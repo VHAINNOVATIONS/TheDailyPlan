@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/resources/gov/med/va/innovations/domain
+END
+Definition-conversion.properties
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/repos/!svn/ver/717/tdp/trunk/tdpWeb/src/main/resources/gov/med/va/innovations/domain/Definition-conversion.properties
+END
+User-validation.xml
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/resources/gov/med/va/innovations/domain/User-validation.xml
+END
+User-conversion.properties
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/resources/gov/med/va/innovations/domain/User-conversion.properties
+END

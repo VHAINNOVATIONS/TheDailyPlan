@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/resources/sqlmaps
+END
+RoleSQL.xml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/resources/sqlmaps/RoleSQL.xml
+END
+DefinitionSQL.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/resources/sqlmaps/DefinitionSQL.xml
+END
+TestimonialSQL.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/resources/sqlmaps/TestimonialSQL.xml
+END
+UserSQL.xml
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/resources/sqlmaps/UserSQL.xml
+END
+LookupSQL.xml
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/repos/!svn/ver/829/tdp/trunk/tdpWeb/src/main/resources/sqlmaps/LookupSQL.xml
+END
+TemplateSQL.xml
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/repos/!svn/ver/831/tdp/trunk/tdpWeb/src/main/resources/sqlmaps/TemplateSQL.xml
+END
+EventSQL.xml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/repos/!svn/ver/838/tdp/trunk/tdpWeb/src/main/resources/sqlmaps/EventSQL.xml
+END

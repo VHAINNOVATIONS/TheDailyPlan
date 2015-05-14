@@ -1,0 +1,401 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Patient's Daily Plan -- Printout</title>
+        <link rel="stylesheet" type="text/css" href="file:/C:/Documents and Settings/insanmaster/My Documents/workspace/tdpWeb/src/main/resources/report/pdf.css" media="print"/>
+    </head>
+    
+    <body>
+		<img class="running-topimage" alt="Daily Plan Header" src="file:/C:\Documents and Settings\insanmaster\My Documents\workspace\tdpWeb\build\weboutput\report\images/dailyPlanPeople.jpg"/>
+
+    	      	<!-- ONE,PATIENT -->
+        <div class="header" style="">
+			<table class="report_logo">
+				<tr>
+					<td><img alt="The Daily Plan" src="file:/C:\Documents and Settings\insanmaster\My Documents\workspace\tdpWeb\build\weboutput\report\images/dailyPlanLogo.jpg"/></td>
+				  	<td><span>The Daily Plan represents current hospital activity and it is NOT a full list of everything that takes place during your hospital stay.  Your medications, treatments, appointments, etc. may change at discharge.  Please keep your personal information out of sight by storing this folder in a private place, such as a night stand drawer or bedside cabinet.</span></td>
+				</tr>
+			</table>
+			<div class="report_title">
+				<h2 class="report MEDIUM">Confidential: The Daily Plan<sup>&#174;</sup> for 10/06/2010</h2>
+			</div>
+			<table class="report_patient">
+				<tr>
+				   	<td class="report_patient_name"><span class="report MEDIUM">ONE,PATIENT</span></td>
+				    <td class="report_patient_name"><span class="report MEDIUM">DOB: 04/07/1935</span></td>
+				    <td class="report_patient_name"><span class="report MEDIUM">Med Unit: Outpatient</span></td>
+			    </tr>
+			</table>
+		</div>
+
+        <div class="print-time" style=""> 
+        	Printed on: 10/06/2010 13:32
+        </div>
+        <div class="page-count" style=""> 
+        	<div class="center">Page <span class="pagenumber"/> of <span class="pagecount"/></div> 
+        </div>
+             
+        <div id="body_${report.patient.id}" class="body MEDIUM">
+        	<table class="patient_data">
+        		<colgroup><col width="100%"/></colgroup>
+							<tr><td>
+			    <div class="report_row">
+			    	<div class="report_category">
+			    		<h4>Active Medications</h4>
+			    	</div>
+			    	<div class="report_column500"><table>
+ <colgroup><col width="20%"/><col width="20%"/><col width="30%"/><col width="30%"/></colgroup>
+<thead><tr><th>Drug</th><th>Dose</th><th>Route</th><th>Frequency</th></tr></thead>
+<tbody>
+</tbody>
+            	</table></div>
+			    </div>
+				</td></tr>
+							<tr><td>
+			    <div class="report_row">
+			    	<div class="report_category">
+			    		<h4>IV Medications</h4>
+			    	</div>
+			    	<div class="report_column500"><table>
+ <colgroup><col width="30%"/><col width="30%"/><col width="40%"/></colgroup>
+<thead><tr><th>Drug</th><th>Dose</th><th>Frequency</th></tr></thead>
+<tbody>
+    <tr><td>AMPICILLIN  35 ML</td><td>5% DEXTROSE  50 ML</td><td>INFUSE OVER 22 MIN.</td></tr>
+</tbody>
+            	</table></div>
+			    </div>
+				</td></tr>
+							<tr><td>
+			    <div class="report_row">
+			    	<div class="report_category">
+			    		<h4>Allergies/Adverse Reactions</h4>
+			    	</div>
+			    	<div class="report_column500"><table>
+ <colgroup><col width="60%"/><col width="40%"/></colgroup>
+<tbody>
+    <tr><td>PENICILLIN </td></tr>
+    <tr><td>CHOCOLATE </td></tr>
+</tbody>
+            	</table></div>
+			    </div>
+				</td></tr>
+							<tr><td>
+			    <div class="report_row">
+			    	<div class="report_category">
+			    		<h4>Lab Orders</h4>
+			    	</div>
+			    	<div class="report_column500"><table>
+ <colgroup><col width="60%"/><col width="15%"/><col width="15%"/><col width="10%"/></colgroup>
+<thead><tr><th>Test Name</th><th>Specimen</th><th>Urgency</th><th>Status</th></tr></thead>
+<tbody>
+    <tr><td>POTASSIUM BLOOD   SERUM <span class="expandable" title="White Count - Total white blood cells: All the white cell types are given as a percentage and as an absolute number per litre.">WC</span> LB #14926
+ </td><td></td><td></td><td>PENDING</td></tr>
+    <tr><td>POTASSIUM BLOOD   SERUM <span class="expandable" title="White Count - Total white blood cells: All the white cell types are given as a percentage and as an absolute number per litre.">WC</span> LB #14825
+ </td><td></td><td></td><td>PENDING</td></tr>
+    <tr><td>POTASSIUM BLOOD   SERUM <span class="expandable" title="White Count - Total white blood cells: All the white cell types are given as a percentage and as an absolute number per litre.">WC</span> LB #14724
+ </td><td></td><td></td><td>PENDING</td></tr>
+    <tr><td>POTASSIUM BLOOD   SERUM <span class="expandable" title="White Count - Total white blood cells: All the white cell types are given as a percentage and as an absolute number per litre.">WC</span> LB #14623
+ </td><td></td><td></td><td>PENDING</td></tr>
+    <tr><td>POTASSIUM BLOOD   SERUM <span class="expandable" title="White Count - Total white blood cells: All the white cell types are given as a percentage and as an absolute number per litre.">WC</span> LB #14522
+ </td><td></td><td></td><td>PENDING</td></tr>
+    <tr><td>CHEM 7 BLOOD   SERUM <span class="expandable" title="White Count - Total white blood cells: All the white cell types are given as a percentage and as an absolute number per litre.">WC</span> LB #2407
+ </td><td></td><td></td><td>ACTIVE</td></tr>
+    <tr><td>GLUCOSE BLOOD   SERUM <span class="expandable" title="White Count - Total white blood cells: All the white cell types are given as a percentage and as an absolute number per litre.">WC</span> LB #2405
+ </td><td></td><td></td><td>ACTIVE</td></tr>
+    <tr><td>CHEM 7 BLOOD   SERUM <span class="expandable" title="White Count - Total white blood cells: All the white cell types are given as a percentage and as an absolute number per litre.">WC</span> LB #2405
+ </td><td></td><td></td><td>ACTIVE</td></tr>
+    <tr><td><span class="expandable" title="complete blood count">CBC</span> BLOOD   ASAP SP LB #692
+ </td><td></td><td></td><td>ACTIVE</td></tr>
+    <tr><td>COAG PROFILE BLOOD   PLASMA SP LB #692
+ </td><td></td><td></td><td>ACTIVE</td></tr>
+    <tr><td>URINALYSIS URINE SP LB #692
+ </td><td></td><td></td><td>ACTIVE</td></tr>
+    <tr><td><span class="expandable" title="complete blood count">CBC</span> &amp; DIFF (WITH MORPHOLOGY) BLOOD   LB #133   <span class="expandable" title="White Count - Total white blood cells: All the white cell types are given as a percentage and as an absolute number per litre.">WC</span> LB #133
+ </td><td></td><td></td><td>ACTIVE</td></tr>
+</tbody>
+            	</table></div>
+			    </div>
+				</td></tr>
+							<tr><td>
+			    <div class="report_row">
+			    	<div class="report_category">
+			    		<h4>Imaging Status/Radiology Orders</h4>
+			    	</div>
+			    	<div class="report_column500"><table>
+ <colgroup><col width="60%"/><col width="20%"/><col width="20%"/></colgroup>
+<thead><tr><th>Test Name</th><th>Urgency</th><th>Status</th></tr></thead>
+<tbody>
+    <tr><td>BONE SCAN
+</td><td></td><td>PENDING</td></tr>
+</tbody>
+            	</table></div>
+			    </div>
+				</td></tr>
+							<tr><td>
+			    <div class="report_row">
+			    	<div class="report_category">
+			    		<h4>Current Diet Profile</h4>
+			    	</div>
+			    	<div class="report_column300"><p>DIETS: 10/10/2008 - Present</p>
+            						<p>NUTRITIONAL STATUS: 10/10/2008 09:07</p>
+									<p>SUPPLEMENTAL FEEDINGS: 10/10/2008-10/14/2008</p>
+                                    <p>DIETETIC ENCOUNTERS: 10/10/2008</p>
+                                    <p>NUTRITIONAL ASSESSMENT:</p>
+            </div>
+            <div class="report_column200"><p>NO DIET (Tray)</p>
+            						<p>Moderately Compromised</p>
+            </div>
+			    </div>
+				</td></tr>
+							<tr><td>
+			    <div class="report_row">
+			    	<div class="report_category">
+			    		<h4>Scheduled Appointments/Visits/Admissions</h4>
+			    	</div>
+			    	<div class="report_column500"><table>
+ <colgroup><col width="20%"/><col width="20%"/><col width="10%"/><col width="25%"/><col width="25%"/></colgroup>
+<thead><tr><th>Date</th><th>Name</th><th>Schedule</th><th>Status</th><th>Location</th></tr></thead>
+<tbody>
+    <tr><td>11/25/1997 09:00</td><td>SCHEDULED VISIT</td><td></td><td>INPATIENT APPOINTMENT</td><td>LINDA'S CLINIC</td></tr>
+    <tr><td>04/06/2000 09:00</td><td>SCHEDULED VISIT</td><td></td><td>INPATIENT APPOINTMENT</td><td>PRIMARY CARE</td></tr>
+    <tr><td>05/21/2000 08:00</td><td>SCHEDULED VISIT</td><td></td><td></td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>05/22/2000 08:00</td><td>SCHEDULED VISIT</td><td></td><td></td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>05/23/2000 08:00</td><td>SCHEDULED VISIT</td><td></td><td></td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>05/24/2000 09:00</td><td>SCHEDULED VISIT</td><td></td><td></td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>05/25/2000 08:00</td><td>SCHEDULED VISIT</td><td></td><td></td><td>AUDIOLOGY</td></tr>
+    <tr><td>06/01/2000 11:00</td><td>SCHEDULED VISIT</td><td></td><td></td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>06/02/2000 11:00</td><td>SCHEDULED VISIT</td><td></td><td></td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>06/04/2000 11:00</td><td>SCHEDULED VISIT</td><td></td><td></td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>06/05/2000 11:00</td><td>SCHEDULED VISIT</td><td></td><td></td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>06/06/2000 11:00</td><td>SCHEDULED VISIT</td><td></td><td></td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>06/07/2000 11:00</td><td>SCHEDULED VISIT</td><td></td><td></td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>04/29/2002 08:00</td><td>SCHEDULED VISIT</td><td></td><td></td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>04/30/2002 08:00</td><td>SCHEDULED VISIT</td><td></td><td></td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>05/01/2002 08:00</td><td>SCHEDULED VISIT</td><td></td><td></td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>05/02/2002 08:00</td><td>SCHEDULED VISIT</td><td></td><td></td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>05/03/2002 08:00</td><td>SCHEDULED VISIT</td><td></td><td>NO ACTION TAKEN</td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>05/06/2002 08:00</td><td>SCHEDULED VISIT</td><td></td><td></td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>07/25/2002 21:00</td><td>SCHEDULED VISIT</td><td></td><td></td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>05/12/2003 08:00</td><td>SCHEDULED VISIT</td><td></td><td>INPATIENT APPOINTMENT</td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>05/13/2003 08:00</td><td>SCHEDULED VISIT</td><td></td><td>INPATIENT APPOINTMENT</td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>05/14/2003 08:00</td><td>SCHEDULED VISIT</td><td></td><td>INPATIENT APPOINTMENT</td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>05/15/2003 08:00</td><td>SCHEDULED VISIT</td><td></td><td>INPATIENT APPOINTMENT</td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>05/16/2003 08:00</td><td>SCHEDULED VISIT</td><td></td><td>INPATIENT APPOINTMENT</td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>06/27/2003 16:00</td><td>SCHEDULED VISIT</td><td></td><td>INPATIENT APPOINTMENT</td><td>BECKY'S CLINIC</td></tr>
+    <tr><td>05/24/2004 08:00</td><td>SCHEDULED VISIT</td><td></td><td></td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>05/25/2004 08:00</td><td>SCHEDULED VISIT</td><td></td><td></td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>05/26/2004 08:00</td><td>SCHEDULED VISIT</td><td></td><td></td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>05/27/2004 08:00</td><td>SCHEDULED VISIT</td><td></td><td></td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>05/28/2004 08:00</td><td>SCHEDULED VISIT</td><td></td><td></td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>05/23/2005 08:00</td><td>SCHEDULED VISIT</td><td></td><td>NO ACTION TAKEN</td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>05/24/2005 08:00</td><td>SCHEDULED VISIT</td><td></td><td>NO ACTION TAKEN</td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>05/25/2005 08:00</td><td>SCHEDULED VISIT</td><td></td><td>NO ACTION TAKEN</td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>05/26/2005 08:00</td><td>SCHEDULED VISIT</td><td></td><td>NO ACTION TAKEN</td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>05/27/2005 08:00</td><td>SCHEDULED VISIT</td><td></td><td>NO ACTION TAKEN</td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>08/23/2005 09:00</td><td>SCHEDULED VISIT</td><td></td><td></td><td>VIST CLINIC</td></tr>
+    <tr><td>08/24/2005 10:00</td><td>SCHEDULED VISIT</td><td></td><td></td><td>VIST CLINIC</td></tr>
+    <tr><td>08/21/2006 08:00</td><td>SCHEDULED VISIT</td><td></td><td>NO ACTION TAKEN</td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>08/22/2006 08:00</td><td>SCHEDULED VISIT</td><td></td><td>NO ACTION TAKEN</td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>08/23/2006 08:00</td><td>SCHEDULED VISIT</td><td></td><td>NO ACTION TAKEN</td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>08/24/2006 08:00</td><td>SCHEDULED VISIT</td><td></td><td>NO ACTION TAKEN</td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>08/20/2007 09:00</td><td>SCHEDULED VISIT</td><td></td><td>NO ACTION TAKEN</td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>08/21/2007 09:00</td><td>SCHEDULED VISIT</td><td></td><td>NO ACTION TAKEN</td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>08/22/2007 09:00</td><td>SCHEDULED VISIT</td><td></td><td>NO ACTION TAKEN</td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>08/23/2007 09:00</td><td>SCHEDULED VISIT</td><td></td><td>NO ACTION TAKEN</td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>07/14/2008 08:00</td><td>SCHEDULED VISIT</td><td></td><td>NO ACTION TAKEN</td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>07/15/2008 08:00</td><td>SCHEDULED VISIT</td><td></td><td>NO ACTION TAKEN</td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>07/16/2008 08:00</td><td>SCHEDULED VISIT</td><td></td><td>NO ACTION TAKEN</td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>07/17/2008 08:00</td><td>SCHEDULED VISIT</td><td></td><td>NO ACTION TAKEN</td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>08/09/2010 08:00</td><td>SCHEDULED VISIT</td><td></td><td>NO ACTION TAKEN</td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>08/10/2010 08:00</td><td>SCHEDULED VISIT</td><td></td><td>NO ACTION TAKEN</td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>08/11/2010 08:00</td><td>SCHEDULED VISIT</td><td></td><td>NO ACTION TAKEN</td><td>GENERAL MEDICINE</td></tr>
+    <tr><td>08/12/2010 08:00</td><td>SCHEDULED VISIT</td><td></td><td>NO ACTION TAKEN</td><td>GENERAL MEDICINE</td></tr>
+</tbody>
+            	</table></div>
+			    </div>
+				</td></tr>
+						</table>
+			<div class="patient-end">* END *</div>
+		</div>
+		      	<!-- ONEHUNDRED,INPATIENT -->
+        <div class="header" style="">
+			<table class="report_logo">
+				<tr>
+					<td><img alt="The Daily Plan" src="file:/C:\Documents and Settings\insanmaster\My Documents\workspace\tdpWeb\build\weboutput\report\images/dailyPlanLogo.jpg"/></td>
+				  	<td><span>The Daily Plan represents current hospital activity and it is NOT a full list of everything that takes place during your hospital stay.  Your medications, treatments, appointments, etc. may change at discharge.  Please keep your personal information out of sight by storing this folder in a private place, such as a night stand drawer or bedside cabinet.</span></td>
+				</tr>
+			</table>
+			<div class="report_title">
+				<h2 class="report MEDIUM">Confidential: The Daily Plan<sup>&#174;</sup> for 10/06/2010</h2>
+			</div>
+			<table class="report_patient">
+				<tr>
+				   	<td class="report_patient_name"><span class="report MEDIUM">ONEHUNDRED,INPATIENT</span></td>
+				    <td class="report_patient_name"><span class="report MEDIUM">DOB: 03/09/1945</span></td>
+				    <td class="report_patient_name"><span class="report MEDIUM">Med Unit: ICU/CCU - ICU25</span></td>
+			    </tr>
+			</table>
+		</div>
+
+        <div class="print-time" style=""> 
+        	Printed on: 10/06/2010 13:32
+        </div>
+        <div class="page-count" style=""> 
+        	<div class="center">Page <span class="pagenumber"/> of <span class="pagecount"/></div> 
+        </div>
+             
+        <div id="body_${report.patient.id}" class="body MEDIUM">
+        	<table class="patient_data">
+        		<colgroup><col width="100%"/></colgroup>
+							<tr><td>
+			    <div class="report_row">
+			    	<div class="report_category">
+			    		<h4>Next of Kin</h4>
+			    	</div>
+			    	<div id="report_column300">Not available in MDWS</div><div id="report_column200"></div>
+			    </div>
+				</td></tr>
+							<tr><td>
+			    <div class="report_row">
+			    	<div class="report_category">
+			    		<h4>IV Medications</h4>
+			    	</div>
+			    	<div class="report_column500"><table>
+ <colgroup><col width="30%"/><col width="30%"/><col width="40%"/></colgroup>
+<thead><tr><th>Drug</th><th>Dose</th><th>Frequency</th></tr></thead>
+<tbody>
+</tbody>
+            	</table></div>
+			    </div>
+				</td></tr>
+						</table>
+			<div class="patient-end">* END *</div>
+		</div>
+		      	<!-- ONEHUNDRED,OUTPATIENT -->
+        <div class="header" style="">
+			<table class="report_logo">
+				<tr>
+					<td><img alt="The Daily Plan" src="file:/C:\Documents and Settings\insanmaster\My Documents\workspace\tdpWeb\build\weboutput\report\images/dailyPlanLogo.jpg"/></td>
+				  	<td><span>The Daily Plan represents current hospital activity and it is NOT a full list of everything that takes place during your hospital stay.  Your medications, treatments, appointments, etc. may change at discharge.  Please keep your personal information out of sight by storing this folder in a private place, such as a night stand drawer or bedside cabinet.</span></td>
+				</tr>
+			</table>
+			<div class="report_title">
+				<h2 class="report MEDIUM">Confidential: The Daily Plan<sup>&#174;</sup> for 10/06/2010</h2>
+			</div>
+			<table class="report_patient">
+				<tr>
+				   	<td class="report_patient_name"><span class="report MEDIUM">ONEHUNDRED,OUTPATIENT</span></td>
+				    <td class="report_patient_name"><span class="report MEDIUM">DOB: 03/09/1945</span></td>
+				    <td class="report_patient_name"><span class="report MEDIUM">Med Unit: Outpatient</span></td>
+			    </tr>
+			</table>
+		</div>
+
+        <div class="print-time" style=""> 
+        	Printed on: 10/06/2010 13:32
+        </div>
+        <div class="page-count" style=""> 
+        	<div class="center">Page <span class="pagenumber"/> of <span class="pagecount"/></div> 
+        </div>
+             
+        <div id="body_${report.patient.id}" class="body MEDIUM">
+        	<table class="patient_data">
+        		<colgroup><col width="100%"/></colgroup>
+							<tr><td>
+			    <div class="report_row">
+			    	<div class="report_category">
+			    		<h4>Active Medications</h4>
+			    	</div>
+			    	<div class="report_column500"><table>
+ <colgroup><col width="20%"/><col width="20%"/><col width="30%"/><col width="30%"/></colgroup>
+<thead><tr><th>Drug</th><th>Dose</th><th>Route</th><th>Frequency</th></tr></thead>
+<tbody>
+</tbody>
+            	</table></div>
+			    </div>
+				</td></tr>
+							<tr><td>
+			    <div class="report_row">
+			    	<div class="report_category">
+			    		<h4>IV Medications</h4>
+			    	</div>
+			    	<div class="report_column500"><table>
+ <colgroup><col width="30%"/><col width="30%"/><col width="40%"/></colgroup>
+<thead><tr><th>Drug</th><th>Dose</th><th>Frequency</th></tr></thead>
+<tbody>
+</tbody>
+            	</table></div>
+			    </div>
+				</td></tr>
+							<tr><td>
+			    <div class="report_row">
+			    	<div class="report_category">
+			    		<h4>Allergies/Adverse Reactions</h4>
+			    	</div>
+			    	<div class="report_column500"><table>
+ <colgroup><col width="60%"/><col width="40%"/></colgroup>
+<tbody>
+    <tr><td>Not Assessed </td></tr>
+</tbody>
+            	</table></div>
+			    </div>
+				</td></tr>
+							<tr><td>
+			    <div class="report_row">
+			    	<div class="report_category">
+			    		<h4>Lab Orders</h4>
+			    	</div>
+			    	<div class="report_column500"><table>
+ <colgroup><col width="60%"/><col width="15%"/><col width="15%"/><col width="10%"/></colgroup>
+<thead><tr><th>Test Name</th><th>Specimen</th><th>Urgency</th><th>Status</th></tr></thead>
+<tbody>
+</tbody>
+            	</table></div>
+			    </div>
+				</td></tr>
+							<tr><td>
+			    <div class="report_row">
+			    	<div class="report_category">
+			    		<h4>Imaging Status/Radiology Orders</h4>
+			    	</div>
+			    	<div class="report_column500"><table>
+ <colgroup><col width="60%"/><col width="20%"/><col width="20%"/></colgroup>
+<thead><tr><th>Test Name</th><th>Urgency</th><th>Status</th></tr></thead>
+<tbody>
+</tbody>
+            	</table></div>
+			    </div>
+				</td></tr>
+							<tr><td>
+			    <div class="report_row">
+			    	<div class="report_category">
+			    		<h4>Current Diet Profile</h4>
+			    	</div>
+			    	<div class="report_column300"><p>DIETS: 10/10/2008 - Present</p>
+            						<p>NUTRITIONAL STATUS: 10/10/2008 09:07</p>
+									<p>SUPPLEMENTAL FEEDINGS: 10/10/2008-10/14/2008</p>
+                                    <p>DIETETIC ENCOUNTERS: 10/10/2008</p>
+                                    <p>NUTRITIONAL ASSESSMENT:</p>
+            </div>
+            <div class="report_column200"><p>NO DIET (Tray)</p>
+            						<p>Moderately Compromised</p>
+            </div>
+			    </div>
+				</td></tr>
+							<tr><td>
+			    <div class="report_row">
+			    	<div class="report_category">
+			    		<h4>Scheduled Appointments/Visits/Admissions</h4>
+			    	</div>
+			    	<div class="report_column500"><table>
+ <colgroup><col width="20%"/><col width="20%"/><col width="10%"/><col width="25%"/><col width="25%"/></colgroup>
+<thead><tr><th>Date</th><th>Name</th><th>Schedule</th><th>Status</th><th>Location</th></tr></thead>
+<tbody>
+</tbody>
+            	</table></div>
+			    </div>
+				</td></tr>
+						</table>
+			<div class="patient-end">* END *</div>
+		</div>
+			</body>
+</html>

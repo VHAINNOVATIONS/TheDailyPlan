@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/repos/!svn/ver/756/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao
+END
+DefinitionDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/DefinitionDao.java
+END
+PagingLookupDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/PagingLookupDao.java
+END
+RoleDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/RoleDao.java
+END
+GenericDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/GenericDao.java
+END
+TemplateDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/TemplateDao.java
+END
+LookupDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/803/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/LookupDao.java
+END
+UserDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/UserDao.java
+END
+UniversalDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/UniversalDao.java
+END
+ComponentDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/829/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/ComponentDao.java
+END
+VistaDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/repos/!svn/ver/836/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/VistaDao.java
+END
+BaseDaoTestCase.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/BaseDaoTestCase.java
+END
+TestimonialDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/TestimonialDao.java
+END
+DocumentEventDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/828/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/DocumentEventDao.java
+END

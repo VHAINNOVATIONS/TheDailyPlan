@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Patient's Daily Plan -- Printout</title>
+        <link rel="stylesheet" type="text/css" href="${cssLoc}" media="print"/>
+    </head>
+    
+    <body>
+
+    	#foreach( $report in $patients )
+    	<span class="patient_header">
+    		<span class="patient_name">${report.patient.name}</span>
+    	</span>
+    	<!-- <img class="running-topimage" alt="Daily Plan Header" src="${logoPath}/dailyPlanPeople.jpg"/>-->
+        <div class="header" style="">
+			<table class="report_logo">
+				<tr>
+					<td><img alt="The Daily Plan" src="${logoPath}/dailyPlanLogo.jpg"/></td>
+				  	<td><span>The Daily Plan represents current hospital activity and it is NOT a full list of everything that takes place during your hospital stay.  Your medications, treatments, appointments, etc. may change at discharge.  Please keep your personal information out of sight by storing this folder in a private place, such as a night stand drawer or bedside cabinet.</span></td>
+				</tr>
+			</table>
+			<div class="report_title">
+				<img alt="VA Header" src="${logoPath}/dailyPlanVA.jpg"/>
+				<h2 class="report ${report.selectedFont.value}">Confidential: The Daily Plan<sup>&#174;</sup> for ${today}</h2>
+			</div>
+			<table class="report_patient">
+				<tr>
+				   	<td class="report_patient_name"><span class="report ${report.selectedFont.value}">${report.patient.name}</span></td>
+				    <td class="report_patient_name"><span class="report ${report.selectedFont.value}">DOB: ${report.dob}</span></td>
+				    <td class="report_patient_name"><span class="report ${report.selectedFont.value}">Med Unit: ${report.medUnit}</span></td>
+				    <!-- User wants actual print date
+				    #if ( $report.hasPrevReview )
+				    	<td class="report_patient_name"><span class="report ${report.selectedFont.value}">Last Reviewed: ${report.lastReviewedStr}</span></td>
+				    #end
+				    -->
+			    </tr>
+			</table>
+		</div>
+
+        <div class="print-time" style=""> 
+        	Printed on: ${today} ${now}
+        </div>
+        <div class="page-count" style=""> 
+        	<div class="center">Page <span class="pagenumber"/> of <span class="pagecount"/></div> 
+        </div>
+             
+        <div id="body_${report.patient.id}" class="body ${report.selectedFont.value}">
+        	<table class="patient_data">
+        		<colgroup><col width="100%"/></colgroup>
+			#foreach( $component in $report.expandedComponents )
+				<tr><td>
+			    <div class="report_row">
+			    	<div class="report_category">
+			    		${component.title}
+			    	</div>
+			    	${component.template}
+			    </div>
+				</td></tr>
+			#end
+			</table>
+			<div class="patient-end">* END *</div>
+		</div>
+		#end
+	</body>
+</html>

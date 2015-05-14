@@ -1,0 +1,102 @@
+div {
+	zoom: 1;
+}
+
+div#content form {
+	zoom: 1;
+	width: 50%;
+}
+
+div#nav {
+	z-index: 10;
+}
+
+div#main table #table_list {
+	width:100%;
+	height: 100%;
+	margin-right:0.5em;
+	margin-bottom: 0.5em;
+	display: inline;
+	overflow: visible;
+}
+		
+#universe table #table_list td,
+#universe table #table_list th {
+	padding: 0;
+	width: 650px;
+	height: 100%;
+}
+
+div.tab_content {
+	clear:both;
+}
+
+div#search_results_group {
+	width: 920px;
+}
+
+div#search_results {
+	width: 100%;
+}
+
+div#search_results table {
+	padding: 0 20px;
+	margin-right: 15px;
+}
+
+div#report {
+	padding: 0;
+}
+
+div#report_buttons {
+	float: left;
+	display: inline;
+	width: 100%;
+}
+
+div#report_print {
+	float: left;
+	width: 10%;
+}
+
+
+
+div#report_font {
+	display: inline;
+	float: right;
+}
+
+div#report_buttons a.graybutton {
+	display: inline;
+}
+
+div#report_title {
+	width: 655px;
+}
+
+div#report_row {
+	width: 640px;
+}
+
+div#report_row table {
+	width: 100%;
+}
+
+#universe #search_results table {
+	display: inline-block;
+	width: 910px;
+}
+
+span.lead {
+	zoom: 1;
+	margin: 5px;
+	line-height: 25px;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+	width: 420px;
+}
+
+.dataTables_filter {
+	margin-right:15px;
+}

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                value="%p - %C{1}.%M(%L) | %m%n"/>
+        </layout>
+    </appender>
+
+    <logger name="net.sf.ehcache">
+        <level value="ERROR"/>
+    </logger>
+
+    <!-- Suppress success logging from InteractiveAuthenticationSuccessEvent -->
+    <logger name="org.springframework.security">
+        <level value="ERROR"/>
+    </logger>
+
+    <logger name="org.apache">
+        <level value="WARN"/>
+    </logger>
+
+    <logger name="org.apache.velocity">
+        <level value="FATAL"/>
+    </logger>
+
+    <logger name="org.hibernate">
+        <level value="WARN"/>
+    </logger>
+  
+    <!--logger name="org.hibernate.SQL">
+        <level value="DEBUG"/>
+    </logger-->
+
+    <logger name="org.springframework">
+        <level value="WARN"/>
+    </logger>
+    
+    <logger name="log4j.logger.com.ibatis">
+        <level value="DEBUG"/>
+    </logger>
+
+    <!-- shows SQL of prepared statements -->
+    <logger name="log4j.logger.java.sql.Connection">
+        <level value="DEBUG"/>
+    </logger>
+
+    <!-- shows parameters inserted into prepared statements -->
+    <logger name="log4j.logger.java.sql.PreparedStatement">
+        <level value="DEBUG"/>
+    </logger>
+
+    <!-- shows query results -->
+    <logger name="log4j.logger.java.sql.ResultSet">
+        <level value="DEBUG"/>
+    </logger>
+
+    <logger name="log4j.logger.java.sql.Statement">
+        <level value="DEBUG"/>
+    </logger>
+
+   
+    <logger name="gov.med.va.innovations">
+        <level value="DEBUG"/>
+    </logger>
+
+    <root>
+        <level value="DEBUG"/>
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+</log4j:configuration>

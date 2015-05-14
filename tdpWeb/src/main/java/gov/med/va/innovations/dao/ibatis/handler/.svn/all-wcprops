@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/ibatis/handler
+END
+FontSizeTypeHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/ibatis/handler/FontSizeTypeHandler.java
+END
+EnumTypeHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/ibatis/handler/EnumTypeHandler.java
+END
+DefinitionStatusTypeHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/ibatis/handler/DefinitionStatusTypeHandler.java
+END
+SearchTabTypeHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/ibatis/handler/SearchTabTypeHandler.java
+END

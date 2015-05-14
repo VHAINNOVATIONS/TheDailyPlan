@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
+       default-lazy-init="true">
+
+
+    <!-- Transaction manager for a single Hibernate SessionFactory (alternative to JTA) -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    
+    <bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+        <property name="configLocation" value="classpath:/sql-map-config.xml"/>
+    </bean>
+
+    <!-- UniversalDao - can be used when doing standard CRUD - made available 
+        for those who don't mind casting.  If you don't want to cast, look at 
+        'fooDao' below. -->
+    <bean id="universalDao" class="gov.med.va.innovations.dao.ibatis.UniversalDaoiBatis">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="sqlMapClient" ref="sqlMapClient"/>
+    </bean>
+
+    <bean id="lookupDao" class="gov.med.va.innovations.dao.ibatis.LookupDaoiBatis">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="sqlMapClient" ref="sqlMapClient"/>
+    </bean>
+
+    <bean id="userDao" class="gov.med.va.innovations.dao.ibatis.UserDaoiBatis">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="sqlMapClient" ref="sqlMapClient"/>
+    </bean>
+
+    <bean id="roleDao" class="gov.med.va.innovations.dao.ibatis.RoleDaoiBatis">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="sqlMapClient" ref="sqlMapClient"/>
+    </bean>
+    
+    <!-- If you want to be able to do simple CRUD for new domain objects without 
+        having to cast, you don't have create a Dao interface and implementation 
+        for that domain object, you simply have to do the following.  
+        
+        eg... 'fooDao'
+    
+    <bean id="fooDao" class="gov.med.va.innovations.dao.ibatis.GenericDaoiBatis">
+        <constructor-arg value="gov.med.va.innovations.domain.Foo"/>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="sqlMapClient" ref="sqlMapClient"/>
+    </bean>
+    
+    You will need to create a Dao interface and implementation for that 
+        domain object if you need more than simple CRUD to occur.  
+        (finders, bulk update/delete, etc.)
+    -->
+
+    <!-- Add new DAOs here -->
+    <bean id="vistaRpcDao" class="gov.med.va.innovations.dao.rpc.VistaRpcDao">
+        <property name="vistaServer" value="${vistaServer}"/>
+        <property name="vistaPort" value="${vistaPort}"/>
+        <property name="rpcVersion" value="${vista.rpc.version}"/>
+    </bean>
+
+</beans>

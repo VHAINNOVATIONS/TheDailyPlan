@@ -1,0 +1,137 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/repos/!svn/ver/775/tdp/trunk/tdpWeb/src/main/resources
+END
+applicationContext-resources.xml
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/resources/applicationContext-resources.xml
+END
+oscache.properties
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/resources/oscache.properties
+END
+log4j.xml
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/repos/!svn/ver/780/tdp/trunk/tdpWeb/src/main/resources/log4j.xml
+END
+velocity.properties
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/resources/velocity.properties
+END
+jdbc.properties
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/resources/jdbc.properties
+END
+xwork-conversion.properties
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/repos/!svn/ver/699/tdp/trunk/tdpWeb/src/main/resources/xwork-conversion.properties
+END
+ehcache.xml
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/resources/ehcache.xml
+END
+displaytag.properties
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/resources/displaytag.properties
+END
+accountCreated.vm
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/resources/accountCreated.vm
+END
+mail.properties
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/resources/mail.properties
+END
+ApplicationResources.properties
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/repos/!svn/ver/830/tdp/trunk/tdpWeb/src/main/resources/ApplicationResources.properties
+END
+struts.xml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/repos/!svn/ver/830/tdp/trunk/tdpWeb/src/main/resources/struts.xml
+END
+cssVerticalMenu.vm
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/resources/cssVerticalMenu.vm
+END
+applicationContext-dao.xml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/resources/applicationContext-dao.xml
+END
+DailyPlanReport.vm
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/repos/!svn/ver/843/tdp/trunk/tdpWeb/src/main/resources/DailyPlanReport.vm
+END
+applicationContext-service.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/repos/!svn/ver/806/tdp/trunk/tdpWeb/src/main/resources/applicationContext-service.xml
+END
+weblogic-application.xml
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/repos/!svn/ver/699/tdp/trunk/tdpWeb/src/main/resources/weblogic-application.xml
+END
+errors.properties
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/resources/errors.properties
+END
+sql-map-config.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/repos/!svn/ver/817/tdp/trunk/tdpWeb/src/main/resources/sql-map-config.xml
+END
+rpc.properties
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/repos/!svn/ver/780/tdp/trunk/tdpWeb/src/main/resources/rpc.properties
+END
+default-data.xml
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/resources/default-data.xml
+END
+cssHorizontalMenu.vm
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/resources/cssHorizontalMenu.vm
+END

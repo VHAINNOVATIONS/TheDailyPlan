@@ -1,0 +1,34 @@
+10
+
+dir
+777
+http://technikprojsrv:82/svn/repos/tdp/trunk/TdpApp/EarContent
+http://technikprojsrv:82/svn/repos
+
+
+
+2010-08-24T14:24:09.627375Z
+764
+mrosenthal
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+6be7442c-6341-7446-a63f-1b90ceddeb61
+
+APP-INF
+dir
+
+META-INF
+dir
+

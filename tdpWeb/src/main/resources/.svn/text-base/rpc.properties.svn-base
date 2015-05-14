@@ -1,0 +1,7 @@
+vistaServer=VISTA.CPM.VA.GOV
+vistaPort=9200
+vista.rpc.version=1
+
+mdws.service.endpoint=http://192.168.56.12/mdws2.0.0/emrsvc.asmx
+mdws.wsdl.endpoint=http://192.168.56.12/mdws2.0.0/emrsvc.asmx?WSDL
+mdws.service.sitelist=999

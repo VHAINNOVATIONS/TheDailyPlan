@@ -1,0 +1,31 @@
+10
+
+dir
+777
+http://technikprojsrv:82/svn/repos/tdp/trunk/tdpWeb/src/test/java
+http://technikprojsrv:82/svn/repos
+
+
+
+2010-09-02T21:53:22.311801Z
+775
+mrosenthal
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+6be7442c-6341-7446-a63f-1b90ceddeb61
+
+gov
+dir
+

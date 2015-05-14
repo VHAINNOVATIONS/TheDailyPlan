@@ -1,0 +1,34 @@
+10
+
+dir
+834
+http://technikprojsrv:82/svn/repos/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws
+http://technikprojsrv:82/svn/repos
+
+
+
+2010-08-05T15:28:56.100866Z
+755
+mrosenthal
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+6be7442c-6341-7446-a63f-1b90ceddeb61
+
+emrsvc
+dir
+
+querysvc
+dir
+

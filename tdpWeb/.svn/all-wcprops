@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 40
+/svn/repos/!svn/ver/775/tdp/trunk/tdpWeb
+END
+Plan.xml
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/repos/!svn/ver/700/tdp/trunk/tdpWeb/Plan.xml
+END
+build.xml
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/repos/!svn/ver/788/tdp/trunk/tdpWeb/build.xml
+END
+.springBeans
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/.springBeans
+END
+.project
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/.project
+END
+.classpath
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/repos/!svn/ver/795/tdp/trunk/tdpWeb/.classpath
+END

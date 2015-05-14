@@ -1,0 +1,653 @@
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/repos/!svn/ver/774/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib
+END
+jackson-jaxrs-1.2.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/jackson-jaxrs-1.2.1.jar
+END
+jackson-mapper-asl-1.2.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/jackson-mapper-asl-1.2.1.jar
+END
+glassfish.jstl_1.2.0.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/glassfish.jstl_1.2.0.1.jar
+END
+jaxb-api-2.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/jaxb-api-2.1.jar
+END
+commons-io-1.3.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/commons-io-1.3.2.jar
+END
+commons-codec-1.3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/commons-codec-1.3.jar
+END
+commons-dbcp-1.2.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/commons-dbcp-1.2.1.jar
+END
+jsr311-api-1.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/jsr311-api-1.0.jar
+END
+junit-dep-4.4.jar
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/junit-dep-4.4.jar
+END
+commons-lang-2.3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/commons-lang-2.3.jar
+END
+slf4j-log4j12-1.4.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/slf4j-log4j12-1.4.2.jar
+END
+sitemesh-2.2.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/sitemesh-2.2.1.jar
+END
+urlrewritefilter-3.0.4.jar
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/urlrewritefilter-3.0.4.jar
+END
+cxf-rt-frontend-jaxws-2.2.7.jar
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/cxf-rt-frontend-jaxws-2.2.7.jar
+END
+xml-resolver-1.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/xml-resolver-1.2.jar
+END
+cxf-rt-ws-addr-2.2.7.jar
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/cxf-rt-ws-addr-2.2.7.jar
+END
+struts2-config-browser-plugin-2.0.14.jar
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/struts2-config-browser-plugin-2.0.14.jar
+END
+geronimo-ws-metadata_2.0_spec-1.1.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/geronimo-ws-metadata_2.0_spec-1.1.2.jar
+END
+backport-util-concurrent-3.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/backport-util-concurrent-3.1.jar
+END
+iText-2.0.8.jar
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/repos/!svn/ver/774/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/iText-2.0.8.jar
+END
+standard-1.1.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/standard-1.1.2.jar
+END
+asm-2.2.3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/asm-2.2.3.jar
+END
+jettison-1.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/jettison-1.2.jar
+END
+struts2-core-2.0.11.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/struts2-core-2.0.11.1.jar
+END
+velocity-tools-view-2.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/velocity-tools-view-2.0.jar
+END
+cxf-rt-transports-http-2.2.7.jar
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/cxf-rt-transports-http-2.2.7.jar
+END
+struts2-codebehind-plugin-2.0.11.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/struts2-codebehind-plugin-2.0.11.1.jar
+END
+spring-jdbc-2.5.6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/spring-jdbc-2.5.6.jar
+END
+hamcrest-core-1.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/hamcrest-core-1.1.jar
+END
+ibatis-sqlmap-2.3.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/ibatis-sqlmap-2.3.0.jar
+END
+cxf-rt-databinding-jaxb-2.2.7.jar
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/cxf-rt-databinding-jaxb-2.2.7.jar
+END
+jaxen-1.1.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/jaxen-1.1.1.jar
+END
+geronimo-stax-api_1.0_spec-1.0.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/geronimo-stax-api_1.0_spec-1.0.1.jar
+END
+xwork-2.0.4.jar
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/xwork-2.0.4.jar
+END
+hamcrest-library-1.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/hamcrest-library-1.1.jar
+END
+struts-menu-2.4.3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/struts-menu-2.4.3.jar
+END
+spring-security-core-2.0.4.jar
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/spring-security-core-2.0.4.jar
+END
+activation-1.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/activation-1.1.jar
+END
+cxf-common-schemas-2.2.7.jar
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/cxf-common-schemas-2.2.7.jar
+END
+geronimo-javamail_1.4_spec-1.6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/geronimo-javamail_1.4_spec-1.6.jar
+END
+abdera-extensions-json-0.4.0-incubating.jar
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/abdera-extensions-json-0.4.0-incubating.jar
+END
+displaytag-1.1.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/displaytag-1.1.1.jar
+END
+aspectjrt-1.6.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/aspectjrt-1.6.0.jar
+END
+wstx-asl-3.2.9.jar
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/wstx-asl-3.2.9.jar
+END
+geronimo-activation_1.1_spec-1.0.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/geronimo-activation_1.1_spec-1.0.2.jar
+END
+cxf-rt-frontend-jaxrs-2.2.7.jar
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/cxf-rt-frontend-jaxrs-2.2.7.jar
+END
+spring-web-2.5.6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/spring-web-2.5.6.jar
+END
+abdera-i18n-0.4.0-incubating.jar
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/abdera-i18n-0.4.0-incubating.jar
+END
+spring-aspects-2.5.6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/spring-aspects-2.5.6.jar
+END
+cxf-api-2.2.7.jar
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/cxf-api-2.2.7.jar
+END
+velocity-1.6.4-dep.jar
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/velocity-1.6.4-dep.jar
+END
+spring-core-2.5.6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/spring-core-2.5.6.jar
+END
+neethi-2.0.4.jar
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/neethi-2.0.4.jar
+END
+struts2-spring-plugin-2.0.11.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/struts2-spring-plugin-2.0.11.1.jar
+END
+cxf-common-utilities-2.2.7.jar
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/cxf-common-utilities-2.2.7.jar
+END
+freemarker-2.3.8.jar
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/freemarker-2.3.8.jar
+END
+commons-collections-3.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/commons-collections-3.2.jar
+END
+jaxb-impl-2.1.12.jar
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/jaxb-impl-2.1.12.jar
+END
+cxf-rt-databinding-aegis-2.2.7.jar
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/cxf-rt-databinding-aegis-2.2.7.jar
+END
+spring-orm-2.5.6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/spring-orm-2.5.6.jar
+END
+slf4j-api-1.4.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/slf4j-api-1.4.2.jar
+END
+aopalliance-1.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/aopalliance-1.0.jar
+END
+mail-1.4.jar
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/mail-1.4.jar
+END
+geronimo-jaxws_2.1_spec-1.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/geronimo-jaxws_2.1_spec-1.0.jar
+END
+spring-context-2.5.6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/spring-context-2.5.6.jar
+END
+saaj-impl-1.3.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/saaj-impl-1.3.2.jar
+END
+commons-digester-1.7.jar
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/commons-digester-1.7.jar
+END
+spring-context-support-2.5.6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/spring-context-support-2.5.6.jar
+END
+commons-logging-1.0.3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/commons-logging-1.0.3.jar
+END
+XmlSchema-1.4.5.jar
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/XmlSchema-1.4.5.jar
+END
+dwr-2.0.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/dwr-2.0.1.jar
+END
+xml-apis-1.0.b2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/xml-apis-1.0.b2.jar
+END
+spring-security-acl-2.0.4.jar
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/spring-security-acl-2.0.4.jar
+END
+abdera-parser-0.4.0-incubating.jar
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/abdera-parser-0.4.0-incubating.jar
+END
+spring-security-core-tiger-2.0.4.jar
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/spring-security-core-tiger-2.0.4.jar
+END
+abdera-core-0.4.0-incubating.jar
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/abdera-core-0.4.0-incubating.jar
+END
+ognl-2.6.11.jar
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/ognl-2.6.11.jar
+END
+axiom-api-1.2.5.jar
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/axiom-api-1.2.5.jar
+END
+geronimo-annotation_1.0_spec-1.1.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/geronimo-annotation_1.0_spec-1.1.1.jar
+END
+ehcache-1.4.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/ehcache-1.4.1.jar
+END
+saaj-api-1.3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/saaj-api-1.3.jar
+END
+commons-fileupload-1.2.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/commons-fileupload-1.2.1.jar
+END
+aspectjweaver-1.6.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/aspectjweaver-1.6.0.jar
+END
+cxf-rt-frontend-simple-2.2.7.jar
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/cxf-rt-frontend-simple-2.2.7.jar
+END
+jackson-core-asl-1.2.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/jackson-core-asl-1.2.1.jar
+END
+core-renderer.jar
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/repos/!svn/ver/774/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/core-renderer.jar
+END
+clickstream-1.0.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/clickstream-1.0.2.jar
+END
+spring-aop-2.5.6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/spring-aop-2.5.6.jar
+END
+spring-beans-2.5.6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/spring-beans-2.5.6.jar
+END
+spring-tx-2.5.6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/spring-tx-2.5.6.jar
+END
+jsr107cache-1.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/jsr107cache-1.0.jar
+END
+xmlbeans-2.4.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/xmlbeans-2.4.0.jar
+END
+cxf-rt-bindings-xml-2.2.7.jar
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/cxf-rt-bindings-xml-2.2.7.jar
+END
+spring-webmvc-2.5.6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/spring-webmvc-2.5.6.jar
+END
+cxf-rt-core-2.2.7.jar
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/cxf-rt-core-2.2.7.jar
+END
+jtds-1.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/jtds-1.2.jar
+END
+jcl104-over-slf4j-1.4.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/jcl104-over-slf4j-1.4.2.jar
+END
+oscache-2.3.jar
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/oscache-2.3.jar
+END
+spring-security-taglibs-2.0.4.jar
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/spring-security-taglibs-2.0.4.jar
+END
+commons-pool-1.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/commons-pool-1.2.jar
+END
+wsdl4j-1.6.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/wsdl4j-1.6.2.jar
+END
+cxf-tools-common-2.2.7.jar
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/cxf-tools-common-2.2.7.jar
+END
+commons-beanutils-1.7.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/commons-beanutils-1.7.0.jar
+END
+axiom-impl-1.2.5.jar
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/axiom-impl-1.2.5.jar
+END
+cxf-rt-bindings-soap-2.2.7.jar
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/cxf-rt-bindings-soap-2.2.7.jar
+END
+velocity-1.6.4.jar
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/velocity-1.6.4.jar
+END
+abdera-extensions-main-0.4.0-incubating.jar
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/abdera-extensions-main-0.4.0-incubating.jar
+END
+persistence-api-1.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/lib/persistence-api-1.0.jar
+END

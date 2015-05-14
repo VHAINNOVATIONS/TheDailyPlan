@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="TestimonialSQL">
+    <typeAlias alias="testimonial" type="gov.med.va.innovations.domain.Testimonial"/>
+
+    <parameterMap id="addParam" class="testimonial">
+	    <parameter property="title" jdbcType="VARCHAR" javaType="java.lang.String" />
+	    <parameter property="quote" jdbcType="VARCHAR" javaType="java.lang.String" />
+	    <parameter property="testimonial" jdbcType="VARCHAR" javaType="java.lang.String" />
+	    <parameter property="imageLink" jdbcType="VARCHAR" javaType="java.lang.String" />
+ 	    <parameter property="createdBy" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </parameterMap>
+
+    <parameterMap id="updateParam" class="testimonial">
+	    <parameter property="title" jdbcType="VARCHAR" javaType="java.lang.String" />
+	    <parameter property="quote" jdbcType="VARCHAR" javaType="java.lang.String" />
+	    <parameter property="testimonial" jdbcType="VARCHAR" javaType="java.lang.String" />
+	    <parameter property="imageLink" jdbcType="VARCHAR" javaType="java.lang.String" />
+ 	    <parameter property="updatedBy" jdbcType="VARCHAR" javaType="java.lang.String" />
+	    <parameter property="id" jdbcType="INTEGER" javaType="java.lang.Long" />
+    </parameterMap>
+
+    <resultMap id="testimonialResult" class="testimonial">
+	    <result column="id" property="id"/>
+	    <result column="title" property="title" />
+	    <result column="quote" property="quote" />
+	    <result column="testimonial" property="testimonial" />
+	    <result column="image_link" property="imageLink" />
+	    <result column="created_by" property="createdBy" />
+	    <result column="updated_by" property="updatedBy" />
+	    <result column="update_date" property="updateDate" />
+    </resultMap>
+
+    <select id="getTestimonials" resultMap="testimonialResult">
+    <![CDATA[
+        select * from testimonials
+    ]]>
+    </select>
+
+    <select id="getTestimonial" resultMap="testimonialResult">
+    <![CDATA[
+        select * from testimonials where id = #value# 
+    ]]>
+    </select>
+
+    <select id="findByTitle" resultMap="testimonialResult">
+    <![CDATA[
+        select * from testimonials where title = #value#
+    ]]>
+    </select>
+
+    <insert id="addTestimonial" parameterMap="addParam">
+        <![CDATA[
+            insert into testimonials (title,quote,testimonial,image_link,created_by) values ( ?,?,?,?,? )
+        ]]>
+        <selectKey resultClass="java.lang.Long" keyProperty="id" type="post">
+            SELECT @@IDENTITY AS id
+        </selectKey>
+    </insert>
+
+    <update id="updateTestimonial" parameterMap="updateParam">
+    <![CDATA[
+        update testimonials 
+        set title = ?, 
+        	quote = ?, 
+        	testimonial = ?,
+        	image_link = ?,
+        	updated_by = ?,
+        	update_date = getdate()
+        where id = ?
+    ]]>
+    </update>
+
+    <delete id="deleteTestimonial">
+    <![CDATA[
+        delete from testimonials where id = #value#
+    ]]>
+    </delete>
+
+    <select id="countTestimonial" resultClass="int">
+    	select count(*) from testimonials
+    </select>
+    
+    <select id="pagingTestimonial" parameterClass="map" resultMap="testimonialResult">
+    <![CDATA[
+    	SELECT *
+		FROM   (SELECT ROW_NUMBER() OVER(ORDER BY $criteria$) AS
+		       rownum, id, title, quote, testimonial, image_link, created_by, updated_by, update_date FROM testimonials) AS testimonials1
+		WHERE  rownum >= $first$ AND rownum <= $max$
+		ORDER BY $criteria$ 
+    ]]>
+    </select>
+</sqlMap>

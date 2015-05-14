@@ -1,0 +1,34 @@
+10
+
+dir
+777
+http://technikprojsrv:82/svn/repos/tdp/trunk/tdpWeb/src/main/resources/gov/med/va/innovations
+http://technikprojsrv:82/svn/repos
+
+
+
+2010-08-04T02:44:46.918735Z
+749
+mrosenthal
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+6be7442c-6341-7446-a63f-1b90ceddeb61
+
+domain
+dir
+
+ui
+dir
+

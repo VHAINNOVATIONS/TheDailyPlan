@@ -1,0 +1,1176 @@
+/* --------------------------------------------------------------- */
+/* -------------------- HACK FOR IE6 PNG TRANSPARENCY ------------- */
+	* html img { 
+		behavior: url(css/iepngfix.htc); 
+	}
+/* --------------------------------------------------------------- */
+/* --------------------------------------------------------------- */
+
+
+/* --------------------------------------------------------------- */
+/* -------------------- BASIC TAG ALTERATIONS -------------------- */
+	html {
+		margin: 0;
+		padding: 0;
+	}
+	body {
+		font-family: Arial, Helvetica, sans-serif;
+		background-color:#FFF;
+		margin: 0px;
+		padding: 0px;
+	}
+
+	#home_universe table,
+	#universe table { 
+		width: 100%;
+	}
+
+	#home_universe td,
+	#universe td { 
+		margin: 0px;
+		padding: .1em; 
+		vertical-align: top;
+		line-height: 1.2em;
+	}
+
+	#home_universe thead,
+	#universe thead { 
+		line-height:1.1em;
+		vertical-align:bottom;
+	}
+	
+	#home_universe ol, #home_universe ul,
+	#universe ol, #universe ul {
+		list-style-type: none;
+		font-size:12px;
+		line-height:16px;
+		color:#000;
+		margin: 0px 0px 10px 0px;
+		padding: 0px 5px 0px 0px;
+	}
+	
+	#home_universe ol.bullets, #home_universe ul.bullets,
+	#universe ol.bullets, #universe ul.bullets {
+		list-style-type: circle;
+		font-size:12px;
+		line-height:0px;
+		color:#000;
+		margin: 0 0 0 25px;
+		padding: 0;
+	}
+	#home_universe li,
+	#universe li {
+		font-weight: normal;
+		margin: 0;
+		padding: 10px;
+	}
+	
+	#home_universe h1,
+	#universe h1 {
+		font-family:Arial, Helvetica, sans-serif;
+		font-weight:bold;
+		font-size: 22px;
+	}
+	#home_universe h2,
+	#universe h2 {
+		font-size: 16px;
+		font-weight:bold;
+	}
+	
+	#home_universe h3,
+	#universe h3 {
+		font-size: 15px;
+		font-weight: bold;
+	}
+	#home_universe h4,
+	#universe h4 {
+		font-size: 14px;
+		font-weight: bold;
+		padding:0px;
+		margin:0px;
+	}
+	#home_universe h5 {
+		font-size: 14px;
+		margin: 7px 0px 7px 0px;
+		font-weight: normal;
+	}
+	#home_universe h6 {
+		font-family:Arial, Helvetica, sans-serif;
+		font-size:13px;
+		color:#003468;
+		margin:5px 0 0 0;
+		font-weight:normal;
+	}
+	#home_universe p,#home_universe label,
+	#universe p, #universe label {
+		font-family:Arial, Helvetica, sans-serif;
+		font-weight: normal;
+		color:#333333;
+		margin:0px;
+		line-height:1em;
+	}
+	
+	#home_universe a,
+	#universe a  {
+		color:#0056A0;
+		text-decoration:underline;
+	}
+	
+	#home_universe a:hover,
+	#universe a:hover {
+		color:#0099FF;
+		text-decoration:none;
+	}
+	
+	#home_universe blockquote,
+	#universe blockquote {
+		margin: 0;
+		padding: 0 0 0 20px;
+	}
+	#home_universe form,
+	#universe form  {
+		font-family:Arial, Helvetica, sans-serif;
+		margin: 0;
+		padding: 0;
+		vertical-align:middle;
+	}
+	#home_universe input, #home_universe textarea, #home_universe select,
+	#universe input, #universe textarea, #universe select  {
+		font-family:Arial, Helvetica, sans-serif;
+		font-size:12px;
+		color:#666;
+		margin:0px;
+		padding:0px;
+		border:1px solid #CCC;
+		behavior: url(css/iepngfix.htc); 
+	}
+	
+	#home_universe fieldset,
+	#universe fieldset {
+		margin: 0;
+		padding: 0;
+		border: none;
+	}
+	
+	#home_universe div#content,
+	#universe div#content {
+		padding-left: 0px;
+	}
+	
+	
+	
+	
+	
+	
+/* --------------------------------------------------------------- */
+/* -------------------------- UNIVERSE --------------------------- */
+	#universe {
+		margin: 0 auto;
+		width: 100%;
+	/*	height:800px;  */
+		float: left;
+		display:inline;
+		clear:both;
+		overflow:hidden;
+	}
+
+	
+/* --------------------------------------------------------------- */
+/* ---------------------------- HOME ----------------------------- */
+	#home_universe {
+		background-color:#FFFFFF;
+		margin: 0 auto;
+		width: 100%;
+		/*float: left;*/
+		display:inline;
+		clear:both;
+		overflow:hidden;
+	}
+	
+	#home {
+		text-align: left;
+		margin: 0 auto;
+		padding:10px 10px 50px 10px;
+		width: 960px;
+	}
+	
+	#home_left_col {
+		float: left;
+		display:inline;
+		width: 325px;
+		margin-right:20px;
+	}	
+	
+	#home_login_box {
+		float: left;
+		width: 295px;
+		/*height: 192px;*/
+		border:solid 1px #CCCCCC;
+		background-image:url(../images/bg_login.gif);
+		background-repeat:repeat-x;
+		background-position:top left;
+		background-color:#C4D9E6;
+		margin-bottom:10px;
+		padding:3px 15px 5px 15px;
+	}
+	
+	#home_login_box h2 {
+		line-height:16px;
+		color:#005CA3;
+	}
+	
+	#home_login_box img {
+		float:left;
+		display:inline;
+		vertical-align:middle;
+		margin:5px 10px 0px 0px;
+	}
+	
+	#home_login_access {
+		float: left;
+		clear:right;
+		width:260px;
+		margin-right:30px;	
+	}
+	
+	#home_login_access input#j_username,
+	#home_login_access input#j_password {
+		vertical-align:middle;
+		border-spacing: 0px;
+		border-collapse: collapse;
+		display:inline-block;
+		overflow:hidden;
+		padding:2px;
+		color:#666;
+		width:260px;
+		height:20px;	
+		margin:5px 100px 10px 0px;
+	}	
+	
+	#home_login_button {
+		width:290px;
+	}
+	
+	#home_login_button p {
+		margin-top:47px;
+	}
+		
+	#home_contact_box_head {
+		float: left;
+		display:inline;
+		width: 295px;
+		height:48px;
+		border-top:solid 1px #CCCCCC;
+		border-right:solid 1px #CCCCCC;
+		border-left:solid 1px #CCCCCC;
+		background-image:url(../images/bg_contact_head.gif);
+		background-repeat:repeat-x;
+		background-color:#FFF;
+		margin-bottom:0px;
+		padding:4px 15px 0px 15px;
+	}
+			
+	#home_contact_box_head h1 {
+		line-height:40px;
+		color:#FFF;
+	}
+	
+	#home_contact_box {
+		float: left;
+		display:inline;
+		width: 295px;
+		border:solid 1px #CCCCCC;
+		background-color:#FFF;
+		margin-bottom:10px;
+		padding:5px 15px 15px 15px;
+	}
+	
+	#home_contact_box p {
+		margin-top:8px;
+	}
+	
+	#home_resources_box_head {
+		float: left;
+		display:inline;
+		width: 295px;
+		height:48px;
+		border-top:solid 1px #CCCCCC;
+		border-right:solid 1px #CCCCCC;
+		border-left:solid 1px #CCCCCC;
+		background-color:#FFF;
+		margin:0px;
+		padding:4px 15px 0px 15px;
+	}	
+		
+	#home_resources_box_head h1 {
+		line-height:40px;
+		color:#007f4E;
+	}
+	
+	#home_resources_box {
+		float: left;
+		display:inline;
+		width: 295px;
+		border:solid 1px #CCCCCC;
+		background-color:#FFF;
+		padding: 5px 15px 15px 15px;
+		margin-bottom:10px;
+	}
+	
+	#home_resources_box p {
+		padding-top: 8px;
+	}
+		
+		
+	#home_right_col {
+		float: left;
+		display:inline;
+		width: 615px;
+		background-color:#FFF;
+	}
+		
+	#home_intro {
+		float: left;
+		display:inline;
+		width: 620px;
+	}	
+		
+	#home_intro img {
+		float: right;
+		margin-left:15px;
+		border:solid 1px #CCCCCC;
+	}	
+	
+	#home_intro p {
+		line-height: 18px;
+		margin-bottom:8px;
+	}
+	
+	#home_intro .lead {
+		font-size:20px;
+		font-weight:bold;
+	}
+			
+	#home_testimonial_head {
+		float: left;
+		display:inline;
+		width: 590px;
+		height: 48px;
+		margin-top:10px;
+		border-top:solid 1px #CCCCCC;
+		border-right:solid 1px #CCCCCC;
+		border-left:solid 1px #CCCCCC;
+		padding:4px 15px 0px 15px;
+		vertical-align:middle;
+		background-image:url(../images/bg_testimonial.gif);
+		background-repeat:repeat-x;
+	}
+	
+	#home_testimonial_head img {
+		float:right;
+	}
+	
+	#home_testimonial_head h1 {
+		line-height:40px;
+		color:#47484A;
+	}
+	
+	#home_testimonial_box {
+		float: left;
+		display:inline;
+		width: 590px;
+		border:solid 1px #CCCCCC;
+		padding: 5px 15px 15px 15px;
+		margin-bottom:10px;
+	}
+	
+	#home_testimonial_box h1 {
+		color:#005CA3;
+		margin:5px 0 0 0;
+	}
+	
+	#home_testimonial_box h2 {
+		color:#005CA3;
+		margin:5px 0 0 0;
+	}
+		
+	#home_testimonial_box p {
+		padding-top: 8px;
+		line-height:18px;
+	}
+	
+	#home_testimonial_box img {
+		float:left;
+		margin:8px 15px 15px 0px;
+	}
+	
+	#home_universe div.expanded {
+		display: block;
+	}
+	
+	#home_universe div.collapsed,
+	#universe div.collapsed {
+		display: none;
+	}
+
+		
+		
+/* --------------------------------------------------------------- */
+/* ------------------------ PATIENT SEARCH ----------------------- */
+	
+	#universe #search {
+		margin: 0 auto;
+		padding:10px 10px 20px 10px;
+		width: 900px;
+		text-align: left;
+	}
+	
+	#universe #search h1 {	
+		margin:0 0 10px 0;
+		color:#005CA3;
+		widows:760px;
+	}
+	
+	#universe #search_tab_row {
+		float:left;
+		width:100%;
+		display:inline;
+		clear:both;
+	}
+	
+	#universe .search_tab {
+		float:left;
+		width:90px;
+		height:45px;
+		margin-right:5px;
+		background-color:#FFF;
+		border-top:solid 1px #CCC;
+		border-right:solid 1px #CCC;
+		border-left:solid 1px #CCC;
+		text-align:center;
+		vertical-align:middle;
+	}
+	
+	#universe .search_tab h1 {
+		line-height:25px;
+		padding:10px 0 10px 0;
+		color:#005CA3;
+	}
+		
+	#universe #search_fontsize {
+		float:left;
+		width:564px;
+		padding-top:10px;
+		padding-bottom: 10px;
+	}
+	
+	#universe #search_unit,
+	#universe #search_ward,
+	#universe #search_team,
+	#universe #search_match {
+		float:left;
+		background-color:#FFF;
+		width:100%;
+		padding:15px;
+		border-left:solid 1px #CCCCCC;
+		border-right:solid 1px #CCCCCC;
+		border-bottom:solid 1px #CCCCCC;
+	}
+	
+	#universe #search_unit_list,
+	#universe #search_ward_list {
+		width:540px;
+		height: 160px;
+		padding:10px;
+		margin:0 auto;
+		background-color:#EEE;
+		border:solid 1px #CCC;
+		overflow-y:scroll;
+	}
+	
+	#universe #search_unit_list h2, 
+	#universe #search_ward_list h2 {
+		color:#005CA3;
+		margin:0px;
+		display:inline;
+	}
+	
+	#universe #search_unit_list a, 
+	#universe #search_ward_list a {
+		color:#005CA3;
+		text-decoration:none;
+		display: block;
+	}
+	
+	#universe #search_unit_list a:hover, 
+	#universe #search_unit_list a.selected, 
+	#universe #search_ward_list a:hover,
+	#universe #search_ward_list a.selected {
+		color: #fff;
+		background-color:#005CA3;
+		text-decoration:none;
+	}
+	
+	#universe #search_find #search_criteria,
+	#universe #search_match #search_criteria {
+		width: 45%;
+		margin: 0 auto;
+	}
+	
+	#universe #search_find #search_criteria h2,
+	#universe #search_match #search_criteria h2 {
+		float: none;
+	}
+	
+	#universe #search_find #search_criteria #search_patient_name,
+	#universe #search_match #search_criteria #search_patient_name {
+		float: left;
+		padding: .4em;
+		margin-right: 10px;
+	}
+
+	#universe #search_find_controls,
+	#universe #search_match {
+		float:left;
+		background-color:#FFF;
+		width:100%;
+		padding:25px 15px;
+		border-left:solid 1px #CCCCCC;
+		border-right:solid 1px #CCCCCC;
+		border-bottom:solid 1px #CCCCCC;
+	}	
+		
+	#universe #search_find h2 {
+		float:left;
+		color:#005CA3;
+		margin:0 10px 0 0;
+	}
+	
+	#universe #search_patient,
+	#universe #search_match {
+		padding-top:7px;
+		margin-right:10px;
+	}
+	
+	#universe #search_patient input#search_patient_name,
+	#universe #search_match input#name {
+		vertical-align:middle;
+		border-spacing: 0px;
+		border-collapse: collapse;
+		display:inline-block;
+		overflow:hidden;
+		padding:2px;
+		margin-left:10px;
+		color:#666;
+		width:200px;
+		height:20px;	
+		float:left;
+	}		
+	
+	#universe #search_patient input#search_patient_ssn {
+		vertical-align:middle;
+		border-spacing: 0px;
+		border-collapse: collapse;
+		display:inline-block;
+		overflow:hidden;
+		padding:2px;
+		margin-left:10px;
+		color:#666;
+		width:100px;
+		height:20px;	
+	}	
+	
+	#universe #search_patient input#search_patient_dob {
+		vertical-align:middle;
+		border-spacing: 0px;
+		border-collapse: collapse;
+		display:inline-block;
+		overflow:hidden;
+		padding:2px;
+		margin-left:10px;
+		color:#666;
+		width:100px;
+		height:20px;	
+	}	
+	
+	#universe #search_find_display {
+		padding: 6px 20px;
+		float:left;
+		background-color:#FFF;
+		width:100%;
+		border-left: solid 1px #CCCCCC;
+		border-right: solid 1px #CCCCCC;
+	}
+		
+	#universe #search_results_group {
+		display:none;
+	}
+		
+	#universe #search_results {
+		float:left;
+		background-color:#FFF;
+		width:101%;
+		margin:0px;
+		padding:0 0 15px 0;
+		border:solid 1px #CCCCCC;
+	}	
+	
+	#universe #preview_pending {
+		display: block; 
+		width: 450px; 
+		margin: 25px;
+	}
+		
+	#universe #search_results_empty {
+		float:left;
+		background-color:#FFF;
+		width:101%;
+		margin:0px;
+		padding:0 0 15px 0;
+		border-left:solid 1px #CCCCCC;
+		border-right:solid 1px #CCCCCC;
+		border-bottom:solid 1px #CCCCCC;
+		display: none;
+	}	
+	
+	#universe #search_results_empty h2 {
+		padding: 20px;
+	}
+
+	#universe #search_results table {
+		margin:0px;
+		padding:0px;
+		border:none;
+		width:100%
+	}
+	
+	#universe #search_results table p {
+		margin:0px;
+		padding:0px;
+		border:none;
+	}
+	
+	#universe #search_results th.head {
+		margin:0px;
+		padding:7px 5px 7px 5px;
+		background-color:#005DA4;
+		font-size:14px;
+		font-weight:bold;
+		color:#FFF;
+		border:none;
+		text-align:center;
+	}
+	
+	#universe #search_results th.headleft {
+		margin:0px;
+		padding:7px 5px 7px 5px;
+		background-color:#005DA4;
+		font-size:14px;
+		font-weight:bold;
+		color:#FFF;
+		border:none;
+		text-align:left;
+	}	
+	
+	#universe #search_results td.result {
+		font-size:12px;
+		color:#333333;
+		margin:0px;
+		padding:5px;
+		text-align:center;
+	}
+		
+	#universe #search_results td.resultleft {
+		font-size:12px;
+		color:#333333;
+		margin:0px;
+		padding:5px;
+		text-align:left;
+	}	
+		
+	#universe #search_buttons {
+		background-image:url("../images/bg_gray_07.gif");
+		background-repeat:repeat-x;		
+		float:left;
+		width:100%;
+		height:27px;
+		margin:0px;
+		padding:15px 15px 15px 525px;
+		border-left:solid 1px #CCCCCC;
+		border-right:solid 1px #CCCCCC;
+		border-bottom:solid 1px #CCCCCC;
+	}
+		
+		
+/* --------------------------------------------------------------- */
+/* ------------------------ PATIENT REPORT ---------------------- */
+	
+	#report {
+		padding:10px 10px 20px;
+		width: 900px;
+	}
+	
+	#universe .SMALL,
+	#universe .SMALL h2,
+	#universe .SMALL h3,
+	#universe .SMALL h4,
+	#universe .SMALL p {
+		font-size: 10pt;
+	}
+	
+	#universe .MEDIUM,
+	#universe .MEDIUM h2,
+	#universe .MEDIUM h3,
+	#universe .MEDIUM h4,
+	#universe .MEDIUM p {
+		font-size: 12pt;
+	}
+	
+	#universe .LARGE,
+	#universe .LARGE h2,
+	#universe .LARGE h3,
+	#universe .LARGE h4,
+	#universe .LARGE p {
+		font-size: 14pt;
+	}
+
+	#report_buttons {
+		float:left;
+		display:inline;
+		overflow:hidden;
+		width:100%;
+		padding:0 1px 10px 1px;
+	}
+	
+	#report_print {
+		float:left;
+	}
+	
+	#report_font {
+		float:right;
+	}
+	
+	#report_container {
+		float:left;
+		width:100%;
+		background-color:#FFF;
+		border:solid 1px #CCC;
+	}
+	
+	
+	#report_container iframe {
+		height:1110px;
+	}
+	
+	#universe #patient_tab_row {
+       	background-image:url(../images/bg.gif);
+		background-repeat:repeat-x;
+		clear:both;
+		display:inline;
+		float:left;
+		width:100%;
+		padding-top: 15px;
+	}
+	
+	#universe #patient_tab_row .patient_tab {
+		background-color:#FFFFFF;
+		border-left:1px solid #CCCCCC;
+		border-right:1px solid #CCCCCC;
+		border-top:1px solid #CCCCCC;
+		float:left;
+		height:45px;
+		margin: 0 5px;
+		text-align:center;
+		vertical-align:middle;
+		width:105px;
+	}
+	
+	#universe #patient_tab_row a.tab {
+	    background: transparent url('../images/tab.gif') no-repeat scroll top right;
+	    color: #AAA;
+	    display: block;
+	    float: left;
+	    font: bold 22px arial, sans-serif;
+	    height: 45px;
+		width:90px;
+	    margin-right: 6px;
+	    padding-right: 18px; /* sliding doors padding */
+	    text-decoration: none;
+	}
+	
+	#universe #patient_tab_row a.tab span {
+		background:url("../images/tab.gif") no-repeat scroll 0 0 transparent;
+		display:block;
+		line-height:25px;
+		padding:10px 0 10px 12px;
+		width: 100%;
+	}
+	
+	#universe #patient_tab_row a.tab.selected {
+		background-color: #ffffff;
+		background: none;
+	}
+	
+	#universe #patient_tab_row a.tab.selected span {
+		background: none;
+		color:#005CA3;
+		margin:0px;
+		outline: none; 
+	}
+
+	#report_logo {
+		display: none;
+	}
+	
+	#report_bluetop {
+		float:left;
+		display:inline;
+		overflow:hidden;
+		width:100%;
+		height:26px;
+		background-image:url(../images/bg_blue.gif);
+		background-repeat:repeat-x;
+	}
+	
+	#report_bluetop form li {
+		padding: 0;
+	}
+	
+	#report_dropdown_left {
+		float:left;
+		display:inline;
+		overflow:hidden;
+		margin: 0 15px 10px;
+	}	
+	
+	#report_dropdown_left form#patient_name {
+
+	}
+		
+	#report_dropdown_left select#dropdown {
+
+	}
+	
+	#report_dropdown_right {
+		float:right;
+		display:inline;
+		overflow:hidden;
+	}
+		
+	#report_dropdown_right form#template {
+		
+	}
+		
+	#report_dropdown_right select#dropdown {
+
+	}	
+	
+	#report_title {
+		float:left;
+		width:100%;
+		padding:6px 0 4px;
+		background-color:#005DA4;
+	}
+	
+	#report_title h2 {
+		color:#FFF;
+		padding:0px;
+		margin:5px 0 01px 10px;
+		vertical-align:middle;
+	}
+	
+	#report_patient {
+		float:left;
+		width:650px;
+	}
+	
+	#report_patient h2 {
+		color:#005DA4;
+	}
+	
+	#report_patient_name {
+		float:left;
+		display:inline;
+		overflow:hidden;
+		width:auto;
+		margin:0px .6em 0;
+	}
+
+	#report_row {
+		float:left;
+		width:97%;
+		margin:10px 15px 5px 15px;
+	}
+	
+	#report_row p {
+		padding:3px 0 2px 0;
+	}
+	
+	#report_row tr.highrisk {
+		background-color: LightGoldenRodYellow;
+		color: RED;
+		font-weight: bold;
+	}
+	
+	#report_row tr.new {
+		font-weight: bold;
+	}
+
+	#report_category {
+		width:97%;
+		padding:10px;
+		margin-bottom:15px;
+		border: 2px solid #005DA4;
+	}
+	
+	#report_category h4 {
+		color:#005DA4;
+		margin:0px;
+	}
+	
+	#report_column500 {
+		float:left;
+		padding-top:3px;
+		margin-right:15px;
+		width: 66%;
+	}
+
+	#report_column300 {
+		float:left;
+		width:44%;
+		padding-top:3px;
+		margin-right:15px;
+	}
+	
+	#report_column200 {
+		float:left;
+		width:22%;
+		padding-top:3px;
+	}
+
+		
+	
+	
+
+
+/* --------------------------------------------------------------- */
+/* ---------------------- DARK BLUE BUTTON ----------------------- */
+
+
+#home_universe .clear,
+#universe .clear { /* generic container (i.e. div) for floating buttons */
+    overflow: hidden;
+    width: 100%;
+}
+
+#home_universe .button,
+#universe .button {
+    background: transparent url('../images/login_button.gif') no-repeat scroll top right;
+    color: #FFF;
+    display: block;
+    float: left;
+    font: normal 12px arial, sans-serif;
+    height: 24px;
+    margin-right: 6px;
+    padding-right: 18px; /* sliding doors padding */
+    text-decoration: none;
+}
+
+#home_universe input.button,
+#universe input.button {
+    background: transparent url('../images/login_button.gif') no-repeat scroll top right;
+    color: #FFF;
+    display: block;
+    float: left;
+    font: normal 12px arial, sans-serif;
+    height: 24px;
+    margin-left: 6px;
+	padding: 0 9px 3px;
+}
+
+#home_universe a.button span,
+#home_universe input.button span,
+#universe a.button span,
+#universe input.button span {
+    background: transparent url('../images/login_button.gif') no-repeat;
+    display: block;
+    line-height: 14px;
+    padding: 5px 0 5px 18px;
+} 
+
+#home_universe a.button:active,
+#home_universe input.button:active,
+#universe a.button:active,
+#universe input.button:active {
+    background-position: bottom right;
+    color: #8FB1CB;
+    outline: none; /* hide dotted outline in Firefox */
+}
+
+#home_universe a.button:active span,
+#home_universe input.button:active span,
+#universe a.button:active span,
+#universe input.button:active span {
+    background-position: bottom left;
+    padding: 6px 0 4px 18px; /* push text down 1px */
+} 
+
+
+
+
+/* --------------------------------------------------------------- */
+/* ---------------------- DARK GRAY BUTTON ----------------------- */
+
+
+#universe .clear { /* generic container (i.e. div) for floating buttons */
+    overflow: hidden;
+    width: 100%;
+}
+
+#universe a.graybutton {
+    background: transparent url('../images/gray_button.gif') no-repeat scroll top right;
+    color: #FFF;
+    display: block;
+    float: right;
+    font: normal 12px arial, sans-serif;
+    height: 22px;
+    padding-right: 18px; /* sliding doors padding */
+    padding-left:21px;
+	padding-top:5px;
+    text-decoration: none;
+}
+
+#home_universe a.graybutton span {
+    background: transparent url('../images/gray_button.gif') no-repeat;
+    display: block;
+    line-height: 12px;
+    padding: 5px 0 5px 18px;
+} 
+
+#home_universe a.graybutton:active {
+    background-position: bottom right;
+    color: #DDD;
+    outline: none; /* hide dotted outline in Firefox */
+}
+
+#home_universe a.graybutton:active span {
+    background-position: bottom left;
+    padding: 6px 0 4px 18px; /* push text down 1px */
+} 
+
+
+
+
+
+
+
+		
+	
+
+
+/* --------------------------------------------------------------- */
+/* ------------------------ SEARCH TAB --------------------------- */
+
+
+#universe .clear { /* generic container (i.e. div) for floating buttons */
+    overflow: hidden;
+    width: 100%;
+}
+
+#universe a.tab {
+    background: transparent url('../images/tab.gif') no-repeat scroll top right;
+    color: #AAA;
+    display: block;
+    float: left;
+    font: bold 22px arial, sans-serif;
+    height: 45px;
+	width:72px;
+    margin-right: 6px;
+    padding-right: 18px; /* sliding doors padding */
+    text-decoration: none;
+}
+
+#universe a.tab span {
+    background: transparent url('../images/tab.gif') no-repeat;
+    display: block;
+    line-height: 25px;
+    padding: 10px 0 10px 18px;
+} 
+	
+#universe a.tab.selected {
+	background-color: #ffffff;
+	background: none;
+}
+
+#universe a.tab.selected span {
+	background: none;
+	color:#005CA3;
+	margin:0px;
+}
+
+#universe a.tab:active, #universe a.tab:hover {
+    background-position: bottom right;
+	color:#999;
+    outline: none; /* hide dotted outline in Firefox */
+}
+
+#universe a.tab:active span, #universe a.tab:hover span {
+    background-position: bottom left;
+    padding: 11px 0 9px 18px; /* push text down 1px */
+} 
+
+#universe div.tab_content {
+	display: none;
+}
+	
+	
+/* --------------------------------------------------------------- */
+/* ----------------------- TOOLTIP POP-UP ------------------------ */
+
+	
+
+#universe span.expandable {
+	text-decoration: underline;
+	color:#005CA3;
+}
+
+#tooltip {
+	position: absolute;
+	z-index: 3000;
+	border: 1px solid #111;
+	background-color: #eee;
+	padding: 5px;
+	opacity: 0.85;
+}
+#tooltip h3, #tooltip div { margin: 0; }
+
+#tooltip.pretty {
+	background:url("images/shadow.png") repeat scroll 0 0 transparent;
+	border:medium none;
+	font-family:Arial;
+	height:135px;
+	opacity:0.8;
+	padding:20px;
+	width:210px;
+}
+#tooltip.pretty h3 {
+	font-size:12pt;
+	margin-bottom:0.75em;
+	text-align:center;
+	width:220px;
+}
+#tooltip.pretty div {
+	text-align:left;
+	width:220px;
+}
+#tooltip.fancy {
+	background:url("images/shadow2.png") repeat scroll 0 0 transparent;
+	height:100px;
+	padding-top:5em;
+}
+#tooltip.fancy.viewport-bottom {
+	background:url("images/shadow3.png") repeat scroll 0 0 transparent;
+	height:100px;
+	padding-top:1em;
+	padding-bottom:4em;
+}

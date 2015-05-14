@@ -1,0 +1,359 @@
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/repos/!svn/ver/829/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain
+END
+BaseObject.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/BaseObject.java
+END
+User.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/User.java
+END
+VistaSignon.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/861/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaSignon.java
+END
+VistaLabSpecimen.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/833/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaLabSpecimen.java
+END
+FontSizes.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/FontSizes.java
+END
+VistaLocation.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/861/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaLocation.java
+END
+VistaOrder.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/833/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaOrder.java
+END
+VistaOrderList.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/817/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaOrderList.java
+END
+DocumentEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/828/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/DocumentEvent.java
+END
+Component.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/833/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/Component.java
+END
+VistaSymptom.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/817/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaSymptom.java
+END
+VistaVitalSign.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/833/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaVitalSign.java
+END
+VistaVitalSignList.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/833/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaVitalSignList.java
+END
+VistaObservationType.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/repos/!svn/ver/817/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaObservationType.java
+END
+VistaRadiologyReport.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/repos/!svn/ver/833/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaRadiologyReport.java
+END
+VistaSigStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/817/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaSigStatus.java
+END
+VistaRadiologyReportList.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/repos/!svn/ver/833/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaRadiologyReportList.java
+END
+VistaLabReport.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/838/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaLabReport.java
+END
+VistaAllergy.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/817/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaAllergy.java
+END
+VistaAppointment.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/817/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaAppointment.java
+END
+VistaLabReportList.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/833/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaLabReportList.java
+END
+VistaProblem.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/833/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaProblem.java
+END
+VistaAllergyList.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/817/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaAllergyList.java
+END
+VistaFacility.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/833/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaFacility.java
+END
+VistaAppointmentList.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/repos/!svn/ver/817/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaAppointmentList.java
+END
+VistaProblemList.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/833/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaProblemList.java
+END
+VistaImmunization.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/repos/!svn/ver/836/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaImmunization.java
+END
+VistaImmunizationList.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/repos/!svn/ver/836/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaImmunizationList.java
+END
+VistaTeam.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/861/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaTeam.java
+END
+VistaTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/repos/!svn/ver/833/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaTO.java
+END
+VistaGenericList.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/817/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaGenericList.java
+END
+VistaAddress.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/817/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaAddress.java
+END
+ReportEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/817/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/ReportEvent.java
+END
+SearchTabs.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/812/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/SearchTabs.java
+END
+DefinitionStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/DefinitionStatus.java
+END
+VistaDirective.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/833/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaDirective.java
+END
+VistaPhone.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/817/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaPhone.java
+END
+VistaDirectiveList.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/833/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaDirectiveList.java
+END
+Testimonial.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/Testimonial.java
+END
+VistaConsult.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/807/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaConsult.java
+END
+LabelValue.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/LabelValue.java
+END
+VistaConsultList.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/817/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaConsultList.java
+END
+VistaMedication.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repos/!svn/ver/836/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaMedication.java
+END
+VistaClinicalWarning.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/repos/!svn/ver/833/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaClinicalWarning.java
+END
+VistaOrderType.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/817/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaOrderType.java
+END
+VistaMedicationList.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/repos/!svn/ver/828/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaMedicationList.java
+END
+Template.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/repos/!svn/ver/803/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/Template.java
+END
+VistaClinicalWarningList.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/repos/!svn/ver/833/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaClinicalWarningList.java
+END
+VistaUser.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/817/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaUser.java
+END
+VistaAuthor.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/833/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaAuthor.java
+END
+VistaPatient.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/817/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaPatient.java
+END
+DailyPlanReport.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repos/!svn/ver/838/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/DailyPlanReport.java
+END
+Role.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/Role.java
+END
+VistaPatientList.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/817/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaPatientList.java
+END
+VistaFault.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaFault.java
+END
+EventType.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/817/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/EventType.java
+END
+Address.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/Address.java
+END
+Definition.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/Definition.java
+END
+VistaOrderStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/817/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/domain/VistaOrderStatus.java
+END

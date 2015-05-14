@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/webapp/common
+END
+taglibs.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/repos/!svn/ver/689/tdp/trunk/tdpWeb/src/main/webapp/common/taglibs.jsp
+END
+footer.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/repos/!svn/ver/699/tdp/trunk/tdpWeb/src/main/webapp/common/footer.jsp
+END
+messages.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/repos/!svn/ver/689/tdp/trunk/tdpWeb/src/main/webapp/common/messages.jsp
+END
+header.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/repos/!svn/ver/832/tdp/trunk/tdpWeb/src/main/webapp/common/header.jsp
+END
+menu.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/repos/!svn/ver/689/tdp/trunk/tdpWeb/src/main/webapp/common/menu.jsp
+END
+meta.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/repos/!svn/ver/689/tdp/trunk/tdpWeb/src/main/webapp/common/meta.jsp
+END

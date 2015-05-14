@@ -1,0 +1,184 @@
+@charset "UTF-8";
+/* CSS Document */
+
+.dataTables_wrapper {
+	position: relative;
+	min-height: 302px;
+	clear: both;
+	_height: 302px;
+	padding: 15px;
+	zoom: 1; /* Feeling sorry for IE */
+}
+
+.dataTables_processing {
+/*	position: absolute;
+	top: 50%;
+	left: 50%;*/
+	width: 250px;
+	height: 15px;
+	margin-left: -125px;
+	margin-top: -15px;
+	padding: 14px 0 2px 0;
+	border: 1px solid #ddd;
+	text-align: center;
+	color: #999;
+	font-size: 14px;
+	background-color: white;
+	float: left;
+}
+
+.dataTables_length {
+	width: 40%;
+	float: left;
+}
+
+.dataTables_filter {
+	width: 50%;
+	float: right;
+	text-align: right;
+}
+
+.dataTables_info {
+	width: 60%;
+	float: left;
+	padding: 10px;
+	background:url("images/wbg.gif") repeat-x scroll 0 -1px transparent;
+	padding:10px;
+	width:445px;
+}
+
+.dataTables_paginate {
+	float: right;
+	text-align: right;
+	background:url("images/wbg.gif") repeat-x scroll 0 -1px transparent;
+	margin:0;
+	padding:7px 7px 6px;
+	text-align:right;
+	width:400px;
+	height:19px;
+}
+
+/* Pagination nested */
+.paginate_disabled_previous, .paginate_enabled_previous, .paginate_disabled_next, .paginate_enabled_next {
+	height: 19px;
+	width: 19px;
+	margin-left: 3px;
+	float: left;
+}
+
+.paginate_disabled_previous {
+	background-image: url('images/back_disabled.jpg');
+}
+
+.paginate_enabled_previous {
+	background-image: url('images/back_enabled.jpg');
+}
+
+.paginate_disabled_next {
+	background-image: url('images/forward_disabled.jpg');
+}
+
+.paginate_enabled_next {
+	background-image: url('images/forward_enabled.jpg');
+}
+
+.paging_full_numbers {
+	height:22px;
+	line-height:22px;
+	width:400px;
+}
+
+.paging_full_numbers span.paginate_button, 
+.paging_full_numbers span.paginate_active {
+	-moz-border-radius:5px 5px 5px 5px;
+	border:1px solid #AAAAAA;
+	cursor:pointer;
+	margin:0 3px;
+	padding:2px 5px;
+}
+.paging_full_numbers span.paginate_button {
+	background-color:#DDDDDD;
+}
+.paging_full_numbers span.paginate_button:hover {
+	background-color:#CCCCCC;
+}
+.paging_full_numbers span.paginate_active {
+	background-color:#99B3FF;
+}
+
+.dataTables_paginate {
+	float: right;
+	text-align: right;
+	background:url("images/wbg.gif") repeat-x scroll 0 -1px transparent;
+	margin:0;
+	padding:7px 7px 6px;
+	text-align:right;
+	width:400px;
+	height:19px;
+}
+
+.hidden {
+	display: none;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * DataTables sorting
+ */
+
+.sorting_asc {
+	background: url('images/sort_asc.png') no-repeat center right;
+}
+
+.sorting_desc {
+	background: url('images/sort_desc.png') no-repeat center right;
+}
+
+.sorting {
+	background: url('images/sort_both.png') no-repeat center right;
+}
+
+.sorting_asc_disabled {
+	background: url('images/sort_asc_disabled.png') no-repeat center right;
+}
+
+.sorting_desc_disabled {
+	background: url('images/sort_desc_disabled.png') no-repeat center right;
+}
+
+/* ----- Table Display ------- */
+tr.even {
+	background:none repeat scroll 0 0 #EEEEEE;
+	border-top:1px solid #C0C0C0;
+	color:#000000;
+}
+
+tr.odd {
+	background:none repeat scroll 0 0 #FFFFFF;
+	border-top:1px solid #C0C0C0;
+	color:#000000;
+}
+
+#home_universe tr.odd td, #universe tr.odd td,
+#home_universe tr.even td, #universe tr.even td {
+	border-left:1px solid #FFFFFF;
+	border-right:1px solid #DDDDDD;
+	overflow:hidden;
+	text-align:left;
+	vertical-align: middle;
+}
+
+#home_universe tbody tr.even:hover, #home_universe tbody tr.even.highlighted,
+#universe tbody tr.even:hover, #universe tbody tr.even.highlighted {
+	background-color: #d2fffd;
+}
+
+#home_universe tbody tr.odd:hover, #home_universe tbody tr.odd.highlighted,
+#universe tbody tr.odd:hover, #universe tbody tr.odd.highlighted {
+	background-color: #b2fdf9;
+}
+
+#universe .toolbar {
+	width: 55%; 
+	text-align: right; 
+	font-size: 1.2em;
+}

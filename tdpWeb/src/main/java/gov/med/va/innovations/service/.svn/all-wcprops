@@ -1,0 +1,125 @@
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/repos/!svn/ver/774/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service
+END
+TestimonialManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/TestimonialManager.java
+END
+UserService.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/691/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/UserService.java
+END
+MdwsConnectionAdvice.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/repos/!svn/ver/761/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/MdwsConnectionAdvice.java
+END
+MdwsXhtmlAdvice.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/844/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/MdwsXhtmlAdvice.java
+END
+CustomAuthenticationEntryPoint.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/CustomAuthenticationEntryPoint.java
+END
+PagingLookupManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/PagingLookupManager.java
+END
+CustomAuthenticationManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/repos/!svn/ver/756/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/CustomAuthenticationManager.java
+END
+UserSecurityAdvice.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/UserSecurityAdvice.java
+END
+UniversalManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/UniversalManager.java
+END
+UserManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/UserManager.java
+END
+VistaManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/836/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/VistaManager.java
+END
+BaseManagerTestCase.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/BaseManagerTestCase.java
+END
+DefinitionManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/DefinitionManager.java
+END
+ReportManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/831/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/ReportManager.java
+END
+MailEngine.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/MailEngine.java
+END
+RoleManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/RoleManager.java
+END
+GenericManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/GenericManager.java
+END
+LookupManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/803/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/LookupManager.java
+END
+TemplateManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/829/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/TemplateManager.java
+END
+EventManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/828/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/EventManager.java
+END

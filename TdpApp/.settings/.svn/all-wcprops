@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/repos/!svn/ver/777/tdp/trunk/TdpApp/.settings
+END
+org.eclipse.wst.common.project.facet.core.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/702/tdp/trunk/TdpApp/.settings/org.eclipse.wst.common.project.facet.core.xml
+END
+org.eclipse.wst.common.component
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/repos/!svn/ver/777/tdp/trunk/TdpApp/.settings/org.eclipse.wst.common.component
+END
+org.springframework.ide.eclipse.core.prefs
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/repos/!svn/ver/702/tdp/trunk/TdpApp/.settings/org.springframework.ide.eclipse.core.prefs
+END
+org.springframework.ide.eclipse.beans.core.prefs
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/702/tdp/trunk/TdpApp/.settings/org.springframework.ide.eclipse.beans.core.prefs
+END

@@ -1,0 +1,127 @@
+@page { 
+	size: 8.5in 11in;
+	margin: 0.25in; 
+	@top-center { 
+		font-size: 18pt;
+		font-weight: bold;
+		position: absolute; top: 0; left: 0; 
+		content: div.header;
+		display: block;
+	}
+	@bottom-center { 
+		font-size: 90%; font-style: italic; 
+		content: "Page " counter(page) " of " counter(pages);
+	}
+	
+	border: thin solid black;
+	padding: 1em;
+}
+
+#pagenumber:before {
+	content: counter(page); 
+}
+
+#pagecount:before {
+	content: counter(pages);  
+}
+
+.SMALL,
+.SMALL h2,
+.SMALL h3,
+.SMALL h4,
+.SMALL p {
+	font-size: 12pt;
+}
+
+.MEDIUM,
+.MEDIUM h2,
+.MEDIUM h3,
+.MEDIUM h4,
+.MEDIUM p {
+	font-size: 14pt;
+}
+
+.LARGE,
+.LARGE h2,
+.LARGE h3,
+.LARGE h4,
+.LARGE p {
+	font-size: 18pt;
+}
+	
+#report_title {
+	float:left;
+	width:100%;
+	padding:6px 0 4px;
+	background-color:#005DA4;
+}
+
+#report_title h2 {
+	color:#FFF;
+	padding:0px;
+	margin:5px 0 01px 10px;
+	vertical-align:middle;
+}
+
+#report_patient {
+	float:left;
+	width:650px;
+}
+
+#report_patient h2 {
+	color:#005DA4;
+}
+
+#report_patient_name {
+	float:left;
+	display:inline;
+	overflow:hidden;
+	width:auto;
+	margin:0px .6em 0;
+}
+
+#report_row {
+	float:left;
+	width:97%;
+	margin:10px 15px 5px 15px;
+	border-top:solid 2px #005DA4;
+}
+
+#report_row p {
+	padding:3px 0 2px 0;
+}
+
+#report_category {
+	float:left;
+	width:160px;
+	padding:10px;
+	margin-right:15px;
+	background-color:#005DA4;
+}
+
+#report_category h4 {
+	color:#FFF;
+	margin:0px;
+}
+
+#report_column500 {
+	float:left;
+	padding-top:3px;
+	margin-right:15px;
+	width: 66%;
+}
+
+#report_column300 {
+	float:left;
+	width:44%;
+	padding-top:3px;
+	margin-right:15px;
+}
+
+#report_column200 {
+	float:left;
+	width:22%;
+	padding-top:3px;
+}
+
+

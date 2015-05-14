@@ -1,0 +1,844 @@
+<!--
+   Licensed to the Apache Software Foundation (ASF) under one or more
+   contributor license agreements.  See the NOTICE file distributed with
+   this work for additional information regarding copyright ownership.
+   The ASF licenses this file to You under the Apache License, Version 2.0
+   (the "License"); you may not use this file except in compliance with
+   the License.  You may obtain a copy of the License at
+  
+       http://www.apache.org/licenses/LICENSE-2.0
+  
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+
+<!--
+     General purpose build script for web applications and web services,
+     including enhanced support for deploying directly to a Tomcat 4
+     based server.
+
+     This build script assumes that the source code of your web application
+     is organized into the following subdirectories underneath the source
+     code directory from which you execute the build script:
+
+        docs                 Static documentation files to be copied to
+                             the "docs" subdirectory of your distribution.
+
+        src                  Java source code (and associated resource files)
+                             to be compiled to the "WEB-INF/classes"
+                             subdirectory of your web applicaiton.
+
+        web                  Static HTML, JSP, and other content (such as
+                             image files), including the WEB-INF subdirectory
+                             and its configuration file contents.
+
+     $Id: build.xml.txt 743401 2009-02-11 17:01:58Z markt $
+-->
+
+
+<!-- A "project" describes a set of targets that may be requested
+     when Ant is executed.  The "default" attribute defines the
+     target which is executed if no specific target is requested,
+     and the "basedir" attribute defines the current working directory
+     from which Ant executes the requested task.  This is normally
+     set to the current working directory.
+-->
+
+<project name="Tdp Project" default="dist" basedir=".">
+
+
+
+<!-- ===================== Property Definitions =========================== -->
+
+
+<!--
+
+  Each of the following properties are used in the build script.
+  Values for these properties are set by the first place they are
+  defined, from the following list:
+
+  * Definitions on the "ant" command line (ant -Dfoo=bar compile).
+
+  * Definitions from a "build.properties" file in the top level
+    source directory of this application.
+
+  * Definitions from a "build.properties" file in the developer's
+    home directory.
+
+  * Default definitions in this build.xml file.
+
+  You will note below that property values can be composed based on the
+  contents of previously defined properties.  This is a powerful technique
+  that helps you minimize the number of changes required when your development
+  environment is modified.  Note that property composition is allowed within
+  "build.properties" files as well as in the "build.xml" script.
+
+-->
+
+  <property file="build.properties"/>
+  <property file="${user.home}/build.properties"/>
+
+
+<!-- ==================== File and Directory Names ======================== -->
+
+
+<!--
+
+  These properties generally define file and directory names (or paths) that
+  affect where the build process stores its outputs.
+
+  app.name             Base name of this application, used to
+                       construct filenames and directories.
+                       Defaults to "myapp".
+
+  app.path             Context path to which this application should be
+                       deployed (defaults to "/" plus the value of the
+                       "app.name" property).
+
+  app.version          Version number of this iteration of the application.
+
+  build.home           The directory into which the "prepare" and
+                       "compile" targets will generate their output.
+                       Defaults to "build".
+
+  catalina.home        The directory in which you have installed
+                       a binary distribution of Tomcat 4.  This will
+                       be used by the "deploy" target.
+
+  dist.home            The name of the base directory in which
+                       distribution files are created.
+                       Defaults to "dist".
+
+  manager.password     The login password of a user that is assigned the
+                       "manager" role (so that he or she can execute
+                       commands via the "/manager" web application)
+
+  manager.url          The URL of the "/manager" web application on the
+                       Tomcat installation to which we will deploy web
+                       applications and web services.
+
+  manager.username     The login username of a user that is assigned the
+                       "manager" role (so that he or she can execute
+                       commands via the "/manager" web application)
+
+-->
+
+	  <property name="appHome" value="${basedir}/../TdpApp"/>
+
+	  <property name="app.name"     	value="tdpApp"/>
+	  <property name="app.path"      	value="/${app.name}"/>
+	  <property name="app.version"   	value="0.1-dev"/>
+	  <property name="copyright.year" 	value="2010"/>
+	  <property name="manager.url"   	value="http://localhost:8080/manager"/>
+	  <property name="lib.dir"			value="lib"/>
+	  <property name="docs.home"		value="docs"/>
+	
+	  <property name="build.finalName" 	value="${app.name}-${app.version}-SNAPSHOT"/>
+	  <property name="build.dir" 		value="target"/>
+	  <property name="build.directory" 	value="${build.dir}"/>
+	  <property name="build.outputDir" 	value="${build.dir}/classes"/>
+	  <property name="build.webOutputDir" 	value="build/weboutput"/>
+	  <property name="build.srcDir" 	value="src/main/java"/>
+	  <property name="build.webDir" 	value="src/main/webapp"/>
+	  <property name="build.resourceDir" value="src/main/resources"/>
+	  <property name="build.testOutputDir" value="${build.dir}/test-classes"/>
+	  <property name="build.testDir" 	value="src/test/java"/>
+	  <property name="build.testResourceDir.0" value="src/test/resources"/>
+	  <property name="build.testResourceDir.1" value="src/main/webapp"/>
+  	  <property name="target" 			value="${build.dir}/${build.finalName}"/>
+  	  <property name="war" 				value="${build.finalName}.war"/>
+	  <property name="dist.home" 		value="${build.dir}/dist"/>
+	  <property name="test.reports" 	value="${build.dir}/test-reports"/>
+	  <property name="project.build.outputDirectory" value="${build.outputDir}"/>
+	  <property name="reporting.outputDirectory" value="${build.dir}/site"/>
+	  <property name="webLib.dir" 		value="${build.testResourceDir.1}/WEB-INF/lib"/>
+
+	  <property name="settings.offline" value="false"/>
+	  <property name="settings.interactiveMode" value="true"/>
+	
+	  <!-- Tomcat container for web tests -->
+	  <property name="cargo.container.home" value="${env.CATALINA_HOME}"/>
+	  <property name="cargo.container.url" 	value="http\://archive.apache.org/dist/tomcat/tomcat-6/v6.0.14/bin/apache-tomcat-6.0.14.zip"/>
+	  <property name="cargo.container" 		value="tomcat5x"/>
+	  <property name="cargo.port" 			value="8081"/>
+	  <property name="cargo.host" 			value="localhost"/>
+	  <property name="cargo.wait" 			value="false"/>
+	
+	  <property name="dbunit.operation.type" value="MSSQL_CLEAN_INSERT"/>
+	  <property name="dbunit.dataTypeFactoryName" value="org.dbunit.dadatatype.DefaultDataTyory"/>
+	  <property name="junit.present" value="true"/>
+	
+	  <property name="jdbc.driverClassName" value="net.sourceforge.jtds.jdbc.Driver"/>
+	  <property name="jdbc.url" value="jdbc:jtds:sqlserver://localhost:1433/tdp_web"/>
+	  <property name="jdbc.password" value="tdpP@55"/>
+	  <property name="jdbc.username" value="tdp_user"/>
+	
+	  <property name="mdws.service.endpoint" value="http://vaphsmdws2/mdws2.0.0/emrsvc.asmx"/>
+	  <property name="mdws.wsdl.endpoint" value="http://vaphsmdws2/mdws2.0.0/emrsvc.asmx?WSDL"/>
+	  <property name="mdws.service.sitelist" value="900"/>
+	
+	  <property name="settings.offline" value="false"/>
+	  <property name="settings.interactiveMode" value="true"/>
+	  <property name="web.framework" value="struts"/>
+	  <property name="weblogic.home" value="/Oracle/Middleware/wlserver_10.3/server"/>
+	  <property name="weblogic.lib" value="${weblogic.home}/lib"/>
+	  <property name="weblogic.deployDir" value="${weblogic.home}/../../user_projects/domains/tdp_domain/autodeploy"/>
+	  <property name="weblogic.userName" value="weblogic"/>
+	  <property name="weblogic.password" value="1qazxsw2"/>
+
+	  <property name="weblogic.host" value="localhost"/>
+	  <property name="weblogic.port" value="7001"/>
+	  <property name="weblogic.deployUrl" value="T3://${weblogic.host}:${weblogic.port}"/>
+	  <property name="my.domain" location="${weblogic.home}/../../user_projects/domains/starter_domain" />
+
+
+<!-- ================== Custom Ant Task Definitions ======================= -->
+
+
+<!--
+
+  These properties define custom tasks for the Ant build tool that interact
+  with the "/manager" web application installed with Tomcat 4.  Before they
+  can be successfully utilized, you must perform the following steps:
+
+  - Copy the file "server/lib/catalina-ant.jar" from your Tomcat 4
+    installation into the "lib" directory of your Ant installation.
+
+  - Create a "build.properties" file in your application's top-level
+    source directory (or your user login home directory) that defines
+    appropriate values for the "manager.password", "manager.url", and
+    "manager.username" properties described above.
+
+  For more information about the Manager web application, and the functionality
+  of these tasks, see <http://localhost:8080/tomcat-docs/manager-howto.html>.
+
+
+  <taskdef name="install" classname="org.apache.catalina.ant.InstallTask"/>
+  <taskdef name="list"    classname="org.apache.catalina.ant.ListTask"/>
+  <taskdef name="reload"  classname="org.apache.catalina.ant.ReloadTask"/>
+  <taskdef name="remove"  classname="org.apache.catalina.ant.RemoveTask"/>
+-->
+
+	<path id="weblogic.classpath">
+        <!--fileset dir="${weblogic.home}/lib">
+            <include name="*.jar" />
+        </fileset-->
+		<fileset file="${weblogic.home}/lib/weblogic.jar" />
+		<fileset file="${weblogic.home}/lib/webservices.jar" />
+	</path>
+
+	<taskdef name="wldeploy" 
+	        classname="weblogic.ant.taskdefs.management.WLDeploy">
+	        <classpath refid="weblogic.classpath" />
+	</taskdef>
+
+	<taskdef name="wlpackage" 
+	        classname="weblogic.ant.taskdefs.build.WLPackageTask">
+	        <classpath refid="weblogic.classpath" />
+	</taskdef>
+
+	<taskdef name="wlcompile" 
+	        classname="weblogic.ant.taskdefs.build.WLCompileTask">
+	        <classpath refid="weblogic.classpath" />
+	</taskdef>
+
+<!--  ==================== Compilation Control Options ==================== -->
+
+<!--
+
+  These properties control option settings on the Javac compiler when it
+  is invoked using the <javac> task.
+
+  compile.debug        Should compilation include the debug option?
+
+  compile.deprecation  Should compilation include the deprecation option?
+
+  compile.optimize     Should compilation include the optimize option?
+
+-->
+
+  <property name="compile.debug"       value="true"/>
+  <property name="compile.deprecation" value="false"/>
+  <property name="compile.optimize"    value="true"/>
+
+
+
+<!-- ==================== External Dependencies =========================== -->
+
+
+<!--
+
+  Use property values to define the locations of external JAR files on which
+  your application will depend.  In general, these values will be used for
+  two purposes:
+  * Inclusion on the classpath that is passed to the Javac compiler
+  * Being copied into the "/WEB-INF/lib" directory during execution
+    of the "deploy" target.
+
+  Because we will automatically include all of the Java classes that Tomcat 4
+  exposes to web applications, we will not need to explicitly list any of those
+  dependencies.  You only need to worry about external dependencies for JAR
+  files that you are going to include inside your "/WEB-INF/lib" directory.
+
+-->
+
+<!-- Dummy external dependency -->
+<!--
+  <property name="foo.jar"
+           value="/path/to/foo.jar"/>
+-->
+
+
+<!-- ==================== Compilation Classpath =========================== -->
+
+<!--
+
+  Rather than relying on the CLASSPATH environment variable, Ant includes
+  features that makes it easy to dynamically construct the classpath you
+  need for each compilation.  The example below constructs the compile
+  classpath to include the servlet.jar file, as well as the other components
+  that Tomcat makes available to web applications automatically, plus anything
+  that you explicitly added.
+
+-->
+
+    <!-- Include all JAR files that will be included in /WEB-INF/lib -->
+    <!-- *** CUSTOMIZE HERE AS REQUIRED BY YOUR APPLICATION *** -->
+<!--
+    <pathelement location="${foo.jar}"/>
+-->
+
+    <!-- Include all elements that Weblogic exposes to applications -->
+	<!-- This will be used to drive the WEB-INF/lib loading -->
+    <path id="build.classpath">
+
+    	<pathelement location="${lib.dir}/spring-test-2.5.6.jar"/>
+    	<fileset dir="${webLib.dir}">
+		    <include name="*.jar"/>
+    	</fileset>
+    	<fileset dir="${appHome}/EarContent/APP-INF/lib">
+		    <include name="*.jar"/>
+    	</fileset>
+    </path>
+	
+    <path id="build.test.classpath">
+    	<fileset dir="${webLib.dir}">
+		    <include name="*.jar"/>
+    	</fileset>
+      	<fileset dir="${lib.dir}">
+		    <include name="*.jar"/>
+		    <exclude name="**/*.xml"/>
+		</fileset>
+    	<fileset dir="${appHome}/EarContent/APP-INF/lib">
+		    <include name="*.jar"/>
+    	</fileset>
+        <pathelement location="${weblogic.lib}/weblogic.jar"/>
+    </path>
+
+<!-- ==================== All Target ====================================== -->
+
+<!--
+
+  The "all" target is a shortcut for running the "clean" target followed
+  by the "compile" target, to force a complete recompile.
+
+-->
+
+  <target name="all" depends="clean,compile"
+   description="Clean build and dist directories, then compile"/>
+
+
+
+<!-- ==================== Clean Target ==================================== -->
+
+<!--
+
+  The "clean" target deletes any previous "build" and "dist" directory,
+  so that you can be ensured the application can be built from scratch.
+
+-->
+
+  <target name="clean"
+   description="Delete old build and dist directories">
+    <delete dir="${build.dir}"/>
+  	<mkdir dir="${build.testOutputDir}"/>
+  </target>
+
+
+
+<!-- ==================== Compile Target ================================== -->
+
+<!--
+
+  The "compile" target transforms source files (from your "src" directory)
+  into object files in the appropriate location in the build directory.
+  This example assumes that you will be including your classes in an
+  unpacked directory hierarchy under "/WEB-INF/classes".
+
+-->
+
+  <target name="compile" depends="prepare"
+   description="Compile Java sources">
+  	
+  	<property name="buildClasspath" refid="build.classpath"/>
+  	<echo message="${buildClasspath}"/>
+
+    <!-- Compile Java classes as necessary -->
+    <mkdir dir="${build.outputDir}"/>
+    <javac destdir="${build.outputDir}" 
+           nowarn="false" 
+           debug="${compile.debug}" 
+           optimize="${compile.optimize}" 
+           deprecation="${compile.deprecation}" 
+           target="1.5" 
+           verbose="false" 
+           fork="false" 
+           source="1.5">
+      <src>
+        <pathelement location="${build.srcDir}"/>
+      </src>
+      <classpath>
+      	<pathelement path="${buildClasspath}"/>
+      	<fileset dir="${lib.dir}">
+      		<include name="spring-test-3.0.0.RELEASE.jar"/>
+      		<include name="junit-dep-4.4.jar"/>
+      		<include name="jmock-2.5.1.jar"/>
+      		<include name="jmock-junit4-2.5.1.jar"/>
+     	</fileset>
+      </classpath>
+    </javac>
+
+    <!-- Copy application resources -->
+  	<copy todir="${build.resourceDir}" overwrite="true">
+		<fileset dir="${build.resourceDir}/base"/>
+		<filterset>
+			<filter token="mdws.service.endpoint" value="${mdws.service.endpoint}"/>
+			<filter token="mdws.wsdl.endpoint" value="${mdws.wsdl.endpoint}"/>
+			<filter token="mdws.service.sitelist" value="${mdws.service.sitelist}"/>
+		</filterset>
+  	</copy>
+  	
+    <copy todir="${build.outputDir}">
+		<fileset dir="${build.resourceDir}">
+			<exclude name="jdbc.properties"/>
+		</fileset>
+    </copy>
+  	
+    <copy todir="${build.webOutputDir}">
+		<fileset dir="${build.resourceDir}">
+			<include name="**/*.css"/>
+			<include name="**/*.jpg"/>
+		</fileset>
+    </copy>
+
+  </target>
+
+
+	  <!-- ====================================================================== -->
+	  <!-- Test-compilation target                                                -->
+	  <!-- ====================================================================== -->
+	
+	  <target name="compile-tests" 
+	      depends="compile" 
+	      description="Compile the test code" 
+	      unless="test.skip">
+		<mkdir dir="${build.testOutputDir}"/>
+		<javac destdir="${build.testOutputDir}" 
+	       nowarn="false" 
+	       debug="${compile.debug}" 
+	       optimize="${compile.optimize}" 
+	       deprecation="${compile.deprecation}" 
+	       target="1.5" 
+	       verbose="false" 
+	       fork="false" 
+	       source="1.5">
+		  <src>
+		    <pathelement location="${build.testDir}"/>
+		  </src>
+		  <classpath>
+		    <path refid="build.test.classpath"/>
+		    <pathelement location="${build.outputDir}"/>
+		  </classpath>
+		</javac>
+		<copy todir="${build.testOutputDir}">
+		  	<fileset dir="${build.testResourceDir.0}">
+			    <include name="**/*.properties"/>
+			    <include name="**/*.xml"/>
+			    <include name="**/*.txt"/>
+			    <include name="**/*.vm"/>
+		  	</fileset> 
+			<filterset>
+			    <filter token="jdbc.driverClassName" value="${jdbc.driverClassName}"/>
+			    <filter token="jdbc.url" value="${jdbc.url}"/>
+			    <filter token="jdbc.username" value="${jdbc.username}"/>
+			    <filter token="jdbc.password" value="${jdbc.password}"/>
+			</filterset>
+		</copy>
+		<copy todir="${build.testOutputDir}">
+		  <fileset dir="${build.resourceDir}">
+		  	<exclude name="applicationContext-resources.xml"/>
+		  	<exclude name="**/sqlmaps/"/>
+		    <exclude name="**/*.jpg"/>
+		  </fileset>
+			<filterset>
+				<filter token="mdws.service.endpoint" value="${mdws.service.endpoint}"/>
+				<filter token="mdws.service.sitelist" value="${mdws.service.sitelist}"/>
+			</filterset>
+		</copy>
+		<copy todir="${build.testOutputDir}">
+		  <fileset dir="${build.testResourceDir.1}">
+		    <include name="**/*.xml"/>
+		  </fileset>
+		  <fileset dir="${build.resourceDir}">
+			<include name="**/*.jpg"/>
+			<exclude name="**/*.xml"/>
+		  </fileset>
+		</copy>
+	  </target>
+
+
+	  <!-- ====================================================================== -->
+	  <!-- Run all tests                                                          -->
+	  <!-- ====================================================================== -->
+
+	  <target name="test" 
+	          depends="compile, compile-tests, junit-missing, reload-db" 
+	          unless="junit.skipped" 
+	          description="Run the test cases">
+	    <mkdir dir="${test.reports}"/>
+	    <junit printSummary="yes" haltonerror="true" haltonfailure="true" fork="true" dir=".">
+	      <sysproperty key="basedir" value="."/>
+	      <formatter type="xml"/>
+	      <formatter type="plain" usefile="false"/>
+	      <classpath>
+	        <path refid="build.test.classpath"/>
+	        <pathelement location="${build.testOutputDir}"/>
+	        <pathelement location="${build.outputDir}"/>
+	      </classpath>
+	      <batchtest todir="${test.reports}" unless="test">
+	        <fileset dir="${build.testDir}">
+	          <include name="**/Test*.java"/>
+	          <include name="**/*Test.java"/>
+	          <include name="**/*TestCase.java"/>
+	          <exclude name="**/*Abstract*Test.java"/>
+	          <exclude name="**/BaseDaoTestCase.java"/>
+	        </fileset>
+	      </batchtest>
+	      <batchtest todir="${test.reports}" if="test">
+	        <fileset dir="${build.testDir}">
+	          <include name="**/${test}.java"/>
+	          <exclude name="**/*Abstract*Test.java"/>
+	        </fileset>
+	      </batchtest>
+	    </junit>
+	  </target>
+
+	  <target name="test-junit-present">
+	    <available classname="junit.framework.Test" property="junit.present"/>
+	  </target>
+
+	  <target name="test-junit-status" 
+	          depends="test-junit-present">
+	    <condition property="junit.missing">
+	      <and>
+	        <isfalse value="${junit.present}"/>
+	        <isfalse value="${test.skip}"/>
+	      </and>
+	    </condition>
+	    <condition property="junit.skipped">
+	      <or>
+	        <isfalse value="${junit.present}"/>
+	        <istrue value="${test.skip}"/>
+	      </or>
+	    </condition>
+	  </target>
+
+	  <target name="junit-missing" 
+	          depends="test-junit-status" 
+	          if="junit.missing">
+	    <echo>=================================== WARNING ===================================</echo>
+	    <echo> JUnit is not present in your $ANT_HOME/lib directory. Tests not executed.</echo>
+	    <echo>===============================================================================</echo>
+	  </target>
+	
+	  <!-- Reload the database to a known state for testing -->
+	  <taskdef name="dbunit" classname="org.dbunit.ant.DbUnitTask"/>
+	  <target name="reload-db">
+		<dbunit driver="${jdbc.driverClassName}"
+		    url="${jdbc.url}"
+		    userid="${jdbc.username}"
+		    password="${jdbc.password}" 
+			supportBatchStatement="false"
+            schema="dbo" 
+			useQualifiedTableNames="enabled">
+		    <classpath>
+		        <pathelement location="${lib.dir}/jtds-1.2.5.jar"/>
+		    </classpath>
+		    <operation type="${dbunit.operation.type}" src="${build.testResourceDir.0}/sample-data.xml" format="xml"/>
+		</dbunit>
+	  </target>
+
+<!-- ==================== Dist Target ===================================== -->
+
+
+<!--
+
+  The "dist" target creates a binary distribution of your application
+  in a directory structure ready to be archived in a tar.gz or zip file.
+  Note that this target depends on two others:
+
+  * "compile" so that the entire web application (including external
+    dependencies) will have been assembled
+
+  * "javadoc" so that the application Javadocs will have been created
+
+-->
+
+  <target name="dist" depends="compile"
+   description="Create binary distribution">
+
+    <!-- Copy documentation subdirectories -->
+    <mkdir   dir="${dist.home}/docs"/>
+    <copy    todir="${dist.home}/docs">
+      <fileset dir="${docs.home}"/>
+    </copy>
+
+   <!-- Create application WAR file -->
+    <war destfile="${target}.war"
+         compress="true" 
+         webxml="src/main/webapp/WEB-INF/web.xml">
+      	<lib dir="src/main/webapp/WEB-INF/lib"/>
+      	<classes dir="${build.outputDir}"/>
+      	<fileset dir="src/main/webapp">
+      		<exclude name="WEB-INF/web.xml"/>
+    	</fileset>
+		<fileset dir="${build.resourceDir}">
+			<include name="**/*.css"/>
+			<include name="**/*.jpg"/>
+		</fileset>
+    </war>
+
+    <!-- Copy additional files to ${dist.home} as necessary -->
+  	<copy todir="${dist.home}/ear">
+        <fileset dir="${appHome}/EarContent"/>
+        <fileset file="${target}.war" />
+ 	</copy>
+
+    <!-- Create application EAR file -->
+    <jar jarfile="${dist.home}/${app.name}.ear"
+         basedir="${dist.home}/ear"/>
+	
+  </target>
+
+
+
+<!-- ==================== Install Target ================================== -->
+
+<!--
+
+  The "install" target tells the specified Tomcat 4 installation to dynamically
+  install this web application and make it available for execution.  It does
+  *not* cause the existence of this web application to be remembered across
+  Tomcat restarts; if you restart the server, you will need to re-install all
+  this web application.
+
+  If you have already installed this application, and simply want Tomcat to
+  recognize that you have updated Java classes (or the web.xml file), use the
+  "reload" target instead.
+
+  NOTE:  This target will only succeed if it is run from the same server that
+  Tomcat is running on.
+
+  NOTE:  This is the logical opposite of the "remove" target.
+
+-->
+
+  <macrodef name="run-domain-task">
+    <attribute name="task.name" />
+    <sequential>
+        <property name="runner" location="${my.domain}/bin/run_domain_task.cmd" />
+        <copy file="${my.domain}/bin/setDomainEnv.cmd" tofile="${runner}" overwrite="true" />
+        <concat append="true" destfile="${runner}">
+              ant -f "${ant.file}" @{task.name}</concat>
+        <exec executable="${runner}" />
+    </sequential>
+  </macrodef>
+	
+  <target name="deploy-to-domain">
+  	<copy todir="${weblogic.deployDir}">
+        <fileset file="${dist.home}/${app.name}.ear" />
+        <fileset file="${appHome}/plan.xml" />
+ 	</copy>
+
+  	<wldeploy
+  	      action="redeploy" verbose="true" debug="true"
+  	      name="${app.name}" source="${weblogic.deployDir}/${app.name}.ear" plan="${weblogic.deployDir}/plan.xml"
+  	      user="${weblogic.userName}" password="${weblogic.password}"
+  	      adminurl="${weblogic.deployUrl}" targets="AdminServer" />
+  </target>
+		
+  <target name="install" depends="dist"
+  	description="Install application to servlet container">
+
+  	<run-domain-task task.name="deploy-to-domain" />
+
+  </target>
+
+
+<!-- ==================== Javadoc Target ================================== -->
+
+<!--
+
+  The "javadoc" target creates Javadoc API documentation for the Java
+  classes included in your application.  Normally, this is only required
+  when preparing a distribution release, but is available as a separate
+  target in case the developer wants to create Javadocs independently.
+
+-->
+
+	  <!-- ====================================================================== -->
+	  <!-- Javadoc target                                                         -->
+	  <!-- ====================================================================== -->
+
+	  <target name="javadoc"  depends="compile"
+		description="Generates the Javadoc API documentation">
+	    <javadoc sourcepath="${build.srcDir}" 
+	             packagenames="*" 
+	             destdir="${reporting.outputDirectory}/apidocs" 
+	             access="protected" 
+	             old="false" 
+	             verbose="false" 
+	             version="true" 
+	             use="true" 
+	             author="true" 
+	             splitindex="false" 
+	             nodeprecated="false" 
+	             nodeprecatedlist="false" 
+	             notree="false" 
+	             noindex="false" 
+	             nohelp="false" 
+	             nonavbar="false" 
+	             serialwarn="false" 
+	             charset="ISO-8859-1" 
+	             linksource="false" 
+	             breakiterator="false"/>
+	  </target>
+
+	  <target name="package" depends="compile" description="Package the application">
+
+	  	<!-- Exploded EAR -->
+	  	<property name="buildClasspath" refid="build.classpath"/>
+
+<!--	  	<wlcompile srcdir="${build.srcDir}" destdir="${target} classpath=${buildClasspath}">
+	  	   <javac deprecation="false" debug="true"
+	  	   debuglevel="lines,vars,source"/>
+	  	</wlcompile>
+
+	  	<wlpackage tofile="${target}.ear" 
+	  	           srcdir="${build.webDir}"
+	  	           destdir="${target}"/> -->
+	  	
+	    <mkdir dir="${target}/app"/>
+	    <mkdir dir="${target}/plan"/>
+		<mkdir dir="${target}/${war}/WEB-INF/lib"/>
+	  	<copy todir="${target}/app" file="${build.resourceDir}/weblogic-application.xml"/>
+	  	<copy todir="${target}/plan" file="${basedir}/Plan.xml"/>
+	  	<copy todir="${target}/${war}" file="${basedir}/Plan.xml"/>
+	    <copy todir="${target}/${war}/WEB-INF/lib" flatten="true">
+	    	<path refid="build.classpath"/>
+	    </copy>
+	  	<copy todir="${target}/${war}/WEB-INF/classes">
+	  		<fileset dir="${build.outputDir}">
+	  			<exclude name="**/*Test*"/>
+	  		</fileset>
+	  	</copy>
+	    <copy todir="${target}/${war}">
+	    	<fileset dir="${build.webDir}"/>
+			<fileset dir="${build.resourceDir}">
+				<include name="**/*.css"/>
+				<include name="**/*.jpg"/>
+			</fileset>
+	    </copy>
+	  	
+	  	<antcall target="create-war"/>
+	  	
+	</target>
+	
+	<target name="create-war" if="archive.war">
+
+	    <war destfile="${target}.war"
+	         compress="true" 
+	         webxml="src/main/webapp/WEB-INF/web.xml">
+	      	<lib dir="${target}/${war}/WEB-INF/lib"/>
+	      	<classes dir="${build.outputDir}"/>
+	      	<fileset dir="${target}/${war}">
+	      		<exclude name="WEB-INF/web.xml"/>
+	    	</fileset>
+	    </war>
+
+	  </target>
+	
+	  <!-- ====================================================================== -->
+	  <!-- A dummy target for the package named after the type it creates         -->
+	  <!-- ====================================================================== -->
+
+	  <target name="war" depends="package" description="Builds the war for the application"/>
+
+
+<!-- ==================== Prepare Target ================================== -->
+
+<!--
+
+  The "prepare" target is used to create the "build" destination directory,
+  and copy the static contents of your web application to it.  If you need
+  to copy static files from external dependencies, you can customize the
+  contents of this task.
+
+  Normally, this task is executed indirectly when needed.
+
+-->
+
+  <target name="prepare">
+
+    <!-- Create build directories as needed -->
+    <mkdir  dir="${build.dir}"/>
+
+
+    <!-- Copy external dependencies as required -->
+    <!-- *** CUSTOMIZE HERE AS REQUIRED BY YOUR APPLICATION *** -->
+<!--
+    <copy todir="${build.home}/WEB-INF/lib" file="${foo.jar}"/>
+-->
+
+    <!-- Copy static files from external dependencies as needed -->
+    <!-- *** CUSTOMIZE HERE AS REQUIRED BY YOUR APPLICATION *** -->
+
+  </target>
+
+
+<!-- ==================== Remove Target =================================== -->
+
+<!--
+
+  The "remove" target tells the specified Tomcat 4 installation to dynamically
+  remove this web application from service.
+
+  NOTE:  This is the logical opposite of the "install" target.
+
+-->
+
+  <target name="remove"
+   description="Remove application on servlet container">
+
+    <remove url="${manager.url}"
+       username="${manager.username}"
+       password="${manager.password}"
+           path="${app.path}"/>
+
+  </target>
+
+
+</project>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MenuConfig>
+    <Displayers>
+        <Displayer name="Velocity" type="net.sf.navigator.displayer.VelocityMenuDisplayer"/>
+    </Displayers>
+    <Menus>
+        <Menu name="MainMenu" title="patientSearch.title" page="/mainMenu.html" roles="ROLE_ADMIN,ROLE_USER" width="120">
+            <Item name="SearchWard" title="patientSearch.title.ward" page="/mainMenu.html?tab=WARD"/>
+            <Item name="SearchTeam" title="patientSearch.title.team" page="/mainMenu.html?tab=TEAM"/>
+            <Item name="SearchAll" title="patientSearch.title.all" page="/mainMenu.html?tab=ALL"/>
+        </Menu>
+        <Menu name="UserMenu" title="menu.user" description="User Menu" page="/editProfile.html" roles="ROLE_ADMIN,ROLE_USER" width="120">
+            <Item name="Defaults" title="menu.user.defaults" page="/editProfile.html"/>
+        </Menu>
+        <Menu name="AdminMenu" title="menu.admin" description="Admin Menu" roles="ROLE_ADMIN" width="120" page="/admin/users.html">
+            <Item name="Templates" title="menu.admin.templates" page="/admin/templates.html"/>
+            <Item name="Definitions" title="menu.definitions" page="/admin/definitions.html"/>
+            <Item name="Testimonials" title="menu.admin.testimonials" page="/admin/testimonials.html"/>
+            <Item name="ViewUsers" title="menu.admin.users" page="/admin/users.html"/>
+            <Item name="OverrideDate" title="menu.admin.overrideDate" page="/admin/editDateOverride.html"/>
+            <Item name="ReloadContext" title="menu.admin.reload" page="/admin/reload.html"/>
+            <Item name="FlushCache" title="menu.flushCache" page="/admin/flushCache.html"/>
+            <Item name="Clickstream" title="menu.clickstream" page="/admin/clickstreams.jsp"/>
+        </Menu>
+        <Menu name="Logout" title="user.logout" page="/logout.jsp" roles="ROLE_ADMIN,ROLE_USER"/>
+    </Menus>
+</MenuConfig>

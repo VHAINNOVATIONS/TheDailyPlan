@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="TemplateSQL">
+    <typeAlias alias="template" type="gov.med.va.innovations.domain.Template"/>
+    <typeAlias alias="component" type="gov.med.va.innovations.domain.Component"/>
+
+    <parameterMap id="addTemplateParam" class="template">
+	    <parameter property="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+	    <parameter property="ward" jdbcType="VARCHAR" javaType="java.lang.String" />
+	    <parameter property="description" jdbcType="VARCHAR" javaType="java.lang.String" />
+ 	    <parameter property="createdBy" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </parameterMap>
+
+    <parameterMap id="addComponentParam" class="component">
+	    <parameter property="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+	    <parameter property="title" jdbcType="VARCHAR" javaType="java.lang.String" />
+	    <parameter property="template" jdbcType="VARCHAR" javaType="java.lang.String" />
+	    <parameter property="mandatory" jdbcType="CHAR" javaType="java.lang.Boolean" />
+	    <parameter property="method" jdbcType="VARCHAR" javaType="java.lang.String" />
+ 	    <parameter property="createdBy" jdbcType="VARCHAR" javaType="java.lang.String" />
+ 	    <parameter property="priority" jdbcType="INTEGER" javaType="java.lang.Long" />
+	    <parameter property="hasCriteria" jdbcType="CHAR" javaType="java.lang.Boolean" />
+	    <parameter property="criteria" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </parameterMap>
+
+    <parameterMap id="updateTemplateParam" class="template">
+	    <parameter property="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+	    <parameter property="ward" jdbcType="VARCHAR" javaType="java.lang.String" />
+	    <parameter property="description" jdbcType="VARCHAR" javaType="java.lang.String" />
+ 	    <parameter property="updatedBy" jdbcType="VARCHAR" javaType="java.lang.String" />
+	    <parameter property="id" jdbcType="INTEGER" javaType="java.lang.Long" />
+    </parameterMap>
+
+    <parameterMap id="updateComponentParam" class="component">
+	    <parameter property="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+	    <parameter property="title" jdbcType="VARCHAR" javaType="java.lang.String" />
+	    <parameter property="template" jdbcType="VARCHAR" javaType="java.lang.String" />
+	    <parameter property="mandatory" jdbcType="CHAR" javaType="java.lang.Boolean" />
+	    <parameter property="method" jdbcType="VARCHAR" javaType="java.lang.String" />
+ 	    <parameter property="updatedBy" jdbcType="VARCHAR" javaType="java.lang.String" />
+ 	    <parameter property="priority" jdbcType="INTEGER" javaType="java.lang.Long" />
+	    <parameter property="hasCriteria" jdbcType="CHAR" javaType="java.lang.Boolean" />
+	    <parameter property="criteria" jdbcType="VARCHAR" javaType="java.lang.String" />
+	    <parameter property="id" jdbcType="INTEGER" javaType="java.lang.Long" />
+    </parameterMap>
+
+    <resultMap id="templateResult" class="template" groupBy="id">
+	    <result column="template_id" property="id"/>
+	    <result column="template_name" property="name" />
+	    <result column="ward" property="ward" />
+	    <result column="description" property="description" />
+	    <result resultMap="TemplateSQL.componentResult" property="components" />
+	    <result column="template_created_by" property="createdBy" />
+	    <result column="template_updated_by" property="updatedBy" />
+	    <result column="template_update_date" property="updateDate" />
+    </resultMap>
+
+    <resultMap id="componentResult" class="component">
+	    <result column="component_id" property="id"/>
+	    <result column="component_name" property="name" />
+	    <result column="title" property="title" />
+	    <result column="template" property="template" />
+	    <result column="mandatory" property="mandatory" />
+	    <result column="method" property="method" />
+	    <result column="order_sequence" property="priority" />
+	    <result column="component_created_by" property="createdBy" />
+	    <result column="component_create_date" property="createDate" />
+	    <result column="component_updated_by" property="updatedBy" />
+	    <result column="component_update_date" property="updateDate" />
+	    <result column="has_criteria" property="hasCriteria" />
+	    <result column="criteria" property="criteria" />
+    </resultMap>
+
+    <select id="getTemplates" resultMap="templateResult">
+    <![CDATA[
+        select *, templates.id as template_id, components.id as component_id
+        from templates
+        join template_components on (templates.id = template_id)
+        join components on (component_id = components.id)
+        order by template_name, priority
+    ]]>
+    </select>
+
+    <select id="getTemplatesForWard" resultMap="templateResult">
+    <![CDATA[
+        select *, templates.id as template_id, components.id as component_id
+        from templates
+        join template_components on (templates.id = template_id)
+        join components on (component_id = components.id)
+        where ward is null or ward = #value#
+        order by template_name, priority
+    ]]>
+    </select>
+
+    <select id="getTemplate" resultMap="templateResult">
+    <![CDATA[
+        select *, templates.id as template_id, components.id as component_id
+        from templates 
+        join template_components on (templates.id = template_id)
+        join components on (component_id = components.id)
+        where templates.id = #value# 
+        order by priority
+    ]]>
+    </select>
+
+    <select id="getTemplateByName" resultMap="templateResult">
+    <![CDATA[
+        select *, templates.id as template_id, components.id as component_id 
+        from templates 
+        join template_components on (templates.id = template_id)
+        join components on (component_id = components.id)
+        where template_name = #value# 
+        order by template_name, priority
+    ]]>
+    </select>
+
+    <insert id="addTemplate" parameterMap="addTemplateParam">
+        <![CDATA[
+            insert into templates (template_name,ward,description,template_created_by) values ( ?,?,?,? )
+        ]]>
+        <selectKey resultClass="java.lang.Long" keyProperty="id" type="post">
+            SELECT @@IDENTITY AS id
+        </selectKey>
+    </insert>
+
+    <update id="updateTemplate" parameterMap="updateTemplateParam">
+    <![CDATA[
+        update templates 
+        set template_name = ?, 
+        	ward = ?,
+        	description = ?, 
+        	template_updated_by = ?,
+        	template_update_date = getdate()
+        where id = ?
+    ]]>
+    </update>
+
+    <delete id="deleteTemplate">
+    <![CDATA[
+        delete from templates where id = #value#
+    ]]>
+    </delete>
+    
+    <!-- Component CRUD -->
+
+    <select id="getComponents" resultMap="componentResult">
+    <![CDATA[
+        select *, components.id as component_id 
+        from components
+        order by order_sequence
+    ]]>
+    </select>
+
+    <select id="getComponent" resultMap="componentResult">
+    <![CDATA[
+        select *, components.id as component_id
+        from components 
+        where id = #value# 
+    ]]>
+    </select>
+
+    <select id="getComponentsByTemplate" resultMap="componentResult">
+    <![CDATA[
+        select 
+            *, components.id as component_id 
+        from components
+        join template_components on (components.id = component_id)
+        where template_id = #value#
+        order by order_sequence
+    ]]>
+    </select>
+
+    <select id="getComponentByName" resultMap="componentResult">
+    <![CDATA[
+        select 
+            *, components.id as component_id 
+        from components
+        where component_name = #value#
+    ]]>
+    </select>
+
+    <select id="getComponentsByType" resultMap="componentResult">
+    <![CDATA[
+        select 
+            *, components.id as component_id 
+        from components
+        where mandatory = #value#
+        order by order_sequence
+    ]]>
+    </select>
+    
+    <select id="getOwned" resultClass="int">
+    <![CDATA[
+        select count(*)
+        from components
+        join template_components on (id = component_id)
+        where id = #value#
+    ]]>
+    </select>
+
+    <insert id="addComponent" parameterMap="addComponentParam">
+        <![CDATA[
+            insert into components (component_name,title,template,mandatory,method,component_created_by,order_sequence,has_criteria,criteria) values ( ?,?,?,?,?,?,?,?,? )
+        ]]>
+        <selectKey resultClass="java.lang.Long" keyProperty="id" type="post">
+            SELECT @@IDENTITY AS id
+        </selectKey>
+    </insert>
+
+    <update id="updateComponent" parameterMap="updateComponentParam">
+    <![CDATA[
+        update components 
+        set component_name = ?,
+        	title = ?,
+        	template = ?, 
+        	mandatory = ?,
+        	method = ?,
+        	component_updated_by = ?,
+        	order_sequence = ?,
+ 			has_criteria = ?,
+ 			criteria = ?,
+        	component_update_date = getdate()
+        where id = ?
+    ]]>
+    </update>
+
+    <delete id="deleteComponent">
+    <![CDATA[
+        delete from components where id = #value#
+    ]]>
+    </delete>
+
+    <insert id="addTemplateComponent" parameterClass="map">
+        <![CDATA[
+            insert into template_components (template_id,component_id,priority) values ( #templateId#,#componentId#,#priority# )
+        ]]>
+    </insert>
+
+    <update id="updateTemplateComponent" parameterClass="map">
+    <![CDATA[
+        update template_components 
+        set priority = #priority#
+        where template_id = #templateId# and 
+        	component_id = #componentId#
+    ]]>
+    </update>
+
+    <delete id="deleteTemplateComponent">
+    <![CDATA[
+        delete from template_components where template_id = #templateId# and 
+        	component_id = #componentId#
+    ]]>
+    </delete>
+
+    <delete id="deleteTemplateComponentForTemplate">
+    <![CDATA[
+        delete from template_components where template_id = #templateId#
+    ]]>
+    </delete>
+
+    <!-- Paging -->
+
+    <select id="countTemplate" resultClass="int">
+    	select count(*) from templates
+    </select>
+    
+    <select id="pagingTemplate" parameterClass="map" resultMap="templateResult">
+    <![CDATA[
+    	SELECT *
+		FROM   (SELECT ROW_NUMBER() OVER(ORDER BY $criteria$) AS
+		       rownum, templates.id as template_id, template_name, ward, description, template_created_by, template_updated_by, template_update_date, order_sequence,
+		        components.id as component_id, component_name, title, template, mandatory, method, component_created_by, component_create_date, component_updated_by, component_update_date, has_criteria, criteria 
+		        from templates 
+		        join template_components on (templates.id = template_components.template_id)
+		        join components on (template_components.component_id = components.id)
+		       ) AS templates1
+		WHERE  rownum >= $first$ AND rownum <= $max$
+		ORDER BY $criteria$ 
+    ]]>
+    </select>
+
+    <select id="countComponent" resultClass="int">
+    	select count(*) from components
+    </select>
+    
+    <select id="pagingComponent" parameterClass="map" resultMap="componentResult">
+    <![CDATA[
+    	SELECT *
+		FROM   (SELECT ROW_NUMBER() OVER(ORDER BY $criteria$) AS
+		       rownum, id, component_name, title, template, mandatory, method, component_created_by, component_updated_by, component_update_date, order_sequence, has_criteria, criteria  FROM components) AS components1
+		WHERE  rownum >= $first$ AND rownum <= $max$
+		ORDER BY $criteria$ 
+    ]]>
+    </select>
+</sqlMap>

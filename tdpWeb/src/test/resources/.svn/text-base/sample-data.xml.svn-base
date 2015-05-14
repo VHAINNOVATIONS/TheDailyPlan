@@ -1,0 +1,1156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <table name="app_user">
+        <column>id</column>
+        <column>username</column>
+        <column>password</column>
+        <column>first_name</column>
+        <column>last_name</column>
+        <column>duz</column>
+        <column>email</column>
+        <column>version</column>
+        <column>account_enabled</column>
+        <column>account_expired</column>
+        <column>account_locked</column>
+        <column>credentials_expired</column>
+        <column>pref_init_search</column>
+        <column>pref_font_size</column>
+        <column>pref_team</column>
+        <row>
+            <value description="id">-1</value>
+            <value description="username">vhaino321</value>
+            <value description="password">31da5d2c585210763fe91f8121af2a67398869aa</value>
+            <value description="first_name">VHA</value>
+            <value description="last_name">INNOVATIONS</value>
+            <value description="duz">10000000210</value>
+            <value description="email"></value>
+            <value description="version">1</value>
+            <value description="account_enabled">1</value>
+            <value description="account_expired">0</value>
+            <value description="account_locked">0</value>
+            <value description="credentials_expired">0</value>
+            <value description="pref_init_search"></value>
+            <value description="pref_font_size">MEDIUM</value>
+            <value description="pref_team"></value>
+        </row>
+        <row>
+            <value description="id">-2</value>
+            <value description="username">vhaino111</value>
+            <value description="password">31da5d2c585210763fe91f8121af2a67398869aa</value>
+            <value description="first_name">TDP</value>
+            <value description="last_name">ADMIN</value>
+            <value description="duz">10000000216</value>
+            <value description="email">mrosent@gmail.com</value>
+            <value description="version">1</value>
+            <value description="account_enabled">1</value>
+            <value description="account_expired">0</value>
+            <value description="account_locked">0</value>
+            <value description="credentials_expired">0</value>
+            <value description="pref_init_search">ALL</value>
+            <value description="pref_font_size">MEDIUM</value>
+            <value description="pref_team">Geriatric</value>
+        </row>
+    </table>
+    <table name="role">
+        <column>id</column>
+        <column>name</column>
+        <column>description</column>
+        <row>
+            <value description="id">-1</value>
+            <value description="name">ROLE_ADMIN</value>
+            <value description="description"><![CDATA[Administrator role (can edit Users)]]></value>
+        </row>
+        <row>
+            <value description="id">-2</value>
+            <value description="name">ROLE_USER</value>
+            <value description="description"><![CDATA[Default role for all Users]]></value>
+        </row>
+    </table>
+    <table name="user_role">
+        <column>user_id</column>
+        <column>role_id</column>
+        <row>
+            <value description="user_id">-1</value>
+            <value description="role_id">-2</value>
+        </row>
+        <row>
+            <value description="user_id">-2</value>
+            <value description="role_id">-1</value>
+        </row>
+    </table>
+    <table name="definition">
+        <column>id</column>
+        <column>abbreviation</column>
+        <column>definition</column>
+        <column>deleted</column>
+        <column>status</column>
+        <column>next_refresh</column>
+        <column>medline_plus_index</column>
+        <column>updated_by</column>
+        <row>
+            <value description="id">-1</value>
+            <value description="abbreviation">WC</value>
+            <value description="definition">White Count - Total white blood cells: All the white cell types are given as a percentage and as an absolute number per litre.</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+         </row>
+        <row>
+            <value description="id">-2</value>
+            <value description="abbreviation">BB</value>
+            <value description="definition">Better Barbituates</value>
+            <value description="deleted">1</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>       				
+        <row>
+            <value description="id">1</value>
+            <value description="abbreviation">Po</value>
+            <value description="definition">by mouth</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>
+        <row>
+            <value description="id">2</value>
+            <value description="abbreviation">IM</value>
+            <value description="definition">intramuscular (in muscle)</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>
+        <row>
+            <value description="id">3</value>
+            <value description="abbreviation">Subq</value>
+            <value description="definition">subcutaneous (under the skin)</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>
+        <row>
+            <value description="id">4</value>
+            <value description="abbreviation">Q</value>
+            <value description="definition">every</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>
+				
+        <row>
+            <value description="id">5</value>
+            <value description="abbreviation">IV</value>
+            <value description="definition">intravenous (through the vein)</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>
+        <row>
+            <value description="id">6</value>
+            <value description="abbreviation">Cap</value>
+            <value description="definition">capsule</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>
+        <row>
+            <value description="id">7</value>
+            <value description="abbreviation">EC</value>
+            <value description="definition">enteric coated</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>
+        <row>
+            <value description="id">8</value>
+            <value description="abbreviation">Tab</value>
+            <value description="definition">tablet</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>
+        <row>
+            <value description="id">9</value>
+            <value description="abbreviation">AC</value>
+            <value description="definition">before meals</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>
+        <row>
+            <value description="id">10</value>
+            <value description="abbreviation">PC</value>
+            <value description="definition">after meals</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>
+        <row>
+            <value description="id">11</value>
+            <value description="abbreviation">Gtt</value>
+            <value description="definition">drops</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>				
+        <row>
+            <value description="id">12</value>
+            <value description="abbreviation">OD</value>
+            <value description="definition">right eye</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>
+				
+        <row>
+            <value description="id">13</value>
+            <value description="abbreviation">OS</value>
+            <value description="definition">left eye</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>				
+        <row>
+            <value description="id">14</value>
+            <value description="abbreviation">s/p</value>
+            <value description="definition">status post(after)</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>				
+        <row>
+            <value description="id">15</value>
+            <value description="abbreviation">gm</value>
+            <value description="definition">grams</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>				
+        <row>
+            <value description="id">16</value>
+            <value description="abbreviation">mg</value>
+            <value description="definition">milligrams</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>				
+        <row>
+            <value description="id">17</value>
+            <value description="abbreviation">meq</value>
+            <value description="definition">milliequivalents</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>				
+        <row>
+            <value description="id">18</value>
+            <value description="abbreviation">IVPB</value>
+            <value description="definition">intravenous piggyback</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>				
+        <row>
+            <value description="id">20</value>
+            <value description="abbreviation">Oint</value>
+            <value description="definition">ointment</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>				
+        <row>
+            <value description="id">21</value>
+            <value description="abbreviation">Soln</value>
+            <value description="definition">solution</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>				
+        <row>
+            <value description="id">22</value>
+            <value description="abbreviation">INHL</value>
+            <value description="definition">inhaler</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>				
+        <row>
+            <value description="id">23</value>
+            <value description="abbreviation">Ml</value>
+            <value description="definition">milliliter</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>				
+        <row>
+            <value description="id">24</value>
+            <value description="abbreviation">Min.</value>
+            <value description="definition">minutes</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>				
+        <row>
+            <value description="id">25</value>
+            <value description="abbreviation">UA</value>
+            <value description="definition">urinalysis</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>				
+        <row>
+            <value description="id">26</value>
+            <value description="abbreviation">CBC</value>
+            <value description="definition">complete blood count</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>				
+        <row>
+            <value description="id">27</value>
+            <value description="abbreviation">C&amp;S</value>
+            <value description="definition">culture &amp; sensitivity</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>				
+        <row>
+            <value description="id">28</value>
+            <value description="abbreviation">Hgb</value>
+            <value description="definition">hemoglobin</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>				
+        <row>
+            <value description="id">29</value>
+            <value description="abbreviation">Hct</value>
+            <value description="definition">hematocrit</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>				
+        <row>
+            <value description="id">30</value>
+            <value description="abbreviation">BP</value>
+            <value description="definition">blood pressure</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>
+        <row>
+            <value description="id">31</value>
+            <value description="abbreviation">HR</value>
+            <value description="definition">heart rate</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>				
+        <row>
+            <value description="id">32</value>
+            <value description="abbreviation">STAT</value>
+            <value description="definition">immediately</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>				
+        <row>
+            <value description="id">33</value>
+            <value description="abbreviation">CXR</value>
+            <value description="definition">chest x-ray</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>				
+        <row>
+            <value description="id">34</value>
+            <value description="abbreviation">MRI</value>
+            <value description="definition">magnetic resonance imagery</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>				
+        <row>
+            <value description="id">35</value>
+            <value description="abbreviation">CT</value>
+            <value description="definition">computerized axial tomography</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>				
+        <row>
+            <value description="id">36</value>
+            <value description="abbreviation">US</value>
+            <value description="definition">ultrasound</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>				
+        <row>
+            <value description="id">38</value>
+            <value description="abbreviation">TEMP</value>
+            <value description="definition">temperature</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>				
+        <row>
+            <value description="id">39</value>
+            <value description="abbreviation"><![CDATA[&le;]]></value>
+            <value description="definition">less than or equal to</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>	
+        <row>
+            <value description="id">40</value>
+            <value description="abbreviation"><![CDATA[&ge;]]></value>
+            <value description="definition">greater than or equal to</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>	
+        <row>
+            <value description="id">41</value>
+            <value description="abbreviation">Inj</value>
+            <value description="definition">injection</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-05-10 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>
+        <row>
+            <value description="id">42</value>
+            <value description="abbreviation">Imaging</value>
+            <value description="definition">X-Ray</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-10-27 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>
+        <row>
+            <value description="id">43</value>
+            <value description="abbreviation">Pending</value>
+            <value description="definition">those orders waiting to be signed by Dr.</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-10-27 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>
+        <row>
+            <value description="id">44</value>
+            <value description="abbreviation">Active</value>
+            <value description="definition">those orders waiting to be carried out</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-10-27 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>
+        <row>
+            <value description="id">45</value>
+            <value description="abbreviation">ASAP</value>
+            <value description="definition">As soon as possible</value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-10-27 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>
+        <row>
+            <value description="id">46</value>
+            <value description="abbreviation"><![CDATA[PA&LAT]]></value>
+            <value description="definition"><![CDATA[posterior/anterior & lateral views]]></value>
+            <value description="deleted">0</value>
+        	<value description="status">MISSING</value>
+        	<value description="next_refresh">2010-10-27 23:59:00</value>
+        	<value description="medline_plus_index">0</value>
+        	<value description="updated_by">mark</value>
+        </row>
+    </table>
+    <table name="testimonials">
+        <column>id</column>
+        <column>title</column>
+        <column>quote</column>
+        <column>testimonial</column>
+        <column>image_link</column>
+        <column>created_by</column>
+        <row>
+            <value description="id">-2</value>
+            <value description="title">Nursing Staff Evaluations</value>
+            <value description="quote"><![CDATA[Percentage of nursing staff that reported this behavior or event on at least one occasion over the two-week pilot]]></value>
+            <value description="testimonial"><![CDATA[These are the summarized results of a survey given to nursing staff about their experience with The Daily Plan<sup>&reg;</sup>. Click on the image to see the results.]]></value>
+            <value description="image_link"><![CDATA[/tdpWeb/resources/Figure2.jpg]]></value>
+            <value description="created_by">vhaino321</value>
+        </row>
+        <row>
+            <value description="id">-1</value>
+            <value description="title">Patient Evaluations</value>
+            <value description="quote"><![CDATA[Percent of Patient and/or Family Evaluations responses that agreed or strongly agreed with the statement]]></value>
+            <value description="testimonial"><![CDATA[These are the summarized results of a survey given to patients about their experience with The Daily Plan<sup>&reg;</sup>. Click on the image to see the results.]]></value>
+            <value description="image_link"><![CDATA[/tdpWeb/resources/Figure1.jpg]]></value>
+            <value description="created_by">vhaino321</value>
+        </row>
+    </table>
+    <table name="templates">
+        <column>id</column>
+        <column>template_name</column>
+        <column>ward</column>
+        <column>description</column>
+        <column>template_created_by</column>
+        <row>
+            <value description="id">1</value>
+            <value description="template_name">Mandatory Components</value>
+            <null/>
+            <value description="description"><![CDATA[Daily Plan template containing all Mandatory Components]]></value>
+            <value description="template_created_by">vhaino321</value>
+        </row>
+        <row>
+            <value description="id">-2</value>
+            <value description="template_name">ICU/CCU Components</value>
+            <value description="ward">ICU/CCU</value>
+            <value description="description"><![CDATA[Daily Plan template containing Components used in ICU]]></value>
+            <value description="template_created_by">vhaino321</value>
+        </row>
+    </table>
+    <table name="components">
+        <column>id</column>
+        <column>component_name</column>
+        <column>title</column>
+        <column>template</column>
+        <column>mandatory</column>
+        <column>method</column>
+        <column>component_created_by</column>
+        <column>order_sequence</column>
+        <column>has_criteria</column>
+        <column>criteria</column>
+        <row>
+            <value description="id">2</value>
+            <value description="component_name">Current Diet Profile</value>
+            <value description="title"><![CDATA[<h4>Current Diet Profile</h4>]]></value>
+            <value description="template"><![CDATA[<div class="report_column500">
+#if ( $vista.listLength > 0 )
+<table><colgroup><col width="40%"/><col width="30%"/><col width="30%"/></colgroup>
+<thead><tr><th>Description</th><th>Start</th><th>Stop</th></tr></thead>
+<tbody>
+#foreach( $diet in $vista.orders )
+    <tr><td>${diet.text}</td><td>${diet.startDateString}</td><td>${diet.stopDateString}</td></tr>
+#end
+</tbody></table>
+#else
+	<h2>No Diet Orders to Display</h2>
+#end
+</div>]]></value>
+            <value description="mandatory">1</value>
+            <value description="method">getDietOrders</value>
+            <value description="component_created_by">vhaino321</value>
+            <value description="order_sequence">6</value>
+            <value description="has_criteria">0</value>
+            <value description="criteria"></value>
+        </row>
+        <row>
+            <value description="id">3</value>
+            <value description="component_name">Active Medications</value>
+            <value description="title"><![CDATA[<h4>Active Medications</h4>]]></value>
+            <value description="template"><![CDATA[<div class="report_column500">
+#if ( $vista.listLength > 0 )
+<table>
+ <colgroup><col width="40%"/><col width="10%"/><col width="30%"/><col width="20%"/></colgroup>
+<thead><tr><th>Drug</th><th>Dose</th><th>Route</th><th>Frequency</th></tr></thead>
+<tbody>
+#foreach( $drug in $vista.meds )
+	#if ( ${drug.highRisk} ) 
+		<tr class="highrisk"><td class="highrisk">
+	#elseif ( ${drug.new} ) 
+		<tr class="new"><td class="new">
+	#else
+		<tr><td>
+	#end
+    ${drug.name}</td><td>${drug.dose}</td><td>${drug.route}</td><td>${drug.schedule}</td></tr>
+#end
+</tbody>
+</table>
+#else
+	<h2>No Active Medications to Display</h2>
+#end
+</div>]]></value>
+            <value description="mandatory">1</value>
+            <value description="method">getInpatientMeds</value>
+            <value description="component_created_by">vhaino321</value>
+            <value description="order_sequence">1</value>
+            <value description="has_criteria">0</value>
+            <value description="criteria"></value>
+        </row>
+        <row>
+            <value description="id">4</value>
+            <value description="component_name">IV Medications</value>
+            <value description="title"><![CDATA[<h4>IV Medications</h4>]]></value>
+            <value description="template"><![CDATA[<div class="report_column500">
+#if ( $vista.listLength > 0 )
+<table>
+ <colgroup><col width="60%"/><col width="20%"/><col width="20%"/></colgroup>
+<thead><tr><th>Drug</th><th>Dose</th><th>Frequency</th></tr></thead>
+<tbody>
+#foreach( $drug in $vista.meds )
+    <tr><td>${drug.detail}</td><td>${drug.dose}</td><td>${drug.schedule}</td></tr>
+#end
+</tbody></table>
+#else
+	<h2>No IV Medications to Display</h2>
+#end
+</div>]]></value>
+            <value description="mandatory">1</value>
+            <value description="method">getIvMeds</value>
+            <value description="component_created_by">vhaino321</value>
+            <value description="order_sequence">2</value>
+            <value description="has_criteria">0</value>
+            <value description="criteria"></value>
+        </row>
+        <row>
+            <value description="id">5</value>
+            <value description="component_name">Allergies/Adverse Reactions</value>
+            <value description="title"><![CDATA[<h4>Allergies/Adverse Reactions</h4>]]></value>
+            <value description="template"><![CDATA[<div class="report_column500">
+#if ( $vista.listLength > 0 )
+<table> <colgroup><col width="60%"/><col width="40%"/></colgroup>
+<tbody>
+#foreach( $allergy in $vista.allergies )
+    <tr><td>${allergy.allergenName} ${allergy.reaction}</td></tr>
+#end
+</tbody></table>
+#else
+	<h2>No Allergies to Display</h2>
+#end
+</div>]]></value>
+            <value description="mandatory">1</value>
+            <value description="method">getAllergies</value>
+            <value description="component_created_by">vhaino321</value>
+            <value description="order_sequence">3</value>
+            <value description="has_criteria">0</value>
+            <value description="criteria"></value>
+        </row>
+        <row>
+            <value description="id">6</value>
+            <value description="component_name">Lab Orders</value>
+            <value description="title"><![CDATA[<h4>Lab Orders</h4>]]></value>
+            <value description="template"><![CDATA[<div class="report_column500">
+#if ( $vista.listLength > 0 )
+<table><colgroup><col width="50%"/><col width="10%"/><col width="10%"/><col width="30%"/></colgroup>
+<thead><tr><th>Test Name</th><th>Specimen</th><th>Urgency</th><th>Status</th></tr></thead>
+<tbody>
+#foreach( $lab in $vista.orders )
+    <tr><td>${lab.text}</td><td></td><td></td><td>${lab.status.displayName}</td></tr>
+#end
+</tbody></table>
+#else
+	<h2>No Lab Orders to Display</h2>
+#end
+</div>]]></value>
+            <value description="mandatory">1</value>
+            <value description="method">getLabOrders</value>
+            <value description="component_created_by">vhaino321</value>
+            <value description="order_sequence">4</value>
+            <value description="has_criteria">0</value>
+            <value description="criteria"></value>
+        </row>
+        <row>
+            <value description="id">7</value>
+            <value description="component_name">Imaging Status/Radiology Orders</value>
+            <value description="title"><![CDATA[<h4>Imaging Status/Radiology Orders</h4>]]></value>
+            <value description="template"><![CDATA[<div class="report_column500">
+#if ( $vista.listLength > 0 )
+<table><colgroup><col width="50%"/><col width="10%"/><col width="40%"/></colgroup>
+<thead><tr><th>Test Name</th><th>Urgency</th><th>Status</th></tr></thead>
+<tbody>
+#foreach( $lab in $vista.orders )
+    <tr><td>${lab.text}</td><td></td><td>${lab.status.displayName}</td></tr>
+#end
+</tbody></table>
+#else
+	<h2>No Imaging Status/Radiology Orders to Display</h2>
+#end
+</div>]]></value>
+            <value description="mandatory">1</value>
+            <value description="method">getRadiologyOrders</value>
+            <value description="component_created_by">vhaino321</value>
+             <value description="order_sequence">5</value>
+            <value description="has_criteria">0</value>
+            <value description="criteria"></value>
+        </row>
+        <row>
+            <value description="id">8</value>
+            <value description="component_name">Scheduled Appointments/Visits/Admissions</value>
+            <value description="title"><![CDATA[<h4>Scheduled Appointments/Visits/Admissions</h4>]]></value>
+            <value description="template"><![CDATA[<div class="report_column500">
+#if ( $vista.listLength > 0 )
+<table><colgroup><col width="20%"/><col width="20%"/><col width="10%"/><col width="25%"/><col width="25%"/></colgroup>
+<thead><tr><th>Date</th><th>Name</th><th>Schedule</th><th>Status</th><th>Location</th></tr></thead>
+<tbody>
+#foreach( $appt in $vista.mapList )
+    <tr><td>${appt.timestamp}</td><td>${appt.name}</td><td>${appt.schedule}</td><td>${appt.status}</td><td>${appt.location}</td></tr>
+#end
+</tbody></table>
+#else
+	<h2>No Appointments/Visits/Admissions Orders to Display</h2>
+#end
+</div>]]></value>
+            <value description="mandatory">1</value>
+            <value description="method">getAppointments</value>
+            <value description="component_created_by">vhaino321</value>
+            <value description="order_sequence">7</value>
+            <value description="has_criteria">0</value>
+            <value description="criteria"></value>
+        </row>
+        <row>
+            <value description="id">9</value>
+            <value description="component_name">Activities</value>
+            <value description="title"><![CDATA[<h4>Other Orders</h4>]]></value>
+            <value description="template"><![CDATA[<div class="report_column500">
+#if ( $vista.listLength > 0 )
+<table><colgroup><col width="100%"/></colgroup>
+<tbody>
+#foreach( $order in $vista.orders )
+    <tr><td>${order.text}</td></tr>
+#end
+</tbody></table>
+#else
+	<h2>No Nursing Orders to Display</h2>
+#end
+</div>]]></value>
+            <value description="mandatory">1</value>
+            <value description="method">getNursingOrders</value>
+            <value description="component_created_by">vhaino321</value>
+            <value description="order_sequence">8</value>
+            <value description="has_criteria">0</value>
+            <value description="criteria"></value>
+        </row>
+        <row>
+            <value description="id">10</value>
+            <value description="component_name">Procedures</value>
+            <value description="title"><![CDATA[<h4>Procedures</h4>]]></value>
+            <value description="template"><![CDATA[<div class="report_column500">
+#if ( $vista.listLength > 0 )
+<table><colgroup><col width="60%"/><col width="40%"/></colgroup>
+<tbody>
+#foreach( $order in $vista.orders )
+    <tr><td>${order.text}</td><td></td></tr>
+#end
+</tbody></table>
+#else
+	<h2>No Procedure Orders to Display</h2>
+#end
+</div>]]></value>
+            <value description="mandatory">1</value>
+            <value description="method">getProcedureOrders</value>
+            <value description="component_created_by">vhaino321</value>
+            <value description="order_sequence">9</value>
+            <value description="has_criteria">0</value>
+            <value description="criteria"></value>
+        </row>
+        <row>
+            <value description="id">11</value>
+            <value description="component_name">Advanced Directives</value>
+            <value description="title"><![CDATA[<h4>Advanced Directives</h4>]]></value>
+           <value description="template"><![CDATA[<div class="report_column500">
+#if ( $vista.listLength > 0 )
+<table><colgroup><col width="60%"/><col width="40%"/></colgroup>
+<tbody>
+#foreach( $order in $vista.orders )
+    <tr><td><b>${order.text}</b></td><td></td></tr>
+#end
+</tbody></table>
+#else
+	<h2>No Advanced Directive Orders to Display</h2>
+#end
+</div>]]></value>
+            <value description="mandatory">0</value>
+            <value description="method">getAdvancedDirectivesOrders</value>
+            <value description="component_created_by">vhaino321</value>
+            <value description="order_sequence">10</value>
+            <value description="has_criteria">0</value>
+            <value description="criteria"></value>
+        </row>
+        <row>
+            <value description="id">12</value>
+            <value description="component_name">Vital Signs</value>
+            <value description="title"><![CDATA[<h4>Vital Signs</h4>]]></value>
+            <value description="template"><![CDATA[<div class="report_column500">
+#if ( $vista.listLength > 0 )
+<table><colgroup><col width="10%"/><col width="10%"/><col width="15%"/><col width="15%"/><col width="15%"/><col width="15%"/></colgroup>
+<thead><tr><th>Date</th><th>Time</th><th>Blood Pressure</th><th>Temperature</th><th>Pulse</th><th>Respiration</th></tr></thead>
+<tbody>
+#foreach( $vital in $vista.vitals )
+    <tr><td>$vital.date</td><td>$vital.time</td><td>$vital.bloodPressure</td><td>$vital.temperature</td><td>$vital.pulse</td><td>$vital.respiration</td></tr>
+#end
+</tbody></table>
+#else
+	<h2>No Recent Vital Signs to Display</h2>
+#end
+</div>]]></value>
+            <value description="mandatory">0</value>
+            <value description="method">getVitals</value>
+            <value description="component_created_by">vhaino321</value>
+            <value description="order_sequence">11</value>
+             <value description="has_criteria">0</value>
+            <value description="criteria"></value>
+         </row>
+         <row>
+            <value description="id">13</value>
+            <value description="component_name">Active Problems</value>
+            <value description="title"><![CDATA[<h4>Active Problems</h4>]]></value>
+            <value description="template"><![CDATA[<div class="report_column500">
+#if ( $vista.listLength > 0 )
+<table><colgroup><col width="15%"/><col width="50%"/><col width="15%"/><col width="20%"/></colgroup>
+<thead><tr><th>Date</th><th>Name of Problem</th><th>Status</th><th>Observer</th></tr></thead>
+<tbody>
+#foreach( $problem in $vista.problems )
+    <tr><td>${problem.onsetDate}</td><td>${problem.providerNarrative}</td><td>${problem.status}</td><td>${problem.observer.name}</td></tr>
+#end
+</tbody></table>
+#else
+	<h2>No Problems to Display</h2>
+#end
+</div>]]></value>
+            <value description="mandatory">0</value>
+            <value description="method">getProblems</value>
+            <value description="component_created_by">vhaino321</value>
+            <value description="order_sequence">12</value>
+            <value description="has_criteria">0</value>
+            <value description="criteria"></value>
+        </row>
+         <row>
+            <value description="id">14</value>
+            <value description="component_name">Lab Results</value>
+            <value description="title"><![CDATA[<h4>Lab Results</h4>]]></value>
+            <value description="template"><![CDATA[<div class="report_column500">
+#if ( $vista.listLength > 0 )
+<table><colgroup><col width="10%"/><col width="35%"/><col width="10%"/><col width="15%"/><col width="10%"/><col width="20%"/></colgroup>
+<thead><tr><th>Collection Date</th><th>Test Name</th><th>Specimen</th><th>Result</th><th>Normal Range</th><th>Facility</th></tr></thead>
+<tbody>
+#foreach( $report in $vista.labReports )
+    <tr><td>${report.collectionDateStr}</td><td>${report.testName}</td><td>${report.specimen.name}</td><td>${report.result}</td><td>${report.normalRange}</td><td>${report.facility.sitecode}</td></tr>
+#end
+</tbody></table>
+#else
+	<h2>No Lab Results to Display</h2>
+#end
+</div>]]></value>
+            <value description="mandatory">0</value>
+            <value description="method">getLabResults</value>
+            <value description="component_created_by">vhaino321</value>
+            <value description="order_sequence">13</value>
+            <value description="has_criteria">1</value>
+            <value description="criteria">Date:fromDate:T-34m;Date:toDate:T;List:reportList:chemHemReports=Y^cytologyReports=Y^cytopathologyReports=Y^electronMicroscopyReports=Y^microbiologyReports=Y^surgicalPathologyReports=Y</value>
+         </row>
+         <row>
+            <value description="id">15</value>
+            <value description="component_name">Radiology Report Titles</value>
+            <value description="title"><![CDATA[<h4>Radiology Report Titles</h4>]]></value>
+            <value description="template"><![CDATA[<div class="report_column500">
+#if ( $vista.listLength > 0 )
+<table><colgroup><col width="15%"/><col width="85%"/></colgroup>
+<thead><tr><th>Date</th><th>Title</th></tr></thead>
+<tbody>
+#foreach( $report in $vista.radiologyReports )
+    <tr><td>${report.dateStr}</td><td>${report.title}</td></tr>
+#end
+</tbody></table>
+#else
+	<h2>No Radiology Results to Display</h2>
+#end
+</div>]]></value>
+            <value description="mandatory">0</value>
+            <value description="method">getRadiologyReports</value>
+            <value description="component_created_by">vhaino321</value>
+            <value description="order_sequence">13</value>
+            <value description="has_criteria">1</value>
+            <value description="criteria">Date:fromDate:T-15y;Date:toDate:T</value>
+         </row>
+         <row>
+            <value description="id">16</value>
+            <value description="component_name">Clinical Warnings</value>
+            <value description="title"><![CDATA[<h4>Clinical Warnings</h4>]]></value>
+            <value description="template"><![CDATA[<div class="report_column500">
+#if ( $vista.listLength > 0 )
+<table><colgroup><col width="15%"/><col width="15%"/><col width="70%"/></colgroup>
+<thead><tr><th>Date</th><th>Title</th><th>Text</th></tr></thead>
+<tbody>
+#foreach( $report in $vista.warnings )
+    <tr><td>${report.dateStr}</td><td>${report.localTitle}</td><td>${report.text}</td></tr>
+#end
+</tbody></table>
+#else
+	<h2>No Clinical Warnings to Display</h2>
+#end
+</div>]]></value>
+            <value description="mandatory">0</value>
+            <value description="method">getClinicalWarnings</value>
+            <value description="component_created_by">vhaino321</value>
+            <value description="order_sequence">14</value>
+            <value description="has_criteria">1</value>
+            <value description="criteria">Date:fromDate:T-15y;Date:toDate:T</value>
+        </row>
+         <row>
+            <value description="id">17</value>
+            <value description="component_name">Immunizations</value>
+            <value description="title"><![CDATA[<h4>Immunizations</h4>]]></value>
+            <value description="template"><![CDATA[<div class="report_column500">
+#if ( $vista.listLength > 0 )
+<table><colgroup><col width="15%"/><col width="15%"/><col width="70%"/></colgroup>
+<thead><tr><th>Date</th><th>Immunization</th><th>Reaction</th><th>Comment</th></tr></thead>
+<tbody>
+#foreach( $shot in $vista.immunizations )
+    <tr><td>${shot.dateStr}</td><td>${shot.immunization}</td><td>${shot.reaction}</td><td>${shot.comments}</td></tr>
+#end
+</tbody></table>
+#else
+	<h2>No Immunizations to Display</h2>
+#end
+</div>]]></value>
+            <value description="mandatory">0</value>
+            <value description="method">getImmunizations</value>
+            <value description="component_created_by">vhaino321</value>
+            <value description="order_sequence">15</value>
+            <value description="has_criteria">1</value>
+            <value description="criteria">Date:fromDate:T-15y;Date:toDate:T</value>
+        </row>
+    </table>
+    <table name="template_components">
+        <column>template_id</column>
+        <column>component_id</column>
+        <column>priority</column>
+        <row>
+            <value description="template_id">1</value>
+            <value description="component_id">3</value>
+            <value description="priority">2</value>
+        </row>
+        <row>
+            <value description="template_id">1</value>
+            <value description="component_id">4</value>
+            <value description="priority">3</value>
+        </row>
+        <row>
+            <value description="template_id">1</value>
+            <value description="component_id">5</value>
+            <value description="priority">4</value>
+        </row>
+        <row>
+            <value description="template_id">1</value>
+            <value description="component_id">6</value>
+            <value description="priority">5</value>
+        </row>
+        <row>
+            <value description="template_id">1</value>
+            <value description="component_id">7</value>
+            <value description="priority">6</value>
+        </row>
+        <row>
+            <value description="template_id">1</value>
+            <value description="component_id">2</value>
+            <value description="priority">7</value>
+        </row>
+        <row>
+            <value description="template_id">1</value>
+            <value description="component_id">8</value>
+            <value description="priority">8</value>
+        </row>
+        <row>
+            <value description="template_id">1</value>
+            <value description="component_id">9</value>
+            <value description="priority">9</value>
+        </row>
+        <row>
+            <value description="template_id">1</value>
+            <value description="component_id">10</value>
+            <value description="priority">10</value>
+        </row>
+         <row>
+            <value description="template_id">-2</value>
+            <value description="component_id">13</value>
+            <value description="priority">1</value>
+        </row>
+        <row>
+            <value description="template_id">-2</value>
+            <value description="component_id">4</value>
+            <value description="priority">2</value>
+        </row>
+        <row>
+            <value description="template_id">-2</value>
+            <value description="component_id">14</value>
+            <value description="priority">3</value>
+        </row>
+    </table>
+    <table name="event_type">
+        <column>event_type_id</column>
+        <column>code</column>
+        <column>description</column>
+        <column>status</column>
+        <column>created_by</column>
+        <row>
+            <value description="event_type_id">1</value>
+            <value description="code">RPT</value>
+            <value description="description">Report Generation</value>
+            <value description="status">1</value>
+            <value description="created_by">vhaino111</value>
+        </row>
+         <row>
+            <value description="event_type_id">2</value>
+            <value description="code">MED</value>
+            <value description="description">Active Meds</value>
+            <value description="status">1</value>
+            <value description="created_by">vhaino111</value>
+        </row>
+    </table>
+    <table name="document_event">
+        <column>document_event_id</column>
+        <column>event_type_id</column>
+        <column>event_date</column>
+        <column>document_id</column>
+        <column>patient_id</column>
+        <column>first_name</column>
+        <column>last_name</column>
+        <column>ssn</column>
+        <column>dob</column>
+        <column>med_unit_id</column>
+        <column>event_updated_by</column>
+        <column>event_target_key</column>
+        <row>
+            <value description="document_event_id">1</value>
+            <value description="event_type_id">1</value>
+            <value description="event_date">2010-10-27 23:59:00</value>
+            <value description="document_id">1</value>
+            <value description="patient_id">237</value>
+            <value description="first_name">Patient</value>
+            <value description="last_name">One</value>
+            <value description="ssn">111111111</value>
+            <value description="dob">2039-10-27 06:57:00</value>
+            <value description="med_unit_id">1</value>
+            <value description="event_updated_by">vhaino111</value>
+            <value description="event_target_key"></value>
+        </row>
+        <row>
+            <value description="document_event_id">2</value>
+            <value description="event_type_id">1</value>
+            <value description="event_date">2010-10-27 23:59:00</value>
+            <value description="document_id">1</value>
+            <value description="patient_id">237</value>
+            <value description="first_name">Patient</value>
+            <value description="last_name">One</value>
+            <value description="ssn">111111111</value>
+            <value description="dob">2039-10-27 06:57:00</value>
+            <value description="med_unit_id">1</value>
+            <value description="event_updated_by">vhaino111</value>
+            <value description="event_target_key"></value>
+        </row>
+        <row>
+            <value description="document_event_id">3</value>
+            <value description="event_type_id">2</value>
+            <value description="event_date">2010-10-27 23:59:00</value>
+            <value description="document_id">1</value>
+            <value description="patient_id">237</value>
+            <value description="first_name">Patient</value>
+            <value description="last_name">One</value>
+            <value description="ssn">111111111</value>
+            <value description="dob">2039-10-27 06:57:00</value>
+            <value description="med_unit_id">1</value>
+            <value description="event_updated_by">vhaino111</value>
+            <value description="event_target_key">123.45</value>
+        </row>
+        <row>
+            <value description="document_event_id">4</value>
+            <value description="event_type_id">2</value>
+            <value description="event_date">2010-10-28 23:59:00</value>
+            <value description="document_id">2</value>
+            <value description="patient_id">237</value>
+            <value description="first_name">Patient</value>
+            <value description="last_name">One</value>
+            <value description="ssn">111111111</value>
+            <value description="dob">2039-10-27 06:57:00</value>
+            <value description="med_unit_id">1</value>
+            <value description="event_updated_by">vhaino111</value>
+            <value description="event_target_key">123.45</value>
+        </row>
+    </table>
+</dataset>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="DefinitionSQL">
+    <typeAlias alias="definition" type="gov.med.va.innovations.domain.Definition"/>
+
+    <parameterMap id="addParam" class="definition">
+        <parameter property="abbreviation" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <parameter property="definition" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <parameter property="isDeleted" jdbcType="CHAR" javaType="java.lang.Boolean"/>
+	    <parameter property="status" jdbcType="VARCHAR" javaType="gov.med.va.innovations.domain.DefinitionStatus"/>
+	    <parameter property="nextRefresh" jdbcType="TIMESTAMP"  javaType="java.util.Date"/>
+	    <parameter property="medlinePlusIndex" jdbcType="TINYINT"  javaType="java.lang.Integer"/>
+	    <parameter property="lastupdateBy" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </parameterMap>
+
+    <parameterMap id="updateParam" class="definition">
+        <parameter property="abbreviation" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <parameter property="definition" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        <parameter property="isDeleted" jdbcType="CHAR" javaType="java.lang.Boolean"/>
+	    <parameter property="status" jdbcType="VARCHAR" javaType="gov.med.va.innovations.domain.DefinitionStatus"/>
+	    <parameter property="nextRefresh" jdbcType="TIMESTAMP"  javaType="java.util.Date"/>
+	    <parameter property="medlinePlusIndex" jdbcType="TINYINT"  javaType="java.lang.Integer"/>
+	    <parameter property="lastupdateBy" jdbcType="VARCHAR" javaType="java.lang.String" />
+        <parameter property="id" jdbcType="INTEGER" javaType="java.lang.Long"/>
+    </parameterMap>
+
+    <resultMap id="definitionResult" class="definition">
+        <result property="id" column="id"/>
+        <result property="abbreviation" column="abbreviation"/>
+        <result property="definition" column="definition"/>
+        <result property="isDeleted" column="deleted"/>
+	    <result column="status" property="status"/>
+	    <result column="next_refresh" property="nextRefresh" />
+	    <result column="medline_plus_index" property="medlinePlusIndex" />
+	    <result column="updated_by" property="lastupdateBy"  />
+    </resultMap>
+
+    <select id="getDefinitions" resultMap="definitionResult">
+    <![CDATA[
+        select * from definition where deleted = 0
+    ]]>
+    </select>
+
+    <select id="getDefinition" resultMap="definitionResult">
+    <![CDATA[
+        select * from definition where id = #value# and deleted = 0
+    ]]>
+    </select>
+
+    <select id="getDeletedDefinition" resultMap="definitionResult">
+    <![CDATA[
+        select * from definition where abbreviation = #value# and deleted = 1
+    ]]>
+    </select>
+
+    <select id="findByAbbreviation" resultMap="definitionResult">
+    <![CDATA[
+        select * from definition where deleted = 0 and abbreviation = #value#
+    ]]>
+    </select>
+
+    <select id="findByStatus" resultMap="definitionResult">
+    <![CDATA[
+        select * from definition where deleted = 0 and status = #value#
+    ]]>
+    </select>
+
+    <insert id="addDefinition" parameterMap="addParam">
+        <![CDATA[
+            insert into definition (abbreviation,definition,deleted,status,next_refresh,medline_plus_index,updated_by) values ( ?,?,?,?,?,?,? )
+        ]]>
+        <selectKey resultClass="java.lang.Long" keyProperty="id" type="post">
+            SELECT @@IDENTITY AS id
+        </selectKey>
+    </insert>
+
+    <update id="updateDefinition" parameterMap="updateParam">
+    <![CDATA[
+        update definition 
+        set abbreviation = ?, 
+        	definition = ?, 
+        	deleted = ?,
+        	status = ?,
+        	next_refresh = ?,
+        	medline_plus_index = ?,
+        	updated_by = ?
+        where id = ?
+    ]]>
+    </update>
+
+    <delete id="deleteDefinition">
+    <![CDATA[
+        update definition set deleted = 1 where id = #id#
+    ]]>
+    </delete>
+
+    <select id="countDefinition" resultClass="int">
+    	select count(*) from definition
+    </select>
+    
+    <select id="pagingDefinition" parameterClass="map" resultMap="definitionResult">
+    <![CDATA[
+    	SELECT *
+		FROM   (SELECT ROW_NUMBER() OVER(ORDER BY $criteria$) AS
+		       rownum, id, abbreviation, definition, status, next_refresh, medline_plus_index, updated_by, deleted FROM definition) AS definition1
+		WHERE  rownum >= $first$ AND rownum <= $max$ AND deleted = 0
+		ORDER BY $criteria$ 
+    ]]>
+    </select>
+</sqlMap>

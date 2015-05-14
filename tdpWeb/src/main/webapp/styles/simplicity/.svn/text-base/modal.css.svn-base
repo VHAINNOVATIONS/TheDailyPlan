@@ -1,0 +1,43 @@
+/*
+ * SimpleModal Form Styles
+ * http://www.ericmmartin.com/projects/simplemodal/
+ * http://code.google.com/p/simplemodal/
+ *
+ * Copyright (c) 2010 Eric Martin - http://ericmmartin.com
+ *
+ * Licensed under the MIT license:
+ *   http://www.opensource.org/licenses/mit-license.php
+ *
+ */
+
+/* Overlay */
+#modal-overlay {background-color:#000; cursor:wait;}
+
+/* Container */
+#modal-container {font: 16px/22px 'Trebuchet MS', Verdana, Arial; text-align:left; width:450px; padding:10px;}
+#modal-container .modal-content {background-color:#333; color:#ddd; height:40px;}
+#modal-container h1 {color:#777CCC; font-size:20px; line-height:20px; margin:0; padding:0 0 6px 12px; text-align:left;}
+#modal-container .modal-loading {background:url(../img/contact/loading.gif) no-repeat; height:55px; margin:-14px 0 0 190px; padding:0; position:absolute; width:54px; z-index:8000;}
+#modal-container .modal-message {text-align:center; padding: 15px;}
+#modal-container .modal-error {background:#000; border:2px solid #ccc; font-size:14px; font-weight:bold; line-height:18px; margin:0 auto; padding:2px; width:92%;}
+#modal-container br {clear:both;}
+#modal-container form {margin:0; padding:20px;}
+#modal-container label {clear:left; display:block; float:left; font-weight:bold; padding-right:4px; text-align:right; width:100px;}
+#modal-container .modal-input {background:#eee; border:1px solid #fff; font-family:'Trebuchet MS', Verdana, Arial; float:left; padding:2px; margin:2px; width:300px;}
+#modal-container textarea {height:114px;}
+#modal-container .definition {padding: 5px; border: 5px none; background-color: #77778F;}
+#modal-container .modal-cc {cursor:default; font-size:14px; vertical-align:top;}
+#modal-container .modal-top {background-color:#333; height:13px; margin:0; padding:0; -webkit-border-top-left-radius:8px; -webkit-border-top-right-radius:8px; -moz-border-radius-topleft:8px; -moz-border-radius-topright:8px; border-radius:8px 8px 0 0;}
+#modal-container .modal-bottom {background-color:#333; font-size:12px; height:13px; line-height:12px; text-align:center; -webkit-border-bottom-right-radius:8px; -webkit-border-bottom-left-radius:8px; -moz-border-radius-bottomright:8px; -moz-border-radius-bottomleft:8px; border-radius:0 0 8px 8px;}
+#modal-container .modal-bottom a,
+#modal-container .modal-bottom a:link,
+#modal-container .modal-bottom a:active,
+#modal-container .modal-bottom a:visited {color:#666; position:relative; top:-4px; text-decoration:none;}
+#modal-container .modal-bottom a:hover {color:#888;}
+#modal-container .modal-button {background:#777CCC; border:0; color:#fff; cursor:pointer; font-size:16px; font-weight:bold; height:26px; margin:4px 0 0 4px; text-align:center; vertical-align:middle; -webkit-border-radius:8px; -moz-border-radius:8px; border-radius:8px;}
+#modal-container .modal-button:hover {background:#77CCCC;}
+#simplemodal-container a.modal-close,
+#simplemodal-container a.modal-close:link,
+#simplemodal-container a.modal-close:active,
+#simplemodal-container a.modal-close:visited {color:#999; font-size:18px; font-weight:bold; position:absolute; text-decoration:none; right:8px; top:0px;}
+#simplemodal-container a.modal-close:hover {color:#ccc;}

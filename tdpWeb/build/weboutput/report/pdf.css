@@ -1,0 +1,231 @@
+@page patient { 
+	size: 8.5in 11in;
+	margin: 4.50in 0.25in 0.25in;
+	@top-center { 
+		font-size: 18pt;
+		font-weight: bold;
+		position: absolute; top: 0; left: 0; 
+		content: element(header);
+		padding: none;
+		margin: 0;
+	}
+	@bottom-left { 
+		font-size: 90%; font-style: italic; 
+		content: element(print-time);
+	}
+	@bottom-center { 
+		font-size: 90%; font-style: italic; 
+		content: element(page-count);
+	}
+
+	padding: 10px;
+}
+
+@page { 
+	size: 8.5in 11in;
+	margin: 0.75in 0.25in 0.25in;
+	@top-center { 
+		font-size: 18pt;
+		font-weight: bold;
+		position: absolute; top: 0; left: 0; 
+		content: element(topimage, start);
+		padding: 10px;
+	}
+	@bottom-left { 
+		font-size: 90%; font-style: italic; 
+		content: element(print-time);
+	}
+	@bottom-center { 
+		font-size: 90%; font-style: italic; 
+		content: element(page-count);
+	}
+
+	/*border: thin solid black;*/
+	padding: 10px;
+}
+
+body {
+	margin: 0;
+}
+
+div.patient-end {
+  counter-reset: page;
+}
+
+div.header { 
+	display: block;
+	width: 700px;
+	position: running(header) 
+  	page: patient;
+  	page-break-before: always;
+  	counter-reset: page;
+}
+
+span.patient_header {
+	background: url('images/dailyPlanPeople.jpg');
+	display: block;
+	width: 700px;
+	margin: 0;
+	padding: 10px 0;
+	position: running(topimage) 
+}
+
+div.print-time { 
+	position: running(print-time) 
+}
+
+div.page-count { 
+	position: running(page-count) 
+}
+
+.pagenumber:before {
+	content: counter(page); 
+}
+
+.pagecount:before {
+	content: counter(pages);  
+}
+
+.report_logo span {
+	font: 10pt italic;
+	width: 50%;
+	padding: 20px;
+}
+
+.report_logo img {
+	padding: 20px;
+}
+
+.report_title h2 {
+	padding: 0;
+	font-size: 18pt;
+}
+
+.SMALL,
+.SMALL h2,
+.SMALL h3,
+.SMALL h4,
+.SMALL p {
+	font-size: 10pt;
+}
+
+.MEDIUM,
+.MEDIUM h2,
+.MEDIUM h3,
+.MEDIUM h4,
+.MEDIUM p {
+	font-size: 12pt;
+}
+
+.LARGE,
+.LARGE h2,
+.LARGE h3,
+.LARGE h4,
+.LARGE p {
+	font-size: 14pt;
+}
+	
+.report_title {
+	width:100%;
+	padding:4px 0;
+	border: 2px solid #005DA4;
+	page-break-before: auto;
+}
+	
+.report_title img {
+	float: right; 
+	height: 80px; 
+	padding: 0 3px;
+}
+
+.report_title h2 {
+	color: #005DA4;
+	padding:0px;
+	margin:25px 0 21px 10px;
+	vertical-align:middle;
+}
+
+.report_patient {
+	width:100%;
+	padding: 10px;
+}
+
+.report_patient span {
+	color:#005DA4;
+}
+
+.report_patient_name {
+	display:inline;
+	overflow:hidden;
+	margin:0px .6em 0;
+}
+
+.patient_data {
+	width: 700px;
+}
+
+.report_row {
+/*	float:left; 
+	border-top:solid 2px #005DA4;
+*/
+	float: clear;	
+	width:97%;
+	margin:10px 15px 5px 15px;
+}
+
+.report_row p {
+	padding:3px 0 2px 0;
+}
+
+.report_row tr.highrisk {
+	font-style:italic;
+	font-weight:bold;
+}
+
+.report_row tr.highrisk td.highrisk:before {
+	content: 'HIGH ALERT: ';
+}
+
+.report_row tr.new {
+	font-weight:bold;
+}
+
+.report_row tr.new td.new:before {
+	content: 'NEW ORDER: ';
+}
+
+.report_category {
+	border:solid 1px  #005DA4;
+}
+
+.report_category h4 {
+	margin:0px;
+	padding: 5px;
+	color:#005DA4;
+}
+
+#report_column500 {
+	padding-top:3px;
+	margin-right:15px;
+}
+
+.report_column500 table {
+	-fs-table-paginate: paginate;
+}
+
+.report_column300 {
+	float:left;
+	width:300px;
+	padding-top:3px;
+	margin-right:15px;
+}
+
+.report_column200 {
+	float:right;
+	width:200px;
+	padding-top:3px;
+}
+
+span.expandable:after {
+	content: ' (' attr(title) ') ';
+}

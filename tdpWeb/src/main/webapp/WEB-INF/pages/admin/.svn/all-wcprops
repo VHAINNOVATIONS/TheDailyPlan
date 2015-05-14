@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/repos/!svn/ver/761/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/pages/admin
+END
+definitionForm.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/pages/admin/definitionForm.jsp
+END
+templateList.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/repos/!svn/ver/803/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/pages/admin/templateList.jsp
+END
+userList.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/repos/!svn/ver/699/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/pages/admin/userList.jsp
+END
+testimonialList.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/pages/admin/testimonialList.jsp
+END
+flushCache.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/repos/!svn/ver/714/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/pages/admin/flushCache.jsp
+END
+dateOverrideForm.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/repos/!svn/ver/749/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/pages/admin/dateOverrideForm.jsp
+END
+templateForm.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/repos/!svn/ver/861/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/pages/admin/templateForm.jsp
+END
+definitionList.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/repos/!svn/ver/761/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/pages/admin/definitionList.jsp
+END
+componentForm.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/repos/!svn/ver/861/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/pages/admin/componentForm.jsp
+END
+activeUsers.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/repos/!svn/ver/699/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/pages/admin/activeUsers.jsp
+END
+testimonialForm.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/webapp/WEB-INF/pages/admin/testimonialForm.jsp
+END

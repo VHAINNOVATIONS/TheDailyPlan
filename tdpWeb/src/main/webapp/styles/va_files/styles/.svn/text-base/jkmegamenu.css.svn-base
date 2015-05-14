@@ -1,0 +1,80 @@
+
+#banner-area-menu {width:996px; height:17px; margin:0; padding: 2px 0 0 0; clear:both; background:#000033; position:relative; z-index:1000;}
+
+
+#banner-area-menu ul {padding:0; margin:0;}
+
+#banner-area-menu ul li {float:left; position:relative; margin:0 0 0 30px; list-style:none; }
+
+#banner-area-menu ul li a {display:block; text-decoration:none; color:#fff; font-family: Verdana, Geneva, sans-serif; font-size: 12px; font-weight: bold;}
+
+#banner-area-menu ul li a:link {text-decoration:none;}
+
+#banner-area-menu ul li a:visited {text-decoration:none;}
+
+#banner-area-menu ul li a:hover {text-decoration:none; color:#FC0;}
+
+#banner-area-menu ul li a:active {text-decoration:none;}
+
+
+#banner-area-menu .menu { position:absolute; background:#000033;}
+
+#banner-area-menu .menu .sub_nav {float:left;}
+
+#banner-area-menu .menu .sub_nav {margin:0 10px 0 0; padding:0; width:200px; }
+
+#banner-area-menu .menu .sub_nav h4 { color:#FC0; font-family: Arial, Verdana, Geneva, sans-serif; font-size: 13px; font-weight: bold; padding:5px 0 0 0; margin:0;}
+
+#banner-area-menu .menu .sub_nav ul { font-family: Verdana, Geneva, sans-serif; font-size: 11px; }
+
+#banner-area-menu .menu .sub_nav ul li {float:none; background-image:url(/va_files/2009/images/img-bullet.gif); background-repeat:no-repeat; background-position:0 10px; list-style:none; color:#fff; margin:0 0 0 0; padding:0 0 0 10px; }
+
+#banner-area-menu .menu .sub_nav ul li a, #banner-area-menu .menu ul.sub_nav li a:link, #banner-area-menu .menu ul.sub_nav li a:visited {font-size:12px; font-family: Verdana, Geneva, sans-serif; font-weight:normal; line-height:1.3em; color:#fff; text-decoration:none; padding:3px 4px; height:100%; background-color:transparent;}
+
+#banner-area-menu .menu .sub_nav ul li a:hover, #banner-area-menu .menu .sub_nav ul li a:focus {color:#fc0; text-decoration: none; background-color:#33335c;}
+
+#banner-area-menu .menu .sub_nav ul li a:active {color:#fff; text-decoration: none; background-color:transparent;}
+
+
+#banner-area-menu li .menu {display:none; width:210px; padding:5px 0 10px 20px; border-top:4px solid #FC0; border-bottom:4px solid #FC0; border-left:1px solid #FC0; border-right:1px solid #FC0; }
+
+#banner-area-menu li .twoColumn {width:420px !important;}
+
+#banner-area-menu li:hover .menu {display:block;}
+
+#banner-area-menu li.over .menu {display:block;}
+
+#banner-area-menu li.over a {color:#FC0;}
+
+
+#banner-area-menu .relatedLinks li .menu {display:none; width:210px; padding:5px 0 10px 20px; margin:0 0 0 0; position:absolute; right:0px; left:auto; text-align:left;}
+#banner-area-menu .relatedLinks li .twoColumn {width:420px !important;}
+
+#banner-area-menu .relatedLinks li:hover .menu {display:block;}
+
+#banner-area-menu .relatedLinks li.over .menu {display:block;}
+
+#banner-area-menu .relatedLinks li.over a {color:#FC0;}
+
+
+#banner-area-menu .relatedLinks {float:right; padding:0 30px 0 0; text-align:right; position:relative;}
+
+#banner-area-menu .relatedLinks .menu .sub_nav {margin:0 10px 0 0; padding:0; width:200px; float:left; }
+
+#banner-area-menu .relatedLinks .menu .sub_nav h4 { color:#FC0; font-family: Verdana, Geneva, sans-serif; font-size: 11px; font-weight: bold;}
+
+#banner-area-menu .relatedLinks .menu .sub_nav ul { font-family: Verdana, Geneva, sans-serif; font-size: 11px; }
+
+#banner-area-menu .relatedLinks .menu .sub_nav ul li {float:none; background-image:url(/va_files/2009/images/img-bullet.gif); background-repeat:no-repeat; background-position:0 10px; list-style:none; color:#fff; margin:0 0 0 0; padding:0 0 0 10px;}
+
+#banner-area-menu .relatedLinks .menu .sub_nav ul li a, #banner-area-menu .relatedLinks .menu ul.sub_nav li a:link, #banner-area-menu .relatedLinks .menu ul.sub_nav li a:visited {font-size:12px; font-family: Verdana, Geneva, sans-serif; font-weight:normal; line-height:1.3em; color:#fff; text-decoration:none; padding:3px 4px; height:100%; background-color:transparent;}
+
+#banner-area-menu .relatedLinks .menu .sub_nav ul li a:hover, #banner-area-menu .relatedLinks .menu .sub_nav ul li a:focus {color:#fc0; text-decoration: none; background-color:#33335c;}
+
+#banner-area-menu .relatedLinks .menu .sub_nav ul li a:active {color:#fff; text-decoration: none; background-color:transparent;}
+
+
+
+.e {font-style:italic; text-decoration:underline;}
+
+.clear {clear:both; display: block; font-size:.01em; height:0; margin:0; overflow:hidden; padding:0; }

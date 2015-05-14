@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faceted-project>
+  <runtime name="Oracle WebLogic Server 11gR1 PatchSet 2"/>
+  <installed facet="jst.java" version="6.0"/>
+  <installed facet="jst.web" version="2.4"/>
+  <installed facet="spring.core" version="2.5"/>
+</faceted-project>

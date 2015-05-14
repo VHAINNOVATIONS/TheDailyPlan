@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="EventSQL">
+    <typeAlias alias="event" type="gov.med.va.innovations.domain.DocumentEvent"/>
+    <typeAlias alias="eventType" type="gov.med.va.innovations.domain.EventType"/>
+
+    <resultMap id="eventResult" class="event">
+        <result property="documentEventId" column="document_event_id"/>
+        <result property="eventDate" column="event_date"/>
+        <result property="documentId" column="document_id"/>
+        <result property="patientId" column="patient_id"/>
+	    <result property="firstName" column="first_name"/>
+	    <result property="lastName" column="last_name" />
+	    <result property="ssn" column="ssn" />
+	    <result property="dob" column="dob" />
+	    <result property="medUnitId" column="med_unit_id" />
+	    <result property="updatedBy" column="event_updated_by"  />
+	    <result property="updateTime" column="event_update_date"  />
+	    <result property="eventTargetId" column="event_target_key"  />
+	    <result property="eventType" resultMap="EventSQL.eventTypeResult"  />
+    </resultMap>
+
+    <resultMap id="eventTypeResult" class="eventType">
+	    <result property="eventTypeId" column="event_type_id"  />
+	    <result property="code" column="code"  />
+	    <result property="description" column="description"  />
+	    <result property="status" column="status"  />
+	    <result property="createdBy" column="created_by"  />
+	    <result property="updatedBy" column="updated_by"  />
+	    <result property="updateDate" column="update_date"  />
+	    <result property="createDate" column="create_date"  />
+    </resultMap>
+
+    <select id="getEventTypes" resultMap="eventTypeResult">
+    <![CDATA[
+        select * from event_type
+    ]]>
+    </select>
+
+    <select id="getEventType" resultMap="eventTypeResult">
+    <![CDATA[
+        select * from event_type where code = #value#
+    ]]>
+    </select>
+
+    <select id="getDocumentEvents" resultMap="eventResult">
+    <![CDATA[
+        select * from document_event d
+        join event_type e on (d.event_type_id = e.event_type_id)
+    ]]>
+    </select>
+
+    <select id="getDocumentEvent" resultMap="eventResult">
+    <![CDATA[
+        select * from document_event d
+        join event_type e on (d.event_type_id = e.event_type_id)
+        where document_event_id = #value#
+    ]]>
+    </select>
+
+    <select id="findByPatient" resultMap="eventResult">
+    <![CDATA[
+        select * from document_event d
+        join event_type e on (d.event_type_id = e.event_type_id)
+        where patient_id = #value#
+    ]]>
+    </select>
+
+    <select id="findByPatientCode" parameterClass="map" resultMap="eventResult">
+    <![CDATA[
+        select * from document_event d
+        join event_type e on (d.event_type_id = e.event_type_id)
+        where patient_id = #pid# and code = #code#
+        order by event_update_date desc
+    ]]>
+    </select>
+    
+    <select id="findRecentEvents" parameterClass="map" resultMap="eventResult">
+    <![CDATA[
+    select *
+	from document_event d
+    join event_type e on (d.event_type_id = e.event_type_id)
+	where PATIENT_ID = #pid# AND document_id = (select MAX(document_id) 
+			from document_event 
+			where event_target_key IS NOT NULL and code = #code#  and DATEPART(DY,event_date) < DATEPART(DY,#today#))
+	order by event_update_date desc
+    ]]>
+	</select>
+
+    <insert id="addDocumentEvent" parameterClass="event">
+        <![CDATA[
+            insert into document_event (event_type_id,event_date,document_id,patient_id,first_name,last_name,ssn,dob,med_unit_id,event_updated_by,event_update_date,event_target_key) 
+            values ( #eventType.eventTypeId#,#eventDate#,#documentId#,#patientId#,#firstName#,#lastName#,#ssn#,#dob#,#medUnitId#,#updatedBy#,getdate(),#eventTargetId# )
+        ]]>
+        <selectKey resultClass="java.lang.Long" keyProperty="documentEventId" type="post">
+            SELECT @@IDENTITY AS document_event_id
+        </selectKey>
+    </insert>
+
+    <update id="updateDocumentEvent" parameterClass="event">
+    <![CDATA[
+        update document_event 
+        set event_type_id = #eventType.eventTypeId#,
+        event_date = #eventDate#,
+        document_id = #documentId#,
+        patient_id = #patientId#,
+        first_name = #firstName#,
+        last_name = #lastName#,
+        ssn = #ssn#,
+        dob = #dob#,
+        med_unit_id = #medUnitId#,
+        event_target_key = #eventTargetId#,
+        event_updated_by = #updatedBy#,
+        event_update_date = getdate()
+        where document_event_id = #documentEventId#
+    ]]>
+    </update>
+
+    <delete id="deleteDocumentEvent">
+    <![CDATA[
+        delete from document_event where document_event_id = #documentEventId#
+    ]]>
+    </delete>
+    
+    <parameterMap id="reportParameter" class="map" >
+		<parameter property="reportId" jdbcType="VARCHAR" javaType="java.lang.String" mode="OUT"/>
+	</parameterMap>
+    
+    <procedure id="genReportId" parameterMap="reportParameter" >
+		{call get_next_sequence (?)}
+	</procedure>
+
+    <select id="countDocumentEvent" resultClass="int">
+    	select count(*) from document_event
+    </select>
+    
+    <select id="pagingDocumentEvent" parameterClass="map" resultMap="eventResult">
+    <![CDATA[
+    	SELECT *
+		FROM   (SELECT ROW_NUMBER() OVER(ORDER BY $criteria$) AS
+		       event_type_id,event_date,document_id,patient_id,first_name,last_name,ssn,dob,med_unit_id,event_updated_by,event_update_date FROM document_event) AS document_event1
+		WHERE  rownum >= $first$ AND rownum <= $max$
+		ORDER BY $criteria$ 
+    ]]>
+    </select>
+</sqlMap>

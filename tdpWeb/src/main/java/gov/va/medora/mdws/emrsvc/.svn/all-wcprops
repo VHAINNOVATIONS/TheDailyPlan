@@ -1,0 +1,2147 @@
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc
+END
+CytologyRpt.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/CytologyRpt.java
+END
+GetAllOrders.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetAllOrders.java
+END
+GetSignedNotesResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetSignedNotesResponse.java
+END
+AdtTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/AdtTO.java
+END
+GetIvMedsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetIvMedsResponse.java
+END
+NoteResultTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/NoteResultTO.java
+END
+TaggedMicrobiologyRptArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedMicrobiologyRptArray.java
+END
+GetCytopathologyReportsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetCytopathologyReportsResponse.java
+END
+GetNote.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetNote.java
+END
+GetSpecialties.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetSpecialties.java
+END
+MatchResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/MatchResponse.java
+END
+WriteSimpleOrderByPolicy.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/WriteSimpleOrderByPolicy.java
+END
+TaggedAllergyArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedAllergyArray.java
+END
+ArrayOfTaggedCytologyRptArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfTaggedCytologyRptArray.java
+END
+GetPatientsBySpecialtyResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetPatientsBySpecialtyResponse.java
+END
+GetDemographics.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetDemographics.java
+END
+GetVersionResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetVersionResponse.java
+END
+GetWards.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetWards.java
+END
+GetVitalSignsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetVitalSignsResponse.java
+END
+GetTreatingSpecialtyReportsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetTreatingSpecialtyReportsResponse.java
+END
+IsValidEsigResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/IsValidEsigResponse.java
+END
+Disconnect.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/Disconnect.java
+END
+GetVHA.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetVHA.java
+END
+TaggedText.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedText.java
+END
+ArrayOfTaggedMicrobiologyRptArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfTaggedMicrobiologyRptArray.java
+END
+GetCompAndPenReports.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetCompAndPenReports.java
+END
+GetUnsignedNotesResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetUnsignedNotesResponse.java
+END
+GetOutpatientRxProfileResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetOutpatientRxProfileResponse.java
+END
+ArrayOfVisitTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfVisitTO.java
+END
+ArrayOfTaggedAllergyArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfTaggedAllergyArray.java
+END
+ArrayOfSurgeryReportTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfSurgeryReportTO.java
+END
+ChemHemRpt.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ChemHemRpt.java
+END
+RegionTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/RegionTO.java
+END
+NptLookupResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/NptLookupResponse.java
+END
+ArrayOfTaggedText.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfTaggedText.java
+END
+GetProblemListResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetProblemListResponse.java
+END
+VisitTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/VisitTO.java
+END
+SetupMultiSiteQuery.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/SetupMultiSiteQuery.java
+END
+SurgeryReportTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/SurgeryReportTO.java
+END
+ArrayOfChemHemRpt.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfChemHemRpt.java
+END
+GetAdmissionsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetAdmissionsResponse.java
+END
+IsCosignerRequiredResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/IsCosignerRequiredResponse.java
+END
+ArrayOfRegionTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfRegionTO.java
+END
+GetUnitDoseMeds.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetUnitDoseMeds.java
+END
+GetExpandedAdtReports.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetExpandedAdtReports.java
+END
+TaggedVitalSignArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedVitalSignArray.java
+END
+GetImagingReportResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetImagingReportResponse.java
+END
+GetOutpatientMeds.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetOutpatientMeds.java
+END
+GetAllOrdersResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetAllOrdersResponse.java
+END
+GetAutopsyReports.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetAutopsyReports.java
+END
+ArrayOfTaggedVitalSignArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfTaggedVitalSignArray.java
+END
+VisitResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/VisitResponse.java
+END
+ArrayOfAllergyTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfAllergyTO.java
+END
+ArrayOfProblemTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfProblemTO.java
+END
+GetNoteResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetNoteResponse.java
+END
+WriteSimpleOrderByPolicyResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/WriteSimpleOrderByPolicyResponse.java
+END
+GetSpecialtiesResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetSpecialtiesResponse.java
+END
+GetDemographicsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetDemographicsResponse.java
+END
+GetCytologyReportsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetCytologyReportsResponse.java
+END
+CprsLaunchResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/CprsLaunchResponse.java
+END
+TaggedTextArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedTextArray.java
+END
+DisconnectResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/DisconnectResponse.java
+END
+GetImmunizationsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetImmunizationsResponse.java
+END
+GetImoMeds.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetImoMeds.java
+END
+AllergyTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/AllergyTO.java
+END
+ProblemTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ProblemTO.java
+END
+GetCompAndPenReportsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetCompAndPenReportsResponse.java
+END
+PersonsTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/PersonsTO.java
+END
+GetDischargeSummaries.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetDischargeSummaries.java
+END
+GetDischargesReports.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetDischargesReports.java
+END
+ArrayOfConsultTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfConsultTO.java
+END
+PatientRecordFlagArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/PatientRecordFlagArray.java
+END
+TaggedVitalSignArrays.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedVitalSignArrays.java
+END
+GetFutureClinicVisitsReports.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetFutureClinicVisitsReports.java
+END
+GetSurgeryReportsWithTextResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetSurgeryReportsWithTextResponse.java
+END
+ArrayOfTaggedIcdRptArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfTaggedIcdRptArray.java
+END
+GetMicrobiologyReports.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetMicrobiologyReports.java
+END
+GetHospitalLocations.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetHospitalLocations.java
+END
+ArrayOfTaggedMedicationArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfTaggedMedicationArray.java
+END
+SetVhaResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/SetVhaResponse.java
+END
+DischargeDiagnosesTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/DischargeDiagnosesTO.java
+END
+EmrSvcHttpPost_EmrSvcHttpPost_Client.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/EmrSvcHttpPost_EmrSvcHttpPost_Client.java
+END
+GetPastClinicVisitsReportsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetPastClinicVisitsReportsResponse.java
+END
+ConsultTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ConsultTO.java
+END
+TaggedProblemArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedProblemArray.java
+END
+SiteTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/SiteTO.java
+END
+GetOtherMedsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetOtherMedsResponse.java
+END
+TaggedIcdRptArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedIcdRptArray.java
+END
+GetBloodAvailabilityReports.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetBloodAvailabilityReports.java
+END
+GetSurgeryReports.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetSurgeryReports.java
+END
+GetUnitDoseMedsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetUnitDoseMedsResponse.java
+END
+GetAdmissionsReports.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetAdmissionsReports.java
+END
+GetPrfNoteActionsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetPrfNoteActionsResponse.java
+END
+TaggedMedicationArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedMedicationArray.java
+END
+GetPatientsByTeam.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetPatientsByTeam.java
+END
+DemographicSetTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/DemographicSetTO.java
+END
+ArrayOfTaggedProblemArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfTaggedProblemArray.java
+END
+ArrayOfLabResultTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfLabResultTO.java
+END
+GetOutpatientMedsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetOutpatientMedsResponse.java
+END
+ArrayOfSiteTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfSiteTO.java
+END
+LabSpecimenTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/LabSpecimenTO.java
+END
+SignNoteResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/SignNoteResponse.java
+END
+GetAutopsyReportsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetAutopsyReportsResponse.java
+END
+GetUncosignedNotes.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetUncosignedNotes.java
+END
+GetAppointments.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetAppointments.java
+END
+DisconnectRemoteSites.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/DisconnectRemoteSites.java
+END
+ArrayOfDemographicSetTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfDemographicSetTO.java
+END
+LabResultTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/LabResultTO.java
+END
+GetElectronMicroscopyReports.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetElectronMicroscopyReports.java
+END
+GetImoMedsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetImoMedsResponse.java
+END
+GetDischargeSummariesResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetDischargeSummariesResponse.java
+END
+GetDischargesReportsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetDischargesReportsResponse.java
+END
+TeamTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TeamTO.java
+END
+GetFutureClinicVisitsReportsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetFutureClinicVisitsReportsResponse.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/package-info.java
+END
+AbstractArrayTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/AbstractArrayTO.java
+END
+GetSurgicalPathologyReports.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetSurgicalPathologyReports.java
+END
+GetMicrobiologyReportsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetMicrobiologyReportsResponse.java
+END
+PersonTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/PersonTO.java
+END
+GetHospitalLocationsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetHospitalLocationsResponse.java
+END
+GetTransfersReportsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetTransfersReportsResponse.java
+END
+HospitalLocationTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/HospitalLocationTO.java
+END
+AbstractTaggedArrayTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/AbstractTaggedArrayTO.java
+END
+IsOneVisitNoteResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/IsOneVisitNoteResponse.java
+END
+GetSurgeryReportsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetSurgeryReportsResponse.java
+END
+GetBloodAvailabilityReportsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetBloodAvailabilityReportsResponse.java
+END
+GetVisits.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetVisits.java
+END
+GetNotesWithText.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetNotesWithText.java
+END
+TaggedHospitalLocationArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedHospitalLocationArray.java
+END
+GetCareTeamReportsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetCareTeamReportsResponse.java
+END
+ArrayOfHospitalLocationTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfHospitalLocationTO.java
+END
+GetPatientsByTeamResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetPatientsByTeamResponse.java
+END
+ArrayOfOrderTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfOrderTO.java
+END
+GetBloodTransfusionReports.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetBloodTransfusionReports.java
+END
+TaggedSurgeryReportArrays.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedSurgeryReportArrays.java
+END
+TaggedPatientArrays.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedPatientArrays.java
+END
+GetSignedNotes.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetSignedNotes.java
+END
+IsPrfNote.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/IsPrfNote.java
+END
+GetAppointmentsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetAppointmentsResponse.java
+END
+DisconnectRemoteSitesResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/DisconnectRemoteSitesResponse.java
+END
+ArrayOfTaggedNoteArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfTaggedNoteArray.java
+END
+GetUncosignedNotesResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetUncosignedNotesResponse.java
+END
+Connect.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/Connect.java
+END
+OrderTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/OrderTO.java
+END
+GetAllergies.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetAllergies.java
+END
+GetCytopathologyReports.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetCytopathologyReports.java
+END
+RegionArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/RegionArray.java
+END
+Match.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/Match.java
+END
+GetPatientsByClinicResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetPatientsByClinicResponse.java
+END
+GetPatientsBySpecialty.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetPatientsBySpecialty.java
+END
+GetTreatingSpecialtyReports.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetTreatingSpecialtyReports.java
+END
+IsSurgeryNoteResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/IsSurgeryNoteResponse.java
+END
+TaggedNoteArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedNoteArray.java
+END
+EmrSvcHttpGet.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/EmrSvcHttpGet.java
+END
+IssueConfidentialityBulletin.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/IssueConfidentialityBulletin.java
+END
+GetSurgicalPathologyReportsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetSurgicalPathologyReportsResponse.java
+END
+TaggedRadiologyReportArrays.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedRadiologyReportArrays.java
+END
+WriteNoteResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/WriteNoteResponse.java
+END
+UserArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/UserArray.java
+END
+TaggedProblemArrays.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedProblemArrays.java
+END
+GetIcdProceduresReportsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetIcdProceduresReportsResponse.java
+END
+GetPatientsByProvider.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetPatientsByProvider.java
+END
+ArrayOfTaggedSurgicalPathologyRptArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfTaggedSurgicalPathologyRptArray.java
+END
+LoginResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/LoginResponse.java
+END
+GetProblemList.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetProblemList.java
+END
+GetRadiologyReportsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetRadiologyReportsResponse.java
+END
+GetNoteTitlesResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetNoteTitlesResponse.java
+END
+ArrayOfInpatientStayTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfInpatientStayTO.java
+END
+IsCosignerRequired.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/IsCosignerRequired.java
+END
+GetVisitsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetVisitsResponse.java
+END
+GetNotesWithTextResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetNotesWithTextResponse.java
+END
+TaggedSurgicalPathologyRptArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedSurgicalPathologyRptArray.java
+END
+GetConsultsForPatientResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetConsultsForPatientResponse.java
+END
+GetPatientsByWardResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetPatientsByWardResponse.java
+END
+DataSourceArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/DataSourceArray.java
+END
+InpatientStayTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/InpatientStayTO.java
+END
+IsPrfNoteResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/IsPrfNoteResponse.java
+END
+TaggedInpatientStayArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedInpatientStayArray.java
+END
+TaggedMicrobiologyRptArrays.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedMicrobiologyRptArrays.java
+END
+EmrSvcSoap_EmrSvcSoap_Client.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/EmrSvcSoap_EmrSvcSoap_Client.java
+END
+Visit.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/Visit.java
+END
+ConnectResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ConnectResponse.java
+END
+GetAllergiesResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetAllergiesResponse.java
+END
+GetFacadeVersion.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetFacadeVersion.java
+END
+GetLatestVitalSignsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetLatestVitalSignsResponse.java
+END
+GetCytologyReports.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetCytologyReports.java
+END
+GetMedsAdminHx.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetMedsAdminHx.java
+END
+CprsLaunch.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/CprsLaunch.java
+END
+TaggedRadiologyReportArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedRadiologyReportArray.java
+END
+GetBloodBankReportsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetBloodBankReportsResponse.java
+END
+GetImmunizations.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetImmunizations.java
+END
+TaggedVisitArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedVisitArray.java
+END
+IssueConfidentialityBulletinResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/IssueConfidentialityBulletinResponse.java
+END
+CprsUserLookupResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/CprsUserLookupResponse.java
+END
+GetSurgeryReportsWithText.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetSurgeryReportsWithText.java
+END
+ArrayOfTaggedRadiologyReportArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfTaggedRadiologyReportArray.java
+END
+ArrayOfPatientTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfPatientTO.java
+END
+GetPatientsByProviderResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetPatientsByProviderResponse.java
+END
+SetVha.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/SetVha.java
+END
+GetPastClinicVisitsReports.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetPastClinicVisitsReports.java
+END
+OrderTypeTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/OrderTypeTO.java
+END
+GetOtherMeds.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetOtherMeds.java
+END
+PatientTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/PatientTO.java
+END
+MpiLookup.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/MpiLookup.java
+END
+GetTeams.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetTeams.java
+END
+AbstractTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/AbstractTO.java
+END
+GetPrfNoteActions.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetPrfNoteActions.java
+END
+LabTestTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/LabTestTO.java
+END
+GetOutpatientEncounterReportsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetOutpatientEncounterReportsResponse.java
+END
+TaggedChemHemRptArrays.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedChemHemRptArrays.java
+END
+GetClinicsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetClinicsResponse.java
+END
+GetAllMeds.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetAllMeds.java
+END
+GetConfidentiality.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetConfidentiality.java
+END
+SignNote.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/SignNote.java
+END
+ArrayOfPatientRecordFlagTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfPatientRecordFlagTO.java
+END
+ArrayOfAppointmentTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfAppointmentTO.java
+END
+GetFacadeVersionResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetFacadeVersionResponse.java
+END
+AddDataSource.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/AddDataSource.java
+END
+GetVISN.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetVISN.java
+END
+GetMedsAdminHxResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetMedsAdminHxResponse.java
+END
+GetWardsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetWardsResponse.java
+END
+TaggedPatientArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedPatientArray.java
+END
+ArrayOfAddressTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfAddressTO.java
+END
+EmrSvcHttpPost.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/EmrSvcHttpPost.java
+END
+PatientRecordFlagTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/PatientRecordFlagTO.java
+END
+AppointmentTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/AppointmentTO.java
+END
+GetVHAResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetVHAResponse.java
+END
+TaggedOrderArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedOrderArray.java
+END
+PatientArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/PatientArray.java
+END
+PhoneNumTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/PhoneNumTO.java
+END
+SiteArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/SiteArray.java
+END
+ArrayOfTaggedPatientArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfTaggedPatientArray.java
+END
+AddressTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/AddressTO.java
+END
+TaggedAllergyArrays.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedAllergyArrays.java
+END
+GetTransfersReports.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetTransfersReports.java
+END
+NoteTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/NoteTO.java
+END
+ArrayOfTaggedOrderArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfTaggedOrderArray.java
+END
+SetupMultiSiteQueryResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/SetupMultiSiteQueryResponse.java
+END
+UserTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/UserTO.java
+END
+TaggedAppointmentArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedAppointmentArray.java
+END
+ArrayOfPhoneNumTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfPhoneNumTO.java
+END
+PatientInquiry.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/PatientInquiry.java
+END
+MpiLookupResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/MpiLookupResponse.java
+END
+GetTeamsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetTeamsResponse.java
+END
+IsOneVisitNote.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/IsOneVisitNote.java
+END
+GetClinicalWarnings.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetClinicalWarnings.java
+END
+GetExpandedAdtReportsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetExpandedAdtReportsResponse.java
+END
+GetIcdSurgeryReports.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetIcdSurgeryReports.java
+END
+TaggedCytologyRptArrays.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedCytologyRptArrays.java
+END
+ArrayOfNoteTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfNoteTO.java
+END
+FaultTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/FaultTO.java
+END
+GetCareTeamReports.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetCareTeamReports.java
+END
+TaggedConsultArrays.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedConsultArrays.java
+END
+TaggedConsultArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedConsultArray.java
+END
+ArrayOfUserTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfUserTO.java
+END
+ArrayOfTaggedAppointmentArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfTaggedAppointmentArray.java
+END
+IsConsultNote.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/IsConsultNote.java
+END
+ArrayOfSymptomTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfSymptomTO.java
+END
+GetAllMedsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetAllMedsResponse.java
+END
+GetMedsAdminLog.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetMedsAdminLog.java
+END
+TaggedIcdRptArrays.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedIcdRptArrays.java
+END
+GetChemHemReports.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetChemHemReports.java
+END
+GetConfidentialityResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetConfidentialityResponse.java
+END
+ObjectFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ObjectFactory.java
+END
+ArrayOfTaggedChemHemRptArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfTaggedChemHemRptArray.java
+END
+ArrayOfTaggedConsultArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfTaggedConsultArray.java
+END
+GetLocations.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetLocations.java
+END
+AddDataSourceResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/AddDataSourceResponse.java
+END
+GetVISNResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetVISNResponse.java
+END
+SymptomTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/SymptomTO.java
+END
+GetPatientsByClinic.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetPatientsByClinic.java
+END
+ObservationTypeTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ObservationTypeTO.java
+END
+GetSurgeryReportText.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetSurgeryReportText.java
+END
+DataSourceTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/DataSourceTO.java
+END
+IsSurgeryNote.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/IsSurgeryNote.java
+END
+TaggedChemHemRptArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedChemHemRptArray.java
+END
+WriteNote.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/WriteNote.java
+END
+ArrayOfDataSourceTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfDataSourceTO.java
+END
+IcdRpt.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/IcdRpt.java
+END
+GetIcdProceduresReports.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetIcdProceduresReports.java
+END
+CloseNote.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/CloseNote.java
+END
+Login.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/Login.java
+END
+GetCrisisNotes.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetCrisisNotes.java
+END
+AuthorTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/AuthorTO.java
+END
+GetRadiologyReports.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetRadiologyReports.java
+END
+GetNoteTitles.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetNoteTitles.java
+END
+PatientInquiryResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/PatientInquiryResponse.java
+END
+GetClinicalWarningsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetClinicalWarningsResponse.java
+END
+GetAdmissionsReportsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetAdmissionsReportsResponse.java
+END
+GetIcdSurgeryReportsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetIcdSurgeryReportsResponse.java
+END
+TaggedVitalSignSetArrays.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedVitalSignSetArrays.java
+END
+ArrayOfIcdRpt.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfIcdRpt.java
+END
+Select.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/Select.java
+END
+GetDischargeDiagnosisReports.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetDischargeDiagnosisReports.java
+END
+GetConsultsForPatient.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetConsultsForPatient.java
+END
+GetPatientsByWard.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetPatientsByWard.java
+END
+GetAppointmentText.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetAppointmentText.java
+END
+GetMedicationDetail.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetMedicationDetail.java
+END
+EmrSvc.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/EmrSvc.java
+END
+IsConsultNoteResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/IsConsultNoteResponse.java
+END
+VitalSignSetTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/VitalSignSetTO.java
+END
+ArrayOfVitalSignTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfVitalSignTO.java
+END
+GetChemHemReportsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetChemHemReportsResponse.java
+END
+SurgicalPathologyRpt.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/SurgicalPathologyRpt.java
+END
+GetMedsAdminLogResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetMedsAdminLogResponse.java
+END
+GetAdvanceDirectives.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetAdvanceDirectives.java
+END
+ArrayOfRadiologyReportTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfRadiologyReportTO.java
+END
+ArrayOfMicrobiologyRpt.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfMicrobiologyRpt.java
+END
+GetIvMeds.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetIvMeds.java
+END
+GetLocationsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetLocationsResponse.java
+END
+TextTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TextTO.java
+END
+GetLatestVitalSigns.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetLatestVitalSigns.java
+END
+VitalSignTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/VitalSignTO.java
+END
+ArrayOfTaggedVitalSignSetArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfTaggedVitalSignSetArray.java
+END
+GetElectronMicroscopyReportsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetElectronMicroscopyReportsResponse.java
+END
+ArrayOfVitalSignSetTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfVitalSignSetTO.java
+END
+ArrayOfSurgicalPathologyRpt.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfSurgicalPathologyRpt.java
+END
+GetVersion.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetVersion.java
+END
+GetSurgeryReportTextResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetSurgeryReportTextResponse.java
+END
+ArrayOfString.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfString.java
+END
+GetVitalSigns.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetVitalSigns.java
+END
+RadiologyReportTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/RadiologyReportTO.java
+END
+GetBloodBankReports.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetBloodBankReports.java
+END
+IsValidEsig.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/IsValidEsig.java
+END
+MicrobiologyRpt.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/MicrobiologyRpt.java
+END
+TaggedSurgeryReportArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedSurgeryReportArray.java
+END
+TaggedOrderArrays.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedOrderArrays.java
+END
+TaggedSurgicalPathologyRptArrays.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedSurgicalPathologyRptArrays.java
+END
+TaggedNoteArrays.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedNoteArrays.java
+END
+GetUnsignedNotes.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetUnsignedNotes.java
+END
+GetOutpatientRxProfile.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetOutpatientRxProfile.java
+END
+TaggedMedicationArrays.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedMedicationArrays.java
+END
+TaggedVitalSignSetArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedVitalSignSetArray.java
+END
+CprsUserLookup.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/CprsUserLookup.java
+END
+TaggedAppointmentArrays.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedAppointmentArrays.java
+END
+ArrayOfTaggedSurgeryReportArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfTaggedSurgeryReportArray.java
+END
+NptLookup.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/NptLookup.java
+END
+CloseNoteResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/CloseNoteResponse.java
+END
+EmrSvcSoap_EmrSvcSoap12_Client.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/EmrSvcSoap_EmrSvcSoap12_Client.java
+END
+MedicationTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/MedicationTO.java
+END
+GetCrisisNotesResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetCrisisNotesResponse.java
+END
+EmrSvcSoap.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/EmrSvcSoap.java
+END
+GetAdmissions.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetAdmissions.java
+END
+ArrayOfCytologyRpt.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfCytologyRpt.java
+END
+SelectResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/SelectResponse.java
+END
+ArrayOfAdtTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfAdtTO.java
+END
+GetDischargeDiagnosisReportsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetDischargeDiagnosisReportsResponse.java
+END
+ArrayOfMedicationTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/ArrayOfMedicationTO.java
+END
+EmrSvcHttpGet_EmrSvcHttpGet_Client.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/EmrSvcHttpGet_EmrSvcHttpGet_Client.java
+END
+GetOutpatientEncounterReports.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetOutpatientEncounterReports.java
+END
+GetBloodTransfusionReportsResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetBloodTransfusionReportsResponse.java
+END
+GetAppointmentTextResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetAppointmentTextResponse.java
+END
+GetMedicationDetailResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetMedicationDetailResponse.java
+END
+GetImagingReport.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetImagingReport.java
+END
+GetClinics.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetClinics.java
+END
+TaggedCytologyRptArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/TaggedCytologyRptArray.java
+END
+GetAdvanceDirectivesResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/emrsvc/GetAdvanceDirectivesResponse.java
+END

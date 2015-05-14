@@ -1,0 +1,19 @@
+<!DOCTYPE validators PUBLIC "-//OpenSymphony Group//XWork Validator 1.0.2//EN"
+    "http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+<validators>
+    <field name="definition.abbreviation">
+        <field-validator type="requiredstring" short-circuit="true">
+            <message key="errors.required"/>
+        </field-validator>
+    </field>
+    <field name="definition.definition">
+        <field-validator type="requiredstring" short-circuit="true">
+            <message key="errors.required"/>
+        </field-validator>
+    </field>
+    <field name="definition.status">
+        <field-validator type="required" short-circuit="true">
+            <message key="errors.required"/>
+        </field-validator>
+    </field>
+</validators>

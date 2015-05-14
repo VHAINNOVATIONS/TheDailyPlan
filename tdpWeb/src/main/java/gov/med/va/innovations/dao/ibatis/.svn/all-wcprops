@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/repos/!svn/ver/756/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/ibatis
+END
+LookupDaoiBatis.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/repos/!svn/ver/803/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/ibatis/LookupDaoiBatis.java
+END
+TemplateDaoiBatis.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/ibatis/TemplateDaoiBatis.java
+END
+UniversalDaoiBatis.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/ibatis/UniversalDaoiBatis.java
+END
+UserDaoiBatis.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/ibatis/UserDaoiBatis.java
+END
+ComponentDaoiBatis.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/repos/!svn/ver/829/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/ibatis/ComponentDaoiBatis.java
+END
+TestimonialDaoiBatis.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/ibatis/TestimonialDaoiBatis.java
+END
+DocumentEventDaoiBatis.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/repos/!svn/ver/828/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/ibatis/DocumentEventDaoiBatis.java
+END
+iBatisDaoUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/ibatis/iBatisDaoUtils.java
+END
+DefinitionDaoiBatis.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/repos/!svn/ver/756/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/ibatis/DefinitionDaoiBatis.java
+END
+PagingLookupDaoiBatis.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/ibatis/PagingLookupDaoiBatis.java
+END
+RoleDaoiBatis.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/ibatis/RoleDaoiBatis.java
+END
+GenericDaoiBatis.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/dao/ibatis/GenericDaoiBatis.java
+END

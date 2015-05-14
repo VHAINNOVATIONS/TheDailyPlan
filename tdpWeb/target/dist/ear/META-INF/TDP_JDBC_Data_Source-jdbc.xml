@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jdbc-data-source xmlns="http://xmlns.oracle.com/weblogic/jdbc-data-source" xmlns:sec="http://xmlns.oracle.com/weblogic/security" xmlns:wls="http://xmlns.oracle.com/weblogic/security/wls" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.oracle.com/weblogic/jdbc-data-source http://xmlns.oracle.com/weblogic/jdbc-data-source/1.0/jdbc-data-source.xsd">
+  <name>TDP JDBC Data Source</name>
+  <jdbc-driver-params>
+    <url>jdbc:jtds:sqlserver://localhost:1433/tdp_web</url>
+    <driver-name>net.sourceforge.jtds.jdbc.Driver</driver-name>
+    <properties>
+      <property>
+        <name>user</name>
+        <value>tdp_user</value>
+      </property>
+      <property>
+        <name>portNumber</name>
+        <value>1433</value>
+      </property>
+      <property>
+        <name>databaseName</name>
+        <value>tdp_web</value>
+      </property>
+      <property>
+        <name>serverName</name>
+        <value>localhost</value>
+      </property>
+    </properties>
+    <password-encrypted>tdpP@55</password-encrypted>
+  </jdbc-driver-params>
+  <jdbc-connection-pool-params>
+    <test-table-name>SQL SELECT id FROM definition WHERE id=1</test-table-name>
+  </jdbc-connection-pool-params>
+  <jdbc-data-source-params>
+    <jndi-name>jdbc/TdpDataSource</jndi-name>
+    <global-transactions-protocol>OnePhaseCommit</global-transactions-protocol>
+  </jdbc-data-source-params>
+</jdbc-data-source>

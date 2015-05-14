@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/repos/!svn/ver/769/tdp/trunk/tdpWeb/bin
+END
+antRun.cmd
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/repos/!svn/ver/747/tdp/trunk/tdpWeb/bin/antRun.cmd
+END
+runant.cmd
+K 25
+svn:wc:ra_dav:version-url
+V 55
+/svn/repos/!svn/ver/768/tdp/trunk/tdpWeb/bin/runant.cmd
+END
+regenWsClients.cmd
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/repos/!svn/ver/832/tdp/trunk/tdpWeb/bin/regenWsClients.cmd
+END
+createDomain.cmd
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/repos/!svn/ver/769/tdp/trunk/tdpWeb/bin/createDomain.cmd
+END

@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/repos/!svn/ver/774/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/util
+END
+DateUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/831/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/util/DateUtil.java
+END
+CurrencyConverter.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/util/CurrencyConverter.java
+END
+ParamMap.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/util/ParamMap.java
+END
+MdwsClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/repos/!svn/ver/780/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/util/MdwsClient.java
+END
+MdwsClientFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repos/!svn/ver/786/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/util/MdwsClientFactory.java
+END
+TimestampConverter.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/util/TimestampConverter.java
+END
+ConvertUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/831/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/util/ConvertUtil.java
+END
+SessionSecurityContextHolder.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/util/SessionSecurityContextHolder.java
+END
+DateConverter.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/util/DateConverter.java
+END
+CriteriaUtil.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/841/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/util/CriteriaUtil.java
+END

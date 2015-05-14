@@ -1,0 +1,64 @@
+#header, #nav, #sub, #sub h2, #footer, #local,
+#report_print, #report_font, #report_bluetop {
+    display: none;
+}
+
+#universe, #report, #report_container {
+    width: 100%; 
+    margin: 0; 
+    float: none;
+/*    display: inline; */
+	overflow: visible;
+}
+
+#universe table,
+#content {
+	overflow: visible;
+}
+
+/* table and td need height set to 100% to print correctly in large examples on firefox */
+
+table {
+  width:100%;
+  height: 100%;
+  margin-right:0.5em;
+  margin-bottom: 0.5em;
+  display: inline;
+  overflow: visible;
+}
+
+#table_list td,
+#table_list th {
+  padding: 0;
+  width: 920px;
+  height: 100%;
+}
+
+div#page, div#content, div#main, div#universe,  div#report, div#report_container
+{
+	display: inline;
+	clear: both;
+}
+
+body {
+	font-family: Georgia, serif;
+	background: none;
+	color: black;
+}
+
+thead {display: table-header-group;}
+tfoot {display: table-footer-group;}
+
+#report_logo {
+	display: block;
+}
+	
+#report_logo img {
+	width: 920px;
+}
+
+#report_title {
+	background-color:#005DA4 !important;
+	width:100%;
+	color: #000; 
+}

@@ -1,0 +1,20 @@
+Running Ant tasks
+- Assumption that Oracle Weblogic Server is installed in the default location: C:\Oracle\Middleware\wlserver_10.3\
+
+Launch a command prompt
+
+run the command: \Oracle\Middleware\wlserver_10.3\server\bin\setWLSEnv.cmd to set the environment
+
+cd to the location where the source is installed (cd workspace\VA\tdpWeb).  Note the the shared, tdpApp and tdpWeb folders are in the same location
+
+run the following command to correct the classpath: set CLASSPATH=%CLASSPATH%;..\shared\lib\dbunit-2.4.5.jar;..\shared\lib\slf4j-api-1.6.0.jar;..\shared\lib\slf4j-simple-1.6.0.jar
+
+In the tdpWeb\build.properties file, ensure that the MDWS Server URL is correct, and the following SQL Server properties are set correctly:
+jdbc.url=jdbc:jtds:sqlserver://localhost:1433/tdp_web
+jdbc.password=tdpP@55
+jdbc.username=tdp_user
+
+Run the command 'ant reload-db' to initialize the database.  Note that the database should already exist on the server, and the SQL Server user matching the jdbc.username should have administrative privileges to create the table structure.
+
+Running 'ant' will build an ear file that may be deployed to the Weblogic server.
+

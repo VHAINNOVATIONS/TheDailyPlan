@@ -1,0 +1,34 @@
+10
+
+dir
+777
+http://technikprojsrv:82/svn/repos/tdp/trunk/tdpWeb/src/main/webapp/template
+http://technikprojsrv:82/svn/repos
+
+
+
+2010-05-28T16:29:19.206507Z
+699
+mrosenthal
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+6be7442c-6341-7446-a63f-1b90ceddeb61
+
+css_xhtml
+dir
+
+xhtml
+dir
+

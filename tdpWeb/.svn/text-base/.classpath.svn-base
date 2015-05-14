@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry excluding="*.xml" kind="src" output="target/test-classes" path="src/test/resources"/>
+	<classpathentry including="*.properties" kind="src" path="target/classes"/>
+	<classpathentry excluding="rpc.propeties" kind="src" path="src/main/resources"/>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/Oracle WebLogic Server 11gR1 PatchSet 2 JRE">
+		<attributes>
+			<attribute name="owner.project.facets" value="jst.java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="oracle.eclipse.tools.weblogic.lib.application/TdpApp"/>
+	<classpathentry kind="lib" path="lib/jmock-2.5.1.jar"/>
+	<classpathentry kind="lib" path="lib/jmock-junit4-2.5.1.jar" sourcepath="C:/repos/.m2/repository/org/jmock/jmock-junit4/2.5.1/jmock-junit4-2.5.1-sources.jar"/>
+	<classpathentry kind="lib" path="lib/junit-4.4.jar"/>
+	<classpathentry kind="lib" path="lib/junit-dep-4.4.jar"/>
+	<classpathentry kind="lib" path="lib/spring-test-2.5.6.jar" sourcepath="C:/repos/.m2/repository/org/springframework/spring-test/2.5.6/spring-test-2.5.6-sources.jar"/>
+	<classpathentry kind="lib" path="lib/subethasmtp-smtp-1.2.jar"/>
+	<classpathentry kind="lib" path="lib/subethasmtp-wiser-1.2.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/VistaLink Foundations"/>
+	<classpathentry kind="lib" path="lib/jsp-api-2.0.jar"/>
+	<classpathentry kind="lib" path="lib/servlet-api-2.4.jar"/>
+	<classpathentry kind="output" path="target/classes"/>
+</classpath>

@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/repos/!svn/ver/774/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/impl
+END
+VistaManagerImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/repos/!svn/ver/841/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/impl/VistaManagerImpl.java
+END
+TestimonialManagerImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/impl/TestimonialManagerImpl.java
+END
+DefinitionManagerImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/repos/!svn/ver/756/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/impl/DefinitionManagerImpl.java
+END
+ReportManagerImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/repos/!svn/ver/841/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/impl/ReportManagerImpl.java
+END
+BaseManagerMockTestCase.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/impl/BaseManagerMockTestCase.java
+END
+PagingLookupManagerImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/impl/PagingLookupManagerImpl.java
+END
+RoleManagerImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/impl/RoleManagerImpl.java
+END
+GenericManagerImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/impl/GenericManagerImpl.java
+END
+LookupManagerImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/repos/!svn/ver/803/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/impl/LookupManagerImpl.java
+END
+TemplateManagerImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/repos/!svn/ver/829/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/impl/TemplateManagerImpl.java
+END
+EventManagerImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/repos/!svn/ver/832/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/impl/EventManagerImpl.java
+END
+UniversalManagerImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/impl/UniversalManagerImpl.java
+END
+UserManagerImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/repos/!svn/ver/691/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations/service/impl/UserManagerImpl.java
+END

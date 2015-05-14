@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    <!-- AOP Advisor -->
+    <bean id="userSecurityInterceptor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+        <property name="advice" ref="userSecurityAdvice"/>
+        <property name="patterns">
+            <list>
+                <value>.*saveUser</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Advice Class -->
+    <bean id="userSecurityAdvice" class="gov.med.va.innovations.service.UserSecurityAdvice"/>
+
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc.properties</value>
+                <value>classpath:mail.properties</value>
+                <value>classpath:rpc.properties</value>
+            </list>
+        </property>
+    </bean>
+    
+    <bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+        <property name="configLocation" value="classpath:/sql-map-config.xml"/>
+    </bean>
+    
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="maxActive" value="100"/>
+        <property name="maxWait" value="1000"/>
+        <property name="poolPreparedStatements" value="true"/>
+        <property name="defaultAutoCommit" value="true"/>
+    </bean>
+
+    <!-- Generic Test -->
+    <bean id="genericDao" class="gov.med.va.innovations.dao.ibatis.GenericDaoiBatis">
+        <qualifier value="testDao"/>
+        <constructor-arg value="gov.med.va.innovations.domain.User"/>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="sqlMapClient" ref="sqlMapClient"/>
+    </bean>
+
+    <bean id="userDao" class="gov.med.va.innovations.dao.ibatis.UserDaoiBatis">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="sqlMapClient" ref="sqlMapClient"/>
+    </bean>
+
+    <bean id="userManager" class="gov.med.va.innovations.service.impl.UserManagerImpl">
+        <property name="userDao" ref="userDao"/>
+        <property name="passwordEncoder">
+            <bean class="org.springframework.security.providers.encoding.ShaPasswordEncoder"/>
+        </property>
+    </bean>
+
+    <bean id="target" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="proxyInterfaces" value="gov.med.va.innovations.service.UserManager"/>
+        <property name="interceptorNames">
+            <list>
+                <idref local="userSecurityInterceptor"/>
+                <idref local="userManager"/>
+            </list>
+        </property>
+    </bean>
+</beans>    

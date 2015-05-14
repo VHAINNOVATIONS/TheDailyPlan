@@ -1,0 +1,142 @@
+/* A CSS Framework by Mike Stenhouse of Content with Style */
+
+/* SITE SPECIFIC LAYOUT */
+    body {
+		background-color: #C0C0C0;
+		color: #000000; 
+		font-family: Verdana, Geneva, sans-serif;
+		font-size: 12px;
+		margin: 0px; 
+		padding: 20px 0px 20px 0px; 
+		position: relative;
+		text-align: center; 
+		width: 100%; 
+    }
+    div#page {
+        width: 996px;
+        margin: 0 auto;
+        padding: 0;
+        text-align: center;
+    }
+    
+    /* HEADER */
+        div#header {
+            margin: 0;
+            /*padding: 6px 0 2px 10px;*/
+            text-align: left;
+            height: 231px; /* needed by IE 7 */
+        }
+            div#switchLocale {
+                position: absolute;
+                right: 10px;
+            }
+        div#branding {
+            height: 111px;
+            margin: 0;
+            padding: 0;
+            text-align: left;
+            background-image: url(images/tdp-header.png);
+        }
+        div#search {
+            float: right;
+            width: 49%;
+            margin: 0;
+            padding: 40px 40px 0 0;
+
+            text-align: right;
+        }
+    /* END HEADER */
+    
+    /* CONTENT */
+        div#content {
+        	background-image:url(../../images/bg.gif);
+			background-repeat:repeat-x;
+        }
+            body#error #content {
+                /* margin-top: 20px; */
+            }
+        /* MAIN */
+            div#main {
+                padding-left: 15px;
+            }
+                div#main form ul li {
+                    list-style-type: none;
+                    margin-left: 0;
+                }
+            body#login div#main {
+                padding-left: 0px;
+            }
+        /* END MAIN */
+        
+        /* SUB */
+            div#sub h2 {
+                margin-bottom: 5px;
+            }
+            
+            div#sub ul li {
+                list-style-type: none;
+                padding-bottom: 10px;
+            }
+                div#sub p.line {
+                    border-top: 1px dotted #ccc;
+                    margin: 15px 0;
+                }
+            
+        /* END SUB */
+        
+        /* RIGHT CONTENT */
+        #criteria_fields {
+	    	float: right;
+	    	min-width: 200px;
+	    	text-align: right;
+	    	z-index: 1001;
+	    }
+	    
+	    #criteria_fields p,
+	    #criteria_fields ul {
+	    	text-align: left;
+	    }
+	    
+	    #criteria_fields li {
+	    	padding: 1px;
+	    }
+	    
+	    #componentForm ul {
+	    	width: 50%;
+	    }
+
+	    #componentForm li {
+	    	width: 250px;
+	    }
+        /* END RIGHT CONTENT*/
+        
+    /* END CONTENT */
+    
+    /* FOOTER */
+        div#footer {
+            color: #444;
+            padding: 0 39px;
+            text-align: left;
+            font-size: 0.9em;
+        }
+
+            div#footer div#divider {
+                    margin: 0 0 4px 0;
+                    border-top: 1px solid #ccc;
+            }
+
+            div#footer div#divider div {
+                    margin: 1px 0 0 0;
+                    border-top: 6px solid #ebf5fc;
+            }
+
+            div#footer .left {
+                    float: left;
+            }
+
+            div#footer .right {
+                    float: right;
+            }
+    /* END FOOTER */
+    
+/* END LAYOUT */

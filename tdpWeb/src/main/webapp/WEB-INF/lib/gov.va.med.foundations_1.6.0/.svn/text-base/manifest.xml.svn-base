@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin id="gov.va.med.foundations" name="Foundations" version="1.6.0" ignore="unavailable">
+	<prerequisites>
+		<requires plugin="org.jaxen" version="0"/>
+		<requires plugin="org.saxpath" version="0"/>
+		<requires plugin="org.apache.xerces" version="2.3.0"/>
+		<requires plugin="j2ee" version="1.3.1"/>
+		<requires plugin="org.apache.jakarta.log4j" version="1.2"/>
+		<requires plugin="gov.va.med.hds.util" version="1.0.2"/>
+		<requires plugin="gov.va.med.hds.cd.ccow.api" version="1.0.0"/>
+		<requires plugin="gov.va.med.hds.cd.ccow.core" version="1.0.1"/>
+	</prerequisites>
+	<distribution>
+		<file filename="vljFoundationsLib-1.5.1.002.jar"/>
+		<file filename="vljConnector-1.5.1.002.jar"/>
+		<file filename="vljSecurity-1.5.1.002.jar"/>
+	</distribution>
+	<published>
+		<publish class="*"/>
+	</published>
+</plugin>

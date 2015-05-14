@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/repos/!svn/ver/735/tdp/trunk/TdpApp/EarContent/APP-INF/lib
+END
+jtds-1.2.5.jar
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/repos/!svn/ver/735/tdp/trunk/TdpApp/EarContent/APP-INF/lib/jtds-1.2.5.jar
+END
+ll-javaBroker.jar
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/repos/!svn/ver/735/tdp/trunk/TdpApp/EarContent/APP-INF/lib/ll-javaBroker.jar
+END
+xercesImpl.jar
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/repos/!svn/ver/735/tdp/trunk/TdpApp/EarContent/APP-INF/lib/xercesImpl.jar
+END
+axis.jar
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/repos/!svn/ver/735/tdp/trunk/TdpApp/EarContent/APP-INF/lib/axis.jar
+END
+jaxrpc-api.jar
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/repos/!svn/ver/735/tdp/trunk/TdpApp/EarContent/APP-INF/lib/jaxrpc-api.jar
+END
+ll-javaUtils.jar
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/repos/!svn/ver/735/tdp/trunk/TdpApp/EarContent/APP-INF/lib/ll-javaUtils.jar
+END

@@ -1,0 +1,117 @@
+10
+
+dir
+777
+http://technikprojsrv:82/svn/repos/tdp/trunk/tdpWeb/src/main/java/gov/med/va/innovations
+http://technikprojsrv:82/svn/repos
+
+
+
+2010-09-02T15:01:37.469602Z
+774
+mrosenthal
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+6be7442c-6341-7446-a63f-1b90ceddeb61
+
+App.java
+file
+
+
+
+
+2010-09-15T18:58:38.968000Z
+114486bca68be39eee5be4fc2b31cad6
+2010-05-19T19:25:40.983201Z
+690
+mrosenthal
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+122
+
+Constants.java
+file
+803
+
+
+
+2010-10-14T17:38:33.187000Z
+794156fd02bbf7a4b1873e87d0dd0fcb
+2010-10-15T22:30:56.419950Z
+803
+mrosenthal
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3195
+
+core
+dir
+
+dao
+dir
+
+domain
+dir
+
+exception
+dir
+
+service
+dir
+
+ui
+dir
+
+util
+dir
+

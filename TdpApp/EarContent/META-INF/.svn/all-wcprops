@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/repos/!svn/ver/764/tdp/trunk/TdpApp/EarContent/META-INF
+END
+TDP_JDBC_Data_Source-jdbc.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/repos/!svn/ver/764/tdp/trunk/TdpApp/EarContent/META-INF/TDP_JDBC_Data_Source-jdbc.xml
+END
+weblogic-application.xml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/repos/!svn/ver/735/tdp/trunk/TdpApp/EarContent/META-INF/weblogic-application.xml
+END
+MANIFEST.MF
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/repos/!svn/ver/702/tdp/trunk/TdpApp/EarContent/META-INF/MANIFEST.MF
+END
+application.xml
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/repos/!svn/ver/702/tdp/trunk/TdpApp/EarContent/META-INF/application.xml
+END

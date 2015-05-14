@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/lib
+END
+jmock-2.5.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/lib/jmock-2.5.1.jar
+END
+spring-test-2.5.6.jar
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/lib/spring-test-2.5.6.jar
+END
+subethasmtp-wiser-1.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/lib/subethasmtp-wiser-1.2.jar
+END
+jtds-1.2.5.jar
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/repos/!svn/ver/716/tdp/trunk/tdpWeb/lib/jtds-1.2.5.jar
+END
+junit-4.4.jar
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/lib/junit-4.4.jar
+END
+jsp-api-2.0.jar
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/lib/jsp-api-2.0.jar
+END
+servlet-api-2.4.jar
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/lib/servlet-api-2.4.jar
+END
+subethasmtp-smtp-1.2.jar
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/lib/subethasmtp-smtp-1.2.jar
+END
+junit-dep-4.4.jar
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/repos/!svn/ver/689/tdp/trunk/tdpWeb/lib/junit-dep-4.4.jar
+END
+jmock-junit4-2.5.1.jar
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/repos/!svn/ver/690/tdp/trunk/tdpWeb/lib/jmock-junit4-2.5.1.jar
+END
+log4j-1.2.13.jar
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/repos/!svn/ver/845/tdp/trunk/tdpWeb/lib/log4j-1.2.13.jar
+END

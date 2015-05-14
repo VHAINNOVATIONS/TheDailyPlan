@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" 
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="LookupSQL">
+
+    <select id="getRoles" resultClass="gov.med.va.innovations.domain.Role">
+      <![CDATA[
+        select name, description from role
+      ]]>
+    </select>
+
+    <select id="getComponentBeans" resultClass="gov.med.va.innovations.domain.Component">
+      <![CDATA[
+        select component_name as name, title from components where mandatory = '0' order by component_name
+      ]]>
+    </select>
+
+</sqlMap>

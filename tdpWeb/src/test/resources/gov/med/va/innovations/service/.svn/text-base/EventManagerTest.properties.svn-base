@@ -1,0 +1,9 @@
+# This is a ResourceBundle for Tests run by EventManagerTest
+documentId=55
+patientId=11223
+firstName=Joe
+lastName=Tester
+ssn=333221111
+dob=1935-10-25
+medUnitId=123
+updatedBy=vhaino321

@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/repos/!svn/ver/699/tdp/trunk/tdpWeb/src/main/webapp/template/xhtml
+END
+controlheader-core.ftl
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/repos/!svn/ver/699/tdp/trunk/tdpWeb/src/main/webapp/template/xhtml/controlheader-core.ftl
+END
+controlfooter.ftl
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/repos/!svn/ver/699/tdp/trunk/tdpWeb/src/main/webapp/template/xhtml/controlfooter.ftl
+END
+controlheader.ftl
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/repos/!svn/ver/699/tdp/trunk/tdpWeb/src/main/webapp/template/xhtml/controlheader.ftl
+END

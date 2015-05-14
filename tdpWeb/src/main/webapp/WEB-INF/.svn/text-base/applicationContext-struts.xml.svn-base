@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
+       default-lazy-init="true">
+
+    <bean id="adminInterceptor" class="gov.med.va.innovations.ui.interceptor.UserRoleAuthorizationInterceptor">
+        <property name="authorizedRoles" value="ROLE_ADMIN"/>
+    </bean>
+    
+    <bean id="userAction" class="gov.med.va.innovations.ui.action.UserAction" scope="prototype">
+        <property name="userManager" ref="userManager"/>
+        <property name="roleManager" ref="roleManager"/>
+        <property name="vistaManager" ref="vistaManager"/>
+        <property name="mailEngine" ref="mailEngine"/>
+        <property name="mailMessage" ref="mailMessage"/>
+        <property name="templateName" value="accountCreated.vm"/>
+    </bean>
+         
+    <bean id="searchAction" class="gov.med.va.innovations.ui.action.PatientSearchAction" scope="prototype">
+        <property name="vistaManager" ref="vistaManager"/>
+        <property name="reportManager" ref="reportManager"/>
+    </bean>
+         
+    <bean id="printPreviewAction" class="gov.med.va.innovations.ui.action.PrintPreviewAction" scope="prototype">
+        <property name="vistaManager" ref="vistaManager"/>
+        <property name="templateManager" ref="templateManager"/>
+        <property name="reportManager" ref="reportManager"/>
+    </bean>
+ 
+    <bean id="definitionAction" class="gov.med.va.innovations.ui.action.DefinitionAction" scope="prototype">
+        <property name="userManager" ref="userManager"/>
+        <property name="mailEngine" ref="mailEngine"/>
+        <property name="vistaManager" ref="vistaManager"/>
+        <property name="mailMessage" ref="mailMessage"/>
+    </bean>
+</beans>

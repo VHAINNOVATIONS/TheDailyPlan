@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/test/java/gov/med/va/innovations/service/impl
+END
+TestimonialManagerImplTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/repos/!svn/ver/778/tdp/trunk/tdpWeb/src/test/java/gov/med/va/innovations/service/impl/TestimonialManagerImplTest.java
+END
+DefinitionManagerImplTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/repos/!svn/ver/778/tdp/trunk/tdpWeb/src/test/java/gov/med/va/innovations/service/impl/DefinitionManagerImplTest.java
+END
+LookupManagerImplTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/repos/!svn/ver/803/tdp/trunk/tdpWeb/src/test/java/gov/med/va/innovations/service/impl/LookupManagerImplTest.java
+END
+UniversalManagerTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/test/java/gov/med/va/innovations/service/impl/UniversalManagerTest.java
+END
+UserManagerImplTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/test/java/gov/med/va/innovations/service/impl/UserManagerImplTest.java
+END
+VistaManagerImplTest.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/repos/!svn/ver/736/tdp/trunk/tdpWeb/src/test/java/gov/med/va/innovations/service/impl/VistaManagerImplTest.java
+END

@@ -1,0 +1,4 @@
+jdbc.driverClassName=net.sourceforge.jtds.jdbc.Driver
+jdbc.url=jdbc:jtds:sqlserver://localhost:1433/tdp_web
+jdbc.username=tdp_user
+jdbc.password=tdpP@55

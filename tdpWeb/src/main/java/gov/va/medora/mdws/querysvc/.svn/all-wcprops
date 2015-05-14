@@ -1,0 +1,497 @@
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc
+END
+ObjectFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/ObjectFactory.java
+END
+ConnectResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/ConnectResponse.java
+END
+GetFacadeVersion.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/GetFacadeVersion.java
+END
+ArrayOfDemographicSetTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/ArrayOfDemographicSetTO.java
+END
+AddDataSourceResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/AddDataSourceResponse.java
+END
+MatchResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/MatchResponse.java
+END
+DdrGetsEntryResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/DdrGetsEntryResponse.java
+END
+GetVersionResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/GetVersionResponse.java
+END
+DataSourceTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/DataSourceTO.java
+END
+Disconnect.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/Disconnect.java
+END
+GetVHA.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/GetVHA.java
+END
+TaggedText.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/TaggedText.java
+END
+TeamTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/TeamTO.java
+END
+QuerySvcHttpGet.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/QuerySvcHttpGet.java
+END
+SiteHasPatch.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/SiteHasPatch.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/package-info.java
+END
+SitesHavePatch.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/SitesHavePatch.java
+END
+CprsUserLookupResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/CprsUserLookupResponse.java
+END
+AbstractArrayTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/AbstractArrayTO.java
+END
+PersonTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/PersonTO.java
+END
+ArrayOfDataSourceTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/ArrayOfDataSourceTO.java
+END
+ArrayOfPatientTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/ArrayOfPatientTO.java
+END
+RegionTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/RegionTO.java
+END
+SetVha.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/SetVha.java
+END
+QuerySvcSoap_QuerySvcSoap12_Client.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/QuerySvcSoap_QuerySvcSoap12_Client.java
+END
+HospitalLocationTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/HospitalLocationTO.java
+END
+ArrayOfTaggedText.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/ArrayOfTaggedText.java
+END
+Login.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/Login.java
+END
+AbstractTaggedArrayTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/AbstractTaggedArrayTO.java
+END
+UserLookup.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/UserLookup.java
+END
+GetVariableValueResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/GetVariableValueResponse.java
+END
+PatientTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/PatientTO.java
+END
+ArrayOfRegionTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/ArrayOfRegionTO.java
+END
+QuerySvcHttpGet_QuerySvcHttpGet_Client.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/QuerySvcHttpGet_QuerySvcHttpGet_Client.java
+END
+AbstractTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/AbstractTO.java
+END
+DdrLister.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/DdrLister.java
+END
+Select.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/Select.java
+END
+QuerySvc.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/QuerySvc.java
+END
+TaggedPatientArrays.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/TaggedPatientArrays.java
+END
+VisitSiteResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/VisitSiteResponse.java
+END
+TextArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/TextArray.java
+END
+QuerySvcSoap_QuerySvcSoap_Client.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/QuerySvcSoap_QuerySvcSoap_Client.java
+END
+Connect.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/Connect.java
+END
+GetFacadeVersionResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/GetFacadeVersionResponse.java
+END
+TextTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/TextTO.java
+END
+AddDataSource.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/AddDataSource.java
+END
+RegionArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/RegionArray.java
+END
+Match.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/Match.java
+END
+DdrGetsEntry.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/DdrGetsEntry.java
+END
+GetVersion.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/GetVersion.java
+END
+ArrayOfString.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/ArrayOfString.java
+END
+TaggedPatientArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/TaggedPatientArray.java
+END
+TaggedTextArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/TaggedTextArray.java
+END
+QuerySvcHttpPost.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/QuerySvcHttpPost.java
+END
+ArrayOfAddressTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/ArrayOfAddressTO.java
+END
+DisconnectResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/DisconnectResponse.java
+END
+GetVHAResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/GetVHAResponse.java
+END
+SiteHasPatchResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/SiteHasPatchResponse.java
+END
+SitesHavePatchResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/SitesHavePatchResponse.java
+END
+CprsUserLookup.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/CprsUserLookup.java
+END
+PhoneNumTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/PhoneNumTO.java
+END
+SiteArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/SiteArray.java
+END
+ArrayOfTaggedPatientArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/ArrayOfTaggedPatientArray.java
+END
+AddressTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/AddressTO.java
+END
+SetVhaResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/SetVhaResponse.java
+END
+UserArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/UserArray.java
+END
+QuerySvcHttpPost_QuerySvcHttpPost_Client.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/QuerySvcHttpPost_QuerySvcHttpPost_Client.java
+END
+LoginResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/LoginResponse.java
+END
+UserTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/UserTO.java
+END
+UserLookupResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/UserLookupResponse.java
+END
+QuerySvcSoap.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/QuerySvcSoap.java
+END
+ArrayOfPhoneNumTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/ArrayOfPhoneNumTO.java
+END
+SiteTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/SiteTO.java
+END
+GetVariableValue.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/GetVariableValue.java
+END
+DdrListerResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/DdrListerResponse.java
+END
+FaultTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/FaultTO.java
+END
+SelectResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/SelectResponse.java
+END
+DemographicSetTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/repos/!svn/ver/835/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/DemographicSetTO.java
+END
+ArrayOfUserTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/ArrayOfUserTO.java
+END
+DataSourceArray.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/DataSourceArray.java
+END
+ArrayOfSiteTO.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/ArrayOfSiteTO.java
+END
+VisitSite.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/repos/!svn/ver/755/tdp/trunk/tdpWeb/src/main/java/gov/va/medora/mdws/querysvc/VisitSite.java
+END

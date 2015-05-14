@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
+       default-lazy-init="true">
+
+    <!-- Add new DAOs here -->
+    <bean id="pagingLookupDao"
+        class="gov.med.va.innovations.dao.ibatis.PagingLookupDaoiBatis">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="sqlMapClient" ref="sqlMapClient"/>
+    </bean>
+
+    <bean id="definitionDao" class="gov.med.va.innovations.dao.ibatis.DefinitionDaoiBatis">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="sqlMapClient" ref="sqlMapClient"/>
+    </bean> 
+
+    <bean id="vistaMdwsDao" class="gov.med.va.innovations.dao.mdws.VistaMdwsDao">
+        <property name="mdwsClientFactory" ref="mdwsClientFactory"/>
+    </bean> 
+
+    <bean id="testimonialDao" class="gov.med.va.innovations.dao.ibatis.TestimonialDaoiBatis">
+        <constructor-arg value="gov.med.va.innovations.domain.Testimonial"/> 
+        <property name="dataSource" ref="dataSource"/>
+        <property name="sqlMapClient" ref="sqlMapClient"/>
+    </bean> 
+
+    <bean id="templateDao" class="gov.med.va.innovations.dao.ibatis.TemplateDaoiBatis">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="sqlMapClient" ref="sqlMapClient"/>
+        <property name="componentDao" ref="componentDao"></property>
+    </bean> 
+
+    <bean id="componentDao" class="gov.med.va.innovations.dao.ibatis.ComponentDaoiBatis">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="sqlMapClient" ref="sqlMapClient"/>
+    </bean> 
+
+    <bean id="documentEventDao" class="gov.med.va.innovations.dao.ibatis.DocumentEventDaoiBatis">
+    	<constructor-arg value="gov.med.va.innovations.domain.DocumentEvent"/>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="sqlMapClient" ref="sqlMapClient"/>
+    </bean> 
+
+    <!-- Add new Managers here -->
+    <bean id="vistaManager" class="gov.med.va.innovations.service.impl.VistaManagerImpl">     
+        <property name="dao" ref="vistaMdwsDao" />
+        <property name="definitionDao" ref="definitionDao" />
+        <property name="eventManager" ref="eventManager" />
+	</bean>
+
+    <bean id="definitionManager" class="gov.med.va.innovations.service.impl.DefinitionManagerImpl">     
+	    <property name="dao" ref="definitionDao"/> 
+	    <property name="vistaMdwsDao" ref="vistaMdwsDao"/> 
+	</bean>
+
+    <bean id="pagingLookupManager"
+        class="gov.med.va.innovations.service.impl.PagingLookupManagerImpl">
+        <property name="pagingDao" ref="pagingLookupDao" />
+    </bean>
+
+    <bean id="testimonialManager" class="gov.med.va.innovations.service.impl.TestimonialManagerImpl">     
+	    <constructor-arg ref="testimonialDao"/> 
+	</bean>
+	
+    <bean id="templateManager" class="gov.med.va.innovations.service.impl.TemplateManagerImpl">     
+	    <constructor-arg ref="templateDao"/> 
+        <property name="velocityEngine" ref="velocityEngine"/>
+        <property name="componentDao" ref="componentDao"/>
+	</bean>
+	
+    <bean id="reportManager" class="gov.med.va.innovations.service.impl.ReportManagerImpl">     
+        <property name="templateManager" ref="templateManager" />
+        <property name="vistaManager" ref="vistaManager" />
+        <property name="velocityEngine" ref="velocityEngine" />
+        <property name="eventManager" ref="eventManager" />
+	</bean>
+	
+    <bean id="eventManager" class="gov.med.va.innovations.service.impl.EventManagerImpl">     
+	    <constructor-arg ref="documentEventDao"/> 
+	</bean>
+	
+
+    <!--  New Misc beans -->
+    <bean id="paginatedListFactory"
+        class="gov.med.va.innovations.ui.util.PaginateListFactory" />
+        
+  	<bean id="mdwsClientFactory" class="gov.med.va.innovations.util.MdwsClientFactory">
+        <property name="initialSite" value="${mdws.service.sitelist}"/>
+  	</bean>
+  	
+  	<bean id="mdwsClient" class="gov.med.va.innovations.util.MdwsClient" scope="prototype">
+  		<constructor-arg value="${mdws.service.endpoint}"/>
+  		<constructor-arg value="${mdws.service.sitelist}"/>
+  		<constructor-arg ref="mdwsConnectionAdvice"/>
+   	</bean>
+	
+    <!-- Add new Actions here -->
+</beans> 

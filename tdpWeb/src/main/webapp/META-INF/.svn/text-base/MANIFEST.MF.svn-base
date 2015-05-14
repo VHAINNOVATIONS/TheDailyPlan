@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Class-Path: APP-INF/lib/axis.jar 
+ APP-INF/lib/jaxrpc-api.jar 
+ APP-INF/lib/jtds-1.2.5.jar 
+ APP-INF/lib/ll-javaBroker.jar 
+ APP-INF/lib/ll-javaUtils.jar 
+ APP-INF/lib/xercesImpl.jar
+
