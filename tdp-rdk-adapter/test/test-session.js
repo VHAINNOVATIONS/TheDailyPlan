@@ -85,7 +85,7 @@ describe('session test', function () {
         });
     });
 
-    it('authorize patient', function (done) {  // if status is not 200 then further authorization is necessary
+    it('authorize patient', function (done) { // if status is not 200 then further authorization is necessary
         testSession.resourceDirectory['authorize-authorize'].parameters = {
             get: {
                 pid: {
@@ -101,6 +101,81 @@ describe('session test', function () {
                 done(err);
             } else {
                 done();
+            }
+        });
+    });
+
+    it('check status (positive)', function (done) {
+        testSession.resourceDirectory['synchronization-status'].parameters = {
+            get: {
+                pid: {
+                    require: true
+                }
+            }
+        };
+        var pid = patients[37].icn || patients[37].pid;
+        testSession.resource('synchronization-status', {
+            'pid': pid
+        }, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body).to.exist();
+                expect(body.status).to.equal(200);
+                done();
+            }
+        });
+    });
+
+    it('get patient data/flags', function (done) {
+        var pid = patients[37].icn || patients[37].pid;
+        testSession.resource('patient-record-patient', {
+            'pid': pid
+        }, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body).to.exist();
+                expect(body.status).to.equal(200);
+                done();
+            }
+        });
+    });
+
+    it('get patient search', function (done) {
+        var pid = patients[37].icn || patients[37].pid;
+        testSession.resource('patient-search-pid', { // patient location indformation that is synced.
+            'pid': pid
+        }, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body).to.exist();
+                expect(body.status).to.equal(200);
+                done();
+            }
+        });
+    });
+
+    var unsyncedIndex = 4;
+    it('check status (negative)', function (done) {
+        testSession.resourceDirectory['synchronization-status'].parameters = {
+            get: {
+                pid: {
+                    require: true
+                }
+            }
+        };
+        var pid = patients[unsyncedIndex].icn || patients[unsyncedIndex].pid;
+        testSession.resource('synchronization-status', {
+            'pid': pid
+        }, function (err, body) {
+            if (err) {
+                expect(body).to.exist();
+                expect(body.status).to.equal(404);
+                done();
+            } else {
+                done(new Error('Unexpected not error'));
             }
         });
     });

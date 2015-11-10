@@ -29,7 +29,7 @@ session.get = function (route, parameters, callback) {
             err = new Error(message);
         }
         if (err) {
-            callback(err);
+            callback(err, body);
         } else {
             callback(null, body);
         }
