@@ -69,6 +69,27 @@ describe('session test', function () {
         });
     });
 
+    var patients;
+    it('search patients', function (done) {
+        testSession.resource('patient-search-full-name', {
+            'name.full': 'eig'
+        }, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body.data && body.data.items).to.exist();
+                expect(body.data.items.length).to.be.above(0);
+                patients = body.data.items;
+                done();
+            }
+        });
+    });
+
+    it('authorize patient', function (done) {
+        console.log(JSON.stringify(patients[1], undefined, 4));
+        done();
+    });
+
     it('logout', function (done) {
         testSession.logout(done);
     });

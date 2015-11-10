@@ -12,7 +12,7 @@ var session = {
     baseUrl: 'https://ehmp.vaftl.us'
 };
 
-session.get = function (route, callback) {
+session.get = function (route, parameters, callback) {
     var options = _.assign({
         uri: this.baseUrl + route
     }, {
@@ -20,6 +20,9 @@ session.get = function (route, callback) {
         json: true,
         strictSSL: false
     });
+    if (parameters) {
+        options.qs = parameters;
+    }
     request.get(options, function (err, response, body) {
         if ((!err) && response.statusCode !== 200) {
             var message = util.format('Invalid response status for %s: %s', options.uri, response.statusCode);
@@ -78,6 +81,34 @@ session.delete = function (route, callback) {
 
 };
 
+session.verifyParameters = function (defParameters, parameters, callback) {
+    defParameters = defParameters || {};
+    parameters = parameters || {};
+    var unrecognizedParameters = Object.keys(parameters).reduce(function (r, key) {
+        if (!defParameters[key]) {
+            r.push(key);
+        }
+        return r;
+    }, []);
+    if (unrecognizedParameters.length) {
+        var unrecognizedMessage = util.format('Unrecognized parameters: %s', unrecognizedParameters.join());
+        callback(new Error(unrecognizedMessage));
+        return false;
+    }
+    var missingParameters = Object.keys(defParameters).reduce(function (r, key) {
+        if (defParameters[key].required && !parameters.hasOwnProperty(key)) {
+            r.push(key);
+        }
+        return r;
+    }, []);
+    if (missingParameters.length) {
+        var missingMessage = util.format('Unrecognized parameters: %s', missingParameters.join());
+        callback(new Error(missingMessage));
+        return false;
+    }
+    return true;
+};
+
 session.resource = function (key, parameters, callback) {
     if (!callback) {
         callback = parameters;
@@ -91,32 +122,15 @@ session.resource = function (key, parameters, callback) {
     }
     var rel = e.rel;
     if (rel === 'vha.read') {
-        this.get(e.href, callback);
+        var getDefParameters = e.parameters && e.parameters.get;
+        if (this.verifyParameters(getDefParameters, parameters, callback)) {
+            this.get(e.href, parameters, callback);
+        }
     } else if (rel === 'vha.create') {
-        var defParameters = e.parameters.post;
-        var unrecognizedParameters = Object.keys(parameters).reduce(function (r, key) {
-            if (!defParameters[key]) {
-                r.push(key);
-            }
-            return r;
-        }, []);
-        if (unrecognizedParameters.length) {
-            var unrecognizedMessage = util.format('Unrecognized parameters: %s', unrecognizedParameters.join());
-            callback(new Error(unrecognizedMessage));
-            return;
+        var postDefParameters = e.parameters && e.parameters.post;
+        if (this.verifyParameters(postDefParameters, parameters, callback)) {
+            this.post(e.href, parameters, callback);
         }
-        var missingParameters = Object.keys(defParameters).reduce(function (r, key) {
-            if (defParameters[key].required && !parameters.hasOwnProperty(key)) {
-                r.push(key);
-            }
-            return r;
-        }, []);
-        if (missingParameters.length) {
-            var missingMessage = util.format('Unrecognized parameters: %s', missingParameters.join());
-            callback(new Error(missingMessage));
-            return;
-        }
-        this.post(e.href, parameters, callback);
     } else if (rel === 'vha.delete') {
         this.delete(e.href, callback);
     } else {
@@ -149,7 +163,7 @@ session.logout = function (callback) {
 
 exports.newSession = function (callback) {
     var c = Object.create(session);
-    c.get('/resource/resourceDirectory', function (err, body) {
+    c.get('/resource/resourceDirectory', null, function (err, body) {
         if (err) {
             callback(err);
         } else {
