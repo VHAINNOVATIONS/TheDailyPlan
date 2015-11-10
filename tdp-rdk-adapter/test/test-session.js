@@ -127,7 +127,7 @@ describe('session test', function () {
         });
     });
 
-    it('get patient data/flags', function (done) {
+    it('get patient demographics/flags', function (done) {
         var pid = patients[37].icn || patients[37].pid;
         testSession.resource('patient-record-patient', {
             'pid': pid
@@ -157,8 +157,8 @@ describe('session test', function () {
         });
     });
 
-    var unsyncedIndex = 4;
-    it('check status (negative)', function (done) {
+    var unsyncedIndex = 4; // The next two check unsynced patients but the patient becomes synced aftwerwards.  So not repeatable.  Change index to a unsynced patient to repeat.
+    xit('check status (negative)', function (done) {
         testSession.resourceDirectory['synchronization-status'].parameters = {
             get: {
                 pid: {
@@ -176,6 +176,21 @@ describe('session test', function () {
                 done();
             } else {
                 done(new Error('Unexpected not error'));
+            }
+        });
+    });
+
+    xit('get patient demographics/flags after negative', function (done) {
+        var pid = patients[unsyncedIndex].icn || patients[unsyncedIndex].pid;
+        testSession.resource('patient-record-patient', {
+            'pid': pid
+        }, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body).to.exist();
+                expect(body.status).to.equal(200);
+                done();
             }
         });
     });
