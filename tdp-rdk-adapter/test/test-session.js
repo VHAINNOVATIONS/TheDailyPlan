@@ -85,9 +85,24 @@ describe('session test', function () {
         });
     });
 
-    it('authorize patient', function (done) {
-        console.log(JSON.stringify(patients[1], undefined, 4));
-        done();
+    it('authorize patient', function (done) {  // if status is not 200 then further authorization is necessary
+        testSession.resourceDirectory['authorize-authorize'].parameters = {
+            get: {
+                pid: {
+                    required: true
+                }
+            }
+        };
+        var pid = patients[1].icn || patients[1].pid;
+        testSession.resource('authorize-authorize', {
+            'pid': pid
+        }, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                done();
+            }
+        });
     });
 
     it('logout', function (done) {
