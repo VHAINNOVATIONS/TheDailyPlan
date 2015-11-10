@@ -54,11 +54,22 @@ describe('session test', function () {
         });
     });
 
-    xit('login', function (done) {
-        testSession.login(done);
+    it('login', function (done) {
+        testSession.login({
+            accessCode: 'pu1234',
+            verifyCode: 'pu1234!!',
+            site: '9E7A'
+        }, function (err) {
+            if (err) {
+                done(err);
+            } else {
+                expect(testSession.userData).to.exist();
+                done();
+            }
+        });
     });
 
-    xit('logout', function (done) {
+    it('logout', function (done) {
         testSession.logout(done);
     });
 });
