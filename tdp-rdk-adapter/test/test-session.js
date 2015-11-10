@@ -54,7 +54,11 @@ describe('session test', function () {
         });
     });
 
-    it('authenticate', function () {
-        testSession.authenticate();
+    xit('login', function (done) {
+        testSession.login(done);
+    });
+
+    xit('logout', function (done) {
+        testSession.logout(done);
     });
 });
