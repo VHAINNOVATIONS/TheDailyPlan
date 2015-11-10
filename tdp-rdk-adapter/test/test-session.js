@@ -142,9 +142,69 @@ describe('session test', function () {
         });
     });
 
-    it('get patient search', function (done) {
+    it('get patient facilities', function (done) {
         var pid = patients[37].icn || patients[37].pid;
         testSession.resource('patient-search-pid', { // patient location indformation that is synced.
+            'pid': pid
+        }, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body).to.exist();
+                expect(body.status).to.equal(200);
+                done();
+            }
+        });
+    });
+
+    it('get patient allergies', function (done) {
+        var pid = patients[37].icn || patients[37].pid;
+        testSession.resource('patient-record-allergy', {
+            'pid': pid
+        }, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body).to.exist();
+                expect(body.status).to.equal(200);
+                done();
+            }
+        });
+    });
+
+    it('get patient meds', function (done) {
+        var pid = patients[37].icn || patients[37].pid;
+        testSession.resource('patient-record-med', {
+            'pid': pid
+        }, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body).to.exist();
+                expect(body.status).to.equal(200);
+                done();
+            }
+        });
+    });
+
+    it('get patient problems', function (done) {
+        var pid = patients[37].icn || patients[37].pid;
+        testSession.resource('patient-record-problem', {
+            'pid': pid
+        }, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body).to.exist();
+                expect(body.status).to.equal(200);
+                done();
+            }
+        });
+    });
+
+    it('get patient orders', function (done) {
+        var pid = patients[37].icn || patients[37].pid;
+        testSession.resource('patient-record-order', {
             'pid': pid
         }, function (err, body) {
             if (err) {
