@@ -65,6 +65,18 @@ session.login = function (userInfo, callback) {
     });
 };
 
+session.searchPatients = function (searchParam, callback) {
+    this.get('/patientsByName', {
+        prefix: searchParam['name.full']
+    }, function (err, body) {
+        if (err) {
+            callback(err);
+        } else {
+            callback(null, body);
+        }
+    });
+};
+
 exports.newSession = function (callback) {
     var c = Object.create(session);
     c.get('/initiate', null, function (err, body) {

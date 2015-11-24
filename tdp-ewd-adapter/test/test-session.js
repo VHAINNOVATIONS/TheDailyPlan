@@ -61,16 +61,16 @@ describe('session test', function () {
     });
 
     var patients;
-    xit('search patients', function (done) {
-        testSession.resource('patient-search-full-name', {
+    it('search patients', function (done) {
+        testSession.searchPatients({
             'name.full': 'eig'
         }, function (err, body) {
             if (err) {
                 done(err);
             } else {
-                expect(body.data && body.data.items).to.exist();
-                expect(body.data.items.length).to.be.above(0);
-                patients = body.data.items;
+                expect(body).to.exist();
+                expect(body.length).to.be.above(0);
+                patients = body;
                 done();
             }
         });
