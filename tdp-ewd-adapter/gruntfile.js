@@ -10,7 +10,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-shell');
 
     grunt.initConfig({
-        alljsfiles: ['lib/**/*.js', 'test/**/*.js', 'gruntfile.js', 'package.json', 'index.js'],
+        alljsfiles: ['client/**/*.js', 'lib/**/*.js', 'test/**/*.js', 'gruntfile.js', 'package.json', 'index.js'],
         jsbeautifier: {
             beautify: {
                 src: '<%= alljsfiles%>',

@@ -40,26 +40,16 @@ describe('session test', function () {
             if (err) {
                 done(err);
             } else {
-                console.log(JSON.stringify(session, undefined, 4));
-                //expect(session.resourceDirectory).to.exist();
-                //expect(session.facilityMonikers).to.exist();
-                //expect(session.facilityList).to.exist();
-
-                //writeDebugFile('resourceDirectory.json', session.resourceDirectory);
-                //writeDebugFile('facilityMonikers.json', session.facilityMonikers);
-                //writeDebugFile('facilityList.json', session.facilityList);
-
                 testSession = session;
                 done();
             }
         });
     });
 
-    xit('login', function (done) {
+    it('login', function (done) {
         testSession.login({
-            accessCode: 'pu1234',
-            verifyCode: 'pu1234!!',
-            site: '9E7A'
+            accessCode: 'CPRS1234',
+            verifyCode: 'CPRS4321$'
         }, function (err) {
             if (err) {
                 done(err);

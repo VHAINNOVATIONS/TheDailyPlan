@@ -3,6 +3,7 @@
 var util = require('util');
 var _ = require('lodash');
 var request = require('request');
+var crypto = require('crypto');
 
 request = request.defaults({
     jar: true
@@ -20,11 +21,15 @@ session.get = function (route, parameters, callback) {
         json: true,
         strictSSL: false
     });
+    if (this.Authorization) {
+        options.headers = {
+            'Authorization': this.Authorization
+        };
+    }
     if (parameters) {
         options.qs = parameters;
     }
     request.get(options, function (err, response, body) {
-        console.log(JSON.stringify(response, undefined, 4));
         if ((!err) && response.statusCode !== 200) {
             var message = util.format('Invalid response status for %s: %s', options.uri, response.statusCode);
             err = new Error(message);
@@ -37,12 +42,37 @@ session.get = function (route, parameters, callback) {
     });
 };
 
+var encryptCredentials = function (accessCode, verifyCode, key) {
+    var text = 'accessCode=' + accessCode + '&verifyCode=' + verifyCode;
+    var cipher = crypto.createCipher('aes-256-cbc', key);
+    var crypted = cipher.update(text, 'utf8', 'hex');
+    crypted += cipher.final('hex');
+    return crypted;
+};
+
+session.login = function (userInfo, callback) {
+    var credentials = encryptCredentials(userInfo.accessCode, userInfo.verifyCode, this.key);
+    var self = this;
+    this.get('/authenticate', {
+        credentials: credentials
+    }, function (err, body) {
+        if (err) {
+            callback(err);
+        } else {
+            self.userData = body;
+            callback(null, body);
+        }
+    });
+};
+
 exports.newSession = function (callback) {
     var c = Object.create(session);
     c.get('/initiate', null, function (err, body) {
         if (err) {
             callback(err);
         } else {
+            c.Authorization = body.Authorization;
+            c.key = body.key;
             callback(null, c);
         }
     });

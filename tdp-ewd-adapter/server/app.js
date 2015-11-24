@@ -18,7 +18,7 @@ var params = {
 		tdp: {
 			host: '54.158.47.205',
 			port: 8080,
-			ssl: true,
+			ssl: false,
 			secretKey: 'TakeARest!',
 			accessId: 'RESTServer'
 		}
