@@ -77,6 +77,18 @@ session.searchPatients = function (searchParam, callback) {
     });
 };
 
+session.getDemographics = function (patientId, callback) {
+    this.get('/patientSummary', {
+        id: patientId
+    }, function (err, body) {
+        if (err) {
+            callback(err);
+        } else {
+            callback(null, body);
+        }
+    });
+};
+
 exports.newSession = function (callback) {
     var c = Object.create(session);
     c.get('/initiate', null, function (err, body) {

@@ -76,58 +76,14 @@ describe('session test', function () {
         });
     });
 
-    xit('authorize patient', function (done) { // if status is not 200 then further authorization is necessary
-        testSession.resourceDirectory['authorize-authorize'].parameters = {
-            get: {
-                pid: {
-                    required: true
-                }
-            }
-        };
-        var pid = patients[1].icn || patients[1].pid;
-        testSession.resource('authorize-authorize', {
-            'pid': pid
-        }, function (err, body) {
-            if (err) {
-                done(err);
-            } else {
-                done();
-            }
-        });
-    });
-
-    xit('check status (positive)', function (done) {
-        testSession.resourceDirectory['synchronization-status'].parameters = {
-            get: {
-                pid: {
-                    require: true
-                }
-            }
-        };
-        var pid = patients[37].icn || patients[37].pid;
-        testSession.resource('synchronization-status', {
-            'pid': pid
-        }, function (err, body) {
+    it('get patient demographics/flags', function (done) {
+        var pid = patients[2].id;
+        testSession.getDemographics(pid, function (err, body) {
             if (err) {
                 done(err);
             } else {
                 expect(body).to.exist();
-                expect(body.status).to.equal(200);
-                done();
-            }
-        });
-    });
-
-    xit('get patient demographics/flags', function (done) {
-        var pid = patients[37].icn || patients[37].pid;
-        testSession.resource('patient-record-patient', {
-            'pid': pid
-        }, function (err, body) {
-            if (err) {
-                done(err);
-            } else {
-                expect(body).to.exist();
-                expect(body.status).to.equal(200);
+                expect(body.name).to.equal(patients[2].text);
                 done();
             }
         });
