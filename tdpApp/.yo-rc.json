@@ -1,0 +1,13 @@
+{
+  "generator-mcfly": {
+    "filenameCase": "camel",
+    "filenameSuffix": false,
+    "appname": "tdpApp",
+    "clientFolder": "client",
+    "ionic": true,
+    "ngCordova": true,
+    "fontawesome": true,
+    "bootstrap": true,
+    "material": false
+  }
+}
