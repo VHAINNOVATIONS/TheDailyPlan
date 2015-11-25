@@ -8,7 +8,7 @@ var params = {
 	// service module mapping
 	service: {
 		vista: {
-			module: 'VistARestServer',
+			module: 'raptor',
 			service: 'parse',
 			contentType: 'application/json'
 		}

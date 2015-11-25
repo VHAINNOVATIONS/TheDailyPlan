@@ -89,114 +89,40 @@ describe('session test', function () {
         });
     });
 
-    xit('get patient facilities', function (done) {
-        var pid = patients[37].icn || patients[37].pid;
-        testSession.resource('patient-search-pid', { // patient location indformation that is synced.
-            'pid': pid
-        }, function (err, body) {
+    it('get patient allergies', function (done) {
+        var pid = patients[37].id;
+        testSession.getAllergies(pid, function (err, body) {
             if (err) {
                 done(err);
             } else {
                 expect(body).to.exist();
-                expect(body.status).to.equal(200);
+                expect(body.length).to.be.above(0);
                 done();
             }
         });
     });
 
-    xit('get patient allergies', function (done) {
-        var pid = patients[37].icn || patients[37].pid;
-        testSession.resource('patient-record-allergy', {
-            'pid': pid
-        }, function (err, body) {
+    it('get patient meds', function (done) {
+        var pid = patients[2].id;
+        testSession.getMedications(pid, function (err, body) {
             if (err) {
                 done(err);
             } else {
+                console.log(JSON.stringify(body, undefined, 4));
                 expect(body).to.exist();
-                expect(body.status).to.equal(200);
                 done();
             }
         });
     });
 
-    xit('get patient meds', function (done) {
-        var pid = patients[37].icn || patients[37].pid;
-        testSession.resource('patient-record-med', {
-            'pid': pid
-        }, function (err, body) {
+    it('get patient problems', function (done) {
+        var pid = patients[37].id;
+        testSession.getProblems(pid, function (err, body) {
             if (err) {
                 done(err);
             } else {
+                console.log(JSON.stringify(body, undefined, 4));
                 expect(body).to.exist();
-                expect(body.status).to.equal(200);
-                done();
-            }
-        });
-    });
-
-    xit('get patient problems', function (done) {
-        var pid = patients[37].icn || patients[37].pid;
-        testSession.resource('patient-record-problem', {
-            'pid': pid
-        }, function (err, body) {
-            if (err) {
-                done(err);
-            } else {
-                expect(body).to.exist();
-                expect(body.status).to.equal(200);
-                done();
-            }
-        });
-    });
-
-    xit('get patient orders', function (done) {
-        var pid = patients[37].icn || patients[37].pid;
-        testSession.resource('patient-record-order', {
-            'pid': pid
-        }, function (err, body) {
-            if (err) {
-                done(err);
-            } else {
-                expect(body).to.exist();
-                expect(body.status).to.equal(200);
-                done();
-            }
-        });
-    });
-
-    var unsyncedIndex = 4; // The next two check unsynced patients but the patient becomes synced aftwerwards.  So not repeatable.  Change index to a unsynced patient to repeat.
-    xit('check status (negative)', function (done) {
-        testSession.resourceDirectory['synchronization-status'].parameters = {
-            get: {
-                pid: {
-                    require: true
-                }
-            }
-        };
-        var pid = patients[unsyncedIndex].icn || patients[unsyncedIndex].pid;
-        testSession.resource('synchronization-status', {
-            'pid': pid
-        }, function (err, body) {
-            if (err) {
-                expect(body).to.exist();
-                expect(body.status).to.equal(404);
-                done();
-            } else {
-                done(new Error('Unexpected not error'));
-            }
-        });
-    });
-
-    xit('get patient demographics/flags after negative', function (done) {
-        var pid = patients[unsyncedIndex].icn || patients[unsyncedIndex].pid;
-        testSession.resource('patient-record-patient', {
-            'pid': pid
-        }, function (err, body) {
-            if (err) {
-                done(err);
-            } else {
-                expect(body).to.exist();
-                expect(body.status).to.equal(200);
                 done();
             }
         });

@@ -42,18 +42,37 @@ session.get = function (route, parameters, callback) {
     });
 };
 
+//var encryptCredentials = function (accessCode, verifyCode, key) {
+//    var text = 'accessCode=' + accessCode + '&verifyCode=' + verifyCode;
+//    var cipher = crypto.createCipher('aes-256-cbc', key);
+//    var crypted = cipher.update(text, 'utf8', 'hex');
+//    crypted += cipher.final('hex');
+//    return crypted;
+//};
+
 var encryptCredentials = function (accessCode, verifyCode, key) {
-    var text = 'accessCode=' + accessCode + '&verifyCode=' + verifyCode;
-    var cipher = crypto.createCipher('aes-256-cbc', key);
-    var crypted = cipher.update(text, 'utf8', 'hex');
-    crypted += cipher.final('hex');
-    return crypted;
+    //Enhanced by SAN Businesss Consultants 20150929 for symetry with PHP
+    var cleankey = '';
+    for (var i = 0; i < key.length; i++) {
+        if (key[i] !== '-') {
+            cleankey += key[i];
+        }
+    }
+    var text = 'accessCode:' + accessCode + ';verifyCode:' + verifyCode;
+    var iv1 = '1234567890123456';
+    var algorithm1 = 'aes-256-cbc';
+
+    var cipher1 = crypto.createCipheriv(algorithm1, cleankey, iv1);
+    var crypted = cipher1.update(text, 'utf8', 'hex');
+    crypted += cipher1.final('hex');
+    var encrypted1 = iv1 + '_x_' + crypted;
+    return encrypted1;
 };
 
 session.login = function (userInfo, callback) {
     var credentials = encryptCredentials(userInfo.accessCode, userInfo.verifyCode, this.key);
     var self = this;
-    this.get('/authenticate', {
+    this.get('/login', {
         credentials: credentials
     }, function (err, body) {
         if (err) {
@@ -80,6 +99,43 @@ session.searchPatients = function (searchParam, callback) {
 session.getDemographics = function (patientId, callback) {
     this.get('/patientSummary', {
         id: patientId
+    }, function (err, body) {
+        if (err) {
+            callback(err);
+        } else {
+            callback(null, body);
+        }
+    });
+};
+
+session.getAllergies = function (patientId, callback) {
+    this.get('/getAllergiesDetailMap', {
+        patientId: patientId
+    }, function (err, body) {
+        if (err) {
+            callback(err);
+        } else {
+            callback(null, body);
+        }
+    });
+};
+
+session.getMedications = function (patientId, callback) {
+    this.get('/getMedicationsDetailMap', {
+        patientId: patientId
+    }, function (err, body) {
+        if (err) {
+            callback(err);
+        } else {
+            callback(null, body);
+        }
+    });
+};
+
+session.getProblems = function (patientId, callback) {
+    this.get('/getProblemsListDetailMap', {
+        patientId: patientId,
+        type: 'ALL'
     }, function (err, body) {
         if (err) {
             callback(err);
