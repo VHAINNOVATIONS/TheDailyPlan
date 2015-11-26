@@ -3,6 +3,16 @@
 var dotenv = require('12factor-dotenv');
 
 var config = dotenv({
+    tdpVistAAccessType: {
+        env: 'TDP_VISTA_ACCESS_TYPE',
+        type: 'enum',
+        values: ['EWD', 'RDK'],
+        default: 'EWD'
+    },
+    tdpRdkUrl: {
+        env: 'TDP_RDK_URL',
+        type: 'string',
+    },
     tdpEwdRestHost: {
         env: 'TDP_EWD_REST_HOST',
         type: 'string',

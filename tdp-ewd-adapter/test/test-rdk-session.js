@@ -23,7 +23,6 @@ describe('session test', function () {
     };
 
     before(function () {
-        process.env.TDP_VISTA_ACCESS_TYPE = 'EWD';
         generatedDir = path.join(__dirname, "generated");
         try {
             fs.mkdirSync(generatedDir);
@@ -37,7 +36,9 @@ describe('session test', function () {
 
     var testSession;
     it('new session', function (done) {
-        adapter.newSession(function (err, session) {
+        adapter.newSession({
+            tdpVistAAccessType: 'RDK'
+        }, function (err, session) {
             if (err) {
                 done(err);
             } else {
