@@ -8,9 +8,7 @@ request = request.defaults({
     jar: true
 });
 
-var session = {
-    baseUrl: 'https://ehmp.vaftl.us'
-};
+var session = {};
 
 session.get = function (route, parameters, callback) {
     var options = _.assign({
@@ -161,8 +159,9 @@ session.logout = function (callback) {
     });
 };
 
-exports.newSession = function (callback) {
+exports.newSession = function (options, callback) {
     var c = Object.create(session);
+    c.baseUrl = options.baseUrl;
     c.get('/resource/resourceDirectory', null, function (err, body) {
         if (err) {
             callback(err);
