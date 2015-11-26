@@ -1,7 +1,7 @@
 {
-    "name": "tdp-rdk-adapter",
+    "name": "tdp-ewd-adapter",
     "version": "0.0.1",
-    "description": "Wrapper around RDK rest services",
+    "description": "Wrapper around ewd rest services",
     "main": "./index.js",
     "directories": {
         "lib": "lib"
@@ -16,6 +16,9 @@
         "node": ">= 0.10.0"
     },
     "dependencies": {
+        "12factor-dotenv": "^0.1.5",
+        "crypto": "0.0.3",
+        "ewdrest": "https://github.com/austundag/ewdrest",
         "lodash": "^3.9.3",
         "request": "^2.65.0"
     },
@@ -36,8 +39,7 @@
         "url": "https://github.com/VHAINNOVATIONS/TheDailyPlan.git"
     },
     "keywords": [
-        "ehmp",
-        "rdk"
+        "ewd"
     ],
     "bugs": {
         "url": "https://github.com/VHAINNOVATIONS/TheDailyPlan/issues"
