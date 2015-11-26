@@ -149,6 +149,30 @@ session.login = function (userOptions, callback) {
     });
 };
 
+session.getDemographics = function (patientId, options, callback) {
+    this.resource('patient-record-patient', {
+        'pid': patientId
+    }, callback);
+};
+
+session.getAllergies = function (patientId, options, callback) {
+    this.resource('patient-record-allergy', {
+        'pid': patientId
+    }, callback);
+};
+
+session.getMedications = function (patientId, options, callback) {
+    this.resource('patient-record-med', {
+        'pid': patientId
+    }, callback);
+};
+
+session.getProblems = function (patientId, options, callback) {
+    this.resource('patient-record-problem', {
+        'pid': patientId
+    }, callback);
+};
+
 session.logout = function (callback) {
     this.resource('authentication-destroySession', function (err) {
         if (err) {
