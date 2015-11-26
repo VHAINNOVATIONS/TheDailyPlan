@@ -19,7 +19,8 @@ var params = {
 
 params.service[getenv('EWD_WEB_SERVICE_NAME')] = {
 	module: getenv('EWD_WEB_SERVICE_MODULE'),
-	service: getenv('EWD_WEB_SERVICE_METHOD')
+	service: getenv('EWD_WEB_SERVICE_METHOD'),
+	contentType: 'application/json'
 };
 
 params.server[getenv('EWD_SERVER_NAME')] = {
