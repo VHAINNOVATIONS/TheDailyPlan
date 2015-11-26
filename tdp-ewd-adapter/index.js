@@ -2,11 +2,11 @@
 
 var config = require('./config');
 
-var adapter = require('./lib/adapter');
+var ewdAdapter = require('./lib/ewd-adapter');
 
 exports.newSession = function (callback) {
-    var options = {
+    var ewdOptions = {
         baseUrl: (config.ewdServerSSL ? 'https' : 'http') + '://' + config.tdpEwdRestHost + ':' + config.tdpEwdRestPort + '/' + config.ewdServerName + '/' + config.ewdServiceName
     };
-    adapter.newSession(options, callback);
+    ewdAdapter.newSession(ewdOptions, callback);
 };
