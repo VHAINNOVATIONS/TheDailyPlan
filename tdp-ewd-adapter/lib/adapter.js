@@ -9,9 +9,7 @@ request = request.defaults({
     jar: true
 });
 
-var session = {
-    baseUrl: 'http://localhost:8082/tdp/vista'
-};
+var session = {};
 
 session.get = function (route, parameters, callback) {
     var options = _.assign({
@@ -145,8 +143,9 @@ session.getProblems = function (patientId, callback) {
     });
 };
 
-exports.newSession = function (callback) {
+exports.newSession = function (options, callback) {
     var c = Object.create(session);
+    c.baseUrl = options.baseUrl;
     c.get('/initiate', null, function (err, body) {
         if (err) {
             callback(err);
