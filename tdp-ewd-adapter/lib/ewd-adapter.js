@@ -9,45 +9,6 @@ request = request.defaults({
     jar: true
 });
 
-var session = {};
-
-session.get = function (route, parameters, callback) {
-    var options = _.assign({
-        uri: this.baseUrl + route
-    }, {
-        method: 'GET',
-        json: true,
-        strictSSL: false
-    });
-    if (this.Authorization) {
-        options.headers = {
-            'Authorization': this.Authorization
-        };
-    }
-    if (parameters) {
-        options.qs = parameters;
-    }
-    request.get(options, function (err, response, body) {
-        if ((!err) && response.statusCode !== 200) {
-            var message = util.format('Invalid response status for %s: %s', options.uri, response.statusCode);
-            err = new Error(message);
-        }
-        if (err) {
-            callback(err, body);
-        } else {
-            callback(null, body);
-        }
-    });
-};
-
-//var encryptCredentials = function (accessCode, verifyCode, key) {
-//    var text = 'accessCode=' + accessCode + '&verifyCode=' + verifyCode;
-//    var cipher = crypto.createCipher('aes-256-cbc', key);
-//    var crypted = cipher.update(text, 'utf8', 'hex');
-//    crypted += cipher.final('hex');
-//    return crypted;
-//};
-
 var encryptCredentials = function (accessCode, verifyCode, key) {
     //Enhanced by SAN Businesss Consultants 20150929 for symetry with PHP
     var cleankey = '';
@@ -67,80 +28,108 @@ var encryptCredentials = function (accessCode, verifyCode, key) {
     return encrypted1;
 };
 
-session.login = function (userInfo, callback) {
-    var credentials = encryptCredentials(userInfo.accessCode, userInfo.verifyCode, this.key);
-    var self = this;
-    this.get('/login', {
-        credentials: credentials
-    }, function (err, body) {
-        if (err) {
-            callback(err);
-        } else {
-            self.userData = body;
-            callback(null, body);
+var session = {
+    get: function (route, parameters, callback) {
+        var options = _.assign({
+            uri: this.baseUrl + route
+        }, {
+            method: 'GET',
+            json: true,
+            strictSSL: false
+        });
+        if (this.Authorization) {
+            options.headers = {
+                'Authorization': this.Authorization
+            };
         }
-    });
-};
-
-session.searchPatients = function (searchParam, callback) {
-    this.get('/patientsByName', {
-        prefix: searchParam['name.full']
-    }, function (err, body) {
-        if (err) {
-            callback(err);
-        } else {
-            callback(null, body);
+        if (parameters) {
+            options.qs = parameters;
         }
-    });
-};
-
-session.getDemographics = function (patientId, callback) {
-    this.get('/patientSummary', {
-        id: patientId
-    }, function (err, body) {
-        if (err) {
-            callback(err);
-        } else {
-            callback(null, body);
-        }
-    });
-};
-
-session.getAllergies = function (patientId, callback) {
-    this.get('/getAllergiesDetailMap', {
-        patientId: patientId
-    }, function (err, body) {
-        if (err) {
-            callback(err);
-        } else {
-            callback(null, body);
-        }
-    });
-};
-
-session.getMedications = function (patientId, callback) {
-    this.get('/getMedicationsDetailMap', {
-        patientId: patientId
-    }, function (err, body) {
-        if (err) {
-            callback(err);
-        } else {
-            callback(null, body);
-        }
-    });
-};
-
-session.getProblems = function (patientId, callback) {
-    this.get('/getProblemsListDetailMap', {
-        patientId: patientId,
-        type: 'ALL'
-    }, function (err, body) {
-        if (err) {
-            callback(err);
-        } else {
-            callback(null, body);
-        }
-    });
+        request.get(options, function (err, response, body) {
+            if ((!err) && response.statusCode !== 200) {
+                var message = util.format('Invalid response status for %s: %s', options.uri, response.statusCode);
+                err = new Error(message);
+            }
+            if (err) {
+                callback(err, body);
+            } else {
+                callback(null, body);
+            }
+        });
+    },
+    login: function (userInfo, callback) {
+        var credentials = encryptCredentials(userInfo.accessCode, userInfo.verifyCode, this.key);
+        var self = this;
+        this.get('/login', {
+            credentials: credentials
+        }, function (err, body) {
+            if (err) {
+                callback(err);
+            } else {
+                self.userData = body;
+                callback(null, body);
+            }
+        });
+    },
+    searchPatients: function (searchParams, callback) {
+        this.get('/patientsByName', {
+            prefix: searchParams['prefix']
+        }, function (err, body) {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, body);
+            }
+        });
+    },
+    getDemographics: function (patientId, options, callback) {
+        this.get('/patientSummary', {
+            id: patientId
+        }, function (err, body) {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, body);
+            }
+        });
+    },
+    getAllergies: function (patientId, options, callback) {
+        this.get('/getAllergiesDetailMap', {
+            patientId: patientId
+        }, function (err, body) {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, body);
+            }
+        });
+    },
+    getMedications: function (patientId, options, callback) {
+        this.get('/getMedicationsDetailMap', {
+            patientId: patientId
+        }, function (err, body) {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, body);
+            }
+        });
+    },
+    getProblems: function (patientId, options, callback) {
+        this.get('/getProblemsListDetailMap', {
+            patientId: patientId,
+            type: 'ALL'
+        }, function (err, body) {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, body);
+            }
+        });
+    },
+    logout: function (callback) {
+        callback(null);
+    }
 };
 
 exports.newSession = function (options, callback) {
