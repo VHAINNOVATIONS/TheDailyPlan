@@ -1,0 +1,27 @@
+{
+  "name": "tdpewdrest",
+  "version": "0.0.1",
+  "description": "Tdp ewd rest service runner",
+  "main": "./app.js",
+  "author": "Afsin Ustundag <afsin.ustundag@us.pwc.com>",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "dependencies": {
+    "12factor-dotenv": "^0.1.5",
+   "ewdrest": "https://github.com/austundag/ewdrest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/VHAINNOVATIONS/TheDailyPlan.git"
+  },
+  "keywords": [
+    "the daily plan",
+    "tdp"
+  ],
+  "bugs": {
+    "url": "https://github.com/VHAINNOVATIONS/TheDailyPlan/issues"
+  },
+  "homepage": "https://github.com/VHAINNOVATIONS/TheDailyPlan"
+}

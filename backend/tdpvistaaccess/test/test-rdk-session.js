@@ -36,7 +36,9 @@ describe('session test', function () {
 
     var testSession;
     it('new session', function (done) {
-        adapter.newSession(function (err, session) {
+        adapter.newSession({
+            tdpVistAAccessType: 'RDK'
+        }, function (err, session) {
             if (err) {
                 done(err);
             } else {
@@ -129,9 +131,7 @@ describe('session test', function () {
 
     it('get patient demographics/flags', function (done) {
         var pid = patients[37].icn || patients[37].pid;
-        testSession.resource('patient-record-patient', {
-            'pid': pid
-        }, function (err, body) {
+        testSession.getDemographics(pid, {}, function (err, body) {
             if (err) {
                 done(err);
             } else {
@@ -159,9 +159,7 @@ describe('session test', function () {
 
     it('get patient allergies', function (done) {
         var pid = patients[37].icn || patients[37].pid;
-        testSession.resource('patient-record-allergy', {
-            'pid': pid
-        }, function (err, body) {
+        testSession.getAllergies(pid, {}, function (err, body) {
             if (err) {
                 done(err);
             } else {
@@ -174,9 +172,7 @@ describe('session test', function () {
 
     it('get patient meds', function (done) {
         var pid = patients[37].icn || patients[37].pid;
-        testSession.resource('patient-record-med', {
-            'pid': pid
-        }, function (err, body) {
+        testSession.getMedications(pid, {}, function (err, body) {
             if (err) {
                 done(err);
             } else {
@@ -189,9 +185,7 @@ describe('session test', function () {
 
     it('get patient problems', function (done) {
         var pid = patients[37].icn || patients[37].pid;
-        testSession.resource('patient-record-problem', {
-            'pid': pid
-        }, function (err, body) {
+        testSession.getProblems(pid, {}, function (err, body) {
             if (err) {
                 done(err);
             } else {
@@ -257,5 +251,9 @@ describe('session test', function () {
 
     it('logout', function (done) {
         testSession.logout(done);
+    });
+
+    after(function () {
+        process.env.TDP_VISTA_ACCESS_TYPE = 'RDK';
     });
 });

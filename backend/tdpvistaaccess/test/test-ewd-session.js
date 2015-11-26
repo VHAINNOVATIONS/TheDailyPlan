@@ -10,7 +10,7 @@ var adapter = require('../index');
 chai.use(dirtyChai);
 var expect = chai.expect;
 
-describe('session test', function () {
+describe('ewd session test', function () {
     var generatedDir = null;
 
     var writeDebugFile = function (filename, content) {
@@ -63,7 +63,7 @@ describe('session test', function () {
     var patients;
     it('search patients', function (done) {
         testSession.searchPatients({
-            'name.full': 'eig'
+            prefix: 'eig'
         }, function (err, body) {
             if (err) {
                 done(err);
@@ -78,7 +78,7 @@ describe('session test', function () {
 
     it('get patient demographics/flags', function (done) {
         var pid = patients[2].id;
-        testSession.getDemographics(pid, function (err, body) {
+        testSession.getDemographics(pid, {}, function (err, body) {
             if (err) {
                 done(err);
             } else {
@@ -91,7 +91,7 @@ describe('session test', function () {
 
     it('get patient allergies', function (done) {
         var pid = patients[37].id;
-        testSession.getAllergies(pid, function (err, body) {
+        testSession.getAllergies(pid, {}, function (err, body) {
             if (err) {
                 done(err);
             } else {
@@ -104,7 +104,7 @@ describe('session test', function () {
 
     it('get patient meds', function (done) {
         var pid = patients[2].id;
-        testSession.getMedications(pid, function (err, body) {
+        testSession.getMedications(pid, {}, function (err, body) {
             if (err) {
                 done(err);
             } else {
@@ -117,7 +117,7 @@ describe('session test', function () {
 
     it('get patient problems', function (done) {
         var pid = patients[37].id;
-        testSession.getProblems(pid, function (err, body) {
+        testSession.getProblems(pid, {}, function (err, body) {
             if (err) {
                 done(err);
             } else {
@@ -128,7 +128,7 @@ describe('session test', function () {
         });
     });
 
-    xit('logout', function (done) {
+    it('logout', function (done) {
         testSession.logout(done);
     });
 });
