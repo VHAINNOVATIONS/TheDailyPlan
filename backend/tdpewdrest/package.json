@@ -9,9 +9,8 @@
     "node": ">= 0.10.0"
   },
   "dependencies": {
-    "dotenv": "^1.2.0",
-    "ewdrest": "https://github.com/austundag/ewdrest",
-    "getenv": "^0.5.0"
+    "12factor-dotenv": "^0.1.5",
+   "ewdrest": "https://github.com/austundag/ewdrest"
   },
   "repository": {
     "type": "git",
