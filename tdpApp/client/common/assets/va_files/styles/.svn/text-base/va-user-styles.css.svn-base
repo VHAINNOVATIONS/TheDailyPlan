@@ -1,0 +1,145 @@
+/*
+  File............: /va_files/styles/va-user-styles.css
+  Description.....: Styles available for use in the page content area
+  Version.........: 1.0
+  Release Date....: December 19, 2005
+*/
+hr.va-hr-gray {
+	border: 1px solid #CCCCCC;
+}
+hr.va-hr-black {
+	border: 1px solid #000000;
+}
+div.va-boxed-content {
+	border: 1px solid #000000; 
+	padding: 3px;
+}
+.va-paragraph-header {
+	font-weight: bold;
+	color: #000099;
+}
+.va-section-header {
+	padding: 3px;
+	background-color: #000033;
+	color: #FFFFFF;
+	font-weight: bold;
+	font-size: 115%;
+}
+.va-bold {
+	font-weight: bold;
+}
+.va-emphasis {
+	font-style: italic;
+}
+.va-small {
+	font-size: 90%;
+}
+.va-xsmall {
+	font-size: 80%;
+}
+.va-large {
+	font-size: 115%;
+}
+.va-xlarge {
+	font-size: 130%;
+}
+.va-highlight {
+	background-color: #E4E4E4;
+	padding: 3px;
+}
+.va-grayed-out {
+	color: #999999;
+}
+.va-address {
+	font-family: "Courier New", Courier, mono;
+}
+.va-datatable {
+	font-size: 11px;
+	font-family:  verdana, arial, helvetica, sans-serif;
+	background-color: #000000;
+	text-align: left;
+	margin-top: 0 !important;
+	margin-top: 15px;
+}
+.va-datatable th {
+	background-color: #E4E4E4;
+	color: #000000;
+	font-weight: bold;
+	text-align: left;
+	padding: 4px;
+}
+.va-datatable td.empty-header-cell {
+	background-color: #F0F0F0;
+}
+.va-datatable td {
+	font-size: 11px;
+	padding: 5px 10px;
+	background-color: #FFFFFF;
+	color: #000000;
+}
+.va-datatable td ul {
+	font-size: 11px;
+}
+.va-datatable caption {
+	text-align: left;
+	font-weight: bold;
+	padding-bottom: 3px;
+	margin-top: 15px;
+}
+.img-hm-1 {
+	padding: 8px 8px 8px 0px;
+	border: 0;
+}
+.img-hm-2 {
+	padding: 8px;
+	border: 0;
+}
+.container-list {
+	width: 80%;
+}
+/*	 	site footer 	*/
+.site-footer {
+	margin: 0;
+	width: 100%;
+	color: #999999;
+	font-size: 11px;
+	line-height: 1.6em;
+	text-align: center;
+}
+.site-footer a:link {
+	color: #00f;
+	text-decoration: underline;
+}
+.site-footer a:visited {
+	color: #609;
+	text-decoration: underline;
+}
+.site-footer a:hover {
+	color: #c00;
+	text-decoration: underline;
+}
+.clear-and-pad-top {
+	clear: both;
+	padding-top: 0px;
+}
+/*		special 		*/
+.inset {
+	margin: 20px 20px 30px 20px;
+	width: 180px;
+	}
+.inset-photo {
+	border: 2px solid #000033;
+	width: 180px;
+	}
+.inset-photo-vert {
+	border: 2px solid #000033;
+	width: 155px;
+	}
+.inset-photo-caption {
+	font-size: 86%;
+	width: 180px;
+	}
+.inset-photo-caption p {
+	margin-top: 3px;
+	margin-bottom: 10px;
+}

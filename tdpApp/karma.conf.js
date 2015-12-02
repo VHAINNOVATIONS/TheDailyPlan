@@ -1,155 +1,80 @@
-'use strict';
-
-var args = require('yargs').argv;
-var constants = require('./gulp_tasks/common/constants')();
-var resolutions = require('browserify-resolutions');
-var webpack = require('./webpack.config');
-var args = global.args || (process.env.ARGS ? JSON.parse(process.env.ARGS) : {});
-var moduleManager = args.bundler ? args.bundler : constants.moduleManager;
-var moduleEntry = args.module ? '/' + args.module : '';
-var isWebpack = moduleManager === 'webpack';
+// Karma configuration
+// http://karma-runner.github.io/0.10/config/configuration-file.html
 
 module.exports = function(config) {
-    var debug = false;
-    try {
-        debug = JSON.parse(args._[0]).debug;
-    } catch (err) {}
-    debug = debug || args.debug;
+  config.set({
+    // base path, that will be used to resolve files and exclude
+    basePath: '',
 
-    var autowatch = true;
-    try {
-        autowatch = JSON.parse(args._[0]).autowatch;
-    } catch (err) {}
-    autowatch = autowatch || args.autowatch;
+    // testing framework to use (jasmine/mocha/qunit/...)
+    frameworks: ['jasmine'],
 
-    var reporters = ['mocha', 'coverage'];
+    // list of files / patterns to load in the browser
+    files: [
+      'client/bower_components/jquery/dist/jquery.js',
+      'client/bower_components/angular/angular.js',
+      'client/bower_components/angular-mocks/angular-mocks.js',
+      'client/bower_components/angular-resource/angular-resource.js',
+      'client/bower_components/angular-cookies/angular-cookies.js',
+      'client/bower_components/angular-sanitize/angular-sanitize.js',
+      'client/bower_components/angular-route/angular-route.js',
+      'client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+      'client/bower_components/lodash/dist/lodash.compat.js',
+      'client/bower_components/angular-ui-router/release/angular-ui-router.js',
+      'client/app/app.js',
+      'client/app/app.coffee',
+      'client/app/**/*.js',
+      'client/app/**/*.coffee',
+      'client/components/**/*.js',
+      'client/components/**/*.coffee',
+      'client/app/**/*.jade',
+      'client/components/**/*.jade',
+      'client/app/**/*.html',
+      'client/components/**/*.html'
+    ],
 
-    var browserifyTestFiles = './client/scripts' + moduleEntry + '/**/*.test.js';
-    var webpackTestFiles = './client/scripts' + moduleEntry + '/tests.webpack.js';
+    preprocessors: {
+      '**/*.jade': 'ng-jade2js',
+      '**/*.html': 'html2js',
+      '**/*.coffee': 'coffee',
+    },
 
-    var browserify = {
-        debug: true,
-        transform: [
-            ['browserify-istanbul', {
-                instrumenter: require('isparta'),
-                ignore: ['**/*.test.js', '**/*.html', '**/bower_components/**', '**/node_modules/**', '**/externals/**/*.js', '**/client/scripts/lbServices.js']
-            }],
-            ['babelify', {
-                'stage': 0,
-                'optional': ['es7.asyncFunctions'],
-                'ignore': ['./node_modules', './bower_components', './externals']
-            }]
-        ],
-        configure: function(bundle) {
-            bundle.on('prebundle', function() {
-                bundle.plugin(resolutions, '*');
-            });
-        }
-    };
+    ngHtml2JsPreprocessor: {
+      stripPrefix: 'client/'
+    },
 
-    webpack.cache = true;
-    webpack.devtool = 'eval'; //'inline-source-map';
-    webpack.module.preLoaders = webpack.module.preLoaders || [];
-    webpack.module.preLoaders.push({
-        test: /\.js$/,
-        exclude: /(\.webpack\.js|\.test.js|node_modules|bower_components)/,
-        //exclude: /(tests.webpack.js|.test.js|node_modules|bower_components|test)/,
-        loader: 'istanbul-instrumenter'
-    });
+    ngJade2JsPreprocessor: {
+      stripPrefix: 'client/'
+    },
 
-    var preprocessors = {};
-    if (isWebpack) {
-        preprocessors[webpackTestFiles] = ['webpack', 'sourcemap'];
-    } else {
-        preprocessors[browserifyTestFiles] = ['browserify'];
-    }
+    // list of files / patterns to exclude
+    exclude: [],
 
-    if (debug === true) {
-        delete browserify.transform;
-        reporters.splice(reporters.indexOf('coverage'), 1);
-    }
+    // web server port
+    port: 8080,
 
-    config.set({
-        browserNoActivityTimeout: 120000,
+    // level of logging
+    // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
+    logLevel: config.LOG_INFO,
 
-        // base path that will be used to resolve all patterns (eg. files, exclude)
-        basePath: '',
 
-        // frameworks to use
-        // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-        frameworks: isWebpack ? ['jasmine'] : ['browserify', 'jasmine'],
+    // enable / disable watching file and executing tests whenever any file changes
+    autoWatch: false,
 
-        // list of files / patterns to load in the browser
-        files: [
-            //'./client/scripts/**/*.html',
-            isWebpack ? webpackTestFiles : browserifyTestFiles
-        ],
 
-        // list of files to exclude
-        exclude: [
-            './client/scripts/bundle*.js',
-            './client/scripts/main*.js'
-        ],
+    // Start these browsers, currently available:
+    // - Chrome
+    // - ChromeCanary
+    // - Firefox
+    // - Opera
+    // - Safari (only Mac)
+    // - PhantomJS
+    // - IE (only Windows)
+    browsers: ['PhantomJS'],
 
-        // preprocess matching files before serving them to the browser
-        // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-        preprocessors: preprocessors,
 
-        // test results reporter to use
-        // possible values: 'dots', 'progress'
-        // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-        //  reporters: ['dots', 'coverage'],
-        reporters: reporters,
-
-        // web server port
-        port: 9876,
-
-        // enable / disable colors in the output (reporters and logs)
-        colors: true,
-
-        // level of logging
-        // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-        logLevel: config.LOG_ERROR,
-
-        // enable / disable watching file and executing tests whenever any file changes
-        autoWatch: autowatch,
-
-        // start these browsers
-        // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-        browsers: ['PhantomJS'],
-
-        // Continuous Integration mode
-        // if true, Karma captures browsers, runs the tests and exits
-        singleRun: false,
-        mochaReporter: {
-            output: 'full'
-        },
-
-        coverageReporter: {
-            dir : './coverage/unit',
-            reporters: [{
-                type: 'json'
-            }, {
-                type: 'text'
-            }, {
-                type: 'text-summary'
-            }, {
-                type: 'cobertura',
-                file: 'coverage.xml'
-            }, {
-                type: 'lcov'
-            }]
-        },
-        webpack: webpack,
-        webpackMiddleware: {
-            noInfo: true,
-            stats: {
-                hash: false,
-                version: false,
-                colors: true,
-                moduleSort: 'name'
-            }
-        },
-        browserify: browserify
-    });
+    // Continuous Integration mode
+    // if true, it capture browsers, run tests and exit
+    singleRun: false
+  });
 };

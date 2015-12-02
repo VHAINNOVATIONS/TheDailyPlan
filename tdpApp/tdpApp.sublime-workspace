@@ -1,0 +1,398 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"prop",
+				"Properties"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "client/webapp/app/account/login/login.html",
+			"settings":
+			{
+				"buffer_size": 2393,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "client/webapp/index.html",
+			"settings":
+			{
+				"buffer_size": 4094,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "client/webapp/components/navbar/navbar.html",
+			"settings":
+			{
+				"buffer_size": 1168,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "ins",
+		"selected_items":
+		[
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"gr",
+				"Grunt"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 530.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)",
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/client",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/client/common",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/client/ionic",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/client/webapp",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/client/webapp/app",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/client/webapp/app/account",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/client/webapp/app/account/login",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/client/webapp/app/account/settings",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/client/webapp/app/account/signup",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/client/webapp/app/admin",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/client/webapp/app/main",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/client/webapp/app/patientSearch",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/client/webapp/components",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/client/webapp/components/auth",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/client/webapp/components/modal",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/client/webapp/components/navbar",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/server",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/server/api",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/server/components",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/server/components/errors",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/server/config",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/server/config/environment"
+	],
+	"file_history":
+	[
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/server/config/express.js",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/server/routes.js",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/client/webapp/components/navbar/navbar.html.new",
+		"/Users/robertsnelling/Projects/PwC/angular-fullstack-ionic-starter/client/webapp/components/navbar/navbar.jade",
+		"/Users/robertsnelling/Projects/PwC/angular-fullstack-ionic-starter/client/webapp/components/navbar/navbar.html",
+		"/Users/robertsnelling/Projects/PwC/PerceptiveReach/Dashboard/PRDash-ADF/server/config/express.js",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/client/webapp/components/navbar/navbar.html",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/package.json",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/client/webapp/components/navbar/navbar.controller.js",
+		"/Users/robertsnelling/Projects/PwC/client/webapp/components/navbar/navbar.jade",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/client/webapp/components/modal/modal.jade",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/client/webapp/app/admin/admin.html",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/client/webapp/app/account/settings/settings.html",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/client/webapp/app/admin/admin.jade",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/server/views/404.html",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/server/views/404.jade.old",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/client/webapp/app/patientSearch/patientSearch.html",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/client/webapp/app/main/main.html",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/client/webapp/app/account/signup/signup.html",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/client/webapp/index.html",
+		"/Users/robertsnelling/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/robertsnelling/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/tdpApp.sublime-project",
+		"/Users/robertsnelling/Projects/PwC/TheDailyPlan/tdpApp/client/webapp/app/app.js",
+		"/Users/robertsnelling/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/robertsnelling/Library/Application Support/Sublime Text 3/Packages/Default/Default (OSX).sublime-keymap",
+		"/Users/robertsnelling/Projects/PwC/PerceptiveReach/Dashboard/PRDash-ADF/npm-debug.log",
+		"/Users/robertsnelling/PR_Direct/server/direct/query.txt",
+		"/Users/robertsnelling/PR_Direct/node_modules/karma/node_modules/connect/lib/middleware/logger.js",
+		"/Users/robertsnelling/Projects/OPOPPR/AdminScripts/scripts/importLoadOPOPPR-pre.sql",
+		"/Users/robertsnelling/Projects/OPOPPR/AdminScripts/scripts/closeOPOPPR.sh",
+		"/Users/robertsnelling/Projects/OPOPPR/AdminScripts/scripts/backupOPOPPR.sh",
+		"/Users/robertsnelling/Projects/OPOPPR/AdminScripts/scripts/exportLoadOPOPPR.sh",
+		"/Users/robertsnelling/Projects/OPOPPR/AdminScripts/scripts/importLoadOPOPPR.sh",
+		"/Users/robertsnelling/Projects/OPOPPR/AdminScripts/scripts/importLoadOPOPPR.sql",
+		"/Users/robertsnelling/Documents/Projects/Assessors/Files_2015/2016-ONLINE LAT5 MASTER FILE.TXT"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			"/Users/robertsnelling/PR_Direct/node_modules",
+			"/Users/robertsnelling/PR_Direct/server",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"'",
+			"localhost",
+			"getProp",
+			"getExternalMsgBody",
+			"getInternalMsgBody",
+			"require('morgan')",
+			"morgan",
+			"test",
+			"admin",
+			"ACCOUNT",
+			"FORM",
+			"NOA_PP_LAT5"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"OPATEST",
+			"OPAADMIN",
+			"account",
+			"form",
+			"noa_pp_lat5"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "client/webapp/app/account/login/login.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2393,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"open_with_edit": true,
+							"syntax": "Packages/HTML/HTML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "client/webapp/index.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4094,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1329,
+								1329
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 203.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "client/webapp/components/navbar/navbar.html",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 1168,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 23.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "tdpApp.sublime-project",
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"jade",
+				"client/webapp/components/modal/modal.jade"
+			],
+			[
+				"navb",
+				".tmp/components/navbar/navbar.html"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 191.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

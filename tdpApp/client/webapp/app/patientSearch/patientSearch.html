@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row">
+        <div float="left">
+            <h3>Patient Search</h3>
+            <div class="btn-group"></div>
+            <table summary="search">
+                <tr>
+                    <td>
+                        <button name="btnSearchWard" title="Search Ward" alt="Search Ward" type="button" class="btn btn-default btn-lg btn-primary-disabled"> Ward </button>
+                        <button name="btnSearchAll" title="Search All" alt="Search All" type="button" style="background-color:Gainsboro" class="btn btn-default btn-lg btn-primary-active"> All </button>
+                    </td>
+                </tr>
+            </table>
+            <br/>
+            <div float="right">
+                <div float="right" class="row">Patient Name(Last, First) or SSN
+                    <br/>
+                    <label id="lblSearchCriteria  alt=" title="SearchCriteria" for="SearchCriteria"></label>
+                    <input id="SearchCriteria" type="SearchCriteria" name="SearchCriteria" autocomplete="off" title="SearchCriteria Input" ng-model="user.SearchCriteria" ng-pattern="/^S*$/" ng-maxlength="32" required="" class="form-control" />
+                </div>
+            </div>
+            <br/>
+            <div>
+                <button type="submit" class="btn btn-inverse btn-lg btn-login">Search</button>
+            </div>
+            <br/>
+        </div>
+    </div>
+</div>

@@ -1,23 +1,37 @@
-# tdpapp 
-[![NPM version](https://badge.fury.io/js/tdpapp.svg)](http://badge.fury.io/js/tdpapp) [![Downloads](http://img.shields.io/npm/dm/tdpapp.svg)](http://badge.fury.io/js/tdpapp)   
-[![Build Status](https://travis-ci.org//tdpapp.svg?branch=master)](https://travis-ci.org//tdpapp) [![Test Coverage](https://codeclimate.com/github//tdpapp/badges/coverage.svg)](https://codeclimate.com/github//tdpapp) [![Code Climate](https://codeclimate.com/github//tdpapp/badges/gpa.svg)](https://codeclimate.com/github//tdpapp)   
-[![Dependency Status](https://david-dm.org//tdpapp.svg)](https://david-dm.org//tdpapp) [![devDependency Status](https://david-dm.org//tdpapp/dev-status.svg)](https://david-dm.org//tdpapp#info=devDependencies) [![peerDependency Status](https://david-dm.org//tdpapp/peer-status.svg)](https://david-dm.org//tdpapp#info=peerDependencies)    
+# angular-fullstack-ionic-starter
 
+The motivation behind Angular Fullstack Ionic is to streamline the development of projects that include an API, Angular webapp and Ionic app. It’s core design principles include sharing code and assets wherever possible, creating an efficient workflow and making it super easy to start off a project with handy components available out of the box (e.g. user signup/login). 
 
-> 
+It is based on the brilliant Yeoman angular-fullstack project.
 
-[![NPM](https://nodei.co/npm/tdpapp.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/tdpapp)
+##### Get started
+*Note this project in the early stages - so please read the points below before jumping in!*
+```
+npm install
+bower install
+grunt serve
+```
+##### Dependencies
+If you don't have it already, you'll need Sass: ```gem install sass```
 
-## Usage
+You'll also need MongoDB to be up and running: http://docs.mongodb.org/manual/installation/
 
+### Implemented so far
+* Grunt development workflow to serve webapp and ionic app in two browser tabs
+* Frontend (client) directory with
+  * webapp - Jade, JS, SCSS and assets specific to webapp
+  * ionic -  HTML, JS, SCSS and assets specific to ionic app
+  * common - SCSS and assets shared between webapp and ionic app
+  
+### Next steps
+* Wire up grunt dist tasks to work with new client folder structure
+* Implement user login in Ionic app
+* Implement shared components (e.g. angular directives, etc)
+* Implement shared fonts
+* Support plain HTML as well as Jade for webapp
+* Support Jade as well as plain HTML for ionic app
 
-## Testing
+### Get involved
+The eventual aim of this project is to create an extension to the Yeoman generator-angular-fullstack
 
-
-## Changelog
-
-Recent changes can be viewed on Github on the [Releases Page](https://github.com//tdpapp/releases)
-
-## License
-
-
+Please contact @richardgsands if you'd like to help out!
