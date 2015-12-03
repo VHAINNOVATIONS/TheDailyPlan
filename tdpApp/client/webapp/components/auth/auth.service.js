@@ -20,13 +20,11 @@ angular.module('starterApp')
         var cb = callback || angular.noop;
         var deferred = $q.defer();
 
-        $http.post('/auth/local', {
-          email: user.email,
-          password: user.password
-        }).
+        $http.post('/auth/local', user).
         success(function(data) {
-          $cookieStore.put('token', data.token);
-          currentUser = User.get();
+          console.log("user:",data);
+          /*$cookieStore.put('token', data.token);
+          currentUser = User.get();*/
           deferred.resolve(data);
           return cb();
         }).

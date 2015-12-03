@@ -10,11 +10,12 @@ angular.module('starterApp')
 
       if(form.$valid) {
         Auth.login({
-          email: $scope.user.verifyCode,
-          password: $scope.user.accessCode
+          verifyCode: $scope.user.verifyCode,
+          accessCode: $scope.user.accessCode
         })
-        .then( function() {
+        .then( function(data) {
           // Logged in, redirect to home
+          console.log("login data:",data);
           $location.path('/PatientSearch/PatientSearch');
         })
         .catch( function(err) {
