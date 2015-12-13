@@ -32,6 +32,7 @@ describe('session test', function () {
             }
         }
         expect(generatedDir).not.to.equal(null);
+        process.env.TDP_VISTA_ACCESS_TYPE = 'RDK';
     });
 
     var testSession;
@@ -254,6 +255,6 @@ describe('session test', function () {
     });
 
     after(function () {
-        process.env.TDP_VISTA_ACCESS_TYPE = 'RDK';
+        process.env.TDP_VISTA_ACCESS_TYPE = 'EWD';
     });
 });

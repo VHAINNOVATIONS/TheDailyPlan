@@ -11,29 +11,6 @@ chai.use(dirtyChai);
 var expect = chai.expect;
 
 describe('ewd session test', function () {
-    var generatedDir = null;
-
-    var writeDebugFile = function (filename, content) {
-
-        var filepath = path.join(generatedDir, filename);
-        if (filename.split('.')[1] === 'json') {
-            content = JSON.stringify(content, undefined, 4);
-        }
-        fs.writeFileSync(filepath, content);
-    };
-
-    before(function () {
-        generatedDir = path.join(__dirname, "generated");
-        try {
-            fs.mkdirSync(generatedDir);
-        } catch (e) {
-            if (e.code !== 'EEXIST') {
-                throw e;
-            }
-        }
-        expect(generatedDir).not.to.equal(null);
-    });
-
     var testSession;
     it('new session', function (done) {
         adapter.newSession(function (err, session) {
@@ -42,6 +19,21 @@ describe('ewd session test', function () {
             } else {
                 testSession = session;
                 done();
+            }
+        });
+    });
+
+    it('login error', function (done) {
+        testSession.login({
+            accessCode: 'CPRS1234XX',
+            verifyCode: 'CPRS4321$XX'
+        }, function (err) {
+            if (err) {
+                console.log(err.toString());
+                done();
+            } else {
+                expect(testSession.userData).to.exist();
+                done(new Error('Unexpected success.'));
             }
         });
     });

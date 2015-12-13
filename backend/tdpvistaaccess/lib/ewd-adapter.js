@@ -47,7 +47,10 @@ var session = {
         }
         request.get(options, function (err, response, body) {
             if ((!err) && response.statusCode !== 200) {
-                var message = util.format('Invalid response status for %s: %s', options.uri, response.statusCode);
+                var message = body && body.message;
+                if (! message) {
+                    message = util.format('Invalid response status for %s: %s', options.uri, response.statusCode);
+                }
                 err = new Error(message);
             }
             if (err) {
@@ -58,16 +61,23 @@ var session = {
         });
     },
     login: function (userInfo, callback) {
-        var credentials = encryptCredentials(userInfo.accessCode, userInfo.verifyCode, this.key);
         var self = this;
-        this.get('/login', {
-            credentials: credentials
-        }, function (err, body) {
+        this.get('/initiate', null, function (err, body) {
             if (err) {
                 callback(err);
             } else {
-                self.userData = body;
-                callback(null, body);
+                self.Authorization = body.Authorization;
+                var credentials = encryptCredentials(userInfo.accessCode, userInfo.verifyCode, body.key);
+                self.get('/login', {
+                    credentials: credentials
+                }, function (err, body) {
+                    if (err) {
+                        callback(err);
+                    } else {
+                        self.userData = body;
+                        callback(null, body);
+                    }
+                });
             }
         });
     },
@@ -135,13 +145,5 @@ var session = {
 exports.newSession = function (options, callback) {
     var c = Object.create(session);
     c.baseUrl = options.baseUrl;
-    c.get('/initiate', null, function (err, body) {
-        if (err) {
-            callback(err);
-        } else {
-            c.Authorization = body.Authorization;
-            c.key = body.key;
-            callback(null, c);
-        }
-    });
+    callback(null, c);
 };
