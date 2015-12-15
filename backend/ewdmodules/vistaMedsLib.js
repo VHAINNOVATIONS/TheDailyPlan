@@ -303,34 +303,37 @@ module.exports = {
 	// returns simple array because other meds have no ID
 	toOtherMeds: function(response) {
 		var result = [];
-		
-		for (var prop in response) {
-			if (response.hasOwnProperty(prop) && response[prop]["WP"]) {
-				var raw = response[prop]["WP"];
-				var current = { type: "NV", isOutpatient: true, isNonVa: true };
-				
-				var facilityStr = raw["1"].split("^")[1].split(";"); // e.g. MedObj["1"] : "1^CAMP MASTER;500"
-				current.facility = { id: facilityStr[1], name: facilityStr[0] };
-				
-				current.name = raw.hasOwnProperty("2") ? raw["2"].split("^")[1] : "";
-				current.status = raw.hasOwnProperty("3") ? raw["3"].split("^")[1] : "";
-				current.startDate = raw.hasOwnProperty("4") ? raw["4"].split("^")[1] : "";
-				current.dateDocumented = raw.hasOwnProperty("5") ? raw["5"].split("^")[1] : "";
-				current.documentor = { name: (raw.hasOwnProperty("6") ? raw["6"].split("^")[1] : "") };
-				current.stopDate = raw.hasOwnProperty("7") ? raw["7"].split("^")[1] : "";
-				current.sig = raw.hasOwnProperty("8") ? raw["8"].split("^")[1] : "";
-
-				if (raw.hasOwnProperty("10") && raw["10"].hasOwnProperty("1")) {
-					current.comment = "";
-					var currentLine = 1;
-					while (raw["10"].hasOwnProperty(currentLine.toString())) {
-						current.comment += (raw["10"][currentLine.toString()]).split("^")[1] + "\r\n";
-						currentLine++;
+		for (var propOut in response) {
+			var responseIn = response[propOut];
+			if (responseIn) {
+				for (var prop in responseIn) {
+					if (responseIn.hasOwnProperty(prop) && responseIn[prop]["WP"]) {
+						var raw = responseIn[prop]["WP"];
+						var current = { type: "NV", isOutpatient: true, isNonVa: true };
+						
+						var facilityStr = raw["1"].split("^")[1].split(";"); // e.g. MedObj["1"] : "1^CAMP MASTER;500"
+						current.facility = { id: facilityStr[1], name: facilityStr[0] };
+						
+						current.name = raw.hasOwnProperty("2") ? raw["2"].split("^")[1] : "";
+						current.status = raw.hasOwnProperty("3") ? raw["3"].split("^")[1] : "";
+						current.startDate = raw.hasOwnProperty("4") ? raw["4"].split("^")[1] : "";
+						current.dateDocumented = raw.hasOwnProperty("5") ? raw["5"].split("^")[1] : "";
+						current.documentor = { name: (raw.hasOwnProperty("6") ? raw["6"].split("^")[1] : "") };
+						current.stopDate = raw.hasOwnProperty("7") ? raw["7"].split("^")[1] : "";
+						current.sig = raw.hasOwnProperty("8") ? raw["8"].split("^")[1] : "";
+						if (raw.hasOwnProperty("10") && raw["10"].hasOwnProperty("1")) {
+							current.comment = "";
+							var currentLine = 1;
+							while (raw["10"].hasOwnProperty(currentLine.toString())) {
+								current.comment += (raw["10"][currentLine.toString()]).split("^")[1] + "\r\n";
+								currentLine++;
+							}
+							current.comment = current.comment.trim();
+						}
+						
+						result.push(current);
 					}
-					current.comment = current.comment.trim();
 				}
-				
-				result.push(current);
 			}
 		}
 		return result;
