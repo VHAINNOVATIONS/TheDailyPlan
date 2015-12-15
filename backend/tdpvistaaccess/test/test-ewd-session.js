@@ -89,6 +89,9 @@ describe('ewd session test', function () {
             } else {
                 expect(body).to.exist();
                 expect(body.length).to.be.above(0);
+                //console.log("======ALLERGIES=======");
+                //console.log(JSON.stringify(body, undefined, 4));
+                //console.log("======================");
                 done();
             }
         });
@@ -96,7 +99,20 @@ describe('ewd session test', function () {
 
     it('get patient meds', function (done) {
         var pid = patients[2].id;
-        testSession.getMedications(pid, {}, function (err, body) {
+        testSession.getMedications('100022', {}, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                //console.log(JSON.stringify(body, undefined, 4));
+                expect(body).to.exist();
+                done();
+            }
+        });
+    });
+
+    it('get patient meds', function (done) {
+        var pid = patients[2].id;
+        testSession.getMedications('100840', {}, function (err, body) {
             if (err) {
                 done(err);
             } else {

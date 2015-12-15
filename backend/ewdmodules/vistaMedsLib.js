@@ -5,7 +5,7 @@ module.exports = {
 		params.rpcArgs = [{type: "LITERAL", value: params.patientId}];
 		var response = vistaLib.runRpc(params, session, ewd);
 
-		var meds = this.toAllMeds(response);
+		var meds = this.toAllMeds(response, params, session, ewd);
 		var otherMeds = this.getOtherMedsFromReportsTab(params, session, ewd);
 		
 		var combined = meds.concat(otherMeds);

@@ -48,7 +48,7 @@ var session = {
         request.get(options, function (err, response, body) {
             if ((!err) && response.statusCode !== 200) {
                 var message = body && body.message;
-                if (! message) {
+                if (!message) {
                     message = util.format('Invalid response status for %s: %s', options.uri, response.statusCode);
                 }
                 err = new Error(message);
