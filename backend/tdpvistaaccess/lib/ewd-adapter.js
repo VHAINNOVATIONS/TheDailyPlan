@@ -5,6 +5,8 @@ var _ = require('lodash');
 var request = require('request');
 var crypto = require('crypto');
 
+var translator = require('./translator');
+
 request = request.defaults({
     jar: true
 });
@@ -111,6 +113,18 @@ var session = {
                 callback(err);
             } else {
                 callback(null, body);
+            }
+        });
+    },
+    getVitalSigns: function (patientId, options, callback) {
+        this.get('/getRawVitalSignsMap', {
+            patientId: patientId
+        }, function (err, body) {
+            if (err) {
+                callback(err);
+            } else {
+                var result = translator.translateVitalSigns(body);
+                callback(null, result);
             }
         });
     },

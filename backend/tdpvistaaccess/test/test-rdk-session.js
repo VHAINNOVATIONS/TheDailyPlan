@@ -10,7 +10,7 @@ var adapter = require('../index');
 chai.use(dirtyChai);
 var expect = chai.expect;
 
-describe('session test', function () {
+xdescribe('session test', function () {
     var generatedDir = null;
 
     var writeDebugFile = function (filename, content) {
