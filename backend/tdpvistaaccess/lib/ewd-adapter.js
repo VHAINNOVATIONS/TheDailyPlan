@@ -5,6 +5,8 @@ var _ = require('lodash');
 var request = require('request');
 var crypto = require('crypto');
 
+var translator = require('./translator');
+
 request = request.defaults({
     jar: true
 });
@@ -47,7 +49,10 @@ var session = {
         }
         request.get(options, function (err, response, body) {
             if ((!err) && response.statusCode !== 200) {
-                var message = util.format('Invalid response status for %s: %s', options.uri, response.statusCode);
+                var message = body && body.message;
+                if (!message) {
+                    message = util.format('Invalid response status for %s: %s', options.uri, response.statusCode);
+                }
                 err = new Error(message);
             }
             if (err) {
@@ -58,16 +63,23 @@ var session = {
         });
     },
     login: function (userInfo, callback) {
-        var credentials = encryptCredentials(userInfo.accessCode, userInfo.verifyCode, this.key);
         var self = this;
-        this.get('/login', {
-            credentials: credentials
-        }, function (err, body) {
+        this.get('/initiate', null, function (err, body) {
             if (err) {
                 callback(err);
             } else {
-                self.userData = body;
-                callback(null, body);
+                self.Authorization = body.Authorization;
+                var credentials = encryptCredentials(userInfo.accessCode, userInfo.verifyCode, body.key);
+                self.get('/login', {
+                    credentials: credentials
+                }, function (err, body) {
+                    if (err) {
+                        callback(err);
+                    } else {
+                        self.userData = body;
+                        callback(null, body);
+                    }
+                });
             }
         });
     },
@@ -104,6 +116,36 @@ var session = {
             }
         });
     },
+    getVitalSigns: function (patientId, options, callback) {
+        this.get('/getRawVitalSignsMap', {
+            patientId: patientId
+        }, function (err, body) {
+            if (err) {
+                callback(err);
+            } else {
+                var result = translator.translateVitalSigns(body);
+                callback(null, result);
+            }
+        });
+    },
+    getVisits: function (patientId, options, callback) {
+        var numDaysFuture = _.get(options, "numDaysFuture", 0);
+        var numDaysPast = _.get(options, "numDaysPast", 0);
+        var fromDate = translator.translateNumDaysPast(numDaysPast);
+        var toDate = translator.translateNumDaysFuture(numDaysFuture);
+        this.get('/getVisits', {
+            patientId: patientId,
+            fromDate: fromDate,
+            toDate: toDate
+        }, function (err, body) {
+            if (err) {
+                callback(err);
+            } else {
+                var result = translator.translateVisits(body);
+                callback(null, result);
+            }
+        });
+    },
     getMedications: function (patientId, options, callback) {
         this.get('/getMedicationsDetailMap', {
             patientId: patientId
@@ -135,13 +177,5 @@ var session = {
 exports.newSession = function (options, callback) {
     var c = Object.create(session);
     c.baseUrl = options.baseUrl;
-    c.get('/initiate', null, function (err, body) {
-        if (err) {
-            callback(err);
-        } else {
-            c.Authorization = body.Authorization;
-            c.key = body.key;
-            callback(null, c);
-        }
-    });
+    callback(null, c);
 };
