@@ -81,7 +81,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get patient allergies', function (done) {
+    xit('get patient allergies', function (done) {
         var pid = patients[37].id;
         testSession.getAllergies(pid, {}, function (err, body) {
             if (err) {
@@ -97,7 +97,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get patient vitals', function (done) {
+    xit('get patient vitals', function (done) {
         var pid = patients[37].id;
         testSession.getVitalSigns(pid, {}, function (err, body) {
             if (err) {
@@ -147,6 +147,25 @@ describe('ewd session test', function () {
             } else {
                 //console.log(JSON.stringify(body, undefined, 4));
                 expect(body).to.exist();
+                done();
+            }
+        });
+    });
+
+    it('get patient visits', function (done) {
+        var pid = 100013;
+        testSession.getVisits(pid, {
+            numDaysPast: 2998,
+            numDaysFuture: 10
+        }, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body).to.exist();
+                //expect(body.length).to.be.above(0);
+                //console.log("======= VISITS =======");
+                //console.log(JSON.stringify(body, undefined, 4));
+                //console.log("======================");
                 done();
             }
         });

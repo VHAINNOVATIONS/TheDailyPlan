@@ -128,6 +128,24 @@ var session = {
             }
         });
     },
+    getVisits: function (patientId, options, callback) {
+        var numDaysFuture = _.get(options, "numDaysFuture", 0);
+        var numDaysPast = _.get(options, "numDaysPast", 0);
+        var fromDate = translator.translateNumDaysPast(numDaysPast);
+        var toDate = translator.translateNumDaysFuture(numDaysFuture);
+        this.get('/getVisits', {
+            patientId: patientId,
+            fromDate: fromDate,
+            toDate: toDate
+        }, function (err, body) {
+            if (err) {
+                callback(err);
+            } else {
+                var result = translator.translateVisits(body);
+                callback(null, result);
+            }
+        });
+    },
     getMedications: function (patientId, options, callback) {
         this.get('/getMedicationsDetailMap', {
             patientId: patientId

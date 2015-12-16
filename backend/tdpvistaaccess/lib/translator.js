@@ -1,6 +1,7 @@
 "use strict";
 
 var _ = require('lodash');
+var moment = require('moment');
 
 var setVitalValue = function (key) {
     return function (vitalSet, data) {
@@ -103,4 +104,64 @@ exports.translateVitalSigns = function (rawVitalSets) {
         });
     }
     return vitalSets;
+};
+
+var translateDate = function (m) {
+    var year = m.year();
+    var vistaYear = year - 1700;
+    var result = vistaYear + m.format('MMDD');
+    return result;
+};
+
+exports.translateNumDaysPast = function (numDays) {
+    var m = moment();
+    if (numDays) {
+        m.subtract(numDays, 'd');
+    }
+    return translateDate(m);
+};
+
+exports.translateNumDaysFuture = function (numDays) {
+    var m = moment();
+    if (numDays) {
+        m.add(numDays, 'd');
+    }
+    return translateDate(m);
+};
+
+exports.translateVistADateTime = function(dateTime) {
+    var dateTimePieces = dateTime.split('.');
+    var vistADate = dateTimePieces[0];
+    var year = parseInt(vistADate.substring(0, 3), 10) + 1700;
+    var date = vistADate.substring(3, 5) + '/' + vistADate.substring(5, 7) + '/' + year;
+    var vistATime = dateTimePieces[1];
+    if (vistATime) {
+        var time = vistATime.substring(0, 2) + ':';
+        if (vistATime.length > 2) {
+            time += vistATime.substring(2, 4);
+        } else {
+            time += '00';
+        }
+        date += ' ' + time;
+    }
+    return date;
+};
+
+exports.translateVisits = function(rawData) {
+    var result = [];
+    if (rawData && rawData.value) {
+        Object.keys(rawData.value).forEach(function(key) {
+            var apptPieces = rawData.value[key].split('^');
+            var appt = {
+                id: apptPieces[0],
+                time: exports.translateVistADateTime(apptPieces[1]),
+                title: apptPieces[2]
+            };
+            if (apptPieces[3]) {
+                appt.status = apptPieces[3];
+            }
+            result.push(appt);
+        });
+    }
+    return result;
 };
