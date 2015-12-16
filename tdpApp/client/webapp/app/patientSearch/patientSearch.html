@@ -1,29 +1,32 @@
-<div class="container">
-    <div class="row">
-        <div float="left">
-            <h3>Patient Search</h3>
-            <div class="btn-group"></div>
-            <table summary="search">
-                <tr>
-                    <td>
-                        <button name="btnSearchWard" title="Search Ward" alt="Search Ward" type="button" class="btn btn-default btn-lg btn-primary-disabled"> Ward </button>
-                        <button name="btnSearchAll" title="Search All" alt="Search All" type="button" style="background-color:Gainsboro" class="btn btn-default btn-lg btn-primary-active"> All </button>
-                    </td>
-                </tr>
-            </table>
-            <br/>
-            <div float="right">
-                <div float="right" class="row">Patient Name(Last, First) or SSN
-                    <br/>
-                    <label id="lblSearchCriteria  alt=" title="SearchCriteria" for="SearchCriteria"></label>
-                    <input id="SearchCriteria" type="SearchCriteria" name="SearchCriteria" autocomplete="off" title="SearchCriteria Input" ng-model="user.SearchCriteria" ng-pattern="/^S*$/" ng-maxlength="32" required="" class="form-control" />
+<div ng-controller="PatientSearchCtrl as ctrl" class="container">
+  <div class="row">
+    <h3>Patient Search</h3>
+  </div>
+  <div class="row">
+    <uib-tabset>
+      <uib-tab heading="All">
+        <div class="container">
+            <div class="row row-centered">
+                <div class="col-sm-4 col-centered">
+                  <form ng-submit="ctrl.searchAll()" name="searchAll">
+                      <div class="form-group">
+                        <label for="searchAllPatients">Patient Name(Last, First) or SSN</label>
+                        <input type="text" ng-model="ctrl.search.all" required ng-minlength="3" class="form-control" id="searchAllPatients" placeholder="Patient Name(Last, First) or SSN" autocomplete="off" style="cursor: auto;">
+                      </div>
+                      <input type="submit" value="Search" ng-disabled="searchAll.$invalid">
+                  </form>
                 </div>
             </div>
-            <br/>
-            <div>
-                <button type="submit" class="btn btn-inverse btn-lg btn-login">Search</button>
-            </div>
-            <br/>
         </div>
+      </uib-tab>
+      <uib-tab heading="Ward">
+        <h4>Ward Specific Search Goes Here</h4>
+      </uib-tab>
+    </uib-tabset>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 col-centered">
+      <table datatable="" dt-options="ctrl.dtOptions" dt-columns="ctrl.dtColumns" dt-instance="ctrl.dtInstance" class="row-border hover"></table>
     </div>
+  </div>
 </div>

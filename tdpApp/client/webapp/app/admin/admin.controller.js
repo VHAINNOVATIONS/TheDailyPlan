@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starterApp')
+angular.module('tdpApp')
   .controller('AdminCtrl', function ($scope, $http, Auth, User) {
 
     // Use the User $resource to fetch all users

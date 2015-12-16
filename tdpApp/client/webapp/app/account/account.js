@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starterApp')
+angular.module('tdpApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('login', {
@@ -20,8 +20,8 @@ angular.module('starterApp')
         authenticate: true
       })
       .state('PatientSearch', {
-	   url: '/PatientSearch',
-	   templateUrl: 'app/patientSearch/patientSearch.html',
-	   controller: 'PatientSearchCtrl'
+     url: '/PatientSearch',
+     templateUrl: 'app/patientSearch/patientSearch.html',
+     controller: 'PatientSearchCtrl'
       })
   });

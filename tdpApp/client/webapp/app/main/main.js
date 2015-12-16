@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starterApp')
+/*angular.module('tdpApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('main', {
@@ -8,4 +8,4 @@ angular.module('starterApp')
         templateUrl: 'app/main/main.html',
         controller: 'MainCtrl'
       });
-  });
+  });*/

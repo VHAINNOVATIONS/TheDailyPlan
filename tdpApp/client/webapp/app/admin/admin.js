@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('starterApp')
+angular.module('tdpApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('admin', {

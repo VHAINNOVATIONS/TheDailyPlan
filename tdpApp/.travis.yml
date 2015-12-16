@@ -1,21 +1,9 @@
 language: node_js
-sudo: false
 node_js:
-  - 0.12
-
-cache:
-   directories:
-     - node_modules
-     - bower_components
-
+  - '0.10'
+  - '0.11'
 before_script:
-  - npm install -g bower
-  - npm install -g gulp
+  - npm install -g bower grunt-cli
+  - gem install sass
   - bower install
-
-after_success:
-#  - mv coverage/cobertura-coverage.xml shippable/codecoverage/coverage.xml
-#  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js --verbose
-#  - cat ./coverage/lcov.info | codeclimate
-  - CODECLIMATE_REPO_TOKEN=$CODECLIMATE_REPO_TOKEN codeclimate-test-reporter < ./coverage/**/lcov.info
-
+services: mongodb

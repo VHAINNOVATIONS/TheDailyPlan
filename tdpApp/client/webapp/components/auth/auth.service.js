@@ -1,11 +1,11 @@
 'use strict';
 
-angular.module('starterApp')
+angular.module('tdpApp')
   .factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
     var currentUser = {};
-    if($cookieStore.get('token')) {
+    /*if($cookieStore.get('token')) {
       currentUser = User.get();
-    }
+    }*/
 
     return {
 
@@ -22,9 +22,8 @@ angular.module('starterApp')
 
         $http.post('/auth/local', user).
         success(function(data) {
-          console.log("user:",data);
-          /*$cookieStore.put('token', data.token);
-          currentUser = User.get();*/
+          /*$cookieStore.put('token', data.token);*/
+          currentUser = data;
           deferred.resolve(data);
           return cb();
         }).
@@ -105,7 +104,8 @@ angular.module('starterApp')
        * @return {Boolean}
        */
       isLoggedIn: function() {
-        return currentUser.hasOwnProperty('role');
+        console.log('currentUser:',currentUser);
+        return currentUser.hasOwnProperty('displayName');
       },
 
       /**
@@ -118,7 +118,7 @@ angular.module('starterApp')
           }).catch(function() {
             cb(false);
           });
-        } else if(currentUser.hasOwnProperty('role')) {
+        } else if(currentUser.hasOwnProperty('displayName')) {
           cb(true);
         } else {
           cb(false);

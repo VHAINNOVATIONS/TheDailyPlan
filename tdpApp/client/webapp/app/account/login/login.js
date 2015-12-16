@@ -1,11 +1,11 @@
 'use strict';
 
-/*angular.module('starterApp')
+angular.module('tdpApp')
   .config(function ($stateProvider) {
     $stateProvider
-      .state('login', {
+      .state('init', {
         url: '/',
-        templateUrl: 'app/login/login.html',
+        templateUrl: 'app/account/login/login.html',
         controller: 'LoginCtrl'
       });
-  });*/
+  });

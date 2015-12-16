@@ -1,4 +1,4 @@
-<div ng-controller="NavbarCtrl" class="navbar navbar-default navbar-static-top">
+<div ng-controller="NavbarCtrl as ctrl" class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
             <a href="/" class="navbar-logo"><img alt="TDP Home" src="common/assets/images/TDP-Logo-tr-lg.png"></a>
@@ -11,11 +11,11 @@
         </div>
         <div id="navbar-main" collapse="isCollapsed" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li ng-hide="isLoggedIn()" ng-class="{active: isActive(&quot;/login&quot;)}"><a href="/login">Login</a></li>
-                <li ng-hide="isLoggedIn()" ng-class="{active: isActive(&quot;/PatientSearch&quot;)}"><a href="/PatientSearch">Patient Search</a></li>
+                <li ng-show="isLoggedIn()" ng-class="{active: isActive(&quot;/PatientSearch&quot;)}"><a href="/PatientSearch">Patient Search</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li ng-show="isLoggedIn()" ng-class="{active: isActive(&quot;/logout&quot;)}"><a href="/login">Logout</a></li>
+                <li ng-show="isLoggedIn()"><span class="">{{getCurrentUser().displayName}}</span></li>
+                <li ng-show="isLoggedIn()" ng-class="{active: isActive(&quot;/logout&quot;)}"><a href="/">Logout</a></li>
             </ul>
         </div>
     </div>
