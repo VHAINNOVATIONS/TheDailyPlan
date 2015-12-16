@@ -11,29 +11,6 @@ chai.use(dirtyChai);
 var expect = chai.expect;
 
 describe('ewd session test', function () {
-    var generatedDir = null;
-
-    var writeDebugFile = function (filename, content) {
-
-        var filepath = path.join(generatedDir, filename);
-        if (filename.split('.')[1] === 'json') {
-            content = JSON.stringify(content, undefined, 4);
-        }
-        fs.writeFileSync(filepath, content);
-    };
-
-    before(function () {
-        generatedDir = path.join(__dirname, "generated");
-        try {
-            fs.mkdirSync(generatedDir);
-        } catch (e) {
-            if (e.code !== 'EEXIST') {
-                throw e;
-            }
-        }
-        expect(generatedDir).not.to.equal(null);
-    });
-
     var testSession;
     it('new session', function (done) {
         adapter.newSession(function (err, session) {
@@ -42,6 +19,21 @@ describe('ewd session test', function () {
             } else {
                 testSession = session;
                 done();
+            }
+        });
+    });
+
+    it('login error', function (done) {
+        testSession.login({
+            accessCode: 'CPRS1234XX',
+            verifyCode: 'CPRS4321$XX'
+        }, function (err) {
+            if (err) {
+                console.log(err.toString());
+                done();
+            } else {
+                expect(testSession.userData).to.exist();
+                done(new Error('Unexpected success.'));
             }
         });
     });
@@ -76,7 +68,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get patient demographics/flags', function (done) {
+    xit('get patient demographics/flags', function (done) {
         var pid = patients[2].id;
         testSession.getDemographics(pid, {}, function (err, body) {
             if (err) {
@@ -89,7 +81,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get patient allergies', function (done) {
+    xit('get patient allergies', function (done) {
         var pid = patients[37].id;
         testSession.getAllergies(pid, {}, function (err, body) {
             if (err) {
@@ -97,32 +89,83 @@ describe('ewd session test', function () {
             } else {
                 expect(body).to.exist();
                 expect(body.length).to.be.above(0);
+                console.log("======ALLERGIES=======");
+                console.log(JSON.stringify(body, undefined, 4));
+                console.log("======================");
                 done();
             }
         });
     });
 
-    it('get patient meds', function (done) {
-        var pid = patients[2].id;
-        testSession.getMedications(pid, {}, function (err, body) {
+    xit('get patient vitals', function (done) {
+        var pid = patients[37].id;
+        testSession.getVitalSigns(pid, {}, function (err, body) {
             if (err) {
                 done(err);
             } else {
+                expect(body).to.exist();
+                //expect(body.length).to.be.above(0);
+                console.log("=== VITAL SIGNS ======");
                 console.log(JSON.stringify(body, undefined, 4));
+                console.log("======================");
+                done();
+            }
+        });
+    });
+
+    xit('get patient meds', function (done) {
+        var pid = patients[2].id;
+        testSession.getMedications('100022', {}, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                //console.log(JSON.stringify(body, undefined, 4));
                 expect(body).to.exist();
                 done();
             }
         });
     });
 
-    it('get patient problems', function (done) {
+    xit('get patient meds', function (done) {
+        var pid = patients[2].id;
+        testSession.getMedications('100014', {}, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                //console.log(JSON.stringify(body, undefined, 4));
+                expect(body).to.exist();
+                done();
+            }
+        });
+    });
+
+    xit('get patient problems', function (done) {
         var pid = patients[37].id;
         testSession.getProblems(pid, {}, function (err, body) {
             if (err) {
                 done(err);
             } else {
-                console.log(JSON.stringify(body, undefined, 4));
+                //console.log(JSON.stringify(body, undefined, 4));
                 expect(body).to.exist();
+                done();
+            }
+        });
+    });
+
+    it('get patient visits', function (done) {
+        var pid = 100013;
+        testSession.getVisits(pid, {
+            numDaysPast: 2998,
+            numDaysFuture: 10
+        }, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body).to.exist();
+                //expect(body.length).to.be.above(0);
+                //console.log("======= VISITS =======");
+                //console.log(JSON.stringify(body, undefined, 4));
+                //console.log("======================");
                 done();
             }
         });
