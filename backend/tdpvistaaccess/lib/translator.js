@@ -147,6 +147,11 @@ exports.translateVistADateTime = function(dateTime) {
     return date;
 };
 
+exports.translateVistADate = function(dateTime) {
+    var result = exports.translateVistADateTime(dateTime);
+    return result.split(' ')[0];
+};
+
 exports.translateVisits = function(rawData) {
     var result = [];
     if (rawData && rawData.value) {
@@ -165,3 +170,23 @@ exports.translateVisits = function(rawData) {
     }
     return result;
 };
+
+exports.translateImmunizations = function(rawData) {
+    var result = [];
+    if (rawData && rawData.value) {
+        Object.keys(rawData.value).forEach(function(key) {
+            var immunizationPieces = rawData.value[key].split('^');
+            var immunization = {
+                id: immunizationPieces[0],
+                date: exports.translateVistADate(immunizationPieces[2]),
+                name: immunizationPieces[1]
+            };
+            if (immunizationPieces[3]) {
+                immunization.status = immunizationPieces[3];
+            }
+            result.push(immunization);
+        });
+    }
+    return result;
+};
+

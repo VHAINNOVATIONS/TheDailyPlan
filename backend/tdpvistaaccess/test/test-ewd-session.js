@@ -152,8 +152,8 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get patient visits', function (done) {
-        var pid = 100013;
+    xit('get patient visits', function (done) {
+        var pid = patients[37].id;
         testSession.getVisits(pid, {
             numDaysPast: 2998,
             numDaysFuture: 10
@@ -166,6 +166,38 @@ describe('ewd session test', function () {
                 //console.log("======= VISITS =======");
                 //console.log(JSON.stringify(body, undefined, 4));
                 //console.log("======================");
+                done();
+            }
+        });
+    });
+
+    xit('get clinical warnings', function (done) {
+        var pid = 711;
+        testSession.getClinicalWarnings(pid, {}, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body).to.exist();
+                //expect(body.length).to.be.above(0);
+                console.log("=== CLINICAL WARNINGS ======");
+                console.log(JSON.stringify(body, undefined, 4));
+                console.log("============================");
+                done();
+            }
+        });
+    });
+
+    it('get immunizations', function (done) {
+        var pid = 711;
+        testSession.getImmunizations(pid, {}, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body).to.exist();
+                //expect(body.length).to.be.above(0);
+                console.log("=== Immunizations ======");
+                console.log(JSON.stringify(body, undefined, 4));
+                console.log("============================");
                 done();
             }
         });

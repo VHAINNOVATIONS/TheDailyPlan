@@ -128,6 +128,32 @@ var session = {
             }
         });
     },
+    getClinicalWarnings: function (patientId, options, callback) {
+        this.get('/getClinicalWarnings', {
+            patientId: patientId,
+            nRpts: "0"
+        }, function (err, body) {
+            if (err) {
+                callback(err);
+            } else {
+                var result = body;//translator.translateVitalSigns(body);
+                callback(null, result);
+            }
+        });
+    },
+    getImmunizations: function (patientId, options, callback) {
+        this.get('/getImmunizations', {
+            patientId: patientId,
+            nRpts: "0"
+        }, function (err, body) {
+            if (err) {
+                callback(err);
+            } else {
+                var result = translator.translateImmunizations(body);
+                callback(null, result);
+            }
+        });
+    },
     getVisits: function (patientId, options, callback) {
         var numDaysFuture = _.get(options, "numDaysFuture", 0);
         var numDaysPast = _.get(options, "numDaysPast", 0);
