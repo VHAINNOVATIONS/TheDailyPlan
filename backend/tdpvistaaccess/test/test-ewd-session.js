@@ -187,7 +187,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get immunizations', function (done) {
+    xit('get immunizations', function (done) {
         var pid = 711;
         testSession.getImmunizations(pid, {}, function (err, body) {
             if (err) {
@@ -198,6 +198,21 @@ describe('ewd session test', function () {
                 console.log("=== Immunizations ======");
                 console.log(JSON.stringify(body, undefined, 4));
                 console.log("============================");
+                done();
+            }
+        });
+    });
+
+    it('radiology reports', function (done) {
+        var pid = patients[2].id;
+        testSession.getRadiologyReports('197', {}, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                console.log("======RADIOLOGY REPORTS=======");
+                console.log(JSON.stringify(body, undefined, 4));
+                console.log("==============================");
+                expect(body).to.exist();
                 done();
             }
         });

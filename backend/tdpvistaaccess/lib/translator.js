@@ -129,7 +129,7 @@ exports.translateNumDaysFuture = function (numDays) {
     return translateDate(m);
 };
 
-exports.translateVistADateTime = function(dateTime) {
+exports.translateVistADateTime = function (dateTime) {
     var dateTimePieces = dateTime.split('.');
     var vistADate = dateTimePieces[0];
     var year = parseInt(vistADate.substring(0, 3), 10) + 1700;
@@ -147,15 +147,15 @@ exports.translateVistADateTime = function(dateTime) {
     return date;
 };
 
-exports.translateVistADate = function(dateTime) {
+exports.translateVistADate = function (dateTime) {
     var result = exports.translateVistADateTime(dateTime);
     return result.split(' ')[0];
 };
 
-exports.translateVisits = function(rawData) {
+exports.translateVisits = function (rawData) {
     var result = [];
     if (rawData && rawData.value) {
-        Object.keys(rawData.value).forEach(function(key) {
+        Object.keys(rawData.value).forEach(function (key) {
             var apptPieces = rawData.value[key].split('^');
             var appt = {
                 id: apptPieces[0],
@@ -171,10 +171,10 @@ exports.translateVisits = function(rawData) {
     return result;
 };
 
-exports.translateImmunizations = function(rawData) {
+exports.translateImmunizations = function (rawData) {
     var result = [];
     if (rawData && rawData.value) {
-        Object.keys(rawData.value).forEach(function(key) {
+        Object.keys(rawData.value).forEach(function (key) {
             var immunizationPieces = rawData.value[key].split('^');
             var immunization = {
                 id: immunizationPieces[0],
@@ -190,3 +190,46 @@ exports.translateImmunizations = function(rawData) {
     return result;
 };
 
+var setReportValue = function (key) {
+    return function (report, data) {
+        var value = data.split('^')[1];
+        if (value) {
+            report[key] = value;
+        }
+    };
+};
+
+var radiologyReportUpdateFn = {
+    '1': function (report, data) {
+        var facilityData = data.split('^')[1];
+        var facilityDataPieces = facilityData.split(';');
+        report.facility = {
+            name: facilityDataPieces[0],
+            id: facilityDataPieces[1]
+        };
+    },
+    '2': setReportValue('dateTime'),
+    '3': setReportValue('title'),
+    '4': setReportValue('status'),
+    '5': setReportValue('caseNumber'),
+};
+
+exports.translateRadiologyReports = function (rawData) {
+    var result = [];
+    if (rawData) {
+        Object.keys(rawData).forEach(function (key) {
+            var rawReport = rawData[key].WP;
+            if (rawReport) {
+                var report = {};
+                Object.keys(rawReport).forEach(function (lineKey) {
+                    var fn = radiologyReportUpdateFn[lineKey];
+                    if (fn) {
+                        fn(report, rawReport[lineKey]);
+                    }
+                });
+                result.push(report);
+            }
+        });
+    }
+    return result;
+};

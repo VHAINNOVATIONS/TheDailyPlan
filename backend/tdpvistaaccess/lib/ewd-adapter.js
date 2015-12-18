@@ -136,7 +136,7 @@ var session = {
             if (err) {
                 callback(err);
             } else {
-                var result = body;//translator.translateVitalSigns(body);
+                var result = body; //translator.translateVitalSigns(body);
                 callback(null, result);
             }
         });
@@ -192,6 +192,19 @@ var session = {
                 callback(err);
             } else {
                 callback(null, body);
+            }
+        });
+    },
+    getRadiologyReports: function (patientId, options, callback) {
+        this.get('/getRadiologyReportsDetailMap', {
+            patientId: patientId,
+            type: 'ALL'
+        }, function (err, body) {
+            if (err) {
+                callback(err);
+            } else {
+                var result = translator.translateRadiologyReports(body);
+                callback(null, result);
             }
         });
     },
