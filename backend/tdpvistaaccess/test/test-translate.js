@@ -55,6 +55,12 @@ describe('vista raw translations', function () {
     it('radiology reports', function () {
         var sample = require('./fixtures/rawRadiologyReportSample.json');
         var result = translator.translateRadiologyReports(sample);
+        //console.log(JSON.stringify(result, undefined, 4));
+    });
+
+    it('problem list', function () {
+        var sample = require('./fixtures/rawProblemListSample.json');
+        var result = translator.translateProblemList(sample);
         console.log(JSON.stringify(result, undefined, 4));
     });
 });

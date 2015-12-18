@@ -233,3 +233,46 @@ exports.translateRadiologyReports = function (rawData) {
     }
     return result;
 };
+
+var problemListUpdateFn = {
+    '1': function (report, data) {
+        var facilityData = data.split('^')[1];
+        var facilityDataPieces = facilityData.split(';');
+        report.facility = {
+            name: facilityDataPieces[0],
+            id: facilityDataPieces[1]
+        };
+    },
+    '2': setReportValue('status'),
+    '5': setReportValue('fullDetail'),
+    '7': setReportValue('onsetDate'),
+    '8': setReportValue('modifiedDate'),
+    '9': setReportValue('provider')
+};
+
+exports.translateProblemList = function (rawData) {
+    var result = [];
+    if (rawData) {
+        Object.keys(rawData).forEach(function (key) {
+            var rawProblem = rawData[key].WP;
+            if (rawProblem) {
+                var problem = {};
+                Object.keys(rawProblem).forEach(function (lineKey) {
+                    var fn = problemListUpdateFn[lineKey];
+                    if (fn) {
+                        console.log(rawProblem[lineKey]);
+                        fn(problem, rawProblem[lineKey]);
+                        console.log(problem);
+                    }
+                });
+                var detailPieces = problem.fullDetail.split(' ');
+                problem.code = detailPieces[1];
+                problem.codeSystem = detailPieces[0];
+                problem.description = problem.fullDetail.split('[')[1].split(']')[0];
+                delete problem.fullDetail;
+                result.push(problem);
+            }
+        });
+    }
+    return result;
+};

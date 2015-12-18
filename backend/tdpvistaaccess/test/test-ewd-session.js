@@ -139,13 +139,13 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get patient problems', function (done) {
+    it('get patient problems', function (done) {
         var pid = patients[37].id;
         testSession.getProblems(pid, {}, function (err, body) {
             if (err) {
                 done(err);
             } else {
-                //console.log(JSON.stringify(body, undefined, 4));
+                console.log(JSON.stringify(body, undefined, 4));
                 expect(body).to.exist();
                 done();
             }
@@ -203,7 +203,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('radiology reports', function (done) {
+    xit('radiology reports', function (done) {
         var pid = patients[2].id;
         testSession.getRadiologyReports('197', {}, function (err, body) {
             if (err) {

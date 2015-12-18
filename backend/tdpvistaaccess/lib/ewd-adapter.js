@@ -191,7 +191,8 @@ var session = {
             if (err) {
                 callback(err);
             } else {
-                callback(null, body);
+                var result = translator.translateProblemList(body);
+                callback(null, result);
             }
         });
     },
