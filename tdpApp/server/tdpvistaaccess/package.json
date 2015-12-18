@@ -20,6 +20,7 @@
         "crypto": "0.0.3",
         "ewdrest": "https://github.com/austundag/ewdrest",
         "lodash": "^3.9.3",
+        "moment": "^2.10.6",
         "request": "^2.65.0"
     },
     "devDependencies": {

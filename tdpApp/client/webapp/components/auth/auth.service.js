@@ -23,8 +23,9 @@ angular.module('tdpApp')
         $http.post('/auth/local', user).
         success(function(data) {
           /*$cookieStore.put('token', data.token);*/
-          currentUser = data;
-          deferred.resolve(data);
+          currentUser.displayName = data.displayName;
+
+          deferred.resolve(currentUser);
           return cb();
         }).
         error(function(err) {
@@ -104,7 +105,6 @@ angular.module('tdpApp')
        * @return {Boolean}
        */
       isLoggedIn: function() {
-        console.log('currentUser:',currentUser);
         return currentUser.hasOwnProperty('displayName');
       },
 

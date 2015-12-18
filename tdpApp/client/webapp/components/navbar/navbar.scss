@@ -3,38 +3,36 @@
     .container {
     	.navbar-header {
     		.navbar-logo {
-    			padding-top:0px !important; 
+    			padding-top:0px !important;
     			padding-bottom:15px;
     		}
     	}
 
     	.navbar-collapse {
-    		.navbar-nav {
-    			li {
-    				a {
-    					padding-top:5px !important;
-    					padding-bottom:15px !important; 
-    					height: 30px; 
-                        text-transform: uppercase;
-    				}
-                    &.active {
+        height: 30px !important;
+      		.navbar-nav {
+      			li {
+      				a {
+      					padding-top:5px !important;
+      					padding-bottom:15px !important;
+      					height: 30px;
+                text-transform: uppercase;
+      				}
+              &.active {
 
-                    }
-                    span {
-                        padding-top: 5px !important;
-                        padding-bottom: 15px !important;
-                        height: 30px;
-                        text-transform: uppercase;
-                        line-height: 20px;
-                        position: relative;
-                        display: block;
-                        padding: 10px 15px;
-                    }
-                      				
-    			}
-			}
-
+              }
+              span {
+                  padding-top: 5px !important;
+                  padding-bottom: 15px !important;
+                  height: 30px;
+                  text-transform: uppercase;
+                  line-height: 20px;
+                  position: relative;
+                  display: block;
+                  padding: 10px 15px;
+              }
+      			}
+          }
     	}
     }
-
 }

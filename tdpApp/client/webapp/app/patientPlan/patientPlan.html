@@ -1,0 +1,30 @@
+<div ng-controller="PatientPlanCtrl as ctrl" class="container">
+  <div class="row">
+    <h3>Patient Plan</h3>
+  </div>
+  <div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading"><b>Patient Demographics:</b> <b>{{ctrl.demographics.name}}</b> <b>DOB:</b> {{ctrl.demographics.DOB}} <b>Gender:</b> {{ctrl.demographics.sex}} <b>SSN:</b> {{ctrl.demographics.SSN}}</div>
+        <div class="row">
+            <div class="col-lg-5 col-md-5 col-sm-5">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Allergies</div>
+                    <div class="panel-body">
+                      <ul class="example-animate-container">
+                        <li class="animate-repeat" ng-repeat="allergy in ctrl.allergies">
+                          Name: {{allergy.allergenName}} Type: {{allergy.allergenType}} Reaction: {{allergy.reactions[0].name}}
+                        </li>
+                      </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-7 col-sm-7">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Vitals</div>
+                    <div class="panel-body">Coming Soon!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>

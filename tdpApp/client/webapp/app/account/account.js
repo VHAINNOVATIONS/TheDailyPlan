@@ -24,4 +24,9 @@ angular.module('tdpApp')
      templateUrl: 'app/patientSearch/patientSearch.html',
      controller: 'PatientSearchCtrl'
       })
+      .state('PatientPlan', {
+     url: '/PatientPlan',
+     templateUrl: 'app/patientPlan/patientPlan.html',
+     controller: 'PatientPlanCtrl'
+      })
   });

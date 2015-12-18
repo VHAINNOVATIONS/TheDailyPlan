@@ -1,26 +1,41 @@
 'use strict';
 
 angular.module('tdpApp')
-  .controller('PatientSearchCtrl', function ($compile, $scope, $resource, DTOptionsBuilder, DTColumnBuilder, Patient) {
+  .controller('PatientSearchCtrl', function ($compile, $scope, $resource, $location, DTOptionsBuilder, DTColumnBuilder, Patient) {
   	var self = this;
     self.data = [];
+    self.items = [];
     self.selected = {};
     self.selectAll = false;
     self.toggleAll = toggleAll;
     self.toggleOne = toggleOne;
 
-    var titleHtml = '<input type="checkbox" ng-model="showCase.selectAll" ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)">';
+    var titleHtml = '<input type="checkbox" ng-model="ctrl.selectAll" ng-click="ctrl.toggleAll(ctrl.selectAll, ctrl.selected)">';
 
+    self.display = function() {
+      angular.forEach(self.selected, function(value, key) {
+
+        if(value === true)
+        {
+          this.push(key);
+        }
+      }, self.items);
+
+      console.log('items:',self.items.length);
+      if (self.items.length > 0)
+        {
+          Patient.setSelectedPatients(self.items);
+          $location.path('/PatientPlan');
+        }
+    };
 
     self.searchAll = function() {
       self.submitted = true;
-      console.log('User clicked submit with ', self.search);
 
       Patient.searchAll(self.search.all)
       .then( function(data) {
         self.data = data;
         reloadData();
-        console.log('patient data:',self.data);
       })
       .catch( function(err) {
         self.errors.other = err.message;
@@ -43,18 +58,20 @@ angular.module('tdpApp')
             }
         })
         .withPaginationType('full_numbers');
+
     self.dtColumns = [
         DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable()
             .renderWith(function(data, type, full, meta) {
                 self.selected[full.id] = false;
-                return '<input type="checkbox" ng-model="showCase.selected[' + data.id + ']" ng-click="showCase.toggleOne(showCase.selected)">';
+                return '<input type="checkbox" ng-model="ctrl.selected[' + data.EIN + ']" ng-click="ctrl.toggleOne(ctrl.selected)">';
             }),
-        DTColumnBuilder.newColumn('id').withTitle('ID'),
-        DTColumnBuilder.newColumn('firstName').withTitle('First name'),
-        DTColumnBuilder.newColumn('lastName').withTitle('Last name'),
-        DTColumnBuilder.newColumn('ssn').withTitle('SSN'),
-        DTColumnBuilder.newColumn('birthDate').withTitle('DOB'),
-        DTColumnBuilder.newColumn('gender').withTitle('Gender')
+        DTColumnBuilder.newColumn('EIN').withTitle('EIN'),
+        DTColumnBuilder.newColumn('name').withTitle('Name'),
+        DTColumnBuilder.newColumn('SSN').withTitle('SSN').renderWith(function(data, type, full) {
+            return data.substr(0, 3) + '-' + data.substr(3, 2) + '-' + data.substr(5);
+        }),
+        DTColumnBuilder.newColumn('DOB').withTitle('DOB'),
+        DTColumnBuilder.newColumn('sex').withTitle('Gender')
     ];
 
     self.newPromise = newPromise;
@@ -65,12 +82,10 @@ angular.module('tdpApp')
       return new Promise( function(resolve, reject){
         if (self.data)
         {
-          console.log('newPromise success',self.data);
           resolve(self.data);
         }
         else
         {
-          console.log('newPromise failure');
           resolve([]);
         }
       });
@@ -102,5 +117,18 @@ angular.module('tdpApp')
             }
         }
         self.selectAll = true;
+    }
+
+    function areSelected() {
+      var items = [];
+      angular.forEach(self.selected, function(value, key) {
+
+        if(value === true)
+        {
+          this.push('id' + ': ' + key);
+        }
+      }, items);
+
+      return items;
     }
   });

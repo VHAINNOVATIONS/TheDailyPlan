@@ -17,6 +17,7 @@
                 <br/>
                 <div>
                     <button type="submit" ng-disabled="!consent.isselected" class="btn btn-inverse btn-lg btn-login">Login</button>
+                    <div class="alert alert-danger" role="alert" ng-show="ctrl.errors">Invalid Access Code/Verify Code, please try again.</div>
                 </div>
             </form>
         </div>

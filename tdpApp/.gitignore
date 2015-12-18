@@ -5,5 +5,7 @@ public
 .idea
 client/bower_components
 dist
-/server/config/local.env.js
-/dist-ionic/www
+server/config/local.env.js
+server/tdpvistaaccess/.env
+dist-ionic/
+*.env

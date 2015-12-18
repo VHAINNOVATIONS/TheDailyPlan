@@ -13,20 +13,46 @@
                         <label for="searchAllPatients">Patient Name(Last, First) or SSN</label>
                         <input type="text" ng-model="ctrl.search.all" required ng-minlength="3" class="form-control" id="searchAllPatients" placeholder="Patient Name(Last, First) or SSN" autocomplete="off" style="cursor: auto;">
                       </div>
-                      <input type="submit" value="Search" ng-disabled="searchAll.$invalid">
+                      <input class="btn btn-primary" type="submit" value="Search" ng-disabled="searchAll.$invalid">
                   </form>
                 </div>
             </div>
         </div>
       </uib-tab>
       <uib-tab heading="Ward">
-        <h4>Ward Specific Search Goes Here</h4>
+        <div class="container">
+            <div class="row row-centered">
+                <div class="col-sm-4 col-centered">
+                  <form ng-submit="ctrl.searchAll()" name="searchAll">
+                      <div class="form-group">
+                        <h4>Select Ward to Display</h4>
+                        <select multiple class="form-control">
+                          <option>2-INTERMED</option>
+                          <option>3 NORTH SURG</option>
+                          <option>3E NORTH</option>
+                          <option>7A GEN MED</option>
+                          <option>7A SURG</option>
+                        </select>
+                      </div>
+                      <input class="btn btn-primary" type="submit" value="Search" ng-disabled="searchAll.$invalid">
+                  </form>
+                </div>
+            </div>
+        </div>
       </uib-tab>
     </uib-tabset>
   </div>
   <div class="row">
     <div class="col-sm-12 col-centered">
       <table datatable="" dt-options="ctrl.dtOptions" dt-columns="ctrl.dtColumns" dt-instance="ctrl.dtInstance" class="row-border hover"></table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 col-centered">
+      <hr>
+      <form ng-submit="ctrl.display()" name="display">
+          <input class="btn btn-primary" type="submit" value="Display">
+      </form>
     </div>
   </div>
 </div>

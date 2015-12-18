@@ -1,24 +1,23 @@
 'use strict';
 
 angular.module('tdpApp')
-  .factory('Patient', function Patient($location, $rootScope, $http, $q) {
+  .factory('Demographics', function Demographics($location, $rootScope, $http, $q) {
     var results = {};
-    var selectedPatients = [];
 
     return {
 
       /**
-       * Search All Patients
+       * Get Demographics
        *
        * @param  {String}   value    - query value
        * @param  {Function} callback - optional
        * @return {Promise}
        */
-      searchAll: function(value, callback) {
+      getByEIN: function(value, callback) {
         var cb = callback || angular.noop;
         var deferred = $q.defer();
 
-        $http({url: '/api/patient', method: 'GET', params: {value: value}}).
+        $http({url: '/api/demographics', method: 'GET', params: {value: value}}).
         success(function(data) {
           results = data;
           deferred.resolve(data);
@@ -31,12 +30,6 @@ angular.module('tdpApp')
         }.bind(this));
 
         return deferred.promise;
-      },
-      getSelectedPatients: function() {
-          return selectedPatients;
-      },
-      setSelectedPatients: function(value) {
-          selectedPatients = value;
       }
     };
   });

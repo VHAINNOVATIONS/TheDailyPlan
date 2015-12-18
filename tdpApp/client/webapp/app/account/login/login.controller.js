@@ -4,7 +4,7 @@ angular.module('tdpApp')
   .controller('LoginCtrl', function ($scope, Auth, $location, $window) {
     var self = this;
     self.user = {};
-    self.errors = {};
+    self.errors = false;
     self.consent = {isselected: false};
 
     self.tabs = [
@@ -29,18 +29,19 @@ angular.module('tdpApp')
       self.submitted = true;
 
       if(form.$valid) {
-        console.log('self.user:',self.user);
         Auth.login({
           verifyCode: self.user.verifyCode,
           accessCode: self.user.accessCode
         })
         .then( function(data) {
           // Logged in, redirect to home
-          console.log("login data:",data);
+          self.errors = false;
           $location.path('/PatientSearch');
         })
         .catch( function(err) {
-          self.errors.other = err.message;
+          self.errors = true;
+          console.log('login err:',self.errors);
+
         });
       }
     };
