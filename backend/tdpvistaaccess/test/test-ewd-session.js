@@ -139,7 +139,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get patient problems', function (done) {
+    xit('get patient problems', function (done) {
         var pid = patients[37].id;
         testSession.getProblems(pid, {}, function (err, body) {
             if (err) {
@@ -196,6 +196,25 @@ describe('ewd session test', function () {
                 expect(body).to.exist();
                 //expect(body.length).to.be.above(0);
                 console.log("=== Immunizations ======");
+                console.log(JSON.stringify(body, undefined, 4));
+                console.log("============================");
+                done();
+            }
+        });
+    });
+
+    it('get orders', function (done) {
+        var pid = 100685;
+        testSession.getAllOrders(pid, {}, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body).to.exist();
+                //expect(body.length).to.be.above(0);
+                console.log("=== Order Types ============");
+                console.log(testSession.orderTypes);
+                console.log('============================');
+                console.log("=== All Orders =============");
                 console.log(JSON.stringify(body, undefined, 4));
                 console.log("============================");
                 done();

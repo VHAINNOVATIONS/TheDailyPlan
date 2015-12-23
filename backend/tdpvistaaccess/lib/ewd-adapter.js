@@ -209,6 +209,35 @@ var session = {
             }
         });
     },
+    _getAllOrders: function (patientId, options, callback) {
+        var self = this;
+        this.get('/getAllOrders', {
+            patientId: patientId,
+            vistANow: translator.vistANow()
+        }, function (err, body) {
+            if (err) {
+                callback(err);
+            } else {
+                var result = translator.translateOrdersList(body, self.orderTypes);
+                callback(null, result);
+            }
+        });
+    },
+    getAllOrders: function (patientId, options, callback) {
+        if (this.orderTypes) {
+            this._getAllOrders(patientId, options, callback);
+        } else {
+            var self = this;
+            this.get('/getOrderTypes', {}, function(err, types) {
+                if (err) {
+                    callback(err);
+                } else {
+                    self.orderTypes = types;
+                    self._getAllOrders(patientId, options, callback);
+                }
+            });
+        }
+    },
     logout: function (callback) {
         callback(null);
     }

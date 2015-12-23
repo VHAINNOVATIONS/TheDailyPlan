@@ -1,4 +1,5 @@
 var vista = require('VistALib');
+var ordersLib = require('./vistaOrders');
 
 // REST & Web Service error response formatter function
 // Updated 20150820a
@@ -402,6 +403,29 @@ var operations = {
             var ok = ewd.util.restoreSymbolTable(ewd, session);	//Flush symbol table and replace with ours
             var result = vista.getVisits(params, session, ewd);
             ok = ewd.util.saveSymbolTable(ewd, session);	//Grab our symbol table for use next time
+            return result;
+        }
+    },
+
+    getAllOrders: {
+        GET: function(ewd, session) {
+            var params = {
+                patientId: ewd.query.patientId,
+                vistANow: ewd.query.vistANow
+            };
+            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var result = ordersLib.getAllOrders(params, session, ewd);
+            ok = ewd.util.saveSymbolTable(ewd, session);        //Grab our symbol table for use next time
+            return result;
+        }
+    },
+
+    getOrderTypes: {
+        GET: function(ewd, session) {
+            var params = {};
+            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var result = ordersLib.getOrderTypes(params, session, ewd);
+            ok = ewd.util.saveSymbolTable(ewd, session);        //Grab our symbol table for use next time
             return result;
         }
     },
