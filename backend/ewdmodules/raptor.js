@@ -1,4 +1,5 @@
 var vista = require('VistALib');
+var ordersLib = require('./vistaOrders');
 
 // REST & Web Service error response formatter function
 // Updated 20150820a
@@ -343,6 +344,37 @@ var operations = {
         }
     },
 
+    getClinicalWarnings: {
+        GET: function(ewd, session) {
+            var params = {
+                patientId: ewd.query.patientId,
+                fromDate: ewd.query.fromDate,
+                toDate: ewd.query.toDate,
+                nRpts: ewd.query.nRpts
+            };
+            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var result = vista.getClinicalWarnings(params, session, ewd);
+            ok = ewd.util.saveSymbolTable(ewd, session);    //Grab our symbol table for use next time
+            return result;
+        }
+    },
+
+    getImmunizations: {
+        GET: function(ewd, session) {
+            var params = {
+                patientId: ewd.query.patientId
+            };
+            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+
+            params.rpcName = "ORQQPX IMMUN LIST";
+            params.rpcArgs = [{type: "LITERAL", value: params.patientId}];
+            var result = vista.runRpc(params, session, ewd);
+
+            ok = ewd.util.saveSymbolTable(ewd, session);    //Grab our symbol table for use next time
+            return result;
+        }
+    },
+
     getSurgeryReportsDetailMap: {
         GET: function(ewd, session) {
             var ok = ewd.util.restoreSymbolTable(ewd, session);	//Flush symbol table and replace with ours
@@ -371,6 +403,29 @@ var operations = {
             var ok = ewd.util.restoreSymbolTable(ewd, session);	//Flush symbol table and replace with ours
             var result = vista.getVisits(params, session, ewd);
             ok = ewd.util.saveSymbolTable(ewd, session);	//Grab our symbol table for use next time
+            return result;
+        }
+    },
+
+    getAllOrders: {
+        GET: function(ewd, session) {
+            var params = {
+                patientId: ewd.query.patientId,
+                vistANow: ewd.query.vistANow
+            };
+            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var result = ordersLib.getAllOrders(params, session, ewd);
+            ok = ewd.util.saveSymbolTable(ewd, session);        //Grab our symbol table for use next time
+            return result;
+        }
+    },
+
+    getOrderTypes: {
+        GET: function(ewd, session) {
+            var params = {};
+            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var result = ordersLib.getOrderTypes(params, session, ewd);
+            ok = ewd.util.saveSymbolTable(ewd, session);        //Grab our symbol table for use next time
             return result;
         }
     },

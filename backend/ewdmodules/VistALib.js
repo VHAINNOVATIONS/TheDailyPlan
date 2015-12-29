@@ -589,7 +589,11 @@ module.exports = {
 		params.reportsTabName = "OR_VS:VITAL SIGNS~VS;ORDV04;47;";
 		return this.runReportsTabRpc(params, session, ewd);
 	},
-	
+	getClinicalWarnings: function(params, session, ewd) {
+		//params.reportsTabName = "OR_IM:IMMUNIZATIONS~;;207;";
+		params.reportsTabName = "OR_CW:CLINICAL WARNINGS~;;4;";
+		return this.runReportsTabRpc(params, session, ewd);
+	},
 	// call to vista works
 	getRadiologyReports: function(params, session, ewd) {
 		params.reportsTabName = "OR_R18:IMAGING~RIM;ORDV08;0;";
@@ -734,13 +738,13 @@ module.exports = {
 		var nRpts = "0";
 		
 		// setup date and nrpts so they have everything for RPC builder below
-		if (params.hasOwnProperty("fromDate")) {
+		if (params.hasOwnProperty("fromDate") && params.fromDate) {
 			fromDate = params.fromDate;
 		}
-		if (params.hasOwnProperty("toDate")) {
+		if (params.hasOwnProperty("toDate") && params.toDate) {
 			toDate = params.toDate;
 		}
-		if (params.hasOwnProperty("nRpts")) {
+		if (params.hasOwnProperty("nRpts") && params.nRpts) {
 			nRpts = params.nRpts;
 		}
 

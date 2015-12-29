@@ -40,9 +40,39 @@ describe('vista raw translations', function () {
         //console.log(t1);
     });
 
+    it('vistA now', function() {
+        var t = translator.vistANow();
+        //console.log(t);
+    });
+
     it('visits', function () {
         var sample = require('./fixtures/rawVisitsSample.json');
         var result = translator.translateVisits(sample);
         //console.log(JSON.stringify(result, undefined, 4));
+    });
+
+    it('immunizations', function () {
+        var sample = require('./fixtures/rawImmunizations.json');
+        var result = translator.translateImmunizations(sample);
+        //console.log(JSON.stringify(result, undefined, 4));
+    });
+
+    it('radiology reports', function () {
+        var sample = require('./fixtures/rawRadiologyReportSample.json');
+        var result = translator.translateRadiologyReports(sample);
+        //console.log(JSON.stringify(result, undefined, 4));
+    });
+
+    it('problem list', function () {
+        var sample = require('./fixtures/rawProblemListSample.json');
+        var result = translator.translateProblemList(sample);
+        //console.log(JSON.stringify(result, undefined, 4));
+    });
+
+    it('orders', function () {
+        var ordersSample = require('./fixtures/rawOrdersSample.json');
+        var orderTypes = require('./fixtures/rawOrderTypes.json');
+        var result = translator.translateOrdersList(ordersSample, orderTypes)
+        console.log(JSON.stringify(result, undefined, 4));
     });
 });

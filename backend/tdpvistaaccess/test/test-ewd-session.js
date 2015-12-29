@@ -145,15 +145,15 @@ describe('ewd session test', function () {
             if (err) {
                 done(err);
             } else {
-                //console.log(JSON.stringify(body, undefined, 4));
+                console.log(JSON.stringify(body, undefined, 4));
                 expect(body).to.exist();
                 done();
             }
         });
     });
 
-    it('get patient visits', function (done) {
-        var pid = 100013;
+    xit('get patient visits', function (done) {
+        var pid = patients[37].id;
         testSession.getVisits(pid, {
             numDaysPast: 2998,
             numDaysFuture: 10
@@ -166,6 +166,72 @@ describe('ewd session test', function () {
                 //console.log("======= VISITS =======");
                 //console.log(JSON.stringify(body, undefined, 4));
                 //console.log("======================");
+                done();
+            }
+        });
+    });
+
+    xit('get clinical warnings', function (done) {
+        var pid = 711;
+        testSession.getClinicalWarnings(pid, {}, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body).to.exist();
+                //expect(body.length).to.be.above(0);
+                console.log("=== CLINICAL WARNINGS ======");
+                console.log(JSON.stringify(body, undefined, 4));
+                console.log("============================");
+                done();
+            }
+        });
+    });
+
+    xit('get immunizations', function (done) {
+        var pid = 711;
+        testSession.getImmunizations(pid, {}, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body).to.exist();
+                //expect(body.length).to.be.above(0);
+                console.log("=== Immunizations ======");
+                console.log(JSON.stringify(body, undefined, 4));
+                console.log("============================");
+                done();
+            }
+        });
+    });
+
+    it('get orders', function (done) {
+        var pid = 100685;
+        testSession.getAllOrders(pid, {}, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body).to.exist();
+                //expect(body.length).to.be.above(0);
+                console.log("=== Order Types ============");
+                console.log(testSession.orderTypes);
+                console.log('============================');
+                console.log("=== All Orders =============");
+                console.log(JSON.stringify(body, undefined, 4));
+                console.log("============================");
+                done();
+            }
+        });
+    });
+
+    xit('radiology reports', function (done) {
+        var pid = patients[2].id;
+        testSession.getRadiologyReports('197', {}, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                console.log("======RADIOLOGY REPORTS=======");
+                console.log(JSON.stringify(body, undefined, 4));
+                console.log("==============================");
+                expect(body).to.exist();
                 done();
             }
         });
