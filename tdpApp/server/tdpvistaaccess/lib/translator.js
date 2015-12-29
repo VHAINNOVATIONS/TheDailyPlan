@@ -113,6 +113,11 @@ var translateDate = function (m) {
     return result;
 };
 
+var translateTime = function (m) {
+    var result = m.format('HHmmss');
+    return result;
+};
+
 exports.translateNumDaysPast = function (numDays) {
     var m = moment();
     if (numDays) {
@@ -129,7 +134,7 @@ exports.translateNumDaysFuture = function (numDays) {
     return translateDate(m);
 };
 
-exports.translateVistADateTime = function(dateTime) {
+exports.translateVistADateTime = function (dateTime) {
     var dateTimePieces = dateTime.split('.');
     var vistADate = dateTimePieces[0];
     var year = parseInt(vistADate.substring(0, 3), 10) + 1700;
@@ -147,10 +152,20 @@ exports.translateVistADateTime = function(dateTime) {
     return date;
 };
 
-exports.translateVisits = function(rawData) {
+exports.vistANow = function() {
+    var m = moment();
+    return translateDate(m) + '.' + translateTime(m);
+};
+
+exports.translateVistADate = function (dateTime) {
+    var result = exports.translateVistADateTime(dateTime);
+    return result.split(' ')[0];
+};
+
+exports.translateVisits = function (rawData) {
     var result = [];
     if (rawData && rawData.value) {
-        Object.keys(rawData.value).forEach(function(key) {
+        Object.keys(rawData.value).forEach(function (key) {
             var apptPieces = rawData.value[key].split('^');
             var appt = {
                 id: apptPieces[0],
@@ -162,6 +177,217 @@ exports.translateVisits = function(rawData) {
             }
             result.push(appt);
         });
+    }
+    return result;
+};
+
+exports.translateImmunizations = function (rawData) {
+    var result = [];
+    if (rawData && rawData.value) {
+        Object.keys(rawData.value).forEach(function (key) {
+            var immunizationPieces = rawData.value[key].split('^');
+            var immunization = {
+                id: immunizationPieces[0],
+                date: exports.translateVistADate(immunizationPieces[2]),
+                name: immunizationPieces[1]
+            };
+            if (immunizationPieces[3]) {
+                immunization.status = immunizationPieces[3];
+            }
+            result.push(immunization);
+        });
+    }
+    return result;
+};
+
+var setReportValue = function (key) {
+    return function (report, data) {
+        var value = data.split('^')[1];
+        if (value) {
+            report[key] = value;
+        }
+    };
+};
+
+var radiologyReportUpdateFn = {
+    '1': function (report, data) {
+        var facilityData = data.split('^')[1];
+        var facilityDataPieces = facilityData.split(';');
+        report.facility = {
+            name: facilityDataPieces[0],
+            id: facilityDataPieces[1]
+        };
+    },
+    '2': setReportValue('dateTime'),
+    '3': setReportValue('title'),
+    '4': setReportValue('status'),
+    '5': setReportValue('caseNumber'),
+};
+
+exports.translateRadiologyReports = function (rawData) {
+    var result = [];
+    if (rawData) {
+        Object.keys(rawData).forEach(function (key) {
+            var rawReport = rawData[key].WP;
+            if (rawReport) {
+                var report = {};
+                Object.keys(rawReport).forEach(function (lineKey) {
+                    var fn = radiologyReportUpdateFn[lineKey];
+                    if (fn) {
+                        fn(report, rawReport[lineKey]);
+                    }
+                });
+                result.push(report);
+            }
+        });
+    }
+    return result;
+};
+
+var problemListUpdateFn = {
+    '1': function (report, data) {
+        var facilityData = data.split('^')[1];
+        var facilityDataPieces = facilityData.split(';');
+        report.facility = {
+            name: facilityDataPieces[0],
+            id: facilityDataPieces[1]
+        };
+    },
+    '2': setReportValue('status'),
+    '5': setReportValue('fullDetail'),
+    '7': setReportValue('onsetDate'),
+    '8': setReportValue('modifiedDate'),
+    '9': setReportValue('provider')
+};
+
+exports.translateProblemList = function (rawData) {
+    var result = [];
+    if (rawData) {
+        Object.keys(rawData).forEach(function (key) {
+            var rawProblem = rawData[key].WP;
+            if (rawProblem) {
+                var problem = {};
+                Object.keys(rawProblem).forEach(function (lineKey) {
+                    var fn = problemListUpdateFn[lineKey];
+                    if (fn) {
+                        fn(problem, rawProblem[lineKey]);
+                    }
+                });
+                var detailPieces = problem.fullDetail.split(' ');
+                problem.code = detailPieces[1];
+                problem.codeSystem = detailPieces[0];
+                problem.description = problem.fullDetail.split('[')[1].split(']')[0];
+                delete problem.fullDetail;
+                result.push(problem);
+            }
+        });
+    }
+    return result;
+};
+
+exports.translateOrderType = function(rawData) {
+    var result = {};
+    if (rawData && rawData.value) {
+        Object.keys(rawData.value).forEach(function(key) {
+            var value = rawData.value[key];
+            var ePieces = value.split('=');
+            var tPieces = ePieces[1].split('^');
+            result[ePieces[0]] = {
+                id: tPieces[0],
+                topName: tPieces[1],
+                subName: tPieces[2]
+            }
+        });
+    }
+    return result;
+};
+
+var orderStatusMap = {
+    "1": "Discontinued",
+    "2": "Complete",
+    "3": "Hold",
+    "4": "Flagged",
+    "5": "Pending",
+    "6": "Active",
+    "7": "Expired",
+    "8": "Scheduled",
+    "9": "Partial Results",
+    "10": "Delayed",
+    "11": "Unreleased",
+    "12": "Discontinued/Edit",
+    "13": "Cancelled",
+    "14": "Lapsed",
+    "15": "Renewed",
+    "99": "No Status",
+};
+
+var orderSignStatusMap = {
+    "0": "ON CHART w/written orders",
+    "1": "ELECTRONIC",
+    "2": "NOT SIGNED",
+    "3": "NOT REQUIRED",
+    "4": "ON CHART w/printed orders",
+    "5": "NOT REQUIRED due to cancel/lapse",
+    "6": "SERVICE CORRECTION to signed order",
+    "7": "DIGITALLY SIGNED",
+    "8": "ON PARENT order"
+};
+
+exports.translateOrdersList = function(rawData, rawTypes) {
+    var types = exports.translateOrderType(rawTypes);
+    var result = [];
+    if (rawData && rawData.value) {
+        var lastIndex = 0;
+        Object.keys(rawData.value).forEach(function (key) {
+            var index = parseInt(key, 10);
+            if (index > lastIndex) {
+                lastIndex = index;
+            }
+        });
+        var order = null;
+        for (var index = 1; index <= lastIndex; ++index) {
+            var line = rawData.value[index.toString()];
+            var charAt0 = line.charAt(0);
+            line = line.slice(1);
+            if (charAt0 === '~') {
+                if (! order) {
+                    result.push(order);
+                }
+                order = {};
+                order.text = "";
+                var pieces = line.split('^');
+                order.id = pieces[0];
+                var type = types[pieces[1]];
+                if (type) {
+                    order.type = type;
+                }
+                order.timestamp = exports.translateVistADateTime(pieces[2]);
+                order.startDate = exports.translateVistADateTime(pieces[3]);
+                if (pieces[4]) {
+                    order.stopDate = exports.translateVistADateTime(pieces[4]);
+                }
+                var status = orderStatusMap[pieces[5]] || 'Unknown';
+                order.status = status;
+                order.sigStatus = orderSignStatusMap[pieces[6]] || "Invalid Signature Status: " + pieces[6];
+                order.verifyingNurse = pieces[7];
+                order.verifyingClerk = pieces[8];
+                order.provider = {
+                    uid: pieces[9],
+                    name: pieces[10]
+                }
+                order.flag = pieces[12] == '1';
+                order.chartReviewer = pieces[14];
+            } else if (charAt0 === 't') {
+                if (order.text) {
+                    order.text += '\n' + line;
+                } else {
+                    order.text = line;
+                }
+            } else {
+                continue;
+            }
+            result.push(order);
+        };
     }
     return result;
 };

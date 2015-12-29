@@ -128,6 +128,32 @@ var session = {
             }
         });
     },
+    getClinicalWarnings: function (patientId, options, callback) {
+        this.get('/getClinicalWarnings', {
+            patientId: patientId,
+            nRpts: "0"
+        }, function (err, body) {
+            if (err) {
+                callback(err);
+            } else {
+                var result = body; //translator.translateVitalSigns(body);
+                callback(null, result);
+            }
+        });
+    },
+    getImmunizations: function (patientId, options, callback) {
+        this.get('/getImmunizations', {
+            patientId: patientId,
+            nRpts: "0"
+        }, function (err, body) {
+            if (err) {
+                callback(err);
+            } else {
+                var result = translator.translateImmunizations(body);
+                callback(null, result);
+            }
+        });
+    },
     getVisits: function (patientId, options, callback) {
         var numDaysFuture = _.get(options, "numDaysFuture", 0);
         var numDaysPast = _.get(options, "numDaysPast", 0);
@@ -165,9 +191,52 @@ var session = {
             if (err) {
                 callback(err);
             } else {
-                callback(null, body);
+                var result = translator.translateProblemList(body);
+                callback(null, result);
             }
         });
+    },
+    getRadiologyReports: function (patientId, options, callback) {
+        this.get('/getRadiologyReportsDetailMap', {
+            patientId: patientId,
+            type: 'ALL'
+        }, function (err, body) {
+            if (err) {
+                callback(err);
+            } else {
+                var result = translator.translateRadiologyReports(body);
+                callback(null, result);
+            }
+        });
+    },
+    _getAllOrders: function (patientId, options, callback) {
+        var self = this;
+        this.get('/getAllOrders', {
+            patientId: patientId,
+            vistANow: translator.vistANow()
+        }, function (err, body) {
+            if (err) {
+                callback(err);
+            } else {
+                var result = translator.translateOrdersList(body, self.orderTypes);
+                callback(null, result);
+            }
+        });
+    },
+    getAllOrders: function (patientId, options, callback) {
+        if (this.orderTypes) {
+            this._getAllOrders(patientId, options, callback);
+        } else {
+            var self = this;
+            this.get('/getOrderTypes', {}, function(err, types) {
+                if (err) {
+                    callback(err);
+                } else {
+                    self.orderTypes = types;
+                    self._getAllOrders(patientId, options, callback);
+                }
+            });
+        }
     },
     logout: function (callback) {
         callback(null);
