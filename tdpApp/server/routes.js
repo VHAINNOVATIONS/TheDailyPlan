@@ -15,6 +15,9 @@ module.exports = function(app) {
   app.use('/api/patient', require('./api/patient'));
   app.use('/api/demographics', require('./api/demographics'));
   app.use('/api/allergy', require('./api/allergy'));
+  app.use('/api/problems', require('./api/problems'));
+  app.use('/api/immunizations', require('./api/immunizations'));
+  app.use('/api/vitals', require('./api/vitals'));
 
 
   app.use('/auth', require('./auth'));

@@ -1,6 +1,7 @@
 <div ng-controller="PatientPlanCtrl as ctrl" class="container">
   <div class="row">
     <h3>Patient Plan</h3>
+    <span>Date/Time:<b> {{ctrl.cdate | date:'MM/dd/yyyy hh:mm:ss a'}}</b></span>
   </div>
   <div class="row">
     <div class="panel panel-default">
@@ -10,18 +11,81 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Allergies</div>
                     <div class="panel-body">
-                      <ul class="example-animate-container">
-                        <li class="animate-repeat" ng-repeat="allergy in ctrl.allergies">
-                          Name: {{allergy.allergenName}} Type: {{allergy.allergenType}} Reaction: {{allergy.reactions[0].name}}
-                        </li>
-                      </ul>
+                      <table datatable="ng" dt-options="ctrl.dtOptionsAllergies" dt-column-defs="ctrl.dtColumnDefsAllergies" class="row-border hover">
+                          <thead>
+                          <tr>
+                              <th>Allergy</th>
+                              <th>Type</th>
+                              <th>Reaction</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr ng-repeat="allergy in ctrl.allergies">
+                              <td>{{allergy.allergenName}}</td>
+                              <td>{{allergy.allergenType}}</td>
+                              <td>{{allergy.reactions[0].name}}</td>
+                          </tr>
+                          </tbody>
+                      </table>
                     </div>
                 </div>
             </div>
             <div class="col-lg-7 col-md-7 col-sm-7">
                 <div class="panel panel-default">
                     <div class="panel-heading">Vitals</div>
-                    <div class="panel-body">Coming Soon!</div>
+                    <div class="panel-body">
+                      <ul class="example-animate-container">
+                        <li class="animate-repeat" ng-repeat="vital in ctrl.vitals">
+                          Name: {{vital}}
+                        </li>
+                      </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Problems</div>
+                    <div class="panel-body">
+                      <table datatable="ng" dt-options="ctrl.dtOptionsProblem" dt-column-defs="ctrl.dtColumnDefsProblem" class="row-border hover">
+                          <thead>
+                          <tr>
+                              <th>Facility</th>
+                              <th>Status</th>
+                              <th>Date</th>
+                              <th>Code</th>
+                              <th>Description</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr ng-repeat="problem in ctrl.problems">
+                              <td>{{problem.facility.name}}</td>
+                              <td>{{problem.status}}</td>
+                              <td>{{problem.onsetDate}}</td>
+                              <td>{{problem.code}}</td>
+                              <td>{{problem.desctiption}}</td>
+                          </tr>
+                          </tbody>
+                      </table>
+                      <ul class="example-animate-container">
+                        <li class="animate-repeat" ng-repeat="problem in ctrl.problems">
+                          Name: {{problem}}
+                        </li>
+                      </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Immunizations</div>
+                    <div class="panel-body">
+                      <ul class="example-animate-container">
+                        <li class="animate-repeat" ng-repeat="imm in ctrl.immunizations">
+                          Name: {{imm}}
+                        </li>
+                      </ul>
+                    </div>
                 </div>
             </div>
         </div>
