@@ -50,6 +50,26 @@ var typedOrderUpdater = {
                 result.currentDietProfile.push(diet);
             }
         }
+    },
+    lab: function (result, order) {
+        if (order.status === 'Active' || order.status === 'Pending') {
+            if (!result.labOrders) {
+                result.labOrders = [];
+            }
+            var lab = {
+                testName: order.text
+            };
+            if (order.startDate) {
+                lab.start = order.startDate;
+            }
+            if (order.stopDate) {
+                lab.stop = order.stopDate;
+            }
+            lab.status = order.status;
+            if (timeUtility.nowIsBetween(lab.start, lab.stop)) {
+                result.labOrders.push(lab);
+            }
+        }
     }
 };
 
