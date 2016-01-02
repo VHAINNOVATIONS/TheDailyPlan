@@ -40,7 +40,7 @@ describe('vista raw translations', function () {
         //console.log(t1);
     });
 
-    it('vistA now', function() {
+    it('vistA now', function () {
         var t = translator.vistANow();
         //console.log(t);
     });
@@ -72,7 +72,7 @@ describe('vista raw translations', function () {
     it('orders', function () {
         var ordersSample = require('./fixtures/rawOrdersSample.json');
         var orderTypes = require('./fixtures/rawOrderTypes.json');
-        var result = translator.translateOrdersList(ordersSample, orderTypes)
-        console.log(JSON.stringify(result, undefined, 4));
+        var result = translator.translateOrdersList(ordersSample, orderTypes);
+        //console.log(JSON.stringify(result, undefined, 4));
     });
 });

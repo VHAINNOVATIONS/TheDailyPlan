@@ -152,7 +152,7 @@ exports.translateVistADateTime = function (dateTime) {
     return date;
 };
 
-exports.vistANow = function() {
+exports.vistANow = function () {
     var m = moment();
     return translateDate(m) + '.' + translateTime(m);
 };
@@ -285,10 +285,10 @@ exports.translateProblemList = function (rawData) {
     return result;
 };
 
-exports.translateOrderType = function(rawData) {
+exports.translateOrderType = function (rawData) {
     var result = {};
     if (rawData && rawData.value) {
-        Object.keys(rawData.value).forEach(function(key) {
+        Object.keys(rawData.value).forEach(function (key) {
             var value = rawData.value[key];
             var ePieces = value.split('=');
             var tPieces = ePieces[1].split('^');
@@ -296,7 +296,7 @@ exports.translateOrderType = function(rawData) {
                 id: tPieces[0],
                 topName: tPieces[1],
                 subName: tPieces[2]
-            }
+            };
         });
     }
     return result;
@@ -333,7 +333,7 @@ var orderSignStatusMap = {
     "8": "ON PARENT order"
 };
 
-exports.translateOrdersList = function(rawData, rawTypes) {
+exports.translateOrdersList = function (rawData, rawTypes) {
     var types = exports.translateOrderType(rawTypes);
     var result = [];
     if (rawData && rawData.value) {
@@ -350,7 +350,7 @@ exports.translateOrdersList = function(rawData, rawTypes) {
             var charAt0 = line.charAt(0);
             line = line.slice(1);
             if (charAt0 === '~') {
-                if (! order) {
+                if (!order) {
                     result.push(order);
                 }
                 order = {};
@@ -374,8 +374,8 @@ exports.translateOrdersList = function(rawData, rawTypes) {
                 order.provider = {
                     uid: pieces[9],
                     name: pieces[10]
-                }
-                order.flag = pieces[12] == '1';
+                };
+                order.flag = (pieces[12] === '1');
                 order.chartReviewer = pieces[14];
             } else if (charAt0 === 't') {
                 if (order.text) {
@@ -387,7 +387,7 @@ exports.translateOrdersList = function(rawData, rawTypes) {
                 continue;
             }
             result.push(order);
-        };
+        }
     }
     return result;
 };

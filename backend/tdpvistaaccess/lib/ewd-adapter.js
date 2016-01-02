@@ -228,7 +228,7 @@ var session = {
             this._getAllOrders(patientId, options, callback);
         } else {
             var self = this;
-            this.get('/getOrderTypes', {}, function(err, types) {
+            this.get('/getOrderTypes', {}, function (err, types) {
                 if (err) {
                     callback(err);
                 } else {
