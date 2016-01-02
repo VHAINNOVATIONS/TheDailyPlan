@@ -6,6 +6,7 @@ var request = require('request');
 var crypto = require('crypto');
 
 var translator = require('./translator');
+var timeUtility = require('./time-utility');
 
 request = request.defaults({
     jar: true
@@ -28,6 +29,28 @@ var encryptCredentials = function (accessCode, verifyCode, key) {
     crypted += cipher1.final('hex');
     var encrypted1 = iv1 + '_x_' + crypted;
     return encrypted1;
+};
+
+var typedOrderUpdater = {
+    diet: function (result, order) {
+        if (order.status === 'Active') {
+            if (!result.currentDietProfile) {
+                result.currentDietProfile = [];
+            }
+            var diet = {
+                description: order.text
+            };
+            if (order.startDate) {
+                diet.start = order.startDate;
+            }
+            if (order.stopDate) {
+                diet.stop = order.stopDate;
+            }
+            if (timeUtility.nowIsBetween(diet.start, diet.stop)) {
+                result.currentDietProfile.push(diet);
+            }
+        }
+    }
 };
 
 var session = {
@@ -237,6 +260,27 @@ var session = {
                 }
             });
         }
+    },
+    getOrdersAsClassified: function (patientId, options, callback) {
+        this.getAllOrders(patientId, options, function (err, orders) {
+            if (err) {
+                callback(err);
+            } else {
+                var classifiedOrders = orders.reduce(function (r, order) {
+                    if (order) {
+                        var type = order.type;
+                        if (type && type.topName) {
+                            var updater = typedOrderUpdater[type.topName.toLowerCase()];
+                            if (updater) {
+                                updater(r, order);
+                            }
+                        }
+                    }
+                    return r;
+                }, {});
+                callback(null, classifiedOrders);
+            }
+        });
     },
     logout: function (callback) {
         callback(null);

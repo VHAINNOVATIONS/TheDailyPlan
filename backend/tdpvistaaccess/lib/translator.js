@@ -142,8 +142,10 @@ exports.translateVistADateTime = function (dateTime) {
     var vistATime = dateTimePieces[1];
     if (vistATime) {
         var time = vistATime.substring(0, 2) + ':';
-        if (vistATime.length > 2) {
+        if (vistATime.length > 3) {
             time += vistATime.substring(2, 4);
+        } else if (vistATime.length > 2) {
+            time += vistATime.substring(2, 3) + '0';
         } else {
             time += '00';
         }
@@ -350,7 +352,7 @@ exports.translateOrdersList = function (rawData, rawTypes) {
             var charAt0 = line.charAt(0);
             line = line.slice(1);
             if (charAt0 === '~') {
-                if (!order) {
+                if (order) {
                     result.push(order);
                 }
                 order = {};
@@ -386,6 +388,8 @@ exports.translateOrdersList = function (rawData, rawTypes) {
             } else {
                 continue;
             }
+        }
+        if (order) {
             result.push(order);
         }
     }

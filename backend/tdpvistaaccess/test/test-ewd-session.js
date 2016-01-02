@@ -203,7 +203,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get orders', function (done) {
+    xit('get orders', function (done) {
         var pid = 100685;
         testSession.getAllOrders(pid, {}, function (err, body) {
             if (err) {
@@ -211,9 +211,9 @@ describe('ewd session test', function () {
             } else {
                 expect(body).to.exist();
                 //expect(body.length).to.be.above(0);
-                console.log("=== Order Types ============");
-                console.log(testSession.orderTypes);
-                console.log('============================');
+                //console.log("=== Order Types ============");
+                //console.log(testSession.orderTypes);
+                //console.log('============================');
                 console.log("=== All Orders =============");
                 console.log(JSON.stringify(body, undefined, 4));
                 console.log("============================");
@@ -232,6 +232,21 @@ describe('ewd session test', function () {
                 console.log(JSON.stringify(body, undefined, 4));
                 console.log("==============================");
                 expect(body).to.exist();
+                done();
+            }
+        });
+    });
+
+    it('get diet orders', function (done) {
+        var pid = 100022;
+        testSession.getOrdersAsClassified(pid, {}, function (err, result) {
+            if (err) {
+                done(err);
+            } else {
+                expect(result).to.exist();
+                console.log("=== All Orders =============");
+                console.log(JSON.stringify(result, undefined, 4));
+                console.log("============================");
                 done();
             }
         });
