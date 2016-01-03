@@ -91,6 +91,29 @@ var typedOrderUpdater = {
             }
         }
     },
+    activity: function (result, order) {
+        if (order.status === 'Active') {
+            if (!result.otherOrders) {
+                result.otherOrders = [];
+            }
+            var other = {
+                description: order.text
+            };
+            if (order.startDate) {
+                other.start = order.startDate;
+            }
+            if (order.stopDate) {
+                other.stop = order.stopDate;
+            }
+            other.status = order.status;
+            if (timeUtility.nowIsBetween(undefined, other.stop)) {
+                result.otherOrders.push(other);
+            }
+        }
+    },
+    nursing: function (result, order) {
+        typedOrderUpdater.activity(result, order);
+    }
 };
 
 var session = {
