@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var moment = require('moment');
+var timeUtility = require('./time-utility');
 
 var setVitalValue = function (key) {
     return function (vitalSet, data) {
@@ -100,7 +101,10 @@ exports.translateVitalSigns = function (rawVitalSets) {
                     fn(vitalSet, data);
                 }
             });
-            vitalSets.push(vitalSet);
+            if (timeUtility.onTodayOrYesterday(vitalSet.dateTime)) {
+                console.log('in');
+                vitalSets.push(vitalSet);
+            }
         });
     }
     return vitalSets;

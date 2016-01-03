@@ -97,8 +97,9 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get patient vitals', function (done) {
+    it('get patient vitals', function (done) {
         var pid = patients[37].id;
+        console.log(patients[37]);
         testSession.getVitalSigns(pid, {}, function (err, body) {
             if (err) {
                 done(err);
@@ -237,7 +238,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get diet, lab orders', function (done) {
+    xit('get diet, lab orders', function (done) {
         var pid = 100022;
         testSession.getOrdersAsClassified(pid, {}, function (err, result) {
             if (err) {

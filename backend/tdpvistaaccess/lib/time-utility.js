@@ -18,3 +18,9 @@ exports.nowIsBetween = function (externalStart, externalStop) {
     }
     return true;
 };
+
+exports.onTodayOrYesterday = function (externalTimestamp) {
+    var yesterday = moment().add(-1, 'days');
+    var timestamp = moment(externalTimestamp, "MM/DD/YYYY HH:mm");
+    return !timestamp.isBefore(yesterday, 'day');
+};
