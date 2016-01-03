@@ -70,7 +70,27 @@ var typedOrderUpdater = {
                 result.labOrders.push(lab);
             }
         }
-    }
+    },
+    imaging: function (result, order) {
+        if (order.status === 'Active' || order.status === 'Pending') {
+            if (!result.radiologyOrders) {
+                result.radiologyOrders = [];
+            }
+            var radiology = {
+                testName: order.text
+            };
+            if (order.startDate) {
+                radiology.start = order.startDate;
+            }
+            if (order.stopDate) {
+                radiology.stop = order.stopDate;
+            }
+            radiology.status = order.status;
+            if (timeUtility.nowIsBetween(undefined, radiology.stop)) {
+                result.radiologyOrders.push(radiology);
+            }
+        }
+    },
 };
 
 var session = {
