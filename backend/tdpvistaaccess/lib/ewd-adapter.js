@@ -181,12 +181,15 @@ var session = {
         });
     },
     getDemographics: function (patientId, options, callback) {
-        this.get('/patientSummary', {
-            id: patientId
+        this.get('/getPatientMap', {
+            patientId: patientId
         }, function (err, body) {
             if (err) {
                 callback(err);
             } else {
+                body.sex = body.gender;
+                body.DOB = body.dob;
+                body.SSN = body.ssn; // until client changes not to break
                 callback(null, body);
             }
         });
@@ -345,8 +348,31 @@ var session = {
             }
         });
     },
+    getSurgicalPathologyReports: function (patientId, options, callback) {
+        this.get('/getPathologyReportsDetailMap', {
+            patientId: patientId
+        }, function (err, result) {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, result);
+            }
+        });
+    },
     logout: function (callback) {
         callback(null);
+    },
+    getChemHemReports: function (patientId, options, callback) {
+        this.get('/getChemHemLabs', {
+            patientId: patientId,
+            toDate: '2900101'
+        }, function (err, result) {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, result);
+            }
+        });
     }
 };
 

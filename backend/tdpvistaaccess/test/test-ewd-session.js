@@ -69,13 +69,16 @@ describe('ewd session test', function () {
     });
 
     xit('get patient demographics/flags', function (done) {
-        var pid = patients[2].id;
+        var pid = 100748; //100846;
         testSession.getDemographics(pid, {}, function (err, body) {
             if (err) {
                 done(err);
             } else {
                 expect(body).to.exist();
-                expect(body.name).to.equal(patients[2].text);
+                //expect(body.name).to.equal(patients[2].text);
+                console.log("======DEMOGRAPHICS=======");
+                console.log(JSON.stringify(body, undefined, 4));
+                console.log("======================");
                 done();
             }
         });
@@ -246,6 +249,36 @@ describe('ewd session test', function () {
             } else {
                 expect(result).to.exist();
                 console.log("=== All Orders =============");
+                console.log(JSON.stringify(result, undefined, 4));
+                console.log("============================");
+                done();
+            }
+        });
+    });
+
+    xit('get surgical pathology reports', function (done) {
+        var pid = 4; //100022;
+        testSession.getSurgicalPathologyReports(pid, {}, function (err, result) {
+            if (err) {
+                done(err);
+            } else {
+                expect(result).to.exist();
+                console.log("=== Pathology =============");
+                console.log(JSON.stringify(result, undefined, 4));
+                console.log("============================");
+                done();
+            }
+        });
+    });
+
+    it('get checm hem reports', function (done) {
+        var pid = 4; //100022;
+        testSession.getChemHemReports(pid, {}, function (err, result) {
+            if (err) {
+                done(err);
+            } else {
+                expect(result).to.exist();
+                console.log("=== Chem Hem =============");
                 console.log(JSON.stringify(result, undefined, 4));
                 console.log("============================");
                 done();
