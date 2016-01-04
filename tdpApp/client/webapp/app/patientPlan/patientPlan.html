@@ -1,93 +1,102 @@
 <div ng-controller="PatientPlanCtrl as ctrl" class="container">
   <div class="row">
-    <h3>Patient Plan</h3>
+    <h3>The Daily Plan</h3>
     <span>Date/Time:<b> {{ctrl.cdate | date:'MM/dd/yyyy hh:mm:ss a'}}</b></span>
   </div>
   <div class="row">
     <div class="panel panel-default">
-        <div class="panel-heading"><b>Patient Demographics:</b> <b>{{ctrl.demographics.name}}</b> <b>DOB:</b> {{ctrl.demographics.DOB}} <b>Gender:</b> {{ctrl.demographics.sex}} <b>SSN:</b> {{ctrl.demographics.SSN}}</div>
-        <div class="row">
-            <div class="col-lg-5 col-md-5 col-sm-5">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Allergies</div>
-                    <div class="panel-body">
-                      <table datatable="ng" dt-options="ctrl.dtOptionsAllergies" dt-column-defs="ctrl.dtColumnDefsAllergies" class="row-border hover">
-                          <thead>
-                          <tr>
-                              <th>Allergy</th>
-                              <th>Type</th>
-                              <th>Reaction</th>
-                          </tr>
-                          </thead>
-                          <tbody>
-                          <tr ng-repeat="allergy in ctrl.allergies">
-                              <td>{{allergy.allergenName}}</td>
-                              <td>{{allergy.allergenType}}</td>
-                              <td>{{allergy.reactions[0].name}}</td>
-                          </tr>
-                          </tbody>
-                      </table>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-7 col-md-7 col-sm-7">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Vitals</div>
-                    <div class="panel-body">
-                      <ul class="example-animate-container">
-                        <li class="animate-repeat" ng-repeat="vital in ctrl.vitals">
-                          Name: {{vital}}
-                        </li>
-                      </ul>
-                    </div>
-                </div>
-            </div>
+        <div class="panel-heading">
+          <h3 class="panel-title">Patient: {{ctrl.demographics.name}} DOB: {{ctrl.demographics.DOB}} Gender: {{ctrl.demographics.sex}} SSN: {{ctrl.demographics.SSN}}</h3>
         </div>
-        <div class="row">
-            <div class="col-lg-8 col-md-8 col-sm-8">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Problems</div>
-                    <div class="panel-body">
-                      <table datatable="ng" dt-options="ctrl.dtOptionsProblem" dt-column-defs="ctrl.dtColumnDefsProblem" class="row-border hover">
-                          <thead>
-                          <tr>
-                              <th>Facility</th>
-                              <th>Status</th>
-                              <th>Date</th>
-                              <th>Code</th>
-                              <th>Description</th>
-                          </tr>
-                          </thead>
-                          <tbody>
-                          <tr ng-repeat="problem in ctrl.problems">
-                              <td>{{problem.facility.name}}</td>
-                              <td>{{problem.status}}</td>
-                              <td>{{problem.onsetDate}}</td>
-                              <td>{{problem.code}}</td>
-                              <td>{{problem.desctiption}}</td>
-                          </tr>
-                          </tbody>
-                      </table>
-                      <ul class="example-animate-container">
-                        <li class="animate-repeat" ng-repeat="problem in ctrl.problems">
-                          Name: {{problem}}
-                        </li>
-                      </ul>
+        <div class="panel-body">
+          <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Allergies</h3>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Immunizations</div>
                     <div class="panel-body">
-                      <ul class="example-animate-container">
-                        <li class="animate-repeat" ng-repeat="imm in ctrl.immunizations">
-                          Name: {{imm}}
-                        </li>
-                      </ul>
+                      <div>
+                        <ng ng-repeat="allergy in ctrl.allergies">
+                          <span class="label label-primary">{{allergy.allergenName}}</span>
+                        </ng>
+                      </div>
                     </div>
-                </div>
-            </div>
+                  </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                  <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Vitals</h3>
+                      </div>
+                      <div class="panel-body">
+                        <div class="control-group">
+                          <input type="button" class="btn btn-small" ng-click="ctrl.expandVitalsRows()" value="Expand All"/>
+                          <input type="button" class="btn btn-small" ng-click="ctrl.collapseVitalsRows()" value="Collapse All"/>
+                        </div>
+                        <div ui-grid="ctrl.vitalsGridOptions" ui-grid-pinning ui-grid-expandable class="grid">
+                          <div class="grid-msg-overlay" ng-hide="!ctrl.vitalsLoading">
+                            <div class="msg">
+                              <span>
+                                Loading Data...
+                                <i class="fa fa-spinner fa-spin"></i>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="grid-msg-overlay" ng-hide="ctrl.vitalsLoading || ctrl.vitalsGridOptions.data.length">
+                            <div class="msg">
+                              <span>No Data</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                  <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Problems</h3>
+                      </div>
+                      <div class="panel-body">
+                        <div class="control-group">
+                          <input type="button" class="btn btn-small" ng-click="ctrl.expandProblemsRows()" value="Expand All"/>
+                          <input type="button" class="btn btn-small" ng-click="ctrl.collapseProblemsRows()" value="Collapse All"/>
+                        </div>
+                        <div ui-grid="ctrl.problemsGridOptions" ui-grid-pinning ui-grid-expandable class="grid">
+                          <div class="grid-msg-overlay" ng-hide="!ctrl.problemsLoading">
+                            <div class="msg">
+                              <span>
+                                Loading Data...
+                                <i class="fa fa-spinner fa-spin"></i>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="grid-msg-overlay" ng-hide="ctrl.problemsLoading || ctrl.problemsGridOptions.data.length">
+                            <div class="msg">
+                              <span>No Data</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                  <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Immunizations</h3>
+                      </div>
+                      <div class="panel-body">
+                        <ul class="example-animate-container">
+                          <li class="animate-repeat" ng-repeat="imm in ctrl.immunizations">
+                            Name: {{imm.name}}
+                          </li>
+                        </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
         </div>
     </div>
   </div>

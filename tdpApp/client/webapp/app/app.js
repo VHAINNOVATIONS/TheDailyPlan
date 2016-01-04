@@ -6,7 +6,12 @@ angular.module('tdpApp', [
   'ngSanitize',
   'ui.router',
   'ui.bootstrap',
-  'datatables'
+  'datatables',
+  'ngTouch',
+  'ui.grid',
+  'ui.grid.expandable',
+  'ui.grid.selection',
+  'ui.grid.pinning'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
@@ -47,7 +52,7 @@ angular.module('tdpApp', [
     $rootScope.$on('$stateChangeStart', function (event, next) {
       Auth.isLoggedInAsync(function(loggedIn) {
         if (next.authenticate && !loggedIn) {
-          $location.path('/login');
+          $location.path('/');
         }
       });
     });

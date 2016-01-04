@@ -19,6 +19,16 @@ angular.module('tdpApp')
 
         $http({url: '/api/vitals', method: 'GET', params: {value: value}}).
         success(function(data) {
+          var i = 0;
+          for(i = 0; i < data.length; i++){
+            data[i].subGridOptions = {
+              columnDefs: [ {name:"Weight", field:"value"},{name:"Unit", field:"unit"} ],
+              data: (!angular.isUndefined(data[i].weight) ? [ data[i].weight ] : [])
+            };
+            data[i].getTemp = function(){
+              return this.temperature.value + ' ' + this.temperature.unit;
+            };
+          }
           results = data;
           deferred.resolve(data);
           return cb();

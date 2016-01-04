@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tdpApp')
-  .controller('PatientPlanCtrl', function ($scope, $resource, Patient, Demographics, Allergy, Immunizations, Problems, Vitals, DTOptionsBuilder, DTColumnDefBuilder) {
+  .controller('PatientPlanCtrl', function ($scope, $resource, Patient, Demographics, Allergy, Immunizations, Problems, Vitals) {
   	var self = this;
     self.cdate = new Date();
     self.demographics = null;
@@ -11,6 +11,44 @@ angular.module('tdpApp')
     self.vitals = null;
     self.items = Patient.getSelectedPatients();
 
+    self.vitalsLoading = true;
+
+    self.vitalsGridOptions = {
+      expandableRowTemplate: 'app/patientPlan/expandableRowTemplate.html',
+      expandableRowHeight: 150,
+      //subGridVariable will be available in subGrid scope
+      expandableRowScope: {
+        subGridVariable: 'subGridScopeVariable'
+      }
+    };
+
+    self.vitalsGridOptions.columnDefs = [
+      { name: 'dateTime', displayName: 'Date' },
+      { name: 'getTemp()', displayName: 'Temp' },
+      { name: 'bloodPressure.value', displayName: 'Blood Pressure'},
+      { name: 'pulse.value', displayName: 'Pulse'}
+    ];
+
+
+    self.problemsLoading = true;
+
+    self.problemsGridOptions = {
+      enableExpandable: false,
+      expandableRowTemplate: 'app/patientPlan/expandableRowTemplate.html',
+      expandableRowHeight: 150,
+      //subGridVariable will be available in subGrid scope
+      expandableRowScope: {
+        subGridVariable: 'subGridScopeVariable'
+      }
+    };
+
+    self.problemsGridOptions.columnDefs = [
+      { name: 'facility.name', displayName: 'Facility' },
+      { name: 'status', displayName: 'Status' },
+      { name: 'onsetDate', displayName: 'Date Onset'},
+      { name: 'code', displayName: 'Code'},
+      { name: 'description', displayName: 'Description'}
+    ];
     console.log('Patient Plan - Items:',self.items);
 
     if(self.items.length > 0 && self.items[0])
@@ -28,7 +66,6 @@ angular.module('tdpApp')
       .then( function(data) {
         console.log('Patient Plan - allergies:',data);
         self.allergies = data;
-        loadAllergies();
       })
       .catch( function(err) {
         self.errors.other = err.message;
@@ -46,8 +83,8 @@ angular.module('tdpApp')
       Problems.getByEIN(self.items[0])
       .then( function(data) {
         console.log('Patient Plan - problems:',data);
-        self.problems = data;
-        loadProblems();
+        self.problemsGridOptions.data = data;
+        self.problemsLoading = false;
       })
       .catch( function(err) {
         self.errors.other = err.message;
@@ -56,50 +93,36 @@ angular.module('tdpApp')
       Vitals.getByEIN(self.items[0])
       .then( function(data) {
         console.log('Patient Plan - vitals:',data);
-        self.vitals = data;
+        self.vitalsGridOptions.data = data;
+        self.vitalsLoading = false;
       })
       .catch( function(err) {
         self.errors.other = err.message;
       });
     }
 
-    function loadAllergies() {
-      self.dtOptionsAllergy = DTOptionsBuilder.newOptions().withPaginationType('simple').withDisplayLength(4);
-      self.dtColumnDefsAllergy = [
-        DTColumnDefBuilder.newColumnDef(0),
-        DTColumnDefBuilder.newColumnDef(1),
-        DTColumnDefBuilder.newColumnDef(2)
-      ];
-    }
+    self.vitalsGridOptions.onRegisterApi = function(gridApi){
+      self.vitalsGridApi = gridApi;
+    };
 
-    function loadVitals() {
-      self.dtOptionsVital = DTOptionsBuilder.newOptions().withPaginationType('simple').withDisplayLength(4);
-      self.dtColumnDefsVital = [
-        DTColumnDefBuilder.newColumnDef(0),
-        DTColumnDefBuilder.newColumnDef(1),
-        DTColumnDefBuilder.newColumnDef(2)
-      ];
-    }
+    self.expandVitalsRows = function() {
+      self.vitalsGridApi.expandable.expandAllRows();
+    };
 
-    function loadProblems() {
-      self.dtOptionsProblem = DTOptionsBuilder.newOptions().withPaginationType('simple').withDisplayLength(4);
-      self.dtColumnDefsProblem = [
-        DTColumnDefBuilder.newColumnDef(0),
-        DTColumnDefBuilder.newColumnDef(1),
-        DTColumnDefBuilder.newColumnDef(2),
-        DTColumnDefBuilder.newColumnDef(3),
-        DTColumnDefBuilder.newColumnDef(4)
-      ];
-    }
+    self.collapseVitalsRows = function() {
+      self.vitalsGridApi.expandable.collapseAllRows();
+    };
 
-    function loadImmunizations() {
-      self.dtOptionsImmunization = DTOptionsBuilder.newOptions().withPaginationType('simple').withDisplayLength(4);
-      self.dtColumnDefsImmunization = [
-        DTColumnDefBuilder.newColumnDef(0),
-        DTColumnDefBuilder.newColumnDef(1),
-        DTColumnDefBuilder.newColumnDef(2)
-      ];
-    }
+    self.problemsGridOptions.onRegisterApi = function(gridApi){
+      self.problemsGridApi = gridApi;
+    };
 
+    self.expandProblemsRows = function() {
+      self.problemsGridApi.expandable.expandAllRows();
+    };
+
+    self.collapseProblemsRows = function() {
+      self.problemsGridApi.expandable.collapseAllRows();
+    };
 
   });
