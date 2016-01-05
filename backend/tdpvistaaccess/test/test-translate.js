@@ -35,12 +35,14 @@ describe('vista raw translations', function () {
 
     it('vistA time', function () {
         var t0 = translator.translateVistADateTime("3080714.08");
-        //console.log(t0);
+        expect(t0).to.equal('07/14/2008 08:00');
         var t1 = translator.translateVistADateTime("3150120.09");
-        //console.log(t1);
+        expect(t1).to.equal('01/20/2015 09:00');
+        var t2 = translator.translateVistADateTime("3150221.093");
+        expect(t2).to.equal('02/21/2015 09:30');
     });
 
-    it('vistA now', function() {
+    it('vistA now', function () {
         var t = translator.vistANow();
         //console.log(t);
     });
@@ -69,10 +71,17 @@ describe('vista raw translations', function () {
         //console.log(JSON.stringify(result, undefined, 4));
     });
 
-    it('orders', function () {
+    xit('orders', function () {
         var ordersSample = require('./fixtures/rawOrdersSample.json');
         var orderTypes = require('./fixtures/rawOrderTypes.json');
-        var result = translator.translateOrdersList(ordersSample, orderTypes)
-        console.log(JSON.stringify(result, undefined, 4));
+        var result = translator.translateOrdersList(ordersSample, orderTypes);
+        //console.log(JSON.stringify(result, undefined, 4));
+    });
+
+    it('orders 2', function () {
+        var ordersSample = require('./fixtures/rawOrdersSample2.json');
+        var orderTypes = require('./fixtures/rawOrderTypes.json');
+        var result = translator.translateOrdersList(ordersSample, orderTypes);
+        expect(result.length).to.equal(8);
     });
 });
