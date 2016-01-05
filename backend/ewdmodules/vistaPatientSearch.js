@@ -39,3 +39,29 @@ exports.getWards = function(session, ewd) {
 	var result = toArrayWithNameId(response);
 	return result;
 };
+
+exports.getPatientsByWard = function(params, session, ewd) {
+	params.rpcName = 'ORWPT BYWARD';
+	params.rpcArgs = [{
+		type: 'LITERAL',
+		value: params.wardId
+	}];
+	var response = vistaLib.runRpc(params, session, ewd);
+	return response;
+};
+
+exports.getPatientsByClinic = function(params, session, ewd) {
+	params.rpcName = 'ORWPT BYWARD';
+	params.rpcArgs = [{
+		type: 'LITERAL',
+		value: params.clinicId
+	}, {
+    	type: 'LITERAL',
+		value: params.fromDate
+    }, {
+    	type: 'LITERAL',
+        value: params.toDate
+	}];
+	var response = vistaLib.runRpc(params, session, ewd);
+	return response;
+};

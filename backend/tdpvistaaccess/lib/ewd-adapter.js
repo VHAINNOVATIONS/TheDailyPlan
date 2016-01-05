@@ -116,6 +116,30 @@ var typedOrderUpdater = {
     }
 };
 
+var toPatientList = function (rawData, ignoreSecondPiece) {
+    var result = [];
+    if (rawData && rawData.value) {
+        result = Object.keys(rawData.value).reduce(function (r, index) {
+            var line = rawData.value[index];
+            var pieces = line.split('^');
+            var patient = {
+                id: pieces[0],
+                name: pieces[1]
+            };
+            if (!ignoreSecondPiece && pieces[2]) {
+                var locationPieces = pieces[2].split('-');
+                patient.location = {
+                    room: locationPieces[0],
+                    bed: locationPieces[1]
+                };
+            }
+            r.push(patient);
+            return r;
+        }, []);
+    }
+    return result;
+};
+
 var session = {
     get: function (route, parameters, callback) {
         var options = _.assign({
@@ -383,6 +407,27 @@ var session = {
             }
         });
 
+    },
+    getPatientsByClinic: function (options, callback) {
+        this.get('/getPatientsByClinic', options, function (err, result) {
+            console.log(options);
+            if (err) {
+                callback(err);
+            } else {
+                result = toPatientList(result, true);
+                callback(null, result);
+            }
+        });
+    },
+    getPatientsByWard: function (options, callback) {
+        this.get('/getPatientsByWard', options, function (err, result) {
+            if (err) {
+                callback(err);
+            } else {
+                result = toPatientList(result);
+                callback(null, result);
+            }
+        });
     },
     getWards: function (options, callback) {
         this.get('/getWards', null, function (err, result) {

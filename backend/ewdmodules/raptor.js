@@ -442,9 +442,34 @@ var operations = {
 
     getWards: {
         GET: function(ewd, session) {
-            var params = {};
             var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
             var result = patientSearchLib.getWards(session, ewd);
+            ok = ewd.util.saveSymbolTable(ewd, session);        //Grab our symbol table for use next time
+            return result;
+        }
+    },
+
+    getPatientsByClinic: {
+        GET: function(ewd, session) {
+            var params = {
+                clinicId: ewd.query.clinicId,
+                fromDate: ewd.query.fromDate,
+                toDate: ewd.query.toDate
+            };
+            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var result = patientSearchLib.getPatientsByClinic(params, session, ewd);
+            ok = ewd.util.saveSymbolTable(ewd, session);        //Grab our symbol table for use next time
+            return result;
+        }
+    },
+
+    getPatientsByWard: {
+        GET: function(ewd, session) {
+            var params = {
+                wardId: ewd.query.wardId
+            };
+            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var result = patientSearchLib.getPatientsByWard(params, session, ewd);
             ok = ewd.util.saveSymbolTable(ewd, session);        //Grab our symbol table for use next time
             return result;
         }

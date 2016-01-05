@@ -82,6 +82,24 @@ describe('ewd session test', function () {
         });
     });
 
+    it('getPatientsByClinic', function (done) {
+        var clinicId = clinics[0].id;
+        testSession.getPatientsByClinic({
+            clinicId: clinicId,
+            fromDate: '3150909',
+            toDate: '3160707'
+        }, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body).to.exist();
+                patients = body;
+                console.log(patients);
+                done();
+            }
+        });
+    });
+
     var wards;
     it('getWards', function (done) {
         testSession.getWards({}, function (err, body) {
@@ -91,6 +109,22 @@ describe('ewd session test', function () {
                 expect(body).to.exist();
                 wards = body;
                 console.log(wards);
+                done();
+            }
+        });
+    });
+
+    it('getPatientsByWard', function (done) {
+        var wardId = wards[2].id;
+        testSession.getPatientsByWard({
+            wardId: wardId
+        }, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body).to.exist();
+                patients = body;
+                console.log(patients);
                 done();
             }
         });
