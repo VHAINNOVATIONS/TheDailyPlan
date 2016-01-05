@@ -373,6 +373,25 @@ var session = {
                 callback(null, result);
             }
         });
+    },
+    getClinics: function (options, callback) {
+        this.get('/getClinics', null, function (err, result) {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, result);
+            }
+        });
+
+    },
+    getWards: function (options, callback) {
+        this.get('/getWards', null, function (err, result) {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, result);
+            }
+        });
     }
 };
 

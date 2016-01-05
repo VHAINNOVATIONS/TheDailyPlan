@@ -68,6 +68,34 @@ describe('ewd session test', function () {
         });
     });
 
+    var clinics;
+    it('getClinics', function (done) {
+        testSession.getClinics({}, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body).to.exist();
+                clinics = body;
+                console.log(clinics);
+                done();
+            }
+        });
+    });
+
+    var wards;
+    it('getWards', function (done) {
+        testSession.getWards({}, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body).to.exist();
+                wards = body;
+                console.log(wards);
+                done();
+            }
+        });
+    });
+
     xit('get patient demographics/flags', function (done) {
         var pid = 100748; //100846;
         testSession.getDemographics(pid, {}, function (err, body) {
@@ -100,7 +128,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get patient vitals', function (done) {
+    xit('get patient vitals', function (done) {
         var pid = patients[37].id;
         console.log(patients[37]);
         testSession.getVitalSigns(pid, {}, function (err, body) {
@@ -271,7 +299,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get checm hem reports', function (done) {
+    xit('get checm hem reports', function (done) {
         var pid = 4; //100022;
         testSession.getChemHemReports(pid, {}, function (err, result) {
             if (err) {
