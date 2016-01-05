@@ -211,6 +211,7 @@ var session = {
             if (err) {
                 callback(err);
             } else {
+                body.dob = translator.translateVistADate(body.dob);
                 body.sex = body.gender;
                 body.DOB = body.dob;
                 body.SSN = body.ssn; // until client changes not to break

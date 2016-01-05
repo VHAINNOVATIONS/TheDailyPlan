@@ -69,7 +69,7 @@ describe('ewd session test', function () {
     });
 
     var clinics;
-    it('getClinics', function (done) {
+    xit('getClinics', function (done) {
         testSession.getClinics({}, function (err, body) {
             if (err) {
                 done(err);
@@ -82,7 +82,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('getPatientsByClinic', function (done) {
+    xit('getPatientsByClinic', function (done) {
         var clinicId = clinics[0].id;
         testSession.getPatientsByClinic({
             clinicId: clinicId,
@@ -101,7 +101,7 @@ describe('ewd session test', function () {
     });
 
     var wards;
-    it('getWards', function (done) {
+    xit('getWards', function (done) {
         testSession.getWards({}, function (err, body) {
             if (err) {
                 done(err);
@@ -114,7 +114,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('getPatientsByWard', function (done) {
+    xit('getPatientsByWard', function (done) {
         var wardId = wards[2].id;
         testSession.getPatientsByWard({
             wardId: wardId
@@ -130,7 +130,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get patient demographics/flags', function (done) {
+    it('get patient demographics/flags', function (done) {
         var pid = 100748; //100846;
         testSession.getDemographics(pid, {}, function (err, body) {
             if (err) {
