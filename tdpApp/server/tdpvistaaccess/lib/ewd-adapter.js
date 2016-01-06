@@ -6,6 +6,7 @@ var request = require('request');
 var crypto = require('crypto');
 
 var translator = require('./translator');
+var timeUtility = require('./time-utility');
 
 request = request.defaults({
     jar: true
@@ -28,6 +29,91 @@ var encryptCredentials = function (accessCode, verifyCode, key) {
     crypted += cipher1.final('hex');
     var encrypted1 = iv1 + '_x_' + crypted;
     return encrypted1;
+};
+
+var typedOrderUpdater = {
+    diet: function (result, order) {
+        if (order.status === 'Active') {
+            if (!result.currentDietProfile) {
+                result.currentDietProfile = [];
+            }
+            var diet = {
+                description: order.text
+            };
+            if (order.startDate) {
+                diet.start = order.startDate;
+            }
+            if (order.stopDate) {
+                diet.stop = order.stopDate;
+            }
+            if (timeUtility.nowIsBetween(diet.start, diet.stop)) {
+                result.currentDietProfile.push(diet);
+            }
+        }
+    },
+    lab: function (result, order) {
+        if (order.status === 'Active' || order.status === 'Pending') {
+            if (!result.labOrders) {
+                result.labOrders = [];
+            }
+            var lab = {
+                testName: order.text
+            };
+            if (order.startDate) {
+                lab.start = order.startDate;
+            }
+            if (order.stopDate) {
+                lab.stop = order.stopDate;
+            }
+            lab.status = order.status;
+            if (timeUtility.nowIsBetween(lab.start, lab.stop)) {
+                result.labOrders.push(lab);
+            }
+        }
+    },
+    imaging: function (result, order) {
+        if (order.status === 'Active' || order.status === 'Pending') {
+            if (!result.radiologyOrders) {
+                result.radiologyOrders = [];
+            }
+            var radiology = {
+                testName: order.text
+            };
+            if (order.startDate) {
+                radiology.start = order.startDate;
+            }
+            if (order.stopDate) {
+                radiology.stop = order.stopDate;
+            }
+            radiology.status = order.status;
+            if (timeUtility.nowIsBetween(undefined, radiology.stop)) {
+                result.radiologyOrders.push(radiology);
+            }
+        }
+    },
+    activity: function (result, order) {
+        if (order.status === 'Active') {
+            if (!result.otherOrders) {
+                result.otherOrders = [];
+            }
+            var other = {
+                description: order.text
+            };
+            if (order.startDate) {
+                other.start = order.startDate;
+            }
+            if (order.stopDate) {
+                other.stop = order.stopDate;
+            }
+            other.status = order.status;
+            if (timeUtility.nowIsBetween(undefined, other.stop)) {
+                result.otherOrders.push(other);
+            }
+        }
+    },
+    nursing: function (result, order) {
+        typedOrderUpdater.activity(result, order);
+    }
 };
 
 var session = {
@@ -95,12 +181,15 @@ var session = {
         });
     },
     getDemographics: function (patientId, options, callback) {
-        this.get('/patientSummary', {
-            id: patientId
+        this.get('/getPatientMap', {
+            patientId: patientId
         }, function (err, body) {
             if (err) {
                 callback(err);
             } else {
+                body.sex = body.gender;
+                body.DOB = body.dob;
+                body.SSN = body.ssn; // until client changes not to break
                 callback(null, body);
             }
         });
@@ -228,7 +317,7 @@ var session = {
             this._getAllOrders(patientId, options, callback);
         } else {
             var self = this;
-            this.get('/getOrderTypes', {}, function(err, types) {
+            this.get('/getOrderTypes', {}, function (err, types) {
                 if (err) {
                     callback(err);
                 } else {
@@ -238,8 +327,52 @@ var session = {
             });
         }
     },
+    getOrdersAsClassified: function (patientId, options, callback) {
+        this.getAllOrders(patientId, options, function (err, orders) {
+            if (err) {
+                callback(err);
+            } else {
+                var classifiedOrders = orders.reduce(function (r, order) {
+                    if (order) {
+                        var type = order.type;
+                        if (type && type.topName) {
+                            var updater = typedOrderUpdater[type.topName.toLowerCase()];
+                            if (updater) {
+                                updater(r, order);
+                            }
+                        }
+                    }
+                    return r;
+                }, {});
+                callback(null, classifiedOrders);
+            }
+        });
+    },
+    getSurgicalPathologyReports: function (patientId, options, callback) {
+        this.get('/getPathologyReportsDetailMap', {
+            patientId: patientId
+        }, function (err, result) {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, result);
+            }
+        });
+    },
     logout: function (callback) {
         callback(null);
+    },
+    getChemHemReports: function (patientId, options, callback) {
+        this.get('/getChemHemLabs', {
+            patientId: patientId,
+            toDate: '2900101'
+        }, function (err, result) {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, result);
+            }
+        });
     }
 };
 

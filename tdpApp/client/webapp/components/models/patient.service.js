@@ -20,6 +20,7 @@ angular.module('tdpApp')
 
         $http({url: '/api/patient', method: 'GET', params: {value: value}}).
         success(function(data) {
+          console.log('PatientSearch:',data);
           results = data;
           deferred.resolve(data);
           return cb();

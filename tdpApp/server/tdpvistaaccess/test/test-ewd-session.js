@@ -69,13 +69,16 @@ describe('ewd session test', function () {
     });
 
     xit('get patient demographics/flags', function (done) {
-        var pid = patients[2].id;
+        var pid = 100748; //100846;
         testSession.getDemographics(pid, {}, function (err, body) {
             if (err) {
                 done(err);
             } else {
                 expect(body).to.exist();
-                expect(body.name).to.equal(patients[2].text);
+                //expect(body.name).to.equal(patients[2].text);
+                console.log("======DEMOGRAPHICS=======");
+                console.log(JSON.stringify(body, undefined, 4));
+                console.log("======================");
                 done();
             }
         });
@@ -97,8 +100,9 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get patient vitals', function (done) {
+    it('get patient vitals', function (done) {
         var pid = patients[37].id;
+        console.log(patients[37]);
         testSession.getVitalSigns(pid, {}, function (err, body) {
             if (err) {
                 done(err);
@@ -203,7 +207,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get orders', function (done) {
+    xit('get orders', function (done) {
         var pid = 100685;
         testSession.getAllOrders(pid, {}, function (err, body) {
             if (err) {
@@ -211,9 +215,9 @@ describe('ewd session test', function () {
             } else {
                 expect(body).to.exist();
                 //expect(body.length).to.be.above(0);
-                console.log("=== Order Types ============");
-                console.log(testSession.orderTypes);
-                console.log('============================');
+                //console.log("=== Order Types ============");
+                //console.log(testSession.orderTypes);
+                //console.log('============================');
                 console.log("=== All Orders =============");
                 console.log(JSON.stringify(body, undefined, 4));
                 console.log("============================");
@@ -232,6 +236,51 @@ describe('ewd session test', function () {
                 console.log(JSON.stringify(body, undefined, 4));
                 console.log("==============================");
                 expect(body).to.exist();
+                done();
+            }
+        });
+    });
+
+    xit('get diet, lab orders', function (done) {
+        var pid = 100022;
+        testSession.getOrdersAsClassified(pid, {}, function (err, result) {
+            if (err) {
+                done(err);
+            } else {
+                expect(result).to.exist();
+                console.log("=== All Orders =============");
+                console.log(JSON.stringify(result, undefined, 4));
+                console.log("============================");
+                done();
+            }
+        });
+    });
+
+    xit('get surgical pathology reports', function (done) {
+        var pid = 4; //100022;
+        testSession.getSurgicalPathologyReports(pid, {}, function (err, result) {
+            if (err) {
+                done(err);
+            } else {
+                expect(result).to.exist();
+                console.log("=== Pathology =============");
+                console.log(JSON.stringify(result, undefined, 4));
+                console.log("============================");
+                done();
+            }
+        });
+    });
+
+    it('get checm hem reports', function (done) {
+        var pid = 4; //100022;
+        testSession.getChemHemReports(pid, {}, function (err, result) {
+            if (err) {
+                done(err);
+            } else {
+                expect(result).to.exist();
+                console.log("=== Chem Hem =============");
+                console.log(JSON.stringify(result, undefined, 4));
+                console.log("============================");
                 done();
             }
         });

@@ -37,7 +37,7 @@ module.exports = function (grunt) {
 
       bowerFromWebappIndexHtml: '../',
       bowerFromIonicIndexHtml: '../',
-      
+
       dist: 'dist'
       // TODO: Add distIonic (ionic www folder...)
     },
@@ -61,11 +61,11 @@ module.exports = function (grunt) {
     open: {
       server: {
         url: 'http://localhost:<%= express.options.port %>'
-      },
+      }/*,
       // TODO: Ionic (development only)
       ionic: {
          url: 'http://localhost:<%= express.options.port %>/ionic'
-      }
+      }*/
     },
     watch: {
       injectJS: {
@@ -746,7 +746,7 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'clean:server',
         'env:all',
-        'injector:sass', 
+        'injector:sass',
         'concurrent:server',
         'concurrent:copyToIonicDist',
         'injector',
@@ -759,7 +759,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'env:all',
-      'injector:sass', 
+      'injector:sass',
       'concurrent:server',
       'concurrent:copyToIonicDist',
       'injector',
@@ -790,7 +790,7 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'clean:server',
         'env:all',
-        'injector:sass', 
+        'injector:sass',
         'concurrent:test',
         'injector',
         'autoprefixer',
@@ -803,7 +803,7 @@ module.exports = function (grunt) {
         'clean:server',
         'env:all',
         'env:test',
-        'injector:sass', 
+        'injector:sass',
         'concurrent:test',
         'injector',
         'wiredep',
@@ -821,7 +821,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'injector:sass', 
+    'injector:sass',
     'concurrent:dist',
     'injector',
     'wiredep',

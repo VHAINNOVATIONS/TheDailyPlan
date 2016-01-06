@@ -16,11 +16,7 @@
                       <h3 class="panel-title">Allergies</h3>
                     </div>
                     <div class="panel-body">
-                      <div>
-                        <ng ng-repeat="allergy in ctrl.allergies">
-                          <span class="label label-primary">{{allergy.allergenName}}</span>
-                        </ng>
-                      </div>
+                      <div dt-allergies patient="ctrl.patient"></div>
                     </div>
                   </div>
               </div>
@@ -30,25 +26,7 @@
                         <h3 class="panel-title">Vitals</h3>
                       </div>
                       <div class="panel-body">
-                        <div class="control-group">
-                          <input type="button" class="btn btn-small" ng-click="ctrl.expandVitalsRows()" value="Expand All"/>
-                          <input type="button" class="btn btn-small" ng-click="ctrl.collapseVitalsRows()" value="Collapse All"/>
-                        </div>
-                        <div ui-grid="ctrl.vitalsGridOptions" ui-grid-pinning ui-grid-expandable class="grid">
-                          <div class="grid-msg-overlay" ng-hide="!ctrl.vitalsLoading">
-                            <div class="msg">
-                              <span>
-                                Loading Data...
-                                <i class="fa fa-spinner fa-spin"></i>
-                              </span>
-                            </div>
-                          </div>
-                          <div class="grid-msg-overlay" ng-hide="ctrl.vitalsLoading || ctrl.vitalsGridOptions.data.length">
-                            <div class="msg">
-                              <span>No Data</span>
-                            </div>
-                          </div>
-                        </div>
+                        <div dt-vitals patient="ctrl.patient"></div>
                       </div>
                   </div>
               </div>
@@ -60,25 +38,7 @@
                         <h3 class="panel-title">Problems</h3>
                       </div>
                       <div class="panel-body">
-                        <div class="control-group">
-                          <input type="button" class="btn btn-small" ng-click="ctrl.expandProblemsRows()" value="Expand All"/>
-                          <input type="button" class="btn btn-small" ng-click="ctrl.collapseProblemsRows()" value="Collapse All"/>
-                        </div>
-                        <div ui-grid="ctrl.problemsGridOptions" ui-grid-pinning ui-grid-expandable class="grid">
-                          <div class="grid-msg-overlay" ng-hide="!ctrl.problemsLoading">
-                            <div class="msg">
-                              <span>
-                                Loading Data...
-                                <i class="fa fa-spinner fa-spin"></i>
-                              </span>
-                            </div>
-                          </div>
-                          <div class="grid-msg-overlay" ng-hide="ctrl.problemsLoading || ctrl.problemsGridOptions.data.length">
-                            <div class="msg">
-                              <span>No Data</span>
-                            </div>
-                          </div>
-                        </div>
+                        <div dt-problems patient="ctrl.patient"></div>
                       </div>
                   </div>
               </div>
@@ -88,11 +48,7 @@
                         <h3 class="panel-title">Immunizations</h3>
                       </div>
                       <div class="panel-body">
-                        <ul class="example-animate-container">
-                          <li class="animate-repeat" ng-repeat="imm in ctrl.immunizations">
-                            Name: {{imm.name}}
-                          </li>
-                        </ul>
+                        <div dt-immunizations patient="ctrl.patient"></div>
                       </div>
                   </div>
               </div>

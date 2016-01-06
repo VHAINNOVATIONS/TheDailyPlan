@@ -7,6 +7,16 @@ angular.module('tdpApp')
     self.errors = false;
     self.consent = {isselected: false};
 
+    self.facilities = {
+      facilitySelect: null,
+      availableOptions: [
+        {id: '520', name: '520 - Biloxi'},
+        {id: '607', name: '607 - Madison'},
+        {id: '618', name: '618 - Minneapolis'},
+        {id: '674', name: '674 - Central Texas (Waco)'}
+      ],
+    };
+
     self.tabs = [
       {
         isOpen: true,

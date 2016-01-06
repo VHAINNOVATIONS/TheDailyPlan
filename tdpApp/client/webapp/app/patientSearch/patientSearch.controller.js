@@ -57,20 +57,22 @@ angular.module('tdpApp')
                 $compile(angular.element(header).contents())($scope);
             }
         })
-        .withPaginationType('full_numbers');
+        .withPaginationType('full_numbers')
+        // Active Responsive plugin
+        .withOption('responsive', true);;
 
     self.dtColumns = [
         DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable()
             .renderWith(function(data, type, full, meta) {
                 self.selected[full.id] = false;
-                return '<input type="checkbox" ng-model="ctrl.selected[' + data.EIN + ']" ng-click="ctrl.toggleOne(ctrl.selected)">';
+                return '<input type="checkbox" ng-model="ctrl.selected[' + data.id + ']" ng-click="ctrl.toggleOne(ctrl.selected)">';
             }),
-        DTColumnBuilder.newColumn('EIN').withTitle('EIN'),
         DTColumnBuilder.newColumn('name').withTitle('Name'),
         DTColumnBuilder.newColumn('SSN').withTitle('SSN').renderWith(function(data, type, full) {
             return data.substr(0, 3) + '-' + data.substr(3, 2) + '-' + data.substr(5);
         }),
         DTColumnBuilder.newColumn('DOB').withTitle('DOB'),
+        DTColumnBuilder.newColumn('age').withTitle('Age'),
         DTColumnBuilder.newColumn('sex').withTitle('Gender')
     ];
 
