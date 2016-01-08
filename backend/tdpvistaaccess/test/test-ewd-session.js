@@ -319,7 +319,7 @@ describe('ewd session test', function () {
     });
 
     xit('get surgical pathology reports', function (done) {
-        var pid = 4; //100022;
+        var pid = 100022;
         testSession.getSurgicalPathologyReports(pid, {}, function (err, result) {
             if (err) {
                 done(err);
@@ -333,9 +333,15 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get checm hem reports', function (done) {
+    it('get chem hem reports', function (done) {
         var pid = 4; //100022;
-        testSession.getChemHemReports(pid, {}, function (err, result) {
+        testSession.getChemHemReports(pid, {
+            toDate: '3161010',
+            fromDate: '1501010',
+            testNames: [
+                'MAGNESIUM', 'POTASSIUM'
+            ]
+        }, function (err, result) {
             if (err) {
                 done(err);
             } else {

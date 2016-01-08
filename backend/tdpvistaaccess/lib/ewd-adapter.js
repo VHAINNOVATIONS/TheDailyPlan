@@ -140,6 +140,27 @@ var toPatientList = function (rawData, ignoreSecondPiece) {
     return result;
 };
 
+var filterChemHemReports = function (report, testNames) {
+    var testNameDict = testNames.reduce(function (r, testName) {
+        r[testName] = true;
+        return r;
+    }, {});
+    var result = report.reduce(function (r, reportElement) {
+        if (reportElement.labResults && reportElement.labResults.length) {
+            var filtered = reportElement.labResults.filter(function (labResult) {
+                var testName = labResult.labTest && labResult.labTest.name;
+                return testName && testNameDict[testName];
+            });
+            if (filtered.length) {
+                reportElement.labResults = filtered;
+                r.push(reportElement);
+            }
+        }
+        return r;
+    }, []);
+    return result;
+};
+
 var session = {
     get: function (route, parameters, callback) {
         var options = _.assign({
@@ -390,11 +411,13 @@ var session = {
     getChemHemReports: function (patientId, options, callback) {
         this.get('/getChemHemLabs', {
             patientId: patientId,
-            toDate: '2900101'
+            toDate: options.toDate,
+            fromDate: options.fromDate
         }, function (err, result) {
             if (err) {
                 callback(err);
             } else {
+                result = filterChemHemReports(result, options.testNames);
                 callback(null, result);
             }
         });
