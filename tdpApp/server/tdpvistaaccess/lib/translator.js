@@ -101,10 +101,10 @@ exports.translateVitalSigns = function (rawVitalSets) {
                     fn(vitalSet, data);
                 }
             });
-            if (timeUtility.onTodayOrYesterday(vitalSet.dateTime)) {
+            //if (timeUtility.onTodayOrYesterday(vitalSet.dateTime)) {
                 console.log('in');
                 vitalSets.push(vitalSet);
-            }
+            //}
         });
     }
     return vitalSets;

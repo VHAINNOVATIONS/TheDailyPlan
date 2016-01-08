@@ -6,7 +6,7 @@
   <div class="row">
     <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">Patient: {{ctrl.demographics.name}} DOB: {{ctrl.demographics.DOB}} Gender: {{ctrl.demographics.sex}} SSN: {{ctrl.demographics.SSN}}</h3>
+          <h3 class="panel-title">Patient: {{ctrl.demographics.name}} DOB: {{ctrl.demographics.DOB}} Gender: {{ctrl.demographics.sex}} SSN: {{ctrl.demographics.SSN}} Location: {{ctrl.demographics.location.name}}</h3>
         </div>
         <div class="panel-body">
           <div class="row">
@@ -23,10 +23,10 @@
               <div class="col-lg-6 col-md-6 col-sm-6">
                   <div class="panel panel-default">
                       <div class="panel-heading">
-                        <h3 class="panel-title">Vitals</h3>
+                        <h3 class="panel-title">Immunizations</h3>
                       </div>
                       <div class="panel-body">
-                        <div dt-vitals patient="ctrl.patient"></div>
+                        <div dt-immunizations patient="ctrl.patient"></div>
                       </div>
                   </div>
               </div>
@@ -43,12 +43,56 @@
                   </div>
               </div>
               <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Vitals</h3>
+                    </div>
+                    <div class="panel-body">
+                      <div dt-vitals patient="ctrl.patient"></div>
+                    </div>
+                </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6">
                   <div class="panel panel-default">
                       <div class="panel-heading">
-                        <h3 class="panel-title">Immunizations</h3>
+                        <h3 class="panel-title">Diet Orders</h3>
                       </div>
                       <div class="panel-body">
-                        <div dt-immunizations patient="ctrl.patient"></div>
+                        <div dt-diet-orders patient="ctrl.patient"></div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                  <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Lab Orders</h3>
+                      </div>
+                      <div class="panel-body">
+                        <div dt-lab-orders patient="ctrl.patient"></div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                  <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Radiology Reports</h3>
+                      </div>
+                      <div class="panel-body">
+                        <div dt-radiology-reports patient="ctrl.patient"></div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                  <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Visits</h3>
+                      </div>
+                      <div class="panel-body">
+                        <div dt-visits></dt-visits> patient="ctrl.patient"></div>
                       </div>
                   </div>
               </div>

@@ -12,7 +12,7 @@ angular.module('tdpApp')
       controller: function ($scope, Immunizations) {
 
         $scope.immunizations = null;
-        Immunizations.getByEIN($scope.patient)
+        Immunizations.getByID($scope.patient)
         .then( function(data) {
           console.log('Patient Plan - immunizations:',data);
           $scope.immunizations = data;

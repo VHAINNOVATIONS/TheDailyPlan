@@ -1,0 +1,21 @@
+<div>
+  <div class="control-group" ng-show="labOrdersGridOptions.enableExpandable">
+      <input type="button" class="btn btn-small" ng-click="expandLabOrdersRows()" value="Expand All" />
+      <input type="button" class="btn btn-small" ng-click="collapseLabOrdersRows()" value="Collapse All" />
+  </div>
+  <div ui-grid="labOrdersGridOptions" class="grid">
+      <div class="grid-msg-overlay" ng-hide="!labOrdersLoading">
+          <div class="msg">
+              <span>
+                  Loading Data...
+                  <i class="fa fa-spinner fa-spin"></i>
+              </span>
+          </div>
+      </div>
+      <div class="grid-msg-overlay" ng-hide="labOrdersLoading || labOrdersGridOptions.data.length">
+          <div class="msg">
+              <span>No Orders in this Section</span>
+          </div>
+      </div>
+  </div>
+</div>

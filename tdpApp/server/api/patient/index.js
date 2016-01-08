@@ -7,9 +7,9 @@ var auth = require('../../auth/auth.service');
 
 var router = express.Router();
 
-router.get('/', controller.index);
-//router.get('/:value', controller.search);
-//router.get('/:value', auth.isAuthenticated(), controller.search);
+router.get('/:id', controller.index);
+router.get('/byClinic/:id', controller.byClinic);
+router.get('/byWard/:id', controller.byWard);
 
 
 module.exports = router;

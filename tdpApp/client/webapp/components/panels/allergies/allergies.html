@@ -1,5 +1,12 @@
 <div>
+  <div ng-show="allergies.length">
     <ng ng-repeat="allergy in allergies">
         <span class="label label-primary">{{allergy.allergenName}}</span>
     </ng>
+  </div>
+  <div ng-hide="allergies.length">
+    <div class="msg">
+        <span>No Allergies in this Section</span>
+    </div>
+  </div>
 </div>

@@ -33,7 +33,7 @@ angular.module('tdpApp')
           { name: 'pulse.value', displayName: 'Pulse', width:'*' }
         ];
 
-        Vitals.getByEIN($scope.patient)
+        Vitals.getByID($scope.patient)
         .then( function(data) {
           console.log('Patient Plan - vitals:',data);
           $scope.vitalsGridOptions.data = data;

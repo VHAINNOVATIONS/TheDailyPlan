@@ -13,7 +13,7 @@ angular.module('tdpApp')
        * @param  {Function} callback - optional
        * @return {Promise}
        */
-      getByEIN: function(value, callback) {
+      getByID: function(value, callback) {
         var cb = callback || angular.noop;
         var deferred = $q.defer();
 
@@ -26,7 +26,7 @@ angular.module('tdpApp')
               data: (!angular.isUndefined(data[i].weight) ? [ data[i].weight ] : [])
             };
             data[i].getTemp = function(){
-              return this.temperature.value + ' ' + this.temperature.unit;
+              return !angular.isUndefined(this.temperature) ? this.temperature.value + ' ' + this.temperature.unit : '';
             };
           }
           results = data;

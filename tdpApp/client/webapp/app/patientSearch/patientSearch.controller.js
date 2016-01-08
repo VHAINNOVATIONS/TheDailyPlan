@@ -1,16 +1,36 @@
 'use strict';
 
 angular.module('tdpApp')
-  .controller('PatientSearchCtrl', function ($compile, $scope, $resource, $location, DTOptionsBuilder, DTColumnBuilder, Patient) {
+  .controller('PatientSearchCtrl', function ($compile, $scope, $resource, $location, DTOptionsBuilder, DTColumnBuilder, Patient, Location) {
   	var self = this;
     self.data = [];
     self.items = [];
+    self.wards = [];
+    self.clinics = [];
+    self.wardsSelected = [];
     self.selected = {};
     self.selectAll = false;
     self.toggleAll = toggleAll;
     self.toggleOne = toggleOne;
+    self.noResults = false;
 
     var titleHtml = '<input type="checkbox" ng-model="ctrl.selectAll" ng-click="ctrl.toggleAll(ctrl.selectAll, ctrl.selected)">';
+
+    Location.getWards()
+      .then( function(data) {
+        self.wards = data;
+      })
+      .catch( function(err) {
+        self.errors.other = err.message;
+      });
+
+      Location.getClinics()
+      .then( function(data) {
+        self.clinics = data;
+      })
+      .catch( function(err) {
+        self.errors.other = err.message;
+      });
 
     self.display = function() {
       angular.forEach(self.selected, function(value, key) {
@@ -29,17 +49,54 @@ angular.module('tdpApp')
         }
     };
 
-    self.searchAll = function() {
+    self.searchClinic = function() {
       self.submitted = true;
+      self.clearAlerts();
 
-      Patient.searchAll(self.search.all)
+      Patient.byClinic(self.search.clinic)
       .then( function(data) {
         self.data = data;
+        self.noResults = !(data.length);
         reloadData();
       })
       .catch( function(err) {
         self.errors.other = err.message;
       });
+    };
+
+    self.searchWard = function() {
+      self.submitted = true;
+      self.clearAlerts();
+
+      Patient.byWard(self.search.ward)
+      .then( function(data) {
+        self.data = data;
+        self.noResults = !(data.length);
+        reloadData();
+      })
+      .catch( function(err) {
+        self.errors.other = err.message;
+      });
+    };
+
+
+    self.searchAll = function() {
+      self.submitted = true;
+      self.clearAlerts();
+
+      Patient.searchAll(self.search.all)
+      .then( function(data) {
+        self.data = data;
+        self.noResults = !(data.length);
+        reloadData();
+      })
+      .catch( function(err) {
+        self.errors.other = err.message;
+      });
+    };
+
+    self.clearAlerts = function() {
+      self.noResults = false;
     };
 
     self.dtOptions = DTOptionsBuilder.fromFnPromise(function() {
@@ -58,8 +115,9 @@ angular.module('tdpApp')
             }
         })
         .withPaginationType('full_numbers')
+        .withOption('aaSorting', [[1, 'asc']])
         // Active Responsive plugin
-        .withOption('responsive', true);;
+        .withOption('responsive', true);
 
     self.dtColumns = [
         DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable()
@@ -69,7 +127,7 @@ angular.module('tdpApp')
             }),
         DTColumnBuilder.newColumn('name').withTitle('Name'),
         DTColumnBuilder.newColumn('SSN').withTitle('SSN').renderWith(function(data, type, full) {
-            return data.substr(0, 3) + '-' + data.substr(3, 2) + '-' + data.substr(5);
+          return !angular.isUndefined(data) ? data.substr(0, 3) + '-' + data.substr(3, 2) + '-' + data.substr(5) : '';
         }),
         DTColumnBuilder.newColumn('DOB').withTitle('DOB'),
         DTColumnBuilder.newColumn('age').withTitle('Age'),

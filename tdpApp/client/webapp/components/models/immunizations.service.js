@@ -13,7 +13,7 @@ angular.module('tdpApp')
        * @param  {Function} callback - optional
        * @return {Promise}
        */
-      getByEIN: function(value, callback) {
+      getByID: function(value, callback) {
         var cb = callback || angular.noop;
         var deferred = $q.defer();
 

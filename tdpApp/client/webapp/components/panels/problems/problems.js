@@ -33,7 +33,7 @@ angular.module('tdpApp')
           { name: 'description', displayName: 'Description', width:'*' }
         ];
 
-        Problems.getByEIN($scope.patient)
+        Problems.getByID($scope.patient)
         .then( function(data) {
           console.log('Patient Plan - problems:',data);
           $scope.problemsGridOptions.data = data;
