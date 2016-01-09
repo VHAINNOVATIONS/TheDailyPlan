@@ -131,7 +131,7 @@ describe('ewd session test', function () {
     });
 
     it('get patient demographics/flags', function (done) {
-        var pid = 100748; //100846;
+        var pid = 100845; //100748; //100846;
         testSession.getDemographics(pid, {}, function (err, body) {
             if (err) {
                 done(err);
@@ -333,7 +333,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get chem hem reports', function (done) {
+    xit('get chem hem reports', function (done) {
         var pid = 4; //100022;
         testSession.getChemHemReports(pid, {
             toDate: '3161010',

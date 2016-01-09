@@ -9,3 +9,4 @@ server/config/local.env.js
 server/tdpvistaaccess/.env
 dist-ionic/
 *.env
+bower_components

@@ -326,3 +326,34 @@ login(accessCode,verifyCode)
  m ^CacheTempEWD($j)=results
  ;k ^rob("login") m ^rob("login")=results
  QUIT ""
+ ;
+NKO(PTID,TMP) ;
+ N RESULT
+ D FILLVALUE(TMP,PTID,"nextOfKin",.21)
+ D FILLVALUE(TMP,PTID,"altNextOfKin",.211)
+ D FILLVALUE(TMP,PTID,"emergencyContact",.33)
+ D FILLVALUE(TMP,PTID,"altEmergencyContact",.331)
+ Q ""
+ ;
+FILLVALUE(TMP,PTID,TOP,ITM) ;
+ N GLOB,NAME,VAL
+ S GLOB=$G(^DPT(PTID,ITM))
+ S NAME=$P(GLOB,"^",1)
+ Q:GLOB=""
+ Q:NAME=""
+ S @TMP@(TOP,"name")=NAME
+ S VAL=$P(GLOB,"^",2) S:VAL]"" @TMP@(TOP,"relation")=VAL
+ S VAL=$P(GLOB,"^",3) S:VAL]"" @TMP@(TOP,"st1")=VAL
+ S VAL=$P(GLOB,"^",4) S:VAL]"" @TMP@(TOP,"st2")=VAL
+ S VAL=$P(GLOB,"^",5) S:VAL]"" @TMP@(TOP,"st3")=VAL
+ S VAL=$P(GLOB,"^",6) S:VAL]"" @TMP@(TOP,"city")=VAL
+ S VAL=$P(GLOB,"^",7) I VAL]"" D
+ . N STATE
+ . S STATE=$P($G(^DIC(5,VAL,0)),"^",2) 
+ . S:STATE]"" @TMP@(TOP,"state")=STATE
+ S VAL=$P(GLOB,"^",8) S:VAL]"" @TMP@(TOP,"zip")=VAL
+ S VAL=$P(GLOB,"^",9) S:VAL]"" @TMP@(TOP,"phone")=VAL
+ S VAL=$P(GLOB,"^",11) S:VAL]"" @TMP@(TOP,"workPhone")=VAL
+ S VAL=$P(GLOB,"^",10) S:VAL]"" @TMP@(TOP,"sameAsNKO")=VAL
+ Q
+ ;

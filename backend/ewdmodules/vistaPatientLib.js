@@ -1,21 +1,23 @@
+"use strict";
+
+var vistaLib = require('VistALib');
+
 module.exports = {
-	
 	selectPatient: function(params, session, ewd) {
 		params.rpcName = "ORWPT SELECT";
 		params.rpcArgs = [{type: "LITERAL", value: params.patientId}];
-		
+
 		var response = vistaLib.runRpc(params, session, ewd);
 		var selectedPatient = this.toPatientFromSelect(response);
-		
+
 		params.selectedPatient = selectedPatient;
 		return this.supplementPatient(params, session, ewd);
 	},
-	
 	toPatientFromSelect: function(response) {
 		if (!response.value || response.value == "") {
 			throw Error('No such patient');
 		}
-		
+
 		var result = {};
 		var pieces = response.value.split("^");
 
@@ -25,7 +27,7 @@ module.exports = {
 		result.ssn = pieces[3];
 		result.mpiPid = pieces[13];
 		result.age = pieces[14];
-		
+
 		if (pieces[4] != "" && pieces[5] != "") {
 			result.isInpatient = true;
 			result.location = { id: pieces[4], name: pieces[5], room: pieces[6] };
@@ -33,7 +35,7 @@ module.exports = {
 				result.location.specialty = { id: pieces[15] };
 			}
 		}
-		
+
 		result.cwad = pieces[7];
 		result.isRestricted = (pieces[8] == "1");
 		if (pieces[9] != "") {
@@ -45,24 +47,23 @@ module.exports = {
 		}
 		return result;
 	},
-	
 	supplementPatient: function(params, session, ewd) {
 		// refactoring MDWS selectPlus call which makes a lot of calls for various nodes of ^DPT global 
 		// TODO - swap out stuff below
 		params.iens = params.patientId;
 		params.file = "2";
 		var patientRec = vistaLib.ddrGetsEntry2(params, session, ewd);
-		
+
 		var patient = params.selectedPatient;
 		var pieces = [];
-		
+
 		// node 0 section
 		//var node0 = vistaLib.getVariableValue("$G(^DPT(" + params.patientId + ",0))", session, ewd);
 		//var pieces = node0.split("^");
 		if (patientRec.hasOwnProperty(".05")) {
 			patient.maritalStatus = (patientRec[".05"]["E"] != "" ? patientRec[".05"]["E"] : patientRec[".05"]["I"]);
 		}
-		
+
 		if (patientRec.hasOwnProperty(".06")) {
 			patient.ethnicity = patientRec[".06"]["E"];
 			patient.ethnicityId = patientRec[".06"]["I"];
@@ -75,7 +76,7 @@ module.exports = {
 			patient.isTestPatient = (patientRec[".6"] == "1");
 		}
 		// end node 0
-		
+
 		// room bed/node .101 section
 		if (patient.isInpatient && patientRec.hasOwnProperty(".101")) {
 			pieces = patientRec[".101"]["I"].split("-");
@@ -86,7 +87,7 @@ module.exports = {
 		}
 
 		// end room/bed
-		
+
 		// insurance
 		params.rpcName = "ORVAA VAA";
 		params.rpcArgs = [{ type: "LITERAL", value: params.patientId }];
@@ -126,7 +127,7 @@ module.exports = {
 			patient.isVeteran = (patientRec["1901"]["I"] == "1");
 		}
 		// end veteran
-		
+
 		// sensitivity
 		params.rpcName = "DG SENSITIVE RECORD ACCESS";
 		params.rpcArgs = [{ type: "LITERAL", value: params.patientId }];
@@ -143,14 +144,14 @@ module.exports = {
 		}
 		patient.confidentiality = { tag: level, text: sensitivityMsg };
 		// end sensitivity
-		
+
 		// patient flags
 		params.rpcName = "ORPRF HASFLG";
 		params.rpcArgs = [{ type: "LITERAL", value: params.patientId }];
 		var flagsResponse = vistaLib.runRpc(params, session, ewd);
 		patient.flags = flagsResponse.value;
 		// end flags
-		
+
 		// remote site IDs
 		params.rpcName = "ORWCIRN FACLIST";
 		params.rpcArgs = [{ type: "LITERAL", value: params.patientId }];
@@ -163,7 +164,7 @@ module.exports = {
 			}
 		}
 		// end remote sites
-		
+
 		// teams
 		params.rpcName = "ORWPT1 PRCARE";
 		params.rpcArgs = [{ type: "LITERAL", value: params.patientId }];
@@ -173,7 +174,7 @@ module.exports = {
 			patient.team = { name: teamPieces[0], pcpName: teamPieces[1], attendingName: teamPieces[2] }; // name^PCP name^attending name
 		}
 		// end teams
-		
+
 		// demographics
 		var address = { 
 			street1: patientRec.hasOwnProperty(".111") ? patientRec[".111"]["I"] : "", 
@@ -195,14 +196,27 @@ module.exports = {
 		if (patientRec.hasOwnProperty(".134")) {
 			patient.phoneNumbers.push({ description: "Cell Phone", number: patientRec[".134"]["I"] });
 		}
-		
+
 		if (patientRec.hasOwnProperty(".133")) {
 			patient.email = patientRec[".133"]["I"];
 		}
 		// end demogs
-		return patient;
-	}
-	
-};
 
-var vistaLib = require('VistALib');
+		this.putNokAndEmergencyContacts(patient, params.patientId, ewd, session);
+		return patient;
+	},
+	putNokAndEmergencyContacts: function(patient, patientId, ewd, session) {
+        var gloRef = new ewd.mumps.GlobalNode('TMP', [process.pid]);
+        gloRef._delete();
+        var status = ewd.mumps.function("NKO^VEFBRPC", patientId, '^TMP(' + process.pid + ')') ;
+        var results = gloRef._getDocument();
+        if (results) {
+            ['nextOfKin', 'altNextOfKin', 'emergencyContact', 'altEmergencyContact'].forEach(function(key) {
+                if (results[key]) {
+                    patient[key] = results[key];
+                }
+            });
+        }
+        gloRef._delete();
+	}
+};
