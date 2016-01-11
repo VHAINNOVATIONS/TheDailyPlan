@@ -41,12 +41,16 @@ describe('ewd session test', function () {
     it('login', function (done) {
         testSession.login({
             accessCode: 'CPRS1234',
-            verifyCode: 'CPRS4321$'
+            verifyCode: 'CPRS4321$',
+            userKeys: ['XUPROG', 'NOTHAVE', 'RA VERIFY']
         }, function (err) {
             if (err) {
                 done(err);
             } else {
                 expect(testSession.userData).to.exist();
+                console.log("======USER DATA=======");
+                console.log(JSON.stringify(testSession.userData, undefined, 4));
+                console.log("======================");
                 done();
             }
         });
@@ -130,7 +134,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get patient demographics/flags', function (done) {
+    xit('get patient demographics/flags', function (done) {
         var pid = 100845; //100748; //100846;
         testSession.getDemographics(pid, {}, function (err, body) {
             if (err) {

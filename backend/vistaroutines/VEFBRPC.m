@@ -357,3 +357,12 @@ FILLVALUE(TMP,PTID,TOP,ITM) ;
  S VAL=$P(GLOB,"^",10) S:VAL]"" @TMP@(TOP,"sameAsNKO")=VAL
  Q
  ;
+USERKEYS(UID,KEYS) ;
+ Q:$G(KEYS)="" ""
+ N KEY,VAL,I
+ S KEY=$P(KEYS,"^",1)
+ S VAL=''$D(^XUSEC(KEY,UID))
+ F I=2:1:$L(KEYS,"^") D
+ . S KEY=$P(KEYS,"^",I)
+ . S VAL=VAL_"^"_''$D(^XUSEC(KEY,UID))
+ Q VAL
