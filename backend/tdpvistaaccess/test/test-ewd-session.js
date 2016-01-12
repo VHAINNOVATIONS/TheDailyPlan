@@ -57,7 +57,7 @@ describe('ewd session test', function () {
     });
 
     var patients;
-    it('search patients', function (done) {
+    xit('search patients', function (done) {
         testSession.searchPatients({
             prefix: 'eig'
         }, function (err, body) {
@@ -134,8 +134,8 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get patient demographics/flags', function (done) {
-        var pid = 100845; //100748; //100846;
+    it('get patient demographics/flags', function (done) {
+        var pid = 724; //631; //100845; //100748; //100846;
         testSession.getDemographics(pid, {}, function (err, body) {
             if (err) {
                 done(err);
@@ -223,19 +223,19 @@ describe('ewd session test', function () {
     });
 
     xit('get patient visits', function (done) {
-        var pid = patients[37].id;
+        var pid = 520; //patients[37].id;
         testSession.getVisits(pid, {
             numDaysPast: 2998,
-            numDaysFuture: 10
+            numDaysFuture: 30
         }, function (err, body) {
             if (err) {
                 done(err);
             } else {
                 expect(body).to.exist();
-                //expect(body.length).to.be.above(0);
-                //console.log("======= VISITS =======");
-                //console.log(JSON.stringify(body, undefined, 4));
-                //console.log("======================");
+                expect(body.length).to.be.above(0);
+                console.log("======= VISITS =======");
+                console.log(JSON.stringify(body, undefined, 4));
+                console.log("======================");
                 done();
             }
         });

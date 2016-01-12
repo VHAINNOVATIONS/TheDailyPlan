@@ -203,6 +203,22 @@ module.exports = {
 		// end demogs
 
 		this.putNokAndEmergencyContacts(patient, params.patientId, ewd, session);
+
+		var adminInfo = ewd.mumps.function("ADMINFO^VEFBRPC", params.patientId) ;
+		if (adminInfo) {
+			patient.admissionInfo = {};
+			var adminInfoPieces = adminInfo.split("^");
+			if (adminInfoPieces[0]) {
+				patient.admissionInfo['provider'] = adminInfoPieces[0];
+			}
+			if (adminInfoPieces[1]) {
+				patient.admissionInfo['attendingProvider'] = adminInfoPieces[1];
+            }
+            if (adminInfoPieces[2]) {
+				patient.admissionInfo['diagnosis'] = adminInfoPieces.slice(2).join('^');
+            }
+        }
+
 		return patient;
 	},
 	putNokAndEmergencyContacts: function(patient, patientId, ewd, session) {
