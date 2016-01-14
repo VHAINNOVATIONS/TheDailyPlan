@@ -23,7 +23,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('login error', function (done) {
+    xit('login error', function (done) {
         testSession.login({
             accessCode: 'CPRS1234XX',
             verifyCode: 'CPRS4321$XX'
@@ -134,8 +134,8 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get patient demographics/flags', function (done) {
-        var pid = 724; //631; //100845; //100748; //100846;
+    xit('get patient demographics/flags', function (done) {
+        var pid = 756; //724; //631; //100845; //100748; //100846;
         testSession.getDemographics(pid, {}, function (err, body) {
             if (err) {
                 done(err);
@@ -189,20 +189,24 @@ describe('ewd session test', function () {
             if (err) {
                 done(err);
             } else {
-                //console.log(JSON.stringify(body, undefined, 4));
+                console.log('======== MED 1 =========');
+                console.log(JSON.stringify(body, undefined, 4));
+                console.log('========================');
                 expect(body).to.exist();
                 done();
             }
         });
     });
 
-    xit('get patient meds', function (done) {
-        var pid = patients[2].id;
-        testSession.getMedications('100014', {}, function (err, body) {
+    it('get patient meds', function (done) {
+        var pid = 100846; ///patients[2].id;
+        testSession.getMedications('100033', {}, function (err, body) {
             if (err) {
                 done(err);
             } else {
-                //console.log(JSON.stringify(body, undefined, 4));
+                console.log('======== MED 2 =========');
+                console.log(JSON.stringify(body, undefined, 4));
+                console.log('========================');
                 expect(body).to.exist();
                 done();
             }
@@ -223,7 +227,7 @@ describe('ewd session test', function () {
     });
 
     xit('get patient visits', function (done) {
-        var pid = 520; //patients[37].id;
+        var pid = 756; //520; //patients[37].id;
         testSession.getVisits(pid, {
             numDaysPast: 2998,
             numDaysFuture: 30

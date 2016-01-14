@@ -1,4 +1,7 @@
-// NOTE: these need to be throughly tested... lack of data in dev vistas!!
+"use strict";
+
+var vistaLib = require('VistALib');
+
 module.exports = {
 	getAllMeds: function(params, session, ewd) {
 		params.rpcName = "ORWPS ACTIVE";
@@ -7,21 +10,21 @@ module.exports = {
 
 		var meds = this.toAllMeds(response, params, session, ewd);
 		var otherMeds = this.getOtherMedsFromReportsTab(params, session, ewd);
-		
+
 		var combined = meds.concat(otherMeds);
 		return combined;
 	},
-	
+
 	toAllMeds: function(response, params, session, ewd) {
 		var result = [];
 		if (!response || !response.hasOwnProperty("value")) {
 			return result;
 		}
-		
+
 		//return response;
 		var opSupplements = null;
 		var udSupplements = null;
-		
+
 		// ORWPS ACTIVE response example:
 		//{
 		//	"type":"ARRAY",
@@ -60,13 +63,13 @@ module.exports = {
 			}
 			currRaw.rawLines.push(response.value[i.toString()]);
 		}
-		
+
 		// push last med on to array
 		if (currRaw != null) {
 			rawMeds.push(currRaw);
 		}
 		// done setup! 
-		
+
 		// now loop through prepared array and supplement
 		for (var i = 0; i < rawMeds.length; i++) {
 			var current = rawMeds[i];
@@ -92,14 +95,13 @@ module.exports = {
 			else if (current.medicationType.hasOwnProperty("isInForOut")) { 
 				current = this.toInpatientForOutpatientMed(current.rawLines);
 				result.push(current);
-			} 
+			}
 			// note: purposefully not adding result to array for other types!
-			
 		}
-		
+
 		return result;
 	},
-	
+
 	// don't use this function - only for encapsulating the type determination when supplementing meds
 	getTypeFromCode: function(code) {
 		if (code == "OP") {
@@ -116,23 +118,23 @@ module.exports = {
 			return { code: code, type: "unknown" };
 		}
 	},
-	
+
 	toOutpatientMed: function(rawMedObj, reportsTabObj) {
 		var result = {};
-		
+
 		var line1Pieces = rawMedObj[0].split("^");
-		
+
 		result.type = line1Pieces[0].split("~")[1];
 		result.id = line1Pieces[1];
 		result.name = line1Pieces[2];
 		result.refills = line1Pieces[5];
 		result.orderId = line1Pieces[8];
-		result.status = lines1Pieces[9];
-		result.lastFillDate = lines1Pieces[10];
-		result.daysSupply = lines1Pieces[11];
-		result.quantity = lines1Pieces[12];
+		result.status = line1Pieces[9];
+		result.lastFillDate = line1Pieces[10];
+		result.daysSupply = line1Pieces[11];
+		result.quantity = line1Pieces[12];
 		result.isOutpatient = true;
-		
+
 		result.detail = rawMedObj[1];
 		result.sig = rawMedObj[2];
 
@@ -148,19 +150,19 @@ module.exports = {
 			result.sig = reportsTabObj[numericResultId].sig;
 			result.isSupply = reportsTabObj[numericResultId].isSupply;
 		}
-		
+
 		return result;
 	},
-	
+
 	// not even remotely close to being tested!! we don't have any IV meds in
 	// our test VistA and creating new med orders seems to generate errors
 	// in VistA so can't stage data... for now, just doing best job possible 
 	// translating from MDWS to JS
 	toIVMed: function(rawMedObj) {
 		var result = {};
-		
+
 		rawLine1 = rawMedObj[0].split("^");
-		
+
 		result.type = "IV";
 		result.id = rawLine1[1];
 		result.name = rawLine1[2];
@@ -173,14 +175,14 @@ module.exports = {
 		result.status = rawLine1[9];
 		result.stopDate = rawLine1[4];
 		result.startDate = rawLine1[15];
-		
+
 		result.detail = "";
 		for (var i = 1; i < rawMedObj.length; i++){
 			result.detail += (rawMedObj[i] + "\r\n");
 		}
-		
+
 		var textFields = result.detail.split("\r\n");
-		
+
 		if (textFields.length > 0)
 		{
 			if (result.dose == "" && textFields[0].length > 0)
@@ -198,7 +200,7 @@ module.exports = {
 					result.additives = textFields[0].substr(0, firstIndexOfNumber);
 				}
 			}
-			
+
 			for (var line in textFields) {
 				if (line.indexOf("\\in") > 0) {
 					result.solution = line.replace("\\in", "");
@@ -215,7 +217,7 @@ module.exports = {
 	// TODO: same as toIVMed - needs thorough testing!!!!!
 	toUnitDoseMed: function(rawMedObj, reportsTabObj) {
 		var result = {};
-		
+
 		rawLine1 = rawMedObj[0].split("^");
 		result.type = "UD";
 		result.id = rawLine1[1];
@@ -224,18 +226,18 @@ module.exports = {
 		result.isUnitDose = true;
 		result.isInpatient = true;
 		result.status = rawLine1[9];
-		
+
 		result.drug = { value: rawLine1[2] };
 		result.name = rawLine1[2];
 		result.dose = rawLine1[6];
 		result.startDate = rawLine1[15];
 		result.stopDate = rawLine1[4];
-		
+
 		result.detail = "";
 		for (var i = 1; i < rawMedObj.length; i++){
 			result.detail += (rawMedObj[i] + "\r\n");
 		}
-		
+
 		var textFields = result.detail.split("\r\n");
 
 		var rptsTabMatch = null;
@@ -245,13 +247,13 @@ module.exports = {
 					&& result.drug.startDate == reportsTabObj[prop].startDate
 					&& result.drug.stopDate == reportsTabObj[prop].stopDate
 					&& result.dose == reportsTabObj[prop].dose) {
-					
+
 					rptsTabMatch = reportsTabObj[prop];
 					break;
 				}
 			}
 		}
-		
+
 		if (rptsTabMatch != null) {
 			result.drug = rptsTabMatch.drug;
 			result.stopDate = rptsTabMatch.stopDate;
@@ -261,13 +263,13 @@ module.exports = {
 			result.schedule = rptsTabMatch.schedule;
 			result.status = rptsTabMatch.status;
 		}
-		
+
 		return result;
 	},
-		
+
 	toInpatientForOutpatientMed: function(rawMedObj, reportsTabObj) {
 		var result = {};
-		
+
 		var rawLine1 = rawMedObj[0].split("^");
 		result.type = "CP";
 		result.rawLine1[1];
@@ -275,7 +277,7 @@ module.exports = {
 		result.orderId = rawLine1[8];
 		med.isOutpatient = true;
 		med.isImo = true;
-		
+
 		med.hospital = { 
 			key: rawLine1[0].split(":")[2], 
 			value: rawLine1[0].split(":")[2]
@@ -285,21 +287,21 @@ module.exports = {
 		med.dose = rawLine1[6];
 		med.startDate = rawLine1[15];
 		med.stopDate = rawLine1[4];
-		
+
 		med.detail = "";
 		for (var i = 1; i < rawMedObj.length; i++){
 			result.detail += (rawMedObj[i] + "\r\n");
 		}
-		
+
 		return result;
 	},
-		
+
 	getOtherMedsFromReportsTab: function(params, session, ewd) {
 		params.reportsTabName = "OR_RXN:HERBAL/OTC/NON-VA MEDS~NVA;ORDV06A;0;";
 		//return vistaLib.runReportsTabRpc(params, session, ewd);
 		return this.toOtherMeds(vistaLib.runReportsTabRpc(params, session, ewd));
 	},
-	
+
 	// returns simple array because other meds have no ID
 	toOtherMeds: function(response) {
 		var result = [];
@@ -310,10 +312,10 @@ module.exports = {
 					if (responseIn.hasOwnProperty(prop) && responseIn[prop]["WP"]) {
 						var raw = responseIn[prop]["WP"];
 						var current = { type: "NV", isOutpatient: true, isNonVa: true };
-						
+
 						var facilityStr = raw["1"].split("^")[1].split(";"); // e.g. MedObj["1"] : "1^CAMP MASTER;500"
 						current.facility = { id: facilityStr[1], name: facilityStr[0] };
-						
+
 						current.name = raw.hasOwnProperty("2") ? raw["2"].split("^")[1] : "";
 						current.status = raw.hasOwnProperty("3") ? raw["3"].split("^")[1] : "";
 						current.startDate = raw.hasOwnProperty("4") ? raw["4"].split("^")[1] : "";
@@ -330,7 +332,7 @@ module.exports = {
 							}
 							current.comment = current.comment.trim();
 						}
-						
+
 						result.push(current);
 					}
 				}
@@ -338,16 +340,16 @@ module.exports = {
 		}
 		return result;
 	},
-	
+
 	getOutpatientMedsFromReportsTab: function(params, session, ewd) {
 		params.reportsTabName = "OR_RXOP:ALL OUTPATIENT~RXOP;ORDV06;28;";
 		return this.toOutpatientMedsFromReportsTab(vistaLib.runReportsTabRpc(params, session, ewd));
 	},
-	
+
 	toOutpatientMedsFromReportsTab: function(response) {
 		var result = {}; // make a dictionary
 		//return response;
-		
+
 		// next two lines are how one iterates over object properties in js
 		for (var prop in response.result) {
 			if (response.result.hasOwnProperty(prop)) {
@@ -356,7 +358,7 @@ module.exports = {
 
 				var facilityStr = raw["1"].split("^")[1].split(";"); // e.g. MedObj["1"] : "1^CAMP MASTER;500"
 				current.facility = { id: facilityStr[1], name: facilityStr[0] };
-				
+
 				current.name = raw.hasOwnProperty("2") ? raw["2"].split("^")[1] : ""; // e.g. MedObj["3"] : "3^MORPHINE ORAL 10MG/5ML CC "
 				current.drug = { id: raw["3"].split("^")[1], name: current.name }; // e.g. MedObj["2"] : "2^123"
 				current.rxNumber = raw.hasOwnProperty("4") ? raw["4"].split("^")[1] : ""; // e.g. etc...
@@ -370,7 +372,7 @@ module.exports = {
 				current.cost = raw.hasOwnProperty("12") ? raw["12"].split("^")[1] : "";
 				current.id = raw.hasOwnProperty("15") ? raw["15"].split("^")[1] : "";
 				current.stopDate = raw.hasOwnProperty("16") ? raw["16"].split("^")[1] : "";
-				
+
 				// get sig lines from 14 - line numbers should be object properties
 				if (raw.hasOwnProperty("14") && raw["14"].hasOwnProperty("1")) {
 					current.sig = "";
@@ -381,23 +383,23 @@ module.exports = {
 					}
 					current.sig = current.sig.trim();
 				}
-				
+
 				result[current.id] = current;
 			}
-		}		
-		
+		}
+
 		return result;
 	},
-	
+
 	getUnitDoseMedsFromReportsTab: function(params, session, ewd) {
 		params.reportsTabName = "OR_RXUD:UNIT DOSE~RXUD;ORDV06;29;";
 		return this.toUnitDoseMedsFromReportsTab(vistaLib.runReportsTabRpc(params, session, ewd));
 	},
-	
+
 	toUnitDoseMedsFromReportsTab: function(response) {
 		var result = {}; // make a dictionary
 		//return response;
-		
+
 		// next two lines are how one iterates over object properties in js
 		for (var prop in response.result) {
 			if (response.result.hasOwnProperty(prop)) {
@@ -406,7 +408,7 @@ module.exports = {
 
 				var facilityStr = raw["1"].split("^")[1].split(";"); // e.g. MedObj["1"] : "1^CAMP MASTER;500"
 				current.facility = { id: facilityStr[1], name: facilityStr[0] };
-				
+
 				current.id = raw.hasOwnProperty("2") ? raw["2"].split("^")[1] : ""; // e.g. MedObj["2"] : "2^123"
 				current.name = raw.hasOwnProperty("3") ? raw["3"].split("^")[1] : ""; // e.g. MedObj["3"] : "3^MORPHINE ORAL 10MG/5ML CC "
 				current.dose = raw.hasOwnProperty("4") ? raw["4"].split("^")[1] : ""; // e.g. etc...
@@ -415,15 +417,13 @@ module.exports = {
 				current.stopDate = raw.hasOwnProperty("7") ? raw["7"].split("^")[1] : "";
 				current.route = raw.hasOwnProperty("8") ? raw["8"].split("^")[1] : "";
 				current.schedule = raw.hasOwnProperty("9") ? raw["9"].split("^")[1] : "";
-				
+
 				current.drug = { id: current.id, name: current.name };
-				
+
 				result[current.id] = current;
 			}
-		}		
-		
+		}
+
 		return result;
 	}
 };
-
-var vistaLib = require('VistALib');
