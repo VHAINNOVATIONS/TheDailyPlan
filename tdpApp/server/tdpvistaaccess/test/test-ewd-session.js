@@ -55,17 +55,14 @@ describe('ewd session test', function () {
     var patients;
     it('search patients', function (done) {
         testSession.searchPatients({
-            prefix: 'xqickeinendidkei'
+            prefix: 'eig'
         }, function (err, body) {
             if (err) {
                 done(err);
             } else {
                 expect(body).to.exist();
-                //expect(body.length).to.be.above(0);
+                expect(body.length).to.be.above(0);
                 patients = body;
-                console.log("======SEARCH PATIENTS=======");
-                console.log(patients);
-                console.log("======================");
                 done();
             }
         });
@@ -85,8 +82,8 @@ describe('ewd session test', function () {
         });
     });
 
-    it('getPatientsByClinic', function (done) {
-        var clinicId = 12; //clinics[0].id;
+    xit('getPatientsByClinic', function (done) {
+        var clinicId = clinics[0].id;
         testSession.getPatientsByClinic({
             clinicId: clinicId,
             fromDate: '3150909',
@@ -97,9 +94,7 @@ describe('ewd session test', function () {
             } else {
                 expect(body).to.exist();
                 patients = body;
-                console.log("======PATIENTS BY CLINIC=======");
                 console.log(patients);
-                console.log("======================");
                 done();
             }
         });
@@ -119,8 +114,8 @@ describe('ewd session test', function () {
         });
     });
 
-    it('getPatientsByWard', function (done) {
-        var wardId = 12; //wards[2].id;
+    xit('getPatientsByWard', function (done) {
+        var wardId = wards[2].id;
         testSession.getPatientsByWard({
             wardId: wardId
         }, function (err, body) {
@@ -129,9 +124,7 @@ describe('ewd session test', function () {
             } else {
                 expect(body).to.exist();
                 patients = body;
-                console.log("======PATIENTS BY WARD=======");
                 console.log(patients);
-                console.log("======================");
                 done();
             }
         });
@@ -326,7 +319,7 @@ describe('ewd session test', function () {
     });
 
     xit('get surgical pathology reports', function (done) {
-        var pid = 4; //100022;
+        var pid = 100022;
         testSession.getSurgicalPathologyReports(pid, {}, function (err, result) {
             if (err) {
                 done(err);
@@ -340,9 +333,15 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get checm hem reports', function (done) {
+    it('get chem hem reports', function (done) {
         var pid = 4; //100022;
-        testSession.getChemHemReports(pid, {}, function (err, result) {
+        testSession.getChemHemReports(pid, {
+            toDate: '3161010',
+            fromDate: '1501010',
+            testNames: [
+                'MAGNESIUM', 'POTASSIUM'
+            ]
+        }, function (err, result) {
             if (err) {
                 done(err);
             } else {

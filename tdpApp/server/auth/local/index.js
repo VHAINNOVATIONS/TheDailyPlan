@@ -7,13 +7,7 @@ var auth = require('../auth.service');
 var router = express.Router();
 
 router.post('/', function(req, res, next) {
-  /*res.status(200).json({
-      DT: "DT",
-      DUZ: "DUZ",
-      username: "JSMITH",
-      displayName: "SMITH, JOHN",
-      greeting: "HELLO SMITH, JOHN"
-    });*/
+
   console.log('req.body:',req.body);
   req.session.login({
   	accessCode: req.body.accessCode,
@@ -22,7 +16,15 @@ router.post('/', function(req, res, next) {
 	if (err) {
 		return res.status(401).json(err);
     } else {
-        res.status(200).json(userData);
+      //Should return something like:
+      /*res.status(200).json({
+        DT: "DT",
+        DUZ: "DUZ",
+        username: "JSMITH",
+        displayName: "SMITH, JOHN",
+        greeting: "HELLO SMITH, JOHN"
+      });*/
+      res.status(200).json(userData);
     }
   })
 

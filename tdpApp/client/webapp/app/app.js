@@ -5,6 +5,7 @@ angular.module('tdpApp', [
   'ngResource',
   'ngSanitize',
   'ui.router',
+  'gridster',
   'ui.bootstrap',
   'datatables',
   'ngTouch',

@@ -6,10 +6,11 @@
 
 var errors = require('./components/errors');
 var path = require('path');
+var models = require('./models/index');
 
 module.exports = function(app) {
 
-  // Insert routes below
+  // EWD API Routes
   app.use('/api/things', require('./api/thing'));
   app.use('/api/users', require('./api/user'));
   app.use('/api/patient', require('./api/patient'));
@@ -24,6 +25,16 @@ module.exports = function(app) {
   app.use('/api/radiologyReports', require('./api/radiologyReports'));
   app.use('/api/visits', require('./api/visits'));
   app.use('/api/wards', require('./api/wards'));
+
+  // TDP DB API Routes
+  app.use('/api/template',require('./api/template'));
+  app.use('/api/template_layout',require('./api/template_layout'));
+  app.use('/api/panel',require('./api/panel'));
+  app.use('/api/panel_detail',require('./api/panel_detail'));
+  app.use('/api/panel_setting',require('./api/panel_setting'));
+  app.use('/api/panel_type',require('./api/panel_type'));
+  app.use('/api/facility',require('./api/facility'));
+  app.use('/api/facility_message',require('./api/facility_message'));
 
 
   app.use('/auth', require('./auth'));
