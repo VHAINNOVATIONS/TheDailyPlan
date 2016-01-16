@@ -261,6 +261,19 @@ module.exports = {
       // logged in
       session.$('cipherKey')._delete();
       session.$('VistA')._setDocument(results.data);
+      var userKeys = ewd.query.keys;
+      if (userKeys) {
+      	var hasKeys = ewd.mumps.function("USERKEYS^VEFBRPC", results.data.DUZ, userKeys) ;
+      	if (hasKeys) {
+      		var userKeysAsArray = userKeys.split('^');
+      		var hasKeysAsArray = hasKeys.split('^');
+      		var userKeysResult = userKeysAsArray.reduce(function(r, userKey, index) {
+      			r[userKey] = hasKeysAsArray[index] !== '0';
+      			return r;
+      		}, {});
+      		results.data.keys = userKeysResult;
+      	}
+      }
       var ok = ewd.util.saveSymbolTable(ewd, session);
       return results.data;
     }
@@ -446,7 +459,7 @@ module.exports = {
 		params.rpcArgs = [];
 		return this.runRpc(params, session, ewd);
 	},
-	
+
 	getOrderableItems: function(params, session, ewd) {
 		return radiologyOrdersLib.getOrderableItems(params, session, ewd);
 	},
