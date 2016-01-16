@@ -19,6 +19,7 @@
     "express-session": "~1.0.2",
     "jade": "~1.2.0",
     "jsonwebtoken": "^0.3.0",
+    "lodash": "^3.9.3",
     "merge": "^1.2.0",
     "method-override": "~1.0.0",
     "moment": "^2.10.6",
