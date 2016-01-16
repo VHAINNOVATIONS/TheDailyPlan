@@ -199,8 +199,8 @@ describe('ewd session test', function () {
     });
 
     it('get patient meds', function (done) {
-        var pid = 100846; ///patients[2].id;
-        testSession.getMedications('100033', {}, function (err, body) {
+        var pid = 100846; // 100033  //patients[2].id;
+        testSession.getMedications('100846', {}, function (err, body) {
             if (err) {
                 done(err);
             } else {

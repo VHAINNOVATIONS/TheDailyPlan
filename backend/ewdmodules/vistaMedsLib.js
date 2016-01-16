@@ -21,7 +21,6 @@ module.exports = {
 			return result;
 		}
 
-		//return response;
 		var opSupplements = null;
 		var udSupplements = null;
 
