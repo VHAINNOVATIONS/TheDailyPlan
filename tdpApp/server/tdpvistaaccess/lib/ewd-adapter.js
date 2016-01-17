@@ -201,14 +201,16 @@ var session = {
             } else {
                 self.Authorization = body.Authorization;
                 var credentials = encryptCredentials(userInfo.accessCode, userInfo.verifyCode, body.key);
+                var keysStr = userInfo.userKeys && userInfo.userKeys.length && userInfo.userKeys.join('^');
                 self.get('/login', {
-                    credentials: credentials
-                }, function (err, body) {
+                    credentials: credentials,
+                    keys: keysStr
+                }, function (err, userData) {
                     if (err) {
                         callback(err);
                     } else {
-                        self.userData = body;
-                        callback(null, body);
+                        self.userData = userData;
+                        callback(null, self.userData);
                     }
                 });
             }
@@ -467,5 +469,6 @@ var session = {
 exports.newSession = function (options, callback) {
     var c = Object.create(session);
     c.baseUrl = options.baseUrl;
+    c.userKeys = options.userKeys;
     callback(null, c);
 };

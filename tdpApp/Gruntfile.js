@@ -206,6 +206,33 @@ module.exports = function (grunt) {
           '<%= yeoman.clientWebapp %>/{app,components}/**/*.spec.js',
           '<%= yeoman.clientWebapp %>/{app,components}/**/*.mock.js'
         ]
+      },
+      vistaaccess: {
+        src: ['server/tdpvistaaccess/**/*.js'],
+        options: {
+            browser: true,
+            curly: true,
+            eqeqeq: true,
+            immed: true,
+            latedef: true,
+            newcap: true,
+            noarg: true,
+            sub: true,
+            undef: false,
+            boss: true,
+            eqnull: true,
+            node: true,
+            expr: true,
+            globals: {
+                'xit': true,
+                'xdescribe': true,
+                'it': true,
+                'describe': true,
+                'before': true,
+                'after': true,
+                'done': true
+            }
+        }
       }
     },
 
@@ -531,10 +558,20 @@ module.exports = function (grunt) {
     },
 
     mochaTest: {
-      options: {
-        reporter: 'spec'
+      test: {
+        options: {
+          reporter: 'spec'
+        },
+        src: ['server/**/*.spec.js']
       },
-      src: ['server/**/*.spec.js']
+      vistaaccess: {
+        options: {
+          reporter: 'spec',
+          timeout: '20000',
+          bail: true
+        },
+        src: ['server/tdpvistaaccess/test/**/*.js']
+      }
     },
 
     protractor: {
@@ -712,6 +749,15 @@ module.exports = function (grunt) {
       }
       // TODO: add cssIonic
 
+    },
+
+    jsbeautifier: {
+        vistaaccess: {
+            src: ['server/tdpvistaaccess/**/*.js', 'server/tdpvistaaccess/**/*.json', '!server/tdpvistaaccess/**/*.js'],
+            options: {
+                config: '.jsbeautifyrc'
+            }
+        }
     },
   });
 
