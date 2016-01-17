@@ -342,7 +342,7 @@ var orderSignStatusMap = {
 exports.translateOrdersList = function (rawData, rawTypes) {
     var types = exports.translateOrderType(rawTypes);
     var result = [];
-    if (rawData && rawData.value) {
+    if (rawData && rawData.value && _.isObject(rawData.value)) {
         var lastIndex = 0;
         Object.keys(rawData.value).forEach(function (key) {
             var index = parseInt(key, 10);
