@@ -175,8 +175,8 @@ module.exports = function (grunt) {
     // Make sure code styles are up to par and there are no obvious mistakes
     jshint: {
       options: {
-        // TODO: TESTING: Include common, ionic
-        jshintrc: '<%= yeoman.clientWebapp %>/.jshintrc',
+      //  // TODO: TESTING: Include common, ionic
+        //jshintrc: '<%= yeoman.clientWebapp %>/.jshintrc',
         reporter: require('jshint-stylish')
       },
       server: {
@@ -210,28 +210,7 @@ module.exports = function (grunt) {
       vistaaccess: {
         src: ['server/tdpvistaaccess/**/*.js'],
         options: {
-            browser: true,
-            curly: true,
-            eqeqeq: true,
-            immed: true,
-            latedef: true,
-            newcap: true,
-            noarg: true,
-            sub: true,
-            undef: false,
-            boss: true,
-            eqnull: true,
-            node: true,
-            expr: true,
-            globals: {
-                'xit': true,
-                'xdescribe': true,
-                'it': true,
-                'describe': true,
-                'before': true,
-                'after': true,
-                'done': true
-            }
+          jshintrc: 'server/.jshintrc-spec'
         }
       }
     },
@@ -889,4 +868,6 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+
+  grunt.registerTask('vistaaccess', ['jsbeautifier:vistaaccess', 'jshint:vistaaccess', 'mochaTest:vistaaccess']);
 };

@@ -218,7 +218,7 @@ var session = {
     },
     searchPatients: function (searchParams, callback) {
         this.get('/patientsByName', {
-            prefix: searchParams['prefix']
+            prefix: searchParams.prefix
         }, function (err, body) {
             if (err) {
                 callback(err);
