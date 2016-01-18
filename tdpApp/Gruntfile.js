@@ -175,8 +175,8 @@ module.exports = function (grunt) {
     // Make sure code styles are up to par and there are no obvious mistakes
     jshint: {
       options: {
-        // TODO: TESTING: Include common, ionic
-        jshintrc: '<%= yeoman.clientWebapp %>/.jshintrc',
+      //  // TODO: TESTING: Include common, ionic
+        //jshintrc: '<%= yeoman.clientWebapp %>/.jshintrc',
         reporter: require('jshint-stylish')
       },
       server: {
@@ -206,6 +206,12 @@ module.exports = function (grunt) {
           '<%= yeoman.clientWebapp %>/{app,components}/**/*.spec.js',
           '<%= yeoman.clientWebapp %>/{app,components}/**/*.mock.js'
         ]
+      },
+      vistaaccess: {
+        src: ['server/tdpvistaaccess/**/*.js'],
+        options: {
+          jshintrc: 'server/.jshintrc-spec'
+        }
       }
     },
 
@@ -531,10 +537,20 @@ module.exports = function (grunt) {
     },
 
     mochaTest: {
-      options: {
-        reporter: 'spec'
+      test: {
+        options: {
+          reporter: 'spec'
+        },
+        src: ['server/**/*.spec.js']
       },
-      src: ['server/**/*.spec.js']
+      vistaaccess: {
+        options: {
+          reporter: 'spec',
+          timeout: '20000',
+          bail: true
+        },
+        src: ['server/tdpvistaaccess/test/**/*.js']
+      }
     },
 
     protractor: {
@@ -713,6 +729,15 @@ module.exports = function (grunt) {
       // TODO: add cssIonic
 
     },
+
+    jsbeautifier: {
+        vistaaccess: {
+            src: ['server/tdpvistaaccess/**/*.js', 'server/tdpvistaaccess/**/*.json', '!server/tdpvistaaccess/**/*.js'],
+            options: {
+                config: '.jsbeautifyrc'
+            }
+        }
+    },
   });
 
 
@@ -843,4 +868,6 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+
+  grunt.registerTask('vistaaccess', ['jsbeautifier:vistaaccess', 'jshint:vistaaccess', 'mochaTest:vistaaccess']);
 };

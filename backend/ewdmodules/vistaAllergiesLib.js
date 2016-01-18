@@ -1,18 +1,19 @@
+"use strict";
 
 module.exports = {
 	getAllergies: function(params, session, ewd) {
 		params.reportsTabName = "OR_BADR:ALLERGIES~ADR;ORDV01;73;";
 		var reportsTabAllergies = this.toAllergiesFromReport(vistaLib.runReportsTabRpc(params, session, ewd));
-		
+
 		//return reportsTabAllergies;
-		
+
 		params.rpcName = "ORQQAL LIST";
 		params.rpcArgs = [{type: "LITERAL", value: params.patientId}];
 		var coverResponse = vistaLib.runRpc(params, session, ewd);
 		var coverSheetAllergies = this.toAllergiesFromCover(coverResponse);
-		
+
 		var coverIds = this.toAllergyIdsFromCover(coverResponse);
-		
+
 		var supplemented = [];
 		for (var i = 0; i < coverIds.length; i++) {
 			if (reportsTabAllergies.hasOwnProperty(coverIds[i])) { // building allergy ids from cover sheet response so don't need to check it has the ID again
@@ -20,14 +21,14 @@ module.exports = {
 				supplemented.push(reportsTabAllergies[coverIds[i]]);
 			}
 		}
-		
+
 		return supplemented;
 	},
-	
+
 	toAllergyIdsFromCover: function(coverSheetResponse) {
 		var result = [];
 		var lines = [];
-		
+
 		// getDocument for global array result type turns lines in to object property names - just copy them over to a simple array
 		// e.g. { 1: "line 1", 2: "line 2", etc... }  -> want this: [ "line 1", "line 2", etc... ]
 		var currentIdx = 1;
@@ -39,14 +40,14 @@ module.exports = {
 		for (var i = 0; i < lines.length; i++) {
 			result.push(lines[i].split("^")[0]);
 		}
-		
+
 		return result;
 	},
-	
+
 	toAllergiesFromCover: function(coverSheetResponse) {
 		var result = { };
 		var lines = [];
-		
+
 		if (!coverSheetResponse.hasOwnProperty("value")) {
 			throw Error("Unexpected allergies response format: " + JSON.stringify(coverSheetResponse));
 		}
@@ -66,14 +67,14 @@ module.exports = {
 			newAllergy.reactions = [{ name: pieces[3] }];
 			result[newAllergy.id] = newAllergy;
 		}
-		
+
 		return result;
 	},
-	
+
 	toAllergiesFromReport: function(reportsTabResponse) {
 		var result = { };
 		var lines = [];
-		
+
 		// getDocument for global array result type turns lines in to object property names - just copy them over to a simple array
 		// e.g. { 1: "line 1", 2: "line 2", etc... }  -> want this: [ "line 1", "line 2", etc... ]
 		var currentIdx = 1;
@@ -81,11 +82,11 @@ module.exports = {
 			lines.push(reportsTabResponse[currentIdx.toString()]);
 			currentIdx++;
 		}
-		
+
 		for (var i = 0; i < lines.length; i++) {
 			var newAllergy = { };
 			var curObj = lines[i].WP;
-			
+
 			var facilityStr = curObj["1"]; //"1^CAMP MASTER;500"
 			var allergenStr = curObj["2"]; //"2^CHOCOLATE"
 			var allergenTypeStr = curObj["3"]; //"3^DRUG, FOOD"
@@ -93,7 +94,7 @@ module.exports = {
 			var typeStr = curObj["5"]; //"5^HISTORICAL"
 			// TODO - comment is in curObj["6"] somehow...
 			var idStr = curObj["7"]; //"7^972"
-			
+
 			if (undefined != facilityStr && facilityStr != "") {
 				newAllergy.facility = { id: (facilityStr.split("^")[1]).split(";")[1], name: (facilityStr.split("^")[1]).split(";")[0] };
 			}
@@ -112,10 +113,10 @@ module.exports = {
 			if (undefined != idStr && idStr != "") {
 				newAllergy.id = idStr.split("^")[1];
 			}
-			
+
 			result[newAllergy.id] = newAllergy;
 		}
-		
+
 		return result;
 	}
 };
