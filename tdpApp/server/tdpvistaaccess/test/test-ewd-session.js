@@ -183,13 +183,15 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get patient meds', function (done) {
-        var pid = patients[2].id;
-        testSession.getMedications('100022', {}, function (err, body) {
+    it('get patient meds', function (done) {
+        var pid = 100846; // patients[2].id;
+        testSession.getMedications('100846', {type: 'iv'}, function (err, body) {
             if (err) {
                 done(err);
             } else {
-                console.log('======== MED 1 =========');
+                console.log('======== MED 1IV =========');
+                console.log(body.map(function(e) {return e.type}));
+
                 console.log(JSON.stringify(body, undefined, 4));
                 console.log('========================');
                 expect(body).to.exist();
@@ -200,11 +202,11 @@ describe('ewd session test', function () {
 
     it('get patient meds', function (done) {
         var pid = 100846; // 100033  //patients[2].id;
-        testSession.getMedications('100846', {}, function (err, body) {
+        testSession.getMedications('100846', {type: 'active'}, function (err, body) {
             if (err) {
                 done(err);
             } else {
-                console.log('======== MED 2 =========');
+                console.log('======== MED ACTIVE =========');
                 console.log(JSON.stringify(body, undefined, 4));
                 console.log('========================');
                 expect(body).to.exist();

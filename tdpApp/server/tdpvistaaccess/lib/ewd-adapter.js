@@ -316,7 +316,8 @@ var session = {
             if (err) {
                 callback(err);
             } else {
-                callback(null, body);
+                var meds = translator.translateMeds(body, options.type);
+                callback(null, meds);
             }
         });
     },

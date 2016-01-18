@@ -76,6 +76,18 @@ angular.module('tdpApp')
         }
       }
     },{
+      title: 'Active Medications',
+      settings: {
+        sizeX: 3,
+        sizeY: 3,
+        minSizeX: 2,
+        minSizeY: 2,
+        template: '<div dt-active-meds patient="ctrl.patient"></div>',
+        widgetSettings: {
+          id: 1
+        }
+      }
+    }, {
       title: 'Diet Orders',
       settings: {
         sizeX: 3,
@@ -148,6 +160,18 @@ angular.module('tdpApp')
         template: '<div dt-immunizations patient="ctrl.patient"></div>',
         widgetSettings: {
           id: 3
+        }
+      }
+    },{
+      title: 'IV Medications',
+      settings: {
+        sizeX: 3,
+        sizeY: 3,
+        minSizeX: 2,
+        minSizeY: 2,
+        template: '<div dt-iv-meds patient="ctrl.patient"></div>',
+        widgetSettings: {
+          id: 1
         }
       }
     }];

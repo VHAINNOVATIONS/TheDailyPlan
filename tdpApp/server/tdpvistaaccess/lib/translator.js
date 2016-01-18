@@ -102,7 +102,6 @@ exports.translateVitalSigns = function (rawVitalSets) {
                 }
             });
             //if (timeUtility.onTodayOrYesterday(vitalSet.dateTime)) {
-                console.log('in');
                 vitalSets.push(vitalSet);
             //}
         });
@@ -398,4 +397,46 @@ exports.translateOrdersList = function (rawData, rawTypes) {
         }
     }
     return result;
+};
+
+exports.translateMeds = function(meds, type) {
+  var result = meds.reduce(function(r, med) {
+    var medType = med.type;
+    var medStatus = med.status;
+    if ((type === 'iv') && (medType !== 'IV')) {
+      return r;
+    }
+    if ((type === 'active') && (medStatus !== 'ACTIVE')) {
+      return r;
+    }
+    if (! med.detail) {
+      med.detail = med.name + (med.sig ? ' - ' + med.sig : "");
+    }
+    if (med.isInpatient) {
+      med.detail = med.detail.replace(/\r\n/g, ' ').trim();
+    }
+    med.detail = med.detail.trim();
+    if (med.startDate && med.startDate.length) {
+      med.startDate = exports.translateVistADateTime(med.startDate);
+    }
+    if (med.stopDate && med.stopDate.length) {
+      med.stopDate = exports.translateVistADateTime(med.stopDate);
+    }
+    r.push(med);
+    return r;
+  }, []);
+  if (type === 'iv') {
+    meds.sort(function(a, b) {
+      if ((! b.startDate) || (! b.startDate.length)) {
+        return -1;
+      }
+      if ((! a.startDate) || (! a.startDate.length)) {
+        return 1;
+      }
+      var ma = moment(a, 'MMDDYYYHHdd');
+      var mb = moment(a, 'MMDDYYYHHdd');
+      return mb.diff(ma);
+    });
+  }
+  return result;
 };
