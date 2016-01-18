@@ -23,7 +23,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('login error', function (done) {
+    xit('login error', function (done) {
         testSession.login({
             accessCode: 'CPRS1234XX',
             verifyCode: 'CPRS4321$XX'
@@ -41,19 +41,23 @@ describe('ewd session test', function () {
     it('login', function (done) {
         testSession.login({
             accessCode: 'CPRS1234',
-            verifyCode: 'CPRS4321$'
+            verifyCode: 'CPRS4321$',
+            userKeys: ['XUPROG', 'NOTHAVE', 'RA VERIFY']
         }, function (err) {
             if (err) {
                 done(err);
             } else {
                 expect(testSession.userData).to.exist();
+                console.log("======USER DATA=======");
+                console.log(JSON.stringify(testSession.userData, undefined, 4));
+                console.log("======================");
                 done();
             }
         });
     });
 
     var patients;
-    it('search patients', function (done) {
+    xit('search patients', function (done) {
         testSession.searchPatients({
             prefix: 'eig'
         }, function (err, body) {
@@ -130,8 +134,8 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get patient demographics/flags', function (done) {
-        var pid = 100748; //100846;
+    xit('get patient demographics/flags', function (done) {
+        var pid = 756; //724; //631; //100845; //100748; //100846;
         testSession.getDemographics(pid, {}, function (err, body) {
             if (err) {
                 done(err);
@@ -179,26 +183,32 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get patient meds', function (done) {
-        var pid = patients[2].id;
-        testSession.getMedications('100022', {}, function (err, body) {
+    it('get patient meds', function (done) {
+        var pid = 100846; // patients[2].id;
+        testSession.getMedications('100846', {type: 'iv'}, function (err, body) {
             if (err) {
                 done(err);
             } else {
-                //console.log(JSON.stringify(body, undefined, 4));
+                console.log('======== MED 1IV =========');
+                console.log(body.map(function(e) {return e.type}));
+
+                console.log(JSON.stringify(body, undefined, 4));
+                console.log('========================');
                 expect(body).to.exist();
                 done();
             }
         });
     });
 
-    xit('get patient meds', function (done) {
-        var pid = patients[2].id;
-        testSession.getMedications('100014', {}, function (err, body) {
+    it('get patient meds', function (done) {
+        var pid = 100846; // 100033  //patients[2].id;
+        testSession.getMedications('100846', {type: 'active'}, function (err, body) {
             if (err) {
                 done(err);
             } else {
-                //console.log(JSON.stringify(body, undefined, 4));
+                console.log('======== MED ACTIVE =========');
+                console.log(JSON.stringify(body, undefined, 4));
+                console.log('========================');
                 expect(body).to.exist();
                 done();
             }
@@ -219,19 +229,19 @@ describe('ewd session test', function () {
     });
 
     xit('get patient visits', function (done) {
-        var pid = patients[37].id;
+        var pid = 756; //520; //patients[37].id;
         testSession.getVisits(pid, {
             numDaysPast: 2998,
-            numDaysFuture: 10
+            numDaysFuture: 30
         }, function (err, body) {
             if (err) {
                 done(err);
             } else {
                 expect(body).to.exist();
-                //expect(body.length).to.be.above(0);
-                //console.log("======= VISITS =======");
-                //console.log(JSON.stringify(body, undefined, 4));
-                //console.log("======================");
+                expect(body.length).to.be.above(0);
+                console.log("======= VISITS =======");
+                console.log(JSON.stringify(body, undefined, 4));
+                console.log("======================");
                 done();
             }
         });
@@ -333,7 +343,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get chem hem reports', function (done) {
+    xit('get chem hem reports', function (done) {
         var pid = 4; //100022;
         testSession.getChemHemReports(pid, {
             toDate: '3161010',

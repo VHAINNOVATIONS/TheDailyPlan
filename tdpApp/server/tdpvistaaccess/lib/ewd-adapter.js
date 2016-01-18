@@ -201,14 +201,16 @@ var session = {
             } else {
                 self.Authorization = body.Authorization;
                 var credentials = encryptCredentials(userInfo.accessCode, userInfo.verifyCode, body.key);
+                var keysStr = userInfo.userKeys && userInfo.userKeys.length && userInfo.userKeys.join('^');
                 self.get('/login', {
-                    credentials: credentials
-                }, function (err, body) {
+                    credentials: credentials,
+                    keys: keysStr
+                }, function (err, userData) {
                     if (err) {
                         callback(err);
                     } else {
-                        self.userData = body;
-                        callback(null, body);
+                        self.userData = userData;
+                        callback(null, self.userData);
                     }
                 });
             }
@@ -216,7 +218,7 @@ var session = {
     },
     searchPatients: function (searchParams, callback) {
         this.get('/patientsByName', {
-            prefix: searchParams['prefix']
+            prefix: searchParams.prefix
         }, function (err, body) {
             if (err) {
                 callback(err);
@@ -314,7 +316,8 @@ var session = {
             if (err) {
                 callback(err);
             } else {
-                callback(null, body);
+                var meds = translator.translateMeds(body, options.type);
+                callback(null, meds);
             }
         });
     },
@@ -467,5 +470,6 @@ var session = {
 exports.newSession = function (options, callback) {
     var c = Object.create(session);
     c.baseUrl = options.baseUrl;
+    c.userKeys = options.userKeys;
     callback(null, c);
 };
