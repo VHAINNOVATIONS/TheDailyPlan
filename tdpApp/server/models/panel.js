@@ -33,11 +33,16 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     },
     sizeY: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER(11),
       allowNull: true
     }
   }, {
     tableName: 'panel',
-    freezeTableName: true
+    freezeTableName: true,
+    classMethods: {
+      associate: function(models) {
+        models.panel.belongsTo(models.panel_type,{foreignKey: 'panel_type_id', targetKey: 'id'});
+      }
+    }
   });
 };

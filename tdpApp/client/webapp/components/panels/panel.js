@@ -10,7 +10,7 @@ angular.module('tdpApp')
           var panel = $scope.panel;
           console.log('panel:',panel);
           var container = $scope.findBoxContainer($element);
-          var templateString = panel.settings.template;
+          var templateString = panel.template;
           var panelElement = angular.element(templateString);
 
           container.empty();

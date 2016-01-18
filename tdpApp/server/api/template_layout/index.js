@@ -17,7 +17,8 @@ router.get('/byTemplate/:id', function(req, res) {
   models.template_layout.findAll({
     where: {
       template_id: req.params.id
-    }
+    },
+    order: [['panel_order', 'ASC']      ]
   }).then(function(template_layouts) {
     res.json(template_layouts);
   });

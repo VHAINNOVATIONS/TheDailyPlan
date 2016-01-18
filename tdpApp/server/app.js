@@ -6,9 +6,11 @@
 
 // Set default node environment to development
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+require('dotenv').load();
 
 var express = require('express');
 //var mongoose = require('mongoose');
+var db = require('./models/index');
 var config = require('./config/environment');
 
 // Connect to database
@@ -23,10 +25,19 @@ var server = require('http').createServer(app);
 require('./config/express')(app);
 require('./routes')(app);
 
-// Start server
-server.listen(config.port, config.ip, function () {
-  console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
+db.sequelize
+.sync({ force: false})
+.then(function() {
+    // seed
+    //require('../db/seed')(db);
+
+    // Start server
+    server.listen(config.port, config.ip, function () {
+      console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
+    });
 });
+
+
 
 // Expose app
 exports = module.exports = app;

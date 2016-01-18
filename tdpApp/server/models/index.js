@@ -25,7 +25,6 @@ var sequelize = new Sequelize(process.env.TDP_DB_DATABASE,
   }
 });
 
-
 fs
   .readdirSync(__dirname)
   .filter(function(file) {

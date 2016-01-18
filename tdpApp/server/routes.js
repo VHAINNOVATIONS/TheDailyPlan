@@ -11,8 +11,6 @@ var models = require('./models/index');
 module.exports = function(app) {
 
   // EWD API Routes
-  app.use('/api/things', require('./api/thing'));
-  app.use('/api/users', require('./api/user'));
   app.use('/api/patient', require('./api/patient'));
   app.use('/api/demographics', require('./api/demographics'));
   app.use('/api/allergy', require('./api/allergy'));

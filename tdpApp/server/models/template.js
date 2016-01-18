@@ -30,6 +30,11 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     tableName: 'template',
-    freezeTableName: true
+    freezeTableName: true,
+    classMethods: {
+      associate: function(models) {
+        models.template.hasMany(models.template_layout,{foreignKey: 'template_id', targetKey: 'template_id'});
+      }
+    }
   });
 };
