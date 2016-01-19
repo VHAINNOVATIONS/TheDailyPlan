@@ -149,6 +149,14 @@ form {
 .gridster {
     border: 1px solid #ccc;
 }
-
-
-
+@media print {
+    #printSection {
+        position:absolute;
+        left:0;
+        top:0;
+    }
+}
+@page {
+  size: auto portrait;
+  margin: 10%;
+}

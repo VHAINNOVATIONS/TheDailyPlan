@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tdpApp')
-  .controller('PatientPlanCtrl', function ($scope, $modal, $resource, Patient, Demographics, Template, Template_Layout, Panel, Panel_Type) {
+  .controller('PatientPlanCtrl', function ($scope, $resource, Patient, Demographics, Template, Template_Layout, Panel, Panel_Type) {
   	var self = this;
     self.cdate = new Date();
     self.demographics = null;
@@ -11,11 +11,7 @@ angular.module('tdpApp')
     console.log('Patient Plan - Items:',self.items);
 
     $scope.printDailyPlan = function() {
-      $modal.open({
-        scope: $scope,
-        templateUrl: 'app/printOut/printOut.html',
-        controller: 'PrintOutCtrl'
-      });
+      window.print();
     };
 
     self.gridsterOptions = {
