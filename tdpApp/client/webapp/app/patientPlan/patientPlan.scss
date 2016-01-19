@@ -151,12 +151,10 @@ form {
 }
 @media print {
     #printSection {
-        position:absolute;
-        left:0;
-        top:0;
     }
 }
 @page {
-  size: auto portrait;
-  margin: 10%;
+  size: 8.5in 11in;
+  margin: 0.75in 0.25in 0.25in;
+  padding: 10px;
 }

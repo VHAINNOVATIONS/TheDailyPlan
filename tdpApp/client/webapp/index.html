@@ -20,10 +20,12 @@
     <!-- build:css({.tmp,client}) app/app.css -->
     <link rel="stylesheet" href="app/app.css">
       <!-- injector:css -->
+      <link rel="stylesheet" href="app/pdf.css">
       <!-- endinjector -->
     <!-- endbuild -->
     <link rel="stylesheet" href="common.css">
     <link rel="stylesheet" href="bower_components/angular-gridster/dist/angular-gridster.min.css"/>
+    <link rel="stylesheet" type="text/css" href="app/pdf.css" media="print"/>
   </head>
   <body ng-app="tdpApp">
     <!--[if lt IE 7]>
@@ -94,7 +96,6 @@
             <script src="webapp/app/main/main.js"></script>
             <script src="webapp/app/patientPlan/patientPlan.controller.js"></script>
             <script src="webapp/app/patientSearch/patientSearch.controller.js"></script>
-            <script src="webapp/app/printOut/printOut.controller.js"></script>
             <script src="webapp/components/auth/auth.service.js"></script>
             <script src="webapp/components/auth/user.service.js"></script>
             <script src="webapp/components/modal/modal.service.js"></script>
