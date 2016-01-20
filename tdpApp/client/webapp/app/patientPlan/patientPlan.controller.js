@@ -87,6 +87,7 @@ angular.module('tdpApp')
         minSizeX: 2,
         minSizeY: 2,
         template: '<div dt-active-meds patient="ctrl.patient"></div>',
+        print: '<div dt-active-meds-print patient="ctrl.patient"></div>',
         widgetSettings: {
           id: 1
         }
@@ -183,6 +184,7 @@ angular.module('tdpApp')
     if(self.items.length > 0 && self.items[0])
     {
       self.patient = self.items[0];
+      $scope.patient = self.patient;
       Demographics.getByID(self.items[0])
       .then( function(data) {
         console.log('Patient Plan - demographics:',data);

@@ -1,42 +1,42 @@
 @page patient {
 	size: 8.5in 11in;
 	margin: 4.50in 0.25in 0.25in;
-	@top-center { 
+	@top-center {
 		font-size: 18pt;
 		font-weight: bold;
-		position: absolute; top: 0; left: 0; 
+		position: absolute; top: 0; left: 0;
 		content: element(header);
 		padding: none;
 		margin: 0;
 	}
-	@bottom-left { 
-		font-size: 90%; font-style: italic; 
+	@bottom-left {
+		font-size: 90%; font-style: italic;
 		content: element(print-time);
 	}
-	@bottom-center { 
-		font-size: 90%; font-style: italic; 
+	@bottom-center {
+		font-size: 90%; font-style: italic;
 		content: element(page-count);
 	}
 
 	padding: 10px;
 }
 
-@page { 
+@page {
 	size: 8.5in 11in;
 	margin: 0.75in 0.25in 0.25in;
-	@top-center { 
+	@top-center {
 		font-size: 18pt;
 		font-weight: bold;
-		position: absolute; top: 0; left: 0; 
+		position: absolute; top: 0; left: 0;
 		content: element(topimage, start);
 		padding: 10px;
 	}
-	@bottom-left { 
-		font-size: 90%; font-style: italic; 
+	@bottom-left {
+		font-size: 90%; font-style: italic;
 		content: element(print-time);
 	}
-	@bottom-center { 
-		font-size: 90%; font-style: italic; 
+	@bottom-center {
+		font-size: 90%; font-style: italic;
 		content: element(page-count);
 	}
 
@@ -52,10 +52,10 @@ div.patient-end {
   counter-reset: page;
 }
 
-div.header { 
+div.header {
 	display: block;
 	width: 700px;
-	position: running(header) 
+	position: running(header)
   	page: patient;
   	page-break-before: always;
   	counter-reset: page;
@@ -67,23 +67,23 @@ span.patient_header {
 	width: 700px;
 	margin: 0;
 	padding: 10px 0;
-	position: running(topimage) 
+	position: running(topimage)
 }
 
-div.print-time { 
-	position: running(print-time) 
+div.print-time {
+	position: running(print-time)
 }
 
-div.page-count { 
-	position: running(page-count) 
+div.page-count {
+	position: running(page-count)
 }
 
 .pagenumber:before {
-	content: counter(page); 
+	content: counter(page);
 }
 
 .pagecount:before {
-	content: counter(pages);  
+	content: counter(pages);
 }
 
 .report_logo span {
@@ -124,17 +124,17 @@ div.page-count {
 .LARGE p {
 	font-size: 14pt;
 }
-	
+
 .report_title {
 	width:100%;
 	padding:4px 0;
 	border: 2px solid #005DA4;
 	page-break-before: auto;
 }
-	
+
 .report_title img {
-	float: right; 
-	height: 80px; 
+	float: right;
+	height: 80px;
 	padding: 0 3px;
 }
 
@@ -165,10 +165,10 @@ div.page-count {
 }
 
 .report_row {
-/*	float:left; 
+/*	float:left;
 	border-top:solid 2px #005DA4;
 */
-	float: clear;	
+	float: clear;
 	width:97%;
 	margin:10px 15px 5px 15px;
 }
@@ -228,4 +228,12 @@ div.page-count {
 
 span.expandable:after {
 	content: ' (' attr(title) ') ';
+}
+
+.grid_header {
+  font-weight: bold;
+}
+
+.message span {
+  font-weight: bold;
 }

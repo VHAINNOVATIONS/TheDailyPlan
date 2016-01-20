@@ -1,0 +1,14 @@
+<div class="container report_row">
+  <div class="row" class="report_column500" ng-if="activeMeds && activeMeds.length && !activeMedsError">
+    <div class="col-xs-8 grid_header">Drug</div>
+    <div class="col-xs-4 grid_header">Route</div>
+    <div class="col-xs-8" ng-repeat-start="med in activeMeds">{{med.detail}}</div>
+    <div class="col-xs-4" ng-repeat-end>{{med.route}}</div>
+  </div>
+  <div class="row" class="report_column500" ng-if="activeMedsError">
+    <span class="message">Internal error loading active medications.</span>
+  </div>
+  <div class="row" class="report_column500" ng-if="activeMeds.length == 0 && !activeMedsError">
+    <span class="message">No active medications found.</span>
+  </div>
+</div>

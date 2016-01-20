@@ -149,12 +149,3 @@ form {
 .gridster {
     border: 1px solid #ccc;
 }
-@media print {
-    #printSection {
-    }
-}
-@page {
-  size: 8.5in 11in;
-  margin: 0.75in 0.25in 0.25in;
-  padding: 10px;
-}
