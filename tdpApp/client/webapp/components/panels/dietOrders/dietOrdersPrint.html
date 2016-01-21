@@ -1,0 +1,14 @@
+<div class="container report_row">
+  <div class="row" class="report_column500" ng-if="dietOrders && dietOrders.length && !dietOrdersError">
+    <div class="col-xs-3 grid_header">Start</div>
+    <div class="col-xs-9 grid_header">Description</div>
+    <div class="col-xs-3" ng-repeat-start="dietOrder in dietOrders">{{dietOrder.start}}</div>
+    <div class="col-xs-9" ng-repeat-end>{{dietOrder.description}}</div>
+  </div>
+  <div class="row" class="report_column500" ng-if="dietOrdersError">
+    <span class="message">Internal error loading diet orders.</span>
+  </div>
+  <div class="row" class="report_column500" ng-if="(!dietOrders || dietOrders.length == 0) && !dietOrdersError">
+    <span class="message">No active diet orders found.</span>
+  </div>
+</div>

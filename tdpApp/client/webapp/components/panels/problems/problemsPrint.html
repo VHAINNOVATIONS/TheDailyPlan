@@ -1,0 +1,18 @@
+<div class="container report_row">
+  <div class="row" class="report_column500" ng-if="problems && problems.length && !problemsError">
+    <div class="col-xs-7 grid_header">Description</div>
+    <div class="col-xs-2 grid_header">Onset Date</div>
+    <div class="col-xs-2 grid_header">Code</div>
+    <div class="col-xs-1 grid_header">Status</div>
+    <div class="col-xs-7" ng-repeat-start="problem in problems">{{problem.description}}</div>
+    <div class="col-xs-2">{{problem.onsetDate}}</div>
+    <div class="col-xs-2">{{problem.code}}</div>
+    <div class="col-xs-1" ng-repeat-end>{{problem.status}}</div>
+  </div>
+  <div class="row" class="report_column500" ng-if="problemsError">
+    <span class="message">Internal error loading active problems.</span>
+  </div>
+  <div class="row" class="report_column500" ng-if="problems.length == 0 && !problemsError">
+    <span class="message">No active problems found.</span>
+  </div>
+</div>

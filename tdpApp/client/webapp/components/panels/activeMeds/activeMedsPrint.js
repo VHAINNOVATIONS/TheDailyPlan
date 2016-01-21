@@ -10,7 +10,7 @@ angular.module('tdpApp')
         patient: '=',
       },
       controller: function ($scope, Medication) {
-        console.log('Patient Plan - activeMeds:', $scope.patient);
+        console.log('Patient Plan - activeMeds patient:', $scope.patient);
         Medication.getActiveMeds($scope.patient).then(function(activeMeds) {
           console.log('Patient Plan - activeMeds:', activeMeds);
           $scope.activeMeds = activeMeds;

@@ -62,6 +62,7 @@ angular.module('tdpApp')
         minSizeX: 2,
         minSizeY: 2,
         template: '<div dt-problems patient="ctrl.patient"></div>',
+        print: '<div dt-problems-print patient="ctrl.patient"></div>',
         widgetSettings: {
           id: 2
         }
@@ -75,6 +76,7 @@ angular.module('tdpApp')
         minSizeX: 2,
         minSizeY: 2,
         template: '<div dt-vitals patient="ctrl.patient"></div>',
+        print: '<div dt-vitals-print patient="ctrl.patient"></div>',
         widgetSettings: {
           id: 1
         }
@@ -100,6 +102,7 @@ angular.module('tdpApp')
         minSizeX: 2,
         minSizeY: 2,
         template: '<div dt-diet-orders patient="ctrl.patient"></div>',
+        print: '<div dt-diet-orders-print patient="ctrl.patient"></div>',
         widgetSettings: {
           id: 1
         }
@@ -113,6 +116,7 @@ angular.module('tdpApp')
         minSizeX: 2,
         minSizeY: 2,
         template: '<div dt-lab-orders patient="ctrl.patient"></div>',
+        print: '<div dt-lab-orders-print patient="ctrl.patient"></div>',
         widgetSettings: {
           id: 1
         }
@@ -125,6 +129,7 @@ angular.module('tdpApp')
         minSizeX: 2,
         minSizeY: 2,
         template: '<div dt-radiology-reports patient="ctrl.patient"></div>',
+        print: '<div dt-radiology-reports-print patient="ctrl.patient"></div>',
         widgetSettings: {
           id: 1
         }
@@ -138,6 +143,7 @@ angular.module('tdpApp')
         minSizeX: 2,
         minSizeY: 2,
         template: '<div dt-visits patient="ctrl.patient"></div>',
+        print: '<div dt-visits-print patient="ctrl.patient"></div>',
         widgetSettings: {
           id: 1
         }
@@ -150,6 +156,7 @@ angular.module('tdpApp')
         minSizeX: 2,
         minSizeY: 1,
         template: '<div dt-allergies patient="ctrl.patient"></div>',
+        print: '<div dt-allergies-print patient="ctrl.patient"></div>',
         widgetSettings: {
           id: 1
         }
@@ -163,6 +170,7 @@ angular.module('tdpApp')
         minSizeX: 2,
         minSizeY: 1,
         template: '<div dt-immunizations patient="ctrl.patient"></div>',
+        print: '<div dt-immunizations-print patient="ctrl.patient"></div>',
         widgetSettings: {
           id: 3
         }
@@ -175,6 +183,7 @@ angular.module('tdpApp')
         minSizeX: 2,
         minSizeY: 2,
         template: '<div dt-iv-meds patient="ctrl.patient"></div>',
+        print: '<div dt-iv-meds-print patient="ctrl.patient"></div>',
         widgetSettings: {
           id: 1
         }
