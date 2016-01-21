@@ -27,6 +27,10 @@ module.exports = function(sequelize, DataTypes) {
     minSizeY: {
       type: DataTypes.INTEGER(11),
       allowNull: true
+    },
+    mandatory: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true
     }
   }, {
     tableName: 'panel_type',
