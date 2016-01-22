@@ -3,8 +3,8 @@
 angular.module('tdpApp')
   .config(function ($stateProvider) {
     $stateProvider
-      .state('init', {
-        url: '/',
-        templateUrl: 'app/account/login/login.html'
+      .state('layouts', {
+        url: '/layouts',
+        templateUrl: 'app/layouts/layouts.html'
       });
   });

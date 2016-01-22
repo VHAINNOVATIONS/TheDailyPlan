@@ -13,6 +13,8 @@ angular.module('tdpApp')
     self.gridsterOptions = {
       margins: [20, 20],
       columns: 4,
+      mobileBreakPoint: 768,
+      mobileModeEnabled: true,
       draggable: {
         enabled: false,
         handle: 'h3'

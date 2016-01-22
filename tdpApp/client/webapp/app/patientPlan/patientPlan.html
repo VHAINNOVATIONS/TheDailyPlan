@@ -15,7 +15,7 @@
               <li gridster-item="panel.settings" ng-repeat="panel in ctrl.panels" grid-panel>
                 <div class="box" ng-controller="CustomPanelCtrl">
                   <div class="box-header">
-                    <h3>{{ panel.title }}</h3>
+                    <h3>{{ panel.title }}<span ng-show="panel.mandatory">*</span></h3>
                     <div class="box-header-btns pull-right">
                       <a title="settings" ng-click="openSettings(panel)"><i class="glyphicon glyphicon-cog"></i></a>
                       <a title="Remove panel" ng-click="remove(panel)"><i class="glyphicon glyphicon-trash"></i></a>

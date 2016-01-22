@@ -1,12 +1,21 @@
 <div>
-  <div ng-show="allergies.length">
-    <ng ng-repeat="allergy in allergies">
-        <span class="label label-primary">{{allergy.allergenName}}</span>
-    </ng>
+  <div class="control-group" ng-show="allergiesGridOptions.enableExpandable">
+      <input type="button" class="btn btn-small" ng-click="expandAllergyRows()" value="Expand All" />
+      <input type="button" class="btn btn-small" ng-click="collapseAllergyRows()" value="Collapse All" />
   </div>
-  <div ng-hide="allergies.length">
-    <div class="msg">
-        <span>No Allergies in this Section</span>
-    </div>
+  <div ui-grid="allergiesGridOptions" class="grid">
+      <div class="grid-msg-overlay" ng-hide="!allergiesLoading">
+          <div class="msg">
+              <span>
+                  Loading Data...
+                  <i class="fa fa-spinner fa-spin"></i>
+              </span>
+          </div>
+      </div>
+      <div class="grid-msg-overlay" ng-hide="allergiesLoading || allergiesGridOptions.data.length">
+          <div class="msg">
+              <span>No Data</span>
+          </div>
+      </div>
   </div>
 </div>
