@@ -96,53 +96,11 @@ div.page-count {
 	padding: 20px;
 }
 
-.report_title h2 {
-	padding: 0;
-	font-size: 18pt;
-}
-
-.SMALL,
-.SMALL h2,
-.SMALL h3,
-.SMALL h4,
-.SMALL p {
-	font-size: 10pt;
-}
-
-.MEDIUM,
-.MEDIUM h2,
-.MEDIUM h3,
-.MEDIUM h4,
-.MEDIUM p {
-	font-size: 12pt;
-}
-
-.LARGE,
-.LARGE h2,
-.LARGE h3,
-.LARGE h4,
-.LARGE p {
-	font-size: 14pt;
-}
-
 .report_title {
 	width:100%;
-	padding:4px 0;
+	padding:20px 0;
 	border: 2px solid #005DA4;
 	page-break-before: auto;
-}
-
-.report_title img {
-	float: right;
-	height: 80px;
-	padding: 0 3px;
-}
-
-.report_title h2 {
-	color: #005DA4;
-	padding:0px;
-	margin:25px 0 21px 10px;
-	vertical-align:middle;
 }
 
 .report_patient {
@@ -161,13 +119,10 @@ div.page-count {
 }
 
 .patient_data {
-	width: 700px;
+	width: 650px;
 }
 
 .report_row {
-/*	float:left;
-	border-top:solid 2px #005DA4;
-*/
 	float: clear;
 	width:97%;
 	margin:10px 15px 5px 15px;
@@ -196,12 +151,6 @@ div.page-count {
 
 .report_category {
 	border:solid 1px  #005DA4;
-}
-
-.report_category h4 {
-	margin:0px;
-	padding: 5px;
-	color:#005DA4;
 }
 
 #report_column500 {

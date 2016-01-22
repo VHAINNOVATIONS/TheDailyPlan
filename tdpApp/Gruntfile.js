@@ -711,10 +711,14 @@ module.exports = function (grunt) {
       css: {
         options: {
           transform: function(filePath) {
+            var media = ' media="not print"';
+            if (filePath.indexOf('pdf') > 0) {
+              media =  media=' media="print"';
+            }
             filePath = filePath.replace('/client/webapp/', '');
 
             filePath = filePath.replace('/.tmp/', '');
-            return '<link rel="stylesheet" href="' + filePath + '">';
+            return '<link rel="stylesheet" href="' + filePath + '"' + media + '/>';
           },
           starttag: '<!-- injector:css -->',
           endtag: '<!-- endinjector -->'
