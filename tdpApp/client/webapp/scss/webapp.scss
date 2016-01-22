@@ -1,0 +1,19 @@
+/**
+	Include all your webapp wide styles in the files below
+*/
+
+@import 'colours';
+@import 'fonts';
+@import 'layout';
+
+@media screen {
+    .print-only {
+        display: none !important;
+    }
+}
+
+@media print {
+    .do-not-print {
+        display: none !important;
+    }
+}

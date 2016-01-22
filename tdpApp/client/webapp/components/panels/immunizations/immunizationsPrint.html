@@ -1,0 +1,14 @@
+<div class="container report_row">
+  <div class="row" class="report_column500" ng-if="immunizations && immunizations.length && !immunizationsError">
+    <div class="col-xs-8 grid_header">Name</div>
+    <div class="col-xs-4 grid_header">Date</div>
+    <div class="col-xs-8" ng-repeat-start="immunization in immunizations">{{immunization.name}}</div>
+    <div class="col-xs-4" ng-repeat-end>{{immunization.date}}</div>
+  </div>
+  <div class="row" class="report_column500" ng-if="immunizationsError">
+    <span class="message">Internal error loading active immunizations.</span>
+  </div>
+  <div class="row" class="report_column500" ng-if="immunizations.length == 0 && !immunizationsError">
+    <span class="message">No active immunizations found.</span>
+  </div>
+</div>

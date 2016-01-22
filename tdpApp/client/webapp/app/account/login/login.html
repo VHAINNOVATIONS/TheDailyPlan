@@ -1,0 +1,70 @@
+<div ng-controller="LoginCtrl as ctrl" class="container">
+    <div class="row">
+        <div class="col-sm-4">
+            <h1>Login</h1>
+            <form name="form" ng-submit="login(form)" novalidate="" width="380px" margin="0" auto="auto" class="form">
+            <div class="form-group">
+                <label for="facilitySelect"> Facility</label>
+                <select name="facilitySelect" id="facilitySelect" ng-model="ctrl.facilities.facilitySelect" class="form-control">
+                    <option value="">Select a facility...</option> <!-- not selected / blank option -->
+                    <option ng-repeat="option in ctrl.facilities.availableOptions" value="{{option.id}}">{{option.name}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Access Code</label>
+                <input type="password" name="accessCode" ng-model="ctrl.user.accessCode" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Verify Code</label>
+                <input type="password" name="verifyCode" ng-model="ctrl.user.verifyCode" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label id="lblConsent" tabindex="-1" alt="Consent" title="Consent" for="checky">Consent</label>
+                <div class="checkbox fixpadding">
+                    <input id="checky" type="checkbox" autocomplete="off" title="Consent Checkbox" name="checky" required="" ng-model="consent.isselected" /> I accept the terms and conditions for accessing the system described above.
+                </div>
+            </div>
+            <div>
+                <button type="submit" ng-disabled="!consent.isselected" class="btn btn-inverse btn-lg btn-login">Login</button>
+                <div class="alert alert-danger" role="alert" ng-show="ctrl.errors">Invalid Access Code/Verify Code, please try again.</div>
+            </div>
+        </form>
+        </div>
+        <div class="col-sm-8">
+            <h3>The Latest News</h3>
+            <uib-accordion close-others="true">
+              <uib-accordion-group heading="{{tab.title}}" is-open="tab.isOpen" ng-repeat="tab in ctrl.tabs">
+                {{tab.content}}
+              </uib-accordion-group>
+            </uib-accordion>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <h3>Contact Information</h3>
+            <p/>Please reach out to the TDP Coordinator
+                <br/>555-555-555
+                <br/>Email:
+                <br/>
+                <a href="tdp_coordinator@va.gov"></a>tdp_coordinator@va.gov
+            </p>
+        </div>
+        <div class="col-sm-8"><p>The Daily Plan&reg; was initiated to increase patient safety during hospitalization by empowering patients - and their families - to ask questions about their care; in particular, to speak up if they believe a patient&apos;s care plan is different than expected.</p>
+        <p>The plan is a patient-specific document reviewed with patients each day of their hospitalization.</p>
+        </div>
+   </div>
+   <div class="row">
+       <div class="col-sm-4">
+            <h3> Additional Resources</h3>
+            <p><a href="#">View demo &gt;&gt;</a></p>
+        </div>
+        <div class="col-sm-8">
+            <h3>Testimonials</h3>
+            <p>This is where testimonials would go</p>
+        </div>
+   </div>
+
+
+
+</div>

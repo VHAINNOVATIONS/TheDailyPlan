@@ -1,0 +1,151 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <base href="/">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(client) app/vendor.css -->
+      <!-- bower:css -->
+      <link rel="stylesheet" href="bower_components/datatables/media/css/jquery.dataTables.css" />
+      <link rel="stylesheet" href="bower_components/angular-ui-grid/ui-grid.css" />
+      <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css({.tmp,client}) app/app.css -->
+    <link rel="stylesheet" href="app/app.css">
+      <!-- injector:css -->
+      <link rel="stylesheet" href="app/pdf.css" media="print"/>
+      <!-- endinjector -->
+    <!-- endbuild -->
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="bower_components/angular-gridster/dist/angular-gridster.min.css"/>
+  </head>
+  <body ng-app="tdpApp">
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div ng-include="'components/navbar/navbar.html'" class="hidden-print"></div>
+    <!-- Add your site or application content here -->
+    <div ui-view=""></div>
+    <!-- Footer -->
+    <div ng-include="'components/common/footer.html'" class="hidden-print"></div>
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-XXXXX-X');
+      ga('send', 'pageview');
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+    <!-- build:js({client,node_modules}) app/vendor.js -->
+      <!-- bower:js -->
+      <script src="bower_components/jquery/dist/jquery.js"></script>
+      <script src="bower_components/angular/angular.js"></script>
+      <script src="bower_components/angular-resource/angular-resource.js"></script>
+      <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+      <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+      <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+      <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+      <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+      <script src="bower_components/datatables/media/js/jquery.dataTables.js"></script>
+      <script src="bower_components/angular-datatables/dist/angular-datatables.js"></script>
+      <script src="bower_components/angular-datatables/dist/plugins/colreorder/angular-datatables.colreorder.js"></script>
+      <script src="bower_components/angular-datatables/dist/plugins/columnfilter/angular-datatables.columnfilter.js"></script>
+      <script src="bower_components/angular-datatables/dist/plugins/light-columnfilter/angular-datatables.light-columnfilter.js"></script>
+      <script src="bower_components/angular-datatables/dist/plugins/colvis/angular-datatables.colvis.js"></script>
+      <script src="bower_components/angular-datatables/dist/plugins/fixedcolumns/angular-datatables.fixedcolumns.js"></script>
+      <script src="bower_components/angular-datatables/dist/plugins/fixedheader/angular-datatables.fixedheader.js"></script>
+      <script src="bower_components/angular-datatables/dist/plugins/scroller/angular-datatables.scroller.js"></script>
+      <script src="bower_components/angular-datatables/dist/plugins/tabletools/angular-datatables.tabletools.js"></script>
+      <script src="bower_components/angular-datatables/dist/plugins/buttons/angular-datatables.buttons.js"></script>
+      <script src="bower_components/angular-datatables/dist/plugins/select/angular-datatables.select.js"></script>
+      <script src="bower_components/angular-ui-grid/ui-grid.js"></script>
+      <script src="bower_components/angular-touch/angular-touch.js"></script>
+      <script src="bower_components/datatables-responsive/js/dataTables.responsive.js"></script>
+      <script src="bower_components/javascript-detect-element-resize/detect-element-resize.js"></script>
+      <script src="bower_components/angular-gridster/src/angular-gridster.js"></script>
+      <!-- endbower -->
+    <!-- endbuild -->
+      <script src="bower_components/javascript-detect-element-resize/jquery.resize.js"></script>
+      <script src="bower_components/angular-gridster/dist/angular-gridster.min.js"></script>
+        <!-- build:js({.tmp,client}) app/app.js -->
+        <script src="webapp/app/app.js"></script>
+            <!-- injector:js -->
+            <script src="webapp/app/account/account.js"></script>
+            <script src="webapp/app/account/login/login.controller.js"></script>
+            <script src="webapp/app/account/login/login.js"></script>
+            <script src="webapp/app/account/settings/settings.controller.js"></script>
+            <script src="webapp/app/account/signup/signup.controller.js"></script>
+            <script src="webapp/app/admin/admin.controller.js"></script>
+            <script src="webapp/app/admin/admin.js"></script>
+            <script src="webapp/app/layouts/layouts.controller.js"></script>
+            <script src="webapp/app/layouts/layouts.js"></script>
+            <script src="webapp/app/main/main.controller.js"></script>
+            <script src="webapp/app/main/main.js"></script>
+            <script src="webapp/app/patientPlan/patientPlan.controller.js"></script>
+            <script src="webapp/app/patientSearch/patientSearch.controller.js"></script>
+            <script src="webapp/components/auth/auth.service.js"></script>
+            <script src="webapp/components/auth/user.service.js"></script>
+            <script src="webapp/components/modal/modal.service.js"></script>
+            <script src="webapp/components/mongoose-error/mongoose-error.directive.js"></script>
+            <script src="webapp/components/navbar/navbar.controller.js"></script>
+            <script src="webapp/components/panels/activeMeds/activeMeds.js"></script>
+            <script src="webapp/components/panels/activeMeds/activeMedsPrint.js"></script>
+            <script src="webapp/components/panels/allergies/allergies.js"></script>
+            <script src="webapp/components/panels/allergies/allergiesPrint.js"></script>
+            <script src="webapp/components/panels/dietOrders/dietOrders.js"></script>
+            <script src="webapp/components/panels/dietOrders/dietOrdersPrint.js"></script>
+            <script src="webapp/components/panels/immunizations/immunizations.js"></script>
+            <script src="webapp/components/panels/immunizations/immunizationsPrint.js"></script>
+            <script src="webapp/components/panels/ivMeds/ivMeds.js"></script>
+            <script src="webapp/components/panels/ivMeds/ivMedsPrint.js"></script>
+            <script src="webapp/components/panels/labOrders/labOrders.js"></script>
+            <script src="webapp/components/panels/labOrders/labOrdersPrint.js"></script>
+            <script src="webapp/components/panels/nursingOrders/nursingOrders.js"></script>
+            <script src="webapp/components/panels/panel.js"></script>
+            <script src="webapp/components/panels/panelPrint.js"></script>
+            <script src="webapp/components/panels/problems/problems.js"></script>
+            <script src="webapp/components/panels/problems/problemsPrint.js"></script>
+            <script src="webapp/components/panels/radiologyOrders/radiologyOrders.js"></script>
+            <script src="webapp/components/panels/radiologyReports/radiologyReports.js"></script>
+            <script src="webapp/components/panels/radiologyReports/radiologyReportsPrint.js"></script>
+            <script src="webapp/components/panels/visits/visits.js"></script>
+            <script src="webapp/components/panels/visits/visitsPrint.js"></script>
+            <script src="webapp/components/panels/vitals/vitals.js"></script>
+            <script src="webapp/components/panels/vitals/vitalsPrint.js"></script>
+            <script src="webapp/components/services/allOrders.service.js"></script>
+            <script src="webapp/components/services/allergy.service.js"></script>
+            <script src="webapp/components/services/demographics.service.js"></script>
+            <script src="webapp/components/services/facility.service.js"></script>
+            <script src="webapp/components/services/facility_message.service.js"></script>
+            <script src="webapp/components/services/immunizations.service.js"></script>
+            <script src="webapp/components/services/location.service.js"></script>
+            <script src="webapp/components/services/medications.service.js"></script>
+            <script src="webapp/components/services/ordersAsClassified.service.js"></script>
+            <script src="webapp/components/services/panel.service.js"></script>
+            <script src="webapp/components/services/panel_type.service.js"></script>
+            <script src="webapp/components/services/patient.service.js"></script>
+            <script src="webapp/components/services/problems.service.js"></script>
+            <script src="webapp/components/services/radiologyReports.service.js"></script>
+            <script src="webapp/components/services/template.service.js"></script>
+            <script src="webapp/components/services/template_layout.service.js"></script>
+            <script src="webapp/components/services/visits.service.js"></script>
+            <script src="webapp/components/services/vitals.service.js"></script>
+            <!-- endinjector -->
+
+        <!-- endbuild -->
+</body>
+</html>

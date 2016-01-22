@@ -1,0 +1,29 @@
+div(ng-include='"components/navbar/navbar.html"')
+.container
+  .row
+
+   div(float='left')
+    h3 Patient Search
+        
+    .btn-group
+    table(summary='search')
+     tr
+      td
+       button.btn.btn-default.btn-lg.btn-primary-disabled(name='btnSearchWard', title='Search Ward', alt='Search Ward', type='button')  Ward 
+       button.btn.btn-default.btn-lg.btn-primary-active(name='btnSearchAll', title='Search All', alt='Search All', type='button',style="background-color:Gainsboro")  All 
+    br
+            
+    div(float='right')
+     .row(float='right')
+       | Patient Name(Last, First) or SSN 
+       br
+       label(id='lblSearchCriteria  alt=', title='SearchCriteria', for='SearchCriteria')
+       input#SearchCriteria.form-control(type='SearchCriteria', name='SearchCriteria', autocomplete='off', title='SearchCriteria Input', ng-model='user.SearchCriteria', ng-pattern='/^\S*$/', ng-maxlength='32', required='')
+       
+    br
+    div
+              button.btn.btn-inverse.btn-lg.btn-login(type='submit')
+                | Search
+              = ' ' 
+    br
+    

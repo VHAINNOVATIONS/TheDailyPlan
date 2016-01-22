@@ -1,0 +1,33 @@
+// Colors
+// --------------------------------------------------
+
+$btnText:                           #fff;
+$btnTextAlt:                        #000;
+
+.row {
+  margin-bottom: 5px;
+}
+
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+.col-fixed {
+    /* custom width */
+    width:320px;
+}
+.col-min {
+    /* custom min width */
+    min-width:320px;
+}
+.col-max {
+    /* custom max width */
+    max-width:320px;
+}

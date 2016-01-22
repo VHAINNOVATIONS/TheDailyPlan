@@ -1,0 +1,19 @@
+Using Sequelize-Auto to generate models:
+
+sequelize-auto -h <host> -d <database> -u <user> -x [password] -p [port]  --dialect [dialect] -c [/path/to/config] -o [/path/to/models]
+
+Options:
+  -h, --host      IP/Hostname for the database.                                      [required]
+  -d, --database  Database name.                                                     [required]
+  -u, --user      Username for database.                                             [required]
+  -x, --pass      Password for database.
+  -p, --port      Port number for database.
+  -c, --config    JSON file for sending additional options to the Sequelize object.
+  -o, --output    What directory to place the models.
+  -e, --dialect   The dialect/engine that you're using: postgres, mysql, sqlite
+Example
+
+sequelize-auto -o "./models" -d sequelize_auto_test -h localhost -u my_username -p 5432 -x my_password -e postgres
+
+TDP Specific Cmd
+sequelize-auto -o "./server/models" -d tdpApp -h localhost -u tdpAppBackup -p 3306 -x TDP#2016! -e mysql

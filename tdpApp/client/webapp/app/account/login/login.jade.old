@@ -1,0 +1,67 @@
+div(ng-include='"components/navbar/navbar.html"')
+.container
+  .row
+    .col-sm-12
+      h1 Login
+         .col-sm-12
+  
+  form.form(name='form', ng-submit='login(form)', novalidate='',width='380px', margin='0',auto)
+   .form-group
+   label Verify Code
+   input.form-control(type='text', name='verifyCode', ng-model='user.verifyCode')
+   .form-group
+   label Access Code
+   input.form-control(type='password', name='accessCode', ng-model='user.accessCode')
+
+   br
+   label#lblConsent(tabindex='-1', alt='Consent', title='Consent', for='checky') Consent
+   br
+   input#checky(type='checkbox', autocomplete='off', title='Consent Checkbox', name='checky', required='')
+   |  I accept the terms and conditions for accessing the system described above. 	
+   
+   br
+   br
+   
+   div
+          button.btn.btn-inverse.btn-lg.btn-login(type='submit')
+            | Login
+          = ' ' 
+  br
+  
+  div(style=' background-color: Gainsboro;\
+        width: 300px;height:100px; border: 25px black;\
+          margin: 10px;float:left;')
+            | <b>Contact Information</b>
+            br
+            | Please reach out to the TDP Coordinator 
+            br
+            | 555-555-555
+            br
+            | Email: 
+            br
+            a(href='tdp_coordinator@va.gov')
+            | tdp_coordinator@va.gov 
+
+  div(style=' background-color: Gainsboro;\
+   width: 700px;height:100px; border: 25px black;\
+    margin: 10px;float:right;')
+     | The Daily Plan&reg; was initiated to increase patient safety during hospitalization by empowering patients - and their families - to ask questions about their care; in particular, to speak up if  they believe a patient&apos;s care plan is different than expected.
+     br
+     | The plan is a patient-specific document reviewed with patients each day of their hospitalization....Read More&gt;&gt;      
+  
+  div(style=' background-color: Gainsboro;\
+   width: 300px;height:30px; border: 25px black;\
+    margin: 10px;float:left; ')
+     | <b>Testimonials</b>
+  
+  div(style=' background-color: Gainsboro;\
+       width: 700px;height:50px; border: 25px black;\
+      margin: 10px;float:right; ')      
+          <b> Additional Resources</b>
+          br
+          a(href='#') View demo &gt;&gt;
+  
+  
+  
+   
+    
