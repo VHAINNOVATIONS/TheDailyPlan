@@ -25,6 +25,8 @@ angular.module('tdpApp')
           }
         };
 
+        $scope.allergiesGridOptions.minRowsToShow = 3;
+
         $scope.allergiesGridOptions.columnDefs = [
           { name: 'allergenName', displayName: 'Name', width:'*' },
           { name: 'allergenType', displayName: 'Type', width:'*' ,
