@@ -10,6 +10,10 @@ angular.module('tdpApp')
 
     console.log('Patient Plan - Items:',self.items);
 
+    $scope.printDailyPlan = function() {
+      window.print();
+    };
+
     self.gridsterOptions = {
       margins: [20, 20],
       columns: 4,

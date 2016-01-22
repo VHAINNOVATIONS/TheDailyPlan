@@ -1,123 +1,65 @@
 <div ng-controller="PatientPlanCtrl as ctrl" class="container">
-  <div class="row">
-    <h3>The Daily Plan</h3>
-    <span>Date/Time:<b> {{ctrl.cdate | date:'MM/dd/yyyy hh:mm:ss a'}}</b></span>
-  </div>
-  <div class="row">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title">Patient: {{ctrl.demographics.name}} DOB: {{ctrl.demographics.DOB}} Gender: {{ctrl.demographics.sex}} SSN: {{ctrl.demographics.SSN}} Location: {{ctrl.demographics.location.name}}</h3>
-        </div>
-        <div class="panel-body">
-
-          <div gridster="gridsterOptions">
-            <ul ng-model="ctrl.panels">
-              <li gridster-item="panel.settings" ng-repeat="panel in ctrl.panels" grid-panel>
-                <div class="box" ng-controller="CustomPanelCtrl">
-                  <div class="box-header">
-                    <h3>{{ panel.title }}<span ng-show="panel.mandatory">*</span></h3>
-                    <div class="box-header-btns pull-right">
-                      <a title="settings" ng-click="openSettings(panel)"><i class="glyphicon glyphicon-cog"></i></a>
-                      <a title="Remove panel" ng-click="remove(panel)"><i class="glyphicon glyphicon-trash"></i></a>
-                    </div>
-                  </div>
-                  <div class="box-content">
-
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          <!-- <div class="row">
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
-                      <h3 class="panel-title">Allergies</h3>
-                    </div>
-                    <div class="panel-body">
-                      <div dt-allergies patient="ctrl.patient"></div>
-                    </div>
-                  </div>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                  <div class="panel panel-default">
-                      <div class="panel-heading">
-                        <h3 class="panel-title">Immunizations</h3>
-                      </div>
-                      <div class="panel-body">
-                        <div dt-immunizations patient="ctrl.patient"></div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="row">
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                  <div class="panel panel-default">
-                      <div class="panel-heading">
-                        <h3 class="panel-title">Problems</h3>
-                      </div>
-                      <div class="panel-body">
-                        <div dt-problems patient="ctrl.patient"></div>
-                      </div>
-                  </div>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                      <h3 class="panel-title">Vitals</h3>
-                    </div>
-                    <div class="panel-body">
-                      <div dt-vitals patient="ctrl.patient"></div>
-                    </div>
-                </div>
-              </div>
-          </div>
-          <div class="row">
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                  <div class="panel panel-default">
-                      <div class="panel-heading">
-                        <h3 class="panel-title">Diet Orders</h3>
-                      </div>
-                      <div class="panel-body">
-                        <div dt-diet-orders patient="ctrl.patient"></div>
-                      </div>
-                  </div>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                  <div class="panel panel-default">
-                      <div class="panel-heading">
-                        <h3 class="panel-title">Lab Orders</h3>
-                      </div>
-                      <div class="panel-body">
-                        <div dt-lab-orders patient="ctrl.patient"></div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-          <div class="row">
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                  <div class="panel panel-default">
-                      <div class="panel-heading">
-                        <h3 class="panel-title">Radiology Reports</h3>
-                      </div>
-                      <div class="panel-body">
-                        <div dt-radiology-reports patient="ctrl.patient"></div>
-                      </div>
-                  </div>
-              </div>
-              <div class="col-lg-6 col-md-6 col-sm-6">
-                  <div class="panel panel-default">
-                      <div class="panel-heading">
-                        <h3 class="panel-title">Visits</h3>
-                      </div>
-                      <div class="panel-body">
-                        <div dt-visits patient="ctrl.patient"></div>
-                      </div>
-                  </div>
-              </div>
-          </div> -->
-        </div>
+  <div class="hidden-print">
+    <div class="row hidden-print">
+      <h3>The Daily Plan</h3>
+      <span>Date/Time:<b> {{ctrl.cdate | date:'MM/dd/yyyy hh:mm:ss a'}}</b></span>
     </div>
+    <div class="row">
+      <div class="panel panel-default">
+          <div class="panel-heading clearfix">
+            <a title="Print" ng-click="printDailyPlan()" class="pull-right"><i class="glyphicon glyphicon-print"></i></a>
+            <h3 class="panel-title pull-left">Patient: {{ctrl.demographics.name}} DOB: {{ctrl.demographics.DOB}} Gender: {{ctrl.demographics.sex}} SSN:  {{ctrl.demographics.SSN}} Location: {{ctrl.demographics.location.name}}</h3>
+          </div>
+          <div class="panel-body">
+            <div gridster="gridsterOptions">
+              <ul ng-model="ctrl.panels">
+                <li gridster-item="panel.settings" ng-repeat="panel in ctrl.panels" grid-panel>
+                  <div class="box" ng-controller="CustomPanelCtrl">
+                    <div class="box-header">
+                      <h3>{{ panel.title }}<span ng-show="panel.mandatory">*</span></h3>
+                      <div class="box-header-btns pull-right">
+                        <a title="settings" ng-click="openSettings(panel)"><i class="glyphicon glyphicon-cog"></i></a>
+                        <a title="Remove panel" ng-click="remove(panel)"><i class="glyphicon glyphicon-trash"></i></a>
+                      </div>
+                    </div>
+                    <div class="box-content">
+
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="visible-print-block">
+    <div class="header">
+        <div class="row">
+          <div class="col-xs-6">
+            <img alt="The Daily Plan" src="common/assets/images/dailyPlanLogo.jpg" style="display: block; width: 100%; height: 100%;"/>
+          </div>
+          <div class="col-xs-6">The Daily Plan represents current hospital activity and it is NOT a full list of everything that takes place during your hospital stay.  Your medications, treatments, appointments, etc. may change at discharge.  Please keep your personal information out of sight by storing this folder in a private place, such as a night stand drawer or bedside cabinet.</div>
+        </div>
+      <div class="report_title">
+          <h3 class="text-primary">   Confidential: The Daily Plan<sup>&#174;</sup> {{ctrl.cdate | date:'MM/dd/yyyy'}}</h3>
+      </div>
+      <div class="row report_patient">
+          <div class="col-xs-4">{{ctrl.demographics.name}}</div>
+          <div class="col-xs-4">DOB: {{ctrl.demographics.DOB}}</div>
+          <div class="col-xs-4">Med Unit: {{ctrl.demographics.location.name}}</div>
+      </div>
+    </div>
+    <div>
+      <ul ng-model="ctrl.panels">
+        <li class="patient_data" ng-repeat="panel in ctrl.panels" grid-panel-print>
+            <div class="report_category">
+              <h4>     {{panel.title}}</h4>
+            </div>
+            <div class="box-content-print">
+            </div>
+        </li>
+      </ul>
+   </div>
   </div>
 </div>

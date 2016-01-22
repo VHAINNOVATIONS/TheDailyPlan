@@ -45,6 +45,7 @@ router.get('/complete/:id', function(req, res) {
       panelObj.settings.minSizeX = panel.minSizeX;
       panelObj.settings.minSizeY = panel.minSizeY;
       panelObj.template = '<div ' + panel.directive + ' patient="ctrl.' + panel.scope_variable +'"></div>';
+      panelObj.print = '<div ' + panel.directive + '-print' + ' patient="ctrl.' + panel.scope_variable +'"></div>';
       panelObj.mandatory = panel.mandatory;
       panels.push(panelObj);
       callback();

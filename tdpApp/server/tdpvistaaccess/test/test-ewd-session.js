@@ -57,7 +57,7 @@ describe('ewd session test', function () {
     });
 
     var patients;
-    xit('search patients', function (done) {
+    it('search patients', function (done) {
         testSession.searchPatients({
             prefix: 'eig'
         }, function (err, body) {
@@ -166,7 +166,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get patient vitals', function (done) {
+    it('get patient vitals', function (done) {
         var pid = patients[37].id;
         console.log(patients[37]);
         testSession.getVitalSigns(pid, {}, function (err, body) {
@@ -215,7 +215,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get patient problems', function (done) {
+    it('get patient problems', function (done) {
         var pid = patients[37].id;
         testSession.getProblems(pid, {}, function (err, body) {
             if (err) {
@@ -228,7 +228,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get patient visits', function (done) {
+    it('get patient visits', function (done) {
         var pid = 756; //520; //patients[37].id;
         testSession.getVisits(pid, {
             numDaysPast: 2998,
@@ -247,7 +247,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get clinical warnings', function (done) {
+    it('get clinical warnings', function (done) {
         var pid = 711;
         testSession.getClinicalWarnings(pid, {}, function (err, body) {
             if (err) {
@@ -263,7 +263,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get immunizations', function (done) {
+    it('get immunizations', function (done) {
         var pid = 711;
         testSession.getImmunizations(pid, {}, function (err, body) {
             if (err) {
@@ -313,7 +313,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get diet, lab orders', function (done) {
+    it('get diet, lab orders', function (done) {
         var pid = 100022;
         testSession.getOrdersAsClassified(pid, {}, function (err, result) {
             if (err) {
@@ -328,7 +328,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get surgical pathology reports', function (done) {
+    it('get surgical pathology reports', function (done) {
         var pid = 100022;
         testSession.getSurgicalPathologyReports(pid, {}, function (err, result) {
             if (err) {
@@ -343,7 +343,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get chem hem reports', function (done) {
+    it('get chem hem reports', function (done) {
         var pid = 4; //100022;
         testSession.getChemHemReports(pid, {
             toDate: '3161010',

@@ -1,0 +1,16 @@
+<div class="container report_row">
+  <div class="row" class="report_column500" ng-if="labOrders && labOrders.length && !labOrdersError">
+    <div class="col-xs-7 grid_header">Test Name</div>
+    <div class="col-xs-3 grid_header">Start</div>
+    <div class="col-xs-2 grid_header">Status</div>
+    <div class="col-xs-7" ng-repeat-start="labOrder in labOrders">{{labOrder.testName}}</div>
+    <div class="col-xs-3">{{labOrder.start}}</div>
+    <div class="col-xs-2" ng-repeat-end>{{labOrder.status}}</div>
+  </div>
+  <div class="row" class="report_column500" ng-if="labOrdersError">
+    <span class="message">Internal error loading active lab orders.</span>
+  </div>
+  <div class="row" class="report_column500" ng-if="(!labOrders || labOrders.length == 0) && !labOrdersError">
+    <span class="message">No active lab orders found.</span>
+  </div>
+</div>
