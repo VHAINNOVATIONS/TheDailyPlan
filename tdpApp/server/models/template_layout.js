@@ -34,6 +34,11 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     tableName: 'template_layout',
-    freezeTableName: true
+    freezeTableName: true,
+    classMethods: {
+      associate: function(models) {
+        models.template_layout.belongsTo(models.panel,{foreignKey: 'panel_id', targetKey: 'id'});
+      }
+    }
   });
 };

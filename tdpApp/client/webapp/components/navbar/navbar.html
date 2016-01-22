@@ -12,12 +12,8 @@
         <div id="navbar-main" collapse="isCollapsed" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li ng-show="isLoggedIn()" ng-class="{active: isActive(&quot;/PatientSearch&quot;)}"><a href="/PatientSearch">Patient Search</a></li>
-                <li ng-hide="isLoggedIn()" ng-class="{active: isActive(&quot;/signup&quot;)}"><a href="/signup">Sign up</a></li>
-                <li ng-show="isLoggedIn()" ng-class="{active: isActive(&quot;/settings&quot;)}">
-                    <a href="/settings">
-                        <span class="glyphicon glyphicon-cog"></span>
-                    </a>
-                </li>
+                <!-- <li ng-hide="isLoggedIn()" ng-class="{active: isActive(&quot;/signup&quot;)}"><a href="/signup">Sign up</a></li> -->
+                <li ng-show="isLoggedIn()" ng-class="{active: isActive(&quot;/layouts&quot;)}"><a href="/layouts">Templates</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li ng-show="isLoggedIn()"><span class="">{{currentUser.displayName}}</span></li>

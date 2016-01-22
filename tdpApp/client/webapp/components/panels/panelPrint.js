@@ -10,7 +10,7 @@ angular.module('tdpApp')
           var panel = $scope.panel;
           console.log('print panel:',panel);
           var container = $scope.findPrintBoxContainer($element);
-          var templateString = panel.settings.print;
+          var templateString = panel.print;
           console.log('template: ' + templateString);
           if (templateString) {
             var panelElement = angular.element(templateString);

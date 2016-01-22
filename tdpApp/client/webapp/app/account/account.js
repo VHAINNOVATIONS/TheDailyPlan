@@ -21,12 +21,10 @@ angular.module('tdpApp')
       })
       .state('PatientSearch', {
      url: '/PatientSearch',
-     templateUrl: 'app/patientSearch/patientSearch.html',
-     controller: 'PatientSearchCtrl'
+     templateUrl: 'app/patientSearch/patientSearch.html'
       })
       .state('PatientPlan', {
      url: '/PatientPlan',
-     templateUrl: 'app/patientPlan/patientPlan.html',
-     controller: 'PatientPlanCtrl'
+     templateUrl: 'app/patientPlan/patientPlan.html'
       })
   });

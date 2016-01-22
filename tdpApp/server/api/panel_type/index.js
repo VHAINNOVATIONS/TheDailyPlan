@@ -30,7 +30,8 @@ router.post('/', function(req, res) {
     directive: req.body.directive,
     scope_variable: req.body.scope_variable,
     minSizeX: req.body.minSizeX,
-    minSizeY: req.body.minSizeY
+    minSizeY: req.body.minSizeY,
+    mandatory: req.body.mandatory
   }).then(function(panel_type) {
     res.json(panel_type);
   });
@@ -49,7 +50,8 @@ router.put('/:id', function(req, res) {
         directive: req.body.directive,
         scope_variable: req.body.scope_variable,
         minSizeX: req.body.minSizeX,
-        minSizeY: req.body.minSizeY
+        minSizeY: req.body.minSizeY,
+        mandatory: req.body.mandatory
       }).then(function(panel_type) {
         res.send(panel_type);
       });
