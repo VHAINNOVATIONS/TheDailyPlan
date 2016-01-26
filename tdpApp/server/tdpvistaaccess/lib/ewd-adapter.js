@@ -464,6 +464,19 @@ var session = {
                 callback(null, result);
             }
         });
+    },
+    getHealthFactors: function(patientId, options, callback) {
+        this.get('/getPatientHealthFactors', {
+            patientId: patientId,
+            toDate: options.toDate,
+            fromDate: options.fromDate
+        }, function (err, result) {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, result);
+            }
+        });
     }
 };
 
