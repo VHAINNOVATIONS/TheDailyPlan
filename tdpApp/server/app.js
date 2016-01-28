@@ -28,7 +28,7 @@ require('./routes')(app);
 db.sequelize
 .sync({ force: false})
 .then(function() {
-    // seed
+    // seed the db - for use when sync({force: true})
     //require('../db/seed')(db);
 
     // Start server
