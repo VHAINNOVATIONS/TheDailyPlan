@@ -42,7 +42,7 @@ describe('ewd session test', function () {
         testSession.login({
             accessCode: 'CPRS1234',
             verifyCode: 'CPRS4321$',
-            userKeys: ['XUPROG', 'NOTHAVE', 'RA VERIFY']
+            userKeys: ['XUPROG', 'NOTHAVE', 'RA VERIFY', 'TDPADMIN']
         }, function (err) {
             if (err) {
                 done(err);
@@ -247,7 +247,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get postings', function (done) {
+    xit('get postings', function (done) {
         var pid = 100846; //40; //100848; //100846;
         testSession.getPostings(pid, {}, function (err, body) {
             if (err) {
@@ -298,8 +298,8 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('radiology reports', function (done) {
-        var pid = patients[2].id;
+    it('radiology reports', function (done) {
+        var pid = 296; //patients[2].id;
         testSession.getRadiologyReports('197', {}, function (err, body) {
             if (err) {
                 done(err);
@@ -313,8 +313,8 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get diet, lab orders', function (done) {
-        var pid = 100846; //100022;
+    xit('get diet, lab orders', function (done) {
+        var pid = 296; //100846; //100022;
         testSession.getOrdersAsClassified(pid, {}, function (err, result) {
             if (err) {
                 done(err);

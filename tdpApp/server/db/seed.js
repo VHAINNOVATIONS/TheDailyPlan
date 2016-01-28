@@ -1,19 +1,19 @@
 module.exports = function(db) {
 
-var templateID = 0;
-//Create Default Template
-db.template.create({
+  var templateID = 0;
+  //Create Default Template
+  db.template.create({
     id: 1,
     template_name: 'Default',
     template_description: 'Default Template',
     active: true
   }).then(function(template) {
     templateID = template.id;
-    console.log('templateID:',templateID);
+    console.log('templateID:', templateID);
   });
 
-// Create Facilities and Facility Messages
- db.facility.create({
+  // Create Facilities and Facility Messages
+  db.facility.create({
     name: 'Biloxi',
     station: 520,
     visn: 16
@@ -24,19 +24,19 @@ db.template.create({
       message_order: 1,
       message_text: 'This is the message text for the first message from Biloxi. We hope you have a great day!',
       message_headline: 'Biloxi Message 1 Headline'
-    },{
+    }, {
       facility_id: facility.id,
       active: true,
       message_order: 2,
       message_text: 'This is the message text for the second message from Biloxi. We hope you have a great day!',
       message_headline: 'Biloxi Message 2 Headline'
-    },{
+    }, {
       facility_id: facility.id,
       active: true,
       message_order: 3,
       message_text: 'This is the message text for the third message from Biloxi. We hope you have a great day!',
       message_headline: 'Biloxi Message 3 Headline'
-    },{
+    }, {
       facility_id: facility.id,
       active: true,
       message_order: 4,
@@ -45,7 +45,7 @@ db.template.create({
     }]);
   });
 
-db.facility.create({
+  db.facility.create({
     name: 'Madison',
     station: 607,
     visn: 12
@@ -56,19 +56,19 @@ db.facility.create({
       message_order: 1,
       message_text: 'This is the message text for the first message from Madison. We hope you have a great day!',
       message_headline: 'Madison Message 1 Headline'
-    },{
+    }, {
       facility_id: facility.id,
       active: true,
       message_order: 2,
       message_text: 'This is the message text for the second message from Madison. We hope you have a great day!',
       message_headline: 'Madison Message 2 Headline'
-    },{
+    }, {
       facility_id: facility.id,
       active: true,
       message_order: 3,
       message_text: 'This is the message text for the third message from Madison. We hope you have a great day!',
       message_headline: 'Madison Message 3 Headline'
-    },{
+    }, {
       facility_id: facility.id,
       active: true,
       message_order: 4,
@@ -77,7 +77,7 @@ db.facility.create({
     }]);
   });
 
-db.facility.create({
+  db.facility.create({
     name: 'Minneapolis',
     station: 618,
     visn: 23
@@ -88,19 +88,19 @@ db.facility.create({
       message_order: 1,
       message_text: 'This is the message text for the first message from Minneapolis. We hope you have a great day!',
       message_headline: 'Minneapolis Message 1 Headline'
-    },{
+    }, {
       facility_id: facility.id,
       active: true,
       message_order: 2,
       message_text: 'This is the message text for the second message from Minneapolis. We hope you have a great day!',
       message_headline: 'Minneapolis Message 2 Headline'
-    },{
+    }, {
       facility_id: facility.id,
       active: true,
       message_order: 3,
       message_text: 'This is the message text for the third message from Minneapolis. We hope you have a great day!',
       message_headline: 'Minneapolis Message 3 Headline'
-    },{
+    }, {
       facility_id: facility.id,
       active: true,
       message_order: 4,
@@ -109,7 +109,7 @@ db.facility.create({
     }]);
   });
 
-db.facility.create({
+  db.facility.create({
     name: 'Central Texas (Waco)',
     station: 674,
     visn: 17
@@ -120,19 +120,19 @@ db.facility.create({
       message_order: 1,
       message_text: 'This is the message text for the first message from Central Texas (Waco). We hope you have a great day!',
       message_headline: 'Central Texas (Waco) Message 1 Headline'
-    },{
+    }, {
       facility_id: facility.id,
       active: true,
       message_order: 2,
       message_text: 'This is the message text for the second message from Central Texas (Waco). We hope you have a great day!',
       message_headline: 'Central Texas (Waco) Message 2 Headline'
-    },{
+    }, {
       facility_id: facility.id,
       active: true,
       message_order: 3,
       message_text: 'This is the message text for the third message from Central Texas (Waco). We hope you have a great day!',
       message_headline: 'Central Texas (Waco) Message 3 Headline'
-    },{
+    }, {
       facility_id: facility.id,
       active: true,
       message_order: 4,
@@ -158,7 +158,7 @@ db.facility.create({
       sizeY: 1
     }).then(function(p) {
       // Then Create the Template_Layout Second
-      console.log('templateID:',templateID);
+      console.log('templateID:', templateID);
       db.template_layout.create({
         template_id: templateID,
         panel_id: p.id,
@@ -188,7 +188,7 @@ db.facility.create({
       sizeY: 1
     }).then(function(p) {
       // Then Create the Template_Layout Second
-      console.log('templateID:',templateID);
+      console.log('templateID:', templateID);
       db.template_layout.create({
         template_id: templateID,
         panel_id: p.id,
@@ -218,7 +218,7 @@ db.facility.create({
       sizeY: 2
     }).then(function(p) {
       // Then Create the Template_Layout Second
-      console.log('templateID:',templateID);
+      console.log('templateID:', templateID);
       db.template_layout.create({
         template_id: templateID,
         panel_id: p.id,
@@ -248,7 +248,7 @@ db.facility.create({
       sizeY: 2
     }).then(function(p) {
       // Then Create the Template_Layout Second
-      console.log('templateID:',templateID);
+      console.log('templateID:', templateID);
       db.template_layout.create({
         template_id: templateID,
         panel_id: p.id,
@@ -278,7 +278,7 @@ db.facility.create({
       sizeY: 2
     }).then(function(p) {
       // Then Create the Template_Layout Second
-      console.log('templateID:',templateID);
+      console.log('templateID:', templateID);
       db.template_layout.create({
         template_id: templateID,
         panel_id: p.id,
@@ -308,7 +308,7 @@ db.facility.create({
       sizeY: 2
     }).then(function(p) {
       // Then Create the Template_Layout Second
-      console.log('templateID:',templateID);
+      console.log('templateID:', templateID);
       db.template_layout.create({
         template_id: templateID,
         panel_id: p.id,
@@ -338,7 +338,7 @@ db.facility.create({
       sizeY: 2
     }).then(function(p) {
       // Then Create the Template_Layout Second
-      console.log('templateID:',templateID);
+      console.log('templateID:', templateID);
       db.template_layout.create({
         template_id: templateID,
         panel_id: p.id,
@@ -368,7 +368,7 @@ db.facility.create({
       sizeY: 2
     }).then(function(p) {
       // Then Create the Template_Layout Second
-      console.log('templateID:',templateID);
+      console.log('templateID:', templateID);
       db.template_layout.create({
         template_id: templateID,
         panel_id: p.id,
@@ -398,7 +398,7 @@ db.facility.create({
       sizeY: 2
     }).then(function(p) {
       // Then Create the Template_Layout Second
-      console.log('templateID:',templateID);
+      console.log('templateID:', templateID);
       db.template_layout.create({
         template_id: templateID,
         panel_id: p.id,
@@ -428,7 +428,7 @@ db.facility.create({
       sizeY: 2
     }).then(function(p) {
       // Then Create the Template_Layout Second
-      console.log('templateID:',templateID);
+      console.log('templateID:', templateID);
       db.template_layout.create({
         template_id: templateID,
         panel_id: p.id,
@@ -458,7 +458,7 @@ db.facility.create({
       sizeY: 2
     }).then(function(p) {
       // Then Create the Template_Layout Second
-      console.log('templateID:',templateID);
+      console.log('templateID:', templateID);
       db.template_layout.create({
         template_id: templateID,
         panel_id: p.id,
@@ -488,7 +488,7 @@ db.facility.create({
       sizeY: 2
     }).then(function(p) {
       // Then Create the Template_Layout Second
-      console.log('templateID:',templateID);
+      console.log('templateID:', templateID);
       db.template_layout.create({
         template_id: templateID,
         panel_id: p.id,

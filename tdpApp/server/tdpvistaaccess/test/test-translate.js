@@ -89,7 +89,7 @@ describe('vista raw translations', function () {
         var ordersSample = require('./fixtures/rawOrdersSample3.json');
         var orderTypes = require('./fixtures/rawOrderTypes.json');
         var result = translator.translateOrdersList(ordersSample, orderTypes);
-        console.log(result);
+        //console.log(result);
         expect(result.length).to.equal(6);
     });
 });

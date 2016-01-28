@@ -451,7 +451,6 @@ var session = {
     },
     getPatientsByClinic: function (options, callback) {
         this.get('/getPatientsByClinic', options, function (err, result) {
-            console.log(options);
             if (err) {
                 callback(err);
             } else {
