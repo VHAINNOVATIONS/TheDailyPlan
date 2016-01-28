@@ -5,10 +5,11 @@ angular.module('tdpApp')
   	var self = this;
     self.cdate = new Date();
     self.demographics = null;
-    self.items = Patient.getSelectedPatients();
-    self.patient = null;
+    self.patients = Patient.getSelectedPatients();
+    self.patient = self.patients[0].id;
 
-    console.log('Patient Plan - Items:',self.items);
+    console.log('Patient Plan - patients:',self.patients);
+    console.log('Patient Plan - patient:', self.patient);
 
     $scope.printDailyPlan = function() {
       window.print();
@@ -48,12 +49,8 @@ angular.module('tdpApp')
       self.errors.other = err.message;
     });
 
-
-
-    if(self.items.length > 0 && self.items[0])
-    {
-      self.patient = self.items[0];
-      Demographics.getByID(self.items[0])
+    function loadPatient() {
+      Demographics.getByID(self.patient)
       .then( function(data) {
         console.log('Patient Plan - demographics:',data);
         self.demographics = data;
@@ -62,6 +59,15 @@ angular.module('tdpApp')
         self.errors.other = err.message;
       });
     }
+
+    /*Demographics.getByID(self.patient)
+    .then( function(data) {
+      console.log('Patient Plan - demographics:',data);
+      self.demographics = data;
+    })
+    .catch( function(err) {
+      self.errors.other = err.message;
+    });*/
   })
 // Gridster Custom Controller
 .controller('CustomPanelCtrl', ['$scope', '$modal',
@@ -140,6 +146,35 @@ angular.module('tdpApp')
       out.push(input[i]);
     }
     return out;
-  }
+  };
+})
+// ssn filter
+.filter('ssnFilter', function () {
+  return function (value, mask) {
+    var len, val;
+    if (mask == null) {
+      mask = false;
+    }
+    if (value) {
+      val = value.toString().replace(/\D/g, '');
+      len = val.length;
+      if (len < 4) {
+        return val;
+      } else if (3 < len && len < 6) {
+        if (mask) {
+          return '***-' + val.substr(3);
+        } else {
+          return val.substr(0, 3) + '-' + val.substr(3);
+        }
+      } else if (len > 5) {
+        if (mask) {
+          return '***-**-' + val.substr(5, 4);
+        } else {
+          return val.substr(0, 3) + '-' + val.substr(3, 2) + '-' + val.substr(5, 4);
+        }
+      }
+    }
+    return value;
+  };
 });
 
