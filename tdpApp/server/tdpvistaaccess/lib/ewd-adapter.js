@@ -113,6 +113,20 @@ var typedOrderUpdater = {
     },
     nursing: function (result, order) {
         typedOrderUpdater.activity(result, order);
+    },
+    procedures: function(result, order) {
+      if (order.status === 'Pending') {
+        if (! result.procedures) {
+          result.procedures = [];
+        }
+        var procedure = {
+            name: order.text
+        };
+        if (order.startDate) {
+            procedure.start = order.startDate;
+        }
+        result.procedures.push(procedure);
+      }
     }
 };
 

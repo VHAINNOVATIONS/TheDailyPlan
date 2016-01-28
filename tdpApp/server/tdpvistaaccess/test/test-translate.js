@@ -84,4 +84,12 @@ describe('vista raw translations', function () {
         var result = translator.translateOrdersList(ordersSample, orderTypes);
         expect(result.length).to.equal(8);
     });
+
+    it('orders 3', function () {
+        var ordersSample = require('./fixtures/rawOrdersSample3.json');
+        var orderTypes = require('./fixtures/rawOrderTypes.json');
+        var result = translator.translateOrdersList(ordersSample, orderTypes);
+        console.log(result);
+        expect(result.length).to.equal(6);
+    });
 });
