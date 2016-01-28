@@ -247,15 +247,15 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get clinical warnings', function (done) {
-        var pid = 711;
-        testSession.getClinicalWarnings(pid, {}, function (err, body) {
+    it('get postings', function (done) {
+        var pid = 100846; //40; //100848; //100846;
+        testSession.getPostings(pid, {}, function (err, body) {
             if (err) {
                 done(err);
             } else {
                 expect(body).to.exist();
                 //expect(body.length).to.be.above(0);
-                console.log("=== CLINICAL WARNINGS ======");
+                console.log("====== POSTINGS ============");
                 console.log(JSON.stringify(body, undefined, 4));
                 console.log("============================");
                 done();
@@ -364,7 +364,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get health factors', function (done) {
+    xit('get health factors', function (done) {
         var pid = 100846;
         testSession.getHealthFactors(pid, {}, function (err, result) {
             if (err) {

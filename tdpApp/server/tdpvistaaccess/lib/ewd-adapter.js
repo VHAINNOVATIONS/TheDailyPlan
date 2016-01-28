@@ -265,8 +265,8 @@ var session = {
             }
         });
     },
-    getClinicalWarnings: function (patientId, options, callback) {
-        this.get('/getClinicalWarnings', {
+    getPostings: function (patientId, options, callback) {
+        this.get('/getPostings', {
             patientId: patientId,
             nRpts: "0"
         }, function (err, body) {
