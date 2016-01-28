@@ -1,6 +1,8 @@
 var vista = require('VistALib');
 var ordersLib = require('./vistaOrders');
 var patientSearchLib = require('./vistaPatientSearch');
+var healthFactorsLib = require('./vistaHealthFactors');
+var postingsLib = require('./vistaPostingsLib');
 
 // REST & Web Service error response formatter function
 // Updated 20150820a
@@ -345,16 +347,13 @@ var operations = {
         }
     },
 
-    getClinicalWarnings: {
+    getPostings: {
         GET: function(ewd, session) {
             var params = {
-                patientId: ewd.query.patientId,
-                fromDate: ewd.query.fromDate,
-                toDate: ewd.query.toDate,
-                nRpts: ewd.query.nRpts
+                patientId: ewd.query.patientId
             };
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
-            var result = vista.getClinicalWarnings(params, session, ewd);
+        var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var result = postingsLib.getPostings(params, session, ewd);
             ok = ewd.util.saveSymbolTable(ewd, session);    //Grab our symbol table for use next time
             return result;
         }
@@ -470,6 +469,20 @@ var operations = {
             };
             var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
             var result = patientSearchLib.getPatientsByWard(params, session, ewd);
+            ok = ewd.util.saveSymbolTable(ewd, session);        //Grab our symbol table for use next time
+            return result;
+        }
+    },
+
+    getPatientHealthFactors: {
+        GET: function(ewd, session) {
+            var params = {
+                patientId: ewd.query.patientId,
+                fromDate: ewd.query.fromDate || "",
+                toDate: ewd.query.toDate || ""
+            };
+            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var result = healthFactorsLib.getPatientHealthFactors(params, session, ewd);
             ok = ewd.util.saveSymbolTable(ewd, session);        //Grab our symbol table for use next time
             return result;
         }

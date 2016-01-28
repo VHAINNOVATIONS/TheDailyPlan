@@ -265,8 +265,8 @@ var session = {
             }
         });
     },
-    getClinicalWarnings: function (patientId, options, callback) {
-        this.get('/getClinicalWarnings', {
+    getPostings: function (patientId, options, callback) {
+        this.get('/getPostings', {
             patientId: patientId,
             nRpts: "0"
         }, function (err, body) {
@@ -458,6 +458,19 @@ var session = {
     },
     getWards: function (options, callback) {
         this.get('/getWards', null, function (err, result) {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, result);
+            }
+        });
+    },
+    getHealthFactors: function(patientId, options, callback) {
+        this.get('/getPatientHealthFactors', {
+            patientId: patientId,
+            toDate: options.toDate,
+            fromDate: options.fromDate
+        }, function (err, result) {
             if (err) {
                 callback(err);
             } else {
