@@ -146,8 +146,8 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get patient demographics/flags', function (done) {
-        var pid = 756; //724; //631; //100845; //100748; //100846;
+    it('get patient demographics/flags', function (done) {
+        var pid = 100846; //756; //724; //631; //100845; //100748; //100846;
         testSession.getDemographics(pid, {}, function (err, body) {
             if (err) {
                 done(err);
@@ -310,7 +310,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('radiology reports', function (done) {
+    xit('radiology reports', function (done) {
         var pid = 296; //patients[2].id;
         testSession.getRadiologyReports('197', {}, function (err, body) {
             if (err) {

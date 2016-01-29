@@ -206,10 +206,12 @@ module.exports = {
 
 		var adminInfo = ewd.mumps.function("ADMINFO^VEFBRPC", params.patientId) ;
 		if (adminInfo) {
+			patient.team = patient.team	|| {};
 			patient.admissionInfo = {};
 			var adminInfoPieces = adminInfo.split("^");
 			if (adminInfoPieces[0]) {
 				patient.admissionInfo['provider'] = adminInfoPieces[0];
+				patient.team.inpatientName = adminInfoPieces[0];
 			}
 			if (adminInfoPieces[1]) {
 				patient.admissionInfo['attendingProvider'] = adminInfoPieces[1];
