@@ -38,10 +38,19 @@ angular.module('tdpApp')
     $scope.login = function(form) {
       self.submitted = true;
 
+      var keys = [{
+        client: 'super',
+        vista: 'TDPSUPER'
+      }, {
+        client: 'admin',
+        vista: 'TDPADMIN'
+      }];   // TODO read from  db when combobox for facility is functional
+
       if(form.$valid) {
         Auth.login({
           verifyCode: self.user.verifyCode,
-          accessCode: self.user.accessCode
+          accessCode: self.user.accessCode,
+          userKeys: keys
         })
         .then( function(data) {
           // Logged in, redirect to home

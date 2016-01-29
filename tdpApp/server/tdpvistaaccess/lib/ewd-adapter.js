@@ -215,7 +215,10 @@ var session = {
             } else {
                 self.Authorization = body.Authorization;
                 var credentials = encryptCredentials(userInfo.accessCode, userInfo.verifyCode, body.key);
-                var keysStr = userInfo.userKeys && userInfo.userKeys.length && userInfo.userKeys.join('^');
+                userInfo.userKeys = userInfo.userKeys || [];
+                var keysStr = userInfo.userKeys.map(function(userKey) {
+                  return userKey.vista;
+                }).join('^');
                 self.get('/login', {
                     credentials: credentials,
                     keys: keysStr
@@ -223,6 +226,12 @@ var session = {
                     if (err) {
                         callback(err);
                     } else {
+                        var keys = userData.keys || [];
+                        var keysObj = userInfo.userKeys.reduce(function(r, userKey, index) {
+                          r[userKey.client] = keys[userKey.vista];
+                          return r;
+                        }, {});
+                        userData.keys = keysObj;
                         self.userData = userData;
                         callback(null, self.userData);
                     }

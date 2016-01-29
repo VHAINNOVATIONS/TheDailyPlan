@@ -42,7 +42,19 @@ describe('ewd session test', function () {
         testSession.login({
             accessCode: 'CPRS1234',
             verifyCode: 'CPRS4321$',
-            userKeys: ['XUPROG', 'NOTHAVE', 'RA VERIFY', 'TDPADMIN']
+            userKeys: [{
+              client: 'admin',
+              vista: 'XUPROG'
+            }, {
+              client: 'admin2',
+              vista: 'NOTHAVE'
+            }, {
+              client: 'admin3',
+              vista: 'RA VERIFY'
+            }, {
+              client: 'admin4',
+              vista: 'TDPADMIN'
+            }]
         }, function (err) {
             if (err) {
                 done(err);
