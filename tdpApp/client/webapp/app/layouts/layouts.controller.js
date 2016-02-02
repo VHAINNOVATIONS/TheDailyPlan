@@ -62,6 +62,7 @@ angular.module('tdpApp')
 
     self.addTemplate = function(form) {
       self.submitted = true;
+      self.template.panels = self.selectedPanels;
 
       if(form.$valid) {
         Template.create(self.template)
@@ -72,11 +73,6 @@ angular.module('tdpApp')
         .catch( function(err) {
           self.errors.other = err.message;
         });
-
-        // If successful, create More records
-          // Panel
-          // Template_Layout
-
       }
     };
 
@@ -169,4 +165,73 @@ angular.module('tdpApp')
     };
 
 
-  }]);
+  }])
+// Customizer Controller
+.controller('CustomizerModalCtrl', ['$scope', '$modal',
+  function($scope, $modal) {
+
+    $scope.remove = function(panel) {
+      $scope.panels.splice($scope.panels.indexOf(panel), 1);
+    };
+
+    $scope.openSettings = function(panel) {
+      $modal.open({
+        scope: $scope,
+        templateUrl: 'app/layouts/customizer.html',
+        controller: 'CustomizerCtrl',
+        resolve: {
+          panel: function() {
+            return panel;
+          }
+        }
+      });
+    };
+  }
+])
+//Gridster - Panel Settings Modal
+.controller('CustomizerCtrl', ['$scope', '$timeout', '$rootScope', '$uibModalInstance', 'panel',
+  function($scope, $timeout, $rootScope, $uibModalInstance, panel) {
+    $scope.panel = panel;
+
+    $scope.form = {
+      title: panel.title,
+      settings: {
+        sizeX: panel.settings.sizeX,
+        sizeY: panel.settings.sizeY,
+        col: panel.settings.col,
+        row: panel.settings.row
+      }
+    };
+
+    $scope.sizeOptions = [{
+      id: '1',
+      name: '1'
+    }, {
+      id: '2',
+      name: '2'
+    }, {
+      id: '3',
+      name: '3'
+    }, {
+      id: '4',
+      name: '4'
+    }];
+
+    $scope.dismiss = function() {
+      $uibModalInstance.dismiss();
+    };
+
+    $scope.remove = function() {
+      $scope.panels.splice($scope.panels.indexOf(panel), 1);
+      $uibModalInstance.close();
+    };
+
+    $scope.submit = function() {
+      console.log('PanelSettingsCtrl - panelSave:',panel);
+      angular.extend(panel, $scope.form);
+
+      $uibModalInstance.close(panel);
+    };
+
+  }
+]);

@@ -63,6 +63,9 @@ router.get('/complete/:id', function(req, res) {
 
 // add new template
 router.post('/', function(req, res) {
+  //Template = req.body;
+  //Panels = req.body.panels;
+
   models.template.create({
     template_name: req.body.template_name,
     template_description: req.body.template_description,
@@ -70,7 +73,44 @@ router.post('/', function(req, res) {
     active: req.body.active,
     template_owner: req.body.template_owner
   }).then(function(template) {
-    res.json(template);
+
+    // Panel - Loop
+    var i = 0;
+    var layouts = [];
+    async.eachSeries(req.body.panels, function(panel, callback) {
+      // Count to define panel order
+      i++;
+
+      // Then Create the Panel Second
+      models.panel.create({
+        name: panel.title,
+        panel_type_id: panel.id,
+        sizeX: panel.minSizeX,
+        sizeY: panel.minSizeY
+      }).then(function(p) {
+        // Then Create the Template_Layout Second
+        console.log('templateID:',template.id);
+        models.template_layout.create({
+          template_id: template.id,
+          panel_id: p.id,
+          panel_order: i
+        }).then(function(tl) {
+          console.log('<<<<<<<Template Layout Records Created.>>>>>>>');
+          tl.panel = p;
+          layouts.push(tl);
+          callback();
+        });
+      });
+
+    }, function(err){
+
+      if( err ) {
+        console.log('ERROR:',err);
+      } else {
+        template.layouts = layouts;
+        res.json(template);
+      }
+    });
   });
 });
 
