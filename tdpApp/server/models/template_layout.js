@@ -1,4 +1,4 @@
-/* jshint indent: 2 */
+'use strict';
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('template_layout', {
@@ -37,7 +37,10 @@ module.exports = function(sequelize, DataTypes) {
     freezeTableName: true,
     classMethods: {
       associate: function(models) {
-        models.template_layout.belongsTo(models.panel,{foreignKey: 'panel_id', targetKey: 'id'});
+        models.template_layout.belongsTo(models.panel, {
+          foreignKey: 'panel_id',
+          targetKey: 'id'
+        });
       }
     }
   });

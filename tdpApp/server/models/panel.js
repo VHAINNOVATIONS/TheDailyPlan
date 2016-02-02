@@ -1,4 +1,4 @@
-/* jshint indent: 2 */
+'use strict';
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('panel', {
@@ -41,7 +41,10 @@ module.exports = function(sequelize, DataTypes) {
     freezeTableName: true,
     classMethods: {
       associate: function(models) {
-        models.panel.belongsTo(models.panel_type,{foreignKey: 'panel_type_id', targetKey: 'id'});
+        models.panel.belongsTo(models.panel_type, {
+          foreignKey: 'panel_type_id',
+          targetKey: 'id'
+        });
       }
     }
   });
