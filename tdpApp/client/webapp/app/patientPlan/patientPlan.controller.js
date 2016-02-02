@@ -16,13 +16,15 @@ angular.module('tdpApp')
     };
 
     self.gridsterOptions = {
-      margins: [20, 20],
-      columns: 4,
+      pushing: true,
+      floating: true,
+      margins: [5, 5],
+      columns: 6,
       mobileBreakPoint: 768,
       mobileModeEnabled: true,
       draggable: {
-        enabled: false,
-        handle: 'h3'
+        enabled: true,
+        handle: '.box-header'
       }
     };
 
@@ -49,25 +51,14 @@ angular.module('tdpApp')
       self.errors.other = err.message;
     });
 
-    function loadPatient() {
-      Demographics.getByID(self.patient)
-      .then( function(data) {
-        console.log('Patient Plan - demographics:',data);
-        self.demographics = data;
-      })
-      .catch( function(err) {
-        self.errors.other = err.message;
-      });
-    }
-
-    /*Demographics.getByID(self.patient)
+    Demographics.getByID(self.patient)
     .then( function(data) {
       console.log('Patient Plan - demographics:',data);
       self.demographics = data;
     })
     .catch( function(err) {
       self.errors.other = err.message;
-    });*/
+    });
   })
 // Gridster Custom Controller
 .controller('CustomPanelCtrl', ['$scope', '$modal',

@@ -12,6 +12,9 @@ angular.module('tdpApp')
     self.selectAll = false;
     self.noResults = false;
     self.dtInstance = {};
+    self.displayErr = {};
+    self.displayErr.flag = false;
+    self.errors = {};
     var titleHtml = '<input type="checkbox" ng-model="ctrl.selectAll" ng-click="ctrl.toggleAll(ctrl.selectAll, ctrl.selected)">';
 
     //functions
@@ -59,11 +62,21 @@ angular.module('tdpApp')
       }, self.items);
 
       console.log('items:',self.items.length);
-      if (self.items.length > 0)
-        {
+      switch(self.items.length) {
+        case 0:
+          self.displayErr.flag = true;
+          self.displayErr.msg = 'Please select a patient to display.';
+          break;
+        case 1:
           Patient.setSelectedPatients(self.items);
           $location.path('/PatientPlan');
-        }
+          break;
+        default:
+          self.items = [];
+          self.displayErr.flag = true;
+          self.displayErr.msg = 'Please select only one patient to display.';
+          break;
+      }
     }
 
     function searchClinic() {
@@ -114,6 +127,7 @@ angular.module('tdpApp')
 
     function clearAlerts() {
       self.noResults = false;
+      self.displayErr.flag = false;
     }
 
     function newPromise() {

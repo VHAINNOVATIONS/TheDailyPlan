@@ -7,15 +7,34 @@
     <div class="row">
       <div class="panel panel-default">
           <div class="panel-heading clearfix">
-            <a title="Print" ng-click="printDailyPlan()" class="pull-right"><i class="glyphicon glyphicon-print"></i></a>
-            <h3 class="panel-title pull-left">
-                <select name="patientSelect" id="patientSelect" ng-model="ctrl.patient" ng-change="ctrl.loadPatient()"class="form-control">
-                    <option ng-repeat="patient in ctrl.patients" value="{{patient.id}}">{{patient.name}}</option>
-                </select>
-            Patient: {{ctrl.demographics.name}} DOB: {{ctrl.demographics.DOB}} Gender: {{ctrl.demographics.sex}} SSN:  {{ctrl.demographics.SSN| ssnFilter:true}} Location: {{ctrl.demographics.location.name}}</h3>
+            <div class="col-xs-2 col-sm-1 pull-right">
+              <a title="Print" ng-click="printDailyPlan()" class="pull-right"><i class="glyphicon glyphicon-print"></i></a>
+            </div>
+            <div class="col-xs-10 col-sm-11 pull-left">
+              <div class="col-xs-12">
+                <h4>Patient: {{ctrl.demographics.name}}</h4>
+              </div>
+              <div class="col-md-6 pull-left">
+                <ul class="tdp-ul">
+                  <li>DOB: {{ctrl.demographics.DOB}}</li>
+                  <li>Gender: {{ctrl.demographics.sex}}</li>
+                  <li>SSN:  {{ctrl.demographics.SSN| ssnFilter:true}}</li>
+                  <li>Location: {{ctrl.demographics.location.name}}</li>
+                </ul>
+              </div>
+              <div class="col-md-6 pull-left">
+                <ul class="tdp-ul">
+                  <li>Inpatient:
+                    <span ng-show="ctrl.demographics.isInpatient">Yes</span>
+                    <span ng-hide="ctrl.demographics.isInpatient">No</span>
+                  </li>
+                  <li>Marital Status: {{ctrl.demographics.maritalStatus}}</li>
+                </ul>
+              </div>
+            </div>
           </div>
           <div class="panel-body">
-            <div gridster="gridsterOptions">
+            <div gridster="ctrl.gridsterOptions">
               <ul ng-model="ctrl.panels">
                 <li gridster-item="panel.settings" ng-repeat="panel in ctrl.panels" grid-panel>
                   <div class="box" ng-controller="CustomPanelCtrl">
