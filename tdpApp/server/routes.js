@@ -24,6 +24,8 @@ module.exports = function(app) {
   app.use('/api/radiologyReports', require('./api/radiologyReports'));
   app.use('/api/visits', require('./api/visits'));
   app.use('/api/wards', require('./api/wards'));
+  app.use('/api/labs', require('./api/labs'));
+
 
   // TDP DB API Routes
   app.use('/api/template',require('./api/template'));

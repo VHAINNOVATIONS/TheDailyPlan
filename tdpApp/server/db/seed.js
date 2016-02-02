@@ -1,19 +1,45 @@
 module.exports = function(db) {
 
-  var templateID = 0;
-  //Create Default Template
-  db.template.create({
+var templateID = 0;
+//Create Default Template
+db.template.create({
     id: 1,
     template_name: 'Default',
     template_description: 'Default Template',
     active: true
   }).then(function(template) {
     templateID = template.id;
-    console.log('templateID:', templateID);
+    console.log('templateID:',templateID);
   });
 
-  // Create Facilities and Facility Messages
-  db.facility.create({
+// Create Facilities and Facility Messages
+ db.facility.create({
+    name: 'Select a facility...',
+    station: 0,
+    visn: 0
+  }).then(function(facility) {
+    db.facility_message.bulkCreate([{
+      facility_id: facility.id,
+      active: true,
+      message_order: 1,
+      message_text: 'The Department of Veterans Affairs today announced a number of changes to make participation in the Veterans Choice Program easier and more convenient for Veterans who need to use it.',
+      message_headline: 'VA Makes Changes to Veterans Choice Program '
+    },{
+      facility_id: facility.id,
+      active: true,
+      message_order: 2,
+      message_text: 'The Department of Veterans Affairs  will sponsor the 5th annual National Veterans Small Business Engagement, November 17–19, 2015, at the David L. Lawrence Convention Center in Pittsburgh, PA.',
+      message_headline: 'VA To Hold 2015 Small Business Engagement'
+    },{
+      facility_id: facility.id,
+      active: true,
+      message_order: 3,
+      message_text: 'VA Secretary Robert A. McDonald announces a partnership with the a foundation to further advance VA’s outreach to Veterans through deeper and more innovative local and community partnerships.',
+      message_headline: 'VA Secretary to Announce Partnership'
+    }]);
+  });
+
+ db.facility.create({
     name: 'Biloxi',
     station: 520,
     visn: 16
@@ -24,19 +50,19 @@ module.exports = function(db) {
       message_order: 1,
       message_text: 'This is the message text for the first message from Biloxi. We hope you have a great day!',
       message_headline: 'Biloxi Message 1 Headline'
-    }, {
+    },{
       facility_id: facility.id,
       active: true,
       message_order: 2,
       message_text: 'This is the message text for the second message from Biloxi. We hope you have a great day!',
       message_headline: 'Biloxi Message 2 Headline'
-    }, {
+    },{
       facility_id: facility.id,
       active: true,
       message_order: 3,
       message_text: 'This is the message text for the third message from Biloxi. We hope you have a great day!',
       message_headline: 'Biloxi Message 3 Headline'
-    }, {
+    },{
       facility_id: facility.id,
       active: true,
       message_order: 4,
@@ -45,7 +71,7 @@ module.exports = function(db) {
     }]);
   });
 
-  db.facility.create({
+db.facility.create({
     name: 'Madison',
     station: 607,
     visn: 12
@@ -56,19 +82,19 @@ module.exports = function(db) {
       message_order: 1,
       message_text: 'This is the message text for the first message from Madison. We hope you have a great day!',
       message_headline: 'Madison Message 1 Headline'
-    }, {
+    },{
       facility_id: facility.id,
       active: true,
       message_order: 2,
       message_text: 'This is the message text for the second message from Madison. We hope you have a great day!',
       message_headline: 'Madison Message 2 Headline'
-    }, {
+    },{
       facility_id: facility.id,
       active: true,
       message_order: 3,
       message_text: 'This is the message text for the third message from Madison. We hope you have a great day!',
       message_headline: 'Madison Message 3 Headline'
-    }, {
+    },{
       facility_id: facility.id,
       active: true,
       message_order: 4,
@@ -77,7 +103,7 @@ module.exports = function(db) {
     }]);
   });
 
-  db.facility.create({
+db.facility.create({
     name: 'Minneapolis',
     station: 618,
     visn: 23
@@ -88,19 +114,19 @@ module.exports = function(db) {
       message_order: 1,
       message_text: 'This is the message text for the first message from Minneapolis. We hope you have a great day!',
       message_headline: 'Minneapolis Message 1 Headline'
-    }, {
+    },{
       facility_id: facility.id,
       active: true,
       message_order: 2,
       message_text: 'This is the message text for the second message from Minneapolis. We hope you have a great day!',
       message_headline: 'Minneapolis Message 2 Headline'
-    }, {
+    },{
       facility_id: facility.id,
       active: true,
       message_order: 3,
       message_text: 'This is the message text for the third message from Minneapolis. We hope you have a great day!',
       message_headline: 'Minneapolis Message 3 Headline'
-    }, {
+    },{
       facility_id: facility.id,
       active: true,
       message_order: 4,
@@ -109,7 +135,7 @@ module.exports = function(db) {
     }]);
   });
 
-  db.facility.create({
+db.facility.create({
     name: 'Central Texas (Waco)',
     station: 674,
     visn: 17
@@ -120,19 +146,19 @@ module.exports = function(db) {
       message_order: 1,
       message_text: 'This is the message text for the first message from Central Texas (Waco). We hope you have a great day!',
       message_headline: 'Central Texas (Waco) Message 1 Headline'
-    }, {
+    },{
       facility_id: facility.id,
       active: true,
       message_order: 2,
       message_text: 'This is the message text for the second message from Central Texas (Waco). We hope you have a great day!',
       message_headline: 'Central Texas (Waco) Message 2 Headline'
-    }, {
+    },{
       facility_id: facility.id,
       active: true,
       message_order: 3,
       message_text: 'This is the message text for the third message from Central Texas (Waco). We hope you have a great day!',
       message_headline: 'Central Texas (Waco) Message 3 Headline'
-    }, {
+    },{
       facility_id: facility.id,
       active: true,
       message_order: 4,
@@ -158,7 +184,7 @@ module.exports = function(db) {
       sizeY: 1
     }).then(function(p) {
       // Then Create the Template_Layout Second
-      console.log('templateID:', templateID);
+      console.log('templateID:',templateID);
       db.template_layout.create({
         template_id: templateID,
         panel_id: p.id,
@@ -188,7 +214,7 @@ module.exports = function(db) {
       sizeY: 1
     }).then(function(p) {
       // Then Create the Template_Layout Second
-      console.log('templateID:', templateID);
+      console.log('templateID:',templateID);
       db.template_layout.create({
         template_id: templateID,
         panel_id: p.id,
@@ -218,7 +244,7 @@ module.exports = function(db) {
       sizeY: 2
     }).then(function(p) {
       // Then Create the Template_Layout Second
-      console.log('templateID:', templateID);
+      console.log('templateID:',templateID);
       db.template_layout.create({
         template_id: templateID,
         panel_id: p.id,
@@ -248,7 +274,7 @@ module.exports = function(db) {
       sizeY: 2
     }).then(function(p) {
       // Then Create the Template_Layout Second
-      console.log('templateID:', templateID);
+      console.log('templateID:',templateID);
       db.template_layout.create({
         template_id: templateID,
         panel_id: p.id,
@@ -278,7 +304,7 @@ module.exports = function(db) {
       sizeY: 2
     }).then(function(p) {
       // Then Create the Template_Layout Second
-      console.log('templateID:', templateID);
+      console.log('templateID:',templateID);
       db.template_layout.create({
         template_id: templateID,
         panel_id: p.id,
@@ -308,7 +334,7 @@ module.exports = function(db) {
       sizeY: 2
     }).then(function(p) {
       // Then Create the Template_Layout Second
-      console.log('templateID:', templateID);
+      console.log('templateID:',templateID);
       db.template_layout.create({
         template_id: templateID,
         panel_id: p.id,
@@ -338,7 +364,7 @@ module.exports = function(db) {
       sizeY: 2
     }).then(function(p) {
       // Then Create the Template_Layout Second
-      console.log('templateID:', templateID);
+      console.log('templateID:',templateID);
       db.template_layout.create({
         template_id: templateID,
         panel_id: p.id,
@@ -368,7 +394,7 @@ module.exports = function(db) {
       sizeY: 2
     }).then(function(p) {
       // Then Create the Template_Layout Second
-      console.log('templateID:', templateID);
+      console.log('templateID:',templateID);
       db.template_layout.create({
         template_id: templateID,
         panel_id: p.id,
@@ -398,7 +424,7 @@ module.exports = function(db) {
       sizeY: 2
     }).then(function(p) {
       // Then Create the Template_Layout Second
-      console.log('templateID:', templateID);
+      console.log('templateID:',templateID);
       db.template_layout.create({
         template_id: templateID,
         panel_id: p.id,
@@ -428,7 +454,7 @@ module.exports = function(db) {
       sizeY: 2
     }).then(function(p) {
       // Then Create the Template_Layout Second
-      console.log('templateID:', templateID);
+      console.log('templateID:',templateID);
       db.template_layout.create({
         template_id: templateID,
         panel_id: p.id,
@@ -458,7 +484,7 @@ module.exports = function(db) {
       sizeY: 2
     }).then(function(p) {
       // Then Create the Template_Layout Second
-      console.log('templateID:', templateID);
+      console.log('templateID:',templateID);
       db.template_layout.create({
         template_id: templateID,
         panel_id: p.id,
@@ -488,7 +514,67 @@ module.exports = function(db) {
       sizeY: 2
     }).then(function(p) {
       // Then Create the Template_Layout Second
-      console.log('templateID:', templateID);
+      console.log('templateID:',templateID);
+      db.template_layout.create({
+        template_id: templateID,
+        panel_id: p.id,
+        panel_order: p.id
+      }).then(function(tl) {
+        console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
+      });
+
+    });
+
+  });
+
+  // Create the Panel_Type First
+  db.panel_type.create({
+    title: 'Labs',
+    directive: 'dt-labs',
+    scope_variable: 'patient',
+    minSizeX: 2,
+    minSizeY: 2,
+    mandatory: false
+  }).then(function(pt) {
+    // Then Create the Panel Second
+    db.panel.create({
+      name: 'Labs Default',
+      panel_type_id: pt.id,
+      sizeX: 3,
+      sizeY: 2
+    }).then(function(p) {
+      // Then Create the Template_Layout Second
+      console.log('templateID:',templateID);
+      db.template_layout.create({
+        template_id: templateID,
+        panel_id: p.id,
+        panel_order: p.id
+      }).then(function(tl) {
+        console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
+      });
+
+    });
+
+  });
+
+  // Create the Panel_Type First
+  db.panel_type.create({
+    title: 'Contacts',
+    directive: 'dt-contacts',
+    scope_variable: 'demographics',
+    minSizeX: 2,
+    minSizeY: 2,
+    mandatory: false
+  }).then(function(pt) {
+    // Then Create the Panel Second
+    db.panel.create({
+      name: 'Contacts Default',
+      panel_type_id: pt.id,
+      sizeX: 2,
+      sizeY: 2
+    }).then(function(p) {
+      // Then Create the Template_Layout Second
+      console.log('templateID:',templateID);
       db.template_layout.create({
         template_id: templateID,
         panel_id: p.id,

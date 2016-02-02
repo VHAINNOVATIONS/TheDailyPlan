@@ -72,7 +72,12 @@
       <hr>
       <form ng-submit="ctrl.display()" name="display">
           <input class="btn btn-primary" type="submit" value="Display">
+
       </form>
     </div>
   </div>
+  <div class="row row-centered">
+      <div class="col-sm-4 col-centered pull-left">
+        <div class="alert alert-danger" role="alert" ng-show="ctrl.displayErr.flag">{{ctrl.displayErr.msg}}</div>
+      </div>
 </div>

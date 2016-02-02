@@ -12,9 +12,9 @@ var validationError = function(res, err) {
  * Search for Patients by Prefix
  */
 exports.index = function (req, res, next) {
-  var value = req.query.value;
+  var id = req.params.id;
 
-  req.session.getVitalSigns(value, {}, function (err, body) {
+  req.session.getVitalSigns(id, {}, function (err, body) {
       if (err) {
           return res.status(401).json(err);
       } else {

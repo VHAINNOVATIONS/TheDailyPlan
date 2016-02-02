@@ -28,10 +28,9 @@ angular.module('tdpApp')
         };
 
         $scope.visitsGridOptions.columnDefs = [
-          { name: 'dateTime', displayName: 'Date' , width:'*' },
-          { name: 'getTemp()', displayName: 'Temp' , width:'*' },
-          { name: 'bloodPressure.value', displayName: 'Blood Pressure', width:'*' },
-          { name: 'pulse.value', displayName: 'Pulse', width:'*' }
+          { name: 'time', displayName: 'Date' , width:'*' },
+          { name: 'title', displayName: 'Appointment Type' , width:'*' },
+          { name: 'status', displayName: 'Status', width:'*' }
         ];
 
         Visits.getByID($scope.patient)

@@ -1,0 +1,83 @@
+<div>
+  <uib-tabset>
+    <uib-tab heading="Emergency Contact" ng-if="patient.emergencyContact">
+      <div class="row row-padded">
+        <div class="col-xs-4 col-righted">
+          <strong>Relation:</strong>
+        </div>
+        <div class="col-xs-6 col-lefted">
+          {{patient.emergencyContact.relation}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4 col-righted">
+          <strong>Name:</strong>
+        </div>
+        <div class="col-xs-6 col-lefted">
+          {{patient.emergencyContact.name}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4 col-righted">
+          <strong>Address:</strong>
+        </div>
+        <div class="col-xs-6 col-lefted">
+          <address>
+            {{patient.emergencyContact.st1}}<br>
+            {{patient.emergencyContact.city}} {{patient.emergencyContact.state}} {{patient.emergencyContact.zip}}<br>
+          </address>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4 col-righted">
+          <strong>Phone:</strong>
+        </div>
+        <div class="col-xs-6 col-lefted">
+          {{patient.emergencyContact.phone}}
+        </div>
+      </div>
+    </uib-tab>
+    <uib-tab heading="Next of Kin Contact" ng-if="patient.nextOfKin">
+      <div class="row row-padded">
+        <div class="col-xs-4 col-righted">
+          <strong>Relation:</strong>
+        </div>
+        <div class="col-xs-6 col-lefted">
+          {{patient.nextOfKin.relation}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4 col-righted">
+          <strong>Name:</strong>
+        </div>
+        <div class="col-xs-6 col-lefted">
+          {{patient.nextOfKin.name}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4 col-righted">
+          <strong>Address:</strong>
+        </div>
+        <div class="col-xs-6 col-lefted">
+          <address>
+            {{patient.nextOfKin.st1}}<br>
+            {{patient.nextOfKin.city}} {{patient.nextOfKin.state}} {{patient.nextOfKin.zip}}<br>
+          </address>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4 col-righted">
+          <strong>Phone:</strong>
+        </div>
+        <div class="col-xs-6 col-lefted">
+          {{patient.nextOfKin.phone}}
+        </div>
+      </div>
+    </uib-tab>
+    <div class="panel-msg-overlay" ng-hide="patient.emergencyContact || patient.nextOfKin">
+        <div class="msg">
+            <span>No Contacts Found</span>
+        </div>
+    </div>
+  </uib-tabset>
+</div>
