@@ -1,0 +1,20 @@
+<div class="container report_row">
+  <div class="row" class="report_column500" ng-if="labs && labs.length && !labsError">
+    <div class="col-xs-2 grid_header">Date</div>
+    <div class="col-xs-3 grid_header">Name</div>
+    <div class="col-xs-2 grid_header">Value</div>
+    <div class="col-xs-2 grid_header">Units</div>
+    <div class="col-xs-3 grid_header">Range</div>
+    <div class="col-xs-2" ng-repeat-start="lab in labs">{{lab.date}}</div>
+    <div class="col-xs-3">{{lab.labTest.name}}</div>
+    <div class="col-xs-2">{{lab.value}}</div>
+    <div class="col-xs-2">{{lab.labTest.units}}</div>
+    <div class="col-xs-3" ng-repeat-end>{{lab.labTest.refRange}}</div>
+  </div>
+  <div class="row" class="report_column500" ng-if="labsError">
+    <span class="message">Internal error loading labs.</span>
+  </div>
+  <div class="row" class="report_column500" ng-if="labs.length == 0 && !labsError">
+    <span class="message">No labs found.</span>
+  </div>
+</div>

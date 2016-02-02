@@ -14,6 +14,32 @@ db.template.create({
 
 // Create Facilities and Facility Messages
  db.facility.create({
+    name: 'Select a facility...',
+    station: 0,
+    visn: 0
+  }).then(function(facility) {
+    db.facility_message.bulkCreate([{
+      facility_id: facility.id,
+      active: true,
+      message_order: 1,
+      message_text: 'The Department of Veterans Affairs today announced a number of changes to make participation in the Veterans Choice Program easier and more convenient for Veterans who need to use it.',
+      message_headline: 'VA Makes Changes to Veterans Choice Program '
+    },{
+      facility_id: facility.id,
+      active: true,
+      message_order: 2,
+      message_text: 'The Department of Veterans Affairs  will sponsor the 5th annual National Veterans Small Business Engagement, November 17–19, 2015, at the David L. Lawrence Convention Center in Pittsburgh, PA.',
+      message_headline: 'VA To Hold 2015 Small Business Engagement'
+    },{
+      facility_id: facility.id,
+      active: true,
+      message_order: 3,
+      message_text: 'VA Secretary Robert A. McDonald announces a partnership with the a foundation to further advance VA’s outreach to Veterans through deeper and more innovative local and community partnerships.',
+      message_headline: 'VA Secretary to Announce Partnership'
+    }]);
+  });
+
+ db.facility.create({
     name: 'Biloxi',
     station: 520,
     visn: 16
@@ -485,6 +511,66 @@ db.facility.create({
       name: 'Nursing Orders Default',
       panel_type_id: pt.id,
       sizeX: 3,
+      sizeY: 2
+    }).then(function(p) {
+      // Then Create the Template_Layout Second
+      console.log('templateID:',templateID);
+      db.template_layout.create({
+        template_id: templateID,
+        panel_id: p.id,
+        panel_order: p.id
+      }).then(function(tl) {
+        console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
+      });
+
+    });
+
+  });
+
+  // Create the Panel_Type First
+  db.panel_type.create({
+    title: 'Labs',
+    directive: 'dt-labs',
+    scope_variable: 'patient',
+    minSizeX: 2,
+    minSizeY: 2,
+    mandatory: false
+  }).then(function(pt) {
+    // Then Create the Panel Second
+    db.panel.create({
+      name: 'Labs Default',
+      panel_type_id: pt.id,
+      sizeX: 3,
+      sizeY: 2
+    }).then(function(p) {
+      // Then Create the Template_Layout Second
+      console.log('templateID:',templateID);
+      db.template_layout.create({
+        template_id: templateID,
+        panel_id: p.id,
+        panel_order: p.id
+      }).then(function(tl) {
+        console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
+      });
+
+    });
+
+  });
+
+  // Create the Panel_Type First
+  db.panel_type.create({
+    title: 'Contacts',
+    directive: 'dt-contacts',
+    scope_variable: 'demographics',
+    minSizeX: 2,
+    minSizeY: 2,
+    mandatory: false
+  }).then(function(pt) {
+    // Then Create the Panel Second
+    db.panel.create({
+      name: 'Contacts Default',
+      panel_type_id: pt.id,
+      sizeX: 2,
       sizeY: 2
     }).then(function(p) {
       // Then Create the Template_Layout Second
