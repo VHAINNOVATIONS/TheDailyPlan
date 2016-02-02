@@ -27,7 +27,7 @@ angular.module('tdpApp')
       // Initialize Available Panels and Keep a Master List
       reset();
       self.masterPanelsList = panel_types;
-      self.availablePanels = Array.from(self.masterPanelsList);
+      self.availablePanels = self.masterPanelsList.slice(0);
     })
     .catch( function(err) {
       self.errors.other = err.message;
