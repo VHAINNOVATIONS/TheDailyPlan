@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tdpApp')
-  .controller('PatientSearchCtrl', function ($compile, $scope, $resource, $location, DTOptionsBuilder, DTColumnBuilder, Patient, Location) {
+  .controller('PatientSearchCtrl', function ($compile, $scope, $resource, $location, DTOptionsBuilder, DTColumnBuilder, Patient, Location, Auth, Audit) {
   	var self = this;
     self.data = [];
     self.items = [];
@@ -46,6 +46,18 @@ angular.module('tdpApp')
         {
           Patient.setSelectedPatients(self.items);
           $location.path('/PatientPlan');
+
+          var accessInfo = {
+            userId: Auth.getCurrentUser().duz,
+            patientId: self.items[0],
+            action: 'view'
+          };
+          Audit.create(accessInfo).then( function(data) {
+            console.log('Access Info:', data);
+          })
+          .catch( function(err) {
+            self.errors.other = err.message;
+          });
         }
     };
 

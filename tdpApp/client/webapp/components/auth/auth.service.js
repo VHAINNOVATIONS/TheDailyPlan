@@ -25,6 +25,7 @@ angular.module('tdpApp')
           /*$cookieStore.put('token', data.token);*/
           currentUser.displayName = data.displayName;
           currentUser.keys = data.keys;
+          currentUser.duz = data.DUZ;
 
           deferred.resolve(currentUser);
           return cb();
