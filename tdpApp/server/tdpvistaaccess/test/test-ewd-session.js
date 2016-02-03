@@ -355,7 +355,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get chem hem reports', function (done) {
+    it('get chem hem reports', function (done) {
         var pid = 756; //100022;
         testSession.getChemHemReports(pid, {
             toDate: '3161010',
@@ -391,7 +391,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('boiler plates', function(done) {
+    xit('boiler plates', function(done) {
       var pid = 100846;
         testSession.getBoilerplates(pid, {
           text: '|PATIENT NAME|^|PATIENT AGE|^|PATIENT SEX|'

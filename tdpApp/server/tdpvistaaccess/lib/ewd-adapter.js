@@ -175,6 +175,24 @@ var filterChemHemReports = function (report, testNames) {
     return result;
 };
 
+var putInChemHemReportDates = function(report) {
+    report.forEach(function (reportElement) {
+      var timestamp = reportElement.timestamp
+      if (timestamp) {
+        reportElement.timestamp = translator.translateVistADateTime(timestamp);
+      }
+      var specimen = reportElement.specimen;
+      if (specimen) {
+        if (specimen.reportDate) {
+          specimen.reportDate = translator.translateVistADateTime(specimen.reportDate);
+        }
+        if (specimen.collectionDate) {
+          specimen.collectionDate = translator.translateVistADateTime(specimen.collectionDate);
+        }
+      }
+    });
+};
+
 var session = {
     get: function (route, parameters, callback) {
         var options = _.assign({
@@ -444,6 +462,7 @@ var session = {
                 callback(err);
             } else {
                 result = filterChemHemReports(result, options.testNames);
+                putInChemHemReportDates(result);
                 callback(null, result);
             }
         });
