@@ -3,6 +3,6 @@
 var vistaLib = require('./VistALib');
 
 exports.resolveBoilerplates = function(params, session, ewd) {
-    var result = ewd.mumps.function("BOILPLTS^VEFBRPC", params.patientId, params.text) ;
+    var result = ewd.mumps.function("BOILPLTS^ZZTDP", params.patientId, params.text) ;
     return result;
 };
