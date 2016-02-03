@@ -1,4 +1,4 @@
-/* jshint indent: 2 */
+'use strict';
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('template', {
@@ -33,7 +33,10 @@ module.exports = function(sequelize, DataTypes) {
     freezeTableName: true,
     classMethods: {
       associate: function(models) {
-        models.template.hasMany(models.template_layout,{foreignKey: 'template_id', targetKey: 'template_id'});
+        models.template.hasMany(models.template_layout, {
+          foreignKey: 'template_id',
+          targetKey: 'template_id'
+        });
       }
     }
   });

@@ -113,6 +113,20 @@ var typedOrderUpdater = {
     },
     nursing: function (result, order) {
         typedOrderUpdater.activity(result, order);
+    },
+    procedures: function(result, order) {
+      if (order.status === 'Pending') {
+        if (! result.procedures) {
+          result.procedures = [];
+        }
+        var procedure = {
+            name: order.text
+        };
+        if (order.startDate) {
+            procedure.start = order.startDate;
+        }
+        result.procedures.push(procedure);
+      }
     }
 };
 
@@ -201,7 +215,10 @@ var session = {
             } else {
                 self.Authorization = body.Authorization;
                 var credentials = encryptCredentials(userInfo.accessCode, userInfo.verifyCode, body.key);
-                var keysStr = userInfo.userKeys && userInfo.userKeys.length && userInfo.userKeys.join('^');
+                userInfo.userKeys = userInfo.userKeys || [];
+                var keysStr = userInfo.userKeys.map(function(userKey) {
+                  return userKey.vista;
+                }).join('^');
                 self.get('/login', {
                     credentials: credentials,
                     keys: keysStr
@@ -209,6 +226,12 @@ var session = {
                     if (err) {
                         callback(err);
                     } else {
+                        var keys = userData.keys || [];
+                        var keysObj = userInfo.userKeys.reduce(function(r, userKey, index) {
+                          r[userKey.client] = keys[userKey.vista];
+                          return r;
+                        }, {});
+                        userData.keys = keysObj;
                         self.userData = userData;
                         callback(null, self.userData);
                     }
@@ -265,8 +288,8 @@ var session = {
             }
         });
     },
-    getClinicalWarnings: function (patientId, options, callback) {
-        this.get('/getClinicalWarnings', {
+    getPostings: function (patientId, options, callback) {
+        this.get('/getPostings', {
             patientId: patientId,
             nRpts: "0"
         }, function (err, body) {
@@ -437,7 +460,6 @@ var session = {
     },
     getPatientsByClinic: function (options, callback) {
         this.get('/getPatientsByClinic', options, function (err, result) {
-            console.log(options);
             if (err) {
                 callback(err);
             } else {
@@ -458,6 +480,19 @@ var session = {
     },
     getWards: function (options, callback) {
         this.get('/getWards', null, function (err, result) {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, result);
+            }
+        });
+    },
+    getHealthFactors: function(patientId, options, callback) {
+        this.get('/getPatientHealthFactors', {
+            patientId: patientId,
+            toDate: options.toDate,
+            fromDate: options.fromDate
+        }, function (err, result) {
             if (err) {
                 callback(err);
             } else {

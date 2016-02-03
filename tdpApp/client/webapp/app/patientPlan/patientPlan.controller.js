@@ -1,27 +1,41 @@
 'use strict';
 
 angular.module('tdpApp')
-  .controller('PatientPlanCtrl', function ($scope, $resource, Patient, Demographics, Template, Template_Layout, Panel, Panel_Type) {
+  .controller('PatientPlanCtrl', function ($scope, $resource, Patient, Demographics, Template, Template_Layout, Panel, Panel_Type, Auth, Audit) {
   	var self = this;
     self.cdate = new Date();
     self.demographics = null;
-    self.items = Patient.getSelectedPatients();
-    self.patient = null;
+    self.patients = Patient.getSelectedPatients();
+    self.patient = self.patients[0].id;
 
-    console.log('Patient Plan - Items:',self.items);
+    console.log('Patient Plan - patients:',self.patients);
+    console.log('Patient Plan - patient:', self.patient);
 
     $scope.printDailyPlan = function() {
+      var accessInfo = {
+        userId: Auth.getCurrentUser().duz,
+        patientId: self.patient,
+        action: 'print'
+      };
+      Audit.create(accessInfo).then( function(data) {
+        console.log('Access Info:', data);
+      })
+      .catch( function(err) {
+        self.errors.other = err.message;
+      });
       window.print();
     };
 
     self.gridsterOptions = {
-      margins: [20, 20],
-      columns: 4,
+      pushing: true,
+      floating: true,
+      margins: [5, 5],
+      columns: 6,
       mobileBreakPoint: 768,
       mobileModeEnabled: true,
       draggable: {
-        enabled: false,
-        handle: 'h3'
+        enabled: true,
+        handle: '.box-header'
       }
     };
 
@@ -48,20 +62,14 @@ angular.module('tdpApp')
       self.errors.other = err.message;
     });
 
-
-
-    if(self.items.length > 0 && self.items[0])
-    {
-      self.patient = self.items[0];
-      Demographics.getByID(self.items[0])
-      .then( function(data) {
-        console.log('Patient Plan - demographics:',data);
-        self.demographics = data;
-      })
-      .catch( function(err) {
-        self.errors.other = err.message;
-      });
-    }
+    Demographics.getByID(self.patient)
+    .then( function(data) {
+      console.log('Patient Plan - demographics:',data);
+      self.demographics = data;
+    })
+    .catch( function(err) {
+      self.errors.other = err.message;
+    });
   })
 // Gridster Custom Controller
 .controller('CustomPanelCtrl', ['$scope', '$modal',
@@ -140,6 +148,35 @@ angular.module('tdpApp')
       out.push(input[i]);
     }
     return out;
-  }
+  };
+})
+// ssn filter
+.filter('ssnFilter', function () {
+  return function (value, mask) {
+    var len, val;
+    if (mask == null) {
+      mask = false;
+    }
+    if (value) {
+      val = value.toString().replace(/\D/g, '');
+      len = val.length;
+      if (len < 4) {
+        return val;
+      } else if (3 < len && len < 6) {
+        if (mask) {
+          return '***-' + val.substr(3);
+        } else {
+          return val.substr(0, 3) + '-' + val.substr(3);
+        }
+      } else if (len > 5) {
+        if (mask) {
+          return '***-**-' + val.substr(5, 4);
+        } else {
+          return val.substr(0, 3) + '-' + val.substr(3, 2) + '-' + val.substr(5, 4);
+        }
+      }
+    }
+    return value;
+  };
 });
 

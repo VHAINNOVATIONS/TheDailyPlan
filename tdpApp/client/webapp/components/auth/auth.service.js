@@ -24,6 +24,8 @@ angular.module('tdpApp')
         success(function(data) {
           /*$cookieStore.put('token', data.token);*/
           currentUser.displayName = data.displayName;
+          currentUser.keys = data.keys;
+          currentUser.duz = data.DUZ;
 
           deferred.resolve(currentUser);
           return cb();
@@ -131,7 +133,8 @@ angular.module('tdpApp')
        * @return {Boolean}
        */
       isAdmin: function() {
-        return currentUser.role === 'admin';
+        var keys = currentUser.keys;
+        return keys && (keys.admin || keys.super);
       },
 
       /**

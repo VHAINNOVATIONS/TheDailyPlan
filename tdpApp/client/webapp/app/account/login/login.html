@@ -5,9 +5,9 @@
             <form name="form" ng-submit="login(form)" novalidate="" width="380px" margin="0" auto="auto" class="form">
             <div class="form-group">
                 <label for="facilitySelect"> Facility</label>
-                <select name="facilitySelect" id="facilitySelect" ng-model="ctrl.facilities.facilitySelect" class="form-control">
-                    <option value="">Select a facility...</option> <!-- not selected / blank option -->
-                    <option ng-repeat="option in ctrl.facilities.availableOptions" value="{{option.id}}">{{option.name}}</option>
+                <select name="facilitySelect" id="facilitySelect" ng-model="ctrl.facilitySelect" ng-change="ctrl.setFacility()" class="form-control">
+                    <!--option value="">Select a facility...</option--> <!-- not selected / blank option -->
+                    <option ng-repeat="option in ctrl.facilities" value="{{option.id}}">{{option.name}}</option>
                 </select>
             </div>
             <div class="form-group">
@@ -25,17 +25,30 @@
                     <input id="checky" type="checkbox" autocomplete="off" title="Consent Checkbox" name="checky" required="" ng-model="consent.isselected" /> I accept the terms and conditions for accessing the system described above.
                 </div>
             </div>
-            <div>
+            <div class="form-group">
                 <button type="submit" ng-disabled="!consent.isselected" class="btn btn-inverse btn-lg btn-login">Login</button>
-                <div class="alert alert-danger" role="alert" ng-show="ctrl.errors">Invalid Access Code/Verify Code, please try again.</div>
+            </div>
+            <div class="form-group">
+              <div class="alert alert-danger" role="alert" ng-show="ctrl.errors">Invalid Access Code/Verify Code, please try again.</div>
             </div>
         </form>
         </div>
+        <!-- <div class="col-sm-4">
+          <div class="panel panel-default">
+            <div class="panel-heading row-centered">
+              <h4>** WARNING ** WARNING **</h4>
+            </div>
+            <div class="panel-body">
+              <p>This site is intended to be used by authorized VA network users for viewing and retrieving information only except as otherwise explicitly authorized. VA information resides on and transmits through computer systems and networks funded by VA; all use is considered to be understanding and acceptance that there is no reasonable expectation of privacy for any data or transmissions on Government Intranet or Extranet (non-public) networks or systems. All transactions that occur on this system other than the viewing and downloading of Web site information and all data transmitted through this system are subject to review and action including (but not limited to) monitoring, recording, retrieving, copying, auditing, inspecting, investigating, restricting access, blocking, tracking, disclosing to authorized personnel, or any other authorized actions by all authorized VA and law enforcement personnel. All use of this system constitutes understanding and unconditional acceptance of these terms.</p>
+              <p>Unauthorized attempts or acts to either (1) access, upload, change, or delete information on this system, (2) modify this system, (3) deny access to this system, or (4) accrue resources for unauthorized use on this system are strictly prohibited. Such attempts or acts are subject to action that may result in criminal, civil, or administrative penalties.</p>
+            </div>
+          </div>
+        </div> -->
         <div class="col-sm-8">
             <h3>The Latest News</h3>
             <uib-accordion close-others="true">
-              <uib-accordion-group heading="{{tab.title}}" is-open="tab.isOpen" ng-repeat="tab in ctrl.tabs">
-                {{tab.content}}
+              <uib-accordion-group heading="{{tab.message_headline}}" ng-repeat="tab in ctrl.messageTabs">
+                {{tab.message_text}}
               </uib-accordion-group>
             </uib-accordion>
         </div>

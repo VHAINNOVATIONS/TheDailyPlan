@@ -9,7 +9,8 @@
     	}
 
     	.navbar-collapse {
-        height: 30px !important;
+        height: auto !important;
+        overflow-x: hidden;
       		.navbar-nav {
       			li {
       				a {
