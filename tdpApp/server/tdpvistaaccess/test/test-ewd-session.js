@@ -87,7 +87,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('search patients last 5', function (done) {
+    xit('search patients last 5', function (done) {
         testSession.searchPatients({
             prefix: 'F0440'
         }, function (err, body) {
@@ -104,7 +104,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('search patients full ssn', function (done) {
+    xit('search patients full ssn', function (done) {
         testSession.searchPatients({
             prefix: '666000028'
         }, function (err, body) {
@@ -312,7 +312,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get immunizations', function (done) {
+    it('get immunizations', function (done) {
         var pid = 711;
         testSession.getImmunizations(pid, {}, function (err, body) {
             if (err) {
