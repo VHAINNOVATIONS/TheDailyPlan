@@ -79,6 +79,43 @@ describe('ewd session test', function () {
                 expect(body).to.exist();
                 expect(body.length).to.be.above(0);
                 patients = body;
+                console.log("====== Last NAME =======");
+                console.log(JSON.stringify(body, undefined, 4));
+                console.log("======================");
+                done();
+            }
+        });
+    });
+
+    it('search patients last 5', function (done) {
+        testSession.searchPatients({
+            prefix: 'F0440'
+        }, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body).to.exist();
+                expect(body.length).to.be.above(0);
+                console.log("====== SESARCH LAST 5=======");
+                console.log(JSON.stringify(body, undefined, 4));
+                console.log("======================");
+                done();
+            }
+        });
+    });
+
+    it('search patients full ssn', function (done) {
+        testSession.searchPatients({
+            prefix: '666000028'
+        }, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body).to.exist();
+                expect(body.length).to.be.above(0);
+                console.log("====== SESARCH FULL=======");
+                console.log(JSON.stringify(body, undefined, 4));
+                console.log("======================");
                 done();
             }
         });
@@ -117,7 +154,7 @@ describe('ewd session test', function () {
     });
 
     var wards;
-    xit('getWards', function (done) {
+    it('getWards', function (done) {
         testSession.getWards({}, function (err, body) {
             if (err) {
                 done(err);
@@ -146,7 +183,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get patient demographics/flags', function (done) {
+    xit('get patient demographics/flags', function (done) {
         var pid = 100846; //756; //724; //631; //100845; //100748; //100846;
         testSession.getDemographics(pid, {}, function (err, body) {
             if (err) {
@@ -355,7 +392,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get chem hem reports', function (done) {
+    xit('get chem hem reports', function (done) {
         var pid = 756; //100022;
         testSession.getChemHemReports(pid, {
             toDate: '3161010',

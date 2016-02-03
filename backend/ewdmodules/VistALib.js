@@ -860,10 +860,6 @@ module.exports = {
 		  	SSN: patientObj[8]
 		};
 	}
-
-
-
-	
 };
 
 var chemHemLib = require('vistaChemHemLib');
