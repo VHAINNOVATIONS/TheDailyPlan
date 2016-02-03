@@ -44,9 +44,21 @@ router.get('/complete/:id', function(req, res) {
       panelObj.settings.sizeY = panel.sizeY;
       panelObj.settings.minSizeX = panel.minSizeX;
       panelObj.settings.minSizeY = panel.minSizeY;
-      panelObj.template = '<div ' + panel.directive + ' patient="ctrl.' + panel.scope_variable +'"></div>';
-      panelObj.print = '<div ' + panel.directive + '-print' + ' patient="ctrl.' + panel.scope_variable +'"></div>';
+      panelObj.template = '<div ' + panel.directive + ' patient="ctrl.' + panel.scope_variable +'" detail="panel.detail"></div>';
+      panelObj.print = '<div ' + panel.directive + '-print' + ' patient="ctrl.' + panel.scope_variable +'" detail="panel.detail"></div>';
       panelObj.mandatory = panel.mandatory;
+
+      // TO DO replace with from database
+      if (panel.title === 'Free Text 1') {
+        panelObj.detail = 'Free Text 1'
+      }
+      if (panel.title === 'Free Text 2') {
+        panelObj.detail = 'Name: |PATIENT NAME|, Age: |PATIENT AGE|'
+      }
+      if (panel.title === 'Free Text 3') {
+        panelObj.detail = 'Name: |PATIENT NAME|\nSex: |PATIENT SEX|'
+      }
+
       panels.push(panelObj);
       callback();
 

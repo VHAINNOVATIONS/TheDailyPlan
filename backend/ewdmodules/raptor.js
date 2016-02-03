@@ -3,6 +3,7 @@ var ordersLib = require('./vistaOrders');
 var patientSearchLib = require('./vistaPatientSearch');
 var healthFactorsLib = require('./vistaHealthFactors');
 var postingsLib = require('./vistaPostingsLib');
+var tiuLib = require('./vistaTiuLib');
 
 // REST & Web Service error response formatter function
 // Updated 20150820a
@@ -484,6 +485,19 @@ var operations = {
             var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
             var result = healthFactorsLib.getPatientHealthFactors(params, session, ewd);
             ok = ewd.util.saveSymbolTable(ewd, session);        //Grab our symbol table for use next time
+            return result;
+        }
+    },
+
+    resolveBPs: {
+        GET: function(ewd, session) {
+            var params = {
+                patientId: ewd.query.patientId,
+                text: ewd.query.text || ""
+            };
+            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours                                                            
+            var result = tiuLib.resolveBoilerplates(params, session, ewd);
+            ok = ewd.util.saveSymbolTable(ewd, session);        //Grab our symbol table for use next time                                                             
             return result;
         }
     },

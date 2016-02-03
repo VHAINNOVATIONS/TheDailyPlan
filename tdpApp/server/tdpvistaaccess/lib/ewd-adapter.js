@@ -499,6 +499,17 @@ var session = {
                 callback(null, result);
             }
         });
+    },
+    getBoilerplates: function(patientId, options, callback) {
+      this.get('/resolveBPs', {
+        patientId: patientId,
+        text: options.text
+      }, function(err, result) {
+        if (err) {
+          return callback(err);
+        }
+        callback(null, result);
+      });
     }
 };
 

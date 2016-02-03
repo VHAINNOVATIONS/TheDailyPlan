@@ -355,7 +355,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get chem hem reports', function (done) {
+    xit('get chem hem reports', function (done) {
         var pid = 756; //100022;
         testSession.getChemHemReports(pid, {
             toDate: '3161010',
@@ -386,6 +386,23 @@ describe('ewd session test', function () {
                 console.log("=== Health Factors =============");
                 console.log(JSON.stringify(result, undefined, 4));
                 console.log("================================");
+                done();
+            }
+        });
+    });
+
+    it('boiler plates', function(done) {
+      var pid = 100846;
+        testSession.getBoilerplates(pid, {
+          text: '|PATIENT NAME|^|PATIENT AGE|^|PATIENT SEX|'
+        }, function (err, result) {
+            if (err) {
+                done(err);
+            } else {
+                expect(result).to.exist();
+                console.log("=== Resolved boilerplates =============");
+                console.log(result);
+                console.log("=======================================");
                 done();
             }
         });
