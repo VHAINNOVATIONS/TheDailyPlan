@@ -195,8 +195,10 @@ var putInChemHemReportDates = function(report) {
 
 var session = {
     get: function (route, parameters, callback) {
+        var alias = this.location || 'default';
+        var port = this.ports[alias];
         var options = _.assign({
-            uri: this.baseUrl + route
+            uri: this.baseUrl + port + this.serverRoute + route
         }, {
             method: 'GET',
             json: true,
@@ -226,6 +228,7 @@ var session = {
         });
     },
     login: function (userInfo, callback) {
+        this.location = userInfo.location;
         var self = this;
         this.get('/initiate', null, function (err, body) {
             if (err) {
@@ -535,6 +538,8 @@ var session = {
 exports.newSession = function (options, callback) {
     var c = Object.create(session);
     c.baseUrl = options.baseUrl;
+    c.ports = options.ports;
+    c.serverRoute = options.serverRoute;
     c.userKeys = options.userKeys;
     callback(null, c);
 };
