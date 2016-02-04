@@ -1,8 +1,8 @@
 module.exports = function(db) {
 
-var templateID = 0;
-//Create Default Template
-db.template.create({
+  var templateID = 0;
+  //Create Default Template
+  db.template.create({
     id: 1,
     template_name: 'Default',
     template_description: 'Default Template',
@@ -10,10 +10,12 @@ db.template.create({
   }).then(function(template) {
     templateID = template.id;
     console.log('templateID:',templateID);
+  }).then(function(template) {
+    console.log('afsin');
   });
 
-// Create Facilities and Facility Messages
- db.facility.create({
+  // Create Facilities and Facility Messages
+  db.facility.create({
     name: 'Select a facility...',
     station: 0,
     visn: 0
@@ -71,7 +73,7 @@ db.template.create({
     }]);
   });
 
-db.facility.create({
+  db.facility.create({
     name: 'Madison',
     station: 607,
     visn: 12
@@ -135,7 +137,7 @@ db.facility.create({
     }]);
   });
 
-db.facility.create({
+  db.facility.create({
     name: 'Central Texas (Waco)',
     station: 674,
     visn: 17
@@ -587,4 +589,33 @@ db.facility.create({
 
   });
 
+  // Create the Panel_Type First
+  ['1', '2', '3'].forEach(function(index) {
+    db.panel_type.create({
+      title: 'Free Text ' + index,
+      directive: 'dt-free-text',
+      scope_variable: 'patient',
+      minSizeX: 2,
+      minSizeY: 2,
+      mandatory: false
+    }).then(function(pt) {
+      // Then Create the Panel Second
+      db.panel.create({
+        name: 'Free Text Default',
+        panel_type_id: pt.id,
+        sizeX: 2,
+        sizeY: 2
+      }).then(function(p) {
+        // Then Create the Template_Layout Second
+        console.log('templateID:',templateID);
+        db.template_layout.create({
+          template_id: templateID,
+          panel_id: p.id,
+          panel_order: p.id
+        }).then(function(tl) {
+          console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
+        });
+      });
+    });
+  });
 };

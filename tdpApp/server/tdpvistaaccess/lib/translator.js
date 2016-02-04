@@ -202,6 +202,9 @@ exports.translateImmunizations = function (rawData) {
             result.push(immunization);
         });
     }
+    if (result.length === 1 && ((result[0].name === "No immunizations found.") || ! result[0].id)) {
+      return [];
+    }
     return result;
 };
 

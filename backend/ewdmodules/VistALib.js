@@ -128,7 +128,7 @@ var getJSONFromVPR = function(tmpNode, ewd) {
 };
 
 var VistALogin = function(accessCode, verifyCode, ewd) {
-  var ok = ewd.mumps.function('login^VEFBRPC', accessCode, verifyCode);
+  var ok = ewd.mumps.function('LOGIN^ZZTDP', accessCode, verifyCode);
   if (ok === '') {
     var temp = new ewd.mumps.GlobalNode('CacheTempEWD', [process.pid]);
     //var results = temp._getDocument(0, false);
@@ -263,7 +263,7 @@ module.exports = {
       session.$('VistA')._setDocument(results.data);
       var userKeys = ewd.query.keys;
       if (userKeys) {
-      	var hasKeys = ewd.mumps.function("USERKEYS^VEFBRPC", results.data.DUZ, userKeys) ;
+      	var hasKeys = ewd.mumps.function("USERKEYS^ZZTDP", results.data.DUZ, userKeys) ;
       	if (hasKeys) {
       		var userKeysAsArray = userKeys.split('^');
       		var hasKeysAsArray = hasKeys.split('^');
@@ -655,7 +655,7 @@ module.exports = {
         };
         gloRef._setDocument(data, true, 1);
         
-        var status = ewd.mumps.function("RPCEXECUTE^VEFBRPC", '^TMP(' + process.pid + ')') ;
+        var status = ewd.mumps.function("RPCEXEC^ZZTDP", '^TMP(' + process.pid + ')') ;
         var resultsNode = gloRef.$('result');
         var results = resultsNode._getDocument();
 		
@@ -698,7 +698,7 @@ module.exports = {
 		}
 		// end special
 		
-        var status = ewd.mumps.function("RPCEXECUTE^VEFBRPC", '^TMP(' + process.pid + ')') ;
+        var status = ewd.mumps.function("RPCEXEC^ZZTDP", '^TMP(' + process.pid + ')') ;
         var resultsNode = gloRef.$('result');
         var results = resultsNode._getDocument();
 		
@@ -735,7 +735,7 @@ module.exports = {
 		}
 		// end special
 		
-        var status = ewd.mumps.function("RPCEXECUTE^VEFBRPC", '^TMP(' + process.pid + ')') ;
+        var status = ewd.mumps.function("RPCEXEC^ZZTDP", '^TMP(' + process.pid + ')') ;
         var resultsNode = gloRef.$('result');
         var results = resultsNode._getDocument();
 		gloRef._delete();
@@ -786,7 +786,7 @@ module.exports = {
         };
         gloRef._setDocument(data, true, 1);
         
-        var status = ewd.mumps.function("RPCEXECUTE^VEFBRPC", '^TMP(' + process.pid + ')') ;
+        var status = ewd.mumps.function("RPCEXEC^ZZTDP", '^TMP(' + process.pid + ')') ;
         var resultsNode = gloRef.$('result');
         var results = resultsNode._getDocument();
 		
@@ -860,10 +860,6 @@ module.exports = {
 		  	SSN: patientObj[8]
 		};
 	}
-
-
-
-	
 };
 
 var chemHemLib = require('vistaChemHemLib');

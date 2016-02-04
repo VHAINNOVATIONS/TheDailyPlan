@@ -5,7 +5,7 @@ var vistaLib = require('./VistALib');
 var fillPosting = function(ien, obj, session, ewd) {
     var gloRef = new ewd.mumps.GlobalNode('TMP', [process.pid, 'POSTING', ien.toString()]);
     gloRef._delete();
-    var result = ewd.mumps.function("POSTING^VEFBRPC", ien.toString()) ;
+    var result = ewd.mumps.function("POSTING^ZZTDP", ien.toString()) ;
     var results = gloRef._getDocument();
     gloRef._delete();
     return results;

@@ -65,3 +65,45 @@ exports.getPatientsByClinic = function(params, session, ewd) {
 	var response = vistaLib.runRpc(params, session, ewd);
 	return response;
 };
+
+var translatePtList = function(response) {
+	var value = response && response.value;
+	if (! value) {
+		return [];
+	}
+	var count = Object.keys(value).length;
+	var result = [];
+	for (var i=1; i<=count; ++i) {
+		var pt = value[i.toString()];
+		var pieces = pt.split('^');
+		result.push({
+			id: pieces[0],
+			text: pieces[1]
+		});
+	}
+	return result;
+};
+
+exports.getPatientsLast5 = function (last5, session, ewd) {
+	var params = {};
+	params.rpcName = 'ORWPT LAST5';
+	params.rpcArgs = [{
+		type: 'LITERAL',
+		value: last5
+	}];
+	var response = vistaLib.runRpc(params, session, ewd);
+	var result = translatePtList(response);
+	return result;
+};
+
+exports.getPatientsFullSSN = function (fullSSN, session, ewd) {
+	var params = {};
+	params.rpcName = 'ORWPT FULLSSN';
+	params.rpcArgs = [{
+		type: 'LITERAL',
+		value: fullSSN
+	}];
+	var response = vistaLib.runRpc(params, session, ewd);
+	var result = translatePtList(response);
+	return result;
+};

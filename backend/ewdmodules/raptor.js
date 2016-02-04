@@ -3,6 +3,7 @@ var ordersLib = require('./vistaOrders');
 var patientSearchLib = require('./vistaPatientSearch');
 var healthFactorsLib = require('./vistaHealthFactors');
 var postingsLib = require('./vistaPostingsLib');
+var tiuLib = require('./vistaTiuLib');
 
 // REST & Web Service error response formatter function
 // Updated 20150820a
@@ -488,6 +489,19 @@ var operations = {
         }
     },
 
+    resolveBPs: {
+        GET: function(ewd, session) {
+            var params = {
+                patientId: ewd.query.patientId,
+                text: ewd.query.text || ""
+            };
+            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours                                                            
+            var result = tiuLib.resolveBoilerplates(params, session, ewd);
+            ok = ewd.util.saveSymbolTable(ewd, session);        //Grab our symbol table for use next time                                                             
+            return result;
+        }
+    },
+
     signNote: {
         GET: function(ewd, session) {
             var params = {
@@ -542,8 +556,16 @@ var operations = {
     patientsByName: {
         GET: function(ewd, session) {
             var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
-            var resultRaw = vista.getPatientsByName(ewd.query.prefix, 1000, ewd);
-            var result = resultRaw.results;
+            var result;
+            var prefix = ewd.query.prefix;
+            if (prefix.match(/^[A-Z]?\d{4}$/i)) {
+                result = patientSearchLib.getPatientsLast5(prefix, session, ewd);
+            } else if (prefix.match(/^\d{3}\-?\d{2}\-?\d{4}$/)) {
+                result = patientSearchLib.getPatientsFullSSN(prefix, session, ewd);
+            } else {
+                var resultRaw = vista.getPatientsByName(prefix, 1000, ewd);
+                result = resultRaw.results;
+            }
             ok = ewd.util.saveSymbolTable(ewd, session);    //Grab our symbol table for use next time
             return result;
         }
