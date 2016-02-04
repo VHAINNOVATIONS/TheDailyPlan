@@ -553,6 +553,82 @@ db.facility.create({
         console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
       });
 
+      // Now Create the Settings and Details
+      db.panel_setting.create({
+        panel_type_id: pt.id,
+        setting_type: 1,
+        setting_name: Tests,
+        setting_value: 'MAGNESIUM'
+      }).then(function(ps) {
+        //Then Create the Details
+        db.panel_detail.create({
+          panel_id: p.id,
+          panel_setting_id: ps.id
+        }).then(function(tl) {
+          console.log('<<<<<<<Panel Setting & Detail Record Created.>>>>>>>')
+        });
+
+      });
+
+      // Now Create the Settings and Details
+      db.panel_setting.create({
+        panel_type_id: pt.id,
+        setting_type: 1,
+        setting_name: Tests,
+        setting_value: 'POTASSIUM'
+      }).then(function(ps) {
+        //Then Create the Details
+        db.panel_detail.create({
+          panel_id: p.id,
+          panel_setting_id: ps.id
+        }).then(function(tl) {
+          console.log('<<<<<<<Panel Setting & Detail Record Created.>>>>>>>')
+        });
+
+      });
+
+      // Now Create the Settings and Details
+      db.panel_setting.create({
+        panel_type_id: pt.id,
+        setting_type: 1,
+        setting_name: Tests,
+        setting_value: 'HDL'
+      }).then(function(ps) {
+        //Then Create the Details
+        db.panel_detail.create({
+          panel_id: p.id,
+          panel_setting_id: ps.id
+        }).then(function(tl) {
+          console.log('<<<<<<<Panel Setting & Detail Record Created.>>>>>>>')
+        });
+
+      });
+
+      // Now Create the Settings and Details
+      db.panel_setting.create({
+        panel_type_id: pt.id,
+        setting_type: 1,
+        setting_name: Tests,
+        setting_value: 'CHOLESTEROL'
+      }).then(function(ps) {
+        //Then Create the Details
+        db.panel_detail.create({
+          panel_id: p.id,
+          panel_setting_id: ps.id
+        }).then(function(tl) {
+          console.log('<<<<<<<Panel Setting & Detail Record Created.>>>>>>>')
+        });
+
+      });
+
+      // Now Create just a Settings
+      db.panel_setting.create({
+        panel_type_id: pt.id,
+        setting_type: 1,
+        setting_name: Tests,
+        setting_value: 'TRIGLYCERIDE'
+      })
+
     });
 
   });
@@ -571,6 +647,36 @@ db.facility.create({
       name: 'Contacts Default',
       panel_type_id: pt.id,
       sizeX: 2,
+      sizeY: 2
+    }).then(function(p) {
+      // Then Create the Template_Layout Second
+      console.log('templateID:',templateID);
+      db.template_layout.create({
+        template_id: templateID,
+        panel_id: p.id,
+        panel_order: p.id
+      }).then(function(tl) {
+        console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
+      });
+
+    });
+
+  });
+
+  // Create the Panel_Type First
+  db.panel_type.create({
+    title: 'Health Factors',
+    directive: 'dt-health-factors',
+    scope_variable: 'patient',
+    minSizeX: 2,
+    minSizeY: 2,
+    mandatory: false
+  }).then(function(pt) {
+    // Then Create the Panel Second
+    db.panel.create({
+      name: 'Health Factors Default',
+      panel_type_id: pt.id,
+      sizeX: 3,
       sizeY: 2
     }).then(function(p) {
       // Then Create the Template_Layout Second
