@@ -17,8 +17,15 @@ exports.newSession = function (overrideConfig, callback) {
     }
     if (config.tdpVistAAccessType === 'EWD') {
         var ewdOptions = {
-            baseUrl: (config.ewdServerSSL ? 'https' : 'http') + '://' + config.tdpEwdRestHost + ':' + config.tdpEwdRestPort + '/' + config.ewdServerName + '/' + config.ewdServiceName
+            baseUrl: (config.ewdServerSSL ? 'https' : 'http') + '://' + config.tdpEwdRestHost + ':',
+            serverRoute: '/' + config.ewdServerName + '/' + config.ewdServiceName
         };
+        var aliases = config.tdpEwdRestAlias.split('^');
+        var ports = config.tdpEwdRestPort.split('^');
+        ewdOptions.ports = {};
+        for (var i=0; i<aliases.length; ++i) {
+          ewdOptions.ports[aliases[i]] = ports[i];
+        }
         ewdAdapter.newSession(ewdOptions, callback);
     } else if (config.tdpVistAAccessType === 'RDK') {
         var rdkOptions = {

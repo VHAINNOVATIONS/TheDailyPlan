@@ -23,10 +23,11 @@ describe('ewd session test', function () {
         });
     });
 
-    it('login error', function (done) {
+    xit('login error', function (done) {
         testSession.login({
             accessCode: 'CPRS1234XX',
-            verifyCode: 'CPRS4321$XX'
+            verifyCode: 'CPRS4321$XX',
+            location: 'Biloxi'
         }, function (err) {
             if (err) {
                 console.log(err.toString());
@@ -42,6 +43,7 @@ describe('ewd session test', function () {
         testSession.login({
             accessCode: 'CPRS1234',
             verifyCode: 'CPRS4321$',
+            location: 'Biloxi',
             userKeys: [{
               client: 'admin',
               vista: 'XUPROG'
