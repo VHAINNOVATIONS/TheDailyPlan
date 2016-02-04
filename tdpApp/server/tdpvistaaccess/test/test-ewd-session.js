@@ -376,8 +376,8 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get health factors', function (done) {
-        var pid = 100846;
+    it('get health factors', function (done) {
+        var pid = 756;
         testSession.getHealthFactors(pid, {}, function (err, result) {
             if (err) {
                 done(err);

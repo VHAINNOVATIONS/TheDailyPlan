@@ -1,10 +1,13 @@
 'use strict';
 
 angular.module('tdpApp')
-  .controller('PatientSearchCtrl', function ($compile, $scope, $resource, $location, DTOptionsBuilder, DTColumnBuilder, Patient, Location, $filter) {
+  .controller('PatientSearchCtrl', function ($compile, $scope, $q, $location, DTOptionsBuilder, DTColumnBuilder, Patient, Location, $filter, Template) {
   	var self = this;
     self.data = [];
     self.items = [];
+    self.templates = [];
+    self.selectedTemplate = {};
+    self.selectedTemplateArray = [];
     self.wards = [];
     self.clinics = [];
     self.wardsSelected = [];
@@ -28,6 +31,15 @@ angular.module('tdpApp')
     self.toggleOne = toggleOne;
     self.display = display;
 
+    // Populate the Templates
+    Template.findAll()
+    .then( function(data) {
+      self.templates = data;
+    })
+    .catch( function(err) {
+      self.errors.other = err.message;
+    });
+
     // Initially Populate the Wards
     Location.getWards()
     .then( function(data) {
@@ -47,21 +59,22 @@ angular.module('tdpApp')
     });
 
     function display() {
-      angular.forEach(self.selected, function(value, key) {
-        console.log('patientSearch display!');
+      console.log('patientSearch display!');
 
+      angular.forEach(self.selected, function(value, key) {
         var entry = {};
 
         if(value === true)
         {
           entry.id = key;
           entry.name = findName(key);
+          entry.templateID = findTemplate(key);
           this.push(entry);
         }
 
       }, self.items);
 
-      console.log('items:',self.items.length);
+      console.log('items:',self.items);
       switch(self.items.length) {
         case 0:
           self.displayErr.flag = true;
@@ -131,7 +144,7 @@ angular.module('tdpApp')
     }
 
     function newPromise() {
-      return new Promise( function(resolve, reject){
+      return $q( function(resolve, reject){
         if (self.data)
         {
           resolve(self.data);
@@ -179,6 +192,30 @@ angular.module('tdpApp')
              return 'Name Error';
          }
      }
+
+     function findTemplate(id) {
+      console.log('findTemplate id:', id);
+      angular.forEach(self.selectedTemplate, function(value, key) {
+        var entry = {};
+        console.log('selectedTemplate key:', key);
+
+        entry.id = key;
+        entry.templateID = value;
+        this.push(entry);
+
+      }, self.selectedTemplateArray);
+
+      var item = $filter('filter')(self.selectedTemplateArray, {
+        id: id
+      }, true);
+      if (item.length) {
+        console.log('findTemplate found! ', item[0]);
+        return item[0].templateID;
+      } else {
+        return 'Template Error';
+      }
+    }
+
 
     function areSelected() {
       console.log('patientSearch areSelected!');
@@ -231,7 +268,17 @@ angular.module('tdpApp')
         }),
         DTColumnBuilder.newColumn('DOB').withTitle('DOB'),
         DTColumnBuilder.newColumn('age').withTitle('Age'),
-        DTColumnBuilder.newColumn('sex').withTitle('Gender')
+        DTColumnBuilder.newColumn('sex').withTitle('Gender'),
+        DTColumnBuilder.newColumn(null).withTitle('Template').notSortable()
+            .renderWith(function(data, type, full, meta) {
+              var teamplateSelect = '';
+              teamplateSelect += '<select name="templateSelect" id="templateSelect" class="form-control" ';
+              teamplateSelect += 'ng-model="ctrl.selectedTemplate[' + data.id + ']">';
+              teamplateSelect += '<option ng-repeat="option in ctrl.templates" value="{{option.id}}">{{option.template_name}}</option></select>';
+
+              return  teamplateSelect;
+
+            })
     ];
 
 

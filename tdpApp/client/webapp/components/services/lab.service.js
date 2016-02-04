@@ -3,6 +3,10 @@
 angular.module('tdpApp')
   .factory('Labs', function Labs($location, $rootScope, $http, $q) {
     var results = {};
+    var labTestNames = [];
+    var defaultTestNames = ['MAGNESIUM', 'POTASSIUM', 'HDL', 'TRIGLYCERIDE', 'CHOLESTEROL','CREATININE','HEMOGLOBIN A1C','LDL CHOLESTEROL'];
+
+
 
     return {
 
@@ -17,13 +21,12 @@ angular.module('tdpApp')
       getByID: function(value, callback) {
         var cb = callback || angular.noop;
         var deferred = $q.defer();
-        var tests = ['MAGNESIUM', 'POTASSIUM', 'HDL', 'TRIGLYCERIDE', 'CHOLESTEROL','CREATININE','HEMOGLOBIN A1C','LDL CHOLESTEROL'];
 
         var parameters = {};
         var config = {};
         parameters.toDate = '3161010';
         parameters.fromDate = '1501010';
-        parameters.testNames = tests;
+        parameters.testNames = labTestNames.length > 0 ? labTestNames : defaultTestNames;
         config.params = parameters;
 
         $http.get('/api/labs/' + value, config).
@@ -80,6 +83,15 @@ angular.module('tdpApp')
         }.bind(this));
 
         return deferred.promise;
-      }
+      },
+      /**
+       * Panel Details - Get and Set
+      */
+      getLabTestNames: function() {
+          return labTestNames;
+      },
+      setLabTestNames: function(value) {
+          labTestNames = value;
+      },
     };
   });
