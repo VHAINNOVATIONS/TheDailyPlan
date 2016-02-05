@@ -23,6 +23,17 @@ router.get('/:id', function(req, res) {
   });
 });
 
+// get single panel_settings
+router.get('/byPanelType/:id', function(req, res) {
+  models.panel_setting.findAll({
+    where: {
+      panel_type_id: req.params.id
+    }
+  }).then(function(panel_setting) {
+    res.json(panel_setting);
+  });
+});
+
 // add new panel_setting
 router.post('/', function(req, res) {
   models.panel_setting.create({

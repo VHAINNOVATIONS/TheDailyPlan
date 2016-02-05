@@ -23,6 +23,19 @@ router.get('/:id', function(req, res) {
   });
 });
 
+// get complete details and settings - use sequelize.query
+router.get('/complete/:id', function(req, res) {
+  models.sequelize.query('select * from panel_detail pd ' +
+    'inner join panel_setting ps on pd.panel_setting_id = ps.id ' +
+    'where pd.panel_id = $panel_id order by ps.setting_type asc, ' +
+    'ps.setting_name asc, ps.setting_value asc',
+  { bind: {panel_id: req.params.id}, type: models.sequelize.QueryTypes.SELECT})
+  .then(function(panelDetails) {
+    res.json(panelDetails);
+  });
+});
+
+
 // add new panel_detail
 router.post('/', function(req, res) {
   models.panel_detail.create({

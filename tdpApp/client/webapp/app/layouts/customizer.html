@@ -1,0 +1,35 @@
+<div>
+    <form name="_form" class="form-horizontal" ng-submit="submit(_form)">
+        <div class="modal-header">
+          <button type="button" class="close" ng-click="dismiss()" aria-hidden="true">&times;</button>
+          <h3>Panel Details - {{panel.title}}</h3>
+        </div>
+
+        <div class="modal-body">
+            <div class="form-group" ng-class="{error: _form.title.$error && _form.submitted}">
+              <div class="row">
+                <label class="col-sm-6 col-sm-offset-3">Select Lab Tests to Include</label>
+              </div>
+              <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                  <div class="list-group" id="optionsList">
+                    <span class="list-group-item active">Tests
+                      <input title="Toggle all" ng-click="toggleOptions()" ng-model="checkedOption" value="{{checkedOption}}" ng-disabled="options.length === 0" type="checkbox" class="pull-left picklist-input">
+                    </span>
+                    <span ng-repeat="option in options">
+                      <span class="list-group-item">{{option.setting_value}}
+                        <input ng-click="selectOption(option.id)" name="selectedOption[]" value="{{option.id}}" ng-checked="selectedOption.indexOf(option.id) > -1" type="checkbox" class="pull-left picklist-input">
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+          <a ng-click="dismiss()" class="btn btn-default" tabindex="-1"><i class="glyphicon glyphicon-remove"></i>Cancel</a>
+          <button type="submit" class="btn btn-primary btn-lg"><i class="glyphicon glyphicon-ok"></i>Save</button>
+        </div>
+    </form>
+</div>

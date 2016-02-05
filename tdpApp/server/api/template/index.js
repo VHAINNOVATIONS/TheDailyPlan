@@ -38,14 +38,15 @@ router.get('/complete/:id', function(req, res) {
     // Panel - Loop
     async.eachSeries(layout, function(panel, callback) {
       var panelObj = {};
+      panelObj.panelid = panel.panel_id;
       panelObj.title = panel.title;
       panelObj.settings = {};
       panelObj.settings.sizeX = panel.sizeX;
       panelObj.settings.sizeY = panel.sizeY;
       panelObj.settings.minSizeX = panel.minSizeX;
       panelObj.settings.minSizeY = panel.minSizeY;
-      panelObj.template = '<div ' + panel.directive + ' patient="ctrl.' + panel.scope_variable +'" detail="panel.detail"></div>';
-      panelObj.print = '<div ' + panel.directive + '-print' + ' patient="ctrl.' + panel.scope_variable +'" detail="panel.detail"></div>';
+      panelObj.template = '<div ' + panel.directive + ' patient="ctrl.' + panel.scope_variable +'" panelid="panel.panelid"></div>';
+      panelObj.print = '<div ' + panel.directive + '-print' + ' patient="ctrl.' + panel.scope_variable +'"></div>';
       panelObj.mandatory = panel.mandatory;
 
       // TO DO replace with from database
@@ -75,6 +76,8 @@ router.get('/complete/:id', function(req, res) {
 
 // add new template
 router.post('/', function(req, res) {
+  //Template = req.body;
+  //Panels = req.body.panels;
   models.template.create({
     template_name: req.body.template_name,
     template_description: req.body.template_description,
@@ -82,7 +85,40 @@ router.post('/', function(req, res) {
     active: req.body.active,
     template_owner: req.body.template_owner
   }).then(function(template) {
-    res.json(template);
+    // Panel - Loop
+    var i = 0;
+    var layouts = [];
+    async.eachSeries(req.body.panels, function(panel, callback) {
+      // Count to define panel order
+      i++;
+      // Then Create the Panel Second
+      models.panel.create({
+        name: panel.title,
+        panel_type_id: panel.id,
+        sizeX: panel.minSizeX,
+        sizeY: panel.minSizeY
+      }).then(function(p) {
+        // Then Create the Template_Layout Second
+        models.template_layout.create({
+          template_id: template.id,
+          panel_id: p.id,
+          panel_order: i
+        }).then(function(tl) {
+          tl.panel = p;
+          layouts.push(tl);
+          callback();
+        });
+      });
+
+    }, function(err){
+
+      if( err ) {
+        console.log('ERROR:',err);
+      } else {
+        template.layouts = layouts;
+        res.json(template);
+      }
+    });
   });
 });
 

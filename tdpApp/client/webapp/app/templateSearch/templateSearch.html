@@ -1,6 +1,6 @@
-<div ng-controller="PatientSearchCtrl as ctrl" class="container">
+<div ng-controller="TemplateSearchCtrl as ctrl" class="container">
   <div class="row">
-    <h3>Patient Search</h3>
+    <h3>Template Search</h3>
   </div>
   <div class="row">
     <uib-tabset>
@@ -10,8 +10,8 @@
                 <div class="col-sm-4 col-centered">
                   <form ng-submit="ctrl.searchAll()" name="searchAll">
                       <div class="form-group">
-                        <label for="searchAllPatients">Patient Name(Last, First) or SSN</label>
-                        <input type="text" ng-model="ctrl.search.all" required ng-minlength="3" class="form-control" id="searchAllPatients" placeholder="Patient Name(Last, First) or SSN" autocomplete="off" style="cursor: auto;">
+                        <label for="searchAllTemplates">Template Name</label>
+                        <input type="text" ng-model="ctrl.search.all" required ng-minlength="3" class="form-control" id="searchAllTemplates" placeholder="Template Name" autocomplete="off" style="cursor: auto;">
                       </div>
                       <input class="btn btn-primary" type="submit" value="Search" ng-disabled="searchAll.$invalid">
                   </form>
@@ -58,7 +58,7 @@
     </uib-tabset>
     <div class="row row-centered">
       <div class="col-sm-4 col-centered">
-        <div class="alert alert-danger" role="alert" ng-show="ctrl.noResults">No Patients Found.  Please Try Again.</div>
+        <div class="alert alert-danger" role="alert" ng-show="ctrl.noResults">No Templates Found.  Please Try Again.</div>
       </div>
     </div>
   </div>
@@ -70,10 +70,14 @@
   <div class="row">
     <div class="col-sm-12 col-centered">
       <hr>
-      <form ng-submit="ctrl.display()" name="display">
+      <div class='col-sm-4 col-centered pull-left'>
+        <button type="button" class='btn btn-primary' ng-click="ctrl.display()">Display</button>
+        <button type="button" class='btn btn-primary' ng-click="ctrl.display()">Edit</button>
+        <button type="button" class='btn btn-primary' ng-click="ctrl.create()">Create</button>
+      </div>
+      <!-- <form ng-submit="ctrl.display()" name="display">
           <input class="btn btn-primary" type="submit" value="Display">
-
-      </form>
+      </form> -->
     </div>
   </div>
   <div class="row row-centered">

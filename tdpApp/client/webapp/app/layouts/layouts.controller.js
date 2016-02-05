@@ -2,7 +2,8 @@
 
 angular.module('tdpApp')
   //.controller('LayoutsCtrl', function ($scope, User, Auth) {
-  .controller('LayoutsCtrl', ['$scope', 'Template', 'Panel_Type', 'Location', function($scope, Template, Panel_Type, Location){
+  .controller('LayoutsCtrl', ['$scope', '$location', 'Template', 'Panel_Type', 'Location', '$modal',
+    function($scope, $location, Template, Panel_Type, Location, $modal){
     var self = this;
     self.errors = {};
     self.facilities = [];
@@ -27,7 +28,10 @@ angular.module('tdpApp')
       // Initialize Available Panels and Keep a Master List
       reset();
       self.masterPanelsList = panel_types;
-      self.availablePanels = self.masterPanelsList.slice(0);
+
+      for (var i = 0; i < panel_types.length; i++) {
+        panel_types[i].mandatory ? self.selectedPanels.push(panel_types[i]) : self.availablePanels.push(panel_types[i]);
+      };
     })
     .catch( function(err) {
       self.errors.other = err.message;
@@ -62,22 +66,25 @@ angular.module('tdpApp')
 
     self.addTemplate = function(form) {
       self.submitted = true;
+      self.template.panels = self.selectedPanels;
 
       if(form.$valid) {
         Template.create(self.template)
         .then( function(data) {
           // Returns a Completed Template
           console.log('Record Created:',data);
+          $location.path('/templateSearch');
         })
         .catch( function(err) {
           self.errors.other = err.message;
         });
-
-        // If successful, create More records
-          // Panel
-          // Template_Layout
-
       }
+    };
+
+    self.cancelTemplate = function() {
+
+      $location.path('/templateSearch');
+      return;
     };
 
     self.aToS = function() {
@@ -95,9 +102,12 @@ angular.module('tdpApp')
       var i;
       for (i in self.selectedS) {
         var moveId = arrayObjectIndexOf(self.masterPanelsList, self.selectedS[i], 'id');
-        self.availablePanels.push(self.masterPanelsList[moveId]);
-        var delId = arrayObjectIndexOf(self.selectedPanels, self.selectedS[i], 'id');
-        self.selectedPanels.splice(delId,1);
+
+        if (!self.masterPanelsList[moveId].mandatory) {
+          self.availablePanels.push(self.masterPanelsList[moveId]);
+          var delId = arrayObjectIndexOf(self.selectedPanels, self.selectedS[i], 'id');
+          self.selectedPanels.splice(delId,1);
+        }
       }
       reset();
     };
@@ -168,5 +178,70 @@ angular.module('tdpApp')
       }
     };
 
+    self.openSettings = function(panel) {
+      $modal.open({
+        scope: $scope,
+        templateUrl: 'app/layouts/customizer.html',
+        controller: 'CustomizerCtrl',
+        resolve: {
+          panel: function() {
+            return panel;
+          }
+        }
+      });
+    };
 
-  }]);
+
+  }])
+// Customizer Controller Settings Modal
+.controller('CustomizerCtrl', ['$scope', '$timeout', '$rootScope', '$uibModalInstance', 'panel', 'Panel_Setting',
+  function($scope, $timeout, $rootScope, $uibModalInstance, panel, Panel_Setting) {
+    $scope.panel = panel;
+    $scope.options = [];
+    $scope.selectedOption = [];
+    $scope.checkedOption = false;
+
+
+    Panel_Setting.findByPanelTypeID(panel.id)
+    .then( function(panel_settings) {
+      $scope.options = panel_settings;
+    })
+    .catch( function(err) {
+      $scope.errors = err.message;
+    });
+
+    $scope.toggleOption = function() {
+      if (!$scope.checkedOption) {
+        $scope.selectedOption=[];
+      }
+      else {
+        for (var i in $scope.options) {
+          if ($scope.selectedOption.indexOf($scope.options[i].id) === -1) {
+            $scope.selectedOption.push($scope.options[i].id);
+          }
+        }
+      }
+    };
+
+    $scope.selectOption = function(i) {
+      if ($scope.selectedOption.indexOf(i) === -1) {
+        $scope.selectedOption.push(i);
+      } else {
+        $scope.selectedOption.splice($scope.selectedOption.indexOf(i),1);
+        if ($scope.checkedOption) $scope.checkedOption = false;
+      }
+    };
+
+    $scope.dismiss = function() {
+      $uibModalInstance.dismiss();
+    };
+
+    $scope.submit = function() {
+      console.log('CustomizerCtrl - panelSave:',panel);
+      //angular.extend(panel, $scope.form);
+
+      $uibModalInstance.close(panel);
+    };
+
+  }
+]);

@@ -1,0 +1,21 @@
+<div>
+  <div class="control-group" ng-show="healthFactorsGridOptions.enableExpandable">
+      <input type="button" class="btn btn-small" ng-click="expandHealthFactorsRows()" value="Expand All" />
+      <input type="button" class="btn btn-small" ng-click="collapseHealthFactorsRows()" value="Collapse All" />
+  </div>
+  <div ui-grid="healthFactorsGridOptions" class="grid">
+      <div class="grid-msg-overlay" ng-hide="!healthFactorsLoading">
+          <div class="msg">
+              <span>
+                  Loading Data...
+                  <i class="fa fa-spinner fa-spin"></i>
+              </span>
+          </div>
+      </div>
+      <div class="grid-msg-overlay" ng-hide="healthFactorsLoading || healthFactorsGridOptions.data.length">
+          <div class="msg">
+              <span>No Data</span>
+          </div>
+      </div>
+  </div>
+</div>

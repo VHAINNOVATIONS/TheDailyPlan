@@ -7,6 +7,7 @@ angular.module('tdpApp')
     self.demographics = null;
     self.patients = Patient.getSelectedPatients();
     self.patient = self.patients[0].id;
+    self.templateID = self.patients[0].templateID;
 
     console.log('Patient Plan - patients:',self.patients);
     console.log('Patient Plan - patient:', self.patient);
@@ -54,7 +55,7 @@ angular.module('tdpApp')
 
     self.panels = [];
 
-    Template.findCompleteByID(1)
+    Template.findCompleteByID(self.templateID)
     .then( function(template) {
       self.panels = template;
     })
