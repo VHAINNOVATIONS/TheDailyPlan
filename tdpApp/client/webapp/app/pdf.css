@@ -93,12 +93,12 @@ div.page-count {
 }
 
 .report_logo img {
-	padding: 20px;
+	padding: 10px;
 }
 
 .report_title {
 	width:100%;
-	padding:20px 0;
+	padding:5px 0;
 	border: 2px solid #005DA4;
 	page-break-before: auto;
 }
@@ -124,8 +124,7 @@ div.page-count {
 
 .report_row {
 	float: clear;
-	width:97%;
-	margin:10px 15px 5px 15px;
+	margin:10px 15px 5px 10px;
 }
 
 .report_row p {
@@ -155,7 +154,7 @@ div.page-count {
 
 #report_column500 {
 	padding-top:3px;
-	margin-right:15px;
+	margin-right:10px;
 }
 
 .report_column500 table {

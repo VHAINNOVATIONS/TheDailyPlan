@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tdpApp')
-  .controller('PatientSearchCtrl', function ($compile, $scope, $q, $location, DTOptionsBuilder, DTColumnBuilder, Patient, Location, $filter, Template) {
+  .controller('PatientSearchCtrl', function ($compile, $scope, $q, $location, DTOptionsBuilder, DTColumnBuilder, Patient, Location, Auth, Audit, $filter, Template) {
   	var self = this;
     self.data = [];
     self.items = [];
@@ -74,7 +74,7 @@ angular.module('tdpApp')
 
       }, self.items);
 
-      console.log('items:',self.items);
+      console.log('items:',self.items.length);
       switch(self.items.length) {
         case 0:
           self.displayErr.flag = true;
@@ -83,6 +83,17 @@ angular.module('tdpApp')
         case 1:
           Patient.setSelectedPatients(self.items);
           $location.path('/PatientPlan');
+          var accessInfo = {
+            userId: Auth.getCurrentUser().duz,
+            patientId: self.items[0].id,
+            action: 'view'
+          };
+          Audit.create(accessInfo).then( function(data) {
+            console.log('Access Info:', data);
+          })
+          .catch( function(err) {
+            self.errors.other = err.message;
+          });
           break;
         default:
           self.items = [];

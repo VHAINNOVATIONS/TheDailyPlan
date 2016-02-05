@@ -12,6 +12,7 @@ router.post('/', function(req, res, next) {
   req.session.login({
   	accessCode: req.body.accessCode,
   	verifyCode: req.body.verifyCode,
+    location: req.body.location,
     userKeys: req.body.userKeys
   }, function(err, userData){
 	if (err) {

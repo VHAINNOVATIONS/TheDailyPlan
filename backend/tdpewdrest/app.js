@@ -83,4 +83,14 @@ params.server[config.ewdServerName] = {
 	accessId: config.ewdServerAccessId
 };
 
+if (process.argv.length > 2) {
+    params.restPort = process.argv[2];
+}
+
+if (process.argv.length > 3) {
+    params.server[config.ewdServerName].host = process.argv[3];
+}
+
+console.log(params);
+
 ewdRest.start(params);

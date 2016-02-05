@@ -1,8 +1,8 @@
 module.exports = function(db) {
 
-var templateID = 0;
-//Create Default Template
-db.template.create({
+  var templateID = 0;
+  //Create Default Template
+  db.template.create({
     id: 1,
     template_name: 'Default',
     template_description: 'Default Template',
@@ -10,10 +10,12 @@ db.template.create({
   }).then(function(template) {
     templateID = template.id;
     console.log('templateID:',templateID);
+  }).then(function(template) {
+    console.log('afsin');
   });
 
-// Create Facilities and Facility Messages
- db.facility.create({
+  // Create Facilities and Facility Messages
+  db.facility.create({
     name: 'Select a facility...',
     station: 0,
     visn: 0
@@ -71,7 +73,7 @@ db.template.create({
     }]);
   });
 
-db.facility.create({
+  db.facility.create({
     name: 'Madison',
     station: 607,
     visn: 12
@@ -135,7 +137,7 @@ db.facility.create({
     }]);
   });
 
-db.facility.create({
+  db.facility.create({
     name: 'Central Texas (Waco)',
     station: 674,
     visn: 17

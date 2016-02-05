@@ -1,0 +1,16 @@
+<div class="container report_row">
+  <div class="row" class="report_column500" ng-if="pendingProcedures && pendingProcedures.length && !pendingProceduresError">
+    <div class="col-xs-7 grid_header">Test Name</div>
+    <div class="col-xs-3 grid_header">Start</div>
+    <div class="col-xs-2 grid_header">Status</div>
+    <div class="col-xs-7" ng-repeat-start="pendingProcedures in pendingProcedures">{{pendingProcedures.testName}}</div>
+    <div class="col-xs-3">{{pendingProcedures.start}}</div>
+    <div class="col-xs-2" ng-repeat-end>{{pendingProcedures.status}}</div>
+  </div>
+  <div class="row" class="report_column500" ng-if="pendingProceduresError">
+    <span class="message">Internal error loading active pending procedures.</span>
+  </div>
+  <div class="row" class="report_column500" ng-if="(!pendingProcedures || pendingProcedures.length == 0) && !pendingProceduresError">
+    <span class="message">No active pending procedures found.</span>
+  </div>
+</div>

@@ -175,10 +175,30 @@ var filterChemHemReports = function (report, testNames) {
     return result;
 };
 
+var putInChemHemReportDates = function(report) {
+    report.forEach(function (reportElement) {
+      var timestamp = reportElement.timestamp
+      if (timestamp) {
+        reportElement.timestamp = translator.translateVistADateTime(timestamp);
+      }
+      var specimen = reportElement.specimen;
+      if (specimen) {
+        if (specimen.reportDate) {
+          specimen.reportDate = translator.translateVistADateTime(specimen.reportDate);
+        }
+        if (specimen.collectionDate) {
+          specimen.collectionDate = translator.translateVistADateTime(specimen.collectionDate);
+        }
+      }
+    });
+};
+
 var session = {
     get: function (route, parameters, callback) {
+        var alias = this.location || 'default';
+        var port = this.ports[alias];
         var options = _.assign({
-            uri: this.baseUrl + route
+            uri: this.baseUrl + port + this.serverRoute + route
         }, {
             method: 'GET',
             json: true,
@@ -208,6 +228,7 @@ var session = {
         });
     },
     login: function (userInfo, callback) {
+        this.location = userInfo.location;
         var self = this;
         this.get('/initiate', null, function (err, body) {
             if (err) {
@@ -444,6 +465,7 @@ var session = {
                 callback(err);
             } else {
                 result = filterChemHemReports(result, options.testNames);
+                putInChemHemReportDates(result);
                 callback(null, result);
             }
         });
@@ -499,12 +521,25 @@ var session = {
                 callback(null, result);
             }
         });
+    },
+    getBoilerplates: function(patientId, options, callback) {
+      this.get('/resolveBPs', {
+        patientId: patientId,
+        text: options.text
+      }, function(err, result) {
+        if (err) {
+          return callback(err);
+        }
+        callback(null, result);
+      });
     }
 };
 
 exports.newSession = function (options, callback) {
     var c = Object.create(session);
     c.baseUrl = options.baseUrl;
+    c.ports = options.ports;
+    c.serverRoute = options.serverRoute;
     c.userKeys = options.userKeys;
     callback(null, c);
 };

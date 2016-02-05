@@ -25,11 +25,21 @@ angular.module('tdpApp')
         vista: 'TDPADMIN'
       }];   // TODO read from  db when combobox for facility is functional
 
-      if(form.$valid) {
+      var location;
+      var selectedId = parseInt(self.facilitySelect, 10);
+      if (selectedId !== 1) {
+        self.facilities.forEach(function(facility) {
+          if (facility.id === selectedId) {
+            location = facility.name;
+          }
+        });
+      }
+      if(form.$valid && location) {
         Auth.login({
           verifyCode: self.user.verifyCode,
           accessCode: self.user.accessCode,
-          userKeys: keys
+          userKeys: keys,
+          location: location
         })
         .then( function(data) {
           // Logged in, redirect to home

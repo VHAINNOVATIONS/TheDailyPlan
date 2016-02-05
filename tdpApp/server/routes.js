@@ -26,7 +26,7 @@ module.exports = function(app) {
   app.use('/api/visits', require('./api/visits'));
   app.use('/api/wards', require('./api/wards'));
   app.use('/api/labs', require('./api/labs'));
-
+  app.use('/api/freetextresolve', require('./api/freeTextResolve'));
 
   // TDP DB API Routes
   app.use('/api/template',require('./api/template'));
@@ -37,6 +37,7 @@ module.exports = function(app) {
   app.use('/api/panel_type',require('./api/panel_type'));
   app.use('/api/facility',require('./api/facility'));
   app.use('/api/facility_message',require('./api/facility_message'));
+  app.use('/api/audit',require('./api/audit'));
 
 
   app.use('/auth', require('./auth'));

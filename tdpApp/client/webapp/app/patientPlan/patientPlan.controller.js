@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tdpApp')
-  .controller('PatientPlanCtrl', function ($scope, $resource, Patient, Demographics, Template, Template_Layout, Panel, Panel_Type) {
+  .controller('PatientPlanCtrl', function ($scope, $resource, Patient, Demographics, Template, Template_Layout, Panel, Panel_Type, Auth, Audit) {
   	var self = this;
     self.cdate = new Date();
     self.demographics = null;
@@ -13,6 +13,17 @@ angular.module('tdpApp')
     console.log('Patient Plan - patient:', self.patient);
 
     $scope.printDailyPlan = function() {
+      var accessInfo = {
+        userId: Auth.getCurrentUser().duz,
+        patientId: self.patient,
+        action: 'print'
+      };
+      Audit.create(accessInfo).then( function(data) {
+        console.log('Access Info:', data);
+      })
+      .catch( function(err) {
+        self.errors.other = err.message;
+      });
       window.print();
     };
 
