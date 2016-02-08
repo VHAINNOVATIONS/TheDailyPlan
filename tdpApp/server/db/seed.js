@@ -559,7 +559,7 @@ db.facility.create({
       db.panel_setting.create({
         panel_type_id: pt.id,
         setting_type: 1,
-        setting_name: Tests,
+        setting_name: 'Tests',
         setting_value: 'MAGNESIUM'
       }).then(function(ps) {
         //Then Create the Details
@@ -576,7 +576,7 @@ db.facility.create({
       db.panel_setting.create({
         panel_type_id: pt.id,
         setting_type: 1,
-        setting_name: Tests,
+        setting_name: 'Tests',
         setting_value: 'POTASSIUM'
       }).then(function(ps) {
         //Then Create the Details
@@ -593,7 +593,7 @@ db.facility.create({
       db.panel_setting.create({
         panel_type_id: pt.id,
         setting_type: 1,
-        setting_name: Tests,
+        setting_name: 'Tests',
         setting_value: 'HDL'
       }).then(function(ps) {
         //Then Create the Details
@@ -610,7 +610,7 @@ db.facility.create({
       db.panel_setting.create({
         panel_type_id: pt.id,
         setting_type: 1,
-        setting_name: Tests,
+        setting_name: 'Tests',
         setting_value: 'CHOLESTEROL'
       }).then(function(ps) {
         //Then Create the Details
@@ -627,7 +627,7 @@ db.facility.create({
       db.panel_setting.create({
         panel_type_id: pt.id,
         setting_type: 1,
-        setting_name: Tests,
+        setting_name: 'Tests',
         setting_value: 'TRIGLYCERIDE'
       })
 
