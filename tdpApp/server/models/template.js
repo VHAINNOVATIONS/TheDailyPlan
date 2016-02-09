@@ -16,6 +16,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: true
     },
+    facility_id: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true
+    },
     location_id: {
       type: DataTypes.INTEGER(11),
       allowNull: true
@@ -36,6 +40,10 @@ module.exports = function(sequelize, DataTypes) {
         models.template.hasMany(models.template_layout, {
           foreignKey: 'template_id',
           targetKey: 'template_id'
+        });
+        models.template.belongsTo(models.facility, {
+          foreignKey: 'facility_id',
+          targetKey: 'id'
         });
       }
     }

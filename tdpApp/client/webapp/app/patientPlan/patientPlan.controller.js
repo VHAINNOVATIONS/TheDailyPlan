@@ -6,6 +6,7 @@ angular.module('tdpApp')
     self.cdate = new Date();
     self.demographics = null;
     self.patients = Patient.getSelectedPatients();
+    // Based on constraints, patient array can ony have one element.
     self.patient = self.patients[0].id;
     self.templateID = self.patients[0].templateID;
 
@@ -66,7 +67,9 @@ angular.module('tdpApp')
     Demographics.getByID(self.patient)
     .then( function(data) {
       console.log('Patient Plan - demographics:',data);
+      data.id = self.patient;
       self.demographics = data;
+      Demographics.setDemographics(data);
     })
     .catch( function(err) {
       self.errors.other = err.message;

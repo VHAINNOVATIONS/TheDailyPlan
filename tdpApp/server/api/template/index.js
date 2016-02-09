@@ -14,6 +14,17 @@ router.get('/', function(req, res) {
   });
 });
 
+// get all templates by facility id
+router.get('/facility/:id', function(req, res) {
+  models.template.findAll({
+    where: {
+      facility_id: req.params.id
+    }
+  }).then(function(templates) {
+    res.json(templates);
+  });
+});
+
 // get single template
 router.get('/:id', function(req, res) {
   models.template.find({
@@ -48,9 +59,24 @@ router.get('/complete/:id', function(req, res) {
       panelObj.template = '<div ' + panel.directive + ' patient="ctrl.' + panel.scope_variable +'" panelid="panel.panelid"></div>';
       panelObj.print = '<div ' + panel.directive + '-print' + ' patient="ctrl.' + panel.scope_variable +'"></div>';
       panelObj.mandatory = panel.mandatory;
+      console.log('<<<<< Template api1: ', panelObj);
+
+      models.panel_detail.findAll({
+        attributes: ['panel_setting_id'],
+        where: {
+          panel_id: panel.panel_id
+        }
+      }).then(function(panel_details) {
+        if (panel_details) {
+          console.log('<<<<< Template details: ', panel_details);
+          panelObj.panelDetails = panel_details;
+        }
+      });
+      console.log('<<<<< Template api2: ', panelObj);
+
 
       // TO DO replace with from database
-      if (panel.title === 'Free Text 1') {
+      /*if (panel.title === 'Free Text 1') {
         panelObj.detail = 'Free Text 1'
       }
       if (panel.title === 'Free Text 2') {
@@ -58,7 +84,7 @@ router.get('/complete/:id', function(req, res) {
       }
       if (panel.title === 'Free Text 3') {
         panelObj.detail = 'Name: |PATIENT NAME|\nSex: |PATIENT SEX|'
-      }
+      }*/
 
       panels.push(panelObj);
       callback();
@@ -104,6 +130,14 @@ router.post('/', function(req, res) {
           panel_id: p.id,
           panel_order: i
         }).then(function(tl) {
+          // Create the panel_details
+          for (var i = 0; i < panel.panelDetails.length; i++) {
+            models.panel_detail.create({
+              panel_id: p.id,
+              panel_setting_id: panel.panelDetails[i].panel_setting_id,
+            });
+          }
+          p.panelDetails = panel.panelDetails;
           tl.panel = p;
           layouts.push(tl);
           callback();

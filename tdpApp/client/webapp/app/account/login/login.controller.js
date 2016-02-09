@@ -63,6 +63,8 @@ angular.module('tdpApp')
       console.log('login setFacility',self.facilitySelect);
       // Populate the Message Tabs
       if (self.facilitySelect) {
+        Facility.setCurrentFacility(self.facilitySelect);
+
         Facility_Message.findAllByFacilityID(self.facilitySelect)
         .then( function(data) {
           self.messageTabs = data;

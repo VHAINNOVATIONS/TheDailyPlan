@@ -8,6 +8,10 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true,
       autoIncrement: true
     },
+    facility_id: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true
+    },
     title: {
       type: DataTypes.STRING,
       allowNull: false
@@ -34,6 +38,14 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     tableName: 'panel_type',
-    freezeTableName: true
+    freezeTableName: true,
+    classMethods: {
+      associate: function(models) {
+        models.panel_type.belongsTo(models.facility, {
+          foreignKey: 'facility_id',
+          targetKey: 'id'
+        });
+      }
+    }
   });
 };

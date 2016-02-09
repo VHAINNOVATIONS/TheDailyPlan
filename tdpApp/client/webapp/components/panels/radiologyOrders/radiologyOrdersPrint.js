@@ -9,15 +9,14 @@ angular.module('tdpApp')
       scope: {
         patient: '=',
       },
-      controller: function ($scope, radiologyOrders) {
+      controller: function ($scope, OrdersAsClassified) {
         console.log('Patient Plan - radiologyOrders patient:', $scope.patient);
-        RadiologyOrders.getByID($scope.patient).then(function(radiologyOrders) {
-           OrdersAsClassified.getByID($scope.patient).then(function(orders) {
-		   console.log('Patient Plan - radiologyOrders:', orders.radiologyOrders);
-		   $scope.radiologyOrders = orders.radiologyOrders;
-          $scope.radiologyOrders = null;
+        OrdersAsClassified.getByID($scope.patient).then(function(orders) {
+          console.log('Patient Plan - radiologyOrders:', orders.radiologyOrders);
+          $scope.radiologyOrders = orders.radiologyOrders;
+          $scope.radiologyOrdersError = null;
         }).catch( function() {
-          $scope.radiologyOrdersError = 'Internal error loading radiology orders.';
+          $scope.radiologyOrdersError = 'Internal error loading nursing orders.';
         });
       }
     };

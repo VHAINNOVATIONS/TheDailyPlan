@@ -1,0 +1,12 @@
+<div class="container report_row">
+  <div class="row" class="report_column500" ng-if="clinicalWarnings && clinicalWarnings.length && !clinicalWarningsError">
+    <div class="col-xs-12 grid_header">Name</div>
+    <div class="col-xs-8" ng-repeat="clinicalWarning in clinicalWarnings">{{clinicalWarning.detail}}</div>
+  </div>
+  <div class="row" class="report_column500" ng-if="clinicalWarningsError">
+    <span class="message">Internal error loading clinicalWarnings.</span>
+  </div>
+  <div class="row" class="report_column500" ng-if="clinicalWarnings.length == 0 && !clinicalWarningsError">
+    <span class="message">No clinicalWarnings found.</span>
+  </div>
+</div>

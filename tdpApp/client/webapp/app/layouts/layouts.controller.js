@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('tdpApp')
-  //.controller('LayoutsCtrl', function ($scope, User, Auth) {
-  .controller('LayoutsCtrl', ['$scope', '$location', 'Template', 'Panel_Type', 'Location', '$modal',
-    function($scope, $location, Template, Panel_Type, Location, $modal){
+  .controller('LayoutsCtrl', ['$scope', '$location', 'Template', 'Panel_Type', 'Location', '$modal', 'Facility',
+    function($scope, $location, Template, Panel_Type, Location, $modal, Facility) {
     var self = this;
     self.errors = {};
+    self.currentFacility = Facility.getCurrentFacility();
     self.facilities = [];
     self.selectedA = [];
     self.selectedS = [];
@@ -23,7 +23,7 @@ angular.module('tdpApp')
     //self.checkedA = true;
     //self.checkedS = true;
 
-    Panel_Type.findAll()
+    Panel_Type.findAllByFacilityID(self.currentFacility)
     .then( function(panel_types) {
       // Initialize Available Panels and Keep a Master List
       reset();
@@ -74,6 +74,7 @@ angular.module('tdpApp')
           // Returns a Completed Template
           console.log('Record Created:',data);
           $location.path('/templateSearch');
+          return;
         })
         .catch( function(err) {
           self.errors.other = err.message;
@@ -201,27 +202,19 @@ angular.module('tdpApp')
     $scope.selectedOption = [];
     $scope.checkedOption = false;
 
-
     Panel_Setting.findByPanelTypeID(panel.id)
     .then( function(panel_settings) {
-      $scope.options = panel_settings;
+      $scope.settings = panel_settings;
+      if (panel.panelDetails) {
+        for (var i = 0; i < panel.panelDetails.length; i++) {
+          $scope.selectedOption.push(panel.panelDetails[i].panel_setting_id);
+        };
+      }
+
     })
     .catch( function(err) {
       $scope.errors = err.message;
     });
-
-    $scope.toggleOption = function() {
-      if (!$scope.checkedOption) {
-        $scope.selectedOption=[];
-      }
-      else {
-        for (var i in $scope.options) {
-          if ($scope.selectedOption.indexOf($scope.options[i].id) === -1) {
-            $scope.selectedOption.push($scope.options[i].id);
-          }
-        }
-      }
-    };
 
     $scope.selectOption = function(i) {
       if ($scope.selectedOption.indexOf(i) === -1) {
@@ -238,7 +231,17 @@ angular.module('tdpApp')
 
     $scope.submit = function() {
       console.log('CustomizerCtrl - panelSave:',panel);
-      //angular.extend(panel, $scope.form);
+      var panelDetails = [];
+      if ($scope.selectedOption.length > 0) {
+        for (var i = 0; i < $scope.selectedOption.length; i++) {
+          var detail = {};
+          detail.panel_setting_id = $scope.selectedOption[i];
+          panelDetails.push(detail);
+        };
+        $scope.panel.panelDetails = panelDetails;
+      }
+
+      angular.extend(panel, $scope.panel);
 
       $uibModalInstance.close(panel);
     };
