@@ -1,9 +1,10 @@
 'use strict';
 
 angular.module('tdpApp')
-  .controller('PatientSearchCtrl', function ($compile, $scope, $q, $location, DTOptionsBuilder, DTColumnBuilder, Patient, Location, Auth, Audit, $filter, Template) {
+  .controller('PatientSearchCtrl', function ($compile, $scope, $q, $location, DTOptionsBuilder, DTColumnBuilder, Patient, Location, Auth, Audit, $filter, Template, Facility) {
   	var self = this;
     self.data = [];
+    self.currentFacility = Facility.getCurrentFacility();
     self.items = [];
     self.templates = [];
     self.selectedTemplate = {};
@@ -32,7 +33,7 @@ angular.module('tdpApp')
     self.display = display;
 
     // Populate the Templates
-    Template.findAll()
+    Template.findAllByFacilityID(self.currentFacility)
     .then( function(data) {
       self.templates = data;
     })

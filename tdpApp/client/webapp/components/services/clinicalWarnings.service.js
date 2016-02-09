@@ -1,15 +1,13 @@
 'use strict';
 
 angular.module('tdpApp')
-  .factory('Demographics', function Demographics($location, $rootScope, $http, $q) {
-    var self = this;
+  .factory('ClinicalWarnings', function ClinicalWarnings($location, $rootScope, $http, $q) {
     var results = {};
-    var demographics = {};
 
     return {
 
       /**
-       * Get Demographics
+       * Get ClinicalWarnings
        *
        * @param  {String}   value    - query value
        * @param  {Function} callback - optional
@@ -19,9 +17,8 @@ angular.module('tdpApp')
         var cb = callback || angular.noop;
         var deferred = $q.defer();
 
-        $http.get('/api/demographics/' + value).
+        $http({url: '/api/clinicalWarnings', method: 'GET', params: {value: value}}).
         success(function(data) {
-          data.id = value;
           results = data;
           deferred.resolve(data);
           return cb();
@@ -30,21 +27,9 @@ angular.module('tdpApp')
 
           deferred.reject(err);
           return cb(err);
-        }.bind(self));
+        }.bind(this));
 
         return deferred.promise;
-      },
-
-      getDemographics: function(id) {
-        if (demographics.id !== id) {
-          demographics = {};
-        }
-        return demographics;
-
-      },
-
-      setDemographics: function(demographicsObject) {
-        demographics = demographicsObject;
-      },
+      }
     };
   });

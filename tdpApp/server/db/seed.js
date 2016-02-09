@@ -1,18 +1,6 @@
 module.exports = function(db) {
 
-  var templateID = 0;
-  //Create Default Template
-  db.template.create({
-    id: 1,
-    template_name: 'Default',
-    template_description: 'Default Template',
-    active: true
-  }).then(function(template) {
-    templateID = template.id;
-    console.log('templateID:',templateID);
-  }).then(function(template) {
-    console.log('afsin');
-  });
+  var facilities = [];
 
   // Create Facilities and Facility Messages
   db.facility.create({
@@ -46,6 +34,7 @@ module.exports = function(db) {
     station: 520,
     visn: 16
   }).then(function(facility) {
+    createTemplate(facility.id);
     db.facility_message.bulkCreate([{
       facility_id: facility.id,
       active: true,
@@ -78,6 +67,7 @@ module.exports = function(db) {
     station: 607,
     visn: 12
   }).then(function(facility) {
+    createTemplate(facility.id);
     db.facility_message.bulkCreate([{
       facility_id: facility.id,
       active: true,
@@ -110,6 +100,7 @@ db.facility.create({
     station: 618,
     visn: 23
   }).then(function(facility) {
+    createTemplate(facility.id);
     db.facility_message.bulkCreate([{
       facility_id: facility.id,
       active: true,
@@ -142,6 +133,7 @@ db.facility.create({
     station: 674,
     visn: 17
   }).then(function(facility) {
+    createTemplate(facility.id);
     db.facility_message.bulkCreate([{
       facility_id: facility.id,
       active: true,
@@ -169,530 +161,628 @@ db.facility.create({
     }]);
   });
 
-  // Create the Panel_Type First
-  db.panel_type.create({
-    title: 'Allergies',
-    directive: 'dt-allergies',
-    scope_variable: 'patient',
-    minSizeX: 2,
-    minSizeY: 1,
-    mandatory: true
-  }).then(function(pt) {
-    // Then Create the Panel Second
-    db.panel.create({
-      name: 'Allergies Default',
-      panel_type_id: pt.id,
-      sizeX: 2,
-      sizeY: 1
-    }).then(function(p) {
-      // Then Create the Template_Layout Second
+  function createTemplate(id) {
+    var facilityID = id;
+    var templateID = 0;
+
+//Create Default Template
+    db.template.create({
+      facility_id: facilityID,
+      template_name: 'Default',
+      template_description: 'Default Template',
+      active: true
+    }).then(function(template) {
+      templateID = template.id;
       console.log('templateID:',templateID);
-      db.template_layout.create({
-        template_id: templateID,
-        panel_id: p.id,
-        panel_order: p.id
-      }).then(function(tl) {
-        console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
-      });
 
-    });
 
-  });
+      // Create the Panel_Type First
+      db.panel_type.create({
+        facility_id: facilityID,
+        title: 'Allergies',
+        directive: 'dt-allergies',
+        scope_variable: 'patient',
+        minSizeX: 2,
+        minSizeY: 1,
+        mandatory: true
+      }).then(function(pt) {
+        // Then Create the Panel Second
+        db.panel.create({
+          name: 'Allergies Default',
+          panel_type_id: pt.id,
+          sizeX: 2,
+          sizeY: 1
+        }).then(function(p) {
+          // Then Create the Template_Layout Second
+          console.log('templateID:',templateID);
+          db.template_layout.create({
+            template_id: templateID,
+            panel_id: p.id,
+            panel_order: p.id
+          }).then(function(tl) {
+            console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
+          });
 
-  // Create the Panel_Type First
-  db.panel_type.create({
-    title: 'Immunizations',
-    directive: 'dt-immunizations',
-    scope_variable: 'patient',
-    minSizeX: 2,
-    minSizeY: 1,
-    mandatory: false
-  }).then(function(pt) {
-    // Then Create the Panel Second
-    db.panel.create({
-      name: 'Immunizations Default',
-      panel_type_id: pt.id,
-      sizeX: 2,
-      sizeY: 1
-    }).then(function(p) {
-      // Then Create the Template_Layout Second
-      console.log('templateID:',templateID);
-      db.template_layout.create({
-        template_id: templateID,
-        panel_id: p.id,
-        panel_order: p.id
-      }).then(function(tl) {
-        console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
-      });
-
-    });
-
-  });
-
-  // Create the Panel_Type First
-  db.panel_type.create({
-    title: 'Problems',
-    directive: 'dt-problems',
-    scope_variable: 'patient',
-    minSizeX: 2,
-    minSizeY: 2,
-    mandatory: false
-  }).then(function(pt) {
-    // Then Create the Panel Second
-    db.panel.create({
-      name: 'Problems Default',
-      panel_type_id: pt.id,
-      sizeX: 3,
-      sizeY: 2
-    }).then(function(p) {
-      // Then Create the Template_Layout Second
-      console.log('templateID:',templateID);
-      db.template_layout.create({
-        template_id: templateID,
-        panel_id: p.id,
-        panel_order: p.id
-      }).then(function(tl) {
-        console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
-      });
-
-    });
-
-  });
-
-  // Create the Panel_Type First
-  db.panel_type.create({
-    title: 'Vitals',
-    directive: 'dt-vitals',
-    scope_variable: 'patient',
-    minSizeX: 2,
-    minSizeY: 2,
-    mandatory: false
-  }).then(function(pt) {
-    // Then Create the Panel Second
-    db.panel.create({
-      name: 'Vitals Default',
-      panel_type_id: pt.id,
-      sizeX: 3,
-      sizeY: 2
-    }).then(function(p) {
-      // Then Create the Template_Layout Second
-      console.log('templateID:',templateID);
-      db.template_layout.create({
-        template_id: templateID,
-        panel_id: p.id,
-        panel_order: p.id
-      }).then(function(tl) {
-        console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
-      });
-
-    });
-
-  });
-
-  // Create the Panel_Type First
-  db.panel_type.create({
-    title: 'Diet Orders',
-    directive: 'dt-diet-orders',
-    scope_variable: 'patient',
-    minSizeX: 2,
-    minSizeY: 2,
-    mandatory: false
-  }).then(function(pt) {
-    // Then Create the Panel Second
-    db.panel.create({
-      name: 'Diet Orders Default',
-      panel_type_id: pt.id,
-      sizeX: 3,
-      sizeY: 2
-    }).then(function(p) {
-      // Then Create the Template_Layout Second
-      console.log('templateID:',templateID);
-      db.template_layout.create({
-        template_id: templateID,
-        panel_id: p.id,
-        panel_order: p.id
-      }).then(function(tl) {
-        console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
-      });
-
-    });
-
-  });
-
-  // Create the Panel_Type First
-  db.panel_type.create({
-    title: 'Lab Orders',
-    directive: 'dt-lab-orders',
-    scope_variable: 'patient',
-    minSizeX: 2,
-    minSizeY: 2,
-    mandatory: true
-  }).then(function(pt) {
-    // Then Create the Panel Second
-    db.panel.create({
-      name: 'Lab Orders Default',
-      panel_type_id: pt.id,
-      sizeX: 3,
-      sizeY: 2
-    }).then(function(p) {
-      // Then Create the Template_Layout Second
-      console.log('templateID:',templateID);
-      db.template_layout.create({
-        template_id: templateID,
-        panel_id: p.id,
-        panel_order: p.id
-      }).then(function(tl) {
-        console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
-      });
-
-    });
-
-  });
-
-  // Create the Panel_Type First
-  db.panel_type.create({
-    title: 'Radiology Reports',
-    directive: 'dt-radiology-reports',
-    scope_variable: 'patient',
-    minSizeX: 2,
-    minSizeY: 2,
-    mandatory: false
-  }).then(function(pt) {
-    // Then Create the Panel Second
-    db.panel.create({
-      name: 'Radiology Reports Default',
-      panel_type_id: pt.id,
-      sizeX: 3,
-      sizeY: 2
-    }).then(function(p) {
-      // Then Create the Template_Layout Second
-      console.log('templateID:',templateID);
-      db.template_layout.create({
-        template_id: templateID,
-        panel_id: p.id,
-        panel_order: p.id
-      }).then(function(tl) {
-        console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
-      });
-
-    });
-
-  });
-
-  // Create the Panel_Type First
-  db.panel_type.create({
-    title: 'Visits',
-    directive: 'dt-visits',
-    scope_variable: 'patient',
-    minSizeX: 2,
-    minSizeY: 2,
-    mandatory: true
-  }).then(function(pt) {
-    // Then Create the Panel Second
-    db.panel.create({
-      name: 'Visits Default',
-      panel_type_id: pt.id,
-      sizeX: 3,
-      sizeY: 2
-    }).then(function(p) {
-      // Then Create the Template_Layout Second
-      console.log('templateID:',templateID);
-      db.template_layout.create({
-        template_id: templateID,
-        panel_id: p.id,
-        panel_order: p.id
-      }).then(function(tl) {
-        console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
-      });
-
-    });
-
-  });
-
-  // Create the Panel_Type First
-  db.panel_type.create({
-    title: 'IV Medications',
-    directive: 'dt-iv-meds',
-    scope_variable: 'patient',
-    minSizeX: 2,
-    minSizeY: 2,
-    mandatory: false
-  }).then(function(pt) {
-    // Then Create the Panel Second
-    db.panel.create({
-      name: 'IV Medications Default',
-      panel_type_id: pt.id,
-      sizeX: 3,
-      sizeY: 2
-    }).then(function(p) {
-      // Then Create the Template_Layout Second
-      console.log('templateID:',templateID);
-      db.template_layout.create({
-        template_id: templateID,
-        panel_id: p.id,
-        panel_order: p.id
-      }).then(function(tl) {
-        console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
-      });
-
-    });
-
-  });
-
-  // Create the Panel_Type First
-  db.panel_type.create({
-    title: 'Active Medications',
-    directive: 'dt-active-meds',
-    scope_variable: 'patient',
-    minSizeX: 2,
-    minSizeY: 2,
-    mandatory: true
-  }).then(function(pt) {
-    // Then Create the Panel Second
-    db.panel.create({
-      name: 'Active Medications Default',
-      panel_type_id: pt.id,
-      sizeX: 3,
-      sizeY: 2
-    }).then(function(p) {
-      // Then Create the Template_Layout Second
-      console.log('templateID:',templateID);
-      db.template_layout.create({
-        template_id: templateID,
-        panel_id: p.id,
-        panel_order: p.id
-      }).then(function(tl) {
-        console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
-      });
-
-    });
-
-  });
-
-  // Create the Panel_Type First
-  db.panel_type.create({
-    title: 'Radiology Orders',
-    directive: 'dt-radiology-orders',
-    scope_variable: 'patient',
-    minSizeX: 2,
-    minSizeY: 2,
-    mandatory: false
-  }).then(function(pt) {
-    // Then Create the Panel Second
-    db.panel.create({
-      name: 'Radiology Orders Default',
-      panel_type_id: pt.id,
-      sizeX: 3,
-      sizeY: 2
-    }).then(function(p) {
-      // Then Create the Template_Layout Second
-      console.log('templateID:',templateID);
-      db.template_layout.create({
-        template_id: templateID,
-        panel_id: p.id,
-        panel_order: p.id
-      }).then(function(tl) {
-        console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
-      });
-
-    });
-
-  });
-
-  // Create the Panel_Type First
-  db.panel_type.create({
-    title: 'Nursing Orders',
-    directive: 'dt-nursing-orders',
-    scope_variable: 'patient',
-    minSizeX: 2,
-    minSizeY: 2,
-    mandatory: false
-  }).then(function(pt) {
-    // Then Create the Panel Second
-    db.panel.create({
-      name: 'Nursing Orders Default',
-      panel_type_id: pt.id,
-      sizeX: 3,
-      sizeY: 2
-    }).then(function(p) {
-      // Then Create the Template_Layout Second
-      console.log('templateID:',templateID);
-      db.template_layout.create({
-        template_id: templateID,
-        panel_id: p.id,
-        panel_order: p.id
-      }).then(function(tl) {
-        console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
-      });
-
-    });
-
-  });
-
-  // Create the Panel_Type First
-  db.panel_type.create({
-    title: 'Labs',
-    directive: 'dt-labs',
-    scope_variable: 'patient',
-    minSizeX: 2,
-    minSizeY: 2,
-    mandatory: false
-  }).then(function(pt) {
-    // Then Create the Panel Second
-    db.panel.create({
-      name: 'Labs Default',
-      panel_type_id: pt.id,
-      sizeX: 3,
-      sizeY: 2
-    }).then(function(p) {
-      // Then Create the Template_Layout Second
-      console.log('templateID:',templateID);
-      db.template_layout.create({
-        template_id: templateID,
-        panel_id: p.id,
-        panel_order: p.id
-      }).then(function(tl) {
-        console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
-      });
-
-      // Now Create the Settings and Details
-      db.panel_setting.create({
-        panel_type_id: pt.id,
-        setting_type: 1,
-        setting_name: Tests,
-        setting_value: 'MAGNESIUM'
-      }).then(function(ps) {
-        //Then Create the Details
-        db.panel_detail.create({
-          panel_id: p.id,
-          panel_setting_id: ps.id
-        }).then(function(tl) {
-          console.log('<<<<<<<Panel Setting & Detail Record Created.>>>>>>>')
         });
 
       });
 
-      // Now Create the Settings and Details
-      db.panel_setting.create({
-        panel_type_id: pt.id,
-        setting_type: 1,
-        setting_name: Tests,
-        setting_value: 'POTASSIUM'
-      }).then(function(ps) {
-        //Then Create the Details
-        db.panel_detail.create({
-          panel_id: p.id,
-          panel_setting_id: ps.id
-        }).then(function(tl) {
-          console.log('<<<<<<<Panel Setting & Detail Record Created.>>>>>>>')
+      // Create the Panel_Type First
+      db.panel_type.create({
+        facility_id: facilityID,
+        title: 'Immunizations',
+        directive: 'dt-immunizations',
+        scope_variable: 'patient',
+        minSizeX: 2,
+        minSizeY: 1,
+        mandatory: false
+      }).then(function(pt) {
+        // Then Create the Panel Second
+        db.panel.create({
+          name: 'Immunizations Default',
+          panel_type_id: pt.id,
+          sizeX: 2,
+          sizeY: 1
+        }).then(function(p) {
+          // Then Create the Template_Layout Second
+          console.log('templateID:',templateID);
+          db.template_layout.create({
+            template_id: templateID,
+            panel_id: p.id,
+            panel_order: p.id
+          }).then(function(tl) {
+            console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
+          });
+
         });
 
       });
 
-      // Now Create the Settings and Details
-      db.panel_setting.create({
-        panel_type_id: pt.id,
-        setting_type: 1,
-        setting_name: Tests,
-        setting_value: 'HDL'
-      }).then(function(ps) {
-        //Then Create the Details
-        db.panel_detail.create({
-          panel_id: p.id,
-          panel_setting_id: ps.id
-        }).then(function(tl) {
-          console.log('<<<<<<<Panel Setting & Detail Record Created.>>>>>>>')
+      // Create the Panel_Type First
+      db.panel_type.create({
+        facility_id: facilityID,
+        title: 'Problems',
+        directive: 'dt-problems',
+        scope_variable: 'patient',
+        minSizeX: 2,
+        minSizeY: 2,
+        mandatory: false
+      }).then(function(pt) {
+        // Then Create the Panel Second
+        db.panel.create({
+          name: 'Problems Default',
+          panel_type_id: pt.id,
+          sizeX: 3,
+          sizeY: 2
+        }).then(function(p) {
+          // Then Create the Template_Layout Second
+          console.log('templateID:',templateID);
+          db.template_layout.create({
+            template_id: templateID,
+            panel_id: p.id,
+            panel_order: p.id
+          }).then(function(tl) {
+            console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
+          });
+
         });
 
       });
 
-      // Now Create the Settings and Details
-      db.panel_setting.create({
-        panel_type_id: pt.id,
-        setting_type: 1,
-        setting_name: Tests,
-        setting_value: 'CHOLESTEROL'
-      }).then(function(ps) {
-        //Then Create the Details
-        db.panel_detail.create({
-          panel_id: p.id,
-          panel_setting_id: ps.id
-        }).then(function(tl) {
-          console.log('<<<<<<<Panel Setting & Detail Record Created.>>>>>>>')
+      // Create the Panel_Type First
+      db.panel_type.create({
+        facility_id: facilityID,
+        title: 'Vitals',
+        directive: 'dt-vitals',
+        scope_variable: 'patient',
+        minSizeX: 2,
+        minSizeY: 2,
+        mandatory: false
+      }).then(function(pt) {
+        // Then Create the Panel Second
+        db.panel.create({
+          name: 'Vitals Default',
+          panel_type_id: pt.id,
+          sizeX: 3,
+          sizeY: 2
+        }).then(function(p) {
+          // Then Create the Template_Layout Second
+          console.log('templateID:',templateID);
+          db.template_layout.create({
+            template_id: templateID,
+            panel_id: p.id,
+            panel_order: p.id
+          }).then(function(tl) {
+            console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
+          });
+
         });
 
       });
 
-      // Now Create just a Settings
-      db.panel_setting.create({
-        panel_type_id: pt.id,
-        setting_type: 1,
-        setting_name: Tests,
-        setting_value: 'TRIGLYCERIDE'
-      })
+      // Create the Panel_Type First
+      db.panel_type.create({
+        facility_id: facilityID,
+        title: 'Diet Orders',
+        directive: 'dt-diet-orders',
+        scope_variable: 'patient',
+        minSizeX: 2,
+        minSizeY: 2,
+        mandatory: false
+      }).then(function(pt) {
+        // Then Create the Panel Second
+        db.panel.create({
+          name: 'Diet Orders Default',
+          panel_type_id: pt.id,
+          sizeX: 3,
+          sizeY: 2
+        }).then(function(p) {
+          // Then Create the Template_Layout Second
+          console.log('templateID:',templateID);
+          db.template_layout.create({
+            template_id: templateID,
+            panel_id: p.id,
+            panel_order: p.id
+          }).then(function(tl) {
+            console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
+          });
 
-    });
+        });
 
-  });
-
-  // Create the Panel_Type First
-  db.panel_type.create({
-    title: 'Contacts',
-    directive: 'dt-contacts',
-    scope_variable: 'demographics',
-    minSizeX: 2,
-    minSizeY: 2,
-    mandatory: false
-  }).then(function(pt) {
-    // Then Create the Panel Second
-    db.panel.create({
-      name: 'Contacts Default',
-      panel_type_id: pt.id,
-      sizeX: 2,
-      sizeY: 2
-    }).then(function(p) {
-      // Then Create the Template_Layout Second
-      console.log('templateID:',templateID);
-      db.template_layout.create({
-        template_id: templateID,
-        panel_id: p.id,
-        panel_order: p.id
-      }).then(function(tl) {
-        console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
       });
 
-    });
+      // Create the Panel_Type First
+      db.panel_type.create({
+        facility_id: facilityID,
+        title: 'Lab Orders',
+        directive: 'dt-lab-orders',
+        scope_variable: 'patient',
+        minSizeX: 2,
+        minSizeY: 2,
+        mandatory: true
+      }).then(function(pt) {
+        // Then Create the Panel Second
+        db.panel.create({
+          name: 'Lab Orders Default',
+          panel_type_id: pt.id,
+          sizeX: 3,
+          sizeY: 2
+        }).then(function(p) {
+          // Then Create the Template_Layout Second
+          console.log('templateID:',templateID);
+          db.template_layout.create({
+            template_id: templateID,
+            panel_id: p.id,
+            panel_order: p.id
+          }).then(function(tl) {
+            console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
+          });
 
-  });
+        });
 
-  // Create the Panel_Type First
-  db.panel_type.create({
-    title: 'Health Factors',
-    directive: 'dt-health-factors',
-    scope_variable: 'patient',
-    minSizeX: 2,
-    minSizeY: 2,
-    mandatory: false
-  }).then(function(pt) {
-    // Then Create the Panel Second
-    db.panel.create({
-      name: 'Health Factors Default',
-      panel_type_id: pt.id,
-      sizeX: 3,
-      sizeY: 2
-    }).then(function(p) {
-      // Then Create the Template_Layout Second
-      console.log('templateID:',templateID);
-      db.template_layout.create({
-        template_id: templateID,
-        panel_id: p.id,
-        panel_order: p.id
-      }).then(function(tl) {
-        console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
       });
 
-    });
+      // Create the Panel_Type First
+      db.panel_type.create({
+        facility_id: facilityID,
+        title: 'Radiology Reports',
+        directive: 'dt-radiology-reports',
+        scope_variable: 'patient',
+        minSizeX: 2,
+        minSizeY: 2,
+        mandatory: false
+      }).then(function(pt) {
+        // Then Create the Panel Second
+        db.panel.create({
+          name: 'Radiology Reports Default',
+          panel_type_id: pt.id,
+          sizeX: 3,
+          sizeY: 2
+        }).then(function(p) {
+          // Then Create the Template_Layout Second
+          console.log('templateID:',templateID);
+          db.template_layout.create({
+            template_id: templateID,
+            panel_id: p.id,
+            panel_order: p.id
+          }).then(function(tl) {
+            console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
+          });
 
-  });
+        });
+
+      });
+
+      // Create the Panel_Type First
+      db.panel_type.create({
+        facility_id: facilityID,
+        title: 'Visits',
+        directive: 'dt-visits',
+        scope_variable: 'patient',
+        minSizeX: 2,
+        minSizeY: 2,
+        mandatory: true
+      }).then(function(pt) {
+        // Then Create the Panel Second
+        db.panel.create({
+          name: 'Visits Default',
+          panel_type_id: pt.id,
+          sizeX: 3,
+          sizeY: 2
+        }).then(function(p) {
+          // Then Create the Template_Layout Second
+          console.log('templateID:',templateID);
+          db.template_layout.create({
+            template_id: templateID,
+            panel_id: p.id,
+            panel_order: p.id
+          }).then(function(tl) {
+            console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
+          });
+
+        });
+
+      });
+
+      // Create the Panel_Type First
+      db.panel_type.create({
+        facility_id: facilityID,
+        title: 'IV Medications',
+        directive: 'dt-iv-meds',
+        scope_variable: 'patient',
+        minSizeX: 2,
+        minSizeY: 2,
+        mandatory: false
+      }).then(function(pt) {
+        // Then Create the Panel Second
+        db.panel.create({
+          name: 'IV Medications Default',
+          panel_type_id: pt.id,
+          sizeX: 3,
+          sizeY: 2
+        }).then(function(p) {
+          // Then Create the Template_Layout Second
+          console.log('templateID:',templateID);
+          db.template_layout.create({
+            template_id: templateID,
+            panel_id: p.id,
+            panel_order: p.id
+          }).then(function(tl) {
+            console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
+          });
+
+        });
+
+      });
+
+      // Create the Panel_Type First
+      db.panel_type.create({
+        facility_id: facilityID,
+        title: 'Active Medications',
+        directive: 'dt-active-meds',
+        scope_variable: 'patient',
+        minSizeX: 2,
+        minSizeY: 2,
+        mandatory: true
+      }).then(function(pt) {
+        // Then Create the Panel Second
+        db.panel.create({
+          name: 'Active Medications Default',
+          panel_type_id: pt.id,
+          sizeX: 3,
+          sizeY: 2
+        }).then(function(p) {
+          // Then Create the Template_Layout Second
+          console.log('templateID:',templateID);
+          db.template_layout.create({
+            template_id: templateID,
+            panel_id: p.id,
+            panel_order: p.id
+          }).then(function(tl) {
+            console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
+          });
+
+        });
+
+      });
+
+      // Create the Panel_Type First
+      db.panel_type.create({
+        facility_id: facilityID,
+        title: 'Radiology Orders',
+        directive: 'dt-radiology-orders',
+        scope_variable: 'patient',
+        minSizeX: 2,
+        minSizeY: 2,
+        mandatory: false
+      }).then(function(pt) {
+        // Then Create the Panel Second
+        db.panel.create({
+          name: 'Radiology Orders Default',
+          panel_type_id: pt.id,
+          sizeX: 3,
+          sizeY: 2
+        }).then(function(p) {
+          // Then Create the Template_Layout Second
+          console.log('templateID:',templateID);
+          db.template_layout.create({
+            template_id: templateID,
+            panel_id: p.id,
+            panel_order: p.id
+          }).then(function(tl) {
+            console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
+          });
+
+        });
+
+      });
+
+      // Create the Panel_Type First
+      db.panel_type.create({
+        facility_id: facilityID,
+        title: 'Nursing Orders',
+        directive: 'dt-nursing-orders',
+        scope_variable: 'patient',
+        minSizeX: 2,
+        minSizeY: 2,
+        mandatory: false
+      }).then(function(pt) {
+        // Then Create the Panel Second
+        db.panel.create({
+          name: 'Nursing Orders Default',
+          panel_type_id: pt.id,
+          sizeX: 3,
+          sizeY: 2
+        }).then(function(p) {
+          // Then Create the Template_Layout Second
+          console.log('templateID:',templateID);
+          db.template_layout.create({
+            template_id: templateID,
+            panel_id: p.id,
+            panel_order: p.id
+          }).then(function(tl) {
+            console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
+          });
+
+        });
+
+      });
+
+      // Create the Panel_Type First
+      db.panel_type.create({
+        facility_id: facilityID,
+        title: 'Labs',
+        directive: 'dt-labs',
+        scope_variable: 'patient',
+        minSizeX: 2,
+        minSizeY: 2,
+        mandatory: false
+      }).then(function(pt) {
+        // Then Create the Panel Second
+        db.panel.create({
+          name: 'Labs Default',
+          panel_type_id: pt.id,
+          sizeX: 3,
+          sizeY: 2
+        }).then(function(p) {
+          // Then Create the Template_Layout Second
+          console.log('templateID:',templateID);
+          db.template_layout.create({
+            template_id: templateID,
+            panel_id: p.id,
+            panel_order: p.id
+          }).then(function(tl) {
+            console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
+          });
+
+          // Now Create the Settings and Details
+          db.panel_setting.create({
+            panel_type_id: pt.id,
+            setting_type: 1,
+            setting_name: 'Tests',
+            setting_value: 'MAGNESIUM'
+          }).then(function(ps) {
+            //Then Create the Details
+            db.panel_detail.create({
+              panel_id: p.id,
+              panel_setting_id: ps.id
+            }).then(function(tl) {
+              console.log('<<<<<<<Panel Setting & Detail Record Created.>>>>>>>')
+            });
+
+          });
+
+          // Now Create the Settings and Details
+          db.panel_setting.create({
+            panel_type_id: pt.id,
+            setting_type: 1,
+            setting_name: 'Tests',
+            setting_value: 'POTASSIUM'
+          }).then(function(ps) {
+            //Then Create the Details
+            db.panel_detail.create({
+              panel_id: p.id,
+              panel_setting_id: ps.id
+            }).then(function(tl) {
+              console.log('<<<<<<<Panel Setting & Detail Record Created.>>>>>>>')
+            });
+
+          });
+
+          // Now Create the Settings and Details
+          db.panel_setting.create({
+            panel_type_id: pt.id,
+            setting_type: 1,
+            setting_name: 'Tests',
+            setting_value: 'HDL'
+          }).then(function(ps) {
+            //Then Create the Details
+            db.panel_detail.create({
+              panel_id: p.id,
+              panel_setting_id: ps.id
+            }).then(function(tl) {
+              console.log('<<<<<<<Panel Setting & Detail Record Created.>>>>>>>')
+            });
+
+          });
+
+          // Now Create the Settings and Details
+          db.panel_setting.create({
+            panel_type_id: pt.id,
+            setting_type: 1,
+            setting_name: 'Tests',
+            setting_value: 'CHOLESTEROL'
+          }).then(function(ps) {
+            //Then Create the Details
+            db.panel_detail.create({
+              panel_id: p.id,
+              panel_setting_id: ps.id
+            }).then(function(tl) {
+              console.log('<<<<<<<Panel Setting & Detail Record Created.>>>>>>>')
+            });
+
+          });
+
+          // Now Create just a Settings
+          db.panel_setting.create({
+            panel_type_id: pt.id,
+            setting_type: 1,
+            setting_name: 'Tests',
+            setting_value: 'TRIGLYCERIDE'
+          })
+
+        });
+
+      });
+
+      // Create the Panel_Type First
+      db.panel_type.create({
+        facility_id: facilityID,
+        title: 'Contacts',
+        directive: 'dt-contacts',
+        scope_variable: 'demographics',
+        minSizeX: 2,
+        minSizeY: 2,
+        mandatory: false
+      }).then(function(pt) {
+        // Then Create the Panel Second
+        db.panel.create({
+          name: 'Contacts Default',
+          panel_type_id: pt.id,
+          sizeX: 2,
+          sizeY: 2
+        }).then(function(p) {
+          // Then Create the Template_Layout Second
+          console.log('templateID:',templateID);
+          db.template_layout.create({
+            template_id: templateID,
+            panel_id: p.id,
+            panel_order: p.id
+          }).then(function(tl) {
+            console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
+          });
+
+        });
+
+      });
+
+      // Create the Panel_Type First
+      db.panel_type.create({
+        facility_id: facilityID,
+        title: 'Providers',
+        directive: 'dt-providers',
+        scope_variable: 'demographics',
+        minSizeX: 2,
+        minSizeY: 1,
+        mandatory: false
+      }).then(function(pt) {
+        // Then Create the Panel Second
+        db.panel.create({
+          name: 'Providers Default',
+          panel_type_id: pt.id,
+          sizeX: 2,
+          sizeY: 1
+        }).then(function(p) {
+          // Then Create the Template_Layout Second
+          console.log('templateID:',templateID);
+          db.template_layout.create({
+            template_id: templateID,
+            panel_id: p.id,
+            panel_order: p.id
+          }).then(function(tl) {
+            console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
+          });
+
+        });
+
+      });
+
+      // Create the Panel_Type First
+      db.panel_type.create({
+        facility_id: facilityID,
+        title: 'Health Factors',
+        directive: 'dt-health-factors',
+        scope_variable: 'patient',
+        minSizeX: 2,
+        minSizeY: 2,
+        mandatory: false
+      }).then(function(pt) {
+        // Then Create the Panel Second
+        db.panel.create({
+          name: 'Health Factors Default',
+          panel_type_id: pt.id,
+          sizeX: 3,
+          sizeY: 2
+        }).then(function(p) {
+          // Then Create the Template_Layout Second
+          console.log('templateID:',templateID);
+          db.template_layout.create({
+            template_id: templateID,
+            panel_id: p.id,
+            panel_order: p.id
+          }).then(function(tl) {
+            console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
+          });
+
+        });
+
+      });
+
+        // Create the Panel_Type First
+      ['1', '2', '3'].forEach(function(index) {
+        db.panel_type.create({
+          facility_id: facilityID,
+          title: 'Free Text ' + index,
+          directive: 'dt-free-text',
+          scope_variable: 'patient',
+          minSizeX: 2,
+          minSizeY: 2,
+          mandatory: false
+        }).then(function(pt) {
+          // Then Create the Panel Second
+          db.panel.create({
+            name: 'Free Text Default',
+            panel_type_id: pt.id,
+            sizeX: 2,
+            sizeY: 2
+          }).then(function(p) {
+            // Then Create the Template_Layout Second
+            console.log('templateID:',templateID);
+            db.template_layout.create({
+              template_id: templateID,
+              panel_id: p.id,
+              panel_order: p.id
+            }).then(function(tl) {
+              console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
+            });
+          });
+        });
+      });
+    }).then(function(template) {
+      console.log('afsin');
+    });
+  //endforloop
+  }
+
 
 };

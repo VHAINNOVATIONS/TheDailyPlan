@@ -3,8 +3,15 @@
 angular.module('tdpApp')
   .factory('Facility', function Facility($location, $rootScope, $http, $q) {
     var results = {};
+    var currentFacility = null;
 
     return {
+      getCurrentFacility: function() {
+          return currentFacility;
+      },
+      setCurrentFacility: function(value) {
+          currentFacility = value;
+      },
 
       /**
        * Find All Facilitys

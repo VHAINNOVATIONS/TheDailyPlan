@@ -9,13 +9,12 @@ var validationError = function(res, err) {
 };
 
 /**
- * Search for Patients by Prefix
+ * Search for Clinical Warnings
  */
 exports.index = function (req, res, next) {
-  var value = req.params.id;
+  var value = req.query.value;
 
-
-  req.session.getDemographics(value, {}, function (err, body) {
+  req.session.getPostings(value, {}, function (err, body) {
       if (err) {
           return res.status(401).json(err);
       } else {
