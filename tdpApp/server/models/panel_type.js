@@ -1,4 +1,4 @@
-/* jshint indent: 2 */
+'use strict';
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('panel_type', {
@@ -7,6 +7,10 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
+    },
+    facility_id: {
+      type: DataTypes.INTEGER(11),
+      allowNull: true
     },
     title: {
       type: DataTypes.STRING,
@@ -34,6 +38,14 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     tableName: 'panel_type',
-    freezeTableName: true
+    freezeTableName: true,
+    classMethods: {
+      associate: function(models) {
+        models.panel_type.belongsTo(models.facility, {
+          foreignKey: 'facility_id',
+          targetKey: 'id'
+        });
+      }
+    }
   });
 };

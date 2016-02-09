@@ -17,8 +17,9 @@ angular.module('tdpApp')
         var cb = callback || angular.noop;
         var deferred = $q.defer();
 
-        $http({url: '/api/vitals', method: 'GET', params: {value: value}}).
+        $http.get('/api/vitals/' + value).
         success(function(data) {
+          console.log('Vitals:',data);
           var i = 0;
           for(i = 0; i < data.length; i++){
             data[i].subGridOptions = {

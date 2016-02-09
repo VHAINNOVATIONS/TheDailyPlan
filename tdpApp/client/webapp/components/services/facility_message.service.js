@@ -16,7 +16,7 @@ angular.module('tdpApp')
         var cb = callback || angular.noop;
         var deferred = $q.defer();
 
-        $http.get('/api/facility_message/byFacilityID/'+id).
+        $http.get('/api/facility_message/byFacility/'+id).
         success(function(data) {
           console.log('Facility_Message findAllByFacilityID:',data);
           results = data;

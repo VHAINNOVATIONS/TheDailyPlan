@@ -7,6 +7,9 @@ $btnTextAlt:                        #000;
 .row-centered {
     text-align:center;
 }
+.row-padded {
+    padding-top:10px;
+}
 .col-centered {
     display:inline-block;
     float:none;
@@ -15,18 +18,23 @@ $btnTextAlt:                        #000;
     /* inline-block space fix */
     margin-right:-4px;
 }
-.col-fixed {
-    /* custom width */
-    width:320px;
+.col-righted {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:right;
+    /* inline-block space fix */
+    margin-right:-4px;
 }
-.col-min {
-    /* custom min width */
-    min-width:320px;
+.col-lefted {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
 }
-.col-max {
-    /* custom max width */
-    max-width:320px;
-}
+
 
 .panel {
   .panel-heading {
@@ -78,7 +86,7 @@ $btnTextAlt:                        #000;
     }
 
     .panel-msg-overlay {
-      position: absolute;
+      position: inherit;
       top: 0;
       bottom: 0;
       width: 100%;
@@ -112,8 +120,9 @@ $btnTextAlt:                        #000;
 .page-header {
     margin-top: 20px;
 }
-ul {
+.tdp-ul {
     list-style: none;
+    margin-left: -40px;
 }
 .box {
     height: 100%;

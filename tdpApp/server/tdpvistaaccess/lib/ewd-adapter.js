@@ -113,6 +113,20 @@ var typedOrderUpdater = {
     },
     nursing: function (result, order) {
         typedOrderUpdater.activity(result, order);
+    },
+    procedures: function(result, order) {
+      if (order.status === 'Pending') {
+        if (! result.procedures) {
+          result.procedures = [];
+        }
+        var procedure = {
+            name: order.text
+        };
+        if (order.startDate) {
+            procedure.start = order.startDate;
+        }
+        result.procedures.push(procedure);
+      }
     }
 };
 
@@ -161,10 +175,30 @@ var filterChemHemReports = function (report, testNames) {
     return result;
 };
 
+var putInChemHemReportDates = function(report) {
+    report.forEach(function (reportElement) {
+      var timestamp = reportElement.timestamp
+      if (timestamp) {
+        reportElement.timestamp = translator.translateVistADateTime(timestamp);
+      }
+      var specimen = reportElement.specimen;
+      if (specimen) {
+        if (specimen.reportDate) {
+          specimen.reportDate = translator.translateVistADateTime(specimen.reportDate);
+        }
+        if (specimen.collectionDate) {
+          specimen.collectionDate = translator.translateVistADateTime(specimen.collectionDate);
+        }
+      }
+    });
+};
+
 var session = {
     get: function (route, parameters, callback) {
+        var alias = this.location || 'default';
+        var port = this.ports[alias];
         var options = _.assign({
-            uri: this.baseUrl + route
+            uri: this.baseUrl + port + this.serverRoute + route
         }, {
             method: 'GET',
             json: true,
@@ -194,6 +228,7 @@ var session = {
         });
     },
     login: function (userInfo, callback) {
+        this.location = userInfo.location;
         var self = this;
         this.get('/initiate', null, function (err, body) {
             if (err) {
@@ -201,7 +236,10 @@ var session = {
             } else {
                 self.Authorization = body.Authorization;
                 var credentials = encryptCredentials(userInfo.accessCode, userInfo.verifyCode, body.key);
-                var keysStr = userInfo.userKeys && userInfo.userKeys.length && userInfo.userKeys.join('^');
+                userInfo.userKeys = userInfo.userKeys || [];
+                var keysStr = userInfo.userKeys.map(function(userKey) {
+                  return userKey.vista;
+                }).join('^');
                 self.get('/login', {
                     credentials: credentials,
                     keys: keysStr
@@ -209,6 +247,12 @@ var session = {
                     if (err) {
                         callback(err);
                     } else {
+                        var keys = userData.keys || [];
+                        var keysObj = userInfo.userKeys.reduce(function(r, userKey, index) {
+                          r[userKey.client] = keys[userKey.vista];
+                          return r;
+                        }, {});
+                        userData.keys = keysObj;
                         self.userData = userData;
                         callback(null, self.userData);
                     }
@@ -265,8 +309,8 @@ var session = {
             }
         });
     },
-    getClinicalWarnings: function (patientId, options, callback) {
-        this.get('/getClinicalWarnings', {
+    getPostings: function (patientId, options, callback) {
+        this.get('/getPostings', {
             patientId: patientId,
             nRpts: "0"
         }, function (err, body) {
@@ -421,6 +465,7 @@ var session = {
                 callback(err);
             } else {
                 result = filterChemHemReports(result, options.testNames);
+                putInChemHemReportDates(result);
                 callback(null, result);
             }
         });
@@ -437,7 +482,6 @@ var session = {
     },
     getPatientsByClinic: function (options, callback) {
         this.get('/getPatientsByClinic', options, function (err, result) {
-            console.log(options);
             if (err) {
                 callback(err);
             } else {
@@ -464,12 +508,38 @@ var session = {
                 callback(null, result);
             }
         });
+    },
+    getHealthFactors: function(patientId, options, callback) {
+        this.get('/getPatientHealthFactors', {
+            patientId: patientId,
+            toDate: options.toDate,
+            fromDate: options.fromDate
+        }, function (err, result) {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, result);
+            }
+        });
+    },
+    getBoilerplates: function(patientId, options, callback) {
+      this.get('/resolveBPs', {
+        patientId: patientId,
+        text: options.text
+      }, function(err, result) {
+        if (err) {
+          return callback(err);
+        }
+        callback(null, result);
+      });
     }
 };
 
 exports.newSession = function (options, callback) {
     var c = Object.create(session);
     c.baseUrl = options.baseUrl;
+    c.ports = options.ports;
+    c.serverRoute = options.serverRoute;
     c.userKeys = options.userKeys;
     callback(null, c);
 };

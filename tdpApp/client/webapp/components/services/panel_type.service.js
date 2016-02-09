@@ -33,6 +33,32 @@ angular.module('tdpApp')
       },
 
       /**
+       * Find All Panel_Types By Facility ID
+       *
+       * @param  {Function} callback - optional
+       * @return {Promise}
+       */
+      findAllByFacilityID: function(id, callback) {
+        var cb = callback || angular.noop;
+        var deferred = $q.defer();
+
+        $http.get('/api/panel_type/facility/' + id).
+        success(function(data) {
+          console.log('Panel_Type findAllByFacilityID:',data);
+          results = data;
+          deferred.resolve(data);
+          return cb();
+        }).
+        error(function(err) {
+
+          deferred.reject(err);
+          return cb(err);
+        }.bind(this));
+
+        return deferred.promise;
+      },
+
+      /**
        * Find Single Panel_Type by Panel_Type ID
        *
        * @param  {String}   id    - query id

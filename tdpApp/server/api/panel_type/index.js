@@ -12,6 +12,17 @@ router.get('/', function(req, res) {
   });
 });
 
+// get all panel_types by facility id
+router.get('/facility/:id', function(req, res) {
+  models.panel_type.findAll({
+    where: {
+      facility_id: req.params.id
+    }
+  }).then(function(panel_types) {
+    res.json(panel_types);
+  });
+});
+
 // get single panel_type
 router.get('/:id', function(req, res) {
   models.panel_type.find({

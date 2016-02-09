@@ -2,7 +2,9 @@
 
 angular.module('tdpApp')
   .factory('Demographics', function Demographics($location, $rootScope, $http, $q) {
+    var self = this;
     var results = {};
+    var demographics = {};
 
     return {
 
@@ -17,8 +19,9 @@ angular.module('tdpApp')
         var cb = callback || angular.noop;
         var deferred = $q.defer();
 
-        $http({url: '/api/demographics', method: 'GET', params: {value: value}}).
+        $http.get('/api/demographics/' + value).
         success(function(data) {
+          data.id = value;
           results = data;
           deferred.resolve(data);
           return cb();
@@ -27,9 +30,21 @@ angular.module('tdpApp')
 
           deferred.reject(err);
           return cb(err);
-        }.bind(this));
+        }.bind(self));
 
         return deferred.promise;
-      }
+      },
+
+      getDemographics: function(id) {
+        if (demographics.id !== id) {
+          demographics = {};
+        }
+        return demographics;
+
+      },
+
+      setDemographics: function(demographicsObject) {
+        demographics = demographicsObject;
+      },
     };
   });

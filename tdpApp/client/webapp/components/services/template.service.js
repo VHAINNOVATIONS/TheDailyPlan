@@ -33,6 +33,32 @@ angular.module('tdpApp')
       },
 
       /**
+       * Find All Templates By Facility ID
+       *
+       * @param  {Function} callback - optional
+       * @return {Promise}
+       */
+      findAllByFacilityID: function(id, callback) {
+        var cb = callback || angular.noop;
+        var deferred = $q.defer();
+
+        $http.get('/api/template/facility/' + id).
+        success(function(data) {
+          console.log('Template findAll:',data);
+          results = data;
+          deferred.resolve(data);
+          return cb();
+        }).
+        error(function(err) {
+
+          deferred.reject(err);
+          return cb(err);
+        }.bind(this));
+
+        return deferred.promise;
+      },
+
+      /**
        * Find Single Template by Template ID
        *
        * @param  {String}   id    - query id

@@ -57,10 +57,10 @@
                 </div>
               </span>
               <span ng-repeat="sp in ctrl.selectedPanels">
-                <span class="list-group-item">{{sp.title}}
+                <span class="list-group-item">{{sp.title}}<span ng-show="sp.mandatory">*</span>
                   <input ng-click="ctrl.selectS(sp.id)" name="ctrl.selectedS[]" value="{{sp.id}}" ng-checked="ctrl.selectedS.indexOf(sp.id) > -1" type="checkbox" class="pull-left picklist-input">
                   <span class="pull-right">
-                    <button type="button" class="btn btn-default btn-xs">
+                    <button type="button" class="btn btn-default btn-xs" ng-click="ctrl.openSettings(sp)">
                       <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                     </button>
                     <span class="badge">{{ctrl.selectedPanels.indexOf(sp)+1}}</span>
@@ -74,8 +74,8 @@
     <div class="row">
       <div class="col-sm-4 col-sm-offset-8 col-xs-12 text-center">
         <div >
-          <button type="submit" ng-disabled="form.$invalid || ctrl.dataLoading" class="btn btn-primary"><span ng-if="ctrl.dataLoading" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>Save</button>
-          <a href="#/" class="btn btn-link">Cancel</a>
+          <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i>Save</button>
+          <button type="button" ng-click="ctrl.cancelTemplate()" class="btn btn-default"><i class="glyphicon glyphicon-remove"></i>Cancel</button>
         </div>
       </div>
     </div>

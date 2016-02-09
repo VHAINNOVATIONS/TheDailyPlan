@@ -1,7 +1,12 @@
 <div>
-    <ul class="example-animate-container">
-        <li class="animate-repeat" ng-repeat="imm in immunizations">
+    <ul class="tdp-ul" ng-if="immunizations.length > 0">
+        <li ng-repeat="imm in immunizations">
             {{imm.date}} - {{imm.name}}
         </li>
     </ul>
+    <div class="panel-msg-overlay" ng-hide="immunizations.length > 0">
+      <div class="msg">
+          <span>No Immunizations Found</span>
+      </div>
+    </div>
 </div>

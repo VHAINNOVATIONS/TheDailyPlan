@@ -18,9 +18,14 @@ var config = dotenv({
         type: 'string',
         default: 'localhost'
     },
+    tdpEwdRestAlias: {
+        env: 'TDP_EWD_REST_ALIAS',
+        type: 'string',
+        default: 'default'
+    },
     tdpEwdRestPort: {
         env: 'TDP_EWD_REST_PORT',
-        type: 'integer',
+        type: 'string',
         default: '8082'
     },
     ewdServiceName: {

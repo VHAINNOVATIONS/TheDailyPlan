@@ -11,7 +11,9 @@ router.post('/', function(req, res, next) {
   console.log('req.body:',req.body);
   req.session.login({
   	accessCode: req.body.accessCode,
-  	verifyCode: req.body.verifyCode
+  	verifyCode: req.body.verifyCode,
+    location: req.body.location,
+    userKeys: req.body.userKeys
   }, function(err, userData){
 	if (err) {
 		return res.status(401).json(err);

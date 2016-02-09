@@ -735,6 +735,12 @@ module.exports = function (grunt) {
     },
 
     jsbeautifier: {
+        server: {
+            src: ['server/db/**/*.js', 'server/models/**/*.js'],
+            options: {
+                config: '.jsbeautifyrc'
+            }
+        },
         vistaaccess: {
             src: ['server/tdpvistaaccess/**/*.js', 'server/tdpvistaaccess/**/*.json', '!server/tdpvistaaccess/**/*.js'],
             options: {
@@ -874,4 +880,5 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('vistaaccess', ['jsbeautifier:vistaaccess', 'jshint:vistaaccess', 'mochaTest:vistaaccess']);
+  grunt.registerTask('beautify', ['jsbeautifier:server', 'jsbeautifier:vistaaccess', 'jshint:server']);
 };

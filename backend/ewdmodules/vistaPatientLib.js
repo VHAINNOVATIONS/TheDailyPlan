@@ -204,12 +204,14 @@ module.exports = {
 
 		this.putNokAndEmergencyContacts(patient, params.patientId, ewd, session);
 
-		var adminInfo = ewd.mumps.function("ADMINFO^VEFBRPC", params.patientId) ;
+		var adminInfo = ewd.mumps.function("ADMINFO^ZZTDP", params.patientId) ;
 		if (adminInfo) {
+			patient.team = patient.team	|| {};
 			patient.admissionInfo = {};
 			var adminInfoPieces = adminInfo.split("^");
 			if (adminInfoPieces[0]) {
 				patient.admissionInfo['provider'] = adminInfoPieces[0];
+				patient.team.inpatientName = adminInfoPieces[0];
 			}
 			if (adminInfoPieces[1]) {
 				patient.admissionInfo['attendingProvider'] = adminInfoPieces[1];
@@ -224,7 +226,7 @@ module.exports = {
 	putNokAndEmergencyContacts: function(patient, patientId, ewd, session) {
         var gloRef = new ewd.mumps.GlobalNode('TMP', [process.pid]);
         gloRef._delete();
-        var status = ewd.mumps.function("NKO^VEFBRPC", patientId, '^TMP(' + process.pid + ')') ;
+        var status = ewd.mumps.function("NKO^ZZTDP", patientId, '^TMP(' + process.pid + ')') ;
         var results = gloRef._getDocument();
         if (results) {
             ['nextOfKin', 'altNextOfKin', 'emergencyContact', 'altEmergencyContact'].forEach(function(key) {

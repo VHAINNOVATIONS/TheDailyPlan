@@ -26,7 +26,7 @@
                   <form ng-submit="ctrl.searchWard()" name="searchWard">
                       <div class="form-group">
                         <h4>Select Ward to Display</h4>
-                        <select size=10 class="form-control" ng-model="ctrl.search.ward">
+                        <select class="form-control" ng-model="ctrl.search.ward">
                           <option value="">Select a Ward</option>
                           <option ng-repeat="option in ctrl.wards" value="{{option.id}}">{{option.name}}</option>
                         </select>
@@ -44,7 +44,7 @@
                   <form ng-submit="ctrl.searchClinic()" name="searchClinic">
                       <div class="form-group">
                         <h4>Select Clinic to Display</h4>
-                        <select size=10 class="form-control" ng-model="ctrl.search.clinic">
+                        <select class="form-control" ng-model="ctrl.search.clinic">
                           <option value="">Select a Clinic</option>
                           <option ng-repeat="option in ctrl.clinics" value="{{option.id}}">{{option.name}}</option>
                         </select>
@@ -72,7 +72,12 @@
       <hr>
       <form ng-submit="ctrl.display()" name="display">
           <input class="btn btn-primary" type="submit" value="Display">
+
       </form>
     </div>
   </div>
+  <div class="row row-centered">
+      <div class="col-sm-4 col-centered pull-left">
+        <div class="alert alert-danger" role="alert" ng-show="ctrl.displayErr.flag">{{ctrl.displayErr.msg}}</div>
+      </div>
 </div>

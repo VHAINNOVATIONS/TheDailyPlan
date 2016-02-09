@@ -1,47 +1,45 @@
 'use strict';
 
 angular.module('tdpApp')
-  .controller('LoginCtrl', function ($scope, Auth, $location, $window) {
+  .controller('LoginCtrl', function ($scope, Auth, $location, $window, Facility, Facility_Message) {
     var self = this;
     self.user = {};
     self.errors = false;
     self.consent = {isselected: false};
+    self.facilities = [];
+    //self.facilitySelect = null;
+    self.messageTabs = [];
 
-    self.facilities = {
-      facilitySelect: null,
-      availableOptions: [
-        {id: '520', name: '520 - Biloxi'},
-        {id: '607', name: '607 - Madison'},
-        {id: '618', name: '618 - Minneapolis'},
-        {id: '674', name: '674 - Central Texas (Waco)'}
-      ],
-    };
-
-    self.tabs = [
-      {
-        isOpen: true,
-        title: 'VA Makes Changes to Veterans Choice Program ',
-        content: 'The Department of Veterans Affairs today announced a number of changes to make participation in the Veterans Choice Program easier and more convenient for Veterans who need to use it. The move, which streamlines eligibility requirements, follows feedback from Veterans along with organizations working on their behalf.'
-      },
-      {
-        isOpen: false,
-        title: 'VA To Hold 2015 Small Business Engagement in Pittsburgh',
-        content: 'The Department of Veterans Affairs in collaboration with other federal agencies and partners, will sponsor the 5th annual National Veterans Small Business Engagement, November 17–19, 2015, at the David L. Lawrence Convention Center in Pittsburgh, PA.'
-      },
-      {
-        isOpen: false,
-        title: 'VA Secretary to Announce VA-Bob Woodruff Foundation Partnership',
-        content: 'Department of Veterans Affairs’ Secretary Robert A. McDonald this evening will announce a partnership with the Bob Woodruff Foundation to further advance VA’s outreach to Veterans through deeper and more innovative local and community partnerships. VA will capitalize on BWF’s strength and contacts to find unique ways to connect Veterans, transitioning Servicemembers and their families with resources right where they live.'
-      }
-    ];
+    //functions
+    self.init = init;
+    self.init();
 
     $scope.login = function(form) {
       self.submitted = true;
 
-      if(form.$valid) {
+      var keys = [{
+        client: 'super',
+        vista: 'TDPSUPER'
+      }, {
+        client: 'admin',
+        vista: 'TDPADMIN'
+      }];   // TODO read from  db when combobox for facility is functional
+
+      var location;
+      var selectedId = parseInt(self.facilitySelect, 10);
+      if (selectedId !== 1) {
+        self.facilities.forEach(function(facility) {
+          if (facility.id === selectedId) {
+            location = facility.name;
+          }
+        });
+      }
+      if(form.$valid && location) {
         Auth.login({
           verifyCode: self.user.verifyCode,
-          accessCode: self.user.accessCode
+          accessCode: self.user.accessCode,
+          userKeys: keys,
+          location: location
         })
         .then( function(data) {
           // Logged in, redirect to home
@@ -59,4 +57,40 @@ angular.module('tdpApp')
     $scope.loginOauth = function(provider) {
       $window.location.href = '/auth/' + provider;
     };
+
+    self.setFacility = function() {
+
+      console.log('login setFacility',self.facilitySelect);
+      // Populate the Message Tabs
+      if (self.facilitySelect) {
+        Facility.setCurrentFacility(self.facilitySelect);
+
+        Facility_Message.findAllByFacilityID(self.facilitySelect)
+        .then( function(data) {
+          self.messageTabs = data;
+        })
+        .catch( function(err) {
+          console.log('Facility Error:',err);
+          self.errors = true;
+        });
+      }
+    }
+
+    function init() {
+
+  // Initially Populate the Facilities
+      Facility.findAll()
+      .then( function(data) {
+        self.facilities = data;
+      })
+      .then( function() {
+        self.facilitySelect = '1';
+        self.setFacility();
+      })
+      .catch( function(err) {
+        console.log('Facility Error:',err);
+        self.errors = true;
+      });
+      //setFacility();
+    }
   });

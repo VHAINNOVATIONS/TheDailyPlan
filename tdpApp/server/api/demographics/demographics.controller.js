@@ -12,7 +12,8 @@ var validationError = function(res, err) {
  * Search for Patients by Prefix
  */
 exports.index = function (req, res, next) {
-  var value = req.query.value;
+  var value = req.params.id;
+
 
   req.session.getDemographics(value, {}, function (err, body) {
       if (err) {

@@ -1,0 +1,16 @@
+<div class="container report_row">
+  <div class="row" class="report_column500" ng-if="nursingOrders && nursingOrders.length && !nursingOrdersError">
+    <div class="col-xs-7 grid_header">Test Name</div>
+    <div class="col-xs-3 grid_header">Start</div>
+    <div class="col-xs-2 grid_header">Status</div>
+    <div class="col-xs-7" ng-repeat-start="nursingOrders in nursingOrders">{{nursingOrders.testName}}</div>
+    <div class="col-xs-3">{{nursingOrders.start}}</div>
+    <div class="col-xs-2" ng-repeat-end>{{nursingOrders.status}}</div>
+  </div>
+  <div class="row" class="report_column500" ng-if="nursingOrdersError">
+    <span class="message">Internal error loading active nursing orders.</span>
+  </div>
+  <div class="row" class="report_column500" ng-if="(!nursingOrders || nursingOrders.length == 0) && !nursingOrdersError">
+    <span class="message">No active nursing orders found.</span>
+  </div>
+</div>

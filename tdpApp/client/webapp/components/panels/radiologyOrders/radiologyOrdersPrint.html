@@ -1,0 +1,16 @@
+<div class="container report_row">
+  <div class="row" class="report_column500" ng-if="radiologyOrders && radiologyOrders.length && !radiologyOrdersError">
+    <div class="col-xs-7 grid_header">TestName</div>
+    <div class="col-xs-3 grid_header">Start</div>
+    <div class="col-xs-2 grid_header">Status</div>
+    <div class="col-xs-7" ng-repeat-start="radiologyOrders in radiologyOrders">{{radiologyOrders.testName}}</div>
+    <div class="col-xs-3">{{radiologyOrders.start}}</div>
+    <div class="col-xs-2" ng-repeat-end>{{radiologyOrders.status}}</div>
+  </div>
+  <div class="row" class="report_column500" ng-if="radiologyOrdersError">
+    <span class="message">Internal error loading active radiology orders.</span>
+  </div>
+  <div class="row" class="report_column500" ng-if="radiologyOrders.length == 0 && !radiologyOrdersError">
+    <span class="message">No active radiology orders found.</span>
+  </div>
+</div>

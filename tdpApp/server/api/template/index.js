@@ -14,6 +14,17 @@ router.get('/', function(req, res) {
   });
 });
 
+// get all templates by facility id
+router.get('/facility/:id', function(req, res) {
+  models.template.findAll({
+    where: {
+      facility_id: req.params.id
+    }
+  }).then(function(templates) {
+    res.json(templates);
+  });
+});
+
 // get single template
 router.get('/:id', function(req, res) {
   models.template.find({
@@ -38,15 +49,43 @@ router.get('/complete/:id', function(req, res) {
     // Panel - Loop
     async.eachSeries(layout, function(panel, callback) {
       var panelObj = {};
+      panelObj.panelid = panel.panel_id;
       panelObj.title = panel.title;
       panelObj.settings = {};
       panelObj.settings.sizeX = panel.sizeX;
       panelObj.settings.sizeY = panel.sizeY;
       panelObj.settings.minSizeX = panel.minSizeX;
       panelObj.settings.minSizeY = panel.minSizeY;
-      panelObj.template = '<div ' + panel.directive + ' patient="ctrl.' + panel.scope_variable +'"></div>';
+      panelObj.template = '<div ' + panel.directive + ' patient="ctrl.' + panel.scope_variable +'" panelid="panel.panelid"></div>';
       panelObj.print = '<div ' + panel.directive + '-print' + ' patient="ctrl.' + panel.scope_variable +'"></div>';
       panelObj.mandatory = panel.mandatory;
+      console.log('<<<<< Template api1: ', panelObj);
+
+      models.panel_detail.findAll({
+        attributes: ['panel_setting_id'],
+        where: {
+          panel_id: panel.panel_id
+        }
+      }).then(function(panel_details) {
+        if (panel_details) {
+          console.log('<<<<< Template details: ', panel_details);
+          panelObj.panelDetails = panel_details;
+        }
+      });
+      console.log('<<<<< Template api2: ', panelObj);
+
+
+      // TO DO replace with from database
+      /*if (panel.title === 'Free Text 1') {
+        panelObj.detail = 'Free Text 1'
+      }
+      if (panel.title === 'Free Text 2') {
+        panelObj.detail = 'Name: |PATIENT NAME|, Age: |PATIENT AGE|'
+      }
+      if (panel.title === 'Free Text 3') {
+        panelObj.detail = 'Name: |PATIENT NAME|\nSex: |PATIENT SEX|'
+      }*/
+
       panels.push(panelObj);
       callback();
 
@@ -63,6 +102,8 @@ router.get('/complete/:id', function(req, res) {
 
 // add new template
 router.post('/', function(req, res) {
+  //Template = req.body;
+  //Panels = req.body.panels;
   models.template.create({
     template_name: req.body.template_name,
     template_description: req.body.template_description,
@@ -70,7 +111,48 @@ router.post('/', function(req, res) {
     active: req.body.active,
     template_owner: req.body.template_owner
   }).then(function(template) {
-    res.json(template);
+    // Panel - Loop
+    var i = 0;
+    var layouts = [];
+    async.eachSeries(req.body.panels, function(panel, callback) {
+      // Count to define panel order
+      i++;
+      // Then Create the Panel Second
+      models.panel.create({
+        name: panel.title,
+        panel_type_id: panel.id,
+        sizeX: panel.minSizeX,
+        sizeY: panel.minSizeY
+      }).then(function(p) {
+        // Then Create the Template_Layout Second
+        models.template_layout.create({
+          template_id: template.id,
+          panel_id: p.id,
+          panel_order: i
+        }).then(function(tl) {
+          // Create the panel_details
+          for (var i = 0; i < panel.panelDetails.length; i++) {
+            models.panel_detail.create({
+              panel_id: p.id,
+              panel_setting_id: panel.panelDetails[i].panel_setting_id,
+            });
+          }
+          p.panelDetails = panel.panelDetails;
+          tl.panel = p;
+          layouts.push(tl);
+          callback();
+        });
+      });
+
+    }, function(err){
+
+      if( err ) {
+        console.log('ERROR:',err);
+      } else {
+        template.layouts = layouts;
+        res.json(template);
+      }
+    });
   });
 });
 
