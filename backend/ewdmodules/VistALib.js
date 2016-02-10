@@ -1,29 +1,31 @@
-/*
-
-VistALib: Generic EWD.js Utility Functions for VistA REST Access
-
-*/
-
-// Crypto functions
+"use strict";
 
 var crypto = require('crypto');
+
+var chemHemLib = require('vistaChemHemLib');
+var allergiesLib = require('vistaAllergiesLib');
+var medsLib = require('vistaMedsLib');
+var radiologyOrdersLib = require('vistaRadiologyOrdersLib');
+var userLib = require('vistaUserLib');
+var notesLib = require('vistaNotesLib');
+var patientLib = require('vistaPatientLib');
 
 var encryptCredentials = function(accessCode, verifyCode, key) {
     //Enhanced by SAN Businesss Consultants 20150929 for symetry with PHP
 	var cleankey = '';
-	for (i = 0; i < key.length; i++) { 
+	for (i = 0; i < key.length; i++) {
 		if(key[i] != '-')
 		{
 			cleankey += key[i];
 		}
-	}	
-    var text = 'accessCode:' + accessCode + ';verifyCode:' + verifyCode;    
+	}
+    var text = 'accessCode:' + accessCode + ';verifyCode:' + verifyCode;
     var iv1 = '1234567890123456';
     var algorithm1 = 'aes-256-cbc';
 
     var cipher1 = crypto.createCipheriv(algorithm1, cleankey, iv1)
     var crypted = cipher1.update(text,'utf8','hex')
-    crypted += cipher1.final('hex');	
+    crypted += cipher1.final('hex');
     var encrypted1 = iv1 + '_x_' + crypted;
     return encrypted1
 };
@@ -39,12 +41,12 @@ var decryptCredentials = function(encrypted, key) {
 				cleankey += key[i];
 			}
 		}
-		
+
         var algorithm1 = 'aes-256-cbc';
         var a1 = encrypted.split('_x_');
         var iv1 = a1[0];
         var encry1 = a1[1];
-	
+
         var decipher = crypto.createDecipheriv(algorithm1, cleankey, iv1)
 		var dec1 = decipher.update(encry1,'hex','utf8')
 		dec1 += decipher.final('utf8');
@@ -56,11 +58,11 @@ var decryptCredentials = function(encrypted, key) {
 		  accessCode: pieces[0],
 		  verifyCode: pieces[1]
 		};    }
-    catch(err) 
+    catch(err)
     {
         return {
           error: 'Invalid credentials value'
-        }    
+        }
     }
 };
 
@@ -71,7 +73,7 @@ var errorResponse = function(error, statusCode) {
       "text": error,
       "statusCode": statusCode
     }
-  }; 
+  };
 };
 
 var getGlobalNodeFromRef = function(globalRef, ewd) {
@@ -120,9 +122,9 @@ var getJSONFromVPR = function(tmpNode, ewd) {
       ok = false;
     }
   } while (ok);
-  
+
   tmpNode._delete();
-  
+
   var results = JSON.parse(string);
   return results;
 };
@@ -166,7 +168,6 @@ module.exports = {
   getGlobalNodeFromRef: function(globalRef, ewd) {
 	return getGlobalNodeFromRef(globalRef, ewd);
   },
-    
   authenticate: function(ewd) {
     var statusCode = 401;
     token = ewd.query['rest_auth'];
@@ -278,7 +279,7 @@ module.exports = {
       return results.data;
     }
   },
-  
+
 	getWorklist: function(params, session, ewd) {
 		var ddrArgs = { 
 			FILE: "75.1",
@@ -288,18 +289,18 @@ module.exports = {
 			FIELDS: ".01I;.01;4;14;16;2;3;20;6;26;19;21;7I;5I"
 			//SCREEN: params.filterDiscontinued ? "I ($P(^(0),U,5)'=1)" : ""
 		};
-		
+
 		var results = this.ddrLister3(ddrArgs, session, ewd);
 		if (results.error) {
 			results.data = [];
 			results.error = JSON.stringify(results.errorResponse);
 			return results;
 		}
-		
+
 		var fieldNames = [ "IEN", "PatientID", "PatientName", "ExamCategory", "RequestingPhysician", "OrderedDate", "Procedure",
 			"ImageType", "ExamLocation", "Urgency", "Nature", "Transport", "DesiredDate", "OrderFileIen" , "RadOrderStatus" ];
-		
-		var parsed = { data: [] };		
+
+		var parsed = { data: [] };
 		for (var i = 0; i < results.data.length; i++) {
 			var pieces = results.data[i].split("^");
 			var current = {};
@@ -308,7 +309,7 @@ module.exports = {
 			}
 			parsed.data.push(current);
 		}
-		
+
 		return parsed;
 	},
 
@@ -316,7 +317,7 @@ module.exports = {
 		params.rpcName = "DDR LISTER";
 		params.rpcContext = "DVBA CAPRI GUI";
 		params.rpcArgs = [];
-		
+
 		var ddrListerArgs = {
 			FILE: params.FILE,
 			FIELDS: params.FIELDS || ".01",
@@ -324,7 +325,7 @@ module.exports = {
 			MAX: params.MAX || "1000",
 			XREF: params.XREF || "#"
 		};
-		
+
 		if (params.hasOwnProperty("IENS")) {
 			ddrListerArgs.IENS = params.IENS;
 		}
@@ -340,15 +341,15 @@ module.exports = {
 		if (params.hasOwnProperty("PART")) {
 			ddrListerArgs.PART = params.PART;
 		}
-		
+
 		params.rpcArgs.push({ type: "LIST", value: ddrListerArgs });
-		
+
 		var result = this.runRpc(params, session, ewd);
 
 		if (!result.hasOwnProperty("value")) {
 			return { error: true, errorResponse: JSON.stringify(result) };
 		}
-		
+
 		var response = { data: [] };
 		var inData = false;
 		for (var i = 1; result.value.hasOwnProperty(i.toString()); i++) {
@@ -357,23 +358,23 @@ module.exports = {
 				response.errorResponse = JSON.stringify(result);
 				return response;
 			}
-			
+
 			// just keep checking for start of data!
 			if (!inData && (result.value[i.toString()] == "[BEGIN_diDATA]" || result.value[i.toString()].toUpperCase() == "[DATA]")) {
 				inData = true;
 				continue;
 			}
-			
+
 			if (!inData) {
 				continue;
 			}
-			
+
 			response.data.push(result.value[i.toString()]);
 		}
-		
+
 		return response;
 	},
-  
+
 
 	// NOTE: this call should replace all custom DDR GETS ENTRY wrappers!! 
 	ddrGetsEntry2: function(params, session, ewd) {
@@ -386,16 +387,16 @@ module.exports = {
 			FIELDS: params.fields || '*', 
 			FLAGS: params.flags || "IEN" 
 		};
-		
+
 		if (!(ddrArgs.IENS.slice(-1) == ",")) { // if IENS doesn't end with comma, add it!
 			ddrArgs.IENS += ",";
 		}
-		
+
 		params.rpcArgs.push({ type: "LIST", value: ddrArgs });
-		
-		
+
+
 		var result = this.runRpc(params, session, ewd);
-		
+
 		// parse - turn in to dictionary type object with "I" and "E" properties for internal and external values
 		var response = { };
 		var inData = false;
@@ -405,25 +406,25 @@ module.exports = {
 				response.errorResponse = JSON.stringify(result);
 				return response;
 			}
-			
+
 			// just keep checking for start of data!
 			if (!inData && (result.value[i.toString()] == "[BEGIN_diDATA]" || result.value[i.toString()].toUpperCase() == "[DATA]")) {
 				inData = true;
 				continue;
 			}
-			
+
 			if (!inData) {
 				continue;
 			}
-			
+
 			var pieces = result.value[i.toString()].split("^");
 			var fieldNo = pieces[2];
 			var internal = pieces[3];
 			var external = pieces.length > 4 ? pieces[4] : "";
-			
+
 			response[fieldNo] = {};
 			response.iens = ddrArgs.IENS;
-			
+
 			if (internal == "[WORD PROCESSING]") {
 				internal = "";
 				i++;
@@ -432,20 +433,20 @@ module.exports = {
 					i++;
 				}
 			}
-			
+
 			response[fieldNo]["I"] = internal;
 			response[fieldNo]["E"] = external;
 		}
-		
+
 		return response;
 
 	},
-	
+
 	// radiology calls
 	saveNewRadiologyOrder: function(params, session, ewd) {
 		return radiologyOrdersLib.saveNewRadiologyOrderWithRules(params, session, ewd);
 	},
-	
+
 	discontinueRadiologyOrder: function(params, session, ewd) {
 		if (params.eSig && params.eSig != "") {
 			return radiologyOrdersLib.discontinueAndSignRadiologyOrder(params, session, ewd);
@@ -453,7 +454,7 @@ module.exports = {
 			return radiologyOrdersLib.discontinueRadiologyOrder(params, session, ewd);
 		}
 	},
-	
+
 	getRadiologyOrderCancellationReasons: function(params, session, ewd) {
 		params.rpcName = "ORWDX2 DCREASON";
 		params.rpcArgs = [];
@@ -463,25 +464,25 @@ module.exports = {
 	getOrderableItems: function(params, session, ewd) {
 		return radiologyOrdersLib.getOrderableItems(params, session, ewd);
 	},
-	
+
 	getImagingOrderTypes: function(params, session, ewd) {
 		params.rpcName = "ORWDRA32 IMTYPSEL";
 		params.rpcArgs = [];
-		
+
 		return this.runRpc(params, session, ewd);
 	},
-	
+
 	getRadiologyOrderDialog: function(params, session, ewd) {
 		return radiologyOrdersLib.getRadiologyOrderDialog(params, session, ewd);
 	},
-	
+
 	getRadiologyOrderChecksForAcceptOrderRequest: function(params, session, ewd) {
 		return radiologyOrdersLib.getRadiologyOrderChecksForAcceptOrderRequest(params, session, ewd);
 	},
-	
+
 	// end radiology calls
-	
-	
+
+
 		// FYI: RAPTOR is already receiving the patient ID with the worklist. This extra call to VistA is unnecessary
 	getPatientIDFromTrackingID: function(params, session, ewd) {
 		var response = this.getVariableValue("$G(^RAO(75.1," + params.ien + ",0))", session, ewd);
@@ -490,17 +491,17 @@ module.exports = {
 		}
 		return { result: response.split("^")[0] };
 	},
-	
+
 
 	// notes calls
 	getNoteTitles: function(params, session, ewd) {
 		return notesLib.getNoteTitles(params, session, ewd);
 	},
-	
+
 	getSurgeryReportsWithText: function(params, session, ewd) {
 		return notesLib.getSurgeryReportsWithText(params, session, ewd);
 	},
-	
+
 	getSurgicalPathologyReports: function(params, session, ewd) {
 		params.reportsTabName = "OR_SP:SURGICAL PATHOLOGY~SP;ORDV02A;0;";
 		if (!params.nRpts || params.nRpts == "" || params.nRpts == 0) {
@@ -508,7 +509,7 @@ module.exports = {
 		}
 		return this.runReportsTabRpc(params, session, ewd);
 	},
-	
+
 	getNotesWithText: function(params, session, ewd) {
 		params.reportsTabName = "OR_PN:PROGRESS NOTES~TIUPRG;ORDV04;15;";
 		return this.runReportsTabRpc(params, session, ewd);
@@ -518,12 +519,12 @@ module.exports = {
 	getUserSecurityKeys: function(userId, session, ewd) {
 		return userLib.getUserSecurityKeys(userId, session, ewd);
 	},
-	
+
 	cprsUserLookup: function(params, session, ewd) {
 		return userLib.cprsUserLookup(params, session, ewd);
 	},
-	
-	
+
+
 	getHospitalLocations: function(params, session, ewd) {
 		params.rpcName = "ORWU1 NEWLOC";
 		params.rpcArgs = [];
@@ -539,26 +540,26 @@ module.exports = {
 
 		params.rpcArgs.push({type: "LITERAL", value: target});
 		params.rpcArgs.push({type: "LITERAL", value: direction});
-		
+
 		return this.runRpc(params, session, ewd);
 	},
-	
+
 	getAllMeds: function(params, session, ewd) {
 		return medsLib.getAllMeds(params, session, ewd);
 	},
-	
+
 	getAllergies: function(params, session, ewd) {
 		return allergiesLib.getAllergies(params, session, ewd);
 	},
-	
+
 	getChemHemReports: function(params, session, ewd) {
 		return chemHemLib.getChemHemReports(params, session, ewd);
 	},
-	
+
 	getPatient: function(params, session, ewd) {
 		return patientLib.selectPatient(params, session, ewd);
 	},
-		
+
 	// call to vista works
 	getProblemList: function(params, session, ewd) {
 		var arg = "";
@@ -572,31 +573,31 @@ module.exports = {
 		else if (params.type == "ALL") {
 			arg = "OR_DODPLL:ALL PROBLEM LIST~PLAILALL;ORDV04;61;";
 		}
-		
+
 		if (arg == "") {
 			return { error: "Invalid type request: " + params.type + ".  Must be 'ACTIVE', 'INACTIVE', or 'ALL'."}
 		}
 		params.reportsTabName = arg;
         return this.runReportsTabRpc(params, session, ewd);
 	},
-	
+
 	// call to vista works
 	getVisits: function(params, session, ewd) {
         params.rpcName = "ORWCV VST";
 		params.rpcArgs = [];
-		
+
 		var patientId = params.patientId;
-		var fromDate = params.fromDate; 
+		var fromDate = params.fromDate;
 		var toDate = params.toDate;
-        
+
 		params.rpcArgs.push({type: "LITERAL", value: patientId});
         params.rpcArgs.push({type: "LITERAL", value: fromDate});
         params.rpcArgs.push({type: "LITERAL", value: toDate});
         params.rpcArgs.push({type: "LITERAL", value: '1'});
-		
+
         return this.runRpc(params, session, ewd);
 	},
-	
+
 	// call to vista works
 	getVitalSigns: function(params, session, ewd) {
 		params.reportsTabName = "OR_VS:VITAL SIGNS~VS;ORDV04;47;";
@@ -616,19 +617,18 @@ module.exports = {
 	writeNote: function(params, session, ewd) {
 		return notesLib.writeNote(params, session, ewd);
 	},
-	
+
 	signNote: function(params, session, ewd) {
 		return notesLib.signNote(params, session, ewd);
 	},
-	
+
 	isValidESig: function(params, session, ewd) {
 		params.rpcName = "ORWU VALIDSIG";
 		params.rpcArgs = [ { type: "LITERAL", value: this.encryptRpcParameter(params.eSig, session, ewd) } ];
-		
+
 		return (this.runRpc(params, session, ewd)).value == "1";
 	},
-	
-		
+
 	// helpers for running RPCs below
 	runRpc: function(params, session, ewd) {
 		// TODO - how to handle issues? throw exception? return JSON obj with error message?
@@ -637,10 +637,10 @@ module.exports = {
 		} else {
 			params.rpcContext = "OR CPRS GUI CHART";
 		}
-        
+
 		var xqcsRef = new ewd.mumps.GlobalNode('TMP', ['XQCS', process.pid]);
 		xqcsRef._delete();
-		
+
 		var gloRef = new ewd.mumps.GlobalNode('TMP', [process.pid]);
         // **** essential addition by Rob! - must clear down the temporary global first:
         gloRef._delete();
@@ -654,29 +654,29 @@ module.exports = {
             input: params.rpcArgs
         };
         gloRef._setDocument(data, true, 1);
-        
+
         var status = ewd.mumps.function("RPCEXEC^ZZTDP", '^TMP(' + process.pid + ')') ;
         var resultsNode = gloRef.$('result');
         var results = resultsNode._getDocument();
-		
+
 		//if (params.rpcName == 'ORWDX SEND') {
 		//	throw new Error('Intentionally blowing up on ORWDX SEND');
 		//}
-		
+
 		if (!params.hasOwnProperty("deleteGlobal") || params.deleteGlobal) { // if we didn't set flag or if it's set true
 			gloRef._delete();
 		}
 		return results;
 	},
-	
+
 	// need this special RPC wrapper for creating an order because the JSON -> MUMPS arg passing
 	// doesn't support the format for order checks
 	runRpcForCreateOrder: function(params, session, ewd) {
         params.rpcContext = "OR CPRS GUI CHART";
-        
+
 		var xqcsRef = new ewd.mumps.GlobalNode('TMP', ['XQCS', process.pid]);
 		xqcsRef._delete();
-		
+
 		var gloRef = new ewd.mumps.GlobalNode('TMP', [process.pid]);
         // **** essential addition by Rob! - must clear down the temporary global first:
         gloRef._delete();
@@ -697,23 +697,23 @@ module.exports = {
 			specialGloRef._setDocument(specialGlobalCountSet);
 		}
 		// end special
-		
+
         var status = ewd.mumps.function("RPCEXEC^ZZTDP", '^TMP(' + process.pid + ')') ;
         var resultsNode = gloRef.$('result');
         var results = resultsNode._getDocument();
-		
+
 		gloRef._delete();
 		return results;
 	},
-	
+
 	// need this special RPC wrapper for creating an order because the JSON -> MUMPS arg passing
 	// doesn't support the format for order checks
 	runRpcForSaveOrderChecks: function(params, session, ewd) {
         params.rpcContext = "OR CPRS GUI CHART";
-        
+
 		var xqcsRef = new ewd.mumps.GlobalNode('TMP', ['XQCS', process.pid]);
 		xqcsRef._delete();
-		
+
 		var gloRef = new ewd.mumps.GlobalNode('TMP', [process.pid]);
         // **** essential addition by Rob! - must clear down the temporary global first:
         gloRef._delete();
@@ -734,7 +734,7 @@ module.exports = {
 			specialGloRef._setDocument(specialGlobalCountSet);
 		}
 		// end special
-		
+
         var status = ewd.mumps.function("RPCEXEC^ZZTDP", '^TMP(' + process.pid + ')') ;
         var resultsNode = gloRef.$('result');
         var results = resultsNode._getDocument();
@@ -742,14 +742,13 @@ module.exports = {
 		return results;
 	},
 
-	
 	runReportsTabRpc: function(params, session, ewd) {
 		// params => { reportsTabName:"OR_VS:VITAL SIGNS~VS;ORDV04;47;", patientId: PID }
 		// params => { reportsTabName:"OR_VS:VITAL SIGNS~VS;ORDV04;47;", patientId: PID, fromDate: "20150704", toDate:"20150731", nRpts: 25 }
 		var fromDate = "0";
 		var toDate = "0";
 		var nRpts = "0";
-		
+
 		// setup date and nrpts so they have everything for RPC builder below
 		if (params.hasOwnProperty("fromDate") && params.fromDate) {
 			fromDate = params.fromDate;
@@ -785,22 +784,22 @@ module.exports = {
             ]
         };
         gloRef._setDocument(data, true, 1);
-        
+
         var status = ewd.mumps.function("RPCEXEC^ZZTDP", '^TMP(' + process.pid + ')') ;
         var resultsNode = gloRef.$('result');
         var results = resultsNode._getDocument();
-		
+
 		gloRef._delete();
-        
+
 		// the reports tab RPC returns a reference to where it stored the data - need to get it!! (and delete it)
 		var resultRef = results.value;
 		var resultGlo = getGlobalNodeFromRef(resultRef, ewd);
 		results = resultGlo._getDocument();
 		resultGlo._delete();
-		
+
 		return results;
 	},
-	
+
 	getVariableValue: function(arg, session, ewd) {
 		return ewd.mumps.function("GETV^XWBBRK", arg);
 	},
@@ -808,11 +807,11 @@ module.exports = {
 	encryptRpcParameter: function(arg, session, ewd) {
 		return ewd.mumps.function("ENCRYP^XUSRB1", arg);
 	},
-	
+
 	isActiveSession: function(session, ewd) {
 		return { result: notesLib.getSystemTime({}, session, ewd).indexOf('3') == 0 };
 	},
-	
+
 	setContext: function(contextName, session, ewd) {
 		if (!contextName || contextName === "") {
 			contextName = "OR CPRS GUI CHART";
@@ -861,11 +860,3 @@ module.exports = {
 		};
 	}
 };
-
-var chemHemLib = require('vistaChemHemLib');
-var allergiesLib = require('vistaAllergiesLib');
-var medsLib = require('vistaMedsLib');
-var radiologyOrdersLib = require('vistaRadiologyOrdersLib');
-var userLib = require('vistaUserLib');
-var notesLib = require('vistaNotesLib');
-var patientLib = require('vistaPatientLib');
