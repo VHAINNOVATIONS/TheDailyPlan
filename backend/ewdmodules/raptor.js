@@ -69,80 +69,6 @@ var operations = {
         }
     },
 
-    cancelRadiologyOrder: {
-        GET: function(ewd, session) {
-            var params = {
-                patientId: ewd.query.patientId,
-                orderId: ewd.query.orderId,
-                userId: ewd.query.userId,
-                providerId: ewd.query.providerId,
-                locationId: ewd.query.locationId,
-                reasonId: ewd.query.reasonId,
-                eSig: ewd.query.eSig
-            };
-
-            var ok = ewd.util.restoreSymbolTable(ewd, session);	//Flush symbol table and replace with ours
-            var result = vista.discontinueRadiologyOrder(params, session, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session);	//Grab our symbol table for use next time
-            return result;
-        }
-    },
-
-    /* Some example valid values that successfully created and released a new order:
-
-     params.patientId = "100856"; // BERRILLO test patient
-     params.providerId = "10000000344"; // RADIOLOGIST,SEVEN
-     params.userId = "10000000344";
-     params.locationId = "136"; // BECKY'S CLINIC
-     params.eSig = "RADIOLOGY7";
-     params.dialogId = "37";
-     params.orderableItemId = "3326"; // VENOUS REPAIR
-     params.orderStartDateTime = "Sep 17,2015@09:30";
-     params.urgencyCode = "9";
-     params.modeCode = "A";
-     params.classCode = "O";
-     params.submitTo = "14";
-     params.pregnant = "false";
-     params.isolation = "false";
-     params.preOpDateTime = "Sep 17,2015@08:30";
-     params.reasonForStudy = "Testing order writing via ewd web services";
-     params.clinicHx = "This is some history|separated with a pipe|the same way |MDWS takes it!";
-     //params.modifiers = "mod 1|mod 2" - TBD: any order types in dev environment have modifiers??
-     params.orderCheckOverrideReason = "Because I'm testing!!";
-     */
-    createNewRadiologyOrder: {
-        POST: function(ewd, session) {
-            var params = {
-                patientId: ewd.post_data.patientId,
-                providerId: ewd.post_data.providerId,
-                userId: ewd.post_data.userId,
-                eSig: ewd.post_data.eSig,
-                dialogId: ewd.post_data.dialogId,
-                locationId: ewd.post_data.locationId,
-                orderableItemId: ewd.post_data.orderableItemId,
-                orderStartDateTime: ewd.post_data.orderStartDateTime,
-                urgencyCode: ewd.post_data.urgencyCode,
-                modeCode: ewd.post_data.modeCode,
-                classCode: ewd.post_data.classCode,
-                submitTo: ewd.post_data.submitTo,
-                pregnant: ewd.post_data.pregnant,
-                isolation: ewd.post_data.isolation,
-                preOpDateTime: ewd.post_data.preOpDateTime,
-                reasonForStudy: ewd.post_data.reasonForStudy,
-
-                clinicHx: ewd.post_data.clinicHx, // separate lines with pipe character: '|'
-                orderCheckOverrideReason: ewd.post_data.orderCheckOverrideReason,
-
-                modifiers: ewd.post_data.modifiers // separate modifiers with pipe character: '|'
-            };
-
-            var ok = ewd.util.restoreSymbolTable(ewd, session);	//Flush symbol table and replace with ours
-            var result = vista.saveNewRadiologyOrder(params, session, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session);	//Grab our symbol table for use next time
-            return result;
-        }
-    },
-
     getAllergiesDetailMap: {
         GET: function(ewd, session) {
             var params = {
@@ -275,43 +201,6 @@ var operations = {
         GET: function(ewd, session) {
             var ok = ewd.util.restoreSymbolTable(ewd, session);	//Flush symbol table and replace with ours
             var result = userLib.cprsUserLookup({ target: ewd.query.target }, session, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session);	//Grab our symbol table for use next time
-            return result;
-        }
-    },
-
-    getRadiologyCancellationReasons: {
-        GET: function(ewd, session) {
-            var ok = ewd.util.restoreSymbolTable(ewd, session);	//Flush symbol table and replace with ours
-            var result = vista.getRadiologyOrderCancellationReasons({}, session, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session);	//Grab our symbol table for use next time
-            return result;
-        }
-    },
-
-    getRadiologyOrderChecks: {
-        GET: function(ewd, session) {
-            var params = {
-                patientId: ewd.query.patientId,
-                orderStartDateTime: ewd.query.orderStartDateTime, // expects format: Sep 10,2015@15:30
-                locationId: ewd.query.locationId,
-                orderableItemId: ewd.query.orderableItemId
-            };
-            var ok = ewd.util.restoreSymbolTable(ewd, session);	//Flush symbol table and replace with ours
-            var result = vista.getRadiologyOrderChecksForAcceptOrderRequest(params, session, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session);	//Grab our symbol table for use next time
-            return result;
-        }
-    },
-
-    getRadiologyOrderDialog: {
-        GET: function(ewd, session) {
-            var params = {
-                patientId: ewd.query.patientId,
-                dialogId: ewd.query.dialogId
-            };
-            var ok = ewd.util.restoreSymbolTable(ewd, session);	//Flush symbol table and replace with ours
-            var result = vista.getRadiologyOrderDialog(params, session, ewd);
             ok = ewd.util.saveSymbolTable(ewd, session);	//Grab our symbol table for use next time
             return result;
         }
