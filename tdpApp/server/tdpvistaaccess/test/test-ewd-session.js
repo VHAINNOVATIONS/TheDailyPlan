@@ -363,7 +363,7 @@ describe('ewd session test', function () {
     });
 
     it('get diet, lab orders', function (done) {
-        var pid = 296; //100846; //100022;
+        var pid = 100846; //100022;
         testSession.getOrdersAsClassified(pid, {}, function (err, result) {
             if (err) {
                 done(err);

@@ -160,7 +160,7 @@ module.exports = {
 	toIVMed: function(rawMedObj) {
 		var result = {};
 
-		rawLine1 = rawMedObj[0].split("^");
+		var rawLine1 = rawMedObj[0].split("^");
 
 		result.type = "IV";
 		result.id = rawLine1[1];
@@ -217,7 +217,7 @@ module.exports = {
 	toUnitDoseMed: function(rawMedObj, reportsTabObj) {
 		var result = {};
 
-		rawLine1 = rawMedObj[0].split("^");
+		var rawLine1 = rawMedObj[0].split("^");
 		result.type = "UD";
 		result.id = rawLine1[1];
 		// facility being set cxn site ID - can probably skip

@@ -1,14 +1,6 @@
-"use strict";
+//"use strict";
 
 var crypto = require('crypto');
-
-var chemHemLib = require('vistaChemHemLib');
-var allergiesLib = require('vistaAllergiesLib');
-var medsLib = require('vistaMedsLib');
-var radiologyOrdersLib = require('vistaRadiologyOrdersLib');
-var userLib = require('vistaUserLib');
-var notesLib = require('vistaNotesLib');
-var patientLib = require('vistaPatientLib');
 
 var encryptCredentials = function(accessCode, verifyCode, key) {
     //Enhanced by SAN Businesss Consultants 20150929 for symetry with PHP
@@ -442,45 +434,12 @@ module.exports = {
 
 	},
 
-	// radiology calls
-	saveNewRadiologyOrder: function(params, session, ewd) {
-		return radiologyOrdersLib.saveNewRadiologyOrderWithRules(params, session, ewd);
-	},
-
-	discontinueRadiologyOrder: function(params, session, ewd) {
-		if (params.eSig && params.eSig != "") {
-			return radiologyOrdersLib.discontinueAndSignRadiologyOrder(params, session, ewd);
-		} else {
-			return radiologyOrdersLib.discontinueRadiologyOrder(params, session, ewd);
-		}
-	},
-
-	getRadiologyOrderCancellationReasons: function(params, session, ewd) {
-		params.rpcName = "ORWDX2 DCREASON";
-		params.rpcArgs = [];
-		return this.runRpc(params, session, ewd);
-	},
-
-	getOrderableItems: function(params, session, ewd) {
-		return radiologyOrdersLib.getOrderableItems(params, session, ewd);
-	},
-
 	getImagingOrderTypes: function(params, session, ewd) {
 		params.rpcName = "ORWDRA32 IMTYPSEL";
 		params.rpcArgs = [];
 
 		return this.runRpc(params, session, ewd);
 	},
-
-	getRadiologyOrderDialog: function(params, session, ewd) {
-		return radiologyOrdersLib.getRadiologyOrderDialog(params, session, ewd);
-	},
-
-	getRadiologyOrderChecksForAcceptOrderRequest: function(params, session, ewd) {
-		return radiologyOrdersLib.getRadiologyOrderChecksForAcceptOrderRequest(params, session, ewd);
-	},
-
-	// end radiology calls
 
 
 		// FYI: RAPTOR is already receiving the patient ID with the worklist. This extra call to VistA is unnecessary
@@ -490,16 +449,6 @@ module.exports = {
 			throw new Error('Invalid request: ' + "$G(^RAO(75.1," + params.ien + ",0))");
 		}
 		return { result: response.split("^")[0] };
-	},
-
-
-	// notes calls
-	getNoteTitles: function(params, session, ewd) {
-		return notesLib.getNoteTitles(params, session, ewd);
-	},
-
-	getSurgeryReportsWithText: function(params, session, ewd) {
-		return notesLib.getSurgeryReportsWithText(params, session, ewd);
 	},
 
 	getSurgicalPathologyReports: function(params, session, ewd) {
@@ -515,15 +464,6 @@ module.exports = {
 		return this.runReportsTabRpc(params, session, ewd);
 	},
 	// end notes calls
-
-	getUserSecurityKeys: function(userId, session, ewd) {
-		return userLib.getUserSecurityKeys(userId, session, ewd);
-	},
-
-	cprsUserLookup: function(params, session, ewd) {
-		return userLib.cprsUserLookup(params, session, ewd);
-	},
-
 
 	getHospitalLocations: function(params, session, ewd) {
 		params.rpcName = "ORWU1 NEWLOC";
@@ -542,18 +482,6 @@ module.exports = {
 		params.rpcArgs.push({type: "LITERAL", value: direction});
 
 		return this.runRpc(params, session, ewd);
-	},
-
-	getAllMeds: function(params, session, ewd) {
-		return medsLib.getAllMeds(params, session, ewd);
-	},
-
-	getAllergies: function(params, session, ewd) {
-		return allergiesLib.getAllergies(params, session, ewd);
-	},
-
-	getChemHemReports: function(params, session, ewd) {
-		return chemHemLib.getChemHemReports(params, session, ewd);
 	},
 
 	getPatient: function(params, session, ewd) {
@@ -612,14 +540,6 @@ module.exports = {
 	getRadiologyReports: function(params, session, ewd) {
 		params.reportsTabName = "OR_R18:IMAGING~RIM;ORDV08;0;";
 		return this.runReportsTabRpc(params, session, ewd);
-	},
-
-	writeNote: function(params, session, ewd) {
-		return notesLib.writeNote(params, session, ewd);
-	},
-
-	signNote: function(params, session, ewd) {
-		return notesLib.signNote(params, session, ewd);
 	},
 
 	isValidESig: function(params, session, ewd) {
@@ -806,10 +726,6 @@ module.exports = {
 
 	encryptRpcParameter: function(arg, session, ewd) {
 		return ewd.mumps.function("ENCRYP^XUSRB1", arg);
-	},
-
-	isActiveSession: function(session, ewd) {
-		return { result: notesLib.getSystemTime({}, session, ewd).indexOf('3') == 0 };
 	},
 
 	setContext: function(contextName, session, ewd) {

@@ -197,6 +197,8 @@ var session = {
     get: function (route, parameters, callback) {
         var alias = this.location || 'default';
         var port = this.ports[alias];
+        console.log(this.ports);
+        console.log(alias);
         var options = _.assign({
             uri: this.baseUrl + port + this.serverRoute + route
         }, {
@@ -230,6 +232,8 @@ var session = {
     login: function (userInfo, callback) {
         this.location = userInfo.location;
         var self = this;
+        console.log(this.location);
+        console.log(userInfo);
         this.get('/initiate', null, function (err, body) {
             if (err) {
                 callback(err);
@@ -240,6 +244,7 @@ var session = {
                 var keysStr = userInfo.userKeys.map(function(userKey) {
                   return userKey.vista;
                 }).join('^');
+                console.log(credentials);
                 self.get('/login', {
                     credentials: credentials,
                     keys: keysStr
