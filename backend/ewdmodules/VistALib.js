@@ -231,42 +231,6 @@ module.exports = {
         }
     },
 
-    getWorklist: function(params, session, ewd) {
-        var ddrArgs = {
-            FILE: '75.1',
-            FLAGS: 'PB',
-            MAX: params.max,
-            FROM: params.from || '',
-            FIELDS: '.01I;.01;4;14;16;2;3;20;6;26;19;21;7I;5I'
-                //SCREEN: params.filterDiscontinued ? 'I ($P(^(0),U,5)'=1)' : ''
-        };
-
-        var results = this.ddrLister3(ddrArgs, session, ewd);
-        if (results.error) {
-            results.data = [];
-            results.error = JSON.stringify(results.errorResponse);
-            return results;
-        }
-
-        var fieldNames = ['IEN', 'PatientID', 'PatientName', 'ExamCategory', 'RequestingPhysician', 'OrderedDate', 'Procedure',
-            'ImageType', 'ExamLocation', 'Urgency', 'Nature', 'Transport', 'DesiredDate', 'OrderFileIen', 'RadOrderStatus'
-        ];
-
-        var parsed = {
-            data: []
-        };
-        for (var i = 0; i < results.data.length; i++) {
-            var pieces = results.data[i].split('^');
-            var current = {};
-            for (var j = 0; j < pieces.length; j++) {
-                current[fieldNames[j]] = pieces[j];
-            }
-            parsed.data.push(current);
-        }
-
-        return parsed;
-    },
-
     ddrLister3: function(params, session, ewd) {
         params.rpcName = 'DDR LISTER';
         params.rpcContext = 'DVBA CAPRI GUI';
@@ -526,16 +490,6 @@ module.exports = {
     getRadiologyReports: function(params, session, ewd) {
         params.reportsTabName = 'OR_R18:IMAGING~RIM;ORDV08;0;';
         return this.runReportsTabRpc(params, session, ewd);
-    },
-
-    isValidESig: function(params, session, ewd) {
-        params.rpcName = 'ORWU VALIDSIG';
-        params.rpcArgs = [{
-            type: 'LITERAL',
-            value: this.encryptRpcParameter(params.eSig, session, ewd)
-        }];
-
-        return (this.runRpc(params, session, ewd)).value == '1';
     },
 
     // helpers for running RPCs below

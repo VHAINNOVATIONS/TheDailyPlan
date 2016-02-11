@@ -9,7 +9,6 @@ var tiuLib = require('./vistaTiuLib');
 var chemHemLib = require('vistaChemHemLib');
 var allergiesLib = require('vistaAllergiesLib');
 var medsLib = require('vistaMedsLib');
-var userLib = require('vistaUserLib');
 var patientLib = require('vistaPatientLib');
 
 // REST & Web Service error response formatter function
@@ -24,53 +23,6 @@ var operations = {
     login: {
         GET: function(ewd, session) {
             return vista.login(ewd, session);
-        }
-    },
-
-    getWorklistDetailsMap: {
-        GET: function(ewd, session) {
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
-            var params = {
-                max: ewd.query.max,
-                from: ewd.query.from // joel 8-11-15 -> added for pagination
-            };
-            // joel - 8/29/15 adding to enable filtering per PHP code
-            params.filterDiscontinued = false;
-            if (ewd.query.hasOwnProperty('filterDiscontinued') && ewd.query['filterDiscontinued'] !== '') {
-                if (ewd.query['filterDiscontinued'].toUpperCase() == 'TRUE') {
-                    params.filterDiscontinued = true;
-                }
-            }
-
-            var results = vista.getWorklist(params, session, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time
-            return results;
-        }
-    },
-
-    getDashboardDetailsMap: {
-        GET: function(ewd, session) {
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
-
-            var params = {
-                file: '75.1', // joel changed from 100 -> 75.1
-                iens: [ewd.query.ien]
-            };
-            var radiologyOrder = vista.ddrGetsEntry2(params, session, ewd);
-
-            var correspondingOrderFileIen = radiologyOrder['7']['I'];
-            params = {
-                file: '100',
-                iens: [correspondingOrderFileIen]
-            };
-            var orderFileRec = vista.ddrGetsEntry2(params, session, ewd);
-
-            ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time
-
-            return {
-                'radiologyOrder': radiologyOrder,
-                'order': orderFileRec
-            };
         }
     },
 
@@ -210,17 +162,6 @@ var operations = {
         }
     },
 
-    getProviders: {
-        GET: function(ewd, session) {
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
-            var result = userLib.cprsUserLookup({
-                target: ewd.query.target
-            }, session, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time
-            return result;
-        }
-    },
-
     getRadiologyReportsDetailMap: {
         GET: function(ewd, session) {
             var params = {
@@ -274,15 +215,6 @@ var operations = {
             }];
             var result = vista.runRpc(params, session, ewd);
 
-            ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time
-            return result;
-        }
-    },
-
-    getUserSecurityKeys: {
-        GET: function(ewd, session) {
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
-            var result = userLib.getUserSecurityKeys(ewd.query.uid || ewd.query.providerId, session, ewd); // accept uid or providerId as arg
             ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time
             return result;
         }
@@ -393,19 +325,6 @@ var operations = {
             var result = tiuLib.resolveBoilerplates(params, session, ewd);
             ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time                                                             
             return result;
-        }
-    },
-
-    validateEsig: {
-        GET: function(ewd, session) {
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
-            var tf = vista.isValidESig({
-                eSig: ewd.query.eSig
-            }, session, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time
-            return {
-                result: tf
-            };
         }
     },
 
