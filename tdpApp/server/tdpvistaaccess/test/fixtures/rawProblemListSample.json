@@ -1,62 +1,62 @@
 {
-  "1": {
-    "WP": {
-      "1": "1^CAMP MASTER;500",
-      "2": "2^A",
-      "3": "3^Hypertension (ICD-9-CM 401.9)",
-      "5": "5^ICD-9-CM 401.9 [UNSPECIFIED ESSENTIAL HYPERTENSION]",
-      "7": "7^04/07/2005",
-      "8": "8^04/10/2007",
-      "9": "9^VEHU,ONEHUNDRED",
-      "11": "11^"
+    "1": {
+        "WP": {
+            "1": "1^CAMP MASTER;500",
+            "2": "2^A",
+            "3": "3^Hypertension (ICD-9-CM 401.9)",
+            "5": "5^ICD-9-CM 401.9 [UNSPECIFIED ESSENTIAL HYPERTENSION]",
+            "7": "7^04/07/2005",
+            "8": "8^04/10/2007",
+            "9": "9^VEHU,ONEHUNDRED",
+            "11": "11^"
+        }
+    },
+    "2": {
+        "WP": {
+            "1": "1^CAMP MASTER;500",
+            "2": "2^A",
+            "3": "3^Hyperlipidemia (ICD-9-CM 272.4)",
+            "5": "5^ICD-9-CM 272.4 [OTHER AND UNSPECIFIED HYPERLIPIDEMIA]",
+            "7": "7^04/07/2005",
+            "8": "8^04/10/2007",
+            "9": "9^VEHU,ONEHUNDRED",
+            "11": "11^"
+        }
+    },
+    "3": {
+        "WP": {
+            "1": "1^CAMP MASTER;500",
+            "2": "2^A",
+            "3": "3^Acute myocardial infarction, unspecified site, episode of care unspecified (ICD-9-CM 410.90)",
+            "5": "5^ICD-9-CM 410.90 [ACUTE MYOCARDIAL INFARCTION, UNSPECIFIED SITE, EPISODE OF CARE UNSPECIFIED]",
+            "7": "7^03/17/2005",
+            "8": "8^03/20/2005",
+            "9": "9^VEHU,EIGHTYTWO",
+            "11": "11^"
+        }
+    },
+    "4": {
+        "WP": {
+            "1": "1^CAMP MASTER;500",
+            "2": "2^A",
+            "3": "3^Chronic Systolic Heart failure (ICD-9-CM 428.22)",
+            "5": "5^ICD-9-CM 428.22 [CHRONIC SYSTOLIC HEART FAILURE]",
+            "7": "7^03/09/2004",
+            "8": "8^03/09/2004",
+            "9": "9^LABTECH,SPECIAL",
+            "11": "11^"
+        }
+    },
+    "5": {
+        "WP": {
+            "1": "1^CAMP MASTER;500",
+            "2": "2^A",
+            "3": "3^Diabetes Mellitus Type II or unspecified * (ICD-9-CM 250.00)",
+            "5": "5^ICD-9-CM 250.00 [DIABETES MELLITUS W/O MENTION OF COMPLICATION, TYPE II (NIDDM) (ADULT ONSET OR UNSPECIFIED TYPE), NOT STATED AS UNCONTROLLED]",
+            "7": "7^",
+            "8": "8^04/01/2004",
+            "9": "9^VEHU,EIGHTYTWO",
+            "11": "11^"
+        }
     }
-  },
-  "2": {
-    "WP": {
-      "1": "1^CAMP MASTER;500",
-      "2": "2^A",
-      "3": "3^Hyperlipidemia (ICD-9-CM 272.4)",
-      "5": "5^ICD-9-CM 272.4 [OTHER AND UNSPECIFIED HYPERLIPIDEMIA]",
-      "7": "7^04/07/2005",
-      "8": "8^04/10/2007",
-      "9": "9^VEHU,ONEHUNDRED",
-      "11": "11^"
-    }
-  },
-  "3": {
-    "WP": {
-      "1": "1^CAMP MASTER;500",
-      "2": "2^A",
-      "3": "3^Acute myocardial infarction, unspecified site, episode of care unspecified (ICD-9-CM 410.90)",
-      "5": "5^ICD-9-CM 410.90 [ACUTE MYOCARDIAL INFARCTION, UNSPECIFIED SITE, EPISODE OF CARE UNSPECIFIED]",
-      "7": "7^03/17/2005",
-      "8": "8^03/20/2005",
-      "9": "9^VEHU,EIGHTYTWO",
-      "11": "11^"
-    }
-  },
-  "4": {
-    "WP": {
-      "1": "1^CAMP MASTER;500",
-      "2": "2^A",
-      "3": "3^Chronic Systolic Heart failure (ICD-9-CM 428.22)",
-      "5": "5^ICD-9-CM 428.22 [CHRONIC SYSTOLIC HEART FAILURE]",
-      "7": "7^03/09/2004",
-      "8": "8^03/09/2004",
-      "9": "9^LABTECH,SPECIAL",
-      "11": "11^"
-    }
-  },
-  "5": {
-    "WP": {
-      "1": "1^CAMP MASTER;500",
-      "2": "2^A",
-      "3": "3^Diabetes Mellitus Type II or unspecified * (ICD-9-CM 250.00)",
-      "5": "5^ICD-9-CM 250.00 [DIABETES MELLITUS W/O MENTION OF COMPLICATION, TYPE II (NIDDM) (ADULT ONSET OR UNSPECIFIED TYPE), NOT STATED AS UNCONTROLLED]",
-      "7": "7^",
-      "8": "8^04/01/2004",
-      "9": "9^VEHU,EIGHTYTWO",
-      "11": "11^"
-    }
-  }
 }
