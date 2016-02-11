@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var vistaLib = require('./VistALib');
 
@@ -42,11 +42,11 @@ exports.getAllOrders = function(params, session, ewd) {
 	var response = vistaLib.runRpc(params, session, ewd);
 	var match = /^\^TMP\(\"ORR\",(\d+),\"(\d+,\d+)\"\)$/.exec(response.value);
 	if (match && match[1] && match[2]) {
-		var temp = new ewd.mumps.GlobalNode('TMP', ["ORR", match[1], match[2]]);
+		var temp = new ewd.mumps.GlobalNode('TMP', ['ORR', match[1], match[2]]);
 		var result = temp._getDocument();
-		delete result[".1"];
+		delete result['.1'];
 		Object.keys(result).forEach(function(key) {
-			result[key] = result[key].split('^')[0]
+			result[key] = result[key].split('^')[0];
 		});
 		result = fillOrders(result, params, session, ewd);
 		console.log(result);

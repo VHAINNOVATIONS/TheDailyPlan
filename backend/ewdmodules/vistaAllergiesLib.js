@@ -1,14 +1,16 @@
-"use strict";
+'use strict';
+
+var vistaLib = require('VistALib');
 
 module.exports = {
 	getAllergies: function(params, session, ewd) {
-		params.reportsTabName = "OR_BADR:ALLERGIES~ADR;ORDV01;73;";
+		params.reportsTabName = 'OR_BADR:ALLERGIES~ADR;ORDV01;73;';
 		var reportsTabAllergies = this.toAllergiesFromReport(vistaLib.runReportsTabRpc(params, session, ewd));
 
 		//return reportsTabAllergies;
 
-		params.rpcName = "ORQQAL LIST";
-		params.rpcArgs = [{type: "LITERAL", value: params.patientId}];
+		params.rpcName = 'ORQQAL LIST';
+		params.rpcArgs = [{type: 'LITERAL', value: params.patientId}];
 		var coverResponse = vistaLib.runRpc(params, session, ewd);
 		var coverSheetAllergies = this.toAllergiesFromCover(coverResponse);
 
@@ -30,7 +32,7 @@ module.exports = {
 		var lines = [];
 
 		// getDocument for global array result type turns lines in to object property names - just copy them over to a simple array
-		// e.g. { 1: "line 1", 2: "line 2", etc... }  -> want this: [ "line 1", "line 2", etc... ]
+		// e.g. { 1: 'line 1', 2: 'line 2', etc... }  -> want this: [ 'line 1', 'line 2', etc... ]
 		var currentIdx = 1;
 		while (coverSheetResponse.value.hasOwnProperty(currentIdx.toString())) {
 			lines.push(coverSheetResponse.value[currentIdx.toString()]);
@@ -38,7 +40,7 @@ module.exports = {
 		}
 
 		for (var i = 0; i < lines.length; i++) {
-			result.push(lines[i].split("^")[0]);
+			result.push(lines[i].split('^')[0]);
 		}
 
 		return result;
@@ -48,11 +50,11 @@ module.exports = {
 		var result = { };
 		var lines = [];
 
-		if (!coverSheetResponse.hasOwnProperty("value")) {
-			throw Error("Unexpected allergies response format: " + JSON.stringify(coverSheetResponse));
+		if (!coverSheetResponse.hasOwnProperty('value')) {
+			throw Error('Unexpected allergies response format: ' + JSON.stringify(coverSheetResponse));
 		}
 		// getDocument for global array result type turns lines in to object property names - just copy them over to a simple array
-		// e.g. { 1: "line 1", 2: "line 2", etc... }  -> want this: [ "line 1", "line 2", etc... ]
+		// e.g. { 1: 'line 1', 2: 'line 2', etc... }  -> want this: [ 'line 1', 'line 2', etc... ]
 		var currentIdx = 1;
 		while (coverSheetResponse.value.hasOwnProperty(currentIdx.toString())) {
 			lines.push(coverSheetResponse.value[currentIdx.toString()]);
@@ -60,7 +62,7 @@ module.exports = {
 		}
 
 		for (var i = 0; i < lines.length; i++) {
-			var pieces = lines[i].split("^");
+			var pieces = lines[i].split('^');
 			var newAllergy = {};
 			newAllergy.id = pieces[0];
 			newAllergy.allergenName = pieces[1];
@@ -76,7 +78,7 @@ module.exports = {
 		var lines = [];
 
 		// getDocument for global array result type turns lines in to object property names - just copy them over to a simple array
-		// e.g. { 1: "line 1", 2: "line 2", etc... }  -> want this: [ "line 1", "line 2", etc... ]
+		// e.g. { 1: 'line 1', 2: 'line 2', etc... }  -> want this: [ 'line 1', 'line 2', etc... ]
 		var currentIdx = 1;
 		while (reportsTabResponse.hasOwnProperty(currentIdx.toString())) {
 			lines.push(reportsTabResponse[currentIdx.toString()]);
@@ -87,31 +89,31 @@ module.exports = {
 			var newAllergy = { };
 			var curObj = lines[i].WP;
 
-			var facilityStr = curObj["1"]; //"1^CAMP MASTER;500"
-			var allergenStr = curObj["2"]; //"2^CHOCOLATE"
-			var allergenTypeStr = curObj["3"]; //"3^DRUG, FOOD"
-			var timestampStr = curObj["4"]; //"4^12/17/2007 14:56"
-			var typeStr = curObj["5"]; //"5^HISTORICAL"
-			// TODO - comment is in curObj["6"] somehow...
-			var idStr = curObj["7"]; //"7^972"
+			var facilityStr = curObj['1']; //'1^CAMP MASTER;500'
+			var allergenStr = curObj['2']; //'2^CHOCOLATE'
+			var allergenTypeStr = curObj['3']; //'3^DRUG, FOOD'
+			var timestampStr = curObj['4']; //'4^12/17/2007 14:56'
+			var typeStr = curObj['5']; //'5^HISTORICAL'
+			// TODO - comment is in curObj['6'] somehow...
+			var idStr = curObj['7']; //'7^972'
 
-			if (undefined != facilityStr && facilityStr != "") {
-				newAllergy.facility = { id: (facilityStr.split("^")[1]).split(";")[1], name: (facilityStr.split("^")[1]).split(";")[0] };
+			if (undefined !== facilityStr && facilityStr !== '') {
+				newAllergy.facility = { id: (facilityStr.split('^')[1]).split(';')[1], name: (facilityStr.split('^')[1]).split(';')[0] };
 			}
-			if (undefined != allergenStr && allergenStr != "") {
-				newAllergy.allergenName = allergenStr.split("^")[1];
+			if (undefined !== allergenStr && allergenStr !== '') {
+				newAllergy.allergenName = allergenStr.split('^')[1];
 			}
-			if (undefined != allergenTypeStr && allergenTypeStr != "") {
-				newAllergy.allergenType = allergenTypeStr.split("^")[1];
+			if (undefined !== allergenTypeStr && allergenTypeStr !== '') {
+				newAllergy.allergenType = allergenTypeStr.split('^')[1];
 			}
-			if (undefined != timestampStr && timestampStr != "") {
-				newAllergy.timestamp = timestampStr.split("^")[1];
+			if (undefined !== timestampStr && timestampStr !== '') {
+				newAllergy.timestamp = timestampStr.split('^')[1];
 			}
-			if (undefined != typeStr && typeStr != "") {
-				newAllergy.type = { name: typeStr.split("^")[1], category: "Allergies and Adverse Reactions" };
+			if (undefined !== typeStr && typeStr !== '') {
+				newAllergy.type = { name: typeStr.split('^')[1], category: 'Allergies and Adverse Reactions' };
 			}
-			if (undefined != idStr && idStr != "") {
-				newAllergy.id = idStr.split("^")[1];
+			if (undefined !== idStr && idStr !== '') {
+				newAllergy.id = idStr.split('^')[1];
 			}
 
 			result[newAllergy.id] = newAllergy;
@@ -120,5 +122,3 @@ module.exports = {
 		return result;
 	}
 };
-
-var vistaLib = require('VistALib');

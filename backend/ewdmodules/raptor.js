@@ -1,3 +1,5 @@
+'use strict';
+
 var vista = require('VistALib');
 var ordersLib = require('./vistaOrders');
 var patientSearchLib = require('./vistaPatientSearch');
@@ -34,8 +36,8 @@ var operations = {
             };
             // joel - 8/29/15 adding to enable filtering per PHP code
             params.filterDiscontinued = false;
-            if (ewd.query.hasOwnProperty("filterDiscontinued") && ewd.query["filterDiscontinued"] != "") {
-                if (ewd.query["filterDiscontinued"].toUpperCase() == "TRUE") {
+            if (ewd.query.hasOwnProperty('filterDiscontinued') && ewd.query['filterDiscontinued'] !== '') {
+                if (ewd.query['filterDiscontinued'].toUpperCase() == 'TRUE') {
                     params.filterDiscontinued = true;
                 }
             }
@@ -56,7 +58,7 @@ var operations = {
             };
             var radiologyOrder = vista.ddrGetsEntry2(params, session, ewd);
 
-            var correspondingOrderFileIen = radiologyOrder["7"]["I"];
+            var correspondingOrderFileIen = radiologyOrder['7']['I'];
             params = {
                 file: '100',
                 iens: [correspondingOrderFileIen]
@@ -65,7 +67,7 @@ var operations = {
 
             ok = ewd.util.saveSymbolTable(ewd, session);	//Grab our symbol table for use next time
 
-            return { "radiologyOrder" : radiologyOrder, "order" : orderFileRec };
+            return { 'radiologyOrder' : radiologyOrder, 'order' : orderFileRec };
         }
     },
 
@@ -131,8 +133,8 @@ var operations = {
         GET: function(ewd, session) {
             var params = {
                 patientId: ewd.query.patientId,
-                fromDate: "0",
-                toDate: "0"
+                fromDate: '0',
+                toDate: '0'
             };
             var ok = ewd.util.restoreSymbolTable(ewd, session);	//Flush symbol table and replace with ours
             var result = vista.getNotesWithText(params, session, ewd);
@@ -188,7 +190,7 @@ var operations = {
         GET: function(ewd, session) {
             var params = {
                 patientId: ewd.query.patientId,
-                type: ewd.query.type || ""
+                type: ewd.query.type || ''
             };
             var ok = ewd.util.restoreSymbolTable(ewd, session);	//Flush symbol table and replace with ours
             var result = vista.getProblemList(params, session, ewd);
@@ -252,8 +254,8 @@ var operations = {
             };
             var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
 
-            params.rpcName = "ORQQPX IMMUN LIST";
-            params.rpcArgs = [{type: "LITERAL", value: params.patientId}];
+            params.rpcName = 'ORQQPX IMMUN LIST';
+            params.rpcArgs = [{type: 'LITERAL', value: params.patientId}];
             var result = vista.runRpc(params, session, ewd);
 
             ok = ewd.util.saveSymbolTable(ewd, session);    //Grab our symbol table for use next time
@@ -355,8 +357,8 @@ var operations = {
         GET: function(ewd, session) {
             var params = {
                 patientId: ewd.query.patientId,
-                fromDate: ewd.query.fromDate || "",
-                toDate: ewd.query.toDate || ""
+                fromDate: ewd.query.fromDate || '',
+                toDate: ewd.query.toDate || ''
             };
             var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
             var result = healthFactorsLib.getPatientHealthFactors(params, session, ewd);
@@ -369,7 +371,7 @@ var operations = {
         GET: function(ewd, session) {
             var params = {
                 patientId: ewd.query.patientId,
-                text: ewd.query.text || ""
+                text: ewd.query.text || ''
             };
             var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours                                                            
             var result = tiuLib.resolveBoilerplates(params, session, ewd);
@@ -420,9 +422,10 @@ module.exports = {
     parse: function(ewd) {
         var resource = ewd.query.rest_path.split('/')[1];
         var session;
+        var method;
         if (resource === 'devtest') {
             //No authentication
-            var method = ewd.query.rest_method;
+            method = ewd.query.rest_method;
             return operations[resource][method](ewd, session);
         }
         if (resource !== 'initiate') {
@@ -438,7 +441,7 @@ module.exports = {
             }
             session = status.session;
         }
-        var method = ewd.query.rest_method;
+        method = ewd.query.rest_method;
         if (operations[resource] && operations[resource][method]) {
             return operations[resource][method](ewd, session);
         }

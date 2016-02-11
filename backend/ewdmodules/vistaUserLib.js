@@ -1,23 +1,27 @@
+'use strict';
+
+var vistaLib = require('VistALib');
+
 module.exports = {
 	
 	userHasKey: function(userId, keyName, session, ewd) {
-		var params = { rpcName: "ORWU NPHASKEY" };
+		var params = { rpcName: 'ORWU NPHASKEY' };
 		params.rpcArgs = [
-			{type: "LITERAL", value: userId },
-			{type: "LITERAL", value: keyName },
+			{type: 'LITERAL', value: userId },
+			{type: 'LITERAL', value: keyName },
 		];
 		var response = vistaLib.runRpc(params, session, ewd);
 		
-		return response.value == "1";
+		return response.value == '1';
 	},
 	
 	getUserSecurityKeys: function(userId, session, ewd) {
-		var params = { FILE: "19.1", MAX: "5000" };
+		var params = { FILE: '19.1', MAX: '5000' };
 		var lookupTable = vistaLib.ddrLister3(params, session, ewd);
 		
-		params.FILE = "200.051";
-		params.IENS = "," + userId + ",";
-		params.FIELDS = ".01"; // different from MDWS - was fetching fields 1,2,3 also but not using them!
+		params.FILE = '200.051';
+		params.IENS = ',' + userId + ',';
+		params.FIELDS = '.01'; // different from MDWS - was fetching fields 1,2,3 also but not using them!
 		var userKeys = vistaLib.ddrLister3(params, session, ewd);
 		
 		return this.toUserSecurityKeys(userKeys, lookupTable);
@@ -25,17 +29,19 @@ module.exports = {
 	
 	toUserSecurityKeys: function(userKeys, lookupTable) {
 		var lookupTableDict = {};
-		for (var i = 0; i < lookupTable.data.length; i++) {
-			var caratIdx = lookupTable.data[i].indexOf("^");
+		var i;
+		var keyName;
+		for (i = 0; i < lookupTable.data.length; i++) {
+			var caratIdx = lookupTable.data[i].indexOf('^');
 			var ien = lookupTable.data[i].substr(0, caratIdx);
-			var keyName = lookupTable.data[i].substr(caratIdx+1);
+			keyName = lookupTable.data[i].substr(caratIdx+1);
 			lookupTableDict[ien] = keyName;
 		}
 		
 		var result = [];
-		for (var i = 0; i < userKeys.data.length; i++) {
-			var pieces = userKeys.data[i].split("^");
-			var keyName = lookupTableDict.hasOwnProperty(pieces[1]) ? lookupTableDict[pieces[1]] : "";
+		for (i = 0; i < userKeys.data.length; i++) {
+			var pieces = userKeys.data[i].split('^');
+			keyName = lookupTableDict.hasOwnProperty(pieces[1]) ? lookupTableDict[pieces[1]] : '';
 			result.push({ name: keyName, permissionId: pieces[1], recordId: pieces[0] });
 		}
 		
@@ -43,13 +49,11 @@ module.exports = {
 	},
 	
 	cprsUserLookup: function(params, session, ewd) {
-		params.rpcName = "ORWU NEWPERS";
+		params.rpcName = 'ORWU NEWPERS';
 		params.rpcArgs = [];
-		params.rpcArgs.push({type: "LITERAL", value: params.target});
-		params.rpcArgs.push({type: "LITERAL", value: "1"});
+		params.rpcArgs.push({type: 'LITERAL', value: params.target});
+		params.rpcArgs.push({type: 'LITERAL', value: '1'});
 		return vistaLib.runRpc(params, session, ewd);
 	}
 	
 };
-
-var vistaLib = require('VistALib');

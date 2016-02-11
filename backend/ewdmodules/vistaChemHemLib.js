@@ -1,12 +1,15 @@
+'use strict';
+
+var vistaLib = require('VistALib');
 
 module.exports = {
 	getChemHemReports: function(params, session, ewd) {
 		// swap patient ID for lab data file ID
 		var lrdfn = this.getLrdfnFromDfn(params.patientId, session, ewd);
 		params.lrdfn = lrdfn;
-		// add time component on toDate if not specified
+		// add time component on toDate ifnot specified
 		if (params.toDate.indexOf('.') < 0) {
-			params.toDate = params.toDate + ".235959";
+			params.toDate = params.toDate + '.235959';
 		}
 		// get specimens via DDR for supplementing RPCs
 		var specimens = this.getChemHemSpecimens(params, session, ewd);
@@ -26,7 +29,7 @@ module.exports = {
 			
 			if (!specimens.hasOwnProperty(currentReport.id)) {
 				continue;
-			};
+			}
 			var associatedSpecimen = specimens[currentReport.id];
 			
 			// supplement report with specimen data
@@ -40,29 +43,29 @@ module.exports = {
 		
 		return finalResults;
 	},
-	
+
 	getChemHemReport: function(params, session, ewd) {
-		params.rpcName = "ORWLRR INTERIMG";
+		params.rpcName = 'ORWLRR INTERIMG';
 		params.rpcArgs = [];
 		
-		params.rpcArgs.push({type: "LITERAL", value: params.patientId});
-		params.rpcArgs.push({type: "LITERAL", value: params.date});
-		params.rpcArgs.push({type: "LITERAL", value: "1"});
-		params.rpcArgs.push({type: "LITERAL", value: "1"});
+		params.rpcArgs.push({type: 'LITERAL', value: params.patientId});
+		params.rpcArgs.push({type: 'LITERAL', value: params.date});
+		params.rpcArgs.push({type: 'LITERAL', value: '1'});
+		params.rpcArgs.push({type: 'LITERAL', value: '1'});
 		
 		var results = vistaLib.runRpc(params, session, ewd);
         
 		// TODO - consider auto-detecting this type of thing in runRpc...
 		// ORWLRR INTERIMG returns a global array reference - need to get it after calling RPC
 		var resultRef = results.value;
-		if (!resultRef || resultRef == "") {
+		if (!resultRef || resultRef === '') {
 			return null;
 		}
 		var resultGlo = vistaLib.getGlobalNodeFromRef(resultRef, ewd);
 		results = resultGlo._getDocument();
 		resultGlo._delete();
 		
-		if (!results || !results.hasOwnProperty("1")) { // make sure result looks legit
+		if (!results || !results.hasOwnProperty('1')) { // make sure result looks legit
 			return null;
 		}
 		return this.toChemHemReport(results);
@@ -72,24 +75,23 @@ module.exports = {
 		var result = {};
 		
 		var lines = [];
-		
+	
 		// getDocument for global array result type turns lines in to object property names - just copy them over to a simple array
-		// e.g. { 1: "line 1", 2: "line 2", etc... }  -> want this: [ "line 1", "line 2", etc... ]
+		// e.g. { 1: 'line 1', 2: 'line 2', etc... }  -> want this: [ 'line 1', 'line 2', etc... ]
 		var currentIdx = 1;
 		while (rpcResult.hasOwnProperty(currentIdx.toString())) {
 			lines.push(rpcResult[currentIdx.toString()]);
 			currentIdx++;
 		}
 		// done copy to simple array
-		
-		var fields = lines[0].split("^");
-		
-		if (fields[1] != "CH" || lines[1].length == 1) {
-			return { msg: "NOT CH" };
+				var fields = lines[0].split('^');
+	
+		if (fields[1] != 'CH' || lines[1].length == 1) {
+			return { msg: 'NOT CH' };
 		}
 		
 		var noTests = Number(fields[0]);
-		result.id = fields[2] + "^" + fields[5];
+		result.id = fields[2] + '^' + fields[5];
 		result.timestamp = fields[2];
 		result.specimen = { };
 		result.specimen.collectionDate = fields[2];
@@ -101,7 +103,7 @@ module.exports = {
 		var i = 1;
 		for (i = 1; i <= noTests; i++) {
 			var labResult = {};
-			fields = lines[i].split("^");
+			fields = lines[i].split('^');
 			labResult.labTest = {};
 			labResult.labTest.id = fields[0];
 			labResult.labTest.name = fields[1];
@@ -113,26 +115,26 @@ module.exports = {
 			result.labResults.push(labResult);
 		}
 		
-		result.comment = "";;
+		result.comment = '';
 		while (i < lines.length) {
-			result.comment = result.comment + lines[i++].trim() + "\r\n";
+			result.comment = result.comment + lines[i++].trim() + '\r\n';
 		}
 		
 		return result;
 	},
 	
 	getChemHemSpecimens: function(params, session, ewd) {
-		params.FILE = "63.04";
-		params.IENS = "," + params.lrdfn + ",";
-		params.FIELDS = ".01;.03;.05E;.06;.08;.112E";
-		params.FLAGS = "IP";
-		params.XREF = "#";
-		params.SCREEN = "S FD=" + params.fromDate + ",TD=" + params.toDate + ",CDT=$P(^(0),U,3) I CDT>=FD,CDT<TD";
-		params.ID = "S X=$P(^(0),U,14) I X'= \"\" S Y=$P($G(^DIC(4,X,99)),U,1) D EN^DDIOL(Y)";
+		params.FILE = '63.04';
+		params.IENS = ',' + params.lrdfn + ',';
+		params.FIELDS = '.01;.03;.05E;.06;.08;.112E';
+		params.FLAGS = 'IP';
+		params.XREF = '#';
+		params.SCREEN = 'S FD=' + params.fromDate + ',TD=' + params.toDate + ',CDT=$P(^(0),U,3) I CDT>=FD,CDT<TD';
+		params.ID = 'S X=$P(^(0),U,14) I X\'= "" S Y=$P($G(^DIC(4,X,99)),U,1) D EN^DDIOL(Y)';
 
 		var ddrResults = vistaLib.ddrLister3(params, session, ewd); // TODO: change this to use DDR LISTER 3 implementation!!!
 
-		if (!ddrResults.hasOwnProperty("data")) {
+		if (!ddrResults.hasOwnProperty('data')) {
 			return {};
 		}
 		return this.toChemHemSpecimens(ddrResults.data);
@@ -156,7 +158,7 @@ module.exports = {
 				current.facility = { id: pieces[7], name: pieces[6] };
 			}
 			
-			var key = pieces[1] + "^" + pieces[4];
+			var key = pieces[1] + '^' + pieces[4];
 			result[key] = current;
 		}
 		
@@ -164,8 +166,6 @@ module.exports = {
 	},
 	
 	getLrdfnFromDfn: function(dfn, session, ewd) {
-		return vistaLib.getVariableValue("$G(^DPT(" + dfn + ",\"LR\"))", session, ewd);
+		return vistaLib.getVariableValue('$G(^DPT(' + dfn + ',"LR"))', session, ewd);
 	}
 };
-
-var vistaLib = require('VistALib');

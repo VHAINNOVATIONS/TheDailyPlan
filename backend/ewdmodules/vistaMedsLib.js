@@ -1,11 +1,11 @@
-"use strict";
+'use strict';
 
 var vistaLib = require('VistALib');
 
 module.exports = {
 	getAllMeds: function(params, session, ewd) {
-		params.rpcName = "ORWPS ACTIVE";
-		params.rpcArgs = [{type: "LITERAL", value: params.patientId}];
+		params.rpcName = 'ORWPS ACTIVE';
+		params.rpcArgs = [{type: 'LITERAL', value: params.patientId}];
 		var response = vistaLib.runRpc(params, session, ewd);
 
 		var meds = this.toAllMeds(response, params, session, ewd);
@@ -17,7 +17,7 @@ module.exports = {
 
 	toAllMeds: function(response, params, session, ewd) {
 		var result = [];
-		if (!response || !response.hasOwnProperty("value")) {
+		if (!response || !response.hasOwnProperty('value')) {
 			return result;
 		}
 
@@ -26,18 +26,18 @@ module.exports = {
 
 		// ORWPS ACTIVE response example:
 		//{
-		//	"type":"ARRAY",
-		//	"value":
+		//	'type':'ARRAY',
+		//	'value':
 		//	{
-		//		"1":"~NV^1N;O^FEXOFENADINE HCL 6MG/ML ORAL SUSP^^^^^^33838^ACTIVE",
-		//		"2":" FEXOFENADINE HCL 6MG/ML ORAL SUSP",
-		//		"3":"\\ 1 TEASPOONFUL (5ML) MOUTH EVERY DAY",
-		//		"4":"~NV^2N;O^VITAMIN B COMP W/C & FOLIC (DEXFOL) TAB^^^^^^33839^ACTIVE",
-		//		"5":" VITAMIN B COMP W/C & FOLIC (DEXFOL) TAB",
-		//		"6":"\\ 1 TAB MOUTH EVERY DAY",
-		//		"7":"~NV^3N;O^SIMVASTATIN 20MG TAB^^^^^^33842^ACTIVE",
-		//		"8":" SIMVASTATIN 20MG TAB",
-		//		"9":"\\ 20MG MOUTH TWICE A DAY"
+		//		'1':'~NV^1N;O^FEXOFENADINE HCL 6MG/ML ORAL SUSP^^^^^^33838^ACTIVE',
+		//		'2':' FEXOFENADINE HCL 6MG/ML ORAL SUSP',
+		//		'3':'\\ 1 TEASPOONFUL (5ML) MOUTH EVERY DAY',
+		//		'4':'~NV^2N;O^VITAMIN B COMP W/C & FOLIC (DEXFOL) TAB^^^^^^33839^ACTIVE',
+		//		'5':' VITAMIN B COMP W/C & FOLIC (DEXFOL) TAB',
+		//		'6':'\\ 1 TAB MOUTH EVERY DAY',
+		//		'7':'~NV^3N;O^SIMVASTATIN 20MG TAB^^^^^^33842^ACTIVE',
+		//		'8':' SIMVASTATIN 20MG TAB',
+		//		'9':'\\ 20MG MOUTH TWICE A DAY'
 		//	}
 		//}	
 
@@ -45,11 +45,12 @@ module.exports = {
 		// it's needed because med results may have different numbers of lines for different types so we key off tilde
 		var rawMeds = [];
 		var currRaw = null;
-		for (var i = 1; response.value.hasOwnProperty(i.toString()); i++) { 
-			if (response.value[i.toString()].indexOf("~") == 0) {
-				if (currRaw == null) {
+		var i;
+		for (i = 1; response.value.hasOwnProperty(i.toString()); i++) { 
+			if (response.value[i.toString()].indexOf('~') === 0) {
+				if (currRaw === null) {
 					currRaw = { 
-						medicationType: this.getTypeFromCode(response.value[i.toString()].split("^")[0].split("~")[1]), // init type to make these easier to use below 
+						medicationType: this.getTypeFromCode(response.value[i.toString()].split('^')[0].split('~')[1]), // init type to make these easier to use below 
 						rawLines: []
 					};
 				}
@@ -64,34 +65,34 @@ module.exports = {
 		}
 
 		// push last med on to array
-		if (currRaw != null) {
+		if (currRaw !== null) {
 			rawMeds.push(currRaw);
 		}
 		// done setup! 
 
 		// now loop through prepared array and supplement
-		for (var i = 0; i < rawMeds.length; i++) {
+		for (i = 0; i < rawMeds.length; i++) {
 			var current = rawMeds[i];
 			// build med results, supplement if appropriate, lazy load supplemental results
-			if (current.medicationType.hasOwnProperty("isOutpatient")) {
-				if (opSupplements == null) {
+			if (current.medicationType.hasOwnProperty('isOutpatient')) {
+				if (opSupplements === null) {
 					opSupplements = this.getOutpatientMedsFromReportsTab(params, session, ewd);
 				}
 				current = this.toOutpatientMed(current.rawLines, opSupplements);
 				result.push(current);
 			}
-			else if (current.medicationType.hasOwnProperty("isIV")) {
+			else if (current.medicationType.hasOwnProperty('isIV')) {
 				current = this.toIVMed(current.rawLines);
 				result.push(current);
 			}
-			else if (current.medicationType.hasOwnProperty("isUnitDose")) {
-				if (udSupplements == null) {
+			else if (current.medicationType.hasOwnProperty('isUnitDose')) {
+				if (udSupplements === null) {
 					udSupplements = this.getUnitDoseMedsFromReportsTab(params, session, ewd);
 				}
 				current = this.toUnitDoseMed(current.rawLines, udSupplements);
 				result.push(current);
 			}
-			else if (current.medicationType.hasOwnProperty("isInForOut")) { 
+			else if (current.medicationType.hasOwnProperty('isInForOut')) { 
 				current = this.toInpatientForOutpatientMed(current.rawLines);
 				result.push(current);
 			}
@@ -103,27 +104,27 @@ module.exports = {
 
 	// don't use this function - only for encapsulating the type determination when supplementing meds
 	getTypeFromCode: function(code) {
-		if (code == "OP") {
+		if (code == 'OP') {
 			return { code: code, isOutpatient: true };
-		} else if (code == "IV") {
+		} else if (code == 'IV') {
 			return { code: code, isIV: true };
-		} else if (code == "NV") {
+		} else if (code == 'NV') {
 			return { code: code, isNonVA: true };
-		} else if (code == "UD") {
+		} else if (code == 'UD') {
 			return { code: code, isUnitDose: true };
-		} else if (code == "CP") {
+		} else if (code == 'CP') {
 			return { code: code, isInForOut: true };
 		} else {
-			return { code: code, type: "unknown" };
+			return { code: code, type: 'unknown' };
 		}
 	},
 
 	toOutpatientMed: function(rawMedObj, reportsTabObj) {
 		var result = {};
 
-		var line1Pieces = rawMedObj[0].split("^");
+		var line1Pieces = rawMedObj[0].split('^');
 
-		result.type = line1Pieces[0].split("~")[1];
+		result.type = line1Pieces[0].split('~')[1];
 		result.id = line1Pieces[1];
 		result.name = line1Pieces[2];
 		result.refills = line1Pieces[5];
@@ -138,7 +139,7 @@ module.exports = {
 		result.sig = rawMedObj[2];
 
 		var numericResultId = result.id.replace(/\D/g,''); //remove all non-numeric chars
-		if (reportsTabObj != null && reportsTabObj.hasOwnProperty(numericResultId)) {
+		if (reportsTabObj !== null && reportsTabObj.hasOwnProperty(numericResultId)) {
 			result.rxNumber = reportsTabObj[numericResultId].rxNumber;
 			result.drug = reportsTabObj[numericResultId].drug;
 			result.cost = reportsTabObj[numericResultId].cost;
@@ -160,14 +161,14 @@ module.exports = {
 	toIVMed: function(rawMedObj) {
 		var result = {};
 
-		var rawLine1 = rawMedObj[0].split("^");
+		var rawLine1 = rawMedObj[0].split('^');
 
-		result.type = "IV";
+		result.type = 'IV';
 		result.id = rawLine1[1];
 		result.name = rawLine1[2];
 		result.orderId = rawLine1[8];
 		// set facility to connection site? seems like we can probably skip this...
-		result.route = "INTRAVENOUS";
+		result.route = 'INTRAVENOUS';
 		result.dose = rawLine1[6];
 		result.isIV = true;
 		result.isInpatient = true;
@@ -175,19 +176,20 @@ module.exports = {
 		result.stopDate = rawLine1[4];
 		result.startDate = rawLine1[15];
 
-		result.detail = "";
-		for (var i = 1; i < rawMedObj.length; i++){
-			result.detail += (rawMedObj[i] + "\r\n");
+		result.detail = '';
+		var i;
+		for (i = 1; i < rawMedObj.length; i++){
+			result.detail += (rawMedObj[i] + '\r\n');
 		}
 
-		var textFields = result.detail.split("\r\n");
+		var textFields = result.detail.split('\r\n');
 
 		if (textFields.length > 0)
 		{
-			if (result.dose == "" && textFields[0].length > 0)
+			if (result.dose === '' && textFields[0].length > 0)
 			{
 				var firstIndexOfNumber = 0;
-				for (var i = 0; i < textFields[0].length; i++) {
+				for (i = 0; i < textFields[0].length; i++) {
 					var currentChar = textFields[0][i];
 					if ('0' <= currentChar && currentChar <= '9') {
 						firstIndexOfNumber = i;
@@ -201,11 +203,11 @@ module.exports = {
 			}
 
 			for (var line in textFields) {
-				if (line.indexOf("\\in") > 0) {
-					result.solution = line.replace("\\in", "");
+				if (line.indexOf('\\in') > 0) {
+					result.solution = line.replace('\\in', '');
 				}
-				else if (line.indexOf("\\IV") > 0) {
-					result.schedule = line.replace("\\IV", "");
+				else if (line.indexOf('\\IV') > 0) {
+					result.schedule = line.replace('\\IV', '');
 				}
 			}
 		}
@@ -217,8 +219,8 @@ module.exports = {
 	toUnitDoseMed: function(rawMedObj, reportsTabObj) {
 		var result = {};
 
-		var rawLine1 = rawMedObj[0].split("^");
-		result.type = "UD";
+		var rawLine1 = rawMedObj[0].split('^');
+		result.type = 'UD';
 		result.id = rawLine1[1];
 		// facility being set cxn site ID - can probably skip
 		result.orderId = rawLine1[8];
@@ -232,20 +234,20 @@ module.exports = {
 		result.startDate = rawLine1[15];
 		result.stopDate = rawLine1[4];
 
-		result.detail = "";
+		result.detail = '';
 		for (var i = 1; i < rawMedObj.length; i++){
-			result.detail += (rawMedObj[i] + "\r\n");
+			result.detail += (rawMedObj[i] + '\r\n');
 		}
 
-		var textFields = result.detail.split("\r\n");
+		var textFields = result.detail.split('\r\n');
 
 		var rptsTabMatch = null;
 		for (var prop in reportsTabObj) {
 			if (reportsTabObj.hasOwnProperty(prop)) {
-				if (result.drug.value == reportsTabObj[prop].drug.value
-					&& result.drug.startDate == reportsTabObj[prop].startDate
-					&& result.drug.stopDate == reportsTabObj[prop].stopDate
-					&& result.dose == reportsTabObj[prop].dose) {
+				if ((result.drug.value === reportsTabObj[prop].drug.value) &&
+					(result.drug.startDate === reportsTabObj[prop].startDate) &&
+					(result.drug.stopDate === reportsTabObj[prop].stopDate) &&
+					(result.dose === reportsTabObj[prop].dose)) {
 
 					rptsTabMatch = reportsTabObj[prop];
 					break;
@@ -253,7 +255,7 @@ module.exports = {
 			}
 		}
 
-		if (rptsTabMatch != null) {
+		if (rptsTabMatch !== null) {
 			result.drug = rptsTabMatch.drug;
 			result.stopDate = rptsTabMatch.stopDate;
 			result.startDate = rptsTabMatch.startDate;
@@ -269,34 +271,34 @@ module.exports = {
 	toInpatientForOutpatientMed: function(rawMedObj, reportsTabObj) {
 		var result = {};
 
-		var rawLine1 = rawMedObj[0].split("^");
-		result.type = "CP";
-		result.rawLine1[1];
+		var rawLine1 = rawMedObj[0].split('^');
+		result.type = 'CP';
+		//result.rawLine1[1];
 		// MDWS adding facility from connected site ID - prolly not needed
 		result.orderId = rawLine1[8];
-		med.isOutpatient = true;
-		med.isImo = true;
+		result.isOutpatient = true;
+		result.isImo = true;
 
-		med.hospital = { 
-			key: rawLine1[0].split(":")[2], 
-			value: rawLine1[0].split(":")[2]
+		result.hospital = { 
+			key: rawLine1[0].split(':')[2], 
+			value: rawLine1[0].split(':')[2]
 		};
-		med.drug = { value: rawLine1[2] }; 
-		med.name = rawLine1[2];
-		med.dose = rawLine1[6];
-		med.startDate = rawLine1[15];
-		med.stopDate = rawLine1[4];
+		result.drug = { value: rawLine1[2] }; 
+		result.name = rawLine1[2];
+		result.dose = rawLine1[6];
+		result.startDate = rawLine1[15];
+		result.stopDate = rawLine1[4];
 
-		med.detail = "";
+		result.detail = '';
 		for (var i = 1; i < rawMedObj.length; i++){
-			result.detail += (rawMedObj[i] + "\r\n");
+			result.detail += (rawMedObj[i] + '\r\n');
 		}
 
 		return result;
 	},
 
 	getOtherMedsFromReportsTab: function(params, session, ewd) {
-		params.reportsTabName = "OR_RXN:HERBAL/OTC/NON-VA MEDS~NVA;ORDV06A;0;";
+		params.reportsTabName = 'OR_RXN:HERBAL/OTC/NON-VA MEDS~NVA;ORDV06A;0;';
 		//return vistaLib.runReportsTabRpc(params, session, ewd);
 		return this.toOtherMeds(vistaLib.runReportsTabRpc(params, session, ewd));
 	},
@@ -308,25 +310,25 @@ module.exports = {
 			var responseIn = response[propOut];
 			if (responseIn) {
 				for (var prop in responseIn) {
-					if (responseIn.hasOwnProperty(prop) && responseIn[prop]["WP"]) {
-						var raw = responseIn[prop]["WP"];
-						var current = { type: "NV", isOutpatient: true, isNonVa: true };
+					if (responseIn.hasOwnProperty(prop) && responseIn[prop]['WP']) {
+						var raw = responseIn[prop]['WP'];
+						var current = { type: 'NV', isOutpatient: true, isNonVa: true };
 
-						var facilityStr = raw["1"].split("^")[1].split(";"); // e.g. MedObj["1"] : "1^CAMP MASTER;500"
+						var facilityStr = raw['1'].split('^')[1].split(';'); // e.g. MedObj['1'] : '1^CAMP MASTER;500'
 						current.facility = { id: facilityStr[1], name: facilityStr[0] };
 
-						current.name = raw.hasOwnProperty("2") ? raw["2"].split("^")[1] : "";
-						current.status = raw.hasOwnProperty("3") ? raw["3"].split("^")[1] : "";
-						current.startDate = raw.hasOwnProperty("4") ? raw["4"].split("^")[1] : "";
-						current.dateDocumented = raw.hasOwnProperty("5") ? raw["5"].split("^")[1] : "";
-						current.documentor = { name: (raw.hasOwnProperty("6") ? raw["6"].split("^")[1] : "") };
-						current.stopDate = raw.hasOwnProperty("7") ? raw["7"].split("^")[1] : "";
-						current.sig = raw.hasOwnProperty("8") ? raw["8"].split("^")[1] : "";
-						if (raw.hasOwnProperty("10") && raw["10"].hasOwnProperty("1")) {
-							current.comment = "";
+						current.name = raw.hasOwnProperty('2') ? raw['2'].split('^')[1] : '';
+						current.status = raw.hasOwnProperty('3') ? raw['3'].split('^')[1] : '';
+						current.startDate = raw.hasOwnProperty('4') ? raw['4'].split('^')[1] : '';
+						current.dateDocumented = raw.hasOwnProperty('5') ? raw['5'].split('^')[1] : '';
+						current.documentor = { name: (raw.hasOwnProperty('6') ? raw['6'].split('^')[1] : '') };
+						current.stopDate = raw.hasOwnProperty('7') ? raw['7'].split('^')[1] : '';
+						current.sig = raw.hasOwnProperty('8') ? raw['8'].split('^')[1] : '';
+						if (raw.hasOwnProperty('10') && raw['10'].hasOwnProperty('1')) {
+							current.comment = '';
 							var currentLine = 1;
-							while (raw["10"].hasOwnProperty(currentLine.toString())) {
-								current.comment += (raw["10"][currentLine.toString()]).split("^")[1] + "\r\n";
+							while (raw['10'].hasOwnProperty(currentLine.toString())) {
+								current.comment += (raw['10'][currentLine.toString()]).split('^')[1] + '\r\n';
 								currentLine++;
 							}
 							current.comment = current.comment.trim();
@@ -341,7 +343,7 @@ module.exports = {
 	},
 
 	getOutpatientMedsFromReportsTab: function(params, session, ewd) {
-		params.reportsTabName = "OR_RXOP:ALL OUTPATIENT~RXOP;ORDV06;28;";
+		params.reportsTabName = 'OR_RXOP:ALL OUTPATIENT~RXOP;ORDV06;28;';
 		return this.toOutpatientMedsFromReportsTab(vistaLib.runReportsTabRpc(params, session, ewd));
 	},
 
@@ -352,32 +354,32 @@ module.exports = {
 		// next two lines are how one iterates over object properties in js
 		for (var prop in response.result) {
 			if (response.result.hasOwnProperty(prop)) {
-				var raw = response.result[prop]["WP"];
-				var current = { type: "OP", isOutpatient: true }; // initialize these defaults
+				var raw = response.result[prop]['WP'];
+				var current = { type: 'OP', isOutpatient: true }; // initialize these defaults
 
-				var facilityStr = raw["1"].split("^")[1].split(";"); // e.g. MedObj["1"] : "1^CAMP MASTER;500"
+				var facilityStr = raw['1'].split('^')[1].split(';'); // e.g. MedObj['1'] : '1^CAMP MASTER;500'
 				current.facility = { id: facilityStr[1], name: facilityStr[0] };
 
-				current.name = raw.hasOwnProperty("2") ? raw["2"].split("^")[1] : ""; // e.g. MedObj["3"] : "3^MORPHINE ORAL 10MG/5ML CC "
-				current.drug = { id: raw["3"].split("^")[1], name: current.name }; // e.g. MedObj["2"] : "2^123"
-				current.rxNumber = raw.hasOwnProperty("4") ? raw["4"].split("^")[1] : ""; // e.g. etc...
-				current.status = raw.hasOwnProperty("5") ? raw["5"].split("^")[1] : "";
-				current.quantity = raw.hasOwnProperty("6") ? raw["6"].split("^")[1] : "";
-				current.expirationDate = raw.hasOwnProperty("7") ? raw["7"].split("^")[1] : "";
-				current.issueDate = raw.hasOwnProperty("8") ? raw["8"].split("^")[1] : "";
-				current.lastFillDate = raw.hasOwnProperty("9") ? raw["9"].split("^")[1] : "";
-				current.refills = raw.hasOwnProperty("10") ? raw["10"].split("^")[1] : "";
-				current.provider = raw.hasOwnProperty("11") ? { name: raw["11"].split("^")[1] } : {};
-				current.cost = raw.hasOwnProperty("12") ? raw["12"].split("^")[1] : "";
-				current.id = raw.hasOwnProperty("15") ? raw["15"].split("^")[1] : "";
-				current.stopDate = raw.hasOwnProperty("16") ? raw["16"].split("^")[1] : "";
+				current.name = raw.hasOwnProperty('2') ? raw['2'].split('^')[1] : ''; // e.g. MedObj['3'] : '3^MORPHINE ORAL 10MG/5ML CC '
+				current.drug = { id: raw['3'].split('^')[1], name: current.name }; // e.g. MedObj['2'] : '2^123'
+				current.rxNumber = raw.hasOwnProperty('4') ? raw['4'].split('^')[1] : ''; // e.g. etc...
+				current.status = raw.hasOwnProperty('5') ? raw['5'].split('^')[1] : '';
+				current.quantity = raw.hasOwnProperty('6') ? raw['6'].split('^')[1] : '';
+				current.expirationDate = raw.hasOwnProperty('7') ? raw['7'].split('^')[1] : '';
+				current.issueDate = raw.hasOwnProperty('8') ? raw['8'].split('^')[1] : '';
+				current.lastFillDate = raw.hasOwnProperty('9') ? raw['9'].split('^')[1] : '';
+				current.refills = raw.hasOwnProperty('10') ? raw['10'].split('^')[1] : '';
+				current.provider = raw.hasOwnProperty('11') ? { name: raw['11'].split('^')[1] } : {};
+				current.cost = raw.hasOwnProperty('12') ? raw['12'].split('^')[1] : '';
+				current.id = raw.hasOwnProperty('15') ? raw['15'].split('^')[1] : '';
+				current.stopDate = raw.hasOwnProperty('16') ? raw['16'].split('^')[1] : '';
 
 				// get sig lines from 14 - line numbers should be object properties
-				if (raw.hasOwnProperty("14") && raw["14"].hasOwnProperty("1")) {
-					current.sig = "";
+				if (raw.hasOwnProperty('14') && raw['14'].hasOwnProperty('1')) {
+					current.sig = '';
 					var currentLine = 1;
-					while (raw["14"].hasOwnProperty(currentLine.toString())) {
-						current.sig += (raw["14"][currentLine.toString()]).split("^")[1] + "\r\n";
+					while (raw['14'].hasOwnProperty(currentLine.toString())) {
+						current.sig += (raw['14'][currentLine.toString()]).split('^')[1] + '\r\n';
 						currentLine++;
 					}
 					current.sig = current.sig.trim();
@@ -391,7 +393,7 @@ module.exports = {
 	},
 
 	getUnitDoseMedsFromReportsTab: function(params, session, ewd) {
-		params.reportsTabName = "OR_RXUD:UNIT DOSE~RXUD;ORDV06;29;";
+		params.reportsTabName = 'OR_RXUD:UNIT DOSE~RXUD;ORDV06;29;';
 		return this.toUnitDoseMedsFromReportsTab(vistaLib.runReportsTabRpc(params, session, ewd));
 	},
 
@@ -402,20 +404,20 @@ module.exports = {
 		// next two lines are how one iterates over object properties in js
 		for (var prop in response.result) {
 			if (response.result.hasOwnProperty(prop)) {
-				var raw = response.result[prop]["WP"];
-				var current = { type: "UD", isUnitDose: true, isInpatient: true, sig: "" }; // initialize these defaults
+				var raw = response.result[prop]['WP'];
+				var current = { type: 'UD', isUnitDose: true, isInpatient: true, sig: '' }; // initialize these defaults
 
-				var facilityStr = raw["1"].split("^")[1].split(";"); // e.g. MedObj["1"] : "1^CAMP MASTER;500"
+				var facilityStr = raw['1'].split('^')[1].split(';'); // e.g. MedObj['1'] : '1^CAMP MASTER;500'
 				current.facility = { id: facilityStr[1], name: facilityStr[0] };
 
-				current.id = raw.hasOwnProperty("2") ? raw["2"].split("^")[1] : ""; // e.g. MedObj["2"] : "2^123"
-				current.name = raw.hasOwnProperty("3") ? raw["3"].split("^")[1] : ""; // e.g. MedObj["3"] : "3^MORPHINE ORAL 10MG/5ML CC "
-				current.dose = raw.hasOwnProperty("4") ? raw["4"].split("^")[1] : ""; // e.g. etc...
-				current.status = raw.hasOwnProperty("5") ? raw["5"].split("^")[1] : "";
-				current.startDate = raw.hasOwnProperty("6") ? raw["6"].split("^")[1] : "";
-				current.stopDate = raw.hasOwnProperty("7") ? raw["7"].split("^")[1] : "";
-				current.route = raw.hasOwnProperty("8") ? raw["8"].split("^")[1] : "";
-				current.schedule = raw.hasOwnProperty("9") ? raw["9"].split("^")[1] : "";
+				current.id = raw.hasOwnProperty('2') ? raw['2'].split('^')[1] : ''; // e.g. MedObj['2'] : '2^123'
+				current.name = raw.hasOwnProperty('3') ? raw['3'].split('^')[1] : ''; // e.g. MedObj['3'] : '3^MORPHINE ORAL 10MG/5ML CC '
+				current.dose = raw.hasOwnProperty('4') ? raw['4'].split('^')[1] : ''; // e.g. etc...
+				current.status = raw.hasOwnProperty('5') ? raw['5'].split('^')[1] : '';
+				current.startDate = raw.hasOwnProperty('6') ? raw['6'].split('^')[1] : '';
+				current.stopDate = raw.hasOwnProperty('7') ? raw['7'].split('^')[1] : '';
+				current.route = raw.hasOwnProperty('8') ? raw['8'].split('^')[1] : '';
+				current.schedule = raw.hasOwnProperty('9') ? raw['9'].split('^')[1] : '';
 
 				current.drug = { id: current.id, name: current.name };
 
