@@ -184,7 +184,8 @@ db.facility.create({
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 1,
-        mandatory: true
+        mandatory: true,
+        enable_options: false
       }).then(function(pt) {
         // Then Create the Panel Second
         db.panel.create({
@@ -215,7 +216,8 @@ db.facility.create({
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 1,
-        mandatory: false
+        mandatory: false,
+        enable_options: false
       }).then(function(pt) {
         // Then Create the Panel Second
         db.panel.create({
@@ -246,7 +248,8 @@ db.facility.create({
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 2,
-        mandatory: false
+        mandatory: false,
+        enable_options: false
       }).then(function(pt) {
         // Then Create the Panel Second
         db.panel.create({
@@ -277,7 +280,8 @@ db.facility.create({
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 2,
-        mandatory: false
+        mandatory: false,
+        enable_options: true
       }).then(function(pt) {
         // Then Create the Panel Second
         db.panel.create({
@@ -308,7 +312,8 @@ db.facility.create({
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 2,
-        mandatory: false
+        mandatory: false,
+        enable_options: false
       }).then(function(pt) {
         // Then Create the Panel Second
         db.panel.create({
@@ -339,7 +344,8 @@ db.facility.create({
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 2,
-        mandatory: true
+        mandatory: true,
+        enable_options: false
       }).then(function(pt) {
         // Then Create the Panel Second
         db.panel.create({
@@ -370,7 +376,8 @@ db.facility.create({
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 2,
-        mandatory: false
+        mandatory: false,
+        enable_options: false
       }).then(function(pt) {
         // Then Create the Panel Second
         db.panel.create({
@@ -401,7 +408,8 @@ db.facility.create({
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 2,
-        mandatory: true
+        mandatory: true,
+        enable_options: false
       }).then(function(pt) {
         // Then Create the Panel Second
         db.panel.create({
@@ -432,7 +440,8 @@ db.facility.create({
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 2,
-        mandatory: false
+        mandatory: false,
+        enable_options: false
       }).then(function(pt) {
         // Then Create the Panel Second
         db.panel.create({
@@ -463,7 +472,8 @@ db.facility.create({
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 2,
-        mandatory: true
+        mandatory: true,
+        enable_options: false
       }).then(function(pt) {
         // Then Create the Panel Second
         db.panel.create({
@@ -494,7 +504,8 @@ db.facility.create({
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 2,
-        mandatory: false
+        mandatory: false,
+        enable_options: false
       }).then(function(pt) {
         // Then Create the Panel Second
         db.panel.create({
@@ -525,7 +536,8 @@ db.facility.create({
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 2,
-        mandatory: false
+        mandatory: false,
+        enable_options: false
       }).then(function(pt) {
         // Then Create the Panel Second
         db.panel.create({
@@ -556,7 +568,8 @@ db.facility.create({
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 2,
-        mandatory: false
+        mandatory: false,
+        enable_options: true
       }).then(function(pt) {
         // Then Create the Panel Second
         db.panel.create({
@@ -663,7 +676,8 @@ db.facility.create({
         scope_variable: 'demographics',
         minSizeX: 2,
         minSizeY: 2,
-        mandatory: false
+        mandatory: false,
+        enable_options: false
       }).then(function(pt) {
         // Then Create the Panel Second
         db.panel.create({
@@ -694,7 +708,8 @@ db.facility.create({
         scope_variable: 'demographics',
         minSizeX: 2,
         minSizeY: 1,
-        mandatory: false
+        mandatory: false,
+        enable_options: false
       }).then(function(pt) {
         // Then Create the Panel Second
         db.panel.create({
@@ -725,11 +740,44 @@ db.facility.create({
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 2,
-        mandatory: false
+        mandatory: false,
+        enable_options: true
       }).then(function(pt) {
         // Then Create the Panel Second
         db.panel.create({
           name: 'Health Factors Default',
+          panel_type_id: pt.id,
+          sizeX: 3,
+          sizeY: 2
+        }).then(function(p) {
+          // Then Create the Template_Layout Second
+          console.log('templateID:',templateID);
+          db.template_layout.create({
+            template_id: templateID,
+            panel_id: p.id,
+            panel_order: p.id
+          }).then(function(tl) {
+            console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
+          });
+
+        });
+
+      });
+
+      // Create the Panel_Type First
+      db.panel_type.create({
+        facility_id: facilityID,
+        title: 'Clinical Warnings',
+        directive: 'dt-clinical-warnings',
+        scope_variable: 'patient',
+        minSizeX: 2,
+        minSizeY: 2,
+        mandatory: false,
+        enable_options: true
+      }).then(function(pt) {
+        // Then Create the Panel Second
+        db.panel.create({
+          name: 'Clinical Warnings Default',
           panel_type_id: pt.id,
           sizeX: 3,
           sizeY: 2
@@ -757,7 +805,8 @@ db.facility.create({
           scope_variable: 'patient',
           minSizeX: 2,
           minSizeY: 2,
-          mandatory: false
+          mandatory: false,
+          enable_options: true
         }).then(function(pt) {
           // Then Create the Panel Second
           db.panel.create({
