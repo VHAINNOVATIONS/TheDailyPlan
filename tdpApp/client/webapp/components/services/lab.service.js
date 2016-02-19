@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tdpApp')
-  .factory('Labs', function Labs($location, $rootScope, $http, $q) {
+  .factory('Labs', function Labs($location, $rootScope, $http, $q, $filter) {
     var results = {};
     var labTestNames = [];
     var defaultTestNames = ['MAGNESIUM', 'POTASSIUM', 'HDL', 'TRIGLYCERIDE', 'CHOLESTEROL','CREATININE','HEMOGLOBIN A1C','LDL CHOLESTEROL'];
@@ -31,7 +31,6 @@ angular.module('tdpApp')
 
         $http.get('/api/labs/' + value, config).
         success(function(data) {
-          console.log('Labs:',data);
           var allLabs = [];
           var i = 0;
           for(i = 0; i < data.length; i++){
@@ -41,7 +40,9 @@ angular.module('tdpApp')
             };*/
             var x = 0;
             for(x = 0; x < data[i].labResults.length; x++){
-              data[i].labResults[x].date = data[i].specimen.collectionDate;
+              var resultsDate = data[i].specimen.collectionDate;
+              data[i].labResults[x].date = resultsDate.substring(0,10);
+              //$filter('date')(resultsDate, 'short');
               allLabs.push(data[i].labResults[x]);
             }
           }
@@ -71,7 +72,6 @@ angular.module('tdpApp')
 
         $http.get('/api/labs/byName/' + value).
         success(function(data) {
-          console.log('LabsByName:',data);
           results = data;
           deferred.resolve(data);
           return cb();

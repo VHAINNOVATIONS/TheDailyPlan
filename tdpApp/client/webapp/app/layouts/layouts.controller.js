@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('tdpApp')
-  .controller('LayoutsCtrl', ['$scope', '$location', 'Template', 'Panel_Type', 'Location', '$modal', 'Facility',
-    function($scope, $location, Template, Panel_Type, Location, $modal, Facility) {
+  .controller('LayoutsCtrl', ['$scope', '$location', 'Template', 'Panel_Type', 'Location', '$modal', 'Facility', '$stateParams',
+    function($scope, $location, Template, Panel_Type, Location, $modal, Facility, $stateParams) {
     var self = this;
     self.errors = {};
     self.currentFacility = Facility.getCurrentFacility();
@@ -12,6 +12,10 @@ angular.module('tdpApp')
     self.selectedPanels = [];
     self.masterPanelsList = [];
     self.availablePanels = [];
+    self.submitButton = '';
+
+    //functions
+    self.loadTemplate = loadTemplate;
 
     function reset(){
       self.selectedA=[];
@@ -20,8 +24,28 @@ angular.module('tdpApp')
       self.checkedS = false;
     }
 
-    //self.checkedA = true;
-    //self.checkedS = true;
+    self.mode = $stateParams.mode;
+    self.displayOnly = false;
+    self.templateID = $stateParams.id;
+
+    switch(self.mode) {
+      case 'create':
+        self.submitButton = 'Save';
+        break;
+      case 'edit':
+        self.submitButton = 'Update';
+         loadTemplate(self.templateID);
+        break;
+      case 'display':
+        self.displayOnly = true;
+        self.submitButton = 'Done';
+         loadTemplate(self.templateID);
+        break;
+      default:
+        // set error and send back to templateSearch
+        self.cancelTemplate();
+        break;
+    }
 
     Panel_Type.findAllByFacilityID(self.currentFacility)
     .then( function(panel_types) {
@@ -58,27 +82,63 @@ angular.module('tdpApp')
       var target = array[from];
       var increment = to < from ? -1 : 1;
 
-      for(var k = from; k != to; k += increment){
+      for(var k = from; k !== to; k += increment){
         array[k] = array[k + increment];
       }
       array[to] = target;
     }
 
-    self.addTemplate = function(form) {
+    function loadTemplate(id) {
+      Template.findByID(id)
+      .then (function(template) {
+        self.template = template;
+
+        Template.findCompleteByID(id)
+        .then( function(templateLayout) {
+          //self.template.panels = templateLayout;
+          self.selectedPanels = templateLayout;
+          for (var i = 0; i < templateLayout.length; i++) {
+            var delId = arrayObjectIndexOf(self.availablePanels, templateLayout[i].id, 'id');
+            if (delId !== -1) {
+              self.availablePanels.splice(delId,1);
+            }
+          }
+        });
+
+      }).catch( function(err) {
+        self.errors.other = err.message;
+      });
+    }
+
+    self.processTemplate = function(form) {
       self.submitted = true;
+      self.template.facility_id = self.currentFacility;
       self.template.panels = self.selectedPanels;
 
       if(form.$valid) {
-        Template.create(self.template)
-        .then( function(data) {
-          // Returns a Completed Template
-          console.log('Record Created:',data);
-          $location.path('/templateSearch');
-          return;
-        })
-        .catch( function(err) {
-          self.errors.other = err.message;
-        });
+        switch(self.mode) {
+          case 'create':
+            Template.create(self.template)
+            .then( function(data) {
+              // Returns a Completed Template
+              $location.path('/templateSearch');
+              return;
+            })
+            .catch( function(err) {
+              self.errors.other = err;
+            });
+            break;
+          case 'edit':
+            // Put the logic here to do the updates
+            break;
+          case 'display':
+            $location.path('/templateSearch');
+            break;
+          default:
+            // set error and send back to templateSearch
+            self.cancelTemplate();
+            break;
+        }
       }
     };
 
@@ -191,8 +251,6 @@ angular.module('tdpApp')
         }
       });
     };
-
-
   }])
 // Customizer Controller Settings Modal
 .controller('CustomizerCtrl', ['$scope', '$timeout', '$rootScope', '$uibModalInstance', 'panel', 'Panel_Setting',
