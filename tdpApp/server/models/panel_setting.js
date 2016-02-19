@@ -30,6 +30,14 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     tableName: 'panel_setting',
-    freezeTableName: true
+    freezeTableName: true,
+    classMethods: {
+      associate: function(models) {
+        models.panel_setting.hasMany(models.panel_detail, {
+          foreignKey: 'panel_setting_id',
+          targetKey: 'id'
+        });
+      }
+    }
   });
 };
