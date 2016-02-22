@@ -10,25 +10,16 @@ angular.module('tdpApp')
         patient: '=',
       },
       controller: function ($scope, Medication) {
-
         $scope.ivMeds = null;
 
         $scope.ivMedsLoading = true;
         $scope.ivMedsLoadError = null;
 
-        $scope.ivMedsGridOptions = {
-          enableExpandable: false,
-          expandableRowTemplate: 'components/panels/ivMeds/ivMedsExpRowTemplate.html',
-          expandableRowHeight: 150,
-          //subGridVariable will be available in subGrid scope
-          expandableRowScope: {
-            subGridVariable: 'subGridScopeVariable'
-          }
-        };
+        $scope.ivMedsGridOptions = {};
 
         $scope.ivMedsGridOptions.columnDefs = [
-          { name: 'detail', displayName: 'Drug', width:'**' },
-          { name: 'status', displayName: 'Status', width:'*' }
+          { name: 'detail', displayName: 'Detail', width:'*'},
+          { name: 'sig', displayName: 'Direction', width:'*'}
         ];
 
         Medication.getIvMeds($scope.patient).then( function(data) {
@@ -37,19 +28,11 @@ angular.module('tdpApp')
           $scope.ivMedsLoading = false;
         }).catch( function() {
           $scope.ivMedsLoading = false;
-          $scope.ivMedsLoadError = 'Internal error loading meds.';
+          $scope.ivMedsLoadError = 'Internal error loading IV meds.';
         });
 
         $scope.ivMedsGridOptions.onRegisterApi = function(gridApi){
           $scope.ivMedsGridApi = gridApi;
-        };
-
-        $scope.expandIVMedsRows = function() {
-          $scope.ivMedsGridApi.expandable.expandAllRows();
-        };
-
-        $scope.collapseIVMedsRows = function() {
-          $scope.ivMedsGridApi.expandable.collapseAllRows();
         };
       }
     };

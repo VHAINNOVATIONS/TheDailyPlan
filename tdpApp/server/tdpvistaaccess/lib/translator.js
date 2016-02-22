@@ -409,16 +409,15 @@ exports.translateMeds = function(meds, type) {
     if ((type === 'iv') && (medType !== 'IV')) {
       return r;
     }
-    if ((type === 'active') && (medStatus !== 'ACTIVE')) {
+    if (medStatus !== 'ACTIVE') {
       return r;
     }
-    if (! med.detail) {
-      med.detail = med.name + (med.sig ? ' - ' + med.sig : "");
+    if ((type === 'inpatient') && (medType !== 'UD')) {
+      return r;
     }
-    if (med.isInpatient) {
-      med.detail = med.detail.replace(/\r\n/g, ' ').trim();
+    if ((type === 'outpatient') && ! med.isOutpatient) {
+      return r;
     }
-    med.detail = med.detail.trim();
     if (med.startDate && med.startDate.length) {
       med.startDate = exports.translateVistADateTime(med.startDate);
     }

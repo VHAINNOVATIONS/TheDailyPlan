@@ -10,13 +10,13 @@ angular.module('tdpApp')
         patient: '=',
       },
       controller: function ($scope, Medication) {
-        console.log('Patient Plan - ivMeds patient:', $scope.patient);
+        console.log('Patient Plan Print - ivMeds patient:', $scope.patient);
         Medication.getIvMeds($scope.patient).then(function(ivMeds) {
-          console.log('Patient Plan - ivMeds:', ivMeds);
+          console.log('Patient Plan Print- ivMeds:', ivMeds);
           $scope.ivMeds = ivMeds;
-          $scope.ivMedsError = null;
+          $scope.ivMedsLoadError = null;
         }).catch( function() {
-          $scope.ivMedsError = 'Internal error loading meds.';
+          $scope.ivMedsLoadError = 'Internal error loading meds.';
         });
       }
     };

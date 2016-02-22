@@ -1,0 +1,16 @@
+<div class="container report_row">
+  <div class="row" ng-if="!outpatientMedsLoadError && outpatientMeds && outpatientMeds.length">
+    <div class="col-xs-6 grid_header">Detail</div>
+    <div class="col-xs-6 grid_header">Direction</div>
+  </div>
+  <div class="row" ng-repeat="med in outpatientMeds" ng-if="!outpatientMedsLoadError && outpatientMeds && outpatientMeds.length">
+    <div class="col-xs-6">{{med.detail}}</div>
+    <div class="col-xs-6">{{med.sig}}</div>
+  </div>
+  <div class="row" ng-if="outpatientMedsLoadError">
+    <span class="message">Internal error loading active outpatient medications.</span>
+  </div>
+  <div class="row" ng-if="!outpatientMedsLoadError && outpatientMeds.length == 0">
+    <span class="message">No active outpatient medications found.</span>
+  </div>
+</div>

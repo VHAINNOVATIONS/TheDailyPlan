@@ -38,6 +38,10 @@ router.get('/:id', function(req, res) {
 
 // get complete template - use sequelize.query
 router.get('/complete/:id', function(req, res) {
+  console.log('===========');
+  console.log(req.params);
+  console.log('===========');
+
   models.sequelize.query('select * from template_layout tl ' +
     'inner join panel p on tl.panel_id = p.id ' +
     'inner join panel_type pt on p.panel_type_id = pt.id ' +

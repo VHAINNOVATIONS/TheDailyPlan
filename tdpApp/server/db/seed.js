@@ -467,7 +467,7 @@ db.facility.create({
       // Create the Panel_Type First
       db.panel_type.create({
         facility_id: facilityID,
-        title: 'Active Medications',
+        title: 'Active Inpatient Medications',
         directive: 'dt-active-meds',
         scope_variable: 'patient',
         minSizeX: 2,
@@ -477,7 +477,39 @@ db.facility.create({
       }).then(function(pt) {
         // Then Create the Panel Second
         db.panel.create({
-          name: 'Active Medications Default',
+          name: 'Active Inpatient Medications Default',
+          panel_type_id: pt.id,
+          sizeX: 3,
+          sizeY: 2
+        }).then(function(p) {
+          // Then Create the Template_Layout Second
+          console.log('templateID:',templateID);
+          db.template_layout.create({
+            template_id: templateID,
+            panel_id: p.id,
+            panel_order: p.id
+          }).then(function(tl) {
+            console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
+          });
+
+        });
+
+      });
+
+      // Create the Panel_Type First
+      db.panel_type.create({
+        facility_id: facilityID,
+        title: 'Active Outpatient Medications',
+        directive: 'dt-outpatient-meds',
+        scope_variable: 'patient',
+        minSizeX: 2,
+        minSizeY: 2,
+        mandatory: true,
+        enable_options: false
+      }).then(function(pt) {
+        // Then Create the Panel Second
+        db.panel.create({
+          name: 'Active Outpatient Medications Default',
           panel_type_id: pt.id,
           sizeX: 3,
           sizeY: 2
