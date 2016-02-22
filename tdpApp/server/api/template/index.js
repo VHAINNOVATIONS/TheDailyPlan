@@ -53,17 +53,18 @@ router.get('/complete/:id', function(req, res) {
     // Panel - Loop
     async.eachSeries(layout, function(panel, callback) {
       var panelObj = {};
-      panelObj.panelid = panel.panel_id;
+      panelObj.panel_id = panel.panel_id;
+      panelObj.id = panel.panel_type_id;
       panelObj.title = panel.title;
       panelObj.settings = {};
       panelObj.settings.sizeX = panel.sizeX;
       panelObj.settings.sizeY = panel.sizeY;
       panelObj.settings.minSizeX = panel.minSizeX;
       panelObj.settings.minSizeY = panel.minSizeY;
-      panelObj.template = '<div ' + panel.directive + ' patient="ctrl.' + panel.scope_variable +'" panelid="panel.panelid"></div>';
+      panelObj.template = '<div ' + panel.directive + ' patient="ctrl.' + panel.scope_variable +'" panelid="panel.panel_id"></div>';
       panelObj.print = '<div ' + panel.directive + '-print' + ' patient="ctrl.' + panel.scope_variable +'"></div>';
       panelObj.mandatory = panel.mandatory;
-      console.log('<<<<< Template api1: ', panelObj);
+      panelObj.enable_options = panel.enable_options;
 
       models.panel_detail.findAll({
         attributes: ['panel_setting_id'],
@@ -72,11 +73,14 @@ router.get('/complete/:id', function(req, res) {
         }
       }).then(function(panel_details) {
         if (panel_details) {
-          console.log('<<<<< Template details: ', panel_details);
           panelObj.panelDetails = panel_details;
+          panels.push(panelObj);
+          callback();
+        } else {
+          panels.push(panelObj);
+          callback();
         }
       });
-      console.log('<<<<< Template api2: ', panelObj);
 
 
       // TO DO replace with from database
@@ -90,8 +94,8 @@ router.get('/complete/:id', function(req, res) {
         panelObj.detail = 'Name: |PATIENT NAME|\nSex: |PATIENT SEX|'
       }*/
 
-      panels.push(panelObj);
-      callback();
+      /*panels.push(panelObj);
+      callback();*/
 
     }, function(err){
 
@@ -111,13 +115,15 @@ router.post('/', function(req, res) {
   models.template.create({
     template_name: req.body.template_name,
     template_description: req.body.template_description,
+    facility_id: req.body.facility_id,
     location_id: req.body.location_id,
-    active: req.body.active,
+    active: true,
     template_owner: req.body.template_owner
   }).then(function(template) {
     // Panel - Loop
     var i = 0;
     var layouts = [];
+
     async.eachSeries(req.body.panels, function(panel, callback) {
       // Count to define panel order
       i++;
@@ -129,22 +135,38 @@ router.post('/', function(req, res) {
         sizeY: panel.minSizeY
       }).then(function(p) {
         // Then Create the Template_Layout Second
+
         models.template_layout.create({
           template_id: template.id,
           panel_id: p.id,
           panel_order: i
         }).then(function(tl) {
           // Create the panel_details
-          for (var i = 0; i < panel.panelDetails.length; i++) {
-            models.panel_detail.create({
-              panel_id: p.id,
-              panel_setting_id: panel.panelDetails[i].panel_setting_id,
+
+          if (panel.panelDetails) {
+            async.eachSeries(panel.panelDetails, function(panelDetails, callbackPD) {
+              models.panel_detail.create({
+                panel_id: p.id,
+                panel_setting_id: panelDetails.panel_setting_id,
+              }).then(function(pd) {
+                callbackPD();
+              });
+            }, function(err){
+
+              if( err ) {
+                console.log('ERROR:',err);
+              } else {
+                p.panelDetails = panel.panelDetails;
+                tl.panel = p;
+                layouts.push(tl);
+                callback();
+              }
             });
+
+          } else {
+            layouts.push(tl);
+            callback();
           }
-          p.panelDetails = panel.panelDetails;
-          tl.panel = p;
-          layouts.push(tl);
-          callback();
         });
       });
 
@@ -171,6 +193,7 @@ router.put('/:id', function(req, res) {
       template.updateAttributes({
         template_name: req.body.template_name,
         template_description: req.body.template_description,
+        facility_id: req.body.facility_id,
         location_id: req.body.location_id,
         active: req.body.active,
         template_owner: req.body.active
