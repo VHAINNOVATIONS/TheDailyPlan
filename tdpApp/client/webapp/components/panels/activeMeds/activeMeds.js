@@ -29,7 +29,7 @@ angular.module('tdpApp')
           $scope.activeMedsLoading = false;
         }).catch( function() {
           $scope.activeMedsLoading = false;
-          $scope.activeMedsLoadError = 'Internal error loading active meds.';
+          $scope.activeMedsLoadError = 'Internal Error Loading Active Inpatient Meds';
         });
 
         $scope.activeMedsGridOptions.onRegisterApi = function(gridApi){

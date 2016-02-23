@@ -16,7 +16,7 @@ angular.module('tdpApp')
           $scope.activeMeds = activeMeds;
           $scope.activeMedsLoadError = null;
         }).catch( function() {
-          $scope.activeMedsLoadError = 'Internal error loading inpatient meds.';
+          $scope.activeMedsLoadError = 'Internal Error Loading Inpatient Meds';
         });
       }
     };

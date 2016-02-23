@@ -435,7 +435,7 @@ db.facility.create({
       // Create the Panel_Type First
       db.panel_type.create({
         facility_id: facilityID,
-        title: 'Active Inpatient Medications',
+        title: 'Inpatient Medications',
         directive: 'dt-active-meds',
         scope_variable: 'patient',
         minSizeX: 2,
@@ -467,7 +467,7 @@ db.facility.create({
       // Create the Panel_Type First
       db.panel_type.create({
         facility_id: facilityID,
-        title: 'Active Outpatient Medications',
+        title: 'Outpatient Medications',
         directive: 'dt-outpatient-meds',
         scope_variable: 'patient',
         minSizeX: 2,

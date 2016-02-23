@@ -27,7 +27,7 @@ angular.module('tdpApp')
           $scope.outpatientMedsLoading = false;
         }).catch( function() {
           $scope.outpatientMedsLoading = false;
-          $scope.outpatientMedsLoadError = 'Internal error loading outpatient meds.';
+          $scope.outpatientMedsLoadError = 'Internal Error Loading Outpatient Meds';
         });
 
         $scope.outpatientMedsGridOptions.onRegisterApi = function(gridApi){

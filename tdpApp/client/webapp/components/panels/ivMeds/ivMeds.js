@@ -28,7 +28,7 @@ angular.module('tdpApp')
           $scope.ivMedsLoading = false;
         }).catch( function() {
           $scope.ivMedsLoading = false;
-          $scope.ivMedsLoadError = 'Internal error loading IV meds.';
+          $scope.ivMedsLoadError = 'Internal Error Loading IV Meds';
         });
 
         $scope.ivMedsGridOptions.onRegisterApi = function(gridApi){

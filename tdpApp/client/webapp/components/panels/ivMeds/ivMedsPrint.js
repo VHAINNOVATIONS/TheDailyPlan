@@ -16,7 +16,7 @@ angular.module('tdpApp')
           $scope.ivMeds = ivMeds;
           $scope.ivMedsLoadError = null;
         }).catch( function() {
-          $scope.ivMedsLoadError = 'Internal error loading meds.';
+          $scope.ivMedsLoadError = 'Internal Error Loading Meds';
         });
       }
     };

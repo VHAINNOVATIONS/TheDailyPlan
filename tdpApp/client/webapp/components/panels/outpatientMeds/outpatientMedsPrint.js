@@ -16,7 +16,7 @@ angular.module('tdpApp')
           $scope.outpatientMeds = outpatientMeds;
           $scope.outpatientMedsLoadError = null;
         }).catch( function() {
-          $scope.outpatientMedsLoadError = 'Internal error loading outpatient meds.';
+          $scope.outpatientMedsLoadError = 'Internal Error Loading Outpatient Meds';
         });
       }
     };

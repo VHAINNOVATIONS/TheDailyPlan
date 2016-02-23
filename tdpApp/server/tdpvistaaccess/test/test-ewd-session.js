@@ -89,7 +89,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('search patients last 5', function (done) {
+    it('search patients last 5', function (done) {
         testSession.searchPatients({
             prefix: 'F0440'
         }, function (err, body) {
@@ -106,7 +106,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('search patients full ssn', function (done) {
+    it('search patients full ssn', function (done) {
         testSession.searchPatients({
             prefix: '666000028'
         }, function (err, body) {
@@ -124,7 +124,7 @@ describe('ewd session test', function () {
     });
 
     var clinics;
-    xit('getClinics', function (done) {
+    it('getClinics', function (done) {
         testSession.getClinics({}, function (err, body) {
             if (err) {
                 done(err);
@@ -137,7 +137,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('getPatientsByClinic', function (done) {
+    it('getPatientsByClinic', function (done) {
         var clinicId = clinics[0].id;
         testSession.getPatientsByClinic({
             clinicId: clinicId,
@@ -155,7 +155,7 @@ describe('ewd session test', function () {
     });
 
     var wards;
-    xit('getWards', function (done) {
+    it('getWards', function (done) {
         testSession.getWards({}, function (err, body) {
             if (err) {
                 done(err);
@@ -168,7 +168,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('getPatientsByWard', function (done) {
+    it('getPatientsByWard', function (done) {
         var wardId = wards[2].id;
         testSession.getPatientsByWard({
             wardId: wardId
@@ -183,7 +183,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get patient demographics/flags', function (done) {
+    it('get patient demographics/flags', function (done) {
         var pid = 100846; //756; //724; //631; //100845; //100748; //100846;
         testSession.getDemographics(pid, {}, function (err, body) {
             if (err) {
@@ -215,7 +215,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get patient vitals', function (done) {
+    it('get patient vitals', function (done) {
         var pid = patients[37].id;
         console.log(patients[37]);
         testSession.getVitalSigns(pid, {}, function (err, body) {
@@ -232,7 +232,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get patient iv meds', function (done) {
+    it('get patient iv meds', function (done) {
         var pid = 100846; // patients[2].id;
         testSession.getMedications('100846', {type: 'iv'}, function (err, body) {
             if (err) {
@@ -249,7 +249,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get patient inpatient meds', function (done) {
+    it('get patient inpatient meds', function (done) {
         var pid = 100841; // 100033  //patients[2].id;
         testSession.getMedications('100846', {type: 'inpatient'}, function (err, body) {
             if (err) {
@@ -264,7 +264,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get patient outpatient meds', function (done) {
+    it('get patient outpatient meds', function (done) {
         var pid = 100841; // 100033  //patients[2].id;
         testSession.getMedications('100846', {type: 'outpatient'}, function (err, body) {
             if (err) {
@@ -278,7 +278,7 @@ describe('ewd session test', function () {
             }
         });
     });
-    xit('get patient visits', function (done) {
+    it('get patient visits', function (done) {
         var pid = 756; //520; //patients[37].id;
         testSession.getVisits(pid, {
             numDaysPast: 2998,
@@ -297,7 +297,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get postings', function (done) {
+    it('get postings', function (done) {
         var pid = 100846; //40; //100848; //100846;
         testSession.getPostings(pid, {}, function (err, body) {
             if (err) {
@@ -313,7 +313,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get immunizations', function (done) {
+    it('get immunizations', function (done) {
         var pid = 711;
         testSession.getImmunizations(pid, {}, function (err, body) {
             if (err) {
@@ -329,7 +329,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get orders', function (done) {
+    it('get orders', function (done) {
         var pid = 100685;
         testSession.getAllOrders(pid, {}, function (err, body) {
             if (err) {
@@ -348,7 +348,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('radiology reports', function (done) {
+    it('radiology reports', function (done) {
         var pid = 296; //patients[2].id;
         testSession.getRadiologyReports('197', {}, function (err, body) {
             if (err) {
@@ -363,7 +363,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get diet, lab orders', function (done) {
+    it('get diet, lab orders', function (done) {
         var pid = 100846; //100022;
         testSession.getOrdersAsClassified(pid, {}, function (err, result) {
             if (err) {
@@ -378,7 +378,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get surgical pathology reports', function (done) {
+    it('get surgical pathology reports', function (done) {
         var pid = 100022;
         testSession.getSurgicalPathologyReports(pid, {}, function (err, result) {
             if (err) {
@@ -393,7 +393,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get chem hem reports', function (done) {
+    it('get chem hem reports', function (done) {
         var pid = 756; //100022;
         testSession.getChemHemReports(pid, {
             toDate: '3161010',
@@ -414,7 +414,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get health factors', function (done) {
+    it('get health factors', function (done) {
         var pid = 100846;
         testSession.getHealthFactors(pid, {}, function (err, result) {
             if (err) {
@@ -429,7 +429,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('boiler plates', function(done) {
+    it('boiler plates', function(done) {
       var pid = 100846;
         testSession.getBoilerplates(pid, {
           text: '|PATIENT NAME|^|PATIENT AGE|^|PATIENT SEX|'

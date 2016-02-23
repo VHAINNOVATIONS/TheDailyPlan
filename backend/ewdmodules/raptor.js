@@ -42,13 +42,11 @@ var operations = {
                 target: ewd.query.target,
                 direction: ewd.query.direction
             };
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var ok = vista.restoreSymbolTable(ewd, session);
             var result = vista.getHospitalLocations(params, session, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time
             return result;
         }
     },
-
     getChemHemLabs: {
         GET: function(ewd, session) {
             var params = {
@@ -56,33 +54,27 @@ var operations = {
                 fromDate: ewd.query.fromDate,
                 toDate: ewd.query.toDate
             };
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var ok = vista.restoreSymbolTable(ewd, session);
             var result = chemHemLib.getChemHemReports(params, session, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time
             return result;
         }
     },
-
     getImagingTypesMap: {
         GET: function(ewd, session) {
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var ok = vista.restoreSymbolTable(ewd, session);
             var result = vista.getImagingOrderTypes({}, session, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time
             return result;
         }
     },
-
-    getMedicationsDetailMap: {
+    getMedications: {
         GET: function(ewd, session) {
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var ok = vista.restoreSymbolTable(ewd, session);
             var result = medsLib.getAllMeds({
                 patientId: ewd.query.patientId
             }, session, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time
             return result;
         }
     },
-
     getNotesDetailMap: {
         GET: function(ewd, session) {
             var params = {
@@ -90,24 +82,20 @@ var operations = {
                 fromDate: '0',
                 toDate: '0'
             };
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var ok = vista.restoreSymbolTable(ewd, session);
             var result = vista.getNotesWithText(params, session, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time
             return result;
         }
     },
-
     getOrderableItems: {
         GET: function(ewd, session) {
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var ok = vista.restoreSymbolTable(ewd, session);
             var result = vista.getOrderableItems({
                 dialogId: ewd.query.dialogId
             }, session, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time
             return result;
         }
     },
-
     getPathologyReportsDetailMap: {
         GET: function(ewd, session) {
             var params = {
@@ -116,32 +104,27 @@ var operations = {
                 toDate: ewd.query.toDate,
                 nRpts: ewd.query.nRpts
             };
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var ok = vista.restoreSymbolTable(ewd, session);
             var result = vista.getSurgicalPathologyReports(params, session, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time
             return result;
         }
     },
-
     getPatientIDFromTrackingID: {
         GET: function(ewd, session) {
             var params = {
                 ien: ewd.query.ien
             };
-            //var ok = ewd.util.restoreSymbolTable(ewd, session);	//Flush symbol table and replace with ours
+            //var ok = vista.restoreSymbolTable(ewd, session);	//Flush symbol table and replace with ours
             var result = vista.getPatientIDFromTrackingID(params, session, ewd);
-            //var ok = ewd.util.saveSymbolTable(ewd, session);	//Grab our symbol table for use next time
             return result;
         }
     },
-
     getPatientMap: {
         GET: function(ewd, session) {
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var ok = vista.restoreSymbolTable(ewd, session);
             var result = patientLib.selectPatient({
                 patientId: ewd.query.patientId
             }, session, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time
             return result;
         }
     },
@@ -153,43 +136,37 @@ var operations = {
                 toDate: ewd.query.toDate,
                 nRpts: ewd.query.nRpts
             };
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var ok = vista.restoreSymbolTable(ewd, session);
             var result = vista.getRadiologyReports(params, session, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time
             return result;
         }
     },
-
     getRawVitalSignsMap: {
         GET: function(ewd, session) {
             var params = {
                 patientId: ewd.query.patientId
             };
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var ok = vista.restoreSymbolTable(ewd, session);
             var result = vista.getVitalSigns(params, session, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time
             return result;
         }
     },
-
     getPostings: {
         GET: function(ewd, session) {
             var params = {
                 patientId: ewd.query.patientId
             };
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var ok = vista.restoreSymbolTable(ewd, session);
             var result = postingsLib.getPostings(params, session, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time
             return result;
         }
     },
-
     getImmunizations: {
         GET: function(ewd, session) {
             var params = {
                 patientId: ewd.query.patientId
             };
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var ok = vista.restoreSymbolTable(ewd, session);
 
             params.rpcName = 'ORQQPX IMMUN LIST';
             params.rpcArgs = [{
@@ -197,12 +174,9 @@ var operations = {
                 value: params.patientId
             }];
             var result = vista.runRpc(params, session, ewd);
-
-            ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time
             return result;
         }
     },
-
     getVisits: {
         GET: function(ewd, session) {
             var params = {
@@ -210,54 +184,44 @@ var operations = {
                 fromDate: ewd.query.fromDate,
                 toDate: ewd.query.toDate
             };
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var ok = vista.restoreSymbolTable(ewd, session);
             var result = vista.getVisits(params, session, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time
             return result;
         }
     },
-
     getAllOrders: {
         GET: function(ewd, session) {
             var params = {
                 patientId: ewd.query.patientId,
                 vistANow: ewd.query.vistANow
             };
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var ok = vista.restoreSymbolTable(ewd, session);
             var result = ordersLib.getAllOrders(params, session, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time
             return result;
         }
     },
-
     getOrderTypes: {
         GET: function(ewd, session) {
             var params = {};
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var ok = vista.restoreSymbolTable(ewd, session);
             var result = ordersLib.getOrderTypes(params, session, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time
             return result;
         }
     },
-
     getClinics: {
         GET: function(ewd, session) {
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var ok = vista.restoreSymbolTable(ewd, session);
             var result = patientSearchLib.getClinics(session, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time
             return result;
         }
     },
-
     getWards: {
         GET: function(ewd, session) {
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var ok = vista.restoreSymbolTable(ewd, session);
             var result = patientSearchLib.getWards(session, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time
             return result;
         }
     },
-
     getPatientsByClinic: {
         GET: function(ewd, session) {
             var params = {
@@ -265,25 +229,21 @@ var operations = {
                 fromDate: ewd.query.fromDate,
                 toDate: ewd.query.toDate
             };
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var ok = vista.restoreSymbolTable(ewd, session);
             var result = patientSearchLib.getPatientsByClinic(params, session, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time
             return result;
         }
     },
-
     getPatientsByWard: {
         GET: function(ewd, session) {
             var params = {
                 wardId: ewd.query.wardId
             };
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var ok = vista.restoreSymbolTable(ewd, session);
             var result = patientSearchLib.getPatientsByWard(params, session, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time
             return result;
         }
     },
-
     getPatientHealthFactors: {
         GET: function(ewd, session) {
             var params = {
@@ -291,29 +251,25 @@ var operations = {
                 fromDate: ewd.query.fromDate || '',
                 toDate: ewd.query.toDate || ''
             };
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var ok = vista.restoreSymbolTable(ewd, session);
             var result = healthFactorsLib.getPatientHealthFactors(params, session, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time
             return result;
         }
     },
-
     resolveBPs: {
         GET: function(ewd, session) {
             var params = {
                 patientId: ewd.query.patientId,
                 text: ewd.query.text || ''
             };
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours                                                            
+            var ok = vista.restoreSymbolTable(ewd, session);
             var result = tiuLib.resolveBoilerplates(params, session, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time                                                             
             return result;
         }
     },
-
     patientsByName: {
         GET: function(ewd, session) {
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var ok = vista.restoreSymbolTable(ewd, session);
             var result;
             var prefix = ewd.query.prefix;
             if (prefix.match(/^[A-Z]?\d{4}$/i)) {
@@ -324,16 +280,13 @@ var operations = {
                 var resultRaw = vista.getPatientsByName(prefix, 1000, ewd);
                 result = resultRaw.results;
             }
-            ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time
             return result;
         }
     },
-
     patientSummary: {
         GET: function(ewd, session) {
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var ok = vista.restoreSymbolTable(ewd, session);
             var result = vista.getPatientSummaryDetails(ewd.query.id, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time
             return result;
         }
     }

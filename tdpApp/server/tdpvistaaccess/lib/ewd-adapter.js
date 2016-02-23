@@ -375,7 +375,7 @@ var session = {
         });
     },
     getMedications: function (patientId, options, callback) {
-        this.get('/getMedicationsDetailMap', {
+        this.get('/getMedications', {
             patientId: patientId
         }, function (err, body) {
             if (err) {
