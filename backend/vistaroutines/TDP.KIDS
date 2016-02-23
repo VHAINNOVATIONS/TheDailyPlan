@@ -1,15 +1,15 @@
-KIDS Distribution saved on Feb 22, 2016@02:14:04
-The Daily Plan Utils
+KIDS Distribution saved on Feb 23, 2016@02:00:36
+The Daily Plan Utilities
 **KIDS**:TDP 1.0^
 
 **INSTALL NAME**
 TDP 1.0
 "BLD",9424,0)
-TDP 1.0^^0^3160222^y
+TDP 1.0^^0^3160223^y
 "BLD",9424,4,0)
 ^9.64PA^^
 "BLD",9424,6.3)
-2
+3
 "BLD",9424,"KRN",0)
 ^9.67PA^779.2^20
 "BLD",9424,"KRN",.4,0)
@@ -33,13 +33,19 @@ TDP 1.0^^0^3160222^y
 "BLD",9424,"KRN",9.8,0)
 9.8
 "BLD",9424,"KRN",9.8,"NM",0)
-^9.68A^1^1
+^9.68A^2^2
 "BLD",9424,"KRN",9.8,"NM",1,0)
-ZZTDP^^0^B129872282
+ZZTDP^^0^B141302039
+"BLD",9424,"KRN",9.8,"NM",2,0)
+ZZTDPSES^^0^B2314020
 "BLD",9424,"KRN",9.8,"NM","B","ZZTDP",1)
+
+"BLD",9424,"KRN",9.8,"NM","B","ZZTDPSES",2)
 
 "BLD",9424,"KRN",19,0)
 19
+"BLD",9424,"KRN",19,"NM",0)
+^9.68A^^
 "BLD",9424,"KRN",19.1,0)
 19.1
 "BLD",9424,"KRN",101,0)
@@ -171,13 +177,13 @@ NO
 "QUES","XPZ2","M")
 D XPZ2^XPDIQ
 "RTN")
-1
+2
 "RTN","ZZTDP")
-0^1^B129872282
+0^1^B141302039
 "RTN","ZZTDP",1,0)
 ZZTDP ; AU PWC - THE DAILY PLAN UTILS ; 02/03/2016
 "RTN","ZZTDP",2,0)
- ;;1.0;THE DAILY PLAN;;Feb 02, 2016;Build 2
+ ;;1.0;THE DAILY PLAN;;Feb 02, 2016;Build 3
 "RTN","ZZTDP",3,0)
  Q
 "RTN","ZZTDP",4,0)
@@ -553,15 +559,15 @@ CHKPRMIT(PRPCNAME,PUSER,PCONTEXT) ;checks to see if remote procedure is permited
 "RTN","ZZTDP",189,0)
 LOGIN(ACCESSCODE,VERIFYCODE) ;
 "RTN","ZZTDP",190,0)
- ;
-"RTN","ZZTDP",191,0)
  K (ACCESSCODE,VERIFYCODE)
+"RTN","ZZTDP",191,0)
+ ; LEAVE DUZ, DT AND U in the symbol table 
 "RTN","ZZTDP",192,0)
- N %,ACCVER,DILOCKTM,DPNAME,DISYS,%DT,DT,DTIME,DUZ,%H
+ N %,ACCVER,DILOCKTM,DPNAME,DISYS,%DT,DTIME,%H
 "RTN","ZZTDP",193,0)
  N CHECKRES,%I,I,IO,IOF,IOM,ION,IOS,IOSL,IOST,IOT,J,OK,PERSONDUZ,PERSONNAME
 "RTN","ZZTDP",194,0)
- N POP,RESULTS,SUPERVISOR,TERMREASON,U,USER,V4WVCC,V4WCVMSG
+ N POP,RESULTS,SUPERVISOR,TERMREASON,USER,V4WVCC,V4WCVMSG
 "RTN","ZZTDP",195,0)
  N X,XOPT,XPARSYS,XQVOL,XQXFLG,XUCI,XUDEV,XUENV,XUEOFF,XUEON
 "RTN","ZZTDP",196,0)
@@ -872,6 +878,90 @@ SCHNM(ABBR)  ;
  Q ABBR
 "RTN","ZZTDP",349,0)
  ;
+"RTN","ZZTDP",350,0)
+ALLERGY(DFN) ;TDP ALLERGY
+"RTN","ZZTDP",351,0)
+ N GMRAL,GN,GMVALG
+"RTN","ZZTDP",352,0)
+ D EN1^GMRADPT
+"RTN","ZZTDP",353,0)
+ Q:$G(GMRAL)="" ""
+"RTN","ZZTDP",354,0)
+ Q:$G(GMRAL)=0 0
+"RTN","ZZTDP",355,0)
+ K ^TMP($J,"TDP_ALLERGIES")
+"RTN","ZZTDP",356,0)
+ N ID,NDX S ID="",NDX=0
+"RTN","ZZTDP",357,0)
+ F  S ID=$O(GMRAL(ID)) Q:'ID  S NDX=NDX+1 D
+"RTN","ZZTDP",358,0)
+ . S ^TMP($J,"TDP_ALLERGIES",NDX,"allergenName")=$P(GMRAL(ID),"^",2)
+"RTN","ZZTDP",359,0)
+ . S ^TMP($J,"TDP_ALLERGIES",NDX,"allergenType")=$P(GMRAL(ID),"^",3)
+"RTN","ZZTDP",360,0)
+ . N IDS,NDXS S IDS="",NDXS=0
+"RTN","ZZTDP",361,0)
+ . F  S IDS=$O(GMRAL(ID,"S",IDS)) Q:'IDS  S NDXS=NDXS+1 D
+"RTN","ZZTDP",362,0)
+ . . S ^TMP($J,"TDP_ALLERGIES",NDX,"reaction",NDXS)=$P(GMRAL(ID,"S",IDS),";")
+"RTN","ZZTDP",363,0)
+ Q 1
+"RTN","ZZTDP",364,0)
+ ;
+"RTN","ZZTDPSES")
+0^2^B2314020
+"RTN","ZZTDPSES",1,0)
+ZZTDPSES ; AU PWC - THE DAILY PLAN SESSION UTILS ; 02/22/2016
+"RTN","ZZTDPSES",2,0)
+ ;;1.0;THE DAILY PLAN;;Feb 22, 2016;Build 3
+"RTN","ZZTDPSES",3,0)
+ Q
+"RTN","ZZTDPSES",4,0)
+ ;
+"RTN","ZZTDPSES",5,0)
+CLEAR() ;
+"RTN","ZZTDPSES",6,0)
+ K
+"RTN","ZZTDPSES",7,0)
+ Q 1
+"RTN","ZZTDPSES",8,0)
+ ;
+"RTN","ZZTDPSES",9,0)
+SAVE(%ZZG) ;
+"RTN","ZZTDPSES",10,0)
+ K @%ZZG
+"RTN","ZZTDPSES",11,0)
+ N %ZZZ
+"RTN","ZZTDPSES",12,0)
+ S %ZZZ="%"
+"RTN","ZZTDPSES",13,0)
+ F  S %ZZZ=$O(@%ZZZ) Q:%ZZZ=""  D
+"RTN","ZZTDPSES",14,0)
+ . W %ZZZ,!
+"RTN","ZZTDPSES",15,0)
+ . Q:$E(%ZZZ)="%"
+"RTN","ZZTDPSES",16,0)
+ . M @%ZZG@(%ZZZ)=@%ZZZ
+"RTN","ZZTDPSES",17,0)
+ Q 1
+"RTN","ZZTDPSES",18,0)
+ ;
+"RTN","ZZTDPSES",19,0)
+RESTORE(%ZZG) ;
+"RTN","ZZTDPSES",20,0)
+ N %ZZZ
+"RTN","ZZTDPSES",21,0)
+ S %ZZZ=""
+"RTN","ZZTDPSES",22,0)
+ F  S %ZZZ=$O(@%ZZG@(%ZZZ)) Q:%ZZZ=""  D
+"RTN","ZZTDPSES",23,0)
+ . M @%ZZZ=@%ZZG@(%ZZZ)
+"RTN","ZZTDPSES",24,0)
+ Q 1
+"RTN","ZZTDPSES",25,0)
+ ;
+"RTN","ZZTDPSES",26,0)
+                                                                                                                                                                                                                                                                                                                                 
 "VER")
 8.0^22.0
 **END**

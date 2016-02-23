@@ -226,7 +226,7 @@ module.exports = {
                     results.data.keys = userKeysResult;
                 }
             }
-            var ok = ewd.util.saveSymbolTable(ewd, session);
+            var ok = this.saveSymbolTable(ewd, session);
             return results.data;
         }
     },
@@ -425,28 +425,6 @@ module.exports = {
 
         return this.runRpc(params, session, ewd);
     },
-
-    // call to vista works
-    getProblemList: function(params, session, ewd) {
-        var arg = '';
-        params.type = params.type.toUpperCase();
-        if (params.type == 'A' || params.type == 'ACTIVE') {
-            arg = 'OR_PLA:ACTIVE PROBLEMS~PLAILA;ORDV04;59;';
-        } else if (params.type == 'I' || params.type == 'INACTIVE') {
-            arg = 'OR_PLI:INACTIVE PROBLEMS~PLAILI;ORDV04;60;';
-        } else if (params.type == 'ALL') {
-            arg = 'OR_DODPLL:ALL PROBLEM LIST~PLAILALL;ORDV04;61;';
-        }
-
-        if (arg === '') {
-            return {
-                error: 'Invalid type request: ' + params.type + '.  Must be \'ACTIVE\', \'INACTIVE\', or \'ALL\'.'
-            };
-        }
-        params.reportsTabName = arg;
-        return this.runReportsTabRpc(params, session, ewd);
-    },
-
     // call to vista works
     getVisits: function(params, session, ewd) {
         params.rpcName = 'ORWCV VST';
@@ -734,7 +712,6 @@ module.exports = {
             namesById: namesById
         };
     },
-
     getPatientSummaryDetails: function(patientId, ewd) {
         var patient = new ewd.mumps.GlobalNode('DPT', [patientId, '0']);
         var patientRec0 = patient._value;
@@ -746,5 +723,22 @@ module.exports = {
             DOB: convertFtoStringDate(patientObj[2]),
             SSN: patientObj[8]
         };
+    },
+    clearSymbolTable: function(ewd) {
+        return ewd.mumps.function("CLEAR^ZZTDPSES");
+    },
+    saveSymbolTable: function(ewd, session) {
+        if (!session) {
+            session = ewd.session;
+        }
+        var gloRef = '^' + ewd.map.global.session + '("session",' + session.sessid + ',"ewd_symbolTable")';
+        return ewd.mumps.function("SAVE^ZZTDPSES", gloRef);
+    },
+    restoreSymbolTable: function(ewd, session) {
+        if (!session) {
+            session = ewd.session;
+        }
+        var gloRef = '^' + ewd.map.global.session + '("session",' + session.sessid + ',"ewd_symbolTable")';
+        return ewd.mumps.function("RESTORE^ZZTDPSES", gloRef);
     }
 };

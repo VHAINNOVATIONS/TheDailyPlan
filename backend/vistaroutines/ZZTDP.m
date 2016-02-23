@@ -26,15 +26,15 @@ RPCEXEC(TMP,DT) ;
  ;      ,"input",n,"value",m1)="list1"
  ;      ,"input",n,"value",m2,k1)="list21"
  ;      ,"input",n,"value",m2,k2)="list22"
- ;         
+ ;
  ;          where m1, m2, k1, k2 are numbers or strings
- ;     
+ ;
  ; Output value
  ; ==============
  ; The RPC output is in  @TMP@("result")
  ;  e.g., ,"result","type")="SINGLE VALUE"
  ;                  "value")="Hello World!"
- ;                
+ ;
  ; Return {"success": result, "message" : message }
  ;    result 1 - success
  ;           0 - error
@@ -186,11 +186,11 @@ CHKPRMIT(PRPCNAME,PUSER,PCONTEXT) ;checks to see if remote procedure is permited
  Q RESULT
  ;
 LOGIN(ACCESSCODE,VERIFYCODE) ;
- ;
  K (ACCESSCODE,VERIFYCODE)
- N %,ACCVER,DILOCKTM,DPNAME,DISYS,%DT,DT,DTIME,DUZ,%H
+ ; LEAVE DUZ, DT AND U in the symbol table 
+ N %,ACCVER,DILOCKTM,DPNAME,DISYS,%DT,DTIME,%H
  N CHECKRES,%I,I,IO,IOF,IOM,ION,IOS,IOSL,IOST,IOT,J,OK,PERSONDUZ,PERSONNAME
- N POP,RESULTS,SUPERVISOR,TERMREASON,U,USER,V4WVCC,V4WCVMSG
+ N POP,RESULTS,SUPERVISOR,TERMREASON,USER,V4WVCC,V4WCVMSG
  N X,XOPT,XPARSYS,XQVOL,XQXFLG,XUCI,XUDEV,XUENV,XUEOFF,XUEON
  N XUF,XUFAC,XUIOP,XUVOL,XWBSTATE,XWBTIME,Y
  ;
@@ -345,4 +345,19 @@ SCHNM(ABBR)  ;
  S LINE=^PS(51.1,ID,0)
  S NAME=$P(LINE,"^",8) Q:NAME]"" NAME
  Q ABBR
+ ;
+ALLERGY(DFN) ;TDP ALLERGY
+ N GMRAL,GN,GMVALG
+ D EN1^GMRADPT
+ Q:$G(GMRAL)="" ""
+ Q:$G(GMRAL)=0 0
+ K ^TMP($J,"TDP_ALLERGIES")
+ N ID,NDX S ID="",NDX=0
+ F  S ID=$O(GMRAL(ID)) Q:'ID  S NDX=NDX+1 D
+ . S ^TMP($J,"TDP_ALLERGIES",NDX,"allergenName")=$P(GMRAL(ID),"^",2)
+ . S ^TMP($J,"TDP_ALLERGIES",NDX,"allergenType")=$P(GMRAL(ID),"^",3)
+ . N IDS,NDXS S IDS="",NDXS=0
+ . F  S IDS=$O(GMRAL(ID,"S",IDS)) Q:'IDS  S NDXS=NDXS+1 D
+ . . S ^TMP($J,"TDP_ALLERGIES",NDX,"reaction",NDXS)=$P(GMRAL(ID,"S",IDS),";")
+ Q 1
  ;

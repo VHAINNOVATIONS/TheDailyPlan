@@ -1,12 +1,16 @@
 <div class="container report_row">
-  <div class="row" class="report_column500" ng-if="allergies && allergies.length && !allergiesError">
-    <div class="col-xs-12 grid_header">Name</div>
-    <div class="col-xs-8" ng-repeat="allergy in allergies">{{allergy.detail}}</div>
+  <div class="row" ng-if="!allergiesError && allergies && !allergiesMessage">
+    <div class="col-xs-6 grid_header">Name</div>
+    <div class="col-xs-6 grid_header">Reaction</div>
   </div>
-  <div class="row" class="report_column500" ng-if="allergiesError">
+  <div class="row" ng-repeat="allergy in allergies" ng-if="!allergiesError && allergies && !allergiesMessage">
+    <div class="col-xs-6">{{allergy.allergenName}}</div>
+    <div class="col-xs-6">{{allergy.reaction}}</div>
+  </div>
+  <div class="row" ng-if="allergiesError">
     <span class="message">Internal error loading allergies.</span>
   </div>
-  <div class="row" class="report_column500" ng-if="allergies.length == 0 && !allergiesError">
-    <span class="message">No allergies found.</span>
+  <div class="row" ng-if="!allergiesError && allergiesMessage">
+    <span class="message">{{allergiesMessage}}</span>
   </div>
 </div>

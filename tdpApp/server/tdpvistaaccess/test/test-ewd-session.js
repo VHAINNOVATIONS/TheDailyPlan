@@ -199,14 +199,14 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get patient allergies', function (done) {
-        var pid = patients[37].id;
+    it('get patient allergies', function (done) {
+        var pid = 100846; //patients[37].id;
         testSession.getAllergies(pid, {}, function (err, body) {
             if (err) {
                 done(err);
             } else {
                 expect(body).to.exist();
-                expect(body.length).to.be.above(0);
+                //expect(body.length).to.be.above(0);
                 console.log("======ALLERGIES=======");
                 console.log(JSON.stringify(body, undefined, 4));
                 console.log("======================");
@@ -232,7 +232,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get patient iv meds', function (done) {
+    xit('get patient iv meds', function (done) {
         var pid = 100846; // patients[2].id;
         testSession.getMedications('100846', {type: 'iv'}, function (err, body) {
             if (err) {
@@ -249,7 +249,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get patient inpatient meds', function (done) {
+    xit('get patient inpatient meds', function (done) {
         var pid = 100841; // 100033  //patients[2].id;
         testSession.getMedications('100846', {type: 'inpatient'}, function (err, body) {
             if (err) {
@@ -264,7 +264,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get patient outpatient meds', function (done) {
+    xit('get patient outpatient meds', function (done) {
         var pid = 100841; // 100033  //patients[2].id;
         testSession.getMedications('100846', {type: 'outpatient'}, function (err, body) {
             if (err) {
@@ -278,20 +278,6 @@ describe('ewd session test', function () {
             }
         });
     });
-
-    xit('get patient problems', function (done) {
-        var pid = patients[37].id;
-        testSession.getProblems(pid, {}, function (err, body) {
-            if (err) {
-                done(err);
-            } else {
-                console.log(JSON.stringify(body, undefined, 4));
-                expect(body).to.exist();
-                done();
-            }
-        });
-    });
-
     xit('get patient visits', function (done) {
         var pid = 756; //520; //patients[37].id;
         testSession.getVisits(pid, {

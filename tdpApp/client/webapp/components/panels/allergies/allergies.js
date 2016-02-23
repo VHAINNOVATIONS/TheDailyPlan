@@ -10,56 +10,36 @@ angular.module('tdpApp')
         patient: '=',
       },
       controller: function ($scope, Allergy, uiGridConstants) {
-
         $scope.allergies = null;
 
         $scope.allergiesLoading = true;
+        $scope.allergiesLoadError = null;
 
         $scope.allergiesGridOptions = {
-          enableExpandable: false,
-          expandableRowTemplate: 'components/panels/allergies/allergiesExpRowTemplate.html',
-          expandableRowHeight: 150,
-          //subGridVariable will be available in subGrid scope
-          expandableRowScope: {
-            subGridVariable: 'subGridScopeVariable'
-          }
+          minRowsToShow: 3
         };
 
-        $scope.allergiesGridOptions.minRowsToShow = 3;
-
         $scope.allergiesGridOptions.columnDefs = [
-          { name: 'allergenName', displayName: 'Name', width:'*' },
-          { name: 'allergenType', displayName: 'Type', width:'*' ,
-            sort: {
-              direction: uiGridConstants.ASC,
-              priority: 1,
-            }
-          },
-          { name: 'reactions[0].name', displayName: 'Reaction', width:'*' }
+          {name: 'allergenName', displayName: 'Name', width:'*' },
+          {name: 'reaction', displayName: 'Reaction', width:'*' }
         ];
 
         Allergy.getByID($scope.patient)
         .then( function(data) {
           console.log('Patient Plan - allergies:',data);
-          $scope.allergiesGridOptions.data = data;
+          if (data.status) {
+            $scope.allergiesMessage = null;
+            $scope.allergiesGridOptions.data = data.allergies;
+          } else {
+            $scope.allergiesMessage = (data.status === null) ? 'No Allergy Assessment' : 'No Known Allergies';
+            $scope.allergiesGridOptions.data = data.allergies;
+          }
           $scope.allergiesLoading = false;
         })
-        .catch( function(err) {
-          $scope.errors.other = err.message;
+        .catch( function() {
+          $scope.allergiesLoading = false;
+          $scope.allergiesLoadError = 'Internal Error Loading Allergies';
         });
-
-        $scope.allergiesGridOptions.onRegisterApi = function(gridApi){
-          $scope.allergiesGridApi = gridApi;
-        };
-
-        $scope.expandAllergyRows = function() {
-          $scope.allergiesGridApi.expandable.expandAllRows();
-        };
-
-        $scope.collapseAllergyRows = function() {
-          $scope.allergiesGridApi.expandable.collapseAllRows();
-        };
-
       }
     };
   });

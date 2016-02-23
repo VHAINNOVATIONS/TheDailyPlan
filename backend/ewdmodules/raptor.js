@@ -25,19 +25,16 @@ var operations = {
             return vista.login(ewd, session);
         }
     },
-
-    getAllergiesDetailMap: {
+    getAllergies: {
         GET: function(ewd, session) {
             var params = {
                 patientId: ewd.query.patientId
             };
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
+            var ok = vista.restoreSymbolTable(ewd, session);
             var result = allergiesLib.getAllergies(params, session, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time
             return result;
         }
     },
-
     // per call to RPC, returns 44 results beginning alphabetically at 'target'
     getHospitalLocationsMap: {
         GET: function(ewd, session) {
@@ -148,20 +145,6 @@ var operations = {
             return result;
         }
     },
-
-    getProblemsListDetailMap: {
-        GET: function(ewd, session) {
-            var params = {
-                patientId: ewd.query.patientId,
-                type: ewd.query.type || ''
-            };
-            var ok = ewd.util.restoreSymbolTable(ewd, session); //Flush symbol table and replace with ours
-            var result = vista.getProblemList(params, session, ewd);
-            ok = ewd.util.saveSymbolTable(ewd, session); //Grab our symbol table for use next time
-            return result;
-        }
-    },
-
     getRadiologyReportsDetailMap: {
         GET: function(ewd, session) {
             var params = {
