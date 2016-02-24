@@ -1,5 +1,5 @@
-ZZTDP ; AU PWC - THE DAILY PLAN UTILS ; 02/03/2016
- ;;1.0;THE DAILY PLAN;;Feb 02, 2016;
+ZZTDP ; AU - THE DAILY PLAN UTILS ; 02/24/2016
+ ;;1.0;THE DAILY PLAN;**1**;Feb 24, 2016;Build 2
  Q
  ; RPCEXECUTE is copied from RAPTOR project
 RPCEXEC(TMP,DT) ;
@@ -223,9 +223,8 @@ LOGIN(ACCESSCODE,VERIFYCODE) ;
  S RESULTS("username")=PERSONNAME
  S RESULTS("displayName")=DPNAME
  S RESULTS("greeting")=$g(USER(7))
- K ^CacheTempEWD($J)
- M ^CacheTempEWD($J)=RESULTS
- ;K ^rob("login") M ^rob("login")=RESULTS
+ K ^TMP($J,"TDP_LOGIN")
+ M ^TMP($J,"TDP_LOGIN")=RESULTS
  QUIT ""
  ;
 NKO(PTID,TMP)  ;

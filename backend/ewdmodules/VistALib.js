@@ -78,8 +78,7 @@ var getGlobalNodeFromRef = function(globalRef, ewd) {
 var vistALogin = function(accessCode, verifyCode, ewd) {
     var ok = ewd.mumps.function('LOGIN^ZZTDP', accessCode, verifyCode);
     if (ok === '') {
-        var temp = new ewd.mumps.GlobalNode('CacheTempEWD', [process.pid]);
-        //var results = temp._getDocument(0, false);
+        var temp = new ewd.mumps.GlobalNode('TMP', [process.pid, 'TDP_LOGIN']);
         var results = temp._getDocument(0);
         temp._delete();
         if (results.username) {
