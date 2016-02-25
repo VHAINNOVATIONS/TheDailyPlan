@@ -377,7 +377,7 @@ db.facility.create({
         minSizeX: 2,
         minSizeY: 2,
         mandatory: true,
-        enable_options: false
+        enable_options: true
       }).then(function(pt) {
         // Then Create the Panel Second
         db.panel.create({
@@ -394,6 +394,23 @@ db.facility.create({
             panel_order: p.id
           }).then(function(tl) {
             console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
+          });
+
+          // Now Create the Settings and Details
+          db.panel_setting.create({
+            panel_type_id: pt.id,
+            setting_type: 2,
+            setting_name: 'Number of Future Days',
+            setting_value: '30'
+          }).then(function(ps) {
+            //Then Create the Details
+            db.panel_detail.create({
+              panel_id: p.id,
+              panel_setting_id: ps.id
+            }).then(function(tl) {
+              console.log('<<<<<<<Panel Setting & Detail Record Created.>>>>>>>')
+            });
+
           });
 
         });

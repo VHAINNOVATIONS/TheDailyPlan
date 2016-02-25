@@ -61,8 +61,8 @@ router.get('/complete/:id', function(req, res) {
       panelObj.settings.sizeY = panel.sizeY;
       panelObj.settings.minSizeX = panel.minSizeX;
       panelObj.settings.minSizeY = panel.minSizeY;
-      panelObj.template = '<div ' + panel.directive + ' patient="ctrl.' + panel.scope_variable +'" panelid="panel.panel_id"></div>';
-      panelObj.print = '<div ' + panel.directive + '-print' + ' patient="ctrl.' + panel.scope_variable +'"></div>';
+      panelObj.template = '<div ' + panel.directive + ' patient="ctrl.' + panel.scope_variable + '" panelid="panel.panel_id"></div>';
+      panelObj.print = '<div ' + panel.directive + '-print' + ' patient="ctrl.' + panel.scope_variable + '" panelid="panel.panel_id"></div>';
       panelObj.mandatory = panel.mandatory;
       panelObj.enable_options = panel.enable_options;
 
@@ -145,10 +145,14 @@ router.post('/', function(req, res) {
 
           if (panel.panelDetails) {
             async.eachSeries(panel.panelDetails, function(panelDetails, callbackPD) {
-              models.panel_detail.create({
+              var pd = {
                 panel_id: p.id,
                 panel_setting_id: panelDetails.panel_setting_id,
-              }).then(function(pd) {
+              };
+              if (panelDetails.hasOwnProperty('detail_value')) {
+                pd.detail_value = panelDetails.detail_value;
+              }
+              models.panel_detail.create(pd).then(function(pd) {
                 callbackPD();
               });
             }, function(err){

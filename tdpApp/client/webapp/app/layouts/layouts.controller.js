@@ -258,16 +258,38 @@ angular.module('tdpApp')
     $scope.panel = panel;
     $scope.options = [];
     $scope.selectedOption = [];
-    $scope.checkedOption = false;
 
     Panel_Setting.findByPanelTypeID(panel.id)
     .then( function(panel_settings) {
       $scope.settings = panel_settings;
+      var settingIdMap = panel_settings.reduce(function(r, ps) {
+        ps.settingValues.forEach(function(value) {
+          r[value.panelSettingID] = {
+            type: ps.settingType,
+            obj: ps
+          };
+        });
+        return r;
+      }, {});
       if (panel.panelDetails) {
         for (var i = 0; i < panel.panelDetails.length; i++) {
-          $scope.selectedOption.push(panel.panelDetails[i].panel_setting_id);
-        };
+          var pid = panel.panelDetails[i].panel_setting_id;
+          if (settingIdMap[pid].type === 1) {
+            $scope.selectedOption.push(pid);
+          }
+          if (settingIdMap[pid].type === 2) {
+            settingIdMap[pid].obj.numberValue = panel.panelDetails[i].detail_value;
+          }
+        }
       }
+      panel_settings.forEach(function(ps) {
+        if (ps.settingType === 2) {
+          var settingValue = ps.settingValues[0];
+          if (! ps.hasOwnProperty('numberValue')) {
+            ps.numberValue = parseInt(settingValue.settingValue, 10);
+          }
+        }
+      });
 
     })
     .catch( function(err) {
@@ -279,7 +301,6 @@ angular.module('tdpApp')
         $scope.selectedOption.push(i);
       } else {
         $scope.selectedOption.splice($scope.selectedOption.indexOf(i),1);
-        if ($scope.checkedOption) $scope.checkedOption = false;
       }
     };
 
@@ -295,10 +316,21 @@ angular.module('tdpApp')
           var detail = {};
           detail.panel_setting_id = $scope.selectedOption[i];
           panelDetails.push(detail);
-        };
+        }
+      }
+      $scope.settings.forEach(function(ps) {
+        if (ps.settingType === 2) {
+          var detail = {
+            panel_setting_id: ps.settingValues[0].panelSettingID,
+            detail_value: ps.numberValue.toString()
+          };
+          panelDetails.push(detail);
+        }
+      });
+
+      if (panelDetails.length) {
         $scope.panel.panelDetails = panelDetails;
       }
-
       angular.extend(panel, $scope.panel);
 
       $uibModalInstance.close(panel);

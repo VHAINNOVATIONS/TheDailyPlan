@@ -144,14 +144,8 @@ exports.translateVistADateTime = function (dateTime) {
     var date = vistADate.substring(3, 5) + '/' + vistADate.substring(5, 7) + '/' + year;
     var vistATime = dateTimePieces[1];
     if (vistATime) {
-        var time = vistATime.substring(0, 2) + ':';
-        if (vistATime.length > 3) {
-            time += vistATime.substring(2, 4);
-        } else if (vistATime.length > 2) {
-            time += vistATime.substring(2, 3) + '0';
-        } else {
-            time += '00';
-        }
+        vistATime += "0000".substring(0, 4-vistATime.length);
+        var time = vistATime.substring(0, 2) + ':' + vistATime.substring(2, 4);
         date += ' ' + time;
     }
     return date;
@@ -173,9 +167,8 @@ exports.translateVisits = function (rawData) {
         Object.keys(rawData.value).forEach(function (key) {
             var apptPieces = rawData.value[key].split('^');
             var appt = {
-                id: apptPieces[0],
                 time: exports.translateVistADateTime(apptPieces[1]),
-                title: apptPieces[2]
+                clinic: apptPieces[2]
             };
             if (apptPieces[3]) {
                 appt.status = apptPieces[3];

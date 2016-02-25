@@ -278,10 +278,11 @@ describe('ewd session test', function () {
             }
         });
     });
+
     it('get patient visits', function (done) {
-        var pid = 756; //520; //patients[37].id;
+        var pid = 100613; //756; //100846; //756; //520; //patients[37].id;
         testSession.getVisits(pid, {
-            numDaysPast: 2998,
+            numDaysPast: 0,
             numDaysFuture: 30
         }, function (err, body) {
             if (err) {

@@ -1,11 +1,13 @@
 <div class="container report_row">
   <div class="row" class="report_column500" ng-if="visits && visits.length && !visitsError">
-    <div class="col-xs-6 grid_header">Title</div>
-    <div class="col-xs-3 grid_header">Time</div>
-    <div class="col-xs-3 grid_header">Status</div>
-    <div class="col-xs-6" ng-repeat-start="visit in visits">{{visit.title}}</div>
-    <div class="col-xs-3 grid_header">{{visit.time}}</div>
-    <div class="col-xs-3" ng-repeat-end>{{visit.status}}</div>
+    <div class="col-xs-4 grid_header">Time</div>
+    <div class="col-xs-4 grid_header">Clinic</div>
+    <div class="col-xs-4 grid_header">Status</div>
+  </div>
+  <div class="row" class="report_column500" ng-repeat="visit in visits" ng-if="visits && visits.length && !visitsError">
+    <div class="col-xs-4">{{visit.time}}</div>
+    <div class="col-xs-4">{{visit.clinic}}</div>
+    <div class="col-xs-4">{{visit.status}}</div>
   </div>
   <div class="row" class="report_column500" ng-if="visitsError">
     <span class="message">Internal error loading visits.</span>

@@ -11,18 +11,22 @@
                 <label class="col-sm-6 col-sm-offset-3">Select Options to Include</label>
               </div>
               <div ng-repeat="setting in settings">
-                <div class="row">
+                <div class="row" ng-if="setting.settingType === 1">
                   <!-- Add if logic to control which setting type, ie: list-group, etc -->
                   <div class="col-sm-6 col-sm-offset-3">
                     <div class="list-group" id="optionsList">
-                      <span class="list-group-item active">{{setting.settingName}}
-                      </span>
+                      <span class="list-group-item active">{{setting.settingName}}</span>
                       <span ng-repeat="value in setting.settingValues">
                         <span class="list-group-item">{{value.settingValue}}
                           <input ng-click="selectOption(value.panelSettingID)" name="selectedOption[]" value="{{value.panelSettingID}}" ng-checked="selectedOption.indexOf(value.panelSettingID) > -1" type="checkbox" class="pull-left picklist-input">
                         </span>
                       </span>
                     </div>
+                  </div>
+                </div>
+                <div class="row" ng-if="setting.settingType === 2">
+                  <div class="col-sm-6 col-sm-offset-3">{{setting.settingName}}:
+                    <input ng-model="setting.numberValue" type="number" min="1">
                   </div>
                 </div>
               </div>

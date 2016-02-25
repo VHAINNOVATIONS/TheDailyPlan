@@ -9,15 +9,19 @@ angular.module('tdpApp')
       /**
        * Get Visits
        *
-       * @param  {String}   value    - query value
+       * @param  {String}   patientId    - query patientId
        * @param  {Function} callback - optional
        * @return {Promise}
        */
-      getByID: function(value, callback) {
+      getByID: function(patientId, numDaysFuture, callback) {
         var cb = callback || angular.noop;
         var deferred = $q.defer();
 
-        $http({url: '/api/visits', method: 'GET', params: {value: value}}).
+        var params = {
+          patientId: patientId,
+          numDaysFuture: numDaysFuture
+        };
+        $http({url: '/api/visits', method: 'GET', params: params}).
         success(function(data) {
           results = data;
           deferred.resolve(data);
