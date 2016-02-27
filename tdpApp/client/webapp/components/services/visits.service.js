@@ -1,9 +1,7 @@
 'use strict';
 
 angular.module('tdpApp')
-  .factory('Visits', function Visits($location, $rootScope, $http, $q) {
-    var results = {};
-
+  .factory('Visits', function Visits($location, $rootScope, $http, $q, Panel_Detail) {
     return {
 
       /**
@@ -13,27 +11,30 @@ angular.module('tdpApp')
        * @param  {Function} callback - optional
        * @return {Promise}
        */
-      getByID: function(patientId, numDaysFuture, callback) {
-        var cb = callback || angular.noop;
-        var deferred = $q.defer();
-
-        var params = {
-          patientId: patientId,
-          numDaysFuture: numDaysFuture
-        };
-        $http({url: '/api/visits', method: 'GET', params: params}).
-        success(function(data) {
-          results = data;
-          deferred.resolve(data);
-          return cb();
-        }).
-        error(function(err) {
-
-          deferred.reject(err);
-          return cb(err);
-        }.bind(this));
-
-        return deferred.promise;
-      }
-    };
-  });
+      get: function(patientId, panelId) {
+        return Panel_Detail.findCompleteByID(panelId)
+          .then(function(panel_details) {
+            var numDaysFuture = 30;
+            panel_details.forEach(function(pd) {
+              if (pd.setting_name === 'Number of Future Days') {
+                numDaysFuture = pd.detail_value || pd.setting_value || 30;
+              }
+            });
+            return {
+              patientId: patientId,
+              numDaysFuture: numDaysFuture
+            };
+          })
+          .then(function(params) {
+            var httpParams = {
+              url: '/api/visits',
+              method: 'GET',
+              params: params
+            };
+            return $http(httpParams).then(function(response) {
+              return response.data;
+            });
+          });
+    }
+  };
+});
