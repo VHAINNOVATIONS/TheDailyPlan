@@ -13,8 +13,8 @@ angular.module('tdpApp')
       controller: function ($scope, Visits, Panel_Detail) {
         console.log('Patient Plan Print - visits patient:', $scope.patient);
         console.log('Patient Plan Print - visits panelid:', $scope.panelid);
-        Panel_Detail.findCompleteByID($scope.panelid)
-        .then( function(panel_details) {
+
+        Panel_Detail.findCompleteByID($scope.panelid).then( function(panel_details) {
           var numDaysFuture = 30;
           panel_details.forEach(function(pd) {
             if (pd.setting_name === 'Number of Future Days') {
@@ -25,13 +25,13 @@ angular.module('tdpApp')
           Visits.getByID($scope.patient, numDaysFuture).then(function(visits) {
             console.log('Patient Plan - visits:', visits);
             $scope.visits = visits;
-            $scope.visitsError = null;
-          }).catch( function() {
-            $scope.visitsError = 'Internal error loading visits.';
+            $scope.visitsLoadError = null;
+          }).catch( function(err) {
+            $scope.visitsLoadError = 'Internal error loading visits: ' + err.message;
           });
         })
         .catch( function(err) {
-          $scope.errors.other = err.message;
+          $scope.visitsLoadError = 'Internal error loading visits: ' + err.message;
         });
       }
     };

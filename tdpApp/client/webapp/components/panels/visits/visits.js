@@ -11,22 +11,15 @@ angular.module('tdpApp')
         panelid: '='
       },
       controller: function ($scope, Visits, Panel_Detail) {
+        console.log('Patient Plan Print - visits patient:', $scope.patient);
+        console.log('Patient Plan Print - visits panelid:', $scope.panelid);
 
         $scope.visits = null;
 
         $scope.visitsLoading = true;
-        console.log('Patient Plan Visit - scope:patient:',$scope.patient);
-        console.log('Patient Plan Visit - scope:panelid:',$scope.panelid);
+        $scope.visitsLoadError = null;
 
-        $scope.visitsGridOptions = {
-          enableExpandable: false,
-          expandableRowTemplate: 'components/panels/visits/visitsExpRowTemplate.html',
-          expandableRowHeight: 150,
-          //subGridVariable will be available in subGrid scope
-          expandableRowScope: {
-            subGridVariable: 'subGridScopeVariable'
-          }
-        };
+        $scope.visitsGridOptions = {};
 
         $scope.visitsGridOptions.columnDefs = [
           { name: 'time', displayName: 'Date' , width:'*' },
@@ -49,32 +42,14 @@ angular.module('tdpApp')
             $scope.visitsLoading = false;
           })
           .catch( function(err) {
-            $scope.errors.other = err.message;
+            $scope.visitsLoading = false;
+            $scope.visitsLoadError = 'Internal error loading visits: ' + err.message;
           });
         })
         .catch( function(err) {
-          $scope.errors.other = err.message;
+          $scope.visitsLoading = false;
+          $scope.visitsLoadError = 'Internal error loading visits: ' + err.message;
         });
-
-        $scope.visitsGridOptions.onRegisterApi = function(gridApi){
-          $scope.visitsGridApi = gridApi;
-        };
-
-        $scope.expandVisitsRows = function() {
-          $scope.visitsGridApi.expandable.expandAllRows();
-        };
-
-        $scope.collapseVisitsRows = function() {
-          $scope.visitsGridApi.expandable.collapseAllRows();
-        };
-
-      }/*,
-      link: function postLink(scope) {
-        scope.$watch('data', function (data) {
-          if (data) {
-            scope.data = data;
-          }
-        });
-      }*/
+     }
     };
   });
