@@ -1,0 +1,22 @@
+<div>
+  <div ui-grid="outpatientMedsGridOptions" class="grid">
+    <div class="grid-msg-overlay" ng-hide="!outpatientMedsLoading">
+      <div class="msg">
+        <span>
+          Loading active outpatient medications...
+          <i class="fa fa-spinner fa-spin"></i>
+        </span>
+      </div>
+    </div>
+    <div class="grid-msg-overlay" ng-hide="outpatientMedsLoading || outpatientMedsLoadError || outpatientMedsGridOptions.data.length">
+      <div class="msg">
+          <span>No Active Outpatient Medications Found</span>
+      </div>
+    </div>
+    <div class="grid-msg-overlay" ng-hide="!outpatientMedsLoadError">
+      <div class="msg">
+          <span>{{outpatientMedsLoadError}}</span>
+      </div>
+    </div>
+  </div>
+</div>

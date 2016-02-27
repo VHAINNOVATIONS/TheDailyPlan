@@ -27,8 +27,11 @@ angular.module('tdpApp')
       getIvMeds: function(value, callback) {
         return this.getTypedMeds(value, 'iv', callback);
       },
-      getActiveMeds: function(value, callback) {
-        return this.getTypedMeds(value, 'active', callback);
+      getActiveInpatientMeds: function(value, callback) {
+        return this.getTypedMeds(value, 'inpatient', callback);
+      },
+      getOutpatientMeds: function(value, callback) {
+        return this.getTypedMeds(value, 'outpatient', callback);
       }
     };
   });

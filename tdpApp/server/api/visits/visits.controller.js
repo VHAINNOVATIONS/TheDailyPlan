@@ -12,12 +12,12 @@ var validationError = function(res, err) {
  * Search for Patients by Prefix
  */
 exports.index = function (req, res, next) {
-  var value = req.query.value;
+  var patientId = req.query.patientId;
+  var numDaysFuture = req.query.numDaysFuture;
 
-  req.session.getVisits(value, {
-            numDaysPast: 2998,
-            numDaysFuture: 10
-        }, function (err, body) {
+  req.session.getVisits(patientId, {
+    numDaysFuture: numDaysFuture
+  }, function (err, body) {
       if (err) {
           return res.status(401).json(err);
       } else {

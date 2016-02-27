@@ -27,7 +27,7 @@ describe('ewd session test', function () {
         testSession.login({
             accessCode: 'CPRS1234XX',
             verifyCode: 'CPRS4321$XX',
-            location: 'Biloxi'
+            location: 'Madison'
         }, function (err) {
             if (err) {
                 console.log(err.toString());
@@ -43,7 +43,7 @@ describe('ewd session test', function () {
         testSession.login({
             accessCode: 'CPRS1234',
             verifyCode: 'CPRS4321$',
-            location: 'Biloxi',
+            location: 'Madison',
             userKeys: [{
               client: 'admin',
               vista: 'XUPROG'
@@ -200,13 +200,13 @@ describe('ewd session test', function () {
     });
 
     it('get patient allergies', function (done) {
-        var pid = patients[37].id;
+        var pid = 100846; //patients[37].id;
         testSession.getAllergies(pid, {}, function (err, body) {
             if (err) {
                 done(err);
             } else {
                 expect(body).to.exist();
-                expect(body.length).to.be.above(0);
+                //expect(body.length).to.be.above(0);
                 console.log("======ALLERGIES=======");
                 console.log(JSON.stringify(body, undefined, 4));
                 console.log("======================");
@@ -232,7 +232,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get patient meds', function (done) {
+    it('get patient iv meds', function (done) {
         var pid = 100846; // patients[2].id;
         testSession.getMedications('100846', {type: 'iv'}, function (err, body) {
             if (err) {
@@ -249,9 +249,9 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get patient meds', function (done) {
-        var pid = 100846; // 100033  //patients[2].id;
-        testSession.getMedications('100846', {type: 'active'}, function (err, body) {
+    it('get patient inpatient meds', function (done) {
+        var pid = 100841; // 100033  //patients[2].id;
+        testSession.getMedications('100846', {type: 'inpatient'}, function (err, body) {
             if (err) {
                 done(err);
             } else {
@@ -264,13 +264,15 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get patient problems', function (done) {
-        var pid = patients[37].id;
-        testSession.getProblems(pid, {}, function (err, body) {
+    it('get patient outpatient meds', function (done) {
+        var pid = 100841; // 100033  //patients[2].id;
+        testSession.getMedications('100846', {type: 'outpatient'}, function (err, body) {
             if (err) {
                 done(err);
             } else {
+                console.log('======== MED ACTIVE =========');
                 console.log(JSON.stringify(body, undefined, 4));
+                console.log('========================');
                 expect(body).to.exist();
                 done();
             }
@@ -278,9 +280,9 @@ describe('ewd session test', function () {
     });
 
     it('get patient visits', function (done) {
-        var pid = 756; //520; //patients[37].id;
+        var pid = 100613; //756; //100846; //756; //520; //patients[37].id;
         testSession.getVisits(pid, {
-            numDaysPast: 2998,
+            numDaysPast: 0,
             numDaysFuture: 30
         }, function (err, body) {
             if (err) {

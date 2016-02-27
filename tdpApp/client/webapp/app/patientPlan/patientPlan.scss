@@ -158,3 +158,23 @@ form {
 .gridster {
     border: 1px solid #ccc;
 }
+
+// ui-grid
+[ui-grid-row] {
+  display: table-row;
+}
+
+.ui-grid-row, .ui-grid-cell {
+  height: auto!important;
+}
+
+.ui-grid-cell {
+  float: none;
+  display: table-cell;
+}
+
+.ui-grid-header-cell, .ui-grid-cell-contents {
+  white-space: normal;
+  padding: 2px;
+  word-break: break-word;
+}

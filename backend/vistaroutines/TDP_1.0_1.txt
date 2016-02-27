@@ -1,0 +1,121 @@
+=============================================================================
+Run Date: FEB 24, 2016                     Designation: TDP*1.0*1
+Package : ZZ - THE DAILY PLAN              Priority:
+Version : 1       SEQ #1                   Status:
+Compliance Date: FEB 24, 2016
+=============================================================================
+
+Associated patches: N/A
+
+Subject: THE DAILY PLAN UTILITIES TO LOGIN AND GET PATIENT DATA
+
+Category:
+  - Routine
+
+Description:
+============
+
+ This patch will provide the following utilities for The Daily Plan application
+ EWD layer.
+
+ 1. Login utility that implements equivalent of CPRS login for EwD.
+
+ 2. RPC utility that enables EwD to execute any existing RPC in VistA.
+
+ 3. Session utilities to save and restore VistA session state after login.
+
+ 4. In addition custom tags are added to facilitate obtaining the following
+    data: user keys, health factors, admission info, postings info, allergies
+    info, medication route and schedule outpatient expansion, TUI object
+    content for patients.
+
+ ASSOCIATED NSR(s):
+ ==================
+ N/A
+
+ ASSOCIATED REMEDY TICKET(S):
+ ============================
+ N/A
+
+ TEST SITES:
+ ===========
+ VAMC Madison, WI VAH (607)
+ VA Gulf Coast HCS (520)
+ VAMC Menneapolis, MN (618)
+ VAMC Waco, TX (674A4)
+
+ REMEDY OVERVIEW:
+ ================
+ N/A
+
+ INSTALLATION INSTRUCTIONS
+ =========================
+ This patch can be loaded with users in the system. Installation time will
+ be less than 10 seconds.  You will need the TDP_1.0_1.KIDS host file.
+
+    1.  Make sure to copy TDP_1.0_1.KIDS host file to a location accessible
+        from VistA.
+
+    2.  Start up the Kernel Installation and Distribution System Menu
+        [XPD MAIN]:
+
+           Edits and Distribution ...
+           Utilities ...
+           Installation ...
+           Patch Monitor Main Menu ...
+
+      Select Kernel Installation & Distribution System Option: Installation
+
+             1      Load a Distribution
+             2      Verify Checksums in Transport Global
+             3      Print Transport Global
+             4      Compare Transport Global to Current System
+             5      Backup a Transport Global
+             6      Install Package(s)
+                    Restart Install of Package(s)
+                    Unload a Distribution
+
+    2.  From Installation menu select Load a Distribution and when
+        prompted with Enter a Host File, enter the full path of
+        TDP_1.0_1.KIDS host file.  When successful this will display
+        install name TDP*1.0*1 to be used for rest of the steps and
+        go back to Installation menu.
+
+    3.  From installation menu, you may elect to use the following options
+        (When prompted for the INSTALL NAME, enter TDP*1.0*1):
+
+        a.  Backup a Transport Global - This option will create a backup
+            message of any routines exported with this patch. It will
+            not backup any other changes such as DD's or templates.
+        b.  Compare Transport Global to Current System - This option
+            will allow you to view all changes that will be made when
+            this patch is installed.  It compares all components of this
+            patch (routines, DD's, templates, etc.).
+        c.  Verify Checksums in Transport Global - This option will
+            allow you to ensure the integrity of the routines that are
+            in the transport global.
+
+    4.  Use the Install Package(s) option and select the package
+        TDP*1.0*1.
+
+        a.  When prompted "Want KIDS to INHIBIT LOGONs during the
+            install? NO//", answer NO.
+        b.  When prompted "Want to DISABLE Scheduled Options and Menu
+            Options and Protocols? NO//", answer NO.
+
+Routine Information:
+====================
+The second line of each of these routines now looks like:
+ ;;1.0;THE DAILY PLAN;**1**;Feb 24, 2016;Build 2
+
+The checksums below are new checksums, and
+ can be checked with CHECK1^XTSUMBLD.
+
+Routine Name: ZZTDP
+    Before: N/A   After: 141029706  **1**
+Routine Name: ZZTDPSES
+    Before: N/A   After: 393156     **1**
+
+Routine list of preceding patches: N/A
+
+XINDEX does not report any errors or warnings for the routines.

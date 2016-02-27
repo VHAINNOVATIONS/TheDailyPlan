@@ -38,6 +38,10 @@ router.get('/:id', function(req, res) {
 
 // get complete template - use sequelize.query
 router.get('/complete/:id', function(req, res) {
+  console.log('===========');
+  console.log(req.params);
+  console.log('===========');
+
   models.sequelize.query('select * from template_layout tl ' +
     'inner join panel p on tl.panel_id = p.id ' +
     'inner join panel_type pt on p.panel_type_id = pt.id ' +
@@ -57,8 +61,8 @@ router.get('/complete/:id', function(req, res) {
       panelObj.settings.sizeY = panel.sizeY;
       panelObj.settings.minSizeX = panel.minSizeX;
       panelObj.settings.minSizeY = panel.minSizeY;
-      panelObj.template = '<div ' + panel.directive + ' patient="ctrl.' + panel.scope_variable +'" panelid="panel.panel_id"></div>';
-      panelObj.print = '<div ' + panel.directive + '-print' + ' patient="ctrl.' + panel.scope_variable +'"></div>';
+      panelObj.template = '<div ' + panel.directive + ' patient="ctrl.' + panel.scope_variable + '" panelid="panel.panel_id"></div>';
+      panelObj.print = '<div ' + panel.directive + '-print' + ' patient="ctrl.' + panel.scope_variable + '" panelid="panel.panel_id"></div>';
       panelObj.mandatory = panel.mandatory;
       panelObj.enable_options = panel.enable_options;
 
@@ -141,10 +145,14 @@ router.post('/', function(req, res) {
 
           if (panel.panelDetails) {
             async.eachSeries(panel.panelDetails, function(panelDetails, callbackPD) {
-              models.panel_detail.create({
+              var pd = {
                 panel_id: p.id,
                 panel_setting_id: panelDetails.panel_setting_id,
-              }).then(function(pd) {
+              };
+              if (panelDetails.hasOwnProperty('detail_value')) {
+                pd.detail_value = panelDetails.detail_value;
+              }
+              models.panel_detail.create(pd).then(function(pd) {
                 callbackPD();
               });
             }, function(err){

@@ -24,7 +24,6 @@ angular.module('tdpApp')
           return cb();
         }).
         error(function(err) {
-
           deferred.reject(err);
           return cb(err);
         }.bind(this));

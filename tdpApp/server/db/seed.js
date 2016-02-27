@@ -184,7 +184,7 @@ db.facility.create({
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 1,
-        mandatory: true,
+        mandatory: false,
         enable_options: false
       }).then(function(pt) {
         // Then Create the Panel Second
@@ -225,38 +225,6 @@ db.facility.create({
           panel_type_id: pt.id,
           sizeX: 2,
           sizeY: 1
-        }).then(function(p) {
-          // Then Create the Template_Layout Second
-          console.log('templateID:',templateID);
-          db.template_layout.create({
-            template_id: templateID,
-            panel_id: p.id,
-            panel_order: p.id
-          }).then(function(tl) {
-            console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
-          });
-
-        });
-
-      });
-
-      // Create the Panel_Type First
-      db.panel_type.create({
-        facility_id: facilityID,
-        title: 'Problems',
-        directive: 'dt-problems',
-        scope_variable: 'patient',
-        minSizeX: 2,
-        minSizeY: 2,
-        mandatory: false,
-        enable_options: false
-      }).then(function(pt) {
-        // Then Create the Panel Second
-        db.panel.create({
-          name: 'Problems Default',
-          panel_type_id: pt.id,
-          sizeX: 3,
-          sizeY: 2
         }).then(function(p) {
           // Then Create the Template_Layout Second
           console.log('templateID:',templateID);
@@ -376,7 +344,7 @@ db.facility.create({
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 2,
-        mandatory: false,
+        mandatory: true,
         enable_options: false
       }).then(function(pt) {
         // Then Create the Panel Second
@@ -409,7 +377,7 @@ db.facility.create({
         minSizeX: 2,
         minSizeY: 2,
         mandatory: true,
-        enable_options: false
+        enable_options: true
       }).then(function(pt) {
         // Then Create the Panel Second
         db.panel.create({
@@ -428,6 +396,23 @@ db.facility.create({
             console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
           });
 
+          // Now Create the Settings and Details
+          db.panel_setting.create({
+            panel_type_id: pt.id,
+            setting_type: 2,
+            setting_name: 'Number of Future Days',
+            setting_value: '30'
+          }).then(function(ps) {
+            //Then Create the Details
+            db.panel_detail.create({
+              panel_id: p.id,
+              panel_setting_id: ps.id
+            }).then(function(tl) {
+              console.log('<<<<<<<Panel Setting & Detail Record Created.>>>>>>>')
+            });
+
+          });
+
         });
 
       });
@@ -440,7 +425,7 @@ db.facility.create({
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 2,
-        mandatory: false,
+        mandatory: true,
         enable_options: false
       }).then(function(pt) {
         // Then Create the Panel Second
@@ -467,7 +452,7 @@ db.facility.create({
       // Create the Panel_Type First
       db.panel_type.create({
         facility_id: facilityID,
-        title: 'Active Medications',
+        title: 'Inpatient Medications',
         directive: 'dt-active-meds',
         scope_variable: 'patient',
         minSizeX: 2,
@@ -477,7 +462,39 @@ db.facility.create({
       }).then(function(pt) {
         // Then Create the Panel Second
         db.panel.create({
-          name: 'Active Medications Default',
+          name: 'Active Inpatient Medications Default',
+          panel_type_id: pt.id,
+          sizeX: 3,
+          sizeY: 2
+        }).then(function(p) {
+          // Then Create the Template_Layout Second
+          console.log('templateID:',templateID);
+          db.template_layout.create({
+            template_id: templateID,
+            panel_id: p.id,
+            panel_order: p.id
+          }).then(function(tl) {
+            console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
+          });
+
+        });
+
+      });
+
+      // Create the Panel_Type First
+      db.panel_type.create({
+        facility_id: facilityID,
+        title: 'Outpatient Medications',
+        directive: 'dt-outpatient-meds',
+        scope_variable: 'patient',
+        minSizeX: 2,
+        minSizeY: 2,
+        mandatory: true,
+        enable_options: false
+      }).then(function(pt) {
+        // Then Create the Panel Second
+        db.panel.create({
+          name: 'Active Outpatient Medications Default',
           panel_type_id: pt.id,
           sizeX: 3,
           sizeY: 2
@@ -504,7 +521,7 @@ db.facility.create({
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 2,
-        mandatory: false,
+        mandatory: true,
         enable_options: false
       }).then(function(pt) {
         // Then Create the Panel Second
@@ -828,7 +845,7 @@ db.facility.create({
         });
       });
     }).then(function(template) {
-      console.log('afsin');
+      console.log('success');
     });
   //endforloop
   }

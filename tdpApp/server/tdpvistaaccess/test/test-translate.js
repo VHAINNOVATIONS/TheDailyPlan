@@ -65,12 +65,6 @@ describe('vista raw translations', function () {
         //console.log(JSON.stringify(result, undefined, 4));
     });
 
-    it('problem list', function () {
-        var sample = require('./fixtures/rawProblemListSample.json');
-        var result = translator.translateProblemList(sample);
-        //console.log(JSON.stringify(result, undefined, 4));
-    });
-
     xit('orders', function () {
         var ordersSample = require('./fixtures/rawOrdersSample.json');
         var orderTypes = require('./fixtures/rawOrderTypes.json');
