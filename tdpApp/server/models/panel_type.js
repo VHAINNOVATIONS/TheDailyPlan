@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     facility_id: {
       type: DataTypes.INTEGER(11),
-      allowNull: true
+      allowNull: false
     },
     title: {
       type: DataTypes.STRING,
@@ -35,6 +35,10 @@ module.exports = function(sequelize, DataTypes) {
     mandatory: {
       type: DataTypes.BOOLEAN,
       allowNull: true
+    },
+    enable_options: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false
     }
   }, {
     tableName: 'panel_type',

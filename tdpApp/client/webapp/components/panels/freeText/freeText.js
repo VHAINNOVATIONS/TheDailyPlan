@@ -13,7 +13,7 @@ angular.module('tdpApp')
       controller: function ($scope, FreeText) {
         $scope.textContent = $scope.detail;
         $scope.textLoading = true;
-        var tius = $scope.textContent.match(/\|[^\|]+\|/g);
+        var tius = $scope.textContent && $scope.textContent.match(/\|[^\|]+\|/g);
         if (tius && tius.length) {
           FreeText.resolveFreeTextTemplates($scope.patient, tius.join('^'))
           .then( function(data) {

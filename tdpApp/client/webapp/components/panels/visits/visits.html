@@ -1,21 +1,22 @@
 <div>
-  <div class="control-group" ng-show="visitsGridOptions.enableExpandable">
-      <input type="button" class="btn btn-small" ng-click="expandVisitsRows()" value="Expand All" />
-      <input type="button" class="btn btn-small" ng-click="collapseVisitsRows()" value="Collapse All" />
-  </div>
   <div ui-grid="visitsGridOptions" class="grid">
-      <div class="grid-msg-overlay" ng-hide="!visitsLoading">
+      <div class="grid-msg-overlay" ng-hide="!visitsLoading || visitsLoadError">
           <div class="msg">
               <span>
-                  Loading Data...
+                  Loading future visits...
                   <i class="fa fa-spinner fa-spin"></i>
               </span>
           </div>
       </div>
-      <div class="grid-msg-overlay" ng-hide="visitsLoading || visitsGridOptions.data.length">
+      <div class="grid-msg-overlay" ng-hide="visitsLoading || visitsLoadError || visitsGridOptions.data.length">
           <div class="msg">
-              <span>No Visits in this Section</span>
+              <span>No Future Visits Found</span>
           </div>
+      </div>
+      <div class="grid-msg-overlay" ng-hide="!visitsLoadError">
+        <div class="msg">
+            <span>{{visitsLoadError}}</span>
+        </div>
       </div>
   </div>
 </div>

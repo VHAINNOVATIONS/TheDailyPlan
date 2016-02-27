@@ -1,14 +1,16 @@
 <div class="container report_row">
-  <div class="row" class="report_column500" ng-if="ivMeds && ivMeds.length && !ivMedsError">
-    <div class="col-xs-8 grid_header">Drug</div>
-    <div class="col-xs-4 grid_header">Status</div>
-    <div class="col-xs-8" ng-repeat-start="med in ivMeds">{{med.detail}}</div>
-    <div class="col-xs-4" ng-repeat-end>{{med.status}}</div>
+  <div class="row" ng-if="!ivMedsLoadError && ivMeds && ivMeds.length">
+    <div class="col-xs-6 grid_header">Detail</div>
+    <div class="col-xs-6 grid_header">Direction</div>
   </div>
-  <div class="row" class="report_column500" ng-if="ivMedsError">
-    <span class="message">Internal error loading active medications.</span>
+  <div class="row" ng-repeat="med in ivMeds" ng-if="!ivMedsLoadError && ivMeds && ivMeds.length">
+    <div class="col-xs-6">{{med.detail}}</div>
+    <div class="col-xs-6">{{med.sig}}</div>
   </div>
-  <div class="row" class="report_column500" ng-if="ivMeds.length == 0 && !ivMedsError">
-    <span class="message">No IV medications found.</span>
+  <div class="row" ng-if="ivMedsLoadError">
+    <span class="message">Internal Error Loading IV Medications</span>
+  </div>
+  <div class="row" ng-if="!ivMedsLoadError && ivMeds.length === 0">
+    <span class="message">No IV Medications Found</span>
   </div>
 </div>

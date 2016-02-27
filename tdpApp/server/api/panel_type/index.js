@@ -37,12 +37,14 @@ router.get('/:id', function(req, res) {
 // add new panel_type
 router.post('/', function(req, res) {
   models.panel_type.create({
+    facility_id: req.body.facility_id,
     title: req.body.title,
     directive: req.body.directive,
     scope_variable: req.body.scope_variable,
     minSizeX: req.body.minSizeX,
     minSizeY: req.body.minSizeY,
-    mandatory: req.body.mandatory
+    mandatory: req.body.mandatory,
+    enable_options: req.body.enable_options
   }).then(function(panel_type) {
     res.json(panel_type);
   });
@@ -57,12 +59,14 @@ router.put('/:id', function(req, res) {
   }).then(function(panel_type) {
     if(panel_type){
       panel_type.updateAttributes({
+        facility_id: req.body.facility_id,
         title: req.body.title,
         directive: req.body.directive,
         scope_variable: req.body.scope_variable,
         minSizeX: req.body.minSizeX,
         minSizeY: req.body.minSizeY,
-        mandatory: req.body.mandatory
+        mandatory: req.body.mandatory,
+        enable_options: req.body.enable_options
       }).then(function(panel_type) {
         res.send(panel_type);
       });

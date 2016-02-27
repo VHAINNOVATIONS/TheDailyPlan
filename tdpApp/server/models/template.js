@@ -18,7 +18,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     facility_id: {
       type: DataTypes.INTEGER(11),
-      allowNull: true
+      allowNull: false
     },
     location_id: {
       type: DataTypes.INTEGER(11),

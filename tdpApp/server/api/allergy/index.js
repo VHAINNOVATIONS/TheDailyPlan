@@ -11,5 +11,4 @@ router.get('/', controller.index);
 //router.get('/:value', controller.search);
 //router.get('/:value', auth.isAuthenticated(), controller.search);
 
-
 module.exports = router;

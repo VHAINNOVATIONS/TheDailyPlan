@@ -3,8 +3,16 @@
 angular.module('tdpApp')
   .factory('Template', function Template($location, $rootScope, $http, $q) {
     var results = {};
+    var selectedTemplates = [];
+
 
     return {
+      getSelectedPatients: function() {
+          return selectedTemplates;
+      },
+      setSelectedPatients: function(value) {
+          selectedTemplates = value;
+      },
 
       /**
        * Find All Templates
@@ -18,7 +26,6 @@ angular.module('tdpApp')
 
         $http.get('/api/template/').
         success(function(data) {
-          console.log('Template findAll:',data);
           results = data;
           deferred.resolve(data);
           return cb();
@@ -44,7 +51,6 @@ angular.module('tdpApp')
 
         $http.get('/api/template/facility/' + id).
         success(function(data) {
-          console.log('Template findAll:',data);
           results = data;
           deferred.resolve(data);
           return cb();
@@ -71,7 +77,6 @@ angular.module('tdpApp')
 
         $http.get('/api/template/' + id).
         success(function(data) {
-          console.log('Template findByID:',data);
           results = data;
           deferred.resolve(data);
           return cb();
@@ -98,7 +103,6 @@ angular.module('tdpApp')
 
         $http.get('/api/template/complete/' + id).
         success(function(data) {
-          console.log('Template findCompleteByID:',data);
           results = data;
           deferred.resolve(data);
           return cb();
@@ -132,7 +136,6 @@ angular.module('tdpApp')
 
         $http.post('/api/template/', template).
         success(function(data) {
-          console.log('createTemplate - data:',data);
           deferred.resolve(data);
           return cb();
         }).
@@ -165,7 +168,6 @@ angular.module('tdpApp')
 
         $http.put('/api/template/'+template.id, template).
         success(function(data) {
-          console.log('updateTemplate - data:',data);
           deferred.resolve(data);
           return cb();
         }).
@@ -191,7 +193,6 @@ angular.module('tdpApp')
 
         $http.delete('/api/template/' + id).
         success(function(data) {
-          console.log('Template findByID:',data);
           results = data;
           deferred.resolve(data);
           return cb();

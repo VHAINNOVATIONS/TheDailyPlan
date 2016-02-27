@@ -197,6 +197,8 @@ var session = {
     get: function (route, parameters, callback) {
         var alias = this.location || 'default';
         var port = this.ports[alias];
+        console.log(this.ports);
+        console.log(alias);
         var options = _.assign({
             uri: this.baseUrl + port + this.serverRoute + route
         }, {
@@ -230,6 +232,8 @@ var session = {
     login: function (userInfo, callback) {
         this.location = userInfo.location;
         var self = this;
+        console.log(this.location);
+        console.log(userInfo);
         this.get('/initiate', null, function (err, body) {
             if (err) {
                 callback(err);
@@ -240,6 +244,7 @@ var session = {
                 var keysStr = userInfo.userKeys.map(function(userKey) {
                   return userKey.vista;
                 }).join('^');
+                console.log(credentials);
                 self.get('/login', {
                     credentials: credentials,
                     keys: keysStr
@@ -287,14 +292,30 @@ var session = {
         });
     },
     getAllergies: function (patientId, options, callback) {
-        this.get('/getAllergiesDetailMap', {
+        this.get('/getAllergies', {
             patientId: patientId
-        }, function (err, body) {
+        }, function (err, result) {
             if (err) {
-                callback(err);
-            } else {
-                callback(null, body);
+                return callback(err);
             }
+            if (result.status) {
+              result.allergies.sort(function(a, b) {
+                if (a.allergenType === b.allergenType) {
+                  return 0;
+                }
+                if (a.allergenType && (a.allergenType.indexOf('D') >= 0)) {
+                  return -1;
+                }
+                return 1;
+              });
+              result.allergies.forEach(function(allergy) {
+                if (allergy.reaction) {
+                  allergy.reaction = allergy.reaction.join('; ');
+                }
+
+              });
+            }
+            callback(null, result);
         });
     },
     getVitalSigns: function (patientId, options, callback) {
@@ -354,7 +375,7 @@ var session = {
         });
     },
     getMedications: function (patientId, options, callback) {
-        this.get('/getMedicationsDetailMap', {
+        this.get('/getMedications', {
             patientId: patientId
         }, function (err, body) {
             if (err) {
@@ -362,19 +383,6 @@ var session = {
             } else {
                 var meds = translator.translateMeds(body, options.type);
                 callback(null, meds);
-            }
-        });
-    },
-    getProblems: function (patientId, options, callback) {
-        this.get('/getProblemsListDetailMap', {
-            patientId: patientId,
-            type: 'ALL'
-        }, function (err, body) {
-            if (err) {
-                callback(err);
-            } else {
-                var result = translator.translateProblemList(body);
-                callback(null, result);
             }
         });
     },

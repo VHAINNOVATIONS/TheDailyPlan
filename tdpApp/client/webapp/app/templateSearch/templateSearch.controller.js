@@ -98,34 +98,29 @@ angular.module('tdpApp')
     });
 
     function create() {
-      $location.path('/layouts');
+      $location.path('/layouts/create/');
     }
 
     function display() {
-      console.log('templateSearch display!');
 
       angular.forEach(self.selected, function(value, key) {
         var entry = {};
-
         if(value === true)
         {
           entry.id = key;
-          entry.name = findName(key);
-          entry.templateID = findTemplate(key);
           this.push(entry);
         }
 
       }, self.items);
 
-      console.log('items:',self.items);
       switch(self.items.length) {
         case 0:
           self.displayErr.flag = true;
           self.displayErr.msg = 'Please select a template to display.';
           break;
         case 1:
-          Template.setSelectedTemplates(self.items);
-          $location.path('/layouts');
+          //Template.setSelectedTemplates(self.items);
+          $location.path('/layouts/display/'+self.items[0].id);
           break;
         default:
           self.items = [];
@@ -201,7 +196,6 @@ angular.module('tdpApp')
 
     function reloadData() {
         var resetPaging = true;
-        console.log('reloadData: ', self.dtInstance);
         self.dtInstance.reloadData(callback, resetPaging);
     }
 
@@ -227,38 +221,5 @@ angular.module('tdpApp')
         }
         self.selectAll = true;
     }
-
-    function findName(id) {
-         var item = $filter('filter')(self.data, {id: id}, true);
-         if (item.length) {
-             return item[0].name;
-         } else {
-             return 'Name Error';
-         }
-     }
-
-     function findTemplate(id) {
-      console.log('findTemplate id:', id);
-      angular.forEach(self.selectedTemplate, function(value, key) {
-        var entry = {};
-        console.log('selectedTemplate key:', key);
-
-        entry.id = key;
-        entry.templateID = value;
-        this.push(entry);
-
-      }, self.selectedTemplateArray);
-
-      var item = $filter('filter')(self.selectedTemplateArray, {
-        id: id
-      }, true);
-      if (item.length) {
-        console.log('findTemplate found! ', item[0]);
-        return item[0].templateID;
-      } else {
-        return 'Template Error';
-      }
-    }
-
 
   });

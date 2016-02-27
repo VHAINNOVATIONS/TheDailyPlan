@@ -144,14 +144,8 @@ exports.translateVistADateTime = function (dateTime) {
     var date = vistADate.substring(3, 5) + '/' + vistADate.substring(5, 7) + '/' + year;
     var vistATime = dateTimePieces[1];
     if (vistATime) {
-        var time = vistATime.substring(0, 2) + ':';
-        if (vistATime.length > 3) {
-            time += vistATime.substring(2, 4);
-        } else if (vistATime.length > 2) {
-            time += vistATime.substring(2, 3) + '0';
-        } else {
-            time += '00';
-        }
+        vistATime += "0000".substring(0, 4-vistATime.length);
+        var time = vistATime.substring(0, 2) + ':' + vistATime.substring(2, 4);
         date += ' ' + time;
     }
     return date;
@@ -173,9 +167,8 @@ exports.translateVisits = function (rawData) {
         Object.keys(rawData.value).forEach(function (key) {
             var apptPieces = rawData.value[key].split('^');
             var appt = {
-                id: apptPieces[0],
                 time: exports.translateVistADateTime(apptPieces[1]),
-                title: apptPieces[2]
+                clinic: apptPieces[2]
             };
             if (apptPieces[3]) {
                 appt.status = apptPieces[3];
@@ -246,47 +239,6 @@ exports.translateRadiologyReports = function (rawData) {
                     }
                 });
                 result.push(report);
-            }
-        });
-    }
-    return result;
-};
-
-var problemListUpdateFn = {
-    '1': function (report, data) {
-        var facilityData = data.split('^')[1];
-        var facilityDataPieces = facilityData.split(';');
-        report.facility = {
-            name: facilityDataPieces[0],
-            id: facilityDataPieces[1]
-        };
-    },
-    '2': setReportValue('status'),
-    '5': setReportValue('fullDetail'),
-    '7': setReportValue('onsetDate'),
-    '8': setReportValue('modifiedDate'),
-    '9': setReportValue('provider')
-};
-
-exports.translateProblemList = function (rawData) {
-    var result = [];
-    if (rawData) {
-        Object.keys(rawData).forEach(function (key) {
-            var rawProblem = rawData[key].WP;
-            if (rawProblem) {
-                var problem = {};
-                Object.keys(rawProblem).forEach(function (lineKey) {
-                    var fn = problemListUpdateFn[lineKey];
-                    if (fn) {
-                        fn(problem, rawProblem[lineKey]);
-                    }
-                });
-                var detailPieces = problem.fullDetail.split(' ');
-                problem.code = detailPieces[1];
-                problem.codeSystem = detailPieces[0];
-                problem.description = problem.fullDetail.split('[')[1].split(']')[0];
-                delete problem.fullDetail;
-                result.push(problem);
             }
         });
     }
@@ -409,16 +361,15 @@ exports.translateMeds = function(meds, type) {
     if ((type === 'iv') && (medType !== 'IV')) {
       return r;
     }
-    if ((type === 'active') && (medStatus !== 'ACTIVE')) {
+    if (medStatus !== 'ACTIVE') {
       return r;
     }
-    if (! med.detail) {
-      med.detail = med.name + (med.sig ? ' - ' + med.sig : "");
+    if ((type === 'inpatient') && (medType !== 'UD')) {
+      return r;
     }
-    if (med.isInpatient) {
-      med.detail = med.detail.replace(/\r\n/g, ' ').trim();
+    if ((type === 'outpatient') && ! med.isOutpatient) {
+      return r;
     }
-    med.detail = med.detail.trim();
     if (med.startDate && med.startDate.length) {
       med.startDate = exports.translateVistADateTime(med.startDate);
     }

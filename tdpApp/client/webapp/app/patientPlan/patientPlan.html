@@ -65,19 +65,19 @@
           <div class="col-xs-6">The Daily Plan represents current hospital activity and it is NOT a full list of everything that takes place during your hospital stay.  Your medications, treatments, appointments, etc. may change at discharge.  Please keep your personal information out of sight by storing this folder in a private place, such as a night stand drawer or bedside cabinet.</div>
         </div>
       <div class="report_title">
-          <h3 class="text-primary">   Confidential: The Daily Plan<sup>&#174;</sup> {{ctrl.cdate | date:'MM/dd/yyyy'}}</h3>
+          <h3 class="text-primary report_title_text">Confidential: The Daily Plan<sup>&#174;</sup> {{ctrl.cdate | date:'MM/dd/yyyy'}}</h3>
       </div>
-      <div class="row report_patient">
-          <div class="col-xs-4">{{ctrl.demographics.name}}</div>
-          <div class="col-xs-4">DOB: {{ctrl.demographics.DOB}}</div>
-          <div class="col-xs-4">Med Unit: {{ctrl.demographics.location.name}}</div>
+      <div class="row tdp_demographics">
+          <div class="col-xs-4 tdp_demographics_row">{{ctrl.demographics.name}}</div>
+          <div class="col-xs-4 tdp_demographics_row">DOB: {{ctrl.demographics.DOB}}</div>
+          <div class="col-xs-4 tdp_demographics_row">Med Unit: {{ctrl.demographics.location.name}}</div>
       </div>
     </div>
     <div>
-      <ul ng-model="ctrl.panels">
+      <ul ng-model="ctrl.panels" class="tdp_panel">
         <li class="patient_data" ng-repeat="panel in ctrl.panels" grid-panel-print>
-            <div class="report_category">
-              <h4>     {{panel.title}}</h4>
+            <div class="tdp_panel_title">
+              <h4 class="tdp_panel_title_text">{{panel.title}}</h4>
             </div>
             <div class="box-content-print">
             </div>

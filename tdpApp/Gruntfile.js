@@ -746,6 +746,12 @@ module.exports = function (grunt) {
             options: {
                 config: '.jsbeautifyrc'
             }
+        },
+        ewdmodules: {
+            src: ['../backend/ewdmodules/*.js'],
+            options: {
+                config: '.jsbeautifyrc'
+            }
         }
     },
   });
