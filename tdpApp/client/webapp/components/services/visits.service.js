@@ -3,6 +3,24 @@
 angular.module('tdpApp')
   .factory('Visits', function Visits($location, $rootScope, $http, $q, Panel_Detail) {
     return {
+      columnDefs: [{
+        name: 'time',
+        displayName: 'Date',
+        width:'*',
+        btsrpWidth: '4'
+      }, {
+        name: 'clinic',
+        displayName: 'Clinic',
+        width:'*',
+        btsrpWidth: '4'
+      }, {
+        name: 'status',
+        displayName: 'Status',
+        width:'*',
+        btsrpWidth: '4'
+      }],
+      loadingMsg: 'Loading future visits...',
+      emptyMsg: 'No future visits found',
 
       /**
        * Get Visits
@@ -12,6 +30,7 @@ angular.module('tdpApp')
        * @return {Promise}
        */
       get: function(patientId, panelId) {
+        var self = this;
         return Panel_Detail.findCompleteByID(panelId)
           .then(function(panel_details) {
             var numDaysFuture = 30;
@@ -32,7 +51,18 @@ angular.module('tdpApp')
               params: params
             };
             return $http(httpParams).then(function(response) {
-              return response.data;
+              var result = response.data;
+              result.columns = self.columnDefs;
+
+              result.forEach(function(row) {
+                row.columns = result.columns.map(function(p) {
+                  return {
+                    btsrpWidth: p.btsrpWidth,
+                    value: row[p.name]
+                  };
+                });
+              });
+              return result;
             });
           });
     }

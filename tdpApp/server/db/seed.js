@@ -372,7 +372,8 @@ db.facility.create({
       db.panel_type.create({
         facility_id: facilityID,
         title: 'Visits',
-        directive: 'dt-visits',
+        directive: 'dt-simple-grid',
+        service: 'Visits',
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 2,

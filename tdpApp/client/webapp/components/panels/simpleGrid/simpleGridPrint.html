@@ -1,0 +1,14 @@
+<div class="container report_row">
+  <div class="row" ng-if="!loadError && dataRows && dataRows.length">
+    <div ng-repeat="c in columnDefs" class="col-xs-{{c.btsrpWidth}} grid_header">{{c.displayName}}</div>
+  </div>
+  <div class="row" ng-repeat="dataRow in dataRows" ng-if="!loadError && dataRows && dataRows.length">
+    <div ng-repeat="c in dataRow.columns" class="col-xs-{{c.btsrpWidth}}">{{c.value}}</div>
+  </div>
+  <div class="row" ng-if="loadError">
+    <span class="message">{{loadError}}</span>
+  </div>
+  <div class="row" ng-if="!loadError && dataRows.length == 0">
+    <span class="message">{{emptyMsg}}</span>
+  </div>
+</div>
