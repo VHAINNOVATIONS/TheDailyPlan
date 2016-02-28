@@ -180,7 +180,8 @@ db.facility.create({
       db.panel_type.create({
         facility_id: facilityID,
         title: 'Allergies',
-        directive: 'dt-allergies',
+        directive: 'dt-simple-grid',
+        service: 'Allergy',
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 1,

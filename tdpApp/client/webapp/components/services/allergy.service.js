@@ -2,9 +2,21 @@
 
 angular.module('tdpApp')
   .factory('Allergy', function Allergy($location, $rootScope, $http, $q) {
-    var results = {};
-
     return {
+      columnDefs: [{
+        name: 'allergenName',
+        displayName: 'Name',
+        width:'*',
+        btsrpWidth: '6'
+      }, {
+        name: 'reaction',
+        displayName: 'Reaction',
+        width:'*',
+        btsrpWidth: '6'
+      }],
+      loadingMsg: 'Loading allergies...',
+      emptyMsg: 'No Allergy Assessment',
+
 
       /**
        * Get Allergy
@@ -13,22 +25,30 @@ angular.module('tdpApp')
        * @param  {Function} callback - optional
        * @return {Promise}
        */
-      getByID: function(value, callback) {
-        var cb = callback || angular.noop;
-        var deferred = $q.defer();
-
-        $http({url: '/api/allergy', method: 'GET', params: {value: value}}).
-        success(function(data) {
-          results = data;
-          deferred.resolve(data);
-          return cb();
-        }).
-        error(function(err) {
-          deferred.reject(err);
-          return cb(err);
-        }.bind(this));
-
-        return deferred.promise;
+      get: function(patientId) {
+        var httpParams = {
+          url: '/api/allergy',
+          method: 'GET',
+          params: {
+            value: patientId
+          }
+        };
+        var self = this;
+        return $http(httpParams).then(function(response) {
+          var data = response.data;
+          self.emptyMsg = (data.status === null) ? 'No Allergy Assessment' : 'No Known Allergies';
+          var result = data.allergies || [];
+          result.columns = self.columnDefs;
+          result.forEach(function(row) {
+            row.columns = result.columns.map(function(p) {
+              return {
+                btsrpWidth: p.btsrpWidth,
+                value: row[p.name]
+              };
+            });
+          });
+          return result;
+        });
       }
     };
   });
