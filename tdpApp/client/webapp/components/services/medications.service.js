@@ -3,7 +3,7 @@
 angular.module('tdpApp')
   .factory('Medication', function Medication($location, $rootScope, $http, $q) {
     return {
-      getTypedMeds: function(value, type, callback) {
+      get: function(value, type, callback) {
         var cb = callback || angular.noop;
         var deferred = $q.defer();
 
@@ -23,15 +23,35 @@ angular.module('tdpApp')
         }.bind(this));
 
         return deferred.promise;
-      },
-      getIvMeds: function(value, callback) {
-        return this.getTypedMeds(value, 'iv', callback);
-      },
-      getActiveInpatientMeds: function(value, callback) {
-        return this.getTypedMeds(value, 'inpatient', callback);
-      },
-      getOutpatientMeds: function(value, callback) {
-        return this.getTypedMeds(value, 'outpatient', callback);
       }
     };
   });
+
+angular.module('tdpApp')
+  .factory('IVMedication', function IVMedication(Medication) {
+    return {
+      get: function(patientId) {
+        return Medication.get(patientId, 'iv');
+      }
+    };
+  });
+
+angular.module('tdpApp')
+  .factory('InpatientMedication', function InpatientMedication(Medication) {
+    return {
+      get: function(patientId) {
+        return Medication.get(patientId, 'inpatient');
+      }
+    };
+  });
+
+angular.module('tdpApp')
+  .factory('OutpatientMedication', function OutpatientMedication(Medication) {
+    return {
+      get: function(patientId) {
+        return Medication.get(patientId, 'outpatient');
+      }
+    };
+  });
+
+

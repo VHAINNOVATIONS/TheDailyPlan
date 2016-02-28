@@ -9,7 +9,7 @@ angular.module('tdpApp')
       scope: {
         patient: '=',
       },
-      controller: function ($scope, Medication) {
+      controller: function ($scope, InpatientMedication) {
         $scope.activeMeds = null;
 
         $scope.activeMedsLoading = true;
@@ -23,7 +23,7 @@ angular.module('tdpApp')
           { name: 'route', displayName: 'Route', width:'*'},
           { name: 'schedule', displayName: 'Schedule', width:'*'}
         ];
-        Medication.getActiveInpatientMeds($scope.patient).then( function(data) {
+        InpatientMedication.get($scope.patient).then( function(data) {
           console.log('Patient Plan - activeMeds:', data);
           $scope.activeMedsGridOptions.data = data;
           $scope.activeMedsLoading = false;
