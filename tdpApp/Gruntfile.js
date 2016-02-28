@@ -752,6 +752,12 @@ module.exports = function (grunt) {
             options: {
                 config: '.jsbeautifyrc'
             }
+        },
+        client: {
+          src: ['client/webapp/components/panels/simpleGrid/*.*'],
+            options: {
+                config: '.jsbeautifyrc'
+            }
         }
     },
   });
