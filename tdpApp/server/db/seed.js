@@ -423,7 +423,8 @@ db.facility.create({
       db.panel_type.create({
         facility_id: facilityID,
         title: 'IV Medications',
-        directive: 'dt-iv-meds',
+        directive: 'dt-simple-grid',
+        service: 'IVMedication',
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 2,
@@ -455,7 +456,8 @@ db.facility.create({
       db.panel_type.create({
         facility_id: facilityID,
         title: 'Inpatient Medications',
-        directive: 'dt-active-meds',
+        directive: 'dt-simple-grid',
+        service: 'InpatientMedication',
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 2,
@@ -487,7 +489,8 @@ db.facility.create({
       db.panel_type.create({
         facility_id: facilityID,
         title: 'Outpatient Medications',
-        directive: 'dt-outpatient-meds',
+        directive: 'dt-simple-grid',
+        service: 'OutpatientMedication',
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 2,
