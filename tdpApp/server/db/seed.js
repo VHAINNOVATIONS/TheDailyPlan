@@ -412,7 +412,6 @@ db.facility.create({
             }).then(function(tl) {
               console.log('<<<<<<<Panel Setting & Detail Record Created.>>>>>>>')
             });
-
           });
 
         });
@@ -846,6 +845,44 @@ db.facility.create({
             }).then(function(tl) {
               console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
             });
+
+            // Now Create the Settings and Details
+            db.panel_setting.create({
+              panel_type_id: pt.id,
+              setting_type: 3,
+              setting_name: 'Title',
+              setting_value: ''
+            })
+            .then(function(ps) {
+              //Then Create the Details
+              console.log('AFSINAFSIN1');
+              return db.panel_detail.create({
+                panel_id: p.id,
+                panel_setting_id: ps.id
+              })
+            })
+            .then(function() {
+              console.log('AFSINAFSIN2');
+              return db.panel_setting.create({
+                panel_type_id: pt.id,
+                setting_type: 4,
+                setting_name: 'Content',
+                setting_value: ''
+              });
+            })
+            .then(function(ps) {
+              //Then Create the Details
+              console.log('AFSINAFSIN3');
+
+              return db.panel_detail.create({
+                panel_id: p.id,
+                panel_setting_id: ps.id
+              })
+            })
+            .then(function() {
+              console.log('Free text settings are created<<<<<<<.>>>>>>>')
+            });
+
           });
         });
       });

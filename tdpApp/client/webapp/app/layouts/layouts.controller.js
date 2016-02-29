@@ -280,13 +280,23 @@ angular.module('tdpApp')
           if (settingIdMap[pid].type === 2) {
             settingIdMap[pid].obj.numberValue = panel.panelDetails[i].detail_value;
           }
+          if (settingIdMap[pid].type === 3 || settingIdMap[pid].type === 4) {
+            settingIdMap[pid].obj.textValue = panel.panelDetails[i].detail_value || '';
+          }
         }
       }
+      var settingValue;
       panel_settings.forEach(function(ps) {
         if (ps.settingType === 2) {
-          var settingValue = ps.settingValues[0];
+          settingValue = ps.settingValues[0];
           if (! ps.hasOwnProperty('numberValue')) {
             ps.numberValue = parseInt(settingValue.settingValue, 10);
+          }
+        }
+        if (ps.settingType === 3 || ps.settingType === 4) {
+          settingValue = ps.settingValues[0];
+          if (! ps.hasOwnProperty('textValue')) {
+            ps.textValue = settingValue.settingValue || '';
           }
         }
       });
@@ -323,6 +333,13 @@ angular.module('tdpApp')
           var detail = {
             panel_setting_id: ps.settingValues[0].panelSettingID,
             detail_value: ps.numberValue.toString()
+          };
+          panelDetails.push(detail);
+        }
+        if (ps.settingType === 3 || ps.settingType === 4) {
+          var detail = {
+            panel_setting_id: ps.settingValues[0].panelSettingID,
+            detail_value: ps.textValue
           };
           panelDetails.push(detail);
         }
