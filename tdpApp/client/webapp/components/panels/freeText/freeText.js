@@ -8,30 +8,21 @@ angular.module('tdpApp')
       templateUrl: 'components/panels/freeText/freeText.html',
       scope: {
         patient: '=',
-        detail: '='
+        panelid: '='
       },
       controller: function ($scope, FreeText) {
-        $scope.textContent = $scope.detail;
-        $scope.textLoading = true;
-        var tius = $scope.textContent && $scope.textContent.match(/\|[^\|]+\|/g);
-        if (tius && tius.length) {
-          FreeText.resolveFreeTextTemplates($scope.patient, tius.join('^'))
-          .then( function(data) {
-            console.log('Free Text - resolved:',data);
-            var pieces = data.split('^');
-            var text = $scope.textContent;
-            for (var i=0; i<pieces.length; ++i) {
-              text = text.replace(tius[i], pieces[i]);
-            }
-            $scope.textContent = text;
-            $scope.textLoading = false;
+        $scope.loading = true;
+        $scope.loadError = null;
+
+        FreeText.get($scope.patient, $scope.panelid)
+          .then( function(content) {
+            $scope.textContent = content;
+            $scope.loading = false;
           })
           .catch( function(err) {
-            $scope.errors.other = err.message;
+            $scope.loading = false;
+            $scope.loadError = 'Internal error: ' + err.message;
           });
-        } else {
-          $scope.textLoading = false;
-        }
       }
     };
   });

@@ -20,6 +20,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false
     },
+    service: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     scope_variable: {
       type: DataTypes.STRING,
       allowNull: false

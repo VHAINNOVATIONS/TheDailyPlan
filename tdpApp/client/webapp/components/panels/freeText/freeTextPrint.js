@@ -8,26 +8,17 @@ angular.module('tdpApp')
       templateUrl: 'components/panels/freeText/freeTextPrint.html',
       scope: {
         patient: '=',
-        detail: '='
+        panelid: '='
       },
       controller: function ($scope, FreeText) {
-        $scope.textContent = $scope.detail;
-        var tius = $scope.textContent && $scope.textContent.match(/\|[^\|]+\|/g);
-        if (tius && tius.length) {
-          FreeText.resolveFreeTextTemplates($scope.patient, tius.join('^'))
-          .then( function(data) {
-            console.log('Free Text - resolved:',data);
-            var pieces = data.split('^');
-            var text = $scope.textContent;
-            for (var i=0; i<pieces.length; ++i) {
-              text = text.replace(tius[i], pieces[i]);
-            }
-            $scope.textContent = text;
+        $scope.loadError = null;
+        FreeText.get($scope.patient, $scope.panelid)
+          .then( function(content) {
+            $scope.textContent = content;
           })
           .catch( function(err) {
-            $scope.errors.other = err.message;
+            $scope.loadError = 'Internal error: ' + err.message;
           });
-        }
       }
     };
   });

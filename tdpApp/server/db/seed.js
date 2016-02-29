@@ -180,7 +180,8 @@ db.facility.create({
       db.panel_type.create({
         facility_id: facilityID,
         title: 'Allergies',
-        directive: 'dt-allergies',
+        directive: 'dt-simple-grid',
+        service: 'Allergy',
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 1,
@@ -372,7 +373,8 @@ db.facility.create({
       db.panel_type.create({
         facility_id: facilityID,
         title: 'Visits',
-        directive: 'dt-visits',
+        directive: 'dt-simple-grid',
+        service: 'Visits',
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 2,
@@ -410,7 +412,6 @@ db.facility.create({
             }).then(function(tl) {
               console.log('<<<<<<<Panel Setting & Detail Record Created.>>>>>>>')
             });
-
           });
 
         });
@@ -421,7 +422,8 @@ db.facility.create({
       db.panel_type.create({
         facility_id: facilityID,
         title: 'IV Medications',
-        directive: 'dt-iv-meds',
+        directive: 'dt-simple-grid',
+        service: 'IVMedication',
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 2,
@@ -453,7 +455,8 @@ db.facility.create({
       db.panel_type.create({
         facility_id: facilityID,
         title: 'Inpatient Medications',
-        directive: 'dt-active-meds',
+        directive: 'dt-simple-grid',
+        service: 'InpatientMedication',
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 2,
@@ -485,7 +488,8 @@ db.facility.create({
       db.panel_type.create({
         facility_id: facilityID,
         title: 'Outpatient Medications',
-        directive: 'dt-outpatient-meds',
+        directive: 'dt-simple-grid',
+        service: 'OutpatientMedication',
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 2,
@@ -841,6 +845,44 @@ db.facility.create({
             }).then(function(tl) {
               console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
             });
+
+            // Now Create the Settings and Details
+            db.panel_setting.create({
+              panel_type_id: pt.id,
+              setting_type: 3,
+              setting_name: 'Title',
+              setting_value: ''
+            })
+            .then(function(ps) {
+              //Then Create the Details
+              console.log('AFSINAFSIN1');
+              return db.panel_detail.create({
+                panel_id: p.id,
+                panel_setting_id: ps.id
+              })
+            })
+            .then(function() {
+              console.log('AFSINAFSIN2');
+              return db.panel_setting.create({
+                panel_type_id: pt.id,
+                setting_type: 4,
+                setting_name: 'Content',
+                setting_value: ''
+              });
+            })
+            .then(function(ps) {
+              //Then Create the Details
+              console.log('AFSINAFSIN3');
+
+              return db.panel_detail.create({
+                panel_id: p.id,
+                panel_setting_id: ps.id
+              })
+            })
+            .then(function() {
+              console.log('Free text settings are created<<<<<<<.>>>>>>>')
+            });
+
           });
         });
       });

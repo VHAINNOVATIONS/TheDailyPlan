@@ -61,8 +61,8 @@ router.get('/complete/:id', function(req, res) {
       panelObj.settings.sizeY = panel.sizeY;
       panelObj.settings.minSizeX = panel.minSizeX;
       panelObj.settings.minSizeY = panel.minSizeY;
-      panelObj.template = '<div ' + panel.directive + ' patient="ctrl.' + panel.scope_variable + '" panelid="panel.panel_id"></div>';
-      panelObj.print = '<div ' + panel.directive + '-print' + ' patient="ctrl.' + panel.scope_variable + '" panelid="panel.panel_id"></div>';
+      panelObj.template = '<div ' + panel.directive + ' service="' + panel.service + '" patient="ctrl.' + panel.scope_variable + '" panelid="panel.panel_id"></div>';
+      panelObj.print = '<div ' + panel.directive + '-print' + ' service="' + panel.service + '" patient="ctrl.' + panel.scope_variable + '" panelid="panel.panel_id"></div>';
       panelObj.mandatory = panel.mandatory;
       panelObj.enable_options = panel.enable_options;
 
