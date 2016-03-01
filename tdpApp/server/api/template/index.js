@@ -38,17 +38,12 @@ router.get('/:id', function(req, res) {
 
 // get complete template - use sequelize.query
 router.get('/complete/:id', function(req, res) {
-  console.log('===========');
-  console.log(req.params);
-  console.log('===========');
-
   models.sequelize.query('select * from template_layout tl ' +
     'inner join panel p on tl.panel_id = p.id ' +
     'inner join panel_type pt on p.panel_type_id = pt.id ' +
     'where template_id = $template_id order by panel_order asc',
   { bind: {template_id: req.params.id}, type: models.sequelize.QueryTypes.SELECT})
   .then(function(layout) {
-    console.log('ffff');
     return models.Sequelize.Promise.map(layout, function(panel) {
       var panelObj = {};
       panelObj.panel_id = panel.panel_id;
@@ -63,7 +58,6 @@ router.get('/complete/:id', function(req, res) {
       panelObj.print = '<div ' + panel.directive + '-print' + ' service="' + panel.service + '" patient="ctrl.' + panel.scope_variable + '" panelid="panel.panel_id"></div>';
       panelObj.mandatory = panel.mandatory;
       panelObj.enable_options = panel.enable_options;
-      console.log('here');
       return models.panel_detail.findAll({
           attributes: ['panel_setting_id'],
           where: {
@@ -79,11 +73,9 @@ router.get('/complete/:id', function(req, res) {
     })
   })
   .then(function(panels) {
-    console.log('but');
     return res.json(panels);
   })
   .catch(function(err) {
-    console.log(err);
     return res.status(401).json(err);
   });
 });
