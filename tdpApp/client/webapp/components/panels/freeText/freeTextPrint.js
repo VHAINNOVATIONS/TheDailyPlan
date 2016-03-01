@@ -8,11 +8,11 @@ angular.module('tdpApp')
       templateUrl: 'components/panels/freeText/freeTextPrint.html',
       scope: {
         patient: '=',
-        panelid: '='
+        paneldetail: '='
       },
       controller: function ($scope, FreeText) {
         $scope.loadError = null;
-        FreeText.get($scope.patient, $scope.panelid)
+        FreeText.get($scope.patient, $scope.paneldetail)
           .then( function(content) {
             $scope.textContent = content;
           })

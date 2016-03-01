@@ -45,19 +45,6 @@ router.get('/complete/:id', function(req, res) {
   { bind: {template_id: req.params.id}, type: models.sequelize.QueryTypes.SELECT})
   .then(function(layout) {
     return models.Sequelize.Promise.map(layout, function(panel) {
-      var panelObj = {};
-      panelObj.panel_id = panel.panel_id;
-      panelObj.id = panel.panel_type_id;
-      panelObj.title = panel.title;
-      panelObj.settings = {};
-      panelObj.settings.sizeX = panel.sizeX;
-      panelObj.settings.sizeY = panel.sizeY;
-      panelObj.settings.minSizeX = panel.minSizeX;
-      panelObj.settings.minSizeY = panel.minSizeY;
-      panelObj.template = '<div ' + panel.directive + ' service="' + panel.service + '" patient="ctrl.' + panel.scope_variable + '" panelid="panel.panel_id" paneldetail="panel.panelDetails"></div>';
-      panelObj.print = '<div ' + panel.directive + '-print' + ' service="' + panel.service + '" patient="ctrl.' + panel.scope_variable + '" panelid="panel.panel_id" paneldetail="panel.panelDetails"></div>';
-      panelObj.mandatory = panel.mandatory;
-      panelObj.enable_options = panel.enable_options;
       return models.sequelize.query('select panel_setting_id, detail_value, setting_type, setting_name, setting_value from panel_detail pd ' +
         'inner join panel_setting ps on pd.panel_setting_id = ps.id ' +
         'where pd.panel_id = $panel_id order by ps.setting_type asc, ' +
@@ -65,8 +52,7 @@ router.get('/complete/:id', function(req, res) {
         { bind: {panel_id: panel.panel_id}, type: models.sequelize.QueryTypes.SELECT})
         .then(function(panelDetails) {
           if (panelDetails && panelDetails.length) {
-            panelObj.panelDetails = panelDetails;
-            return panelObj;
+            return panelDetails;
           } else if (panel.enable_options) {
             return models.sequelize.query('select panel_setting.id as panel_setting_id, panel_setting.setting_type, panel_setting.setting_name, panel_setting.setting_value from panel_setting, panel_type, panel where panel.id = $panel_id and panel.panel_type_id = panel_type.id and panel_setting.panel_type_id = panel_type.id',
               {
@@ -80,15 +66,34 @@ router.get('/complete/:id', function(req, res) {
                     return r.setting_value !== null && r.setting_value !== undefined && r.setting_type !== 1;
                   });
                   if (settingDetails && settingDetails.length) {
-                    panelObj.panelDetails = settingDetails;
+                    return settingDetails;
                   }
                 }
-                return panelObj;
+                return null;
               });
           } else {
-            return panelObj;
+            return null;
           }
         })
+        .then(function(panelDetails) {
+          var panelObj = {};
+          panelObj.panel_id = panel.panel_id;
+          panelObj.id = panel.panel_type_id;
+          panelObj.title = panel.title;
+          panelObj.settings = {};
+          panelObj.settings.sizeX = panel.sizeX;
+          panelObj.settings.sizeY = panel.sizeY;
+          panelObj.settings.minSizeX = panel.minSizeX;
+          panelObj.settings.minSizeY = panel.minSizeY;
+          panelObj.template = '<div ' + panel.directive + ' service="' + panel.service + '" patient="ctrl.' + panel.scope_variable + '" panelid="panel.panel_id" paneldetail="panel.panelDetails"></div>';
+          panelObj.print = '<div ' + panel.directive + '-print' + ' service="' + panel.service + '" patient="ctrl.' + panel.scope_variable + '" panelid="panel.panel_id" paneldetail="panel.panelDetails"></div>';
+          panelObj.mandatory = panel.mandatory;
+          panelObj.enable_options = panel.enable_options;
+          if (panelDetails && panelDetails.length) {
+             panelObj.panelDetails = panelDetails;
+          }
+          return panelObj
+        });
     })
   })
   .then(function(panels) {

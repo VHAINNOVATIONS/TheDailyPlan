@@ -8,8 +8,8 @@ angular.module('tdpApp')
             templateUrl: 'components/panels/simpleGrid/simpleGrid.html',
             scope: {
                 patient: '=',
-                panelid: '=',
-                service: '@service'
+                service: '@service',
+                paneldetail: '='
             },
             controller: function($scope, $injector) {
                 console.log($scope.service + '- patient:', $scope.patient);
@@ -24,7 +24,7 @@ angular.module('tdpApp')
                     columnDefs: service.columnDefs
                 };
 
-                service.get($scope.patient, $scope.panelid)
+                service.get($scope.patient, $scope.paneldetail)
                     .then(function(data) {
                         console.log($scope.service + ': ', data);
                         $scope.gridOptions.data = data;

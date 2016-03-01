@@ -8,14 +8,13 @@ angular.module('tdpApp')
       templateUrl: 'components/panels/freeText/freeText.html',
       scope: {
         patient: '=',
-        panelid: '=',
         paneldetail: '='
       },
       controller: function ($scope, FreeText) {
         $scope.loading = true;
         $scope.loadError = null;
 
-        FreeText.get($scope.patient, $scope.panelid)
+        FreeText.get($scope.patient, $scope.paneldetail)
           .then( function(content) {
             $scope.textContent = content;
             $scope.loading = false;
