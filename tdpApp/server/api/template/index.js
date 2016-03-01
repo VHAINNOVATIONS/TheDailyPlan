@@ -48,10 +48,8 @@ router.get('/complete/:id', function(req, res) {
     'where template_id = $template_id order by panel_order asc',
   { bind: {template_id: req.params.id}, type: models.sequelize.QueryTypes.SELECT})
   .then(function(layout) {
-    var panels = [];
-
-    // Panel - Loop
-    async.eachSeries(layout, function(panel, callback) {
+    console.log('ffff');
+    return models.Sequelize.Promise.map(layout, function(panel) {
       var panelObj = {};
       panelObj.panel_id = panel.panel_id;
       panelObj.id = panel.panel_type_id;
@@ -65,46 +63,28 @@ router.get('/complete/:id', function(req, res) {
       panelObj.print = '<div ' + panel.directive + '-print' + ' service="' + panel.service + '" patient="ctrl.' + panel.scope_variable + '" panelid="panel.panel_id"></div>';
       panelObj.mandatory = panel.mandatory;
       panelObj.enable_options = panel.enable_options;
-
-      models.panel_detail.findAll({
-        attributes: ['panel_setting_id'],
-        where: {
-          panel_id: panel.panel_id
-        }
-      }).then(function(panel_details) {
-        if (panel_details) {
-          panelObj.panelDetails = panel_details;
-          panels.push(panelObj);
-          callback();
-        } else {
-          panels.push(panelObj);
-          callback();
-        }
+      console.log('here');
+      return models.panel_detail.findAll({
+          attributes: ['panel_setting_id'],
+          where: {
+            panel_id: panel.panel_id
+          }
+        })
+        .then(function(panel_details) {
+          if (panel_details) {
+            panelObj.panelDetails = panel_details;
+          }
+          return  panelObj;
       });
-
-
-      // TO DO replace with from database
-      /*if (panel.title === 'Free Text 1') {
-        panelObj.detail = 'Free Text 1'
-      }
-      if (panel.title === 'Free Text 2') {
-        panelObj.detail = 'Name: |PATIENT NAME|, Age: |PATIENT AGE|'
-      }
-      if (panel.title === 'Free Text 3') {
-        panelObj.detail = 'Name: |PATIENT NAME|\nSex: |PATIENT SEX|'
-      }*/
-
-      /*panels.push(panelObj);
-      callback();*/
-
-    }, function(err){
-
-      if( err ) {
-        console.log('ERROR:',err);
-      } else {
-        res.json(panels);
-      }
-    });
+    })
+  })
+  .then(function(panels) {
+    console.log('but');
+    return res.json(panels);
+  })
+  .catch(function(err) {
+    console.log(err);
+    return res.status(401).json(err);
   });
 });
 
