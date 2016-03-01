@@ -54,22 +54,41 @@ router.get('/complete/:id', function(req, res) {
       panelObj.settings.sizeY = panel.sizeY;
       panelObj.settings.minSizeX = panel.minSizeX;
       panelObj.settings.minSizeY = panel.minSizeY;
-      panelObj.template = '<div ' + panel.directive + ' service="' + panel.service + '" patient="ctrl.' + panel.scope_variable + '" panelid="panel.panel_id"></div>';
-      panelObj.print = '<div ' + panel.directive + '-print' + ' service="' + panel.service + '" patient="ctrl.' + panel.scope_variable + '" panelid="panel.panel_id"></div>';
+      panelObj.template = '<div ' + panel.directive + ' service="' + panel.service + '" patient="ctrl.' + panel.scope_variable + '" panelid="panel.panel_id" paneldetail="panel.panelDetails"></div>';
+      panelObj.print = '<div ' + panel.directive + '-print' + ' service="' + panel.service + '" patient="ctrl.' + panel.scope_variable + '" panelid="panel.panel_id" paneldetail="panel.panelDetails"></div>';
       panelObj.mandatory = panel.mandatory;
       panelObj.enable_options = panel.enable_options;
-      return models.panel_detail.findAll({
-          attributes: ['panel_setting_id'],
-          where: {
-            panel_id: panel.panel_id
+      return models.sequelize.query('select panel_setting_id, detail_value, setting_type, setting_name, setting_value from panel_detail pd ' +
+        'inner join panel_setting ps on pd.panel_setting_id = ps.id ' +
+        'where pd.panel_id = $panel_id order by ps.setting_type asc, ' +
+        'ps.setting_name asc, ps.setting_value asc',
+        { bind: {panel_id: panel.panel_id}, type: models.sequelize.QueryTypes.SELECT})
+        .then(function(panelDetails) {
+          if (panelDetails && panelDetails.length) {
+            panelObj.panelDetails = panelDetails;
+            return panelObj;
+          } else if (panel.enable_options) {
+            return models.sequelize.query('select panel_setting.id as panel_setting_id, panel_setting.setting_type, panel_setting.setting_name, panel_setting.setting_value from panel_setting, panel_type, panel where panel.id = $panel_id and panel.panel_type_id = panel_type.id and panel_setting.panel_type_id = panel_type.id',
+              {
+                bind: {
+                  panel_id: panel.panel_id
+                },
+                type: models.sequelize.QueryTypes.SELECT
+              }).then(function(settingDetails) {
+                if (settingDetails && settingDetails.length) {
+                  settingDetails = settingDetails.filter(function(r) {
+                    return r.setting_value !== null && r.setting_value !== undefined && r.setting_type !== 1;
+                  });
+                  if (settingDetails && settingDetails.length) {
+                    panelObj.panelDetails = settingDetails;
+                  }
+                }
+                return panelObj;
+              });
+          } else {
+            return panelObj;
           }
         })
-        .then(function(panel_details) {
-          if (panel_details) {
-            panelObj.panelDetails = panel_details;
-          }
-          return  panelObj;
-      });
     })
   })
   .then(function(panels) {

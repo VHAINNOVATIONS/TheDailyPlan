@@ -8,7 +8,8 @@ angular.module('tdpApp')
       templateUrl: 'components/panels/freeText/freeText.html',
       scope: {
         patient: '=',
-        panelid: '='
+        panelid: '=',
+        paneldetail: '='
       },
       controller: function ($scope, FreeText) {
         $scope.loading = true;
