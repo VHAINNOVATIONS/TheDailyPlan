@@ -91,6 +91,15 @@ router.get('/complete/:id', function(req, res) {
           panelObj.enable_options = panel.enable_options;
           if (panelDetails && panelDetails.length) {
              panelObj.panelDetails = panelDetails;
+             for (var i=0; i<panelDetails.length; ++i) {
+              var pd = panelDetails[i];
+              if (pd.setting_name === 'Title') {
+                if (pd.detail_value) {
+                  panelObj.title = pd.detail_value;
+                }
+                break;
+              }
+             }
           }
           return panelObj
         });
