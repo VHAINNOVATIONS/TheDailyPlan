@@ -8,15 +8,15 @@ angular.module('tdpApp')
             templateUrl: 'components/panels/simpleGrid/simpleGridPrint.html',
             scope: {
                 patient: '=',
-                panelid: '=',
-                service: '@service'
+                service: '@service',
+                paneldetail: '='
             },
             controller: function($scope, $injector) {
                 console.log($scope.service + ' Print - patient:', $scope.patient);
                 console.log($scope.service + ' Print - panelid:', $scope.panelid);
 
                 var service = $injector.get($scope.service);
-                service.get($scope.patient, $scope.panelid)
+                service.get($scope.patient, $scope.paneldetail)
                     .then(function(visits) {
                         console.log($scope.service + ': ', visits);
                         $scope.dataRows = visits;

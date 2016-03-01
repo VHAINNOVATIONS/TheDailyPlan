@@ -38,73 +38,78 @@ router.get('/:id', function(req, res) {
 
 // get complete template - use sequelize.query
 router.get('/complete/:id', function(req, res) {
-  console.log('===========');
-  console.log(req.params);
-  console.log('===========');
-
   models.sequelize.query('select * from template_layout tl ' +
     'inner join panel p on tl.panel_id = p.id ' +
     'inner join panel_type pt on p.panel_type_id = pt.id ' +
     'where template_id = $template_id order by panel_order asc',
   { bind: {template_id: req.params.id}, type: models.sequelize.QueryTypes.SELECT})
   .then(function(layout) {
-    var panels = [];
-
-    // Panel - Loop
-    async.eachSeries(layout, function(panel, callback) {
-      var panelObj = {};
-      panelObj.panel_id = panel.panel_id;
-      panelObj.id = panel.panel_type_id;
-      panelObj.title = panel.title;
-      panelObj.settings = {};
-      panelObj.settings.sizeX = panel.sizeX;
-      panelObj.settings.sizeY = panel.sizeY;
-      panelObj.settings.minSizeX = panel.minSizeX;
-      panelObj.settings.minSizeY = panel.minSizeY;
-      panelObj.template = '<div ' + panel.directive + ' service="' + panel.service + '" patient="ctrl.' + panel.scope_variable + '" panelid="panel.panel_id"></div>';
-      panelObj.print = '<div ' + panel.directive + '-print' + ' service="' + panel.service + '" patient="ctrl.' + panel.scope_variable + '" panelid="panel.panel_id"></div>';
-      panelObj.mandatory = panel.mandatory;
-      panelObj.enable_options = panel.enable_options;
-
-      models.panel_detail.findAll({
-        attributes: ['panel_setting_id'],
-        where: {
-          panel_id: panel.panel_id
-        }
-      }).then(function(panel_details) {
-        if (panel_details) {
-          panelObj.panelDetails = panel_details;
-          panels.push(panelObj);
-          callback();
-        } else {
-          panels.push(panelObj);
-          callback();
-        }
-      });
-
-
-      // TO DO replace with from database
-      /*if (panel.title === 'Free Text 1') {
-        panelObj.detail = 'Free Text 1'
-      }
-      if (panel.title === 'Free Text 2') {
-        panelObj.detail = 'Name: |PATIENT NAME|, Age: |PATIENT AGE|'
-      }
-      if (panel.title === 'Free Text 3') {
-        panelObj.detail = 'Name: |PATIENT NAME|\nSex: |PATIENT SEX|'
-      }*/
-
-      /*panels.push(panelObj);
-      callback();*/
-
-    }, function(err){
-
-      if( err ) {
-        console.log('ERROR:',err);
-      } else {
-        res.json(panels);
-      }
-    });
+    return models.Sequelize.Promise.map(layout, function(panel) {
+      return models.sequelize.query('select panel_setting_id, detail_value, setting_type, setting_name, setting_value from panel_detail pd ' +
+        'inner join panel_setting ps on pd.panel_setting_id = ps.id ' +
+        'where pd.panel_id = $panel_id order by ps.setting_type asc, ' +
+        'ps.setting_name asc, ps.setting_value asc',
+        { bind: {panel_id: panel.panel_id}, type: models.sequelize.QueryTypes.SELECT})
+        .then(function(panelDetails) {
+          if (panelDetails && panelDetails.length) {
+            return panelDetails;
+          } else if (panel.enable_options) {
+            return models.sequelize.query('select panel_setting.id as panel_setting_id, panel_setting.setting_type, panel_setting.setting_name, panel_setting.setting_value from panel_setting, panel_type, panel where panel.id = $panel_id and panel.panel_type_id = panel_type.id and panel_setting.panel_type_id = panel_type.id',
+              {
+                bind: {
+                  panel_id: panel.panel_id
+                },
+                type: models.sequelize.QueryTypes.SELECT
+              }).then(function(settingDetails) {
+                if (settingDetails && settingDetails.length) {
+                  settingDetails = settingDetails.filter(function(r) {
+                    return r.setting_value !== null && r.setting_value !== undefined && r.setting_type !== 1;
+                  });
+                  if (settingDetails && settingDetails.length) {
+                    return settingDetails;
+                  }
+                }
+                return null;
+              });
+          } else {
+            return null;
+          }
+        })
+        .then(function(panelDetails) {
+          var panelObj = {};
+          panelObj.panel_id = panel.panel_id;
+          panelObj.id = panel.panel_type_id;
+          panelObj.title = panel.title;
+          panelObj.settings = {};
+          panelObj.settings.sizeX = panel.sizeX;
+          panelObj.settings.sizeY = panel.sizeY;
+          panelObj.settings.minSizeX = panel.minSizeX;
+          panelObj.settings.minSizeY = panel.minSizeY;
+          panelObj.template = '<div ' + panel.directive + ' service="' + panel.service + '" patient="ctrl.' + panel.scope_variable + '" panelid="panel.panel_id" paneldetail="panel.panelDetails"></div>';
+          panelObj.print = '<div ' + panel.directive + '-print' + ' service="' + panel.service + '" patient="ctrl.' + panel.scope_variable + '" panelid="panel.panel_id" paneldetail="panel.panelDetails"></div>';
+          panelObj.mandatory = panel.mandatory;
+          panelObj.enable_options = panel.enable_options;
+          if (panelDetails && panelDetails.length) {
+             panelObj.panelDetails = panelDetails;
+             for (var i=0; i<panelDetails.length; ++i) {
+              var pd = panelDetails[i];
+              if (pd.setting_name === 'Title') {
+                if (pd.detail_value) {
+                  panelObj.title = pd.detail_value;
+                }
+                break;
+              }
+             }
+          }
+          return panelObj
+        });
+    })
+  })
+  .then(function(panels) {
+    return res.json(panels);
+  })
+  .catch(function(err) {
+    return res.status(401).json(err);
   });
 });
 

@@ -10,3 +10,4 @@ server/tdpvistaaccess/.env
 dist-ionic/
 *.env
 bower_components
+sandbox
