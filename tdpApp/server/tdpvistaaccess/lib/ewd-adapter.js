@@ -334,11 +334,14 @@ var session = {
         this.get('/getPostings', {
             patientId: patientId,
             nRpts: "0"
-        }, function (err, body) {
+        }, function (err, result) {
             if (err) {
                 callback(err);
             } else {
-                var result = body; //translator.translateVitalSigns(body);
+                result.forEach(function(item) {
+                    item.text = item.text.join(' ').trim();
+                    item.text = item.text.replace('  ', ' ');
+                });
                 callback(null, result);
             }
         });

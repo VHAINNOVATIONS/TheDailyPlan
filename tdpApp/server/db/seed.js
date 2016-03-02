@@ -806,8 +806,9 @@ db.facility.create({
       // Create the Panel_Type First
       db.panel_type.create({
         facility_id: facilityID,
-        title: 'Clinical Warnings',
-        directive: 'dt-clinical-warnings',
+        title: 'Postings',
+        directive: 'dt-simple-grid',
+        service: 'Postings',
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 2,
@@ -816,7 +817,7 @@ db.facility.create({
       }).then(function(pt) {
         // Then Create the Panel Second
         db.panel.create({
-          name: 'Clinical Warnings Default',
+          name: 'Postings Default',
           panel_type_id: pt.id,
           sizeX: 3,
           sizeY: 2

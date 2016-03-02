@@ -298,7 +298,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get postings', function (done) {
+    it('get postings', function (done) {
         var pid = 100846; //40; //100848; //100846;
         testSession.getPostings(pid, {}, function (err, body) {
             if (err) {
@@ -415,7 +415,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get health factors', function (done) {
+    xit('get health factors', function (done) {
         var pid = 100846;
         testSession.getHealthFactors(pid, {}, function (err, result) {
             if (err) {

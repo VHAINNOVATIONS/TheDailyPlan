@@ -12,9 +12,9 @@ var validationError = function(res, err) {
  * Search for Clinical Warnings
  */
 exports.index = function (req, res, next) {
-  var value = req.query.value;
+  var patientId = req.query.patientId;
 
-  req.session.getPostings(value, {}, function (err, body) {
+  req.session.getPostings(patientId, {}, function (err, body) {
       if (err) {
           return res.status(401).json(err);
       } else {
