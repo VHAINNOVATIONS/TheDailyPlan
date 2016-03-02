@@ -334,11 +334,14 @@ var session = {
         this.get('/getPostings', {
             patientId: patientId,
             nRpts: "0"
-        }, function (err, body) {
+        }, function (err, result) {
             if (err) {
                 callback(err);
             } else {
-                var result = body; //translator.translateVitalSigns(body);
+                result.forEach(function(item) {
+                    item.text = item.text.join(' ').trim();
+                    item.text = item.text.replace('  ', ' ');
+                });
                 callback(null, result);
             }
         });
@@ -518,15 +521,31 @@ var session = {
         });
     },
     getHealthFactors: function(patientId, options, callback) {
+        var numDaysBack = _.get(options, "numDaysBack", 90);
+        var fromDate = translator.translateNumDaysPast(numDaysBack);
         this.get('/getPatientHealthFactors', {
             patientId: patientId,
-            toDate: options.toDate,
-            fromDate: options.fromDate
+            fromDate: fromDate
         }, function (err, result) {
             if (err) {
                 callback(err);
             } else {
-                callback(null, result);
+              result.forEach(function(r) {
+                if (r.date) {
+                  r.date = translator.translateVistADate(r.date);
+                }
+                if (r.severity) {
+                  var severity = {
+                    'M': 'MINIMAL',
+                    'MO': 'MODERATE',
+                    'H': 'SEVERE'
+                  }[r.severity];
+                  if (severity) {
+                    r.severity = severity;
+                  }
+                }
+              });
+              callback(null, result);
             }
         });
     },

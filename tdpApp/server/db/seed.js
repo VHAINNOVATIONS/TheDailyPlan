@@ -753,43 +753,62 @@ db.facility.create({
 
       });
 
-      // Create the Panel_Type First
       db.panel_type.create({
         facility_id: facilityID,
         title: 'Health Factors',
-        directive: 'dt-health-factors',
+        directive: 'dt-simple-grid',
+        service: 'HealthFactors',
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 2,
         mandatory: false,
         enable_options: true
       }).then(function(pt) {
-        // Then Create the Panel Second
-        db.panel.create({
+        var panel = db.panel.create({
           name: 'Health Factors Default',
           panel_type_id: pt.id,
           sizeX: 3,
           sizeY: 2
-        }).then(function(p) {
-          // Then Create the Template_Layout Second
-          console.log('templateID:',templateID);
-          db.template_layout.create({
+        });
+
+        panel.then(function(p) {
+          return db.template_layout.create({
             template_id: templateID,
             panel_id: p.id,
             panel_order: p.id
-          }).then(function(tl) {
-            console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
           });
-
         });
 
+        panel.then(function(p) {
+          return db.panel_setting.create({
+            panel_type_id: pt.id,
+            setting_type: 2,
+            setting_name: 'Number of Back Days',
+            setting_value: '30'
+          }).then(function(ps) {
+            return db.panel_detail.create({
+              panel_id: p.id,
+              panel_setting_id: ps.id
+            })
+          })
+        })
+
+        panel
+          .then(function(p) {
+            console.log('Health Factor related panels are created');
+          })
+          .catch(function(err) {
+            console.log('Error creating Health Factor panels.')
+            console.log(err);
+          })
       });
 
       // Create the Panel_Type First
       db.panel_type.create({
         facility_id: facilityID,
-        title: 'Clinical Warnings',
-        directive: 'dt-clinical-warnings',
+        title: 'Postings',
+        directive: 'dt-simple-grid',
+        service: 'Postings',
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 2,
@@ -798,7 +817,7 @@ db.facility.create({
       }).then(function(pt) {
         // Then Create the Panel Second
         db.panel.create({
-          name: 'Clinical Warnings Default',
+          name: 'Postings Default',
           panel_type_id: pt.id,
           sizeX: 3,
           sizeY: 2
@@ -855,14 +874,12 @@ db.facility.create({
             })
             .then(function(ps) {
               //Then Create the Details
-              console.log('AFSINAFSIN1');
               return db.panel_detail.create({
                 panel_id: p.id,
                 panel_setting_id: ps.id
               })
             })
             .then(function() {
-              console.log('AFSINAFSIN2');
               return db.panel_setting.create({
                 panel_type_id: pt.id,
                 setting_type: 4,
@@ -871,9 +888,6 @@ db.facility.create({
               });
             })
             .then(function(ps) {
-              //Then Create the Details
-              console.log('AFSINAFSIN3');
-
               return db.panel_detail.create({
                 panel_id: p.id,
                 panel_setting_id: ps.id
