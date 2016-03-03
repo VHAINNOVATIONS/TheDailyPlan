@@ -4,6 +4,7 @@ angular.module('tdpApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
+  'ngIdle',
   'ui.router',
   'gridster',
   'ui.bootstrap',
@@ -14,12 +15,13 @@ angular.module('tdpApp', [
   'ui.grid.selection',
   'ui.grid.pinning'
 ])
-  .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
-    $urlRouterProvider
-      .otherwise('/');
+  .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, IdleProvider) {
+    $urlRouterProvider.otherwise('/');
 
     $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push('authInterceptor');
+    IdleProvider.idle(60);
+    IdleProvider.timeout(20);
   })
 
   .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {
@@ -48,7 +50,7 @@ angular.module('tdpApp', [
     };
   })
 
-  .run(function ($rootScope, $location, Auth) {
+  .run(function ($rootScope, $location, Auth, Idle) {
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function (event, next) {
       Auth.isLoggedInAsync(function(loggedIn) {

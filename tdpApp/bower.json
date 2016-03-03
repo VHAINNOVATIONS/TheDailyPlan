@@ -18,7 +18,8 @@
     "angular-ui-grid": "~3.0.7",
     "angular-touch": "~1.4.8",
     "datatables-responsive": "~2.0.0",
-    "angular-gridster": "~0.13.5"
+    "angular-gridster": "~0.13.5",
+    "ng-idle": "~1.2.0"
   },
   "devDependencies": {
     "angular-mocks": ">=1.2.*",
