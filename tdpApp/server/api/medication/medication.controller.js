@@ -3,7 +3,7 @@
 exports.index = function (req, res, next) {
   var value = req.query.value;
 
-  req.session.getMedications(value, req.query, function (err, body) {
+  req.session.getMedications(req.user, value, req.query, function (err, body) {
       if (err) {
           return res.status(401).json(err);
       } else {

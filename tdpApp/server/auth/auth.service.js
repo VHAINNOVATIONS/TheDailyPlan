@@ -56,8 +56,13 @@ function hasRole(roleRequired) {
 /**
  * Returns a jwt token signed by the app secret
  */
-function signToken(id) {
-  return jwt.sign({_id: id}, config.secrets.session, {expiresInMinutes: 60*5});
+function signToken(id, port) {
+  return jwt.sign({
+    _id: id,
+    _port: port
+  }, config.secrets.session, {
+    expiresInMinutes: 60*5
+  });
 }
 
 exports.isAuthenticated = isAuthenticated;

@@ -17,7 +17,7 @@ router.post('/', function(req, res, next) {
         message: 'Internal ewd server error.'
       });
     }
-    var token = auth.signToken(user.DUZ);
+    var token = auth.signToken(user.authKey, user.authPort);
     res.json({
       token: token,
       user: user

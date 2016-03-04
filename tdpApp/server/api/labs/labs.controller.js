@@ -14,7 +14,7 @@ exports.index = function (req, res, next) {
   var id = req.params.id;
   var options = req.query;
 
-  req.session.getChemHemReports(id, options, function (err, body) {
+  req.session.getChemHemReports(req.user, id, options, function (err, body) {
       if (err) {
         return res.status(401).json(err);
       } else {
@@ -29,7 +29,7 @@ exports.index = function (req, res, next) {
 exports.byName = function (req, res, next) {
   var value = req.params.id;
 
-  req.session.getPatientsByClinic({
+  req.session.getPatientsByClinic(req.user, {
       clinicId: value,
       fromDate: '3150909',
       toDate: '3160707'

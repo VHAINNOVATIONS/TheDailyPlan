@@ -4,7 +4,7 @@ exports.index = function (req, res, next) {
   var patientId = req.query.patientId;
   var numDaysBack = req.query.numDaysBack;
 
-  req.session.getHealthFactors(patientId, {
+  req.session.getHealthFactors(req.user, patientId, {
     numDaysBack: numDaysBack
   }, function (err, body) {
       if (err) {

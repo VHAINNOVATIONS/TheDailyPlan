@@ -3,7 +3,7 @@
 exports.index = function (req, res, next) {
   var id = req.params.id;
 
-  req.session.getVitalSigns(id, {}, function (err, body) {
+  req.session.getVitalSigns(req.user, id, {}, function (err, body) {
       if (err) {
           return res.status(401).json(err);
       } else {

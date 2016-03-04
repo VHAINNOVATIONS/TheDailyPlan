@@ -4,7 +4,7 @@ exports.index = function (req, res, next) {
   var value = req.query.value;
   var text = req.query.text;
 
-  req.session.getBoilerplates(value, {
+  req.session.getBoilerplates(req.user, value, {
     text: text
   }, function (err, body) {
       if (err) {

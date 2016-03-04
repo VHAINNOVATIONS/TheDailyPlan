@@ -3,7 +3,7 @@
 exports.index = function (req, res, next) {
   var patientId = req.query.value;
 
-  req.session.getAllergies(patientId, {}, function (err, allergies) {
+  req.session.getAllergies(req.user, patientId, {}, function (err, allergies) {
       if (err) {
           return res.status(401).json(err);
       } else {

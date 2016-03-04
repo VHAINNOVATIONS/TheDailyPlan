@@ -4,7 +4,7 @@ exports.index = function (req, res, next) {
   var patientId = req.query.patientId;
   var numDaysFuture = req.query.numDaysFuture;
 
-  req.session.getVisits(patientId, {
+  req.session.getVisits(req.user, patientId, {
     numDaysFuture: numDaysFuture
   }, function (err, body) {
       if (err) {

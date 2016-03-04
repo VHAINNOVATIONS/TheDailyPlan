@@ -1,7 +1,7 @@
 'use strict';
 
 exports.index = function (req, res, next) {
-  req.session.getClinics({}, function (err, body) {
+  req.session.getClinics(req.user, {}, function (err, body) {
       if (err) {
           return res.status(401).json(err);
       } else {

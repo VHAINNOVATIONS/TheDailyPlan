@@ -7,13 +7,13 @@ var _ = require('lodash');
 exports.index = function (req, res, next) {
   var value = req.params.id;
 
-  req.session.searchPatients({
+  req.session.searchPatients(req.user, {
       prefix: value
   }, function (err, body) {
       if (err) {
         return res.status(401).json(err);
       } else {
-        var fn = _.partial(getInfo, req.session);
+        var fn = _.partial(getInfo, req);
         async.map(body, fn, function (err, result) {
           res.status(200).json(result);
         });
@@ -27,7 +27,7 @@ exports.index = function (req, res, next) {
 exports.byClinic = function (req, res, next) {
   var value = req.params.id;
 
-  req.session.getPatientsByClinic({
+  req.session.getPatientsByClinic(req.user, {
             clinicId: value,
             fromDate: '3150909',
             toDate: '3160707'
@@ -38,7 +38,7 @@ exports.byClinic = function (req, res, next) {
         if (body.length > 0 && body[0].id === '') {
           return res.status(200).json([]);
         }
-        var fn = _.partial(getInfo, req.session);
+        var fn = _.partial(getInfo, req);
         async.map(body, fn, function (err, result) {
           res.status(200).json(result);
         });
@@ -52,7 +52,7 @@ exports.byClinic = function (req, res, next) {
 exports.byWard = function (req, res, next) {
   var value = req.params.id;
 
-  req.session.getPatientsByWard({
+  req.session.getPatientsByWard(req.user, {
       wardId: value
   }, function (err, body) {
       if (err) {
@@ -61,7 +61,7 @@ exports.byWard = function (req, res, next) {
         if (body.length > 0 && body[0].id === '') {
           return res.status(200).json([]);
         }
-        var fn = _.partial(getInfo, req.session);
+        var fn = _.partial(getInfo, req);
         async.map(body, fn, function (err, result) {
           res.status(200).json(result);
         });
@@ -69,10 +69,10 @@ exports.byWard = function (req, res, next) {
   });
 };
 
-function getInfo(session, item, callback) {
+function getInfo(req, item, callback) {
   setTimeout(function() {
     var merged = {};
-    session.getDemographics(item.id, {}, function (err, body) {
+    req.session.getDemographics(req.user, item.id, {}, function (err, body) {
       if (err) {
         callback(err, merged);
       } else {
