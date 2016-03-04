@@ -8,14 +8,14 @@ var async = require('async');
 
 
 // get all templates
-router.get('/', function(req, res) {
+router.get('/', auth.isAuthenticated(), function(req, res) {
   models.template.findAll({}).then(function(templates) {
     res.json(templates);
   });
 });
 
 // get all templates by facility id
-router.get('/facility/:id', function(req, res) {
+router.get('/facility/:id', auth.isAuthenticated(), function(req, res) {
   models.template.findAll({
     where: {
       facility_id: req.params.id
@@ -26,7 +26,7 @@ router.get('/facility/:id', function(req, res) {
 });
 
 // get single template
-router.get('/:id', function(req, res) {
+router.get('/:id', auth.isAuthenticated(), function(req, res) {
   models.template.find({
     where: {
       id: req.params.id
@@ -37,7 +37,7 @@ router.get('/:id', function(req, res) {
 });
 
 // get complete template - use sequelize.query
-router.get('/complete/:id', function(req, res) {
+router.get('/complete/:id', auth.isAuthenticated(), function(req, res) {
   models.sequelize.query('select * from template_layout tl ' +
     'inner join panel p on tl.panel_id = p.id ' +
     'inner join panel_type pt on p.panel_type_id = pt.id ' +
@@ -114,7 +114,7 @@ router.get('/complete/:id', function(req, res) {
 });
 
 // add new template
-router.post('/', function(req, res) {
+router.post('/', auth.isAuthenticated(), function(req, res) {
   //Template = req.body;
   //Panels = req.body.panels;
   models.template.create({
@@ -192,7 +192,7 @@ router.post('/', function(req, res) {
 });
 
 // update single template
-router.put('/:id', function(req, res) {
+router.put('/:id', auth.isAuthenticated(), function(req, res) {
   models.template.find({
     where: {
       id: req.params.id
@@ -214,7 +214,7 @@ router.put('/:id', function(req, res) {
 });
 
 // delete a single template
-router.delete('/:id', function(req, res) {
+router.delete('/:id', auth.isAuthenticated(), function(req, res) {
   models.template.destroy({
     where: {
       id: req.params.id

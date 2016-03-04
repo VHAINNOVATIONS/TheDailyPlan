@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tdpApp')
-  .controller('LoginCtrl', function ($scope, Auth, $location, $window, Facility, Facility_Message) {
+  .controller('LoginCtrl', function ($rootScope, $scope, Auth, $location, $window, $modal, Facility, Facility_Message, Idle) {
     var self = this;
     self.user = {};
     self.errors = false;
@@ -13,6 +13,36 @@ angular.module('tdpApp')
     //functions
     self.init = init;
     self.init();
+
+    function closeTimeout() {
+      if ($scope.timeout) {
+        $scope.timeout.close();
+        $scope.timeout = null;
+      }
+    }
+
+    $rootScope.$on('IdleStart', function() {
+      console.log('IdleStart');
+      closeTimeout();
+
+      $scope.timeout = $modal.open({
+        templateUrl: 'app/account/login/timeout.html',
+        windowClass: 'modal-danger'
+      });
+    });
+
+    $rootScope.$on('IdleEnd', function() {
+      console.log('IdleEnd');
+      closeTimeout();
+    });
+
+    $rootScope.$on('IdleTimeout', function() {
+      console.log('IdleTimeout');
+      closeTimeout();
+      Idle.unwatch();
+      Auth.logout();
+      $location.path('/');
+    });
 
     $scope.login = function(form) {
       self.submitted = true;
@@ -44,6 +74,7 @@ angular.module('tdpApp')
         .then( function(data) {
           // Logged in, redirect to home
           self.errors = false;
+          Idle.watch();
           $location.path('/PatientSearch');
         })
         .catch( function(err) {

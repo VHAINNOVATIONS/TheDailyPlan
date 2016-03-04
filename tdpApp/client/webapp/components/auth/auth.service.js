@@ -22,10 +22,12 @@ angular.module('tdpApp')
 
         $http.post('/auth/local', user).
         success(function(data) {
-          /*$cookieStore.put('token', data.token);*/
-          currentUser.displayName = data.displayName;
-          currentUser.keys = data.keys;
-          currentUser.duz = data.DUZ;
+          console.log(data);
+          $cookieStore.put('token', data.token);
+          var user = data.user;
+          currentUser.displayName = user.displayName;
+          currentUser.keys = user.keys;
+          currentUser.duz = user.DUZ;
 
           deferred.resolve(currentUser);
           return cb();

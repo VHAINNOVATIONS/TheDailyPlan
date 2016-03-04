@@ -35,7 +35,7 @@ router.get('/:id', function(req, res) {
 });
 
 // add new facility_message
-router.post('/', function(req, res) {
+router.post('/', auth.isAuthenticated(), function(req, res) {
   models.facility_message.create({
     facility_id: req.body.facility_id,
     active: req.body.active,
@@ -48,7 +48,7 @@ router.post('/', function(req, res) {
 });
 
 // update single facility_message
-router.put('/:id', function(req, res) {
+router.put('/:id', auth.isAuthenticated(), function(req, res) {
   models.facility_message.find({
     where: {
       id: req.params.id
@@ -69,7 +69,7 @@ router.put('/:id', function(req, res) {
 });
 
 // delete a single facility_message
-router.delete('/:id', function(req, res) {
+router.delete('/:id', auth.isAuthenticated(), function(req, res) {
   models.facility_message.destroy({
     where: {
       id: req.params.id

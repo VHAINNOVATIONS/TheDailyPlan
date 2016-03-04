@@ -8,14 +8,14 @@ var async = require('async');
 
 
 // get all panel_settings
-router.get('/', function(req, res) {
+router.get('/', auth.isAuthenticated(), function(req, res) {
   models.panel_setting.findAll({}).then(function(panel_settings) {
     res.json(panel_settings);
   });
 });
 
 // get single panel_setting
-router.get('/:id', function(req, res) {
+router.get('/:id', auth.isAuthenticated(), function(req, res) {
   models.panel_setting.find({
     where: {
       id: req.params.id
@@ -26,7 +26,7 @@ router.get('/:id', function(req, res) {
 });
 
 // get single panel_settings
-router.get('/byPanelType/:id', function(req, res) {
+router.get('/byPanelType/:id', auth.isAuthenticated(), function(req, res) {
   models.panel_setting.findAll({
     where: {
       panel_type_id: req.params.id
@@ -39,7 +39,7 @@ router.get('/byPanelType/:id', function(req, res) {
     var settingNameSave = '';
     var i = 0;
     // Panel - Loop
-    async.eachSeries(panel_setting, function(setting, callback) {
+    async.eachSeries(panel_setting, auth.isAuthenticated(), function(setting, callback) {
       i++;
 
       if (settingNameSave === '') {
@@ -89,7 +89,7 @@ router.get('/byPanelType/:id', function(req, res) {
 });
 
 // add new panel_setting
-router.post('/', function(req, res) {
+router.post('/', auth.isAuthenticated(), function(req, res) {
   models.panel_setting.create({
     panel_type_id: req.body.panel_type_id,
     setting_type: req.body.setting_type,
@@ -101,7 +101,7 @@ router.post('/', function(req, res) {
 });
 
 // update single panel_setting
-router.put('/:id', function(req, res) {
+router.put('/:id', auth.isAuthenticated(), function(req, res) {
   models.panel_setting.find({
     where: {
       id: req.params.id
@@ -121,7 +121,7 @@ router.put('/:id', function(req, res) {
 });
 
 // delete a single panel_setting
-router.delete('/:id', function(req, res) {
+router.delete('/:id', auth.isAuthenticated(), function(req, res) {
   models.panel_setting.destroy({
     where: {
       id: req.params.id

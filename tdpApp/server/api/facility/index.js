@@ -24,7 +24,7 @@ router.get('/:id', function(req, res) {
 });
 
 // add new facility
-router.post('/', function(req, res) {
+router.post('/', auth.isAuthenticated(), function(req, res) {
   models.facility.create({
     name: req.body.name,
     station: req.body.station,
@@ -36,7 +36,7 @@ router.post('/', function(req, res) {
 });
 
 // update single facility
-router.put('/:id', function(req, res) {
+router.put('/:id', auth.isAuthenticated(), function(req, res) {
   models.facility.find({
     where: {
       id: req.params.id
@@ -56,7 +56,7 @@ router.put('/:id', function(req, res) {
 });
 
 // delete a single facility
-router.delete('/:id', function(req, res) {
+router.delete('/:id', auth.isAuthenticated(), function(req, res) {
   models.facility.destroy({
     where: {
       id: req.params.id

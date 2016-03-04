@@ -6,14 +6,14 @@ var auth = require('../../auth/auth.service');
 var models = require('../../models/index');
 
 // get all template_layouts
-router.get('/', function(req, res) {
+router.get('/', auth.isAuthenticated(), function(req, res) {
   models.template_layout.findAll({}).then(function(template_layouts) {
     res.json(template_layouts);
   });
 });
 
 // get all template_layouts
-router.get('/byTemplate/:id', function(req, res) {
+router.get('/byTemplate/:id', auth.isAuthenticated(), function(req, res) {
   models.template_layout.findAll({
     where: {
       template_id: req.params.id
@@ -25,7 +25,7 @@ router.get('/byTemplate/:id', function(req, res) {
 });
 
 // get single template_layout
-router.get('/:id', function(req, res) {
+router.get('/:id', auth.isAuthenticated(), function(req, res) {
   models.template_layout.find({
     where: {
       id: req.params.id
@@ -36,7 +36,7 @@ router.get('/:id', function(req, res) {
 });
 
 // add new template_layout
-router.post('/', function(req, res) {
+router.post('/', auth.isAuthenticated(), function(req, res) {
   models.template_layout.create({
     template_id: req.body.template_id,
     panel_id: req.body.panel_id,
@@ -48,7 +48,7 @@ router.post('/', function(req, res) {
 });
 
 // update single template_layout
-router.put('/:id', function(req, res) {
+router.put('/:id', auth.isAuthenticated(), function(req, res) {
   models.template_layout.find({
     where: {
       id: req.params.id
@@ -68,7 +68,7 @@ router.put('/:id', function(req, res) {
 });
 
 // delete a single template_layout
-router.delete('/:id', function(req, res) {
+router.delete('/:id', auth.isAuthenticated(), function(req, res) {
   models.template_layout.destroy({
     where: {
       id: req.params.id
