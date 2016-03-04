@@ -15,9 +15,6 @@ var errorHandler = require('errorhandler');
 var path = require('path');
 var config = require('./environment');
 var passport = require('passport');
-var session = require('express-session');
-var mongoStore = require('connect-mongo')(session);
-//var mongoose = require('mongoose');
 
 module.exports = function(app) {
   var env = app.get('env');
