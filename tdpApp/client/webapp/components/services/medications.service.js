@@ -8,7 +8,7 @@ angular.module('tdpApp')
           url: '/api/medication',
           method: 'GET',
           params: {
-            value: patientId,
+            patientId: patientId,
             type: type
           }
         };

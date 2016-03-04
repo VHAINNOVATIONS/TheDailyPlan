@@ -21,7 +21,7 @@ angular.module('tdpApp')
       /**
        * Get Allergy
        *
-       * @param  {String}   value    - query value
+       * @param  {String}   patientId    - query patientId
        * @param  {Function} callback - optional
        * @return {Promise}
        */
@@ -30,7 +30,7 @@ angular.module('tdpApp')
           url: '/api/allergy',
           method: 'GET',
           params: {
-            value: patientId
+            patientId: patientId
           }
         };
         var self = this;
