@@ -1,11 +1,7 @@
 'use strict';
 
-var passport = require('passport');
-var config = require('../../config/environment');
-var jwt = require('jsonwebtoken');
 var async = require('async');
 var merge = require('merge'), original, cloned;
-var session = null;
 
 var validationError = function(res, err) {
   return res.status(422).json(err);
@@ -17,7 +13,6 @@ var validationError = function(res, err) {
 exports.index = function (req, res, next) {
   var id = req.params.id;
   var options = req.query;
-  session = req.session;
 
   req.session.getChemHemReports(id, options, function (err, body) {
       if (err) {
@@ -33,7 +28,6 @@ exports.index = function (req, res, next) {
  */
 exports.byName = function (req, res, next) {
   var value = req.params.id;
-  session = req.session;
 
   req.session.getPatientsByClinic({
       clinicId: value,
@@ -51,12 +45,4 @@ exports.byName = function (req, res, next) {
       });
     }
   });
-};
-
-
-/**
- * Authentication callback
- */
-exports.authCallback = function(req, res, next) {
-  res.redirect('/');
 };

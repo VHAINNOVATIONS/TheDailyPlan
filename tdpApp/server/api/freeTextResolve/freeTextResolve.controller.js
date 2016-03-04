@@ -10,7 +10,7 @@ exports.index = function (req, res, next) {
       if (err) {
           return res.status(401).json(err);
       } else {
-          res.status(200).json(body);
+          return res.status(200).json(body);
       }
   });
 };

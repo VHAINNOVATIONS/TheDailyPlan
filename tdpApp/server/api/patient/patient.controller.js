@@ -1,23 +1,11 @@
 'use strict';
 
-var passport = require('passport');
-var config = require('../../config/environment');
-var jwt = require('jsonwebtoken');
 var async = require('async');
 var merge = require('merge'), original, cloned;
-var session = null;
+var _ = require('lodash');
 
-var validationError = function(res, err) {
-  return res.status(422).json(err);
-};
-
-/**
- * Search for Patients by Prefix
- */
 exports.index = function (req, res, next) {
-  //var value = req.query.value;
   var value = req.params.id;
-  session = req.session;
 
   req.session.searchPatients({
       prefix: value
@@ -25,7 +13,8 @@ exports.index = function (req, res, next) {
       if (err) {
         return res.status(401).json(err);
       } else {
-        async.map(body, getInfo, function (err, result) {
+        var fn = _.partial(getInfo, req.session);
+        async.map(body, fn, function (err, result) {
           res.status(200).json(result);
         });
       }
@@ -37,7 +26,6 @@ exports.index = function (req, res, next) {
  */
 exports.byClinic = function (req, res, next) {
   var value = req.params.id;
-  session = req.session;
 
   req.session.getPatientsByClinic({
             clinicId: value,
@@ -50,7 +38,8 @@ exports.byClinic = function (req, res, next) {
         if (body.length > 0 && body[0].id === '') {
           return res.status(200).json([]);
         }
-        async.map(body, getInfo, function (err, result) {
+        var fn = _.partial(getInfo, req.session);
+        async.map(body, fn, function (err, result) {
           res.status(200).json(result);
         });
       }
@@ -62,27 +51,25 @@ exports.byClinic = function (req, res, next) {
  */
 exports.byWard = function (req, res, next) {
   var value = req.params.id;
-  session = req.session;
 
   req.session.getPatientsByWard({
-            wardId: value
-        }, function (err, body) {
+      wardId: value
+  }, function (err, body) {
       if (err) {
         return res.status(401).json(err);
       } else {
         if (body.length > 0 && body[0].id === '') {
           return res.status(200).json([]);
         }
-        async.map(body, getInfo, function (err, result) {
+        var fn = _.partial(getInfo, req.session);
+        async.map(body, fn, function (err, result) {
           res.status(200).json(result);
         });
       }
   });
 };
 
-
-
-function getInfo(item, callback) {
+function getInfo(session, item, callback) {
   setTimeout(function() {
     var merged = {};
     session.getDemographics(item.id, {}, function (err, body) {
@@ -94,12 +81,3 @@ function getInfo(item, callback) {
     });
   }, 1000);
 }
-
-
-
-/**
- * Authentication callback
- */
-exports.authCallback = function(req, res, next) {
-  res.redirect('/');
-};

@@ -13,7 +13,7 @@ router.get('/', function(req, res) {
 });
 
 // get single panel
-router.get('/:id', function(req, res) {
+router.get('/:id', auth.isAuthenticated(), function(req, res) {
   models.panel.find({
     where: {
       id: req.params.id
@@ -24,7 +24,7 @@ router.get('/:id', function(req, res) {
 });
 
 // add new panel
-router.post('/', function(req, res) {
+router.post('/', auth.isAuthenticated(), function(req, res) {
   models.panel.create({
     name: req.body.name,
     panel_type_id: req.body.panel_type_id,
@@ -38,7 +38,7 @@ router.post('/', function(req, res) {
 });
 
 // update single panel
-router.put('/:id', function(req, res) {
+router.put('/:id', auth.isAuthenticated(), function(req, res) {
   models.panel.find({
     where: {
       id: req.params.id
@@ -60,7 +60,7 @@ router.put('/:id', function(req, res) {
 });
 
 // delete a single panel
-router.delete('/:id', function(req, res) {
+router.delete('/:id', auth.isAuthenticated(), function(req, res) {
   models.panel.destroy({
     where: {
       id: req.params.id

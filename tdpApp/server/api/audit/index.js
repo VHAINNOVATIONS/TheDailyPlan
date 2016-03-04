@@ -1,17 +1,11 @@
 'use strict';
 
 var express = require('express');
-var router = express.Router();
-var models = require('../../models/index');
+var controller = require('./audit.controller');
+var auth = require('../../auth/auth.service');
 
-router.post('/user', function(req, res) {
-  models.user_audit.create({
-    user_id_vista: req.body.userId,
-    patient_id_vista: req.body.patientId,
-    action: req.body.action
-  }).then(function(user_audit) {
-    res.send(user_audit);
-  });
-});
+var router = express.Router();
+
+router.post('/user', auth.isAuthenticated(), controller.index);
 
 module.exports = router;

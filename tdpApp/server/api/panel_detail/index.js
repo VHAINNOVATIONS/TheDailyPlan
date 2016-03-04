@@ -6,14 +6,14 @@ var auth = require('../../auth/auth.service');
 var models = require('../../models/index');
 
 // get all panel_details
-router.get('/', function(req, res) {
+router.get('/', auth.isAuthenticated(), function(req, res) {
   models.panel_detail.findAll({}).then(function(panel_details) {
     res.json(panel_details);
   });
 });
 
 // get single panel_detail
-router.get('/:id', function(req, res) {
+router.get('/:id', auth.isAuthenticated(), function(req, res) {
   models.panel_detail.find({
     where: {
       id: req.params.id
@@ -24,7 +24,7 @@ router.get('/:id', function(req, res) {
 });
 
 // get complete details and settings - use sequelize.query
-router.get('/complete/:id', function(req, res) {
+router.get('/complete/:id', auth.isAuthenticated(), function(req, res) {
   models.sequelize.query('select * from panel_detail pd ' +
     'inner join panel_setting ps on pd.panel_setting_id = ps.id ' +
     'where pd.panel_id = $panel_id order by ps.setting_type asc, ' +
@@ -37,7 +37,7 @@ router.get('/complete/:id', function(req, res) {
 
 
 // add new panel_detail
-router.post('/', function(req, res) {
+router.post('/', auth.isAuthenticated(), function(req, res) {
   models.panel_detail.create({
     panel_id: req.body.panel_id,
     panel_setting_id: req.body.panel_setting_id,
@@ -48,7 +48,7 @@ router.post('/', function(req, res) {
 });
 
 // update single panel_detail
-router.put('/:id', function(req, res) {
+router.put('/:id', auth.isAuthenticated(), function(req, res) {
   models.panel_detail.find({
     where: {
       id: req.params.id
@@ -67,7 +67,7 @@ router.put('/:id', function(req, res) {
 });
 
 // delete a single panel_detail
-router.delete('/:id', function(req, res) {
+router.delete('/:id', auth.isAuthenticated(), function(req, res) {
   models.panel_detail.destroy({
     where: {
       id: req.params.id
