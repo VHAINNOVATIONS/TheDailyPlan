@@ -5,7 +5,6 @@ angular.module('tdpApp')
         var self = this;
         self.data = [];
         self.currentFacility = Facility.getCurrentFacility();
-        self.items = [];
         self.templates = [];
         self.selectedTemplate = {};
         self.selectedTemplateArray = [];
@@ -62,6 +61,7 @@ angular.module('tdpApp')
         function display() {
             console.log('patientSearch display!');
 
+            var items = [];
             angular.forEach(self.selected, function(value, key) {
                 var entry = {};
 
@@ -72,35 +72,44 @@ angular.module('tdpApp')
                     this.push(entry);
                 }
 
-            }, self.items);
+            }, items);
 
-            console.log('items:', self.items.length);
-            switch (self.items.length) {
-                case 0:
-                    self.displayErr.flag = true;
-                    self.displayErr.msg = 'Please select a patient to display.';
-                    break;
-                case 1:
-                    Patient.setSelectedPatients(self.items);
-                    $location.path('/PatientPlan');
-                    var accessInfo = {
-                        userId: Auth.getCurrentUser().duz,
-                        patientId: self.items[0].id,
-                        action: 'view'
-                    };
-                    Audit.create(accessInfo).then(function(data) {
-                            console.log('Access Info:', data);
-                        })
-                        .catch(function(err) {
-                            self.errors.other = err.message;
-                        });
-                    break;
-                default:
-                    self.items = [];
-                    self.displayErr.flag = true;
-                    self.displayErr.msg = 'Please select only one patient to display.';
-                    break;
+            console.log('items:', items.length);
+
+            if (items.length === 0) {
+                self.displayErr.flag = true;
+                self.displayErr.msg = 'Please select a patient to display.';
+                return;
             }
+
+            if (items.length > 1) {
+                self.displayErr.flag = true;
+                self.displayErr.msg = 'Please select only one patient to display.';
+                return;
+            }
+
+            var selectedItem = items[0];
+
+            if (selectedItem.templateID === null) {
+                self.displayErr.flag = true;
+                self.displayErr.msg = 'Please select a template to display.';
+                return;
+            }
+
+            Patient.setSelectedPatients(items);
+            $location.path('/PatientPlan');
+
+            var accessInfo = {
+                userId: Auth.getCurrentUser().duz,
+                patientId: selectedItem.id,
+                action: 'view'
+            };
+            Audit.create(accessInfo).then(function(data) {
+                console.log('Access Info:', data);
+            })
+            .catch(function(err) {
+                console.log('Error filing access info: %s', err.message);
+            });
         }
 
         function searchClinic() {
@@ -222,7 +231,7 @@ angular.module('tdpApp')
                 console.log('findTemplate found! ', item[0]);
                 return item[0].templateID;
             } else {
-                return 'Template Error';
+                return null;
             }
         }
 
