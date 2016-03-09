@@ -105,11 +105,11 @@ angular.module('tdpApp')
                 action: 'view'
             };
             Audit.create(accessInfo).then(function(data) {
-                console.log('Access Info:', data);
-            })
-            .catch(function(err) {
-                console.log('Error filing access info: %s', err.message);
-            });
+                    console.log('Access Info:', data);
+                })
+                .catch(function(err) {
+                    console.log('Error filing access info: %s', err.message);
+                });
         }
 
         function searchClinic() {
