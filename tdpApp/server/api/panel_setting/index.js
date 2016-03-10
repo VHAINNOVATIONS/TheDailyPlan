@@ -39,7 +39,7 @@ router.get('/byPanelType/:id', auth.isAuthenticated(), function(req, res) {
     var settingNameSave = '';
     var i = 0;
     // Panel - Loop
-    async.eachSeries(panel_setting, auth.isAuthenticated(), function(setting, callback) {
+    async.eachSeries(panel_setting, function(setting, callback) {
       i++;
 
       if (settingNameSave === '') {
