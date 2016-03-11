@@ -176,7 +176,7 @@ module.exports = {
             key: key
         };
     },
-
+    vistALogin: vistALogin,
     login: function(ewd, session) {
         //return { ok: true };
         var sessid = session.$('ewd_sessid')._value;
@@ -711,6 +711,7 @@ module.exports = {
             namesById: namesById
         };
     },
+
     getPatientSummaryDetails: function(patientId, ewd) {
         var patient = new ewd.mumps.GlobalNode('DPT', [patientId, '0']);
         var patientRec0 = patient._value;
@@ -724,20 +725,20 @@ module.exports = {
         };
     },
     clearSymbolTable: function(ewd) {
-        return ewd.mumps.function("CLEAR^ZZTDPSES");
+	return ewd.mumps.function("CLEAR^ZZTDPSES");
     },
     saveSymbolTable: function(ewd, session) {
-        if (!session) {
-            session = ewd.session;
-        }
-        var gloRef = '^' + ewd.map.global.session + '("session",' + session.sessid + ',"ewd_symbolTable")';
-        return ewd.mumps.function("SAVE^ZZTDPSES", gloRef);
+	if (!session) {
+	    session = ewd.session;
+	}    
+	var gloRef = '^' + ewd.map.global.session + '("session",' + session.sessid + ',"ewd_symbolTable")';
+	return ewd.mumps.function("SAVE^ZZTDPSES", gloRef);
     },
     restoreSymbolTable: function(ewd, session) {
-        if (!session) {
-            session = ewd.session;
-        }
-        var gloRef = '^' + ewd.map.global.session + '("session",' + session.sessid + ',"ewd_symbolTable")';
-        return ewd.mumps.function("RESTORE^ZZTDPSES", gloRef);
+	if (!session) {
+	    session = ewd.session;
+	}    
+	var gloRef = '^' + ewd.map.global.session + '("session",' + session.sessid + ',"ewd_symbolTable")';
+	return ewd.mumps.function("RESTORE^ZZTDPSES", gloRef);
     }
 };

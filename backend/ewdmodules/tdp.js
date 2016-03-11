@@ -17,7 +17,7 @@ var patientLib = require('vistaPatientLib');
 var operations = {
     initiate: {
         GET: function(ewd) {
-            return vista.initiate('raptor', ewd);
+            return vista.initiate('tdp', ewd);
         }
     },
     login: {
@@ -87,6 +87,7 @@ var operations = {
             return result;
         }
     },
+
     getOrderableItems: {
         GET: function(ewd, session) {
             var ok = vista.restoreSymbolTable(ewd, session);
@@ -208,6 +209,7 @@ var operations = {
             return result;
         }
     },
+
     getClinics: {
         GET: function(ewd, session) {
             var ok = vista.restoreSymbolTable(ewd, session);
@@ -262,7 +264,7 @@ var operations = {
                 patientId: ewd.query.patientId,
                 text: ewd.query.text || ''
             };
-            var ok = vista.restoreSymbolTable(ewd, session);
+            var ok = vista.restoreSymbolTable(ewd, session);                                                            
             var result = tiuLib.resolveBoilerplates(params, session, ewd);
             return result;
         }
@@ -293,7 +295,6 @@ var operations = {
 };
 
 module.exports = {
-
     parse: function(ewd) {
         var resource = ewd.query.rest_path.split('/')[1];
         var session;
@@ -322,6 +323,30 @@ module.exports = {
         } else {
             return vista.errorResponse('Invalid Request', 401);
         }
-    }
-
+    },
+    initiate: function(ewd) {
+	return operations.initiate.GET(ewd);
+    },
+    onMessage: {
+	'EWD.form.login': function(params, ewd) {
+	    if (params.username === '') {
+		return 'You must enter an Access Code';
+	    }
+	    if (params.password === '') {
+		return 'You must enter a Verify Code';
+	    }
+	    var result = vista.vistALogin(params.username, params.password, ewd);
+	    if (result.error) {
+		return result.error;
+	    }
+	    ewd.sendWebSocketMsg({
+	        type: 'loggedIn',
+		message: {
+                    ok: true,
+                   name: result.data.displayName
+                }
+            });
+            return '';
+	}
+    } 
 };

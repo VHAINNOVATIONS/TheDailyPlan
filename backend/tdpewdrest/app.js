@@ -22,7 +22,7 @@ var config = dotenv({
     ewdServiceModule: {
     	env: 'EWD_WEB_SERVICE_MODULE',
     	type: 'string',
-    	default: 'raptor'
+    	default: 'tdp'
     },
     ewdServiceMethod: {
     	env: 'EWD_WEB_SERVICE_METHOD',
