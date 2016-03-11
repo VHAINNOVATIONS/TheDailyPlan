@@ -29,14 +29,14 @@ angular.module('tdpApp')
 
         $scope.nursingOrdersGridOptions.columnDefs = [
           { name: 'start', displayName: 'Date' , width:'*' },
-          { name: 'testName', displayName: 'Order' , width:'**' },
+          { name: 'description', displayName: 'Description' , width:'**' },
           { name: 'status', displayName: 'Status', width:'*' }
         ];
 
         OrdersAsClassified.getByID($scope.patient)
         .then( function(data) {
           console.log('Patient Plan - nursingOrders:',data);
-          $scope.nursingOrdersGridOptions.data = data.nursingOrders;
+          $scope.nursingOrdersGridOptions.data = data.otherOrders;
           $scope.nursingOrdersLoading = false;
         })
         .catch( function(err) {
