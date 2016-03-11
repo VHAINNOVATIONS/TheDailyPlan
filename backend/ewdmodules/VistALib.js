@@ -374,26 +374,6 @@ module.exports = {
 
         return this.runRpc(params, session, ewd);
     },
-
-    // FYI: RAPTOR is already receiving the patient ID with the worklist. This extra call to VistA is unnecessary
-    getPatientIDFromTrackingID: function(params, session, ewd) {
-        var response = this.getVariableValue('$G(^RAO(75.1,' + params.ien + ',0))', session, ewd);
-        if (response === undefined) {
-            throw new Error('Invalid request: ' + '$G(^RAO(75.1,' + params.ien + ',0))');
-        }
-        return {
-            result: response.split('^')[0]
-        };
-    },
-
-    getSurgicalPathologyReports: function(params, session, ewd) {
-        params.reportsTabName = 'OR_SP:SURGICAL PATHOLOGY~SP;ORDV02A;0;';
-        if (!params.nRpts || params.nRpts === '' || params.nRpts === 0) {
-            params.nRpts = 1000;
-        }
-        return this.runReportsTabRpc(params, session, ewd);
-    },
-
     getNotesWithText: function(params, session, ewd) {
         params.reportsTabName = 'OR_PN:PROGRESS NOTES~TIUPRG;ORDV04;15;';
         return this.runReportsTabRpc(params, session, ewd);

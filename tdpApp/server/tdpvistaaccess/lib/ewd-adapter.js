@@ -451,17 +451,6 @@ var session = {
             }
         });
     },
-    getSurgicalPathologyReports: function (userSession, patientId, options, callback) {
-        this.get(userSession, '/getPathologyReportsDetailMap', {
-            patientId: patientId
-        }, function (err, result) {
-            if (err) {
-                callback(err);
-            } else {
-                callback(null, result);
-            }
-        });
-    },
     logout: function (userSession, callback) {
         callback(null);
     },

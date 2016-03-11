@@ -97,29 +97,6 @@ var operations = {
             return result;
         }
     },
-    getPathologyReportsDetailMap: {
-        GET: function(ewd, session) {
-            var params = {
-                patientId: ewd.query.patientId,
-                fromDate: ewd.query.fromDate,
-                toDate: ewd.query.toDate,
-                nRpts: ewd.query.nRpts
-            };
-            var ok = vista.restoreSymbolTable(ewd, session);
-            var result = vista.getSurgicalPathologyReports(params, session, ewd);
-            return result;
-        }
-    },
-    getPatientIDFromTrackingID: {
-        GET: function(ewd, session) {
-            var params = {
-                ien: ewd.query.ien
-            };
-            //var ok = vista.restoreSymbolTable(ewd, session);	//Flush symbol table and replace with ours
-            var result = vista.getPatientIDFromTrackingID(params, session, ewd);
-            return result;
-        }
-    },
     getPatientMap: {
         GET: function(ewd, session) {
             var ok = vista.restoreSymbolTable(ewd, session);
