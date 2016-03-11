@@ -385,21 +385,6 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get surgical pathology reports', function (done) {
-        var pid = 100022;
-        testSession.getSurgicalPathologyReports(userSession, pid, {}, function (err, result) {
-            if (err) {
-                done(err);
-            } else {
-                expect(result).to.exist();
-                console.log("=== Pathology =============");
-                console.log(JSON.stringify(result, undefined, 4));
-                console.log("============================");
-                done();
-            }
-        });
-    });
-
     it('get chem hem reports', function (done) {
         var pid = 756; //100022;
         testSession.getChemHemReports(userSession, pid, {
