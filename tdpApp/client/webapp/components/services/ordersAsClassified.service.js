@@ -1,35 +1,38 @@
 'use strict';
 
 angular.module('tdpApp')
-  .factory('OrdersAsClassified', function OrdersAsClassified($location, $rootScope, $http, $q) {
-    var results = {};
-
+  .factory('Orders', function Orders($http) {
     return {
 
       /**
        * Get OrdersAsClassified
        *
-       * @param  {String}   value    - query value
+       * @param  {String}   patientId    - query patientId
        * @param  {Function} callback - optional
        * @return {Promise}
        */
-      getByID: function(value, callback) {
-        var cb = callback || angular.noop;
-        var deferred = $q.defer();
+      get: function(patientId) {
+       var httpParams = {
+          url: '/api/orders',
+          method: 'GET',
+          params: {
+            patientId: patientId
+          }
+        };
+        return $http(httpParams).then(function(response) {
+          var result = response.data;
+          //result.columns = columnDefs;
 
-        $http({url: '/api/ordersAsClassified', method: 'GET', params: {value: value}}).
-        success(function(data) {
-          results = data;
-          deferred.resolve(data);
-          return cb();
-        }).
-        error(function(err) {
-
-          deferred.reject(err);
-          return cb(err);
-        }.bind(this));
-
-        return deferred.promise;
+          //result.forEach(function(row) {
+          //  row.columns = result.columns.map(function(p) {
+          //    return {
+          //      btsrpWidth: p.btsrpWidth,
+          //      value: row[p.name]
+          //    };
+          //  });
+          //});
+          return result;
+        });
       }
     };
   });

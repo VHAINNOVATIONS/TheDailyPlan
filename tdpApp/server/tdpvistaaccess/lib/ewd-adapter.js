@@ -430,7 +430,7 @@ var session = {
             });
         }
     },
-    getOrdersAsClassified: function (userSession, patientId, options, callback) {
+    getOrders: function (userSession, patientId, options, callback) {
         this.getAllOrders(userSession, patientId, options, function (err, orders) {
             if (err) {
                 callback(err);

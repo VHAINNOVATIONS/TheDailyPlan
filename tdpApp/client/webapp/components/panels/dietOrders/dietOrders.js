@@ -9,7 +9,7 @@ angular.module('tdpApp')
       scope: {
         patient: '=',
       },
-      controller: function ($scope, OrdersAsClassified) {
+      controller: function ($scope, Orders) {
 
         $scope.dietOrders = null;
 
@@ -32,7 +32,7 @@ angular.module('tdpApp')
           { name: 'description', displayName: 'Order', width: '**'}
         ];
 
-        OrdersAsClassified.getByID($scope.patient)
+        Orders.get($scope.patient)
         .then( function(data) {
           console.log('Patient Plan - dietOrders:',data);
           $scope.dietOrdersGridOptions.data = data.currentDietProfile;
