@@ -5,7 +5,7 @@ var router = express.Router();
 var auth = require('../../auth/auth.service');
 var models = require('../../models/index');
 var async = require('async');
-
+var _ = require('lodash');
 
 // get all templates
 router.get('/', auth.isAuthenticated(), function(req, res) {
@@ -89,6 +89,7 @@ router.get('/complete/:id', auth.isAuthenticated(), function(req, res) {
           panelObj.print = '<div ' + panel.directive + '-print' + ' service="' + panel.service + '" patient="ctrl.' + panel.scope_variable + '" panelid="panel.panel_id" paneldetail="panel.panelDetails"></div>';
           panelObj.mandatory = panel.mandatory;
           panelObj.enable_options = panel.enable_options;
+          panelObj.order = panel.panel_order
           if (panelDetails && panelDetails.length) {
              panelObj.panelDetails = panelDetails;
              for (var i=0; i<panelDetails.length; ++i) {
@@ -106,6 +107,8 @@ router.get('/complete/:id', auth.isAuthenticated(), function(req, res) {
     })
   })
   .then(function(panels) {
+    panels = _.sortBy(panels, 'order');
+    console.log(JSON.stringify(panels, undefined, 4));
     return res.json(panels);
   })
   .catch(function(err) {

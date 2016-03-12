@@ -1,6 +1,30 @@
 'use strict';
 
 module.exports = function(db) {
+    var layoutOrder = {
+        'Allergies': 1,
+        'Immunizations': 2,
+        'Vitals': 3,
+        'Diet Orders': 4,
+        'Lab Orders': 5,
+        'Radiology Orders': 6,
+        'Nursing Orders': 7,
+        'Pending Procedures': 8,
+        'Radiology Reports': 9,
+        'Visits': 10,
+        'IV Medications': 11,
+        'Inpatient Medications': 12,
+        'Outpatient Medications': 13,
+        'Labs': 14,
+        'Contacts': 15,
+        'Providers': 16,
+        'Health Factors': 17,
+        'Postings': 18,
+        'Free Text 1': 19,
+        'Free Text 2': 20,
+        'Free Text 3': 21
+    }
+
     var allergies = function(facilityId, templateId) {
         return db.panel_type.create({
             facility_id: facilityId,
@@ -25,7 +49,7 @@ module.exports = function(db) {
                 return db.template_layout.create({
                     template_id: templateId,
                     panel_id: p.id,
-                    panel_order: p.id
+                    panel_order: layoutOrder[pt.title]
                 }).then(function(tl) {
                     console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
                 });
@@ -57,7 +81,7 @@ module.exports = function(db) {
                 return db.template_layout.create({
                     template_id: templateId,
                     panel_id: p.id,
-                    panel_order: p.id
+                    panel_order: layoutOrder[pt.title]
                 }).then(function(tl) {
                     console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
                 });
@@ -88,7 +112,7 @@ module.exports = function(db) {
                 return db.template_layout.create({
                     template_id: templateId,
                     panel_id: p.id,
-                    panel_order: p.id
+                    panel_order: layoutOrder[pt.title]
                 }).then(function(tl) {
                     console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
                 });
@@ -120,7 +144,7 @@ module.exports = function(db) {
                 return db.template_layout.create({
                     template_id: templateId,
                     panel_id: p.id,
-                    panel_order: p.id
+                    panel_order: layoutOrder[pt.title]
                 }).then(function(tl) {
                     console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
                 });
@@ -152,7 +176,7 @@ module.exports = function(db) {
                 return db.template_layout.create({
                     template_id: templateId,
                     panel_id: p.id,
-                    panel_order: p.id
+                    panel_order: layoutOrder[pt.title]
                 }).then(function(tl) {
                     console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
                 });
@@ -184,7 +208,7 @@ module.exports = function(db) {
                 return db.template_layout.create({
                     template_id: templateId,
                     panel_id: p.id,
-                    panel_order: p.id
+                    panel_order: layoutOrder[pt.title]
                 }).then(function(tl) {
                     console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
                 });
@@ -216,7 +240,7 @@ module.exports = function(db) {
                 return db.template_layout.create({
                     template_id: templateId,
                     panel_id: p.id,
-                    panel_order: p.id
+                    panel_order: layoutOrder[pt.title]
                 }).then(function(tl) {
                     console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
                 });
@@ -248,7 +272,7 @@ module.exports = function(db) {
                 return db.template_layout.create({
                     template_id: templateId,
                     panel_id: p.id,
-                    panel_order: p.id
+                    panel_order: layoutOrder[pt.title]
                 }).then(function(tl) {
                     console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
                 });
@@ -279,7 +303,7 @@ module.exports = function(db) {
                 return db.template_layout.create({
                     template_id: templateId,
                     panel_id: p.id,
-                    panel_order: p.id
+                    panel_order: layoutOrder[pt.title]
                 }).then(function(tl) {
                     console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
                 });
@@ -312,7 +336,7 @@ module.exports = function(db) {
                     db.template_layout.create({
                         template_id: templateId,
                         panel_id: p.id,
-                        panel_order: p.id
+                        panel_order: layoutOrder[pt.title]
                     }).then(function(tl) {
                         console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
                     }),
@@ -360,7 +384,7 @@ module.exports = function(db) {
                 return db.template_layout.create({
                     template_id: templateId,
                     panel_id: p.id,
-                    panel_order: p.id
+                    panel_order: layoutOrder[pt.title]
                 }).then(function(tl) {
                     console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
                 });
@@ -392,7 +416,7 @@ module.exports = function(db) {
                 return db.template_layout.create({
                     template_id: templateId,
                     panel_id: p.id,
-                    panel_order: p.id
+                    panel_order: layoutOrder[pt.title]
                 }).then(function(tl) {
                     console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
                 });
@@ -424,7 +448,7 @@ module.exports = function(db) {
                 return db.template_layout.create({
                     template_id: templateId,
                     panel_id: p.id,
-                    panel_order: p.id
+                    panel_order: layoutOrder[pt.title]
                 }).then(function(tl) {
                     console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
                 });
@@ -456,7 +480,7 @@ module.exports = function(db) {
                     db.template_layout.create({
                         template_id: templateId,
                         panel_id: p.id,
-                        panel_order: p.id
+                        panel_order: layoutOrder[pt.title]
                     }).then(function(tl) {
                         console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
                     }),
@@ -563,7 +587,7 @@ module.exports = function(db) {
                 return db.template_layout.create({
                     template_id: templateId,
                     panel_id: p.id,
-                    panel_order: p.id
+                    panel_order: layoutOrder[pt.title]
                 }).then(function(tl) {
                     console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
                 });
@@ -594,7 +618,7 @@ module.exports = function(db) {
                 return db.template_layout.create({
                     template_id: templateId,
                     panel_id: p.id,
-                    panel_order: p.id
+                    panel_order: layoutOrder[pt.title]
                 }).then(function(tl) {
                     console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
                 });
@@ -624,7 +648,7 @@ module.exports = function(db) {
                     db.template_layout.create({
                         template_id: templateId,
                         panel_id: p.id,
-                        panel_order: p.id
+                        panel_order: layoutOrder[pt.title]
                     }),
                     db.panel_setting.create({
                         panel_type_id: pt.id,
@@ -666,7 +690,7 @@ module.exports = function(db) {
                 return db.template_layout.create({
                     template_id: templateId,
                     panel_id: p.id,
-                    panel_order: p.id
+                    panel_order: layoutOrder[pt.title]
                 }).then(function(tl) {
                     console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
                 });
@@ -698,7 +722,7 @@ module.exports = function(db) {
                     db.template_layout.create({
                         template_id: templateId,
                         panel_id: p.id,
-                        panel_order: p.id
+                        panel_order: layoutOrder[pt.title]
                     }).then(function(tl) {
                         console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
                     }),
@@ -758,7 +782,7 @@ module.exports = function(db) {
                 pendingProcedures(facility.id, templateId),
                 radiologyReports(facility.id, templateId),
                 visits(facility.id, templateId),
-                ivMedications,(facility.id, templateId),
+                ivMedications(facility.id, templateId),
                 inpatientMedications(facility.id, templateId),
                 outpatientMedications(facility.id, templateId),
                 labs(facility.id, templateId),
