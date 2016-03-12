@@ -277,7 +277,8 @@ db.facility.create({
       db.panel_type.create({
         facility_id: facilityID,
         title: 'Diet Orders',
-        directive: 'dt-diet-orders',
+        directive: 'dt-simple-grid',
+        service: 'DietOrders',
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 2,
@@ -309,7 +310,8 @@ db.facility.create({
       db.panel_type.create({
         facility_id: facilityID,
         title: 'Lab Orders',
-        directive: 'dt-lab-orders',
+        directive: 'dt-simple-grid',
+        service: 'LabOrders',
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 2,
@@ -334,7 +336,38 @@ db.facility.create({
           });
 
         });
+      });
 
+      // Create the Panel_Type First
+      db.panel_type.create({
+        facility_id: facilityID,
+        title: 'Pending Procedures',
+        directive: 'dt-simple-grid',
+        service: 'Procedures',
+        scope_variable: 'patient',
+        minSizeX: 2,
+        minSizeY: 2,
+        mandatory: false,
+        enable_options: false
+      }).then(function(pt) {
+        // Then Create the Panel Second
+        db.panel.create({
+          name: 'Pending Procedures Default',
+          panel_type_id: pt.id,
+          sizeX: 3,
+          sizeY: 2
+        }).then(function(p) {
+          // Then Create the Template_Layout Second
+          console.log('templateID:',templateID);
+          db.template_layout.create({
+            template_id: templateID,
+            panel_id: p.id,
+            panel_order: p.id
+          }).then(function(tl) {
+            console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
+          });
+
+        });
       });
 
       // Create the Panel_Type First
@@ -521,7 +554,8 @@ db.facility.create({
       db.panel_type.create({
         facility_id: facilityID,
         title: 'Radiology Orders',
-        directive: 'dt-radiology-orders',
+        directive: 'dt-simple-grid',
+        service: 'RadiologyOrders',
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 2,
@@ -553,7 +587,8 @@ db.facility.create({
       db.panel_type.create({
         facility_id: facilityID,
         title: 'Nursing Orders',
-        directive: 'dt-nursing-orders',
+        directive: 'dt-simple-grid',
+        service: 'NursingOrders',
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 2,
