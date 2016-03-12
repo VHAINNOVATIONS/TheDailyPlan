@@ -213,7 +213,8 @@ db.facility.create({
       db.panel_type.create({
         facility_id: facilityID,
         title: 'Immunizations',
-        directive: 'dt-immunizations',
+        directive: 'dt-simple-grid',
+        service: 'Immunizations',
         scope_variable: 'patient',
         minSizeX: 2,
         minSizeY: 1,
