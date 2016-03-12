@@ -758,6 +758,8 @@ module.exports = function (grunt) {
             'client/webapp/components/panels/simpleGrid/*.*',
             'client/webapp/app/patientSearch/*.js',
             'client/webapp/app/patientSearch/*.html',
+            'client/webapp/app/layouts/*.js',
+            'client/webapp/app/layouts/*.html'
           ],
             options: {
                 config: '.jsbeautifyrc'
