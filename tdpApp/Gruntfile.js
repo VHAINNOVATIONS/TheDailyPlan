@@ -755,6 +755,7 @@ module.exports = function (grunt) {
         },
         client: {
           src: [
+            'client/webapp/components/services/*.js',
             'client/webapp/components/auth/*.js',
             'client/webapp/components/panels/simpleGrid/*.*',
             'client/webapp/app/patientSearch/*.js',

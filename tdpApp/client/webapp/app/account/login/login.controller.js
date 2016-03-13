@@ -73,16 +73,15 @@ angular.module('tdpApp')
                         userKeys: keys,
                         location: location
                     })
-                    .then(function(data) {
+                    .then(function() {
                         // Logged in, redirect to home
                         self.errors = false;
                         Idle.watch();
                         $location.path('/PatientSearch');
                     })
-                    .catch(function(err) {
+                    .catch(function() {
                         self.errors = true;
                         console.log('login err:', self.errors);
-
                     });
             }
         };
@@ -107,7 +106,7 @@ angular.module('tdpApp')
                         self.errors = true;
                     });
             }
-        }
+        };
 
         function init() {
 

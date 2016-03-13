@@ -8,7 +8,6 @@ angular.module('tdpApp')
         }*/
 
         return {
-
             /**
              * Authenticate user and save token
              *
@@ -16,29 +15,16 @@ angular.module('tdpApp')
              * @param  {Function} callback - optional
              * @return {Promise}
              */
-            login: function(user, callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.post('/auth/local', user).
-                success(function(data) {
+            login: function(user) {
+                return $http.post('/auth/local', user).then(function(response) {
+                    var data = response.data;
                     console.log(data);
                     $cookieStore.put('token', data.token);
-                    var user = data.user;
-                    currentUser.displayName = user.displayName;
-                    currentUser.keys = user.keys;
-                    currentUser.duz = user.DUZ;
-
-                    deferred.resolve(currentUser);
-                    return cb();
-                }).
-                error(function(err) {
-                    this.logout();
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+                    var serverUser = data.user;
+                    currentUser.displayName = serverUser.displayName;
+                    currentUser.keys = serverUser.keys;
+                    currentUser.duz = serverUser.DUZ;
+                });
             },
 
             /**
