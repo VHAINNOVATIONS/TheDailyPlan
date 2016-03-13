@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tdpApp')
-    .factory('Template', function Template($location, $rootScope, $http, $q) {
+    .factory('Template', function Template($location, $rootScope, $http, $q, Facility) {
         var results = {};
         var selectedTemplates = [];
 
@@ -19,23 +19,12 @@ angular.module('tdpApp')
              * @param  {Function} callback - optional
              * @return {Promise}
              */
-            findAll: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/template/').
-                success(function(data) {
-                    results = data;
-                    deferred.resolve(data);
-                    return cb();
-                }).
-                error(function(err) {
-
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            findAll: function() {
+                var id = Facility.getCurrentFacility();
+                return $http.get('/api/template/facility/' + id).then(function(response) {
+                    var results = response.data;
+                    return results;
+                });
             },
 
             /**
