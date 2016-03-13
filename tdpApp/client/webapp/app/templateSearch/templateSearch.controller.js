@@ -59,25 +59,46 @@ angular.module('tdpApp')
     self.clearAlerts = clearAlerts;
     self.searchWard =searchWard;
     self.searchClinic = searchClinic;
-    self.searchAll = searchAll;
+
+    self.searchAll = function () {
+      self.submitted = true;
+      self.clearAlerts();
+      var nameStartsWith = self.search && self.search.all;
+      Template.findAll().then(function(data) {
+          if (nameStartsWith && nameStartsWith.length) {
+            var n = nameStartsWith.length;
+            nameStartsWith = nameStartsWith.toLowerCase();
+            data = data.reduce(function(r, t) {
+              var name = t.template_name;
+              name = name && name.slice(0, n).toLowerCase();
+              if (name === nameStartsWith) {
+                r.push(t);
+              }
+              return r;
+            }, []);
+          }
+          self.data = data;
+          self.noResults = !(data.length);
+          reloadData();
+      }).catch( function(err) {
+          self.errors.other = err.message;
+      });
+    };
+
     self.toggleAll = toggleAll;
     self.toggleOne = toggleOne;
-    self.display = display;
-    self.create = create;
 
+    self.display = function () {
+      editOrDisplay('display');
+    };
 
-    self.searchAll();
+    self.edit = function () {
+      editOrDisplay('edit');
+    };
 
-    // Populate the Templates
-    /*Template.findAll()
-    .then( function(data) {
-      self.data = data;
-      self.noResults = !(data.length);
-      reloadData();
-    })
-    .catch( function(err) {
-      self.errors.other = err.message;
-    });*/
+    self.create = function () {
+      $location.path('/layouts/create/');
+    };
 
     // Initially Populate the Wards
     Location.getWards()
@@ -97,12 +118,7 @@ angular.module('tdpApp')
       self.errors.other = err.message;
     });
 
-    function create() {
-      $location.path('/layouts/create/');
-    }
-
-    function display() {
-
+    function editOrDisplay(type) {
       angular.forEach(self.selected, function(value, key) {
         var entry = {};
         if(value === true)
@@ -116,16 +132,16 @@ angular.module('tdpApp')
       switch(self.items.length) {
         case 0:
           self.displayErr.flag = true;
-          self.displayErr.msg = 'Please select a template to display.';
+          self.displayErr.msg = 'Please select a template to '+ type + '.';
           break;
         case 1:
           //Template.setSelectedTemplates(self.items);
-          $location.path('/layouts/display/'+self.items[0].id);
+          $location.path('/layouts/' + type + '/' + self.items[0].id);
           break;
         default:
           self.items = [];
           self.displayErr.flag = true;
-          self.displayErr.msg = 'Please select only one template to display.';
+          self.displayErr.msg = 'Please select only one template to '+ type + '.';
           break;
       }
     }
@@ -159,22 +175,6 @@ angular.module('tdpApp')
         self.errors.other = err.message;
       });
     };
-
-
-    function searchAll() {
-      self.submitted = true;
-      self.clearAlerts();
-
-      Template.findAll()
-      .then( function(data) {
-        self.data = data;
-        self.noResults = !(data.length);
-        reloadData();
-      })
-      .catch( function(err) {
-        self.errors.other = err.message;
-      });
-    }
 
     function clearAlerts() {
       self.noResults = false;

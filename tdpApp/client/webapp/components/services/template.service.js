@@ -21,35 +21,14 @@ angular.module('tdpApp')
              */
             findAll: function() {
                 var id = Facility.getCurrentFacility();
-                return $http.get('/api/template/facility/' + id).then(function(response) {
-                    var results = response.data;
-                    return results;
-                });
-            },
-
-            /**
-             * Find All Templates By Facility ID
-             *
-             * @param  {Function} callback - optional
-             * @return {Promise}
-             */
-            findAllByFacilityID: function(id, callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/template/facility/' + id).
-                success(function(data) {
-                    results = data;
-                    deferred.resolve(data);
-                    return cb();
-                }).
-                error(function(err) {
-
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+                if (id) {
+                  return $http.get('/api/template/facility/' + id).then(function(response) {
+                      var results = response.data;
+                      return results;
+                  });
+                } else {
+                    return $q.reject('No facility is chosen.');
+                }
             },
 
             /**

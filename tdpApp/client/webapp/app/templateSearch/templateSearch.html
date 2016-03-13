@@ -11,9 +11,9 @@
                   <form ng-submit="ctrl.searchAll()" name="searchAll">
                       <div class="form-group">
                         <label for="searchAllTemplates">Template Name</label>
-                        <input type="text" ng-model="ctrl.search.all" required ng-minlength="3" class="form-control" id="searchAllTemplates" placeholder="Template Name" autocomplete="off" style="cursor: auto;">
+                        <input type="text" ng-model="ctrl.search.all" class="form-control" id="searchAllTemplates" placeholder="All" autocomplete="off" style="cursor: auto;">
                       </div>
-                      <input class="btn btn-primary" type="submit" value="Search" ng-disabled="searchAll.$invalid">
+                      <input class="btn btn-primary" type="submit" value="Search">
                   </form>
                 </div>
             </div>
@@ -72,7 +72,7 @@
       <hr>
       <div class='col-sm-4 col-centered pull-left'>
         <button type="button" class='btn btn-primary' ng-click="ctrl.display()">Display</button>
-        <button type="button" class='btn btn-primary' ng-click="ctrl.edit()" ng-disabled="true">Edit</button>
+        <button type="button" class='btn btn-primary' ng-click="ctrl.edit()">Edit</button>
         <button type="button" class='btn btn-primary' ng-click="ctrl.create()">Create</button>
       </div>
       <!-- <form ng-submit="ctrl.display()" name="display">
