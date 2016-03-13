@@ -728,10 +728,10 @@ module.exports = function(db) {
                     }),
                     // Now Create the Settings and Details
                     db.panel_setting.create({
-                          panel_type_id: pt.id,
-                          setting_type: 3,
-                          setting_name: 'Title',
-                          setting_value: ''
+                        panel_type_id: pt.id,
+                        setting_type: 3,
+                        setting_name: 'Title',
+                        setting_value: ''
                     }).then(function(ps) {
                         //Then Create the Details
                         return db.panel_detail.create({
@@ -792,9 +792,9 @@ module.exports = function(db) {
                 postings(facility.id, templateId)
             ].concat(['1', '2', '3'].map(function(index) {
                 return freeText(facility, templateId, index);
-            }))
-        )}).then(function() {
-          console.log('%s is created.', facility.name);
+            })))
+        }).then(function() {
+            console.log('%s is created.', facility.name);
         });
     };
 

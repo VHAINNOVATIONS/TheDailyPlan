@@ -736,7 +736,11 @@ module.exports = function (grunt) {
 
     jsbeautifier: {
         server: {
-            src: ['server/db/**/*.js', 'server/models/**/*.js'],
+            src: [
+              'server/db/**/*.js',
+              'server/models/**/*.js',
+              'server/api/template/*.js'
+            ],
             options: {
                 config: '.jsbeautifyrc'
             }

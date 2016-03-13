@@ -97,22 +97,14 @@ angular.module('tdpApp')
              * @param  {Function} callback - optional
              * @return {Promise}
              */
-            create: function(template, callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.post('/api/template/', template).
-                success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                }).
-                error(function(err) {
-
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            create: function(template) {
+                var id = Facility.getCurrentFacility();
+                if (id) {
+                    template.facility_id = id;
+                    return $http.post('/api/template/', template);
+                } else {
+                    return $q.reject('No facility is chosen.');
+                }
             },
 
             /**

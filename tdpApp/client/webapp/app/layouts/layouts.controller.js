@@ -112,7 +112,6 @@ angular.module('tdpApp')
 
             self.processTemplate = function(form) {
                 self.submitted = true;
-                self.template.facility_id = self.currentFacility;
                 self.template.panels = self.selectedPanels;
 
                 if (form.$valid) {
