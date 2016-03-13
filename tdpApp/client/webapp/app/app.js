@@ -20,7 +20,7 @@ angular.module('tdpApp', [
 
     $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push('authInterceptor');
-    IdleProvider.idle(60);
+    IdleProvider.idle(300);
     IdleProvider.timeout(20);
   })
 
