@@ -108,7 +108,6 @@ router.get('/complete/:id', auth.isAuthenticated(), function(req, res) {
   })
   .then(function(panels) {
     panels = _.sortBy(panels, 'order');
-    console.log(JSON.stringify(panels, undefined, 4));
     return res.json(panels);
   })
   .catch(function(err) {

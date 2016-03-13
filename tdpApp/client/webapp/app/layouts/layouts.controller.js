@@ -143,7 +143,6 @@ angular.module('tdpApp')
             };
 
             self.cancelTemplate = function() {
-
                 $location.path('/templateSearch');
                 return;
             };

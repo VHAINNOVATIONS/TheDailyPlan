@@ -55,8 +55,8 @@
                         <span class="list-group-item active">Selected
                             <input title="Toggle all" ng-click="ctrl.toggleS()" ng-model="ctrl.checkedS" value="{{ctrl.checkedS}}" ng-disabled="ctrl.selectedPanels.length === 0" type="checkbox" class="pull-left picklist-input">
                             <div class="btn-group btn-group-xs pull-right">
-                                <button type="button" title="Move Up" class="btn btn-default" ng-click="ctrl.moveUp()"><i class="glyphicon glyphicon-chevron-up"></i></button>
-                                <button type="button" title="Move Down" class="btn btn-default" ng-click="ctrl.moveDown()"><i class="glyphicon glyphicon-chevron-down"></i></button>
+                                <button type="button" title="Move Up" class="btn btn-default" ng-click="ctrl.moveUp()" ng-disabled="ctrl.selectedS.length !== 1"><i class="glyphicon glyphicon-chevron-up"></i></button>
+                                <button type="button" title="Move Down" class="btn btn-default" ng-click="ctrl.moveDown()" ng-disabled="ctrl.selectedS.length !== 1"><i class="glyphicon glyphicon-chevron-down"></i></button>
                             </div>
                         </span>
                         <span ng-repeat="sp in ctrl.selectedPanels">
