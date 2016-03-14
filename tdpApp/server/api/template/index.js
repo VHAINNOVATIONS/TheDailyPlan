@@ -24,6 +24,32 @@ router.get('/facility/:id', auth.isAuthenticated(), function(req, res) {
     });
 });
 
+// get all templates by ward id
+router.get('/ward/:id/:wardId', auth.isAuthenticated(), function(req, res) {
+    models.template.findAll({
+        where: {
+            facility_id: req.params.id,
+            location_id: req.params.wardId,
+            location_type: 1
+        }
+    }).then(function(templates) {
+        res.json(templates);
+    });
+});
+
+// get all templates by ward id
+router.get('/clinic/:id/:clinicId', auth.isAuthenticated(), function(req, res) {
+    models.template.findAll({
+        where: {
+            facility_id: req.params.id,
+            location_id: req.params.clinicId,
+            location_type: 2
+        }
+    }).then(function(templates) {
+        res.json(templates);
+    });
+});
+
 // get single template
 router.get('/:id', auth.isAuthenticated(), function(req, res) {
     models.template.find({
@@ -162,6 +188,7 @@ router.post('/', auth.isAuthenticated(), function(req, res) {
         template_description: req.body.template_description,
         facility_id: req.body.facility_id,
         location_id: req.body.location_id,
+        location_type: req.body.location_type,
         active: true,
         template_owner: req.body.template_owner
     }).then(function(template) {
@@ -190,6 +217,7 @@ router.put('/:id', auth.isAuthenticated(), function(req, res) {
                 template_description: req.body.template_description,
                 facility_id: req.body.facility_id,
                 location_id: req.body.location_id,
+                location_type: req.body.location_type,
                 active: req.body.active,
                 template_owner: req.body.template_owner
             }).then(function(template) {

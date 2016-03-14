@@ -31,6 +31,30 @@ angular.module('tdpApp')
                 }
             },
 
+            findByWard: function(wardId) {
+                var id = Facility.getCurrentFacility();
+                if (id) {
+                  return $http.get('/api/template/ward/' + id + '/' + wardId).then(function(response) {
+                      var results = response.data;
+                      return results;
+                  });
+                } else {
+                    return $q.reject('No facility is chosen.');
+                }
+            },
+
+            findByClinic: function(clinicId) {
+                var id = Facility.getCurrentFacility();
+                if (id) {
+                  return $http.get('/api/template/clinic/' + id + '/' + clinicId).then(function(response) {
+                      var results = response.data;
+                      return results;
+                  });
+                } else {
+                    return $q.reject('No facility is chosen.');
+                }
+            },
+
             /**
              * Find Single Template by Template ID
              *

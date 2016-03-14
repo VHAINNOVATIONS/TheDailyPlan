@@ -37,10 +37,20 @@ angular.module('tdpApp')
                     return Location.getWards().then(function(wards) {
                         self.wards = wards.map(function(ward) {
                             return {
-                                id: ward.id.toString(),
-                                name: ward.name
+                                id: ward.id.toString() + '^1',
+                                name: ward.name + ' (Ward)'
                             };
                         });
+                    });
+                }).then(function() {
+                    return Location.getClinics().then( function(clinics) {
+                        clinics = clinics.map(function(clinic) {
+                            return {
+                                id: clinic.id.toString() + '^2',
+                                name: clinic.name + ' (Clinic)'
+                            };
+                        });
+                        self.wards = self.wards.concat(clinics);
                     });
                 });
 
@@ -49,7 +59,7 @@ angular.module('tdpApp')
                     return Template.findByID(id);
                 }).then(function(template) {
                     self.template = template;
-                    self.locationId = template.location_id ? template.location_id.toString() : "";
+                    self.locationId = template.location_id ? template.location_id.toString() + (template.location_type === 2 ? '^2' : '^1') : '';
                     return Template.findCompleteByID(id).then(function(templateLayout) {
                         //self.template.panels = templateLayout;
                         self.selectedPanels = templateLayout;
@@ -109,6 +119,12 @@ angular.module('tdpApp')
                 array[to] = target;
             }
 
+            var updateLocationInfo = function(template, locationInfo) {
+                var r = locationInfo.split('^');
+                template.location_id = parseInt(r[0], 10);
+                template.location_type = parseInt(r[1], 10);
+            };
+
             self.processTemplate = function(form) {
                 self.submitted = true;
                 self.template.panels = self.selectedPanels;
@@ -117,7 +133,7 @@ angular.module('tdpApp')
                     switch (self.mode) {
                         case 'create':
                             if (self.locationId) {
-                              self.template.location_id = parseInt(self.locationId, 10);
+                                updateLocationInfo(self.template, self.locationId);
                             }
                             Template.create(self.template)
                                 .then(function() {
@@ -131,9 +147,10 @@ angular.module('tdpApp')
                         case 'edit':
                             self.template.id = self.templateID;
                             if (self.locationId) {
-                                self.template.location_id = parseInt(self.locationId, 10);
+                                updateLocationInfo(self.template, self.locationId);
                             } else {
                                 self.template.location_id = null;
+                                self.template.location_type = null;
                             }
                             Template.update(self.template)
                                 .then(function() {
