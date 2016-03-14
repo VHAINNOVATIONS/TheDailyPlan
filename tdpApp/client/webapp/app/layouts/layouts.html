@@ -11,10 +11,10 @@
                 </div>
                 <div class="form-group" ng-class="{ 'has-error': form.locationSelect.$dirty && form.locationSelect.$error.required }">
                     <label for="locationSelect">Location</label>
-                    <select name="locationSelect" id="locationSelect" ng-model="ctrl.template.location_id" ng-disabled="ctrl.displayOnly" class="form-control">
+                    <select name="locationSelect" id="locationSelect" ng-model="ctrl.locationId" ng-disabled="ctrl.displayOnly" class="form-control" ng-options="wobj.id as wobj.name for wobj in ctrl.wards">
                         <option value="">Select a location...</option>
                         <!-- not selected / blank option -->
-                        <option ng-repeat="option in ctrl.wards" value="{{option.id}}">{{option.name}}</option>
+                        <!--option ng-repeat="option in ctrl.wards" value="{{option.id}}">{{option.name}}</option-->
                     </select>
                     <!-- <span ng-show="form.locationSelect.$dirty && form.locationSelect.$error.required" class="help-block">Facility is required</span> -->
                 </div>

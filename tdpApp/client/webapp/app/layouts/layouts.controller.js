@@ -13,6 +13,7 @@ angular.module('tdpApp')
             self.masterPanelsList = [];
             self.availablePanels = [];
             self.submitButton = '';
+            self.locationId = '';
 
             //functions
             function reset() {
@@ -34,7 +35,12 @@ angular.module('tdpApp')
                     }
                 }).then(function() {
                     return Location.getWards().then(function(wards) {
-                        self.wards = wards;
+                        self.wards = wards.map(function(ward) {
+                            return {
+                                id: ward.id.toString(),
+                                name: ward.name
+                            };
+                        });
                     });
                 });
 
@@ -43,6 +49,7 @@ angular.module('tdpApp')
                     return Template.findByID(id);
                 }).then(function(template) {
                     self.template = template;
+                    self.locationId = template.location_id ? template.location_id.toString() : "";
                     return Template.findCompleteByID(id).then(function(templateLayout) {
                         //self.template.panels = templateLayout;
                         self.selectedPanels = templateLayout;
@@ -109,6 +116,9 @@ angular.module('tdpApp')
                 if (form.$valid) {
                     switch (self.mode) {
                         case 'create':
+                            if (self.locationId) {
+                              self.template.location_id = parseInt(self.locationId, 10);
+                            }
                             Template.create(self.template)
                                 .then(function() {
                                     $location.path('/templateSearch');
@@ -120,6 +130,11 @@ angular.module('tdpApp')
                             break;
                         case 'edit':
                             self.template.id = self.templateID;
+                            if (self.locationId) {
+                                self.template.location_id = parseInt(self.locationId, 10);
+                            } else {
+                                self.template.location_id = null;
+                            }
                             Template.update(self.template)
                                 .then(function() {
                                     $location.path('/templateSearch');
