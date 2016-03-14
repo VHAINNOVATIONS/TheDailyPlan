@@ -31,14 +31,17 @@ angular.module('tdpApp')
             switch (self.mode) {
                 case 'create':
                     self.submitButton = 'Save';
+                    self.topTitle = 'New Template';
                     break;
                 case 'edit':
                     self.submitButton = 'Update';
+                    self.topTitle = 'Edit Template';
                     loadTemplate(self.templateID);
                     break;
                 case 'display':
                     self.displayOnly = true;
                     self.submitButton = 'Done';
+                    self.topTitle = 'Display Template';
                     loadTemplate(self.templateID);
                     break;
                 default:
@@ -241,8 +244,11 @@ angular.module('tdpApp')
                     templateUrl: 'app/layouts/customizer.html',
                     controller: 'CustomizerCtrl',
                     resolve: {
-                        panel: function() {
-                            return panel;
+                        params: function() {
+                            return {
+                              panel: panel,
+                              displayOnly: self.displayOnly
+                            };
                         }
                     }
                 });
@@ -250,11 +256,13 @@ angular.module('tdpApp')
         }
     ])
     // Customizer Controller Settings Modal
-    .controller('CustomizerCtrl', ['$scope', '$timeout', '$rootScope', '$uibModalInstance', 'panel', 'Panel_Setting',
-        function($scope, $timeout, $rootScope, $uibModalInstance, panel, Panel_Setting) {
+    .controller('CustomizerCtrl', ['$scope', '$uibModalInstance', 'params', 'Panel_Setting',
+        function($scope, $uibModalInstance, params, Panel_Setting) {
+            var panel = params.panel;
             $scope.panel = panel;
             $scope.options = [];
             $scope.selectedOption = [];
+            $scope.displayOnly = !!params.displayOnly;
 
             Panel_Setting.findByPanelTypeID(panel.id)
                 .then(function(panel_settings) {
@@ -275,7 +283,11 @@ angular.module('tdpApp')
                                 $scope.selectedOption.push(pid);
                             }
                             if (settingIdMap[pid].type === 2) {
-                                settingIdMap[pid].obj.numberValue = panel.panelDetails[i].detail_value;
+                                var valueType2 = panel.panelDetails[i].detail_value;
+                                if (typeof valueType2 === 'string') {
+                                    valueType2 = parseInt(valueType2, 10);
+                                }
+                                settingIdMap[pid].obj.numberValue = valueType2;
                             }
                             if (settingIdMap[pid].type === 3 || settingIdMap[pid].type === 4) {
                                 settingIdMap[pid].obj.textValue = panel.panelDetails[i].detail_value || '';
@@ -349,6 +361,5 @@ angular.module('tdpApp')
 
                 $uibModalInstance.close(panel);
             };
-
         }
     ]);
