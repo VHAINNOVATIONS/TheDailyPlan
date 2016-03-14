@@ -4,7 +4,6 @@ var express = require('express');
 var router = express.Router();
 var auth = require('../../auth/auth.service');
 var models = require('../../models/index');
-var async = require('async');
 var _ = require('lodash');
 
 // get all templates
@@ -126,8 +125,6 @@ router.get('/complete/:id', auth.isAuthenticated(), function(req, res) {
 
 // add new template
 router.post('/', auth.isAuthenticated(), function(req, res) {
-    //Template = req.body;
-    //Panels = req.body.panels;
     models.template.create({
         template_name: req.body.template_name,
         template_description: req.body.template_description,
@@ -136,68 +133,40 @@ router.post('/', auth.isAuthenticated(), function(req, res) {
         active: true,
         template_owner: req.body.template_owner
     }).then(function(template) {
-        // Panel - Loop
-        var i = 0;
-        var layouts = [];
-
-        async.eachSeries(req.body.panels, function(panel, callback) {
-            // Count to define panel order
-            i++;
-            // Then Create the Panel Second
-            models.panel.create({
+        var panelPromises = req.body.panels.map(function(panel, index) {
+            return models.panel.create({
                 name: panel.title,
                 panel_type_id: panel.id,
                 sizeX: panel.minSizeX,
                 sizeY: panel.minSizeY
             }).then(function(p) {
-                // Then Create the Template_Layout Second
-
-                models.template_layout.create({
+                return models.template_layout.create({
                     template_id: template.id,
                     panel_id: p.id,
-                    panel_order: i
+                    panel_order: index
                 }).then(function(tl) {
-                    // Create the panel_details
-
                     if (panel.panelDetails) {
-                        async.eachSeries(panel.panelDetails, function(panelDetails, callbackPD) {
+                        var pds = panel.panelDetails.map(function(panelDetail) {
                             var pd = {
                                 panel_id: p.id,
-                                panel_setting_id: panelDetails.panel_setting_id,
+                                panel_setting_id: panelDetail.panel_setting_id,
                             };
-                            if (panelDetails.hasOwnProperty('detail_value')) {
-                                pd.detail_value = panelDetails.detail_value;
+                            if (panelDetail.hasOwnProperty('detail_value')) {
+                                pd.detail_value = panelDetail.detail_value;
                             }
-                            models.panel_detail.create(pd).then(function(pd) {
-                                callbackPD();
-                            });
-                        }, function(err) {
-
-                            if (err) {
-                                console.log('ERROR:', err);
-                            } else {
-                                p.panelDetails = panel.panelDetails;
-                                tl.panel = p;
-                                layouts.push(tl);
-                                callback();
-                            }
+                            return pd;
                         });
-
+                        return models.panel_detail.bulkCreate(pds);
                     } else {
-                        layouts.push(tl);
-                        callback();
+                        return null;
                     }
                 });
-            });
-
-        }, function(err) {
-
-            if (err) {
-                console.log('ERROR:', err);
-            } else {
-                template.layouts = layouts;
-                res.json(template);
-            }
+            })
+        });
+        return models.Sequelize.Promise.all(panelPromises).then(function() {
+            res.json({});
+        }).catch(function(err) {
+            console.log('ERROR:', err);
         });
     });
 });

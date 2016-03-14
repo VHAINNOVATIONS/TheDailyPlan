@@ -121,8 +121,7 @@ angular.module('tdpApp')
                     switch (self.mode) {
                         case 'create':
                             Template.create(self.template)
-                                .then(function(data) {
-                                    // Returns a Completed Template
+                                .then(function() {
                                     $location.path('/templateSearch');
                                     return;
                                 })
@@ -131,7 +130,15 @@ angular.module('tdpApp')
                                 });
                             break;
                         case 'edit':
-                            // Put the logic here to do the updates
+                            self.template.id = self.templateID;
+                            Template.update(self.template)
+                                .then(function() {
+                                    $location.path('/templateSearch');
+                                    return;
+                                })
+                                .catch(function(err) {
+                                    self.errors.other = err;
+                                });
                             break;
                         case 'display':
                             $location.path('/templateSearch');
