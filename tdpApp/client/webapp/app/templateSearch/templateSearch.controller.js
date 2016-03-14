@@ -32,7 +32,7 @@ angular.module('tdpApp')
             }),
         DTColumnBuilder.newColumn('template_name').withTitle('Name'),
         DTColumnBuilder.newColumn('template_description').withTitle('Description'),
-        DTColumnBuilder.newColumn('location_id').withTitle('Location'),
+        DTColumnBuilder.newColumn('locationName').withTitle('Location'),
         DTColumnBuilder.newColumn('active').withTitle('Active')
     ];
 
@@ -77,6 +77,22 @@ angular.module('tdpApp')
               return r;
             }, []);
           }
+          var wardsDictionary = self.wards.reduce(function(r, ward) {
+              r[ward.id] = ward.name;
+              return r;
+          }, {});
+          data.forEach(function(t) {
+              if (t.location_id) {
+                  var locationName = wardsDictionary[t.location_id];
+                  if (locationName) {
+                      t.locationName = locationName;
+                  } else {
+                      t.locationName = t.location_id;
+                  }
+              } else {
+                t.locationName = null;
+              }
+          });
           self.data = data;
           self.noResults = !(data.length);
           reloadData();
