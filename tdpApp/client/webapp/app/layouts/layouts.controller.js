@@ -15,8 +15,6 @@ angular.module('tdpApp')
             self.submitButton = '';
 
             //functions
-            self.loadTemplate = loadTemplate;
-
             function reset() {
                 self.selectedA = [];
                 self.selectedS = [];
@@ -28,10 +26,45 @@ angular.module('tdpApp')
             self.displayOnly = false;
             self.templateID = $stateParams.id;
 
+            var initializeLayout = Panel_Type.findAllByFacilityID(self.currentFacility).then(function(panel_types) {
+                    reset();
+                    self.masterPanelsList = panel_types;
+                    for (var i = 0; i < panel_types.length; i++) {
+                        panel_types[i].mandatory ? self.selectedPanels.push(panel_types[i]) : self.availablePanels.push(panel_types[i]);
+                    }
+                }).then(function() {
+                    return Location.getWards().then(function(wards) {
+                        self.wards = wards;
+                    });
+                });
+
+            var loadTemplate = function(id) {
+                initializeLayout.then(function() {
+                    return Template.findByID(id);
+                }).then(function(template) {
+                    self.template = template;
+                    return Template.findCompleteByID(id).then(function(templateLayout) {
+                        //self.template.panels = templateLayout;
+                        self.selectedPanels = templateLayout;
+                        for (var i = 0; i < templateLayout.length; i++) {
+                            var delId = arrayObjectIndexOf(self.availablePanels, templateLayout[i].id, 'id');
+                            if (delId !== -1) {
+                                self.availablePanels.splice(delId, 1);
+                            }
+                        }
+                    });
+                }).catch(function(err) {
+                    self.errors.other = err.message;
+                });
+            };
+
             switch (self.mode) {
                 case 'create':
                     self.submitButton = 'Save';
                     self.topTitle = 'New Template';
+                    initializeLayout.catch(function(err) {
+                        self.errors.other = err.message;
+                    });
                     break;
                 case 'edit':
                     self.submitButton = 'Update';
@@ -50,28 +83,6 @@ angular.module('tdpApp')
                     break;
             }
 
-            Panel_Type.findAllByFacilityID(self.currentFacility)
-                .then(function(panel_types) {
-                    // Initialize Available Panels and Keep a Master List
-                    reset();
-                    self.masterPanelsList = panel_types;
-
-                    for (var i = 0; i < panel_types.length; i++) {
-                        panel_types[i].mandatory ? self.selectedPanels.push(panel_types[i]) : self.availablePanels.push(panel_types[i]);
-                    };
-                })
-                .catch(function(err) {
-                    self.errors.other = err.message;
-                });
-
-            Location.getWards()
-                .then(function(wards) {
-                    self.wards = wards;
-                })
-                .catch(function(err) {
-                    self.errors.other = err.message;
-                });
-
             function arrayObjectIndexOf(myArray, searchTerm, property) {
                 for (var i = 0, len = myArray.length; i < len; i++) {
                     if (myArray[i][property] === searchTerm) return i;
@@ -89,28 +100,6 @@ angular.module('tdpApp')
                     array[k] = array[k + increment];
                 }
                 array[to] = target;
-            }
-
-            function loadTemplate(id) {
-                Template.findByID(id)
-                    .then(function(template) {
-                        self.template = template;
-
-                        Template.findCompleteByID(id)
-                            .then(function(templateLayout) {
-                                //self.template.panels = templateLayout;
-                                self.selectedPanels = templateLayout;
-                                for (var i = 0; i < templateLayout.length; i++) {
-                                    var delId = arrayObjectIndexOf(self.availablePanels, templateLayout[i].id, 'id');
-                                    if (delId !== -1) {
-                                        self.availablePanels.splice(delId, 1);
-                                    }
-                                }
-                            });
-
-                    }).catch(function(err) {
-                        self.errors.other = err.message;
-                    });
             }
 
             self.processTemplate = function(form) {
