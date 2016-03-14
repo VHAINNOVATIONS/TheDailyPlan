@@ -125,7 +125,7 @@ angular.module('tdpApp')
                 var id = Facility.getCurrentFacility();
                 if (id) {
                     template.facility_id = id;
-                    return $http.post('/api/template/' + template.id, template);
+                    return $http.put('/api/template/' + template.id, template);
                 } else {
                     return $q.reject('No facility is chosen.');
                 }
