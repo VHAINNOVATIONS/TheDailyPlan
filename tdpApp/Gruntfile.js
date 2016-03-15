@@ -736,7 +736,11 @@ module.exports = function (grunt) {
 
     jsbeautifier: {
         server: {
-            src: ['server/db/**/*.js', 'server/models/**/*.js'],
+            src: [
+              'server/db/**/*.js',
+              'server/models/**/*.js',
+              'server/api/template/*.js'
+            ],
             options: {
                 config: '.jsbeautifyrc'
             }
@@ -754,7 +758,17 @@ module.exports = function (grunt) {
             }
         },
         client: {
-          src: ['client/webapp/components/panels/simpleGrid/*.*'],
+          src: [
+            'client/webapp/components/services/*.js',
+            'client/webapp/components/auth/*.js',
+            'client/webapp/components/panels/simpleGrid/*.*',
+            'client/webapp/app/patientSearch/*.js',
+            'client/webapp/app/patientSearch/*.html',
+            'client/webapp/app/account/login/*.js',
+            'client/webapp/app/account/login/*.html',
+            'client/webapp/app/layouts/*.js',
+            'client/webapp/app/layouts/*.html'
+          ],
             options: {
                 config: '.jsbeautifyrc'
             }

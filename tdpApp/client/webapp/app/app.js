@@ -20,7 +20,7 @@ angular.module('tdpApp', [
 
     $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push('authInterceptor');
-    IdleProvider.idle(60);
+    IdleProvider.idle(300);
     IdleProvider.timeout(20);
   })
 
@@ -50,7 +50,7 @@ angular.module('tdpApp', [
     };
   })
 
-  .run(function ($rootScope, $location, Auth, Idle) {
+  .run(function ($rootScope, $location, Auth) {
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function (event, next) {
       Auth.isLoggedInAsync(function(loggedIn) {
