@@ -1,10 +1,9 @@
 'use strict';
 
 angular.module('tdpApp')
-    .controller('PatientSearchCtrl', function($compile, $scope, $q, $location, DTOptionsBuilder, DTColumnBuilder, Patient, Location, Auth, Audit, $filter, Template, Facility) {
+    .controller('PatientSearchCtrl', function($compile, $scope, $q, $location, DTOptionsBuilder, DTColumnBuilder, Patient, Location, Auth, Audit, $filter, Template) {
         var self = this;
         self.data = [];
-        self.currentFacility = Facility.getCurrentFacility();
         self.templates = [];
         self.selectedTemplate = {};
         self.selectedTemplateArray = [];
@@ -32,7 +31,7 @@ angular.module('tdpApp')
         self.display = display;
 
         // Populate the Templates
-        Template.findAllByFacilityID(self.currentFacility)
+        Template.findAll()
             .then(function(data) {
                 self.templates = data;
             })

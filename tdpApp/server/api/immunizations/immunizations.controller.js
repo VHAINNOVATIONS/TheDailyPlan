@@ -1,9 +1,9 @@
 'use strict';
 
 exports.index = function (req, res, next) {
-  var value = req.query.value;
+  var patientId = req.query.patientId;
 
-  req.session.getImmunizations(req.user, value, {}, function (err, body) {
+  req.session.getImmunizations(req.user, patientId, {}, function (err, body) {
       if (err) {
           return res.status(401).json(err);
       } else {

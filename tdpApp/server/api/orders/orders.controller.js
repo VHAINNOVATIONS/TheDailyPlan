@@ -1,13 +1,13 @@
 'use strict';
 
 exports.index = function (req, res, next) {
-  var value = req.query.value;
+  var patientId = req.query.patientId;
 
-  req.session.getAllOrders(req.user, value, {}, function (err, body) {
+  req.session.getOrders(req.user, patientId, {}, function (err, body) {
       if (err) {
           return res.status(401).json(err);
       } else {
-          return res.status(200).json(body);
+          res.status(200).json(body);
       }
   });
 };
