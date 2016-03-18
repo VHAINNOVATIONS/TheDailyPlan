@@ -15,9 +15,6 @@ angular.module('tdpApp')
         $scope.labs = null;
 
         $scope.labsLoading = true;
-        console.log('Patient Plan - scope:patient:',$scope.patient);
-        console.log('Patient Plan - scope:panelid:',$scope.panelid);
-
 
         $scope.labsGridOptions = {
           enableExpandable: false,
@@ -46,7 +43,6 @@ angular.module('tdpApp')
         Panel_Detail.findCompleteByID($scope.panelid)
         .then( function(panel_details) {
           var labTests = [];
-          console.log('Patient Plan - labs:',panel_details);
           for(var i = 0; i < panel_details.length; i++) {
             if (panel_details[i].setting_name === 'Tests') {
               labTests.push(panel_details[i].setting_value);
@@ -57,7 +53,6 @@ angular.module('tdpApp')
 
           Labs.getByID($scope.patient)
           .then( function(data) {
-            console.log('Patient Plan - labs:',data);
             $scope.labsGridOptions.data = data;
             $scope.labsLoading = false;
           })
@@ -69,8 +64,6 @@ angular.module('tdpApp')
         .catch( function(err) {
           $scope.errors.other = err.message;
         });
-
-
 
         $scope.labsGridOptions.onRegisterApi = function(gridApi){
           $scope.labsGridApi = gridApi;

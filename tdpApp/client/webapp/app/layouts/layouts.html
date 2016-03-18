@@ -1,83 +1,87 @@
 <div ng-controller="LayoutsCtrl as ctrl" class="container">
-  <form name="form" ng-submit="ctrl.addTemplate(form)" role="form">
+    <form name="form" ng-submit="ctrl.processTemplate(form)" role="form">
 
-
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
-        <h2>New Template</h2>
-        <div class="form-group" ng-class="{ 'has-error': form.templateName.$dirty && form.templateName.$error.required }">
-            <label for="templateName">Template Name</label>
-            <input type="text" name="templateName" id="templateName" class="form-control" ng-model="ctrl.template.template_name" required />
-            <span ng-show="form.templateName.$dirty && form.templateName.$error.required" class="help-block">Template name is required</span>
-        </div>
-        <div class="form-group" ng-class="{ 'has-error': form.locationSelect.$dirty && form.locationSelect.$error.required }">
-            <label for="locationSelect">Location</label>
-            <select name="locationSelect" id="locationSelect" ng-model="ctrl.template.location_id" class="form-control">
-                <option value="">Select a location...</option> <!-- not selected / blank option -->
-                <option ng-repeat="option in ctrl.wards" value="{{option.id}}">{{option.name}}</option>
-            </select>
-            <!-- <span ng-show="form.locationSelect.$dirty && form.locationSelect.$error.required" class="help-block">Facility is required</span> -->
-        </div>
-        <div class="form-group" ng-class="{ 'has-error': form.templateDesc.$dirty && form.templateDesc.$error.required }">
-            <label for="templateDesc">Description</label>
-            <textarea name="templateDescription" ng-model="ctrl.template.template_description" class="form-control"></textarea>
-            <!-- Template Description is currently optional, but if that changes use this:
-            <span ng-show="form.templateDesc.$dirty && form.templateDesc.$error.required" class="help-block">Description is required</span> -->
-        </div>
-
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-10 col-md-offset-1 col-sm-12 panel panel-default">
-          <div class="col-sm-12 text-center"><h3>Select Panels for Template</h3></div>
-          <div class="col-sm-5">
-            <div class="list-group" id="availableList">
-              <span class="list-group-item active">Available
-                <input title="Toggle all" ng-click="ctrl.toggleA()" ng-model="ctrl.checkedA" value="{{ctrl.checkedA}}" ng-disabled="ctrl.availablePanels.length === 0" type="checkbox" class="pull-left picklist-input"></span>
-              <span ng-repeat="ap in ctrl.availablePanels">
-                <span class="list-group-item">{{ap.title}}
-                  <input ng-click="ctrl.selectA(ap.id)" name="ctrl.selectedA[]" value="{{ap.id}}" ng-checked="ctrl.selectedA.indexOf(ap.id) > -1" type="checkbox" class="pull-left picklist-input">
-                </span>
-              </span>
-            </div>
-          </div>
-          <div class="col-sm-2 text-center">
-            <div class="btn-group">
-              <button type="button" title="Send to Available List" ng-disabled="ctrl.selectedS.length === 0" class="btn btn-default" ng-click="ctrl.sToA()"><i class="glyphicon glyphicon-chevron-left hidden-xs"></i><i class="glyphicon glyphicon-chevron-up visible-xs"></i></button>
-              <button type="button" title="Send to Selected List" ng-disabled="ctrl.selectedA.length === 0" class="btn btn-default" ng-click="ctrl.aToS()"><i class="glyphicon glyphicon-chevron-right hidden-xs"></i><i class="glyphicon glyphicon-chevron-down visible-xs"></i></button>
-            </div>
-          </div>
-          <div class="col-sm-5">
-            <div class="list-group" id="selectedList">
-              <span class="list-group-item active">Selected
-                <input title="Toggle all" ng-click="ctrl.toggleS()" ng-model="ctrl.checkedS" value="{{ctrl.checkedS}}" ng-disabled="ctrl.selectedPanels.length === 0" type="checkbox" class="pull-left picklist-input">
-                <div class="btn-group btn-group-xs pull-right">
-                  <button type="button" title="Move Up" class="btn btn-default" ng-click="ctrl.moveUp()"><i class="glyphicon glyphicon-chevron-up"></i></button>
-                  <button type="button" title="Move Down" class="btn btn-default" ng-click="ctrl.moveDown()"><i class="glyphicon glyphicon-chevron-down"></i></button>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+                <h2>{{ctrl.topTitle}}</h2>
+                <div class="form-group" ng-class="{ 'has-error': form.templateName.$dirty && form.templateName.$error.required }">
+                    <label for="templateName">Template Name</label>
+                    <input type="text" name="templateName" id="templateName" class="form-control" ng-model="ctrl.template.template_name" ng-disabled="ctrl.displayOnly" required />
+                    <span ng-show="form.templateName.$dirty && form.templateName.$error.required" class="help-block">Template name is required</span>
                 </div>
-              </span>
-              <span ng-repeat="sp in ctrl.selectedPanels">
-                <span class="list-group-item">{{sp.title}}<span ng-show="sp.mandatory">*</span>
-                  <input ng-click="ctrl.selectS(sp.id)" name="ctrl.selectedS[]" value="{{sp.id}}" ng-checked="ctrl.selectedS.indexOf(sp.id) > -1" type="checkbox" class="pull-left picklist-input">
-                  <span class="pull-right">
-                    <button type="button" class="btn btn-default btn-xs" ng-click="ctrl.openSettings(sp)">
-                      <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                    </button>
-                    <span class="badge">{{ctrl.selectedPanels.indexOf(sp)+1}}</span>
-                  </span>
-                </span>
-              </span>
+                <div class="form-group" ng-class="{ 'has-error': form.locationSelect.$dirty && form.locationSelect.$error.required }">
+                    <label for="locationSelect">Location</label>
+                    <select name="locationSelect" id="locationSelect" ng-model="ctrl.locationId" ng-disabled="ctrl.displayOnly" class="form-control" ng-options="wobj.id as wobj.name for wobj in ctrl.wards">
+                        <option value="">Select a location...</option>
+                        <!-- not selected / blank option -->
+                        <!--option ng-repeat="option in ctrl.wards" value="{{option.id}}">{{option.name}}</option-->
+                    </select>
+                    <!-- <span ng-show="form.locationSelect.$dirty && form.locationSelect.$error.required" class="help-block">Facility is required</span> -->
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': form.templateDesc.$dirty && form.templateDesc.$error.required }">
+                    <label for="templateDesc">Description</label>
+                    <textarea name="templateDescription" ng-model="ctrl.template.template_description" ng-disabled="ctrl.displayOnly" class="form-control"></textarea>
+                    <!-- Template Description is currently optional, but if that changes use this:
+            <span ng-show="form.templateDesc.$dirty && form.templateDesc.$error.required" class="help-block">Description is required</span> -->
+                </div>
+
             </div>
-          </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-4 col-sm-offset-8 col-xs-12 text-center">
-        <div >
-          <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i>Save</button>
-          <button type="button" ng-click="ctrl.cancelTemplate()" class="btn btn-default"><i class="glyphicon glyphicon-remove"></i>Cancel</button>
         </div>
-      </div>
-    </div>
-  </form>
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1 col-sm-12 panel panel-default">
+                <div class="col-sm-12 text-center">
+                    <h3>Select Panels for Template</h3>
+                </div>
+                <div class="col-sm-5">
+                    <div class="list-group" id="availableList">
+                        <span class="list-group-item active">Available
+                            <input title="Toggle all" ng-click="ctrl.toggleA()" ng-model="ctrl.checkedA" value="{{ctrl.checkedA}}" ng-disabled="ctrl.availablePanels.length === 0" type="checkbox" class="pull-left picklist-input">
+                        </span>
+                        <span ng-repeat="ap in ctrl.availablePanels">
+                            <span class="list-group-item">{{ap.title}}
+                                <input ng-click="ctrl.selectA(ap.id)" name="ctrl.selectedA[]" value="{{ap.id}}" ng-checked="ctrl.selectedA.indexOf(ap.id) > -1" type="checkbox" class="pull-left picklist-input">
+                            </span>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-2 text-center">
+                    <div class="btn-group">
+                        <button type="button" title="Send to Available List" ng-disabled="ctrl.selectedS.length === 0 || ctrl.displayOnly" class="btn btn-default" ng-click="ctrl.sToA()"><i class="glyphicon glyphicon-chevron-left hidden-xs"></i><i class="glyphicon glyphicon-chevron-up visible-xs"></i></button>
+                        <button type="button" title="Send to Selected List" ng-disabled="ctrl.selectedA.length === 0 || ctrl.displayOnly" class="btn btn-default" ng-click="ctrl.aToS()"><i class="glyphicon glyphicon-chevron-right hidden-xs"></i><i class="glyphicon glyphicon-chevron-down visible-xs"></i></button>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="list-group" id="selectedList">
+                        <span class="list-group-item active">Selected
+                            <input title="Toggle all" ng-click="ctrl.toggleS()" ng-model="ctrl.checkedS" value="{{ctrl.checkedS}}" ng-disabled="ctrl.selectedPanels.length === 0" type="checkbox" class="pull-left picklist-input">
+                            <div class="btn-group btn-group-xs pull-right">
+                                <button type="button" title="Move Up" class="btn btn-default" ng-click="ctrl.moveUp()" ng-disabled="ctrl.selectedS.length !== 1"><i class="glyphicon glyphicon-chevron-up"></i></button>
+                                <button type="button" title="Move Down" class="btn btn-default" ng-click="ctrl.moveDown()" ng-disabled="ctrl.selectedS.length !== 1"><i class="glyphicon glyphicon-chevron-down"></i></button>
+                            </div>
+                        </span>
+                        <span ng-repeat="sp in ctrl.selectedPanels">
+                            <span class="list-group-item">{{sp.title}}
+                                <span ng-show="sp.mandatory"> (Required)</span>
+                                <input ng-click="ctrl.selectS(sp.id)" name="ctrl.selectedS[]" value="{{sp.id}}" ng-checked="ctrl.selectedS.indexOf(sp.id) > -1" type="checkbox" class="pull-left picklist-input">
+                                <span class="pull-right">
+                                    <button type="button" class="btn btn-default btn-xs" ng-click="ctrl.openSettings(sp)" ng-if="sp.enable_options">
+                                        <span aria-hidden="true">OPTIONS</span>
+                                    </button>
+                                    <span class="badge">{{ctrl.selectedPanels.indexOf(sp)+1}}</span>
+                                </span>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-8 col-xs-12 text-center">
+                <div>
+                    <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i>{{ctrl.submitButton}}</button>
+                    <button type="button" ng-click="ctrl.cancelTemplate()" class="btn btn-default"><i class="glyphicon glyphicon-remove"></i>Cancel</button>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>

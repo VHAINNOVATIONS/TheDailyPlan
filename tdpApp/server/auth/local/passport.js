@@ -1,22 +1,32 @@
+'use strict';
+
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
-exports.setup = function (User, config) {
+exports.setup = function () {
   passport.use(new LocalStrategy({
-      usernameField: 'email',
-      passwordField: 'password' // this is the virtual field on the model
-    },
-    function(email, password, done) {
-      User.findOne({
-        email: email.toLowerCase()
+    passReqToCallback: true,
+    usernameField: 'accessCode',
+    passwordField: 'verifyCode'
+  }, function(req, email, password, done) {
+      if (! req.session) {
+        return done(null, false, {
+          message: 'Internal error obtaining session.'
+        });
+      }
+      req.session.login({
+        accessCode: req.body.accessCode,
+        verifyCode: req.body.verifyCode,
+        location: req.body.location,
+        userKeys: req.body.userKeys
       }, function(err, user) {
-        if (err) return done(err);
-
-        if (!user) {
-          return done(null, false, { message: 'This email is not registered.' });
+        if (err) {
+          return done(err);
         }
-        if (!user.authenticate(password)) {
-          return done(null, false, { message: 'This password is not correct.' });
+        if (!user) {
+          return done(null, false, {
+            message: 'Internal ewd server error.'
+          });
         }
         return done(null, user);
       });

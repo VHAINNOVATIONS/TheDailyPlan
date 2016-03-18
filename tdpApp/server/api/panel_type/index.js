@@ -6,14 +6,14 @@ var auth = require('../../auth/auth.service');
 var models = require('../../models/index');
 
 // get all panel_types
-router.get('/', function(req, res) {
+router.get('/', auth.isAuthenticated(), function(req, res) {
   models.panel_type.findAll({}).then(function(panel_types) {
     res.json(panel_types);
   });
 });
 
 // get all panel_types by facility id
-router.get('/facility/:id', function(req, res) {
+router.get('/facility/:id', auth.isAuthenticated(), function(req, res) {
   models.panel_type.findAll({
     where: {
       facility_id: req.params.id
@@ -24,7 +24,7 @@ router.get('/facility/:id', function(req, res) {
 });
 
 // get single panel_type
-router.get('/:id', function(req, res) {
+router.get('/:id', auth.isAuthenticated(), function(req, res) {
   models.panel_type.find({
     where: {
       id: req.params.id
@@ -35,21 +35,23 @@ router.get('/:id', function(req, res) {
 });
 
 // add new panel_type
-router.post('/', function(req, res) {
+router.post('/', auth.isAuthenticated(), function(req, res) {
   models.panel_type.create({
+    facility_id: req.body.facility_id,
     title: req.body.title,
     directive: req.body.directive,
     scope_variable: req.body.scope_variable,
     minSizeX: req.body.minSizeX,
     minSizeY: req.body.minSizeY,
-    mandatory: req.body.mandatory
+    mandatory: req.body.mandatory,
+    enable_options: req.body.enable_options
   }).then(function(panel_type) {
     res.json(panel_type);
   });
 });
 
 // update single panel_type
-router.put('/:id', function(req, res) {
+router.put('/:id', auth.isAuthenticated(), function(req, res) {
   models.panel_type.find({
     where: {
       id: req.params.id
@@ -57,12 +59,14 @@ router.put('/:id', function(req, res) {
   }).then(function(panel_type) {
     if(panel_type){
       panel_type.updateAttributes({
+        facility_id: req.body.facility_id,
         title: req.body.title,
         directive: req.body.directive,
         scope_variable: req.body.scope_variable,
         minSizeX: req.body.minSizeX,
         minSizeY: req.body.minSizeY,
-        mandatory: req.body.mandatory
+        mandatory: req.body.mandatory,
+        enable_options: req.body.enable_options
       }).then(function(panel_type) {
         res.send(panel_type);
       });
@@ -71,7 +75,7 @@ router.put('/:id', function(req, res) {
 });
 
 // delete a single panel_type
-router.delete('/:id', function(req, res) {
+router.delete('/:id', auth.isAuthenticated(), function(req, res) {
   models.panel_type.destroy({
     where: {
       id: req.params.id

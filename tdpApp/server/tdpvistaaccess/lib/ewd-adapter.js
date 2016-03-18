@@ -194,19 +194,17 @@ var putInChemHemReportDates = function(report) {
 };
 
 var session = {
-    get: function (route, parameters, callback) {
-        var alias = this.location || 'default';
-        var port = this.ports[alias];
+    get: function (userSession, route, parameters, callback) {
         var options = _.assign({
-            uri: this.baseUrl + port + this.serverRoute + route
+            uri: this.baseUrl + userSession._port + this.serverRoute + route
         }, {
             method: 'GET',
             json: true,
             strictSSL: false
         });
-        if (this.Authorization) {
+        if (userSession._id) {
             options.headers = {
-                'Authorization': this.Authorization
+                'Authorization': userSession._id
             };
         }
         if (parameters) {
@@ -228,19 +226,24 @@ var session = {
         });
     },
     login: function (userInfo, callback) {
-        this.location = userInfo.location;
         var self = this;
-        this.get('/initiate', null, function (err, body) {
+        var alias = userInfo.location || 'default';
+        var port = this.ports[alias];
+        var userSession = {
+          _port: port
+        };
+        this.get(userSession, '/initiate', null, function (err, body) {
             if (err) {
                 callback(err);
             } else {
-                self.Authorization = body.Authorization;
+                var authorization = body.Authorization;
                 var credentials = encryptCredentials(userInfo.accessCode, userInfo.verifyCode, body.key);
                 userInfo.userKeys = userInfo.userKeys || [];
                 var keysStr = userInfo.userKeys.map(function(userKey) {
                   return userKey.vista;
                 }).join('^');
-                self.get('/login', {
+                userSession._id = authorization;
+                self.get(userSession, '/login', {
                     credentials: credentials,
                     keys: keysStr
                 }, function (err, userData) {
@@ -253,15 +256,16 @@ var session = {
                           return r;
                         }, {});
                         userData.keys = keysObj;
-                        self.userData = userData;
-                        callback(null, self.userData);
+                        userData.authKey = authorization;
+                        userData.authPort = port;
+                        callback(null, userData);
                     }
                 });
             }
         });
     },
-    searchPatients: function (searchParams, callback) {
-        this.get('/patientsByName', {
+    searchPatients: function (userSession, searchParams, callback) {
+        this.get(userSession, '/patientsByName', {
             prefix: searchParams.prefix
         }, function (err, body) {
             if (err) {
@@ -271,8 +275,8 @@ var session = {
             }
         });
     },
-    getDemographics: function (patientId, options, callback) {
-        this.get('/getPatientMap', {
+    getDemographics: function (userSession, patientId, options, callback) {
+        this.get(userSession, '/getPatientMap', {
             patientId: patientId
         }, function (err, body) {
             if (err) {
@@ -286,19 +290,35 @@ var session = {
             }
         });
     },
-    getAllergies: function (patientId, options, callback) {
-        this.get('/getAllergiesDetailMap', {
+    getAllergies: function (userSession, patientId, options, callback) {
+        this.get(userSession, '/getAllergies', {
             patientId: patientId
-        }, function (err, body) {
+        }, function (err, result) {
             if (err) {
-                callback(err);
-            } else {
-                callback(null, body);
+                return callback(err);
             }
+            if (result.status) {
+              result.allergies.sort(function(a, b) {
+                if (a.allergenType === b.allergenType) {
+                  return 0;
+                }
+                if (a.allergenType && (a.allergenType.indexOf('D') >= 0)) {
+                  return -1;
+                }
+                return 1;
+              });
+              result.allergies.forEach(function(allergy) {
+                if (allergy.reaction) {
+                  allergy.reaction = allergy.reaction.join('; ');
+                }
+
+              });
+            }
+            callback(null, result);
         });
     },
-    getVitalSigns: function (patientId, options, callback) {
-        this.get('/getRawVitalSignsMap', {
+    getVitalSigns: function (userSession, patientId, options, callback) {
+        this.get(userSession, '/getRawVitalSignsMap', {
             patientId: patientId
         }, function (err, body) {
             if (err) {
@@ -309,21 +329,24 @@ var session = {
             }
         });
     },
-    getPostings: function (patientId, options, callback) {
-        this.get('/getPostings', {
+    getPostings: function (userSession, patientId, options, callback) {
+        this.get(userSession, '/getPostings', {
             patientId: patientId,
             nRpts: "0"
-        }, function (err, body) {
+        }, function (err, result) {
             if (err) {
                 callback(err);
             } else {
-                var result = body; //translator.translateVitalSigns(body);
+                result.forEach(function(item) {
+                    item.text = item.text.join(' ').trim();
+                    item.text = item.text.replace('  ', ' ');
+                });
                 callback(null, result);
             }
         });
     },
-    getImmunizations: function (patientId, options, callback) {
-        this.get('/getImmunizations', {
+    getImmunizations: function (userSession, patientId, options, callback) {
+        this.get(userSession, '/getImmunizations', {
             patientId: patientId,
             nRpts: "0"
         }, function (err, body) {
@@ -335,12 +358,12 @@ var session = {
             }
         });
     },
-    getVisits: function (patientId, options, callback) {
+    getVisits: function (userSession, patientId, options, callback) {
         var numDaysFuture = _.get(options, "numDaysFuture", 0);
         var numDaysPast = _.get(options, "numDaysPast", 0);
         var fromDate = translator.translateNumDaysPast(numDaysPast);
         var toDate = translator.translateNumDaysFuture(numDaysFuture);
-        this.get('/getVisits', {
+        this.get(userSession, '/getVisits', {
             patientId: patientId,
             fromDate: fromDate,
             toDate: toDate
@@ -353,8 +376,8 @@ var session = {
             }
         });
     },
-    getMedications: function (patientId, options, callback) {
-        this.get('/getMedicationsDetailMap', {
+    getMedications: function (userSession, patientId, options, callback) {
+        this.get(userSession, '/getMedications', {
             patientId: patientId
         }, function (err, body) {
             if (err) {
@@ -365,21 +388,8 @@ var session = {
             }
         });
     },
-    getProblems: function (patientId, options, callback) {
-        this.get('/getProblemsListDetailMap', {
-            patientId: patientId,
-            type: 'ALL'
-        }, function (err, body) {
-            if (err) {
-                callback(err);
-            } else {
-                var result = translator.translateProblemList(body);
-                callback(null, result);
-            }
-        });
-    },
-    getRadiologyReports: function (patientId, options, callback) {
-        this.get('/getRadiologyReportsDetailMap', {
+    getRadiologyReports: function (userSession, patientId, options, callback) {
+        this.get(userSession, '/getRadiologyReportsDetailMap', {
             patientId: patientId,
             type: 'ALL'
         }, function (err, body) {
@@ -391,9 +401,9 @@ var session = {
             }
         });
     },
-    _getAllOrders: function (patientId, options, callback) {
+    _getAllOrders: function (userSession, patientId, options, callback) {
         var self = this;
-        this.get('/getAllOrders', {
+        this.get(userSession, '/getAllOrders', {
             patientId: patientId,
             vistANow: translator.vistANow()
         }, function (err, body) {
@@ -405,23 +415,23 @@ var session = {
             }
         });
     },
-    getAllOrders: function (patientId, options, callback) {
+    getAllOrders: function (userSession, patientId, options, callback) {
         if (this.orderTypes) {
-            this._getAllOrders(patientId, options, callback);
+            this._getAllOrders(userSession, patientId, options, callback);
         } else {
             var self = this;
-            this.get('/getOrderTypes', {}, function (err, types) {
+            this.get(userSession, '/getOrderTypes', {}, function (err, types) {
                 if (err) {
                     callback(err);
                 } else {
                     self.orderTypes = types;
-                    self._getAllOrders(patientId, options, callback);
+                    self._getAllOrders(userSession, patientId, options, callback);
                 }
             });
         }
     },
-    getOrdersAsClassified: function (patientId, options, callback) {
-        this.getAllOrders(patientId, options, function (err, orders) {
+    getOrders: function (userSession, patientId, options, callback) {
+        this.getAllOrders(userSession, patientId, options, function (err, orders) {
             if (err) {
                 callback(err);
             } else {
@@ -441,22 +451,11 @@ var session = {
             }
         });
     },
-    getSurgicalPathologyReports: function (patientId, options, callback) {
-        this.get('/getPathologyReportsDetailMap', {
-            patientId: patientId
-        }, function (err, result) {
-            if (err) {
-                callback(err);
-            } else {
-                callback(null, result);
-            }
-        });
-    },
-    logout: function (callback) {
+    logout: function (userSession, callback) {
         callback(null);
     },
-    getChemHemReports: function (patientId, options, callback) {
-        this.get('/getChemHemLabs', {
+    getChemHemReports: function (userSession, patientId, options, callback) {
+        this.get(userSession, '/getChemHemLabs', {
             patientId: patientId,
             toDate: options.toDate,
             fromDate: options.fromDate
@@ -470,8 +469,8 @@ var session = {
             }
         });
     },
-    getClinics: function (options, callback) {
-        this.get('/getClinics', null, function (err, result) {
+    getClinics: function (userSession, options, callback) {
+        this.get(userSession, '/getClinics', null, function (err, result) {
             if (err) {
                 callback(err);
             } else {
@@ -480,8 +479,8 @@ var session = {
         });
 
     },
-    getPatientsByClinic: function (options, callback) {
-        this.get('/getPatientsByClinic', options, function (err, result) {
+    getPatientsByClinic: function (userSession, options, callback) {
+        this.get(userSession, '/getPatientsByClinic', options, function (err, result) {
             if (err) {
                 callback(err);
             } else {
@@ -490,8 +489,8 @@ var session = {
             }
         });
     },
-    getPatientsByWard: function (options, callback) {
-        this.get('/getPatientsByWard', options, function (err, result) {
+    getPatientsByWard: function (userSession, options, callback) {
+        this.get(userSession, '/getPatientsByWard', options, function (err, result) {
             if (err) {
                 callback(err);
             } else {
@@ -500,8 +499,8 @@ var session = {
             }
         });
     },
-    getWards: function (options, callback) {
-        this.get('/getWards', null, function (err, result) {
+    getWards: function (userSession, options, callback) {
+        this.get(userSession, '/getWards', null, function (err, result) {
             if (err) {
                 callback(err);
             } else {
@@ -509,21 +508,37 @@ var session = {
             }
         });
     },
-    getHealthFactors: function(patientId, options, callback) {
-        this.get('/getPatientHealthFactors', {
+    getHealthFactors: function(userSession, patientId, options, callback) {
+        var numDaysBack = _.get(options, "numDaysBack", 90);
+        var fromDate = translator.translateNumDaysPast(numDaysBack);
+        this.get(userSession, '/getPatientHealthFactors', {
             patientId: patientId,
-            toDate: options.toDate,
-            fromDate: options.fromDate
+            fromDate: fromDate
         }, function (err, result) {
             if (err) {
                 callback(err);
             } else {
-                callback(null, result);
+              result.forEach(function(r) {
+                if (r.date) {
+                  r.date = translator.translateVistADate(r.date);
+                }
+                if (r.severity) {
+                  var severity = {
+                    'M': 'MINIMAL',
+                    'MO': 'MODERATE',
+                    'H': 'SEVERE'
+                  }[r.severity];
+                  if (severity) {
+                    r.severity = severity;
+                  }
+                }
+              });
+              callback(null, result);
             }
         });
     },
-    getBoilerplates: function(patientId, options, callback) {
-      this.get('/resolveBPs', {
+    getBoilerplates: function(userSession, patientId, options, callback) {
+      this.get(userSession, '/resolveBPs', {
         patientId: patientId,
         text: options.text
       }, function(err, result) {

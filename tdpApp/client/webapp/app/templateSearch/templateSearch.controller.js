@@ -32,7 +32,7 @@ angular.module('tdpApp')
             }),
         DTColumnBuilder.newColumn('template_name').withTitle('Name'),
         DTColumnBuilder.newColumn('template_description').withTitle('Description'),
-        DTColumnBuilder.newColumn('location_id').withTitle('Location'),
+        DTColumnBuilder.newColumn('locationName').withTitle('Location'),
         DTColumnBuilder.newColumn('active').withTitle('Active')
     ];
 
@@ -59,25 +59,124 @@ angular.module('tdpApp')
     self.clearAlerts = clearAlerts;
     self.searchWard =searchWard;
     self.searchClinic = searchClinic;
-    self.searchAll = searchAll;
+
+    self.searchAll = function () {
+      self.submitted = true;
+      self.clearAlerts();
+      var nameStartsWith = self.search && self.search.all;
+      Template.findAll().then(function(data) {
+          if (nameStartsWith && nameStartsWith.length) {
+            var n = nameStartsWith.length;
+            nameStartsWith = nameStartsWith.toLowerCase();
+            data = data.reduce(function(r, t) {
+              var name = t.template_name;
+              name = name && name.slice(0, n).toLowerCase();
+              if (name === nameStartsWith) {
+                r.push(t);
+              }
+              return r;
+            }, []);
+          }
+          var wardsDictionary = self.wards.reduce(function(r, ward) {
+              r[ward.id] = ward.name;
+              return r;
+          }, {});
+          var clinicsDictionary = self.clinics.reduce(function(r, clinic) {
+              r[clinic.id] = clinic.name;
+              return r;
+          }, {});
+          data.forEach(function(t) {
+              if (t.location_id) {
+                  var locationName = t.location_type === 2 ? clinicsDictionary[t.location_id] : wardsDictionary[t.location_id];
+                  if (locationName) {
+                      t.locationName = locationName;
+                  } else {
+                      t.locationName = t.location_id;
+                  }
+              } else {
+                t.locationName = null;
+              }
+          });
+          self.data = data;
+          self.noResults = !(data.length);
+          reloadData();
+      }).catch( function(err) {
+          self.errors.other = err.message;
+      });
+    };
+
+    self.searchClinic = function () {
+      self.submitted = true;
+      self.clearAlerts();
+      var id = self.search && self.search.clinic;
+      Template.findByClinic(id).then(function(data) {
+          var clinicsDictionary = self.clinics.reduce(function(r, clinic) {
+              r[clinic.id] = clinic.name;
+              return r;
+          }, {});
+          data.forEach(function(t) {
+              if (t.location_id) {
+                  var locationName = clinicsDictionary[t.location_id];
+                  if (locationName) {
+                      t.locationName = locationName;
+                  } else {
+                      t.locationName = t.location_id;
+                  }
+              } else {
+                t.locationName = null;
+              }
+          });
+          self.data = data;
+          self.noResults = !(data.length);
+          reloadData();
+      }).catch( function(err) {
+          self.errors.other = err.message;
+      });
+    };
+
+    self.searchWard = function () {
+      self.submitted = true;
+      self.clearAlerts();
+      var id = self.search && self.search.ward;
+      Template.findByWard(id).then(function(data) {
+          var wardsDictionary = self.wards.reduce(function(r, ward) {
+              r[ward.id] = ward.name;
+              return r;
+          }, {});
+          data.forEach(function(t) {
+              if (t.location_id) {
+                  var locationName = wardsDictionary[t.location_id];
+                  if (locationName) {
+                      t.locationName = locationName;
+                  } else {
+                      t.locationName = t.location_id;
+                  }
+              } else {
+                t.locationName = null;
+              }
+          });
+          self.data = data;
+          self.noResults = !(data.length);
+          reloadData();
+      }).catch( function(err) {
+          self.errors.other = err.message;
+      });
+    };
+
     self.toggleAll = toggleAll;
     self.toggleOne = toggleOne;
-    self.display = display;
-    self.create = create;
 
+    self.display = function () {
+      editOrDisplay('display');
+    };
 
-    self.searchAll();
+    self.edit = function () {
+      editOrDisplay('edit');
+    };
 
-    // Populate the Templates
-    /*Template.findAll()
-    .then( function(data) {
-      self.data = data;
-      self.noResults = !(data.length);
-      reloadData();
-    })
-    .catch( function(err) {
-      self.errors.other = err.message;
-    });*/
+    self.create = function () {
+      $location.path('/layouts/create/');
+    };
 
     // Initially Populate the Wards
     Location.getWards()
@@ -97,40 +196,30 @@ angular.module('tdpApp')
       self.errors.other = err.message;
     });
 
-    function create() {
-      $location.path('/layouts');
-    }
-
-    function display() {
-      console.log('templateSearch display!');
-
+    function editOrDisplay(type) {
       angular.forEach(self.selected, function(value, key) {
         var entry = {};
-
         if(value === true)
         {
           entry.id = key;
-          entry.name = findName(key);
-          entry.templateID = findTemplate(key);
           this.push(entry);
         }
 
       }, self.items);
 
-      console.log('items:',self.items);
       switch(self.items.length) {
         case 0:
           self.displayErr.flag = true;
-          self.displayErr.msg = 'Please select a template to display.';
+          self.displayErr.msg = 'Please select a template to '+ type + '.';
           break;
         case 1:
-          Template.setSelectedTemplates(self.items);
-          $location.path('/layouts');
+          //Template.setSelectedTemplates(self.items);
+          $location.path('/layouts/' + type + '/' + self.items[0].id);
           break;
         default:
           self.items = [];
           self.displayErr.flag = true;
-          self.displayErr.msg = 'Please select only one template to display.';
+          self.displayErr.msg = 'Please select only one template to '+ type + '.';
           break;
       }
     }
@@ -165,22 +254,6 @@ angular.module('tdpApp')
       });
     };
 
-
-    function searchAll() {
-      self.submitted = true;
-      self.clearAlerts();
-
-      Template.findAll()
-      .then( function(data) {
-        self.data = data;
-        self.noResults = !(data.length);
-        reloadData();
-      })
-      .catch( function(err) {
-        self.errors.other = err.message;
-      });
-    }
-
     function clearAlerts() {
       self.noResults = false;
       self.displayErr.flag = false;
@@ -201,7 +274,6 @@ angular.module('tdpApp')
 
     function reloadData() {
         var resetPaging = true;
-        console.log('reloadData: ', self.dtInstance);
         self.dtInstance.reloadData(callback, resetPaging);
     }
 
@@ -227,38 +299,5 @@ angular.module('tdpApp')
         }
         self.selectAll = true;
     }
-
-    function findName(id) {
-         var item = $filter('filter')(self.data, {id: id}, true);
-         if (item.length) {
-             return item[0].name;
-         } else {
-             return 'Name Error';
-         }
-     }
-
-     function findTemplate(id) {
-      console.log('findTemplate id:', id);
-      angular.forEach(self.selectedTemplate, function(value, key) {
-        var entry = {};
-        console.log('selectedTemplate key:', key);
-
-        entry.id = key;
-        entry.templateID = value;
-        this.push(entry);
-
-      }, self.selectedTemplateArray);
-
-      var item = $filter('filter')(self.selectedTemplateArray, {
-        id: id
-      }, true);
-      if (item.length) {
-        console.log('findTemplate found! ', item[0]);
-        return item[0].templateID;
-      } else {
-        return 'Template Error';
-      }
-    }
-
 
   });

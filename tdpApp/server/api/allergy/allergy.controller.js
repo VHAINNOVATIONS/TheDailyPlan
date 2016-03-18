@@ -1,31 +1,13 @@
 'use strict';
 
-var passport = require('passport');
-var config = require('../../config/environment');
-var jwt = require('jsonwebtoken');
-
-var validationError = function(res, err) {
-  return res.status(422).json(err);
-};
-
-/**
- * Search for Patients by Prefix
- */
 exports.index = function (req, res, next) {
-  var value = req.query.value;
+  var patientId = req.query.patientId;
 
-  req.session.getAllergies(value, {}, function (err, body) {
+  req.session.getAllergies(req.user, patientId, {}, function (err, allergies) {
       if (err) {
           return res.status(401).json(err);
       } else {
-          res.status(200).json(body);
+          return res.status(200).json(allergies);
       }
   });
-};
-
-/**
- * Authentication callback
- */
-exports.authCallback = function(req, res, next) {
-  res.redirect('/');
 };

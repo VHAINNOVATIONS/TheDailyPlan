@@ -18,6 +18,13 @@
 		content: element(page-count);
 	}
 
+  counter-increment: page;
+  counter-reset: page 1;
+
+  @bottom-right {
+    content: counter(page);
+  }
+
 	padding: 10px;
 }
 
@@ -40,8 +47,20 @@
 		content: element(page-count);
 	}
 
+  counter-increment: page;
+  counter-reset: page 1;
+
+  @bottom-right {
+    content: counter(page);
+  }
+
 	/*border: thin solid black;*/
 	padding: 10px;
+}
+
+.page-break {
+  display: block;
+  page-break-before: always;
 }
 
 body {
@@ -96,22 +115,6 @@ div.page-count {
 	padding: 10px;
 }
 
-.report_title {
-	width:100%;
-	padding:5px 0;
-	border: 2px solid #005DA4;
-	page-break-before: auto;
-}
-
-.report_patient {
-	width:100%;
-	padding: 10px;
-}
-
-.report_patient span {
-	color:#005DA4;
-}
-
 .report_patient_name {
 	display:inline;
 	overflow:hidden;
@@ -120,6 +123,7 @@ div.page-count {
 
 .patient_data {
 	width: 650px;
+  page-break-inside: avoid;
 }
 
 .report_row {
@@ -131,23 +135,6 @@ div.page-count {
 	padding:3px 0 2px 0;
 }
 
-.report_row tr.highrisk {
-	font-style:italic;
-	font-weight:bold;
-}
-
-.report_row tr.highrisk td.highrisk:before {
-	content: 'HIGH ALERT: ';
-}
-
-.report_row tr.new {
-	font-weight:bold;
-}
-
-.report_row tr.new td.new:before {
-	content: 'NEW ORDER: ';
-}
-
 .report_category {
 	border:solid 1px  #005DA4;
 }
@@ -155,23 +142,6 @@ div.page-count {
 #report_column500 {
 	padding-top:3px;
 	margin-right:10px;
-}
-
-.report_column500 table {
-	-fs-table-paginate: paginate;
-}
-
-.report_column300 {
-	float:left;
-	width:300px;
-	padding-top:3px;
-	margin-right:15px;
-}
-
-.report_column200 {
-	float:right;
-	width:200px;
-	padding-top:3px;
 }
 
 span.expandable:after {
@@ -184,4 +154,51 @@ span.expandable:after {
 
 .message span {
   font-weight: bold;
+}
+
+div.report_title {
+  width: 100%;
+  padding-left: 20px;
+  border: 3px solid #005DA4;
+  page-break-before: auto;
+  vertical-align: middle;
+}
+
+h3.report_title_text {
+  color: #005DA4 !important;
+  vertical-align: middle;
+}
+
+div.tdp_demographics {
+  width:100%;
+  padding-left: 30px;
+  padding-top: 10px;
+  padding-bottom: :10px;
+  color:#005DA4 !important;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+div.tdp_demographics_row {
+  color: #005DA4 !important;
+}
+
+ul.tdp_panel {
+  list-style-type: none;
+}
+
+div.tdp_panel_title {
+  border:solid 3px #005DA4;
+  padding-left: 20px;
+  margin-top: 10px;
+}
+
+h4.tdp_panel_title_text {
+  color: #005DA4 !important;
+  vertical-align: middle;
+}
+
+.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
+  padding-left: 5px;
+  padding-right: 5px;
 }

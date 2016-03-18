@@ -15,14 +15,12 @@ module.exports = function(app) {
   app.use('/api/demographics', require('./api/demographics'));
   app.use('/api/allergy', require('./api/allergy'));
   app.use('/api/healthFactors', require('./api/healthFactors'));
-  app.use('/api/clinicalWarnings', require('./api/clinicalWarnings'));
+  app.use('/api/postings', require('./api/postings'));
   app.use('/api/medication', require('./api/medication'));
-  app.use('/api/problems', require('./api/problems'));
   app.use('/api/immunizations', require('./api/immunizations'));
   app.use('/api/vitals', require('./api/vitals'));
-  app.use('/api/allOrders', require('./api/allOrders'));
   app.use('/api/clinics', require('./api/clinics'));
-  app.use('/api/ordersAsClassified', require('./api/ordersAsClassified'));
+  app.use('/api/orders', require('./api/orders'));
   app.use('/api/radiologyReports', require('./api/radiologyReports'));
   app.use('/api/visits', require('./api/visits'));
   app.use('/api/wards', require('./api/wards'));
