@@ -91,7 +91,7 @@ angular.module('tdpApp')
                 case 'display':
                     self.displayOnly = true;
                     self.submitButton = 'Done';
-                    self.topTitle = 'Display Template';
+                    self.topTitle = 'Display Template (Read Only)';
                     loadTemplate(self.templateID);
                     break;
                 default:

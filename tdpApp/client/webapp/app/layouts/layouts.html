@@ -35,11 +35,11 @@
                 <div class="col-sm-5">
                     <div class="list-group" id="availableList">
                         <span class="list-group-item active">Available
-                            <input title="Toggle all" ng-click="ctrl.toggleA()" ng-model="ctrl.checkedA" value="{{ctrl.checkedA}}" ng-disabled="ctrl.availablePanels.length === 0" type="checkbox" class="pull-left picklist-input">
+                            <input title="Toggle all" ng-click="ctrl.toggleA()" ng-model="ctrl.checkedA" value="{{ctrl.checkedA}}" ng-disabled="ctrl.availablePanels.length === 0 || ctrl.displayOnly" type="checkbox" class="pull-left picklist-input">
                         </span>
                         <span ng-repeat="ap in ctrl.availablePanels">
                             <span class="list-group-item">{{ap.title}}
-                                <input ng-click="ctrl.selectA(ap.id)" name="ctrl.selectedA[]" value="{{ap.id}}" ng-checked="ctrl.selectedA.indexOf(ap.id) > -1" type="checkbox" class="pull-left picklist-input">
+                                <input ng-click="ctrl.selectA(ap.id)" name="ctrl.selectedA[]" value="{{ap.id}}" ng-checked="ctrl.selectedA.indexOf(ap.id) > -1" type="checkbox" class="pull-left picklist-input" ng-disabled="ctrl.displayOnly">
                             </span>
                         </span>
                     </div>
@@ -53,7 +53,7 @@
                 <div class="col-sm-5">
                     <div class="list-group" id="selectedList">
                         <span class="list-group-item active">Selected
-                            <input title="Toggle all" ng-click="ctrl.toggleS()" ng-model="ctrl.checkedS" value="{{ctrl.checkedS}}" ng-disabled="ctrl.selectedPanels.length === 0" type="checkbox" class="pull-left picklist-input">
+                            <input title="Toggle all" ng-click="ctrl.toggleS()" ng-model="ctrl.checkedS" value="{{ctrl.checkedS}}" ng-disabled="ctrl.selectedPanels.length === 0 || ctrl.displayOnly" type="checkbox" class="pull-left picklist-input">
                             <div class="btn-group btn-group-xs pull-right">
                                 <button type="button" title="Move Up" class="btn btn-default" ng-click="ctrl.moveUp()" ng-disabled="ctrl.selectedS.length !== 1"><i class="glyphicon glyphicon-chevron-up"></i></button>
                                 <button type="button" title="Move Down" class="btn btn-default" ng-click="ctrl.moveDown()" ng-disabled="ctrl.selectedS.length !== 1"><i class="glyphicon glyphicon-chevron-down"></i></button>
@@ -62,7 +62,7 @@
                         <span ng-repeat="sp in ctrl.selectedPanels">
                             <span class="list-group-item">{{sp.title}}
                                 <span ng-show="sp.mandatory"> (Required)</span>
-                                <input ng-click="ctrl.selectS(sp.id)" name="ctrl.selectedS[]" value="{{sp.id}}" ng-checked="ctrl.selectedS.indexOf(sp.id) > -1" type="checkbox" class="pull-left picklist-input">
+                                <input ng-click="ctrl.selectS(sp.id)" name="ctrl.selectedS[]" value="{{sp.id}}" ng-checked="ctrl.selectedS.indexOf(sp.id) > -1" type="checkbox" class="pull-left picklist-input" ng-disabled="ctrl.displayOnly">
                                 <span class="pull-right">
                                     <button type="button" class="btn btn-default btn-xs" ng-click="ctrl.openSettings(sp)" ng-if="sp.enable_options">
                                         <span aria-hidden="true">OPTIONS</span>
@@ -78,8 +78,8 @@
         <div class="row">
             <div class="col-sm-4 col-sm-offset-8 col-xs-12 text-center">
                 <div>
-                    <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i>{{ctrl.submitButton}}</button>
-                    <button type="button" ng-click="ctrl.cancelTemplate()" class="btn btn-default"><i class="glyphicon glyphicon-remove"></i>Cancel</button>
+                    <button type="submit" ng-disabled="form.$invalid && !ctrl.displayOnly" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i>{{ctrl.submitButton}}</button>
+                    <button type="button" ng-hide="ctrl.displayOnly" ng-click="ctrl.cancelTemplate()" class="btn btn-default"><i class="glyphicon glyphicon-remove"></i>Cancel</button>
                 </div>
             </div>
         </div>
