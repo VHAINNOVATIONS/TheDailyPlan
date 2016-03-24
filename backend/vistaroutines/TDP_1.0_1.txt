@@ -106,7 +106,7 @@ Description:
 Routine Information:
 ====================
 The second line of each of these routines now looks like:
- ;;1.0;THE DAILY PLAN;**1**;Feb 24, 2016;Build 3
+ ;;1.0;THE DAILY PLAN;**1**;Feb 24, 2016;Build 4
 
 The checksums below are new checksums, and
  can be checked with CHECK1^XTSUMBLD.
