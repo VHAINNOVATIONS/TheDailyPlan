@@ -127,7 +127,7 @@ div.page-count {
 }
 
 .report_row {
-	float: clear;
+  width: 100%;
 	margin:10px 15px 5px 10px;
 }
 
