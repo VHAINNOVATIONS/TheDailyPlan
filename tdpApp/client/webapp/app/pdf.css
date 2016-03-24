@@ -76,7 +76,6 @@ div.header {
 	width: 700px;
 	position: running(header)
   	page: patient;
-  	page-break-before: always;
   	counter-reset: page;
 }
 
