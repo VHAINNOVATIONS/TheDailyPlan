@@ -76,7 +76,6 @@ div.header {
 	width: 700px;
 	position: running(header)
   	page: patient;
-  	page-break-before: always;
   	counter-reset: page;
 }
 
@@ -127,7 +126,7 @@ div.page-count {
 }
 
 .report_row {
-	float: clear;
+  width: 100%;
 	margin:10px 15px 5px 10px;
 }
 

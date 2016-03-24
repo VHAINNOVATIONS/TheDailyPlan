@@ -522,16 +522,6 @@ var session = {
                 if (r.date) {
                   r.date = translator.translateVistADate(r.date);
                 }
-                if (r.severity) {
-                  var severity = {
-                    'M': 'MINIMAL',
-                    'MO': 'MODERATE',
-                    'H': 'SEVERE'
-                  }[r.severity];
-                  if (severity) {
-                    r.severity = severity;
-                  }
-                }
               });
               callback(null, result);
             }
