@@ -68,9 +68,10 @@
           <h3 class="text-primary report_title_text">Confidential: The Daily Plan<sup>&#174;</sup> {{ctrl.cdate | date:'MM/dd/yyyy'}}</h3>
       </div>
       <div class="row tdp_demographics">
-          <div class="col-xs-4 tdp_demographics_row">{{ctrl.demographics.name}}</div>
-          <div class="col-xs-4 tdp_demographics_row">DOB: {{ctrl.demographics.DOB}}</div>
-          <div class="col-xs-4 tdp_demographics_row">Med Unit: {{ctrl.demographics.location.name}}</div>
+          <div class="col-xs-3 tdp_demographics_row">{{ctrl.demographics.name}}</div>
+          <div class="col-xs-3 tdp_demographics_row">DOB: {{ctrl.demographics.DOB}}</div>
+          <div class="col-xs-3 tdp_demographics_row">SSN: {{ctrl.demographics.SSN| ssnFilter:true}}</div>
+          <div class="col-xs-3 tdp_demographics_row">Med Unit: {{ctrl.demographics.location.name}}</div>
       </div>
     </div>
     <div>
