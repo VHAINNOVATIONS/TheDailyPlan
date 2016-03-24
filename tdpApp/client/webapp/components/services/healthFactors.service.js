@@ -4,25 +4,15 @@ angular.module('tdpApp')
     .factory('HealthFactors', function HealthFactors($http) {
         return {
             columnDefs: [{
-                name: 'name',
-                displayName: 'Name',
-                width: '*',
-                btsrpWidth: '3'
-            }, {
                 name: 'date',
                 displayName: 'Date',
                 width: '*',
                 btsrpWidth: '3'
             }, {
-                name: 'location',
-                displayName: 'Location',
-                width: '*',
-                btsrpWidth: '3'
-            }, {
-                name: 'severity',
-                displayName: 'Severity',
-                width: '*',
-                btsrpWidth: '3'
+                name: 'name',
+                displayName: 'Name',
+                width: '***',
+                btsrpWidth: '9'
             }],
             loadingMsg: 'Loading health factors...',
             emptyMsg: 'No health factors found',

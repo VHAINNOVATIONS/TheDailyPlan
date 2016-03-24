@@ -23,7 +23,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('login error', function (done) {
+    xit('login error', function (done) {
         testSession.login({
             accessCode: 'CPRS1234XX',
             verifyCode: 'CPRS4321$XX',
@@ -77,7 +77,7 @@ describe('ewd session test', function () {
     });
 
     var patients;
-    it('search patients', function (done) {
+    xit('search patients', function (done) {
         testSession.searchPatients(userSession, {
             prefix: 'eig'
         }, function (err, body) {
@@ -130,7 +130,7 @@ describe('ewd session test', function () {
     });
 
     var clinics;
-    it('getClinics', function (done) {
+    xit('getClinics', function (done) {
         testSession.getClinics(userSession, {}, function (err, body) {
             if (err) {
                 done(err);
@@ -406,7 +406,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get health factors', function (done) {
+    it('get health factors', function (done) {
         var pid = 100846;
         testSession.getHealthFactors(userSession, pid, {}, function (err, result) {
             if (err) {

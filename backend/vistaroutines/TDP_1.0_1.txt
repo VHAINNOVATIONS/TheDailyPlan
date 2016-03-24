@@ -112,7 +112,7 @@ The checksums below are new checksums, and
  can be checked with CHECK1^XTSUMBLD.
 
 Routine Name: ZZTDP
-    Before: N/A   After: 147864748  **1**
+    Before: N/A   After: 134972896  **1**
 Routine Name: ZZTDPSES
     Before: N/A   After: 393156     **1**
 
