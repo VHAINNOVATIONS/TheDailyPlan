@@ -46,8 +46,8 @@
                 </div>
                 <div class="col-sm-2 text-center">
                     <div class="btn-group">
-                        <button type="button" title="Send to Available List" ng-disabled="ctrl.selectedS.length === 0 || ctrl.displayOnly" class="btn btn-default" ng-click="ctrl.sToA()"><i class="glyphicon glyphicon-chevron-left hidden-xs"></i><i class="glyphicon glyphicon-chevron-up visible-xs"></i></button>
-                        <button type="button" title="Send to Selected List" ng-disabled="ctrl.selectedA.length === 0 || ctrl.displayOnly" class="btn btn-default" ng-click="ctrl.aToS()"><i class="glyphicon glyphicon-chevron-right hidden-xs"></i><i class="glyphicon glyphicon-chevron-down visible-xs"></i></button>
+                        <button type="button" title="Send to Available List" ng-disabled="ctrl.selectedS.length === 0 || ctrl.displayOnly" class="btn btn-default tdp-chevron-left" ng-click="ctrl.sToA()">Move Left</button>
+                        <button type="button" title="Send to Selected List" ng-disabled="ctrl.selectedA.length === 0 || ctrl.displayOnly" class="btn btn-default tdp-chevron-right" ng-click="ctrl.aToS()">Move Right</button>
                     </div>
                 </div>
                 <div class="col-sm-5">
@@ -55,8 +55,8 @@
                         <span class="list-group-item active">Selected
                             <input title="Toggle all" ng-click="ctrl.toggleS()" ng-model="ctrl.checkedS" value="{{ctrl.checkedS}}" ng-disabled="ctrl.selectedPanels.length === 0 || ctrl.displayOnly" type="checkbox" class="pull-left picklist-input">
                             <div class="btn-group btn-group-xs pull-right">
-                                <button type="button" title="Move Up" class="btn btn-default" ng-click="ctrl.moveUp()" ng-disabled="ctrl.selectedS.length !== 1"><i class="glyphicon glyphicon-chevron-up"></i></button>
-                                <button type="button" title="Move Down" class="btn btn-default" ng-click="ctrl.moveDown()" ng-disabled="ctrl.selectedS.length !== 1"><i class="glyphicon glyphicon-chevron-down"></i></button>
+                                <button type="button" title="Move Up" class="btn btn-default tdp-chevron-up" ng-click="ctrl.moveUp()" ng-disabled="ctrl.selectedS.length !== 1">Move Up</button>
+                                <button type="button" title="Move Down" class="btn btn-default tdp-chevron-down" ng-click="ctrl.moveDown()" ng-disabled="ctrl.selectedS.length !== 1">Move Down</button>
                             </div>
                         </span>
                         <span ng-repeat="sp in ctrl.selectedPanels">
