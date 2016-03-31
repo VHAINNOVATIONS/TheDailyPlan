@@ -111,15 +111,23 @@ angular.module('tdpApp')
                 });
         }
 
+        function setDefaultTemplate(data) {
+            if (data.length && self.templates.length) {
+                var founds = $filter('filter')(self.templates, {'template_name': 'Default'}, true);
+                var found = founds[0] ? founds[0] : self.templates[0];
+                data.forEach(function(patient) {
+                    self.selectedTemplate[patient.id] = found.id.toString();
+                });
+            }
+        }
+
         function searchClinic() {
             self.submitted = true;
             self.clearAlerts();
 
             Patient.byClinic(self.search.clinic)
                 .then(function(data) {
-                    self.data = data;
-                    self.noResults = !(data.length);
-                    reloadData();
+                    reloadData(data);
                 })
                 .catch(function(err) {
                     self.errors.other = err.message;
@@ -132,9 +140,7 @@ angular.module('tdpApp')
 
             Patient.byWard(self.search.ward)
                 .then(function(data) {
-                    self.data = data;
-                    self.noResults = !(data.length);
-                    reloadData();
+                    reloadData(data);
                 })
                 .catch(function(err) {
                     self.errors.other = err.message;
@@ -147,9 +153,7 @@ angular.module('tdpApp')
 
             Patient.searchAll(self.search.all)
                 .then(function(data) {
-                    self.data = data;
-                    self.noResults = !(data.length);
-                    reloadData();
+                    reloadData(data);
                 })
                 .catch(function(err) {
                     self.errors.other = err.message;
@@ -171,7 +175,10 @@ angular.module('tdpApp')
             });
         }
 
-        function reloadData() {
+        function reloadData(data) {
+            self.data = data;
+            self.noResults = !(data.length);
+            setDefaultTemplate(data);
             var resetPaging = true;
             self.dtInstance.reloadData(callback, resetPaging);
         }
