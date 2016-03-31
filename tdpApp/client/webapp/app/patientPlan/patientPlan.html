@@ -8,7 +8,7 @@
       <div class="panel panel-default">
           <div class="panel-heading clearfix">
             <div class="col-xs-2 col-sm-1 pull-right">
-              <a title="Print" ng-click="printDailyPlan()" class="pull-right"><i class="glyphicon glyphicon-print"></i></a>
+              <button type="button" title="Print" class="btn btn-default tdp-printer-icon" ng-click="printDailyPlan()">Print</button>
             </div>
             <div class="col-xs-10 col-sm-11 pull-left">
               <div class="col-xs-12">
@@ -41,7 +41,7 @@
                     <div class="box-header">
                       <h3>{{ panel.title }}<span ng-show="panel.mandatory">*</span></h3>
                       <div class="box-header-btns pull-right">
-                        <a title="settings" ng-click="openSettings(panel)"><i class="glyphicon glyphicon-cog"></i></a>
+                        <button type="button" title="Settings" class="btn btn-default tdp-cog" ng-click="openSettings(panel)">Settings</button>
                         <!-- <a title="Remove panel" ng-click="remove(panel)"><i class="glyphicon glyphicon-trash"></i></a> -->
                       </div>
                     </div>

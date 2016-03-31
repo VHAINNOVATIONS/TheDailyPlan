@@ -30,3 +30,88 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
     color: #000;
     padding: 0.2em 0;
 }
+
+// Setup new images for buttons
+.tdp-printer-icon {
+    background: transparent url("../common/assets/images/print.png") 5px 2px no-repeat;
+    text-indent: -999em;
+    width: 20px;
+    height: 20px;
+    display: block;
+    padding: 10px 13px !important;
+}
+.tdp-printer-icon:hover {
+    background: #e6e6e6 url('../common/assets/images/print.png') 5px 2px no-repeat;
+    color: #333;
+    border-color: #adadad;
+}
+
+.tdp-chevron-left {
+    background: transparent url("../common/assets/images/chevron-left.png") 7px 7px no-repeat;
+    text-indent: -999em;
+    width: 33px;
+    height: 33px;
+    display: block;
+    padding: 10px 13px !important;
+}
+.tdp-chevron-left:hover {
+    background: #e6e6e6 url("../common/assets/images/chevron-left.png") 7px 7px no-repeat;
+    color: #333;
+    border-color: #adadad;
+}
+
+.tdp-chevron-right {
+    background: transparent url("../common/assets/images/chevron-right.png") 7px 7px no-repeat;
+    text-indent: -999em;
+    width: 33px;
+    height: 33px;
+    display: block;
+    padding: 10px 13px !important;
+}
+.tdp-chevron-right:hover {
+    background: #e6e6e6 url("../common/assets/images/chevron-right.png") 7px 7px no-repeat;
+    color: #333;
+    border-color: #adadad;
+}
+
+.tdp-chevron-up {
+    background: white url("../common/assets/images/chevron-up.png") 6px 2px no-repeat;
+    text-indent: -999em;
+    width: 22px;
+    height: 22px;
+    display: block;
+    padding: 10px 13px !important;
+}
+.tdp-chevron-up:hover {
+    background: #e6e6e6 url("../common/assets/images/chevron-up.png") 6px 2px no-repeat;
+    color: #333;
+    border-color: #adadad;
+}
+
+.tdp-chevron-down {
+    background: white url("../common/assets/images/chevron-down.png") 6px 2px no-repeat;
+    text-indent: -999em;
+    width: 22px;
+    height: 22px;
+    display: block;
+    padding: 10px 13px !important;
+}
+.tdp-chevron-down:hover {
+    background: #e6e6e6 url("../common/assets/images/chevron-down.png") 6px 2px no-repeat;
+    color: #333;
+    border-color: #adadad;
+}
+
+.tdp-cog {
+    background: transparent url("../common/assets/images/cog.png") 5px 2px no-repeat;
+    text-indent: -999em;
+    width: 22px;
+    height: 22px;
+    display: block;
+    padding: 10px 13px !important;
+}
+.tdp-cog:hover {
+    background: #e6e6e6 url("../common/assets/images/cog.png") 5px 2px no-repeat;
+    color: #333;
+    border-color: #adadad;
+}
