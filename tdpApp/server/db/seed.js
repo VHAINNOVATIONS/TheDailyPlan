@@ -28,12 +28,12 @@ module.exports = function(db) {
     var allergies = function(facilityId, templateId) {
         return db.panel_type.create({
             facility_id: facilityId,
-            title: 'Allergies',
+            title: '!! Allergies !!',
             directive: 'dt-simple-grid',
             service: 'Allergy',
             scope_variable: 'patient',
             minSizeX: 2,
-            minSizeY: 1,
+            minSizeY: 2,
             mandatory: false,
             enable_options: false
         }).then(function(pt) {
@@ -42,7 +42,7 @@ module.exports = function(db) {
                 name: 'Allergies Default',
                 panel_type_id: pt.id,
                 sizeX: 2,
-                sizeY: 1
+                sizeY: 2
             }).then(function(p) {
                 // Then Create the Template_Layout Second
                 console.log('templateId:', templateId);
@@ -65,7 +65,7 @@ module.exports = function(db) {
             service: 'Immunizations',
             scope_variable: 'patient',
             minSizeX: 2,
-            minSizeY: 1,
+            minSizeY: 2,
             mandatory: false,
             enable_options: false
         }).then(function(pt) {
@@ -74,7 +74,7 @@ module.exports = function(db) {
                 name: 'Immunizations Default',
                 panel_type_id: pt.id,
                 sizeX: 2,
-                sizeY: 1
+                sizeY: 2
             }).then(function(p) {
                 // Then Create the Template_Layout Second
                 console.log('templateId:', templateId);
