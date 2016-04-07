@@ -73,6 +73,7 @@ div.patient-end {
 
 div.header {
 	display: block;
+  page-break-before: always;
 	width: 700px;
 	position: running(header)
   	page: patient;
@@ -81,6 +82,7 @@ div.header {
 
 span.patient_header {
 	background: url('images/dailyPlanPeople.jpg');
+  page-break-before: always;
 	display: block;
 	width: 700px;
 	margin: 0;
