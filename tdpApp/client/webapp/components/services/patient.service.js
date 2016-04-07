@@ -4,6 +4,8 @@ angular.module('tdpApp')
     .factory('Patient', function Patient($location, $rootScope, $http, $q) {
         var results = {};
         var selectedPatients = [];
+        var selectedPrintPatients = [];
+        var selectedPrintPanels = [];
 
         return {
 
@@ -40,6 +42,18 @@ angular.module('tdpApp')
                 selectedPatients = value;
             },
 
+            getPrintPatients: function() {
+                return selectedPrintPatients;
+            },
+            setPrintPatients: function(value) {
+                selectedPrintPatients = value;
+            },
+            getPrintPanels: function() {
+                return selectedPrintPanels;
+            },
+            setPrintPanels: function(value) {
+                selectedPrintPanels = value;
+            },
             /**
              * Search Patients By Clinic
              *

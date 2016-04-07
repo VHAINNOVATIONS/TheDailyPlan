@@ -111,6 +111,59 @@ angular.module('tdpApp')
                 });
         }
 
+        self.printFriendly = function () {
+             console.log('patientSearch display!');
+
+            var items = [];
+            angular.forEach(self.selected, function(value, key) {
+                var entry = {};
+
+                var pt = $filter('filter')(self.data, {
+                    id: key
+                }, true);
+
+                if (value === true) {
+                    entry.id = key;
+                    entry.name = pt[0].name;
+                    entry.DOB = pt[0].DOB;
+                    entry.SSN = pt[0].SSN;
+                    entry.location = pt[0].location;
+                    entry.templateID = findTemplate(key);
+                    this.push(entry);
+                }
+
+            }, items);
+
+            console.log('items:', items.length);
+
+            if (items.length === 0) {
+                self.displayErr.flag = true;
+                self.displayErr.msg = 'Please select a patient to display.';
+                return;
+            }
+
+            var selectedItem = items[0];
+
+            if (selectedItem.templateID === null) {
+                self.displayErr.flag = true;
+                self.displayErr.msg = 'Please select a template to display.';
+                return;
+            }
+
+            Template.findCompleteByID(selectedItem.templateID)
+            .then( function(template) {
+                Patient.setPrintPatients(items);
+                Patient.setPrintPanels(template);
+                $location.path('/PatientsPrint');
+
+                //self.panels = template;
+                //self.printPatients = items;
+            })
+            .catch( function(err) {
+              self.errors.other = err.message;
+            });
+        };
+
         function setDefaultTemplate(data) {
             if (data.length && self.templates.length) {
                 var founds = $filter('filter')(self.templates, {'template_name': 'Default'}, true);
