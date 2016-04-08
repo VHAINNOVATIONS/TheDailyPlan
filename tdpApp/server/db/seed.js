@@ -8,21 +8,19 @@ module.exports = function(db) {
         'Diet Orders': 4,
         'Lab Orders': 5,
         'Radiology Orders': 6,
-        'Nursing Orders': 7,
-        'Pending Procedures': 8,
-        'Radiology Reports': 9,
-        'Visits': 10,
-        'IV Medications': 11,
-        'Inpatient Medications': 12,
-        'Outpatient Medications': 13,
-        'Labs': 14,
-        'Contacts': 15,
-        'Providers': 16,
-        'Health Factors': 17,
-        'Postings': 18,
-        'Free Text 1': 19,
-        'Free Text 2': 20,
-        'Free Text 3': 21
+        'Pending Procedures': 7,
+        'Visits': 8,
+        'IV Medications': 9,
+        'Inpatient Medications': 10,
+        'Outpatient Medications': 11,
+        'Labs': 12,
+        'Contacts': 13,
+        'Providers': 14,
+        'Health Factors': 15,
+        'Postings': 16,
+        'Free Text 1': 17,
+        'Free Text 2': 18,
+        'Free Text 3': 19
     }
 
     var allergies = function(facilityId, templateId) {
@@ -216,38 +214,6 @@ module.exports = function(db) {
         });
     };
 
-    var nursingOrders = function(facilityId, templateId) {
-        return db.panel_type.create({
-            facility_id: facilityId,
-            title: 'Nursing Orders',
-            directive: 'dt-simple-grid',
-            service: 'NursingOrders',
-            scope_variable: 'patient',
-            minSizeX: 2,
-            minSizeY: 2,
-            mandatory: false,
-            enable_options: false
-        }).then(function(pt) {
-            // Then Create the Panel Second
-            return db.panel.create({
-                name: 'Nursing Orders Default',
-                panel_type_id: pt.id,
-                sizeX: 3,
-                sizeY: 2
-            }).then(function(p) {
-                // Then Create the Template_Layout Second
-                console.log('templateId:', templateId);
-                return db.template_layout.create({
-                    template_id: templateId,
-                    panel_id: p.id,
-                    panel_order: layoutOrder[pt.title]
-                }).then(function(tl) {
-                    console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
-                });
-            });
-        });
-    };
-
     var pendingProcedures = function(facilityId, templateId) {
         return db.panel_type.create({
             facility_id: facilityId,
@@ -263,37 +229,6 @@ module.exports = function(db) {
             // Then Create the Panel Second
             return db.panel.create({
                 name: 'Pending Procedures Default',
-                panel_type_id: pt.id,
-                sizeX: 3,
-                sizeY: 2
-            }).then(function(p) {
-                // Then Create the Template_Layout Second
-                console.log('templateId:', templateId);
-                return db.template_layout.create({
-                    template_id: templateId,
-                    panel_id: p.id,
-                    panel_order: layoutOrder[pt.title]
-                }).then(function(tl) {
-                    console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
-                });
-            });
-        });
-    };
-
-    var radiologyReports = function(facilityId, templateId) {
-        return db.panel_type.create({
-            facility_id: facilityId,
-            title: 'Radiology Reports',
-            directive: 'dt-radiology-reports',
-            scope_variable: 'patient',
-            minSizeX: 2,
-            minSizeY: 2,
-            mandatory: true,
-            enable_options: false
-        }).then(function(pt) {
-            // Then Create the Panel Second
-            return db.panel.create({
-                name: 'Radiology Reports Default',
                 panel_type_id: pt.id,
                 sizeX: 3,
                 sizeY: 2
@@ -778,9 +713,7 @@ module.exports = function(db) {
                 dietOrders(facility.id, templateId),
                 labOrders(facility.id, templateId),
                 radiologyOrders(facility.id, templateId),
-                nursingOrders(facility.id, templateId),
                 pendingProcedures(facility.id, templateId),
-                radiologyReports(facility.id, templateId),
                 visits(facility.id, templateId),
                 ivMedications(facility.id, templateId),
                 inpatientMedications(facility.id, templateId),

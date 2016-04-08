@@ -210,41 +210,6 @@ var setReportValue = function (key) {
     };
 };
 
-var radiologyReportUpdateFn = {
-    '1': function (report, data) {
-        var facilityData = data.split('^')[1];
-        var facilityDataPieces = facilityData.split(';');
-        report.facility = {
-            name: facilityDataPieces[0],
-            id: facilityDataPieces[1]
-        };
-    },
-    '2': setReportValue('dateTime'),
-    '3': setReportValue('title'),
-    '4': setReportValue('status'),
-    '5': setReportValue('caseNumber'),
-};
-
-exports.translateRadiologyReports = function (rawData) {
-    var result = [];
-    if (rawData) {
-        Object.keys(rawData).forEach(function (key) {
-            var rawReport = rawData[key].WP;
-            if (rawReport) {
-                var report = {};
-                Object.keys(rawReport).forEach(function (lineKey) {
-                    var fn = radiologyReportUpdateFn[lineKey];
-                    if (fn) {
-                        fn(report, rawReport[lineKey]);
-                    }
-                });
-                result.push(report);
-            }
-        });
-    }
-    return result;
-};
-
 exports.translateOrderType = function (rawData) {
     var result = {};
     if (rawData && rawData.value) {

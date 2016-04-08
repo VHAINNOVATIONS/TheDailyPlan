@@ -93,34 +93,6 @@ angular.module('tdpApp')
     });
 
 angular.module('tdpApp')
-    .factory('NursingOrders', function LabOrders(Orders) {
-        return {
-            columnDefs: [{
-                name: 'start',
-                displayName: 'Date/Time',
-                width: '*',
-                btsrpWidth: '3'
-            }, {
-                name: 'description',
-                displayName: 'Description',
-                width: '**',
-                btsrpWidth: '7'
-            }, {
-                name: 'status',
-                displayName: 'Status',
-                width: '*',
-                btsrpWidth: '2'
-            }],
-            loadingMsg: 'Loading Nursing orders...',
-            emptyMsg: 'No Nursing Orders Found',
-
-            get: function(patientId) {
-                return Orders.get(patientId, 'otherOrders', this.columnDefs);
-            }
-        };
-    });
-
-angular.module('tdpApp')
     .factory('DietOrders', function LabOrders(Orders) {
         return {
             columnDefs: [{

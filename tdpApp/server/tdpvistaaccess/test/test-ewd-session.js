@@ -355,21 +355,6 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('radiology reports', function (done) {
-        var pid = 296; //patients[2].id;
-        testSession.getRadiologyReports(userSession, '197', {}, function (err, body) {
-            if (err) {
-                done(err);
-            } else {
-                console.log("======RADIOLOGY REPORTS=======");
-                console.log(JSON.stringify(body, undefined, 4));
-                console.log("==============================");
-                expect(body).to.exist();
-                done();
-            }
-        });
-    });
-
     xit('get diet, lab orders', function (done) {
         var pid = 100846; //100022;
         testSession.getOrders(userSession, pid, {}, function (err, result) {

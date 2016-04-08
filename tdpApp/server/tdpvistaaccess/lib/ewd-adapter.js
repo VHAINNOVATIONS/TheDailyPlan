@@ -91,29 +91,6 @@ var typedOrderUpdater = {
             }
         }
     },
-    activity: function (result, order) {
-        if (order.status === 'Active') {
-            if (!result.otherOrders) {
-                result.otherOrders = [];
-            }
-            var other = {
-                description: order.text
-            };
-            if (order.startDate) {
-                other.start = order.startDate;
-            }
-            if (order.stopDate) {
-                other.stop = order.stopDate;
-            }
-            other.status = order.status;
-            if (timeUtility.nowIsBetween(undefined, other.stop)) {
-                result.otherOrders.push(other);
-            }
-        }
-    },
-    nursing: function (result, order) {
-        typedOrderUpdater.activity(result, order);
-    },
     procedures: function(result, order) {
       if (order.status === 'Pending') {
         if (! result.procedures) {
@@ -385,19 +362,6 @@ var session = {
             } else {
                 var meds = translator.translateMeds(body, options.type);
                 callback(null, meds);
-            }
-        });
-    },
-    getRadiologyReports: function (userSession, patientId, options, callback) {
-        this.get(userSession, '/getRadiologyReportsDetailMap', {
-            patientId: patientId,
-            type: 'ALL'
-        }, function (err, body) {
-            if (err) {
-                callback(err);
-            } else {
-                var result = translator.translateRadiologyReports(body);
-                callback(null, result);
             }
         });
     },
