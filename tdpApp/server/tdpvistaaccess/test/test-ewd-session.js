@@ -355,7 +355,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get diet, lab orders', function (done) {
+    it('get diet, lab orders', function (done) {
         var pid = 100846; //100022;
         testSession.getOrders(userSession, pid, {}, function (err, result) {
             if (err) {

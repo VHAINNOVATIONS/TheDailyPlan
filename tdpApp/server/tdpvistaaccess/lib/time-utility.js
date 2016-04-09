@@ -24,3 +24,26 @@ exports.onTodayOrYesterday = function (externalTimestamp) {
     var timestamp = moment(externalTimestamp, "MM/DD/YYYY HH:mm");
     return !timestamp.isBefore(yesterday, 'day');
 };
+
+exports.nowIsBefore = function(external, externalStop) {
+    if (externalStop) {
+        var now = moment();
+        var stop = moment(externalStop, "MM/DD/YYYY HH:mm");
+        if (now.isAfter(stop)) {
+            return false;
+        }
+    }
+    return true;
+};
+
+exports.existingIsBefore = function(newDateTime, existingIsBefore) {
+    if (newDateTime && existingIsBefore) {
+        var n = moment(newDateTime, "MM/DD/YYYY HH:mm");
+        var e = moment(existingIsBefore, "MM/DD/YYYY HH:mm");
+        return n.isAfter(e);
+    } else if (newDateTime) {
+      return true;
+    } else {
+      return false;
+    }
+};

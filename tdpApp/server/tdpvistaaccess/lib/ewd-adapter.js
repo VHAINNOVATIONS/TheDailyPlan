@@ -43,11 +43,15 @@ var typedOrderUpdater = {
             if (order.startDate) {
                 diet.start = order.startDate;
             }
-            if (order.stopDate) {
-                diet.stop = order.stopDate;
-            }
-            if (timeUtility.nowIsBetween(diet.start, diet.stop)) {
-                result.currentDietProfile.push(diet);
+            diet.status = order.status;
+            if (timeUtility.nowIsBefore(diet.stop)) {
+                if (result.currentDietProfile.length) {
+                    if (timeUtility.existingIsBefore(diet.start, result.currentDietProfile[0].start)) {
+                        result.currentDietProfile[0] = diet;
+                    }
+                } else {
+                  result.currentDietProfile.push(diet);
+                }
             }
         }
     },
