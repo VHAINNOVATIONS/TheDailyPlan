@@ -56,7 +56,7 @@ var typedOrderUpdater = {
         }
     },
     lab: function (result, order) {
-        if (order.status === 'Active' || order.status === 'Pending') {
+        if (order.status === 'Pending') {
             if (!result.labOrders) {
                 result.labOrders = [];
             }
@@ -70,13 +70,13 @@ var typedOrderUpdater = {
                 lab.stop = order.stopDate;
             }
             lab.status = order.status;
-            if (timeUtility.nowIsBetween(lab.start, lab.stop)) {
+            if (timeUtility.nowIsBefore(lab.stop)) {
                 result.labOrders.push(lab);
             }
         }
     },
     imaging: function (result, order) {
-        if (order.status === 'Active' || order.status === 'Pending') {
+        if (order.status === 'Pending') {
             if (!result.radiologyOrders) {
                 result.radiologyOrders = [];
             }
@@ -90,7 +90,7 @@ var typedOrderUpdater = {
                 radiology.stop = order.stopDate;
             }
             radiology.status = order.status;
-            if (timeUtility.nowIsBetween(undefined, radiology.stop)) {
+            if (timeUtility.nowIsBefore(radiology.stop)) {
                 result.radiologyOrders.push(radiology);
             }
         }

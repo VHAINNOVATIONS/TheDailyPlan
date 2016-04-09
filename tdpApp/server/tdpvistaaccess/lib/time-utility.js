@@ -25,7 +25,7 @@ exports.onTodayOrYesterday = function (externalTimestamp) {
     return !timestamp.isBefore(yesterday, 'day');
 };
 
-exports.nowIsBefore = function(external, externalStop) {
+exports.nowIsBefore = function(externalStop) {
     if (externalStop) {
         var now = moment();
         var stop = moment(externalStop, "MM/DD/YYYY HH:mm");
@@ -36,10 +36,10 @@ exports.nowIsBefore = function(external, externalStop) {
     return true;
 };
 
-exports.existingIsBefore = function(newDateTime, existingIsBefore) {
-    if (newDateTime && existingIsBefore) {
+exports.existingIsBefore = function(newDateTime, existing) {
+    if (newDateTime && existing) {
         var n = moment(newDateTime, "MM/DD/YYYY HH:mm");
-        var e = moment(existingIsBefore, "MM/DD/YYYY HH:mm");
+        var e = moment(existing, "MM/DD/YYYY HH:mm");
         return n.isAfter(e);
     } else if (newDateTime) {
       return true;
