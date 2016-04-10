@@ -161,7 +161,7 @@ describe('ewd session test', function () {
     });
 
     var wards;
-    it('getWards', function (done) {
+    xit('getWards', function (done) {
         testSession.getWards(userSession, {}, function (err, body) {
             if (err) {
                 done(err);
@@ -355,7 +355,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get diet, lab orders', function (done) {
+    xit('get diet, lab orders', function (done) {
         var pid = 100846; //100022;
         testSession.getOrders(userSession, pid, {}, function (err, result) {
             if (err) {
@@ -393,7 +393,9 @@ describe('ewd session test', function () {
 
     it('get health factors', function (done) {
         var pid = 100846;
-        testSession.getHealthFactors(userSession, pid, {}, function (err, result) {
+        testSession.getHealthFactors(userSession, pid, {
+          includeFactors: ['PRESSURE ULCER PROTOCOL INITIATED']
+        }, function (err, result) {
             if (err) {
                 done(err);
             } else {

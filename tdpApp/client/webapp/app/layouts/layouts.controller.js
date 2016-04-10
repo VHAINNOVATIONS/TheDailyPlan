@@ -320,24 +320,37 @@ angular.module('tdpApp')
                             if (settingIdMap[pid].type === 3 || settingIdMap[pid].type === 4) {
                                 settingIdMap[pid].obj.textValue = panel.panelDetails[i].detail_value || '';
                             }
+                            if (settingIdMap[pid].type === 5) {
+                                if (! settingIdMap[pid].obj.listValues) {
+                                    settingIdMap[pid].obj.listValues = [panel.panelDetails[i].detail_value];
+                                } else {
+                                    settingIdMap[pid].obj.listValues.push(panel.panelDetails[i].detail_value);
+                                }
+                            }
                         }
                     }
                     var settingValue;
                     panel_settings.forEach(function(ps) {
+                        if (ps.settingType === 1) {
+                            return;
+                        }
+                        settingValue = ps.settingValues[0] && ps.settingValues[0].settingValue;
                         if (ps.settingType === 2) {
-                            settingValue = ps.settingValues[0];
                             if (!ps.hasOwnProperty('numberValue')) {
-                                ps.numberValue = parseInt(settingValue.settingValue, 10);
+                                ps.numberValue = parseInt(settingValue, 10);
                             }
                         }
                         if (ps.settingType === 3 || ps.settingType === 4) {
-                            settingValue = ps.settingValues[0];
                             if (!ps.hasOwnProperty('textValue')) {
-                                ps.textValue = settingValue.settingValue || '';
+                                ps.textValue = settingValue || '';
+                            }
+                        }
+                        if (ps.settingType === 5) {
+                            if (!ps.hasOwnProperty('listValues')) {
+                                ps.listValues = (settingValue && settingValue.split('^')) || [];
                             }
                         }
                     });
-
                 })
                 .catch(function(err) {
                     $scope.errors = err.message;
@@ -366,22 +379,32 @@ angular.module('tdpApp')
                     }
                 }
                 $scope.settings.forEach(function(ps) {
+                    var detail;
                     if (ps.settingType === 2) {
-                        var detail = {
+                        detail = {
                             panel_setting_id: ps.settingValues[0].panelSettingID,
                             detail_value: ps.numberValue.toString()
                         };
                         panelDetails.push(detail);
                     }
                     if (ps.settingType === 3 || ps.settingType === 4) {
-                        var detail = {
+                        detail = {
                             panel_setting_id: ps.settingValues[0].panelSettingID,
                             detail_value: ps.textValue
                         };
                         panelDetails.push(detail);
                     }
+                    if (ps.settingType === 5) {
+                        var listValuesPSId = ps.settingValues[0].panelSettingID;
+                        ps.listValues.forEach(function(listValue) {
+                            detail = {
+                                panel_setting_id: listValuesPSId,
+                                detail_value: listValue
+                            };
+                            panelDetails.push(detail);
+                        });
+                    }
                 });
-
                 if (panelDetails.length) {
                     $scope.panel.panelDetails = panelDetails;
                 }

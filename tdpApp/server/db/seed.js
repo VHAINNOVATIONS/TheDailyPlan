@@ -279,7 +279,7 @@ module.exports = function(db) {
                     db.panel_setting.create({
                         panel_type_id: pt.id,
                         setting_type: 2,
-                        setting_name: 'Number of Future Days',
+                        setting_name: 'Future Days',
                         setting_value: '30'
                     }).then(function(ps) {
                         //Then Create the Details
@@ -587,14 +587,10 @@ module.exports = function(db) {
                     }),
                     db.panel_setting.create({
                         panel_type_id: pt.id,
-                        setting_type: 2,
-                        setting_name: 'Number of Back Days',
-                        setting_value: '30'
-                    }).then(function(ps) {
-                        return db.panel_detail.create({
-                            panel_id: p.id,
-                            panel_setting_id: ps.id
-                        })
+                        setting_type: 5,
+                        setting_name: 'Include Factors'
+                    }).then(function() {
+                        console.log('health factor settings are created...')
                     })
                 ]);
             });

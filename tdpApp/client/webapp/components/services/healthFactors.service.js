@@ -26,16 +26,20 @@ angular.module('tdpApp')
              */
             get: function(patientId, panelDetails) {
                 var self = this;
-                var numDaysBack = 30;
-                panelDetails.forEach(function(pd) {
-                    if (pd.setting_name === 'Number of Back Days') {
-                        numDaysBack = pd.detail_value || pd.setting_value || 30;
-                    }
-                });
                 var params = {
                     patientId: patientId,
-                    numDaysBack: numDaysBack
                 };
+                if (panelDetails && panelDetails.length) {
+                    var includeFactors = [];
+                    panelDetails.forEach(function(pd) {
+                        if (pd.setting_name === 'Include Factors') {
+                            includeFactors.push(pd.detail_value);
+                        }
+                    });
+                    if (includeFactors.length) {
+                      params.includeFactors = includeFactors;
+                    }
+                }
                 var httpParams = {
                     url: '/api/healthFactors',
                     method: 'GET',

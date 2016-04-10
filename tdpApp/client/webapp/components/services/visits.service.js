@@ -33,7 +33,7 @@ angular.module('tdpApp')
                 var self = this;
                 var numDaysFuture = 30;
                 panelDetails.forEach(function(pd) {
-                    if (pd.setting_name === 'Number of Future Days') {
+                    if (pd.setting_name === 'Future Days') {
                         numDaysFuture = pd.detail_value || pd.setting_value || 30;
                     }
                 });

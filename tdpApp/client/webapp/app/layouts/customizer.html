@@ -22,21 +22,27 @@
                         </div>
                     </div>
                     <div class="form-group row" ng-if="setting.settingType === 2">
-                        <label for="numberinput" class="col-sm-5 control-label">{{setting.settingName}}</label>
-                        <div class="col-sm-5">
+                        <label for="numberinput" class="col-sm-offset-1 col-sm-3 control-label">{{setting.settingName}}</label>
+                        <div class="col-sm-7">
                             <input ng-model="setting.numberValue" type="number" min="1" class="form-control" id="numberinput" ng-disabled="displayOnly">
                         </div>
                     </div>
                     <div class="form-group row" ng-if="setting.settingType === 3">
-                        <label for="textinput" class="col-sm-5 control-label">{{setting.settingName}}</label>
-                        <div class="col-sm-5">
+                        <label for="textinput" class="col-sm-offset-1 col-sm-3 control-label">{{setting.settingName}}</label>
+                        <div class="col-sm-7">
                             <input ng-model="setting.textValue" type="text" class="form-control" id="textinput" ng-disabled="displayOnly">
                         </div>
                     </div>
                     <div class="form-group row" ng-if="setting.settingType === 4">
-                        <label for="textareainput" class="col-sm-5 control-label">{{setting.settingName}}</label>
-                        <div class="col-sm-5">
+                        <label for="textareainput" class="col-sm-offset-1 col-sm-3 control-label">{{setting.settingName}}</label>
+                        <div class="col-sm-7">
                             <textarea ng-model="setting.textValue" rows="4" class="form-control" id="textareainput" ng-disabled="displayOnly"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row" ng-if="setting.settingType === 5">
+                        <label for="listareainput" class="col-sm-offset-1 col-sm-3 control-label">{{setting.settingName}}</label>
+                        <div class="col-sm-7">
+                            <textarea ng-model="setting.listValues" ng-list="&#10;" ng-trim="false" rows="4" class="form-control" id="listareainput" ng-disabled="displayOnly"></textarea>
                         </div>
                     </div>
                 </div>

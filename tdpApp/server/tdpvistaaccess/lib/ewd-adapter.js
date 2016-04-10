@@ -477,21 +477,28 @@ var session = {
         });
     },
     getHealthFactors: function(userSession, patientId, options, callback) {
-        var numDaysBack = _.get(options, "numDaysBack", 90);
-        var fromDate = translator.translateNumDaysPast(numDaysBack);
         this.get(userSession, '/getPatientHealthFactors', {
-            patientId: patientId,
-            fromDate: fromDate
+            patientId: patientId
         }, function (err, result) {
             if (err) {
                 callback(err);
             } else {
-              result.forEach(function(r) {
-                if (r.date) {
-                  r.date = translator.translateVistADate(r.date);
+                var includeFactors = _.get(options, 'includeFactors', null);
+                if (includeFactors) {
+                    if (! Array.isArray(includeFactors)) {
+                        includeFactors = [includeFactors];
+                    }
+                    var dictionary = _.indexBy(includeFactors, _.toUpper);
+                    result = _.filter(result, function(hf) {
+                        return hf.name && dictionary[hf.name.toUpperCase()];
+                    });
                 }
-              });
-              callback(null, result);
+                result.forEach(function(r) {
+                  if (r.date) {
+                    r.date = translator.translateVistADate(r.date);
+                  }
+                });
+                callback(null, result);
             }
         });
     },
