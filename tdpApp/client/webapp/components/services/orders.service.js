@@ -3,13 +3,15 @@
 angular.module('tdpApp')
     .factory('Orders', function Orders($http) {
         return {
-            get: function(patientId, topType, columnDefs) {
+            get: function(patientId, topType, columnDefs, params) {
+                if (! params) {
+                    params = {};
+                }
+                params.patientId = patientId;
                 var httpParams = {
                     url: '/api/orders',
                     method: 'GET',
-                    params: {
-                        patientId: patientId
-                    }
+                    params: params
                 };
                 return $http(httpParams).then(function(response) {
                     var result = response.data;
@@ -132,8 +134,16 @@ angular.module('tdpApp')
             loadingMsg: 'Loading pending procedures...',
             emptyMsg: 'No pending procedures',
 
-            get: function(patientId) {
-                return Orders.get(patientId, 'procedures', this.columnDefs);
+            get: function(patientId, panelDetails) {
+                var futureDays = 30;
+                panelDetails.forEach(function(pd) {
+                    if (pd.setting_name === 'Future Days') {
+                        futureDays = pd.detail_value || pd.setting_value || 30;
+                    }
+                });
+                return Orders.get(patientId, 'procedures', this.columnDefs, {
+                    futureDays: futureDays
+                });
             }
         };
     });

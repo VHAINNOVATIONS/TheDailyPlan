@@ -77,7 +77,7 @@ describe('ewd session test', function () {
     });
 
     var patients;
-    it('search patients', function (done) {
+    xit('search patients', function (done) {
         testSession.searchPatients(userSession, {
             prefix: 'eig'
         }, function (err, body) {
@@ -221,7 +221,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get patient vitals', function (done) {
+    xit('get patient vitals', function (done) {
         var pid = patients[37].id;
         console.log(patients[37]);
         testSession.getVitalSigns(userSession, pid, {
@@ -344,7 +344,26 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get orders', function (done) {
+    it('get procedures', function (done) {
+        var pid = 100846; //100685;
+        testSession.getOrders(userSession, pid, {}, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body).to.exist();
+                //expect(body.length).to.be.above(0);
+                //console.log("=== Order Types ============");
+                //console.log(testSession.orderTypes);
+                //console.log('============================');
+                console.log("=== All Orders =============");
+                console.log(JSON.stringify(body, undefined, 4));
+                console.log("============================");
+                done();
+            }
+        });
+    });
+
+    xit('get pending procedures', function (done) {
         var pid = 100846; //100685;
         testSession.getAllOrders(userSession, pid, {}, function (err, body) {
             if (err) {
