@@ -2,7 +2,7 @@
 
 module.exports = function(db) {
     var layoutOrder = {
-        'Allergies': 1,
+        '!! Allergies !!': 1,
         'Immunizations': 2,
         'Vitals': 3,
         'Diet Orders': 4,
