@@ -128,18 +128,10 @@ module.exports = function (grunt) {
           '<%= yeoman.clientIonic %>/{,components,scss}/**/*.{scss,sass}'],
         tasks: ['sass:ionic']
       },
-      jade: {
-        // TODO: include common
-        files: [
-          '<%= yeoman.clientWebapp %>/{app,components}/*',
-          '<%= yeoman.clientWebapp %>/{app,components}/**/*.jade'],
-        tasks: ['jade']
-      },
       htmlIonic: {
         files:['<%= yeoman.clientIonic %>/www/**/*'],
         tasks:['copy:ionicWwwFromClient']
       },
-      // TODO: Set up jadeIonic
       // TODO: Do we actually want to watch gruntfile - why?
       gruntfile: {
         files: ['Gruntfile.js']
@@ -499,11 +491,9 @@ module.exports = function (grunt) {
     // TODO: Add the relevant ionic tasks in here aswell
     concurrent: {
       server: [
-        'jade',
         'sass',
       ],
       test: [
-        'jade',
         'sass',
       ],
       debug: {
@@ -516,7 +506,6 @@ module.exports = function (grunt) {
         }
       },
       dist: [
-        'jade',
         'sass',
         'imagemin',
         'svgmin'
@@ -575,28 +564,6 @@ module.exports = function (grunt) {
       },
       all: localConfig
     },
-
-    // Compiles Jade to html
-    jade: {
-      compile: {
-        options: {
-          data: {
-            debug: false
-          }
-        },
-        // TODO: Include common
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.clientWebapp %>',
-          src: [
-            '{app,components}/**/*.jade'
-          ],
-          dest: '.tmp',
-          ext: '.html'
-        }]
-      }
-    },
-    // TODO: jadeIonic
 
     // Compiles Sass to CSS
     sass: {

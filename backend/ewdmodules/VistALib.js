@@ -443,13 +443,6 @@ module.exports = {
         params.reportsTabName = 'OR_CW:CLINICAL WARNINGS~;;4;';
         return this.runReportsTabRpc(params, session, ewd);
     },
-    // call to vista works
-    getRadiologyReports: function(params, session, ewd) {
-        params.reportsTabName = 'OR_R18:IMAGING~RIM;ORDV08;0;';
-        return this.runReportsTabRpc(params, session, ewd);
-    },
-
-    // helpers for running RPCs below
     runRpc: function(params, session, ewd) {
         // TODO - how to handle issues? throw exception? return JSON obj with error message?
         if (params.rpcName == 'DDR LISTER' || params.rpcName == 'DDR GETS ENTRY DATA') {

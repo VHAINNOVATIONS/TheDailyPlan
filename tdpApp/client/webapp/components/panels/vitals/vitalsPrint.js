@@ -21,10 +21,11 @@ angular.module('tdpApp')
       templateUrl: 'components/panels/vitals/vitalsPrint.html',
       scope: {
         patient: '=',
+        paneldetail: '='
       },
       controller: function ($scope, Vitals) {
         console.log('Patient Plan - vitals patient:', $scope.patient);
-        Vitals.getByID($scope.patient).then(function(vitals) {
+        Vitals.get($scope.patient, $scope.paneldetail).then(function(vitals) {
           console.log('Patient Plan - print vitals:', vitals);
           $scope.vitalSets = vitals.reduce(function(r, vital) {
             var dateTime = vital.dateTime;

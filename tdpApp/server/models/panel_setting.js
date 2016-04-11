@@ -26,7 +26,7 @@ module.exports = function(sequelize, DataTypes) {
         },
         setting_value: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true
         }
     }, {
         tableName: 'panel_setting',

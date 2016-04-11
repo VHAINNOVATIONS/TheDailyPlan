@@ -87,11 +87,14 @@ var vitalSetUpdateFn = {
     '17': setVitalUnitOrQualifier('unit')
 };
 
-exports.translateVitalSigns = function (rawVitalSets) {
+exports.translateVitalSigns = function (rawVitalSets, occurances) {
     var vitalSets = [];
     rawVitalSets = _.get(rawVitalSets, "WP", null);
     if (rawVitalSets) {
-        Object.keys(rawVitalSets).forEach(function (rawDate) {
+        occurances = occurances || 3;
+        var rawDates = Object.keys(rawVitalSets).slice(0, occurances);
+        rawDates.sort();
+        rawDates.forEach(function (rawDate) {
             var vitalSet = {};
             var vitalSetData = rawVitalSets[rawDate];
             Object.keys(vitalSetData).forEach(function (key) {
@@ -101,9 +104,7 @@ exports.translateVitalSigns = function (rawVitalSets) {
                     fn(vitalSet, data);
                 }
             });
-            //if (timeUtility.onTodayOrYesterday(vitalSet.dateTime)) {
-                vitalSets.push(vitalSet);
-            //}
+            vitalSets.push(vitalSet);
         });
     }
     return vitalSets;
@@ -154,6 +155,14 @@ exports.translateVistADateTime = function (dateTime) {
 exports.vistANow = function () {
     var m = moment();
     return translateDate(m) + '.' + translateTime(m);
+};
+
+exports.vistAFuture = function () {
+    var m = moment();
+    var year = m.year() + 1 ;
+    var vistaYear = year - 1700;
+    var result = vistaYear + m.format('MMDD');
+    return result;
 };
 
 exports.translateVistADate = function (dateTime) {
@@ -208,41 +217,6 @@ var setReportValue = function (key) {
             report[key] = value;
         }
     };
-};
-
-var radiologyReportUpdateFn = {
-    '1': function (report, data) {
-        var facilityData = data.split('^')[1];
-        var facilityDataPieces = facilityData.split(';');
-        report.facility = {
-            name: facilityDataPieces[0],
-            id: facilityDataPieces[1]
-        };
-    },
-    '2': setReportValue('dateTime'),
-    '3': setReportValue('title'),
-    '4': setReportValue('status'),
-    '5': setReportValue('caseNumber'),
-};
-
-exports.translateRadiologyReports = function (rawData) {
-    var result = [];
-    if (rawData) {
-        Object.keys(rawData).forEach(function (key) {
-            var rawReport = rawData[key].WP;
-            if (rawReport) {
-                var report = {};
-                Object.keys(rawReport).forEach(function (lineKey) {
-                    var fn = radiologyReportUpdateFn[lineKey];
-                    if (fn) {
-                        fn(report, rawReport[lineKey]);
-                    }
-                });
-                result.push(report);
-            }
-        });
-    }
-    return result;
 };
 
 exports.translateOrderType = function (rawData) {
