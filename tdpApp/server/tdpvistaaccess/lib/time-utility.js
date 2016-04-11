@@ -47,3 +47,15 @@ exports.existingIsBefore = function(newDateTime, existing) {
       return false;
     }
 };
+
+exports.startWithinFutureDays = function(externalStart, futureDays) {
+    if (futureDays === undefined || futureDays === null) {
+        futureDays = 30;
+    }
+    var mlimit = moment();
+    if (futureDays) {
+        mlimit.add(futureDays, 'd');
+    }
+    var start = moment(externalStart, "MM/DD/YYYY HH:mm");
+    return ! start.isAfter(mlimit, 'day');
+};

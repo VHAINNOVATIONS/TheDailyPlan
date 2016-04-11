@@ -95,7 +95,7 @@ var typedOrderUpdater = {
             }
         }
     },
-    procedures: function(result, order) {
+    procedures: function(result, order, options) {
       if (order.status === 'Pending') {
         if (! result.procedures) {
           result.procedures = [];
@@ -106,7 +106,9 @@ var typedOrderUpdater = {
         if (order.startDate) {
             procedure.start = order.startDate;
         }
-        result.procedures.push(procedure);
+        if (procedure.start && timeUtility.startWithinFutureDays(procedure.startDate, options.numDaysFuture)) {
+            result.procedures.push(procedure);
+        }
       }
     }
 };
@@ -460,7 +462,7 @@ var session = {
                         if (type && type.topName) {
                             var updater = typedOrderUpdater[type.topName.toLowerCase()];
                             if (updater) {
-                                updater(r, order);
+                                updater(r, order, options);
                             }
                         }
                     }
