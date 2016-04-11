@@ -156,6 +156,14 @@ exports.vistANow = function () {
     return translateDate(m) + '.' + translateTime(m);
 };
 
+exports.vistAFuture = function () {
+    var m = moment();
+    var year = m.year() + 1 ;
+    var vistaYear = year - 1700;
+    var result = vistaYear + m.format('MMDD');
+    return result;
+};
+
 exports.translateVistADate = function (dateTime) {
     var result = exports.translateVistADateTime(dateTime);
     return result.split(' ')[0];

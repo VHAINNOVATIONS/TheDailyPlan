@@ -136,6 +136,9 @@ var toPatientList = function (rawData, ignoreSecondPiece) {
 };
 
 var filterChemHemReports = function (report, testNames) {
+    if (! testNames || ! testNames.length) {
+        return report;
+    }
     var testNameDict = testNames.reduce(function (r, testName) {
         r[testName] = true;
         return r;
@@ -172,6 +175,17 @@ var putInChemHemReportDates = function(report) {
         }
       }
     });
+};
+
+var reduceLabToTests = function(fullLabResults) {
+    return fullLabResults.reduce(function(r, fullLabResult) {
+        var collectionDate =fullLabResult.specimen.collectionDate;
+        fullLabResult.labResults.forEach(function(labResult) {
+            labResult.date = collectionDate;
+            r.push(labResult);
+        });
+        return r;
+    }, []);
 };
 
 var session = {
@@ -425,14 +439,15 @@ var session = {
     getChemHemReports: function (userSession, patientId, options, callback) {
         this.get(userSession, '/getChemHemLabs', {
             patientId: patientId,
-            toDate: options.toDate,
-            fromDate: options.fromDate
+            toDate: translator.vistAFuture(),
+            fromDate: 0
         }, function (err, result) {
             if (err) {
                 callback(err);
             } else {
                 result = filterChemHemReports(result, options.testNames);
                 putInChemHemReportDates(result);
+                result = reduceLabToTests(result);
                 callback(null, result);
             }
         });

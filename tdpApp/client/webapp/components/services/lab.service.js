@@ -22,30 +22,14 @@ angular.module('tdpApp')
 
                 var parameters = {};
                 var config = {};
-                parameters.toDate = '3161010';
-                parameters.fromDate = '1501010';
                 parameters.testNames = labTestNames.length > 0 ? labTestNames : defaultTestNames;
+                console.log('Test Names: %s', parameters.testNames);
                 config.params = parameters;
 
                 $http.get('/api/labs/' + value, config).
                 success(function(data) {
-                    var allLabs = [];
-                    var i = 0;
-                    for (i = 0; i < data.length; i++) {
-                        /*data[i].subGridOptions = {
-                          columnDefs: [ {name:"Name", field:"labTest.name"},{name:"Value", field:"value"},{name:"Units", field:"labTest.units"},{name:"Range", field:"labTest.refRange"} ],
-                          data: (!angular.isUndefined(data[i].labResults) ? data[i].labResults : [])
-                        };*/
-                        var x = 0;
-                        for (x = 0; x < data[i].labResults.length; x++) {
-                            var resultsDate = data[i].specimen.collectionDate;
-                            data[i].labResults[x].date = resultsDate.substring(0, 10);
-                            //$filter('date')(resultsDate, 'short');
-                            allLabs.push(data[i].labResults[x]);
-                        }
-                    }
-                    results = allLabs;
-                    deferred.resolve(allLabs);
+                    console.log('AFSIN %s', data.length);
+                    deferred.resolve(data);
                     return cb();
                 }).
                 error(function(err) {

@@ -370,14 +370,33 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get chem hem reports', function (done) {
+    it('get chem hem reports', function (done) {
         var pid = 756; //100022;
         testSession.getChemHemReports(userSession, pid, {
             toDate: '3161010',
             fromDate: '1501010',
             testNames: [
-                'MAGNESIUM', 'POTASSIUM'
+                'CHOLESTEROL', 'HDL', 'TRIGLYCERIDE', 'MAGNESIUM', 'POTASSIUM'
             ]
+        }, function (err, result) {
+            if (err) {
+                done(err);
+            } else {
+                expect(result).to.exist();
+                console.log("=== Chem Hem =============");
+                console.log(JSON.stringify(result, undefined, 4));
+                console.log(result.length);
+                console.log("============================");
+                done();
+            }
+        });
+    });
+
+    xit('get chem hem reports', function (done) {
+        var pid = 100846
+        testSession.getChemHemReports(userSession, pid, {
+            toDate: '3160412',
+            fromDate: '1501010',
         }, function (err, result) {
             if (err) {
                 done(err);
