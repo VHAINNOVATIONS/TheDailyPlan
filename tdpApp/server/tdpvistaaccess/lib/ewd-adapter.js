@@ -346,10 +346,29 @@ var session = {
         this.get(userSession, '/getPostings', {
             patientId: patientId,
             nRpts: "0"
-        }, function (err, result) {
+        }, function (err, rawResult) {
             if (err) {
                 callback(err);
             } else {
+                var includeTypes = _.get(options, 'includeTypes', null);
+                var result = rawResult;
+                if (includeTypes && includeTypes.length) {
+                    if (! Array.isArray(includeTypes)) {
+                        includeTypes = [includeTypes];
+                    }
+                    var dictionary = _.indexBy(includeTypes, _.toUpper);
+                    result = _.filter(rawResult, function(p) {
+                        return p.type && dictionary[p.type.toUpperCase()];
+                    });
+                }
+                var d = {};
+                result = result.reduce(function(r, p) {
+                    if (! d[p.type]) {
+                        d[p.type] = true;
+                        r.push(p);
+                    }
+                    return r;
+                }, []);
                 result.forEach(function(item) {
                     item.text = item.text.join(' ').trim();
                     item.text = item.text.replace('  ', ' ');
@@ -517,7 +536,7 @@ var session = {
                 callback(err);
             } else {
                 var includeFactors = _.get(options, 'includeFactors', null);
-                if (includeFactors) {
+                if (includeFactors && includeFactors.length) {
                     if (! Array.isArray(includeFactors)) {
                         includeFactors = [includeFactors];
                     }
@@ -526,6 +545,14 @@ var session = {
                         return hf.name && dictionary[hf.name.toUpperCase()];
                     });
                 }
+                var d = {};
+                result = result.reduce(function(r, hf) {
+                    if (! d[hf.name]) {
+                        d[hf.name] = true;
+                        r.push(hf);
+                    }
+                    return r;
+                }, []);
                 result.forEach(function(r) {
                   if (r.date) {
                     r.date = translator.translateVistADate(r.date);

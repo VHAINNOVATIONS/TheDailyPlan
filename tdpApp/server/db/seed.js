@@ -556,15 +556,39 @@ module.exports = function(db) {
                 sizeX: 3,
                 sizeY: 2
             }).then(function(p) {
-                // Then Create the Template_Layout Second
-                console.log('templateId:', templateId);
-                return db.template_layout.create({
-                    template_id: templateId,
-                    panel_id: p.id,
-                    panel_order: layoutOrder[pt.title]
-                }).then(function(tl) {
-                    console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
-                });
+                return db.Sequelize.Promise.all([
+                    db.template_layout.create({
+                        template_id: templateId,
+                        panel_id: p.id,
+                        panel_order: layoutOrder[pt.title]
+                    }),
+                    db.panel_setting.create({
+                        panel_type_id: pt.id,
+                        setting_type: 5,
+                        setting_name: 'Include Types',
+                        setting_value: 'FALL RISK^CLINICAL WARNING^ADVANCE DIRECTIVE'
+                    }).then(function(ps) {
+                        return db.panel_detail.create({
+                            panel_id: p.id,
+                            panel_setting_id: ps.id,
+                            detail_value: 'FALL RISK'
+                        }).then(function() {
+                          return db.panel_detail.create({
+                              panel_id: p.id,
+                              panel_setting_id: ps.id,
+                              detail_value: 'CLINICAL WARNING'
+                          });
+                        }).then(function() {
+                          return db.panel_detail.create({
+                              panel_id: p.id,
+                              panel_setting_id: ps.id,
+                              detail_value: 'ADVANCE DIRECTIVE'
+                          });
+                        });
+                    }).then(function() {
+                        console.log('postings settings are created...')
+                    })
+                ]);
             });
         });
     };

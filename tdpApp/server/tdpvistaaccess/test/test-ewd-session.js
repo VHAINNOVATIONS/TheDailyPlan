@@ -304,9 +304,15 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get postings', function (done) {
+    it('get postings', function (done) {
         var pid = 100846; //40; //100848; //100846;
-        testSession.getPostings(userSession, pid, {}, function (err, body) {
+        testSession.getPostings(userSession, pid, {
+            includeTypes: undefined
+        //    includeTypes: [
+        //        'FALL RISK',
+        //        'CLINICAL WARNING'
+        //    ]
+        }, function (err, body) {
             if (err) {
                 done(err);
             } else {
@@ -370,7 +376,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get chem hem reports', function (done) {
+    xit('get chem hem reports', function (done) {
         var pid = 756; //100022;
         testSession.getChemHemReports(userSession, pid, {
             occurances: 2,
@@ -412,7 +418,7 @@ describe('ewd session test', function () {
     it('get health factors', function (done) {
         var pid = 100846;
         testSession.getHealthFactors(userSession, pid, {
-          includeFactors: ['PRESSURE ULCER PROTOCOL INITIATED']
+          //includeFactors: ['PRESSURE ULCER PROTOCOL INITIATED']
         }, function (err, result) {
             if (err) {
                 done(err);

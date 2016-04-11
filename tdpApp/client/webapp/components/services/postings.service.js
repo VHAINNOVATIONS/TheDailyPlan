@@ -23,11 +23,25 @@ angular.module('tdpApp')
              * @param  {Function} callback - optional
              * @return {Promise}
              */
-            get: function(patientId) {
+            get: function(patientId, panelDetails) {
                 var self = this;
                 var params = {
                     patientId: patientId
                 };
+
+                if (panelDetails && panelDetails.length) {
+                    var includeTypes = [];
+                    panelDetails.forEach(function(pd) {
+                        if (pd.setting_name === 'Include Types') {
+                            if (pd.detail_value) {
+                                includeTypes.push(pd.detail_value);
+                            }
+                        }
+                    });
+                    if (includeTypes.length) {
+                        params.includeTypes = includeTypes;
+                    }
+                }
                 var httpParams = {
                     url: '/api/postings',
                     method: 'GET',
