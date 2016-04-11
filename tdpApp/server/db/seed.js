@@ -105,15 +105,27 @@ module.exports = function(db) {
                 sizeX: 3,
                 sizeY: 2
             }).then(function(p) {
-                // Then Create the Template_Layout Second
-                console.log('templateId:', templateId);
-                return db.template_layout.create({
-                    template_id: templateId,
-                    panel_id: p.id,
-                    panel_order: layoutOrder[pt.title]
-                }).then(function(tl) {
-                    console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
-                });
+                return db.Sequelize.Promise.all([
+                    db.template_layout.create({
+                        template_id: templateId,
+                        panel_id: p.id,
+                        panel_order: layoutOrder[pt.title]
+                    }),
+                    db.panel_setting.create({
+                        panel_type_id: pt.id,
+                        setting_type: 2,
+                        setting_name: 'Occurances',
+                        setting_value: '3'
+                    }).then(function(ps) {
+                        return db.panel_detail.create({
+                            panel_id: p.id,
+                            panel_setting_id: ps.id,
+                            detail_value: '3'
+                        }).then(function(tl) {
+                            console.log('vital settings updated...')
+                        });
+                    })
+                ]);
             });
         });
     };
@@ -224,7 +236,7 @@ module.exports = function(db) {
             minSizeX: 2,
             minSizeY: 2,
             mandatory: false,
-            enable_options: false
+            enable_options: true
         }).then(function(pt) {
             // Then Create the Panel Second
             return db.panel.create({
@@ -233,15 +245,27 @@ module.exports = function(db) {
                 sizeX: 3,
                 sizeY: 2
             }).then(function(p) {
-                // Then Create the Template_Layout Second
-                console.log('templateId:', templateId);
-                return db.template_layout.create({
-                    template_id: templateId,
-                    panel_id: p.id,
-                    panel_order: layoutOrder[pt.title]
-                }).then(function(tl) {
-                    console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
-                });
+                return db.Sequelize.Promise.all([
+                    db.template_layout.create({
+                        template_id: templateId,
+                        panel_id: p.id,
+                        panel_order: layoutOrder[pt.title]
+                    }),
+                    db.panel_setting.create({
+                        panel_type_id: pt.id,
+                        setting_type: 2,
+                        setting_name: 'Future Days',
+                        setting_value: '30'
+                    }).then(function(ps) {
+                        return db.panel_detail.create({
+                            panel_id: p.id,
+                            panel_setting_id: ps.id,
+                            detail_value: '30'
+                        }).then(function(tl) {
+                            console.log('pending procedures settings updated...')
+                        });
+                    })
+                ]);
             });
         });
     };
@@ -285,7 +309,8 @@ module.exports = function(db) {
                         //Then Create the Details
                         return db.panel_detail.create({
                             panel_id: p.id,
-                            panel_setting_id: ps.id
+                            panel_setting_id: ps.id,
+                            detail_value: '30'
                         }).then(function(tl) {
                             console.log('<<<<<<<Panel Setting & Detail Record Created.>>>>>>>')
                         });
@@ -294,7 +319,6 @@ module.exports = function(db) {
             });
         });
     };
-
     var ivMedications = function(facilityId, templateId) {
         return db.panel_type.create({
             facility_id: facilityId,

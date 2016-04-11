@@ -87,11 +87,14 @@ var vitalSetUpdateFn = {
     '17': setVitalUnitOrQualifier('unit')
 };
 
-exports.translateVitalSigns = function (rawVitalSets) {
+exports.translateVitalSigns = function (rawVitalSets, occurances) {
     var vitalSets = [];
     rawVitalSets = _.get(rawVitalSets, "WP", null);
     if (rawVitalSets) {
-        Object.keys(rawVitalSets).forEach(function (rawDate) {
+        occurances = occurances || 3;
+        var rawDates = Object.keys(rawVitalSets).slice(0, occurances);
+        rawDates.sort();
+        rawDates.forEach(function (rawDate) {
             var vitalSet = {};
             var vitalSetData = rawVitalSets[rawDate];
             Object.keys(vitalSetData).forEach(function (key) {
@@ -101,9 +104,7 @@ exports.translateVitalSigns = function (rawVitalSets) {
                     fn(vitalSet, data);
                 }
             });
-            //if (timeUtility.onTodayOrYesterday(vitalSet.dateTime)) {
-                vitalSets.push(vitalSet);
-            //}
+            vitalSets.push(vitalSet);
         });
     }
     return vitalSets;

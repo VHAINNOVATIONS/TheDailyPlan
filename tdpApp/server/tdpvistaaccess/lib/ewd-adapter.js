@@ -337,7 +337,7 @@ var session = {
             if (err) {
                 callback(err);
             } else {
-                var result = translator.translateVitalSigns(body);
+                var result = translator.translateVitalSigns(body, options.occurances);
                 callback(null, result);
             }
         });

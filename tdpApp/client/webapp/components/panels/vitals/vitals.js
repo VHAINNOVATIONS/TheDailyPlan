@@ -8,6 +8,7 @@ angular.module('tdpApp')
       templateUrl: 'components/panels/vitals/vitals.html',
       scope: {
         patient: '=',
+        paneldetail: '='
       },
       controller: function ($scope, Vitals) {
 
@@ -33,7 +34,7 @@ angular.module('tdpApp')
           { name: 'pulse.value', displayName: 'Pulse', width:'*' }
         ];
 
-        Vitals.getByID($scope.patient)
+        Vitals.get($scope.patient, $scope.paneldetail)
         .then( function(data) {
           console.log('Patient Plan - vitals:',data);
           $scope.vitalsGridOptions.data = data;
@@ -55,13 +56,6 @@ angular.module('tdpApp')
           $scope.vitalsGridApi.expandable.collapseAllRows();
         };
 
-      }/*,
-      link: function postLink(scope) {
-        scope.$watch('data', function (data) {
-          if (data) {
-            scope.data = data;
-          }
-        });
-      }*/
+      }
     };
   });

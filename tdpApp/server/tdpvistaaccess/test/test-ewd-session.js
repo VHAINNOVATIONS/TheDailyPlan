@@ -77,7 +77,7 @@ describe('ewd session test', function () {
     });
 
     var patients;
-    xit('search patients', function (done) {
+    it('search patients', function (done) {
         testSession.searchPatients(userSession, {
             prefix: 'eig'
         }, function (err, body) {
@@ -221,10 +221,12 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get patient vitals', function (done) {
+    it('get patient vitals', function (done) {
         var pid = patients[37].id;
         console.log(patients[37]);
-        testSession.getVitalSigns(userSession, pid, {}, function (err, body) {
+        testSession.getVitalSigns(userSession, pid, {
+            occurances: 2
+        }, function (err, body) {
             if (err) {
                 done(err);
             } else {
@@ -304,7 +306,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get postings', function (done) {
+    xit('get postings', function (done) {
         var pid = 100846; //40; //100848; //100846;
         testSession.getPostings(userSession, pid, {
             includeTypes: undefined
@@ -415,7 +417,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get health factors', function (done) {
+    xit('get health factors', function (done) {
         var pid = 100846;
         testSession.getHealthFactors(userSession, pid, {
           //includeFactors: ['PRESSURE ULCER PROTOCOL INITIATED']
