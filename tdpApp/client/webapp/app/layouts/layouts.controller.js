@@ -289,7 +289,6 @@ angular.module('tdpApp')
             var panel = params.panel;
             $scope.panel = panel;
             $scope.options = [];
-            $scope.selectedOption = [];
             $scope.displayOnly = !!params.displayOnly;
 
             Panel_Setting.findByPanelTypeID(panel.id)
@@ -307,9 +306,6 @@ angular.module('tdpApp')
                     if (panel.panelDetails) {
                         for (var i = 0; i < panel.panelDetails.length; i++) {
                             var pid = panel.panelDetails[i].panel_setting_id;
-                            if (settingIdMap[pid].type === 1) {
-                                $scope.selectedOption.push(pid);
-                            }
                             if (settingIdMap[pid].type === 2) {
                                 var valueType2 = panel.panelDetails[i].detail_value;
                                 if (typeof valueType2 === 'string') {
@@ -331,9 +327,6 @@ angular.module('tdpApp')
                     }
                     var settingValue;
                     panel_settings.forEach(function(ps) {
-                        if (ps.settingType === 1) {
-                            return;
-                        }
                         settingValue = ps.settingValues[0] && ps.settingValues[0].settingValue;
                         if (ps.settingType === 2) {
                             if (!ps.hasOwnProperty('numberValue')) {
@@ -356,14 +349,6 @@ angular.module('tdpApp')
                     $scope.errors = err.message;
                 });
 
-            $scope.selectOption = function(i) {
-                if ($scope.selectedOption.indexOf(i) === -1) {
-                    $scope.selectedOption.push(i);
-                } else {
-                    $scope.selectedOption.splice($scope.selectedOption.indexOf(i), 1);
-                }
-            };
-
             $scope.dismiss = function() {
                 $uibModalInstance.dismiss();
             };
@@ -371,13 +356,6 @@ angular.module('tdpApp')
             $scope.submit = function() {
                 console.log('CustomizerCtrl - panelSave:', panel);
                 var panelDetails = [];
-                if ($scope.selectedOption.length > 0) {
-                    for (var i = 0; i < $scope.selectedOption.length; i++) {
-                        var detail = {};
-                        detail.panel_setting_id = $scope.selectedOption[i];
-                        panelDetails.push(detail);
-                    }
-                }
                 $scope.settings.forEach(function(ps) {
                     var detail;
                     if (ps.settingType === 2) {
