@@ -373,8 +373,7 @@ describe('ewd session test', function () {
     it('get chem hem reports', function (done) {
         var pid = 756; //100022;
         testSession.getChemHemReports(userSession, pid, {
-            toDate: '3161010',
-            fromDate: '1501010',
+            occurances: 2,
             testNames: [
                 'CHOLESTEROL', 'HDL', 'TRIGLYCERIDE', 'MAGNESIUM', 'POTASSIUM'
             ]

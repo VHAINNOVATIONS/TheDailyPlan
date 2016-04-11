@@ -177,12 +177,30 @@ var putInChemHemReportDates = function(report) {
     });
 };
 
-var reduceLabToTests = function(fullLabResults) {
+var reduceLabToTests = function(fullLabResults, occurances) {
+    var testNameOccurances = {};
     return fullLabResults.reduce(function(r, fullLabResult) {
         var collectionDate =fullLabResult.specimen.collectionDate;
+        collectionDate = collectionDate && collectionDate.split(' ')[0];
         fullLabResult.labResults.forEach(function(labResult) {
-            labResult.date = collectionDate;
-            r.push(labResult);
+            var e = {
+                date: collectionDate,
+                value: labResult.value
+            }
+            var name = labResult.labTest.name;
+            if (! testNameOccurances[name]) {
+                testNameOccurances[name] = 1;
+            } else {
+                ++testNameOccurances[name];
+            }
+            if (testNameOccurances[name] <= occurances) {
+                if (labResult.labTest) {
+                      e.name = name;
+                      e.units = labResult.labTest.units;
+                      e.refRange = labResult.labTest.refRange;
+                }
+                r.push(e);
+            }
         });
         return r;
     }, []);
@@ -447,7 +465,7 @@ var session = {
             } else {
                 result = filterChemHemReports(result, options.testNames);
                 putInChemHemReportDates(result);
-                result = reduceLabToTests(result);
+                result = reduceLabToTests(result, options.occurances);
                 callback(null, result);
             }
         });
