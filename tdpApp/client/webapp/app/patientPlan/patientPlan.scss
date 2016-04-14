@@ -160,19 +160,14 @@ form {
 }
 
 .stripe-4 {
-  color: black;
+  color: white;
   background: repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 10px,
-    #ccc 10px,
-    #ccc 20px
-  ),
-  linear-gradient(
-    to bottom,
-    #eee,
-    #999
-  )
+    -55deg,
+    #222,
+    #222 10px,
+    #333 10px,
+    #333 20px
+  );
 }
 
 // ui-grid
