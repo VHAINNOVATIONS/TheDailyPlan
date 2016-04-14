@@ -24,11 +24,13 @@ angular.module('tdpApp')
           //subGridVariable will be available in subGrid scope
           expandableRowScope: {
             subGridVariable: 'subGridScopeVariable'
-          }
+          },
+          rowHeight:50
         };
 
         $scope.vitalsGridOptions.columnDefs = [
-          { name: 'dateTime', displayName: 'Date' , width:'*' },
+          { name: 'dateTime', displayName: 'Date' , width:'*',
+            cellTemplate: '<div class="ui-grid-cell-contents wrap" white-space: normal>{{COL_FIELD CUSTOM_FILTERS}}</div>' },
           { name: 'getTemp()', displayName: 'Temp' , width:'*' },
           { name: 'bloodPressure.value', displayName: 'Blood Pressure', width:'*' },
           { name: 'pulse.value', displayName: 'Pulse', width:'*' }
