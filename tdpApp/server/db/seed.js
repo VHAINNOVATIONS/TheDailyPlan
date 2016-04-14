@@ -2,7 +2,7 @@
 
 module.exports = function(db) {
     var layoutOrder = {
-        '!! Allergies !!': 1,
+        'Allergies': 1,
         'Immunizations': 2,
         'Vitals': 3,
         'Diet Orders': 4,
@@ -26,14 +26,15 @@ module.exports = function(db) {
     var allergies = function(facilityId, templateId) {
         return db.panel_type.create({
             facility_id: facilityId,
-            title: '!! Allergies !!',
+            title: 'Allergies',
             directive: 'dt-simple-grid',
             service: 'Allergy',
             scope_variable: 'patient',
             minSizeX: 2,
             minSizeY: 2,
             mandatory: false,
-            enable_options: false
+            enable_options: false,
+            highlightPanel:true
         }).then(function(pt) {
             // Then Create the Panel Second
             return db.panel.create({

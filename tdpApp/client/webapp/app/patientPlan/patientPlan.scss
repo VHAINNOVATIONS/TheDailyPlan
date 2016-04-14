@@ -159,6 +159,22 @@ form {
     border: 1px solid #ccc;
 }
 
+.stripe-4 {
+  color: black;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    #ccc 10px,
+    #ccc 20px
+  ),
+  linear-gradient(
+    to bottom,
+    #eee,
+    #999
+  )
+}
+
 // ui-grid
 .simpleGrid {
   .ui-grid-viewport .ui-grid-cell-contents {
