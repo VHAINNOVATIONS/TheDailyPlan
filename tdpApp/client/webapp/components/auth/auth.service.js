@@ -3,7 +3,7 @@
 angular.module('tdpApp')
     .factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
         var currentUser = {};
-        /*if($cookieStore.get('token')) {
+        /*if($cookieStore.get('tdptoken')) {
           currentUser = User.get();
         }*/
 
@@ -19,7 +19,7 @@ angular.module('tdpApp')
                 return $http.post('/auth/local', user).then(function(response) {
                     var data = response.data;
                     console.log(data);
-                    $cookieStore.put('token', data.token);
+                    $cookieStore.put('tdptoken', data.token);
                     var serverUser = data.user;
                     currentUser.displayName = serverUser.displayName;
                     currentUser.keys = serverUser.keys;
@@ -33,7 +33,7 @@ angular.module('tdpApp')
              * @param  {Function}
              */
             logout: function() {
-                $cookieStore.remove('token');
+                $cookieStore.remove('tdptoken');
                 currentUser = {};
             },
 
@@ -49,7 +49,7 @@ angular.module('tdpApp')
 
                 return User.save(user,
                     function(data) {
-                        $cookieStore.put('token', data.token);
+                        $cookieStore.put('tdptoken', data.token);
                         currentUser = User.get();
                         return cb(user);
                     },
@@ -131,7 +131,7 @@ angular.module('tdpApp')
              * Get auth token
              */
             getToken: function() {
-                return $cookieStore.get('token');
+                return $cookieStore.get('tdptoken');
             }
         };
     });

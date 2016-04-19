@@ -29,8 +29,8 @@ angular.module('tdpApp', [
       // Add authorization token to headers
       request: function (config) {
         config.headers = config.headers || {};
-        if ($cookieStore.get('token')) {
-          config.headers.Authorization = 'Bearer ' + $cookieStore.get('token');
+        if ($cookieStore.get('tdptoken')) {
+          config.headers.Authorization = 'Bearer ' + $cookieStore.get('tdptoken');
         }
         return config;
       },
@@ -40,7 +40,7 @@ angular.module('tdpApp', [
         if(response.status === 401) {
           $location.path('/');
           // remove any stale tokens
-          $cookieStore.remove('token');
+          $cookieStore.remove('tdptoken');
           return $q.reject(response);
         }
         else {
