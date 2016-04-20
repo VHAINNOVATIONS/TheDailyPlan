@@ -56,7 +56,15 @@ $btnTextAlt:                        #000;
     }
     .grid {
       width: 100%;
-      height: 250px;
+      height: 90%;
+    }
+
+    .simpleGrid{
+      height:88%;
+    }
+
+    .vitalsGrid{
+      height: 80%;
     }
 
     .grid-msg-overlay {
@@ -142,6 +150,7 @@ $btnTextAlt:                        #000;
 }
 .box-content {
     padding: 10px;
+    height:100%;
 }
 .box-header-btns {
     top: 15px;
