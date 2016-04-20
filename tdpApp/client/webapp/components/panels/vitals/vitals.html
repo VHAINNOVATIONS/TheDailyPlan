@@ -1,9 +1,9 @@
-<div>
+<div class="vitalsGrid">
   <div class="control-group">
       <input type="button" class="btn btn-small" ng-click="expandVitalsRows()" value="Expand All" />
       <input type="button" class="btn btn-small" ng-click="collapseVitalsRows()" value="Collapse All" />
   </div>
-  <div ui-grid="vitalsGridOptions" ui-grid-pinning ui-grid-expandable class="grid">
+  <div ui-grid="vitalsGridOptions" ui-grid-pinning ui-grid-expandable class="grid" ui-grid-auto-resize>
       <div class="grid-msg-overlay" ng-hide="!vitalsLoading">
           <div class="msg">
               <span>
