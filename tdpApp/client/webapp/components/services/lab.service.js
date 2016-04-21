@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tdpApp')
-    .factory('Labs', function Labs($http, $log) {
+    .factory('Labs', function Labs($http) {
         return {
             columnDefs: [{
                 name: 'date',
