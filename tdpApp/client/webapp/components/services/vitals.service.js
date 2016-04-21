@@ -7,10 +7,10 @@ angular.module('tdpApp')
                 var fn = function() {
                     return !angular.isUndefined(this.temperature) ? this.temperature.value + ' ' + this.temperature.unit : '';
                 };
-                var occurances = 2;
+                var occurances = 3;
                 panelDetails.forEach(function(pd) {
                     if (pd.setting_name === 'Occurances') {
-                        occurances = pd.detail_value || pd.setting_value || 2;
+                       occurances = parseInt(pd.detail_value, 10);
                     }
                 });
                 var params = {

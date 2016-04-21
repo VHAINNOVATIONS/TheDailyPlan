@@ -114,9 +114,9 @@ module.exports = function(db) {
                     }),
                     db.panel_setting.create({
                         panel_type_id: pt.id,
-                        setting_type: 2,
+                        setting_type: 6,
                         setting_name: 'Occurances',
-                        setting_value: '3'
+                        setting_value: '3:1^2^3'
                     }).then(function(ps) {
                         return db.panel_detail.create({
                             panel_id: p.id,
@@ -447,9 +447,15 @@ module.exports = function(db) {
                     }),
                     db.panel_setting.create({
                         panel_type_id: pt.id,
-                        setting_type: 2,
+                        setting_type: 6,
                         setting_name: 'Occurances',
-                        setting_value: '3'
+                        setting_value: '3:1^2^3'
+                    }).then(function(ps) {
+                        return db.panel_detail.create({
+                            panel_id: p.id,
+                            panel_setting_id: ps.id,
+                            detail_value: '3'
+                        })
                     }).then(function() {
                         return db.panel_setting.create({
                             panel_type_id: pt.id,
