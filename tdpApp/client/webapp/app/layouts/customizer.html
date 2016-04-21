@@ -11,7 +11,7 @@
                     <div class="form-group row" ng-if="setting.settingType === 2">
                         <label for="numberinput" class="col-sm-offset-1 col-sm-3 control-label">{{setting.settingName}}</label>
                         <div class="col-sm-7">
-                            <input ng-model="setting.numberValue" type="number" min="1" class="form-control" id="numberinput" ng-disabled="displayOnly">
+                            <input ng-model="setting.numberValue" type="number" min="0" max="120" class="form-control" id="numberinput" ng-disabled="displayOnly">
                         </div>
                     </div>
                     <div class="form-group row" ng-if="setting.settingType === 3">
