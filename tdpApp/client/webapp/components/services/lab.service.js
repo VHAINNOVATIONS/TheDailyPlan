@@ -42,10 +42,10 @@ angular.module('tdpApp')
             get: function(patientId, panelDetails) {
                 var self = this;
                 var tn = [];
-                var occurances = 3;
+                var occurances = '3';
                 panelDetails.forEach(function(pd) {
-                    if (pd.setting_name === 'Occurances') {
-                        occurances = parseInt(pd.detail_value, 10);
+                    if (pd.setting_name === 'Occurences') {
+                        occurances = pd.detail_value || '3';
                         return;
                     }
                     if (pd.setting_name === 'Test Names') {

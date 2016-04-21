@@ -115,7 +115,7 @@ module.exports = function(db) {
                     db.panel_setting.create({
                         panel_type_id: pt.id,
                         setting_type: 6,
-                        setting_name: 'Occurances',
+                        setting_name: 'Occurences',
                         setting_value: '3:1^2^3'
                     }).then(function(ps) {
                         return db.panel_detail.create({
@@ -448,7 +448,7 @@ module.exports = function(db) {
                     db.panel_setting.create({
                         panel_type_id: pt.id,
                         setting_type: 6,
-                        setting_name: 'Occurances',
+                        setting_name: 'Occurences',
                         setting_value: '3:1^2^3'
                     }).then(function(ps) {
                         return db.panel_detail.create({
