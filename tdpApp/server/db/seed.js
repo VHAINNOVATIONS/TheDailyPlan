@@ -6,8 +6,8 @@ module.exports = function(db) {
         'Immunizations': 2,
         'Vitals': 3,
         'Diet Orders': 4,
-        'Lab Orders': 5,
-        'Radiology Orders': 6,
+        'Pending Lab Orders': 5,
+        'Pending Radiology Orders': 6,
         'Pending Procedures': 7,
         'Visits': 8,
         'IV Medications': 9,
@@ -114,9 +114,9 @@ module.exports = function(db) {
                     }),
                     db.panel_setting.create({
                         panel_type_id: pt.id,
-                        setting_type: 2,
-                        setting_name: 'Occurances',
-                        setting_value: '3'
+                        setting_type: 6,
+                        setting_name: 'Occurences',
+                        setting_value: '3:1^2^3'
                     }).then(function(ps) {
                         return db.panel_detail.create({
                             panel_id: p.id,
@@ -166,7 +166,7 @@ module.exports = function(db) {
     var labOrders = function(facilityId, templateId) {
         return db.panel_type.create({
             facility_id: facilityId,
-            title: 'Lab Orders',
+            title: 'Pending Lab Orders',
             directive: 'dt-simple-grid',
             service: 'LabOrders',
             scope_variable: 'patient',
@@ -177,7 +177,7 @@ module.exports = function(db) {
         }).then(function(pt) {
             // Then Create the Panel Second
             return db.panel.create({
-                name: 'Lab Orders Default',
+                name: 'Pending Lab Orders Default',
                 panel_type_id: pt.id,
                 sizeX: 3,
                 sizeY: 2
@@ -198,7 +198,7 @@ module.exports = function(db) {
     var radiologyOrders = function(facilityId, templateId) {
         return db.panel_type.create({
             facility_id: facilityId,
-            title: 'Radiology Orders',
+            title: 'Pending Radiology Orders',
             directive: 'dt-simple-grid',
             service: 'RadiologyOrders',
             scope_variable: 'patient',
@@ -209,7 +209,7 @@ module.exports = function(db) {
         }).then(function(pt) {
             // Then Create the Panel Second
             return db.panel.create({
-                name: 'Radiology Orders Default',
+                name: 'Pending Radiology Orders Default',
                 panel_type_id: pt.id,
                 sizeX: 3,
                 sizeY: 2
@@ -447,9 +447,15 @@ module.exports = function(db) {
                     }),
                     db.panel_setting.create({
                         panel_type_id: pt.id,
-                        setting_type: 2,
-                        setting_name: 'Occurances',
-                        setting_value: '3'
+                        setting_type: 6,
+                        setting_name: 'Occurences',
+                        setting_value: '3:1^2^3'
+                    }).then(function(ps) {
+                        return db.panel_detail.create({
+                            panel_id: p.id,
+                            panel_setting_id: ps.id,
+                            detail_value: '3'
+                        })
                     }).then(function() {
                         return db.panel_setting.create({
                             panel_type_id: pt.id,

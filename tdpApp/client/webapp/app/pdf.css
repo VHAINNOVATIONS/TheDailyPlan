@@ -73,11 +73,19 @@ div.patient-end {
 
 div.header {
 	display: block;
-  page-break-before: always;
 	width: 700px;
 	position: running(header)
   	page: patient;
   	counter-reset: page;
+}
+
+div.headerlater {
+  display: block;
+  page-break-before: always;
+  width: 700px;
+  position: running(header)
+    page: patient;
+    counter-reset: page;
 }
 
 span.patient_header {

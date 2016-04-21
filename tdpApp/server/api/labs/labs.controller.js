@@ -2,7 +2,12 @@
 
 exports.index = function (req, res, next) {
   var patientId = req.query.patientId;
-  var options = req.query;
+  var options = {
+      occurances: parseInt(req.query.occurances, 10)
+  };
+  if (req.query.testNames) {
+    options.testNames = req.query.testNames;
+  }
 
   req.session.getChemHemReports(req.user, patientId, options, function (err, body) {
       if (err) {

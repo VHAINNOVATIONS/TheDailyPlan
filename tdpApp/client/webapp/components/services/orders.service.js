@@ -49,13 +49,8 @@ angular.module('tdpApp')
             }, {
                 name: 'testName',
                 displayName: 'Order',
-                width: '**',
-                btsrpWidth: '7'
-            }, {
-                name: 'status',
-                displayName: 'Status',
-                width: '*',
-                btsrpWidth: '2'
+                width: '***',
+                btsrpWidth: '9'
             }],
             loadingMsg: 'Loading Lab orders...',
             emptyMsg: 'No Lab Orders Found',
@@ -77,13 +72,8 @@ angular.module('tdpApp')
             }, {
                 name: 'testName',
                 displayName: 'Order',
-                width: '**',
-                btsrpWidth: '7'
-            }, {
-                name: 'status',
-                displayName: 'Status',
-                width: '*',
-                btsrpWidth: '2'
+                width: '***',
+                btsrpWidth: '9'
             }],
             loadingMsg: 'Loading Radiology orders...',
             emptyMsg: 'No Radiology Orders Found',
