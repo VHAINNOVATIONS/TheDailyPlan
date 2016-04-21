@@ -13,7 +13,8 @@ angular.module('tdpApp', [
   'ui.grid',
   'ui.grid.expandable',
   'ui.grid.selection',
-  'ui.grid.pinning'
+  'ui.grid.pinning',
+  'ui.grid.autoResize'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, IdleProvider) {
     $urlRouterProvider.otherwise('/');
