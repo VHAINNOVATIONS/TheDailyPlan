@@ -60,7 +60,7 @@ angular.module('tdpApp')
             },
 
             /**
-             * Find Complete Panel_Setting by Panel_Type ID
+             * Find Complete Panel_Setting by PanelType id
              *
              * @param  {String}   id    - query id
              * @param  {Function} callback - optional

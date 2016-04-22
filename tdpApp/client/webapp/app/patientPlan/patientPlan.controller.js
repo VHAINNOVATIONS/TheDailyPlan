@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tdpApp')
-  .controller('PatientPlanCtrl', function ($scope, $resource, Patient, Demographics, Template, Panel, Panel_Type, Auth, Audit) {
+  .controller('PatientPlanCtrl', function ($scope, $resource, Patient, Demographics, Template, Panel, Auth, Audit) {
   	var self = this;
     self.cdate = new Date();
     self.demographics = null;

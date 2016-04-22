@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('tdpApp')
-    .controller('LayoutsCtrl', ['$scope', '$location', 'Template', 'Panel_Type', 'Location', '$modal', 'Facility', '$stateParams',
-        function($scope, $location, Template, Panel_Type, Location, $modal, Facility, $stateParams) {
+    .controller('LayoutsCtrl', ['$scope', '$location', 'Template', 'PanelType', 'Location', '$modal', 'Facility', '$stateParams',
+        function($scope, $location, Template, PanelType, Location, $modal, Facility, $stateParams) {
             var self = this;
             self.errors = {};
             self.currentFacility = Facility.getCurrentFacility();
@@ -27,7 +27,7 @@ angular.module('tdpApp')
             self.displayOnly = false;
             self.templateID = $stateParams.id;
 
-            var initializeLayout = Panel_Type.findAllByFacilityID(self.currentFacility).then(function(panel_types) {
+            var initializeLayout = PanelType.findAllByFacilityID(self.currentFacility).then(function(panel_types) {
                     reset();
                     self.masterPanelsList = panel_types;
                     for (var i = 0; i < panel_types.length; i++) {
