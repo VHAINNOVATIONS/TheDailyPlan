@@ -29,13 +29,11 @@ module.exports = function(app) {
   // TDP DB API Routes
   app.use('/api/template',require('./api/template'));
   app.use('/api/panel',require('./api/panel'));
-  app.use('/api/panel_detail',require('./api/panel_detail'));
   app.use('/api/panel_setting',require('./api/panel_setting'));
   app.use('/api/panel_type',require('./api/panel_type'));
   app.use('/api/facility',require('./api/facility'));
   app.use('/api/facility_message',require('./api/facility_message'));
   app.use('/api/audit',require('./api/audit'));
-
 
   app.use('/auth', require('./auth'));
 
