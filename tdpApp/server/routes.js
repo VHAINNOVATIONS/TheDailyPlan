@@ -28,7 +28,6 @@ module.exports = function(app) {
 
   // TDP DB API Routes
   app.use('/api/template',require('./api/template'));
-  app.use('/api/template_layout',require('./api/template_layout'));
   app.use('/api/panel',require('./api/panel'));
   app.use('/api/panel_detail',require('./api/panel_detail'));
   app.use('/api/panel_setting',require('./api/panel_setting'));
