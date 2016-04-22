@@ -88,11 +88,60 @@ angular.module('tdpApp')
                 });
             };
 
+            var defaultDetail = function(setting, detailValue) {
+                var detaill = {
+                    panel_setting_id: setting.id,
+                    detail_value: detailValue,
+                    setting_type: setting.setting_type,
+                    setting_name: setting.setting_name,
+                    setting_value: setting.setting_value
+                };
+                return detaill;
+            };
+
             switch (self.mode) {
                 case 'create':
                     self.submitButton = 'Save';
                     self.topTitle = 'New Template';
-                    initializeLayout.catch(function(err) {
+                    initializeLayout.then(function() {
+                        self.masterPanelsList.forEach(function(panel) {
+                            var settings = panel.panelSettings;
+                            if (settings && settings.length) {
+                                var panelDetails = [];
+                                settings.forEach(function(setting) {
+                                    switch (setting.setting_type) {
+                                        case 2:
+                                        case 3:
+                                        case 4:
+                                            if (setting.setting_value) {
+                                                panelDetails.push(defaultDetail(setting, setting.setting_value));
+                                            }
+                                            break;
+                                        case 5:
+                                           if (setting.setting_value) {
+                                                var values = setting.setting_value.split('^');
+                                                values.forEach(function(value) {
+                                                    panelDetails.push(defaultDetail(setting, value));
+                                                });
+                                            }
+                                            break;
+                                        case 6:
+                                           if (setting.setting_value) {
+                                                var value = setting.setting_value.split(':')[0];
+                                                if (value) {
+                                                    panelDetails.push(defaultDetail(setting, value));
+                                                }
+                                            }
+                                            break;
+                                        default:
+                                    }
+                                });
+                                if (panelDetails && panelDetails.length) {
+                                    panel.panelDetails = panelDetails;
+                                }
+                            }
+                        });
+                    }).catch(function(err) {
                         self.errors.other = err.message;
                     });
                     break;
@@ -340,30 +389,11 @@ angular.module('tdpApp')
                             }
                         }
                     }
-                    var settingValue;
                     panel_settings.forEach(function(ps) {
-                        settingValue = ps.settingValues[0] && ps.settingValues[0].settingValue;
-                        if (ps.settingType === 2) {
-                            if (!ps.hasOwnProperty('numberValue')) {
-                                ps.numberValue = parseInt(settingValue, 10);
-                            }
-                        }
-                        if (ps.settingType === 3 || ps.settingType === 4) {
-                            if (!ps.hasOwnProperty('textValue')) {
-                                ps.textValue = settingValue || '';
-                            }
-                        }
-                        if (ps.settingType === 5) {
-                            if (!ps.hasOwnProperty('listValues')) {
-                                ps.listValues = (settingValue && settingValue.split('^')) || [];
-                            }
-                        }
+                        var settingValue = ps.settingValues[0] && ps.settingValues[0].settingValue;
                         if (ps.settingType === 6) {
                             if (settingValue) {
                                 var pieces = settingValue.split(':');
-                                if (!ps.hasOwnProperty('textValue')) {
-                                    ps.textValue = pieces[0];
-                                }
                                 if (pieces[1]) {
                                     ps.possibleValues = pieces[1].split('^');
                                 }
