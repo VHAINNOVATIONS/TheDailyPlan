@@ -5,84 +5,28 @@ var router = express.Router();
 var auth = require('../../auth/auth.service');
 var models = require('../../models/index');
 
-// get all panel_types
-router.get('/', auth.isAuthenticated(), function(req, res) {
-  models.panel_type.findAll({}).then(function(panel_types) {
-    res.json(panel_types);
-  });
-});
-
 // get all panel_types by facility id
 router.get('/facility/:id', auth.isAuthenticated(), function(req, res) {
-  models.panel_type.findAll({
-    where: {
-      facility_id: req.params.id
-    }
-  }).then(function(panel_types) {
-    res.json(panel_types);
-  });
-});
-
-// get single panel_type
-router.get('/:id', auth.isAuthenticated(), function(req, res) {
-  models.panel_type.find({
-    where: {
-      id: req.params.id
-    }
-  }).then(function(panel_type) {
-    res.json(panel_type);
-  });
-});
-
-// add new panel_type
-router.post('/', auth.isAuthenticated(), function(req, res) {
-  models.panel_type.create({
-    facility_id: req.body.facility_id,
-    title: req.body.title,
-    directive: req.body.directive,
-    scope_variable: req.body.scope_variable,
-    minSizeX: req.body.minSizeX,
-    minSizeY: req.body.minSizeY,
-    mandatory: req.body.mandatory,
-    enable_options: req.body.enable_options
-  }).then(function(panel_type) {
-    res.json(panel_type);
-  });
-});
-
-// update single panel_type
-router.put('/:id', auth.isAuthenticated(), function(req, res) {
-  models.panel_type.find({
-    where: {
-      id: req.params.id
-    }
-  }).then(function(panel_type) {
-    if(panel_type){
-      panel_type.updateAttributes({
-        facility_id: req.body.facility_id,
-        title: req.body.title,
-        directive: req.body.directive,
-        scope_variable: req.body.scope_variable,
-        minSizeX: req.body.minSizeX,
-        minSizeY: req.body.minSizeY,
-        mandatory: req.body.mandatory,
-        enable_options: req.body.enable_options
-      }).then(function(panel_type) {
-        res.send(panel_type);
-      });
-    }
-  });
-});
-
-// delete a single panel_type
-router.delete('/:id', auth.isAuthenticated(), function(req, res) {
-  models.panel_type.destroy({
-    where: {
-      id: req.params.id
-    }
-  }).then(function(panel_type) {
-    res.json(panel_type);
-  });
+    models.panel_type.findAll({
+        where: {
+            facility_id: req.params.id
+        },
+        raw: true
+    }).then(function(panelTypes) {
+        return models.Sequelize.Promise.map(panelTypes, function(panelType) {
+            return models.panel_setting.findAll({
+                where: {
+                    panel_type_id: panelType.id
+                },
+                raw: true
+            }).then(function(settings) {
+                panelType.panelSettings = settings;
+                return panelType;
+            })
+        })
+    }).then(function(panelTypes) {
+        res.json(panelTypes);
+    });
 });
 
 module.exports = router;
