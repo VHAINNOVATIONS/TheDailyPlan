@@ -41,12 +41,16 @@ exports.generatePDF = function(patientIds, templateId) {
     var content = [];
 
     var allergiesSection = sections.getSectionContent('Allergies', allergies)
-
+    var emptySection = sections.getSectionContent('Allergies', {
+        status: 1
+    });
     Array.prototype.push.apply(content, allergiesSection);
+    Array.prototype.push.apply(content, emptySection);
 
 
     return {
         content: content,
+        pageSize: 'A4',
         styles: {
             tableTitle: {
                 bold: true,
@@ -59,6 +63,9 @@ exports.generatePDF = function(patientIds, templateId) {
                 alignment: 'center',
                 fontSize: 13,
                 color: 'black'
+            },
+            tableEmpty: {
+                alignment: 'center'
             }
         }
     }

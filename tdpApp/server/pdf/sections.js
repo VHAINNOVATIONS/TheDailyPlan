@@ -38,8 +38,19 @@ var commonTable = function(tableData) {
             table: tableContent
         };
     } else {
-        return {
+        var emptyTableContent = {
+            headerRows: 1,
+        };
+        emptyTableContent.widths = ['100%'];
+        emptyTableContent.body = [[{
+            text: tableData.title,
+            style: 'tableTitle'
+        }], [{
             text: tableData.emptyMessage
+        }]];
+        return {
+            table: emptyTableContent,
+            style: 'tableEmpty'
         }
     }
 };
@@ -66,6 +77,7 @@ exports.getSectionContent = function(sectionName, patientData) {
     var handler = sectionHandlers[sectionName];
     if (handler && patientData) {
         var table = handler(patientData);
+        table.margin = [0, 0, 0, 20];
         var result = [table];
         return result;
     } else {
