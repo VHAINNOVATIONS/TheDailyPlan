@@ -29,6 +29,7 @@
     "mysql": "^2.10.1",
     "passport": "~0.2.0",
     "passport-local": "~0.1.6",
+    "pdfmake": "git+https://github.com/austundag/pdfmake.git",
     "pg": "^4.4.3",
     "pg-hstore": "^2.3.2",
     "request": "^2.65.0",
