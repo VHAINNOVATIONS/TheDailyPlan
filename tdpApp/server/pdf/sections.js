@@ -8,6 +8,7 @@ var commonTable = function(tableData) {
     if (tableData.data && tableData.data.length) {
         var tableContent = {
             headerRows: 2,
+            keepWithHeaderRows: 2
         };
         tableContent.widths =  _.map(tableData.columns, 'width');
         tableContent.body = [[{
@@ -35,11 +36,13 @@ var commonTable = function(tableData) {
             tableContent.body.push(row);
         });
         return {
-            table: tableContent
+            table: tableContent,
+            keepWithHeaderRows: true
         };
     } else {
         var emptyTableContent = {
             headerRows: 1,
+            keepWithHeaderRows: 1
         };
         emptyTableContent.widths = ['100%'];
         emptyTableContent.body = [[{
