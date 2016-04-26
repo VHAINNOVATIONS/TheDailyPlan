@@ -83,31 +83,56 @@ var demographics2 = {
     DOB: '05/21/1985'
 };
 
-var headerFooterHandler = (function(demographicsList) {
-    var resetPages = {};
+var headerFooterHandler = function(demographicsList) {
+    var pageInfos = [];
 
     return {
         layoutInfoAccepter: function(pages) {
-            console.log(pages);
+            var dindex = 0;
+            var pindex = 1;
+            var counts = [1]
+            pages.forEach(function(page, index) {
+                if (index > 0) {
+                    if (page.items[0].type === 'image') {
+                        dindex = dindex + 1;
+                        pindex = 1;
+                        counts.push(1);
+                    } else {
+                        ++pindex;
+                        counts[dindex] = pindex;
+                    }
+                }
+                pageInfos.push({
+                    dindex: dindex,
+                    pindex: pindex
+                })
+            });
+            pageInfos.forEach(function(pageInfo, index) {
+                var dindex = pageInfo.dindex;
+                pageInfo.count = counts[dindex];
+            });
         },
         header: function(currentPage, pageCount) {
+            var pageInfo = pageInfos[currentPage-1];
+            var dindex = pageInfo.dindex;
             return {
-                text: 'Confidential ' + demographicsList[0].name + ' ' + moment().format('MM/DD/YYYY HH:mm'),
+                text: 'CONFIDENTIAL ' + demographicsList[dindex].name + ' ' + moment().format('MM/DD/YYYY HH:mm'),
                 bold: true,
                 alignment: 'center',
-                fontsize: 18,
-                margin: [0, 5, 0, 0]
+                fontSize: 18
             }
         },
-        footer: function(currentPage, pageCount) {
+        footer: function(currentPage) {
+            var pageInfo = pageInfos[currentPage-1];
+            var pindex = pageInfo.pindex;
+            var count = pageInfo.count;
             return {
-                text: currentPage.toString() + ' of ' + pageCount.toString(),
-                alignment: 'right',
-                margin: [0, 0, 20, 5]
+                text: pindex.toString() + ' of ' + count.toString(),
+                alignment: 'center'
             }
         }
     };
-})();
+};
 
 
 exports.generatePDF = function(patientIds, templateId) {
@@ -147,8 +172,7 @@ exports.generatePDF = function(patientIds, templateId) {
     return {
         content: content,
         pageSize: 'A4',
-        footer: sections.footer,
-        header: sections.header(demographics),
+        pageMargins: [20, 40, 20, 40],
         styles: {
             demographics: {
                 fontSize: 18,
@@ -178,7 +202,13 @@ exports.run = function(patientId, templateId, callback) {
 
     var pdoc = exports.generatePDF(patientId, templateId)
 
-    var doc = printer.createPdfKitDocument(pdoc);
+    var hfh = headerFooterHandler([demographics, demographics2]);
+    pdoc.header = hfh.header;
+    pdoc.footer = hfh.footer;
+
+    var doc = printer.createPdfKitDocument(pdoc, {
+        pagesInfoCallback: hfh.layoutInfoAccepter
+    });
     var target = fs.createWriteStream('/Work/sandbox/tdp.pdf');
     target.on('finish', function() {
         callback(null);
