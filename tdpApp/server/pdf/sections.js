@@ -180,3 +180,23 @@ exports.getIntro = function(following) {
     }
     return result;
 };
+
+exports.header = function(demographics) {
+    return function(currentPage, pageCount) {
+        return {
+            text: 'Confidential ' + demographics.name + ' ' + moment().format('MM/DD/YYYY HH:mm'),
+            bold: true,
+            alignment: 'center',
+            fontsize: 18,
+            margin: [0, 5, 0, 0]
+        }
+    };
+}
+
+exports.footer = function(currentPage, pageCount) {
+    return {
+        text: currentPage.toString() + ' of ' + pageCount.toString(),
+        alignment: 'right',
+        margin: [0, 0, 20, 5]
+    }
+};

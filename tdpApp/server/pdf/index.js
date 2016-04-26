@@ -3,6 +3,8 @@
 var fs = require('fs');
 var path = require('path');
 
+var moment = require('moment');
+
 var PdfMake = require('pdfmake');
 
 var sections = require('./sections');
@@ -81,6 +83,33 @@ var demographics2 = {
     DOB: '05/21/1985'
 };
 
+var headerFooterHandler = (function(demographicsList) {
+    var resetPages = {};
+
+    return {
+        layoutInfoAccepter: function(pages) {
+            console.log(pages);
+        },
+        header: function(currentPage, pageCount) {
+            return {
+                text: 'Confidential ' + demographicsList[0].name + ' ' + moment().format('MM/DD/YYYY HH:mm'),
+                bold: true,
+                alignment: 'center',
+                fontsize: 18,
+                margin: [0, 5, 0, 0]
+            }
+        },
+        footer: function(currentPage, pageCount) {
+            return {
+                text: currentPage.toString() + ' of ' + pageCount.toString(),
+                alignment: 'right',
+                margin: [0, 0, 20, 5]
+            }
+        }
+    };
+})();
+
+
 exports.generatePDF = function(patientIds, templateId) {
     var content = [sections.getIntro()];
 
@@ -118,6 +147,8 @@ exports.generatePDF = function(patientIds, templateId) {
     return {
         content: content,
         pageSize: 'A4',
+        footer: sections.footer,
+        header: sections.header(demographics),
         styles: {
             demographics: {
                 fontSize: 18,
