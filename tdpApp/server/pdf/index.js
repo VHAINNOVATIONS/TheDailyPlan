@@ -3,8 +3,6 @@
 var fs = require('fs');
 var path = require('path');
 
-var moment = require('moment');
-
 var PdfMake = require('pdfmake');
 
 var sections = require('./sections');
@@ -83,88 +81,11 @@ var demographics2 = {
     DOB: '05/21/1985'
 };
 
-var headerText = "The Daily Plan represents current hospital activity and it is NOT a full list of everything that takes place during your hospital stay.  Your medications, treatments, appointments, etc. may change at discharge.  Please keep your personal information out of sight by storing this folder in a private place, such as a night stand drawer or bedside cabinet.";
-
 exports.generatePDF = function(patientIds, templateId) {
-    var content = [{
-        columns: [{
-            image: path.join(__dirname, 'images', 'dailyPlanLogo.jpg')
-        }, {
-            text: headerText,
-            width: '50%'
-        }],
-        margin: [0, 0, 0, 10]
-    }];
+    var content = [sections.getIntro()];
 
-    var m = moment();
-
-    var demographicsTableContent = {
-        headerRows: 0,
-        widths: ['15%', '35%', '15%', '35%'],
-        body: [
-            [{
-                text: 'Name:',
-                alignment: 'right',
-                fontSize: 18
-            }, {
-                text: demographics.name,
-                alignment: 'left',
-                bold: true,
-                fontSize: 18
-            }, {
-                text: 'Date:',
-                alignment: 'right',
-                fontSize: 18
-            }, {
-                text: m.format('MM/DD/YYYY'),
-                alignment: 'left',
-                fontSize: 18
-            }],
-            [{
-                text: 'DOB:',
-                alignment: 'right',
-                fontSize: 18
-            }, {
-                text: demographics.DOB,
-                alignment: 'left',
-                fontSize: 18
-            }, {
-                text: 'Time:',
-                alignment: 'right',
-                fontSize: 18
-            }, {
-                text: m.format('HH:mm'),
-                alignment: 'left',
-                fontSize: 18
-            }]
-        ]
-    };
-    var locationName = demographics.location && demographics.location.name;
-    if (locationName) {
-        demographicsTableContent.body.push([{
-            text: 'Location:',
-            alignment: 'right',
-            fontSize: 18
-        }, {
-            text: locationName,
-            alignment: 'left',
-            fontSize: 18
-        }, {
-            text: '',
-            alignment: 'left',
-            fontSize: 18
-        }, {
-            text: '',
-            alignment: 'left',
-            fontSize: 18
-        }]);
-    }
-
-    content.push({
-        table: demographicsTableContent,
-        margin: [5, 0, 0, 20],
-        layout: 'noBorders'
-    });
+    var dem = sections.getDemographicsContent(demographics);
+    content.push(dem);
 
     for (var i=0; i<4; ++i) {
         var allergiesSection = sections.getSectionContent('Allergies', allergies)
@@ -176,6 +97,22 @@ exports.generatePDF = function(patientIds, templateId) {
         Array.prototype.push.apply(content, allergiesSection);
         Array.prototype.push.apply(content, emptySection);
         Array.prototype.push.apply(content, allergiesSection2);
+    }
+
+    content.push(sections.getIntro(true));
+    var dem2 = sections.getDemographicsContent(demographics2);
+    content.push(dem2);
+
+    for (i=0; i<4; ++i) {
+        var allergiesSection22 = sections.getSectionContent('Allergies', allergies)
+        var emptySection22 = sections.getSectionContent('Allergies', {
+            status: 1
+        });
+        var allergiesSection222 = sections.getSectionContent('Allergies', allergies2)
+
+        Array.prototype.push.apply(content, allergiesSection22);
+        Array.prototype.push.apply(content, emptySection22);
+        Array.prototype.push.apply(content, allergiesSection222);
     }
 
     return {

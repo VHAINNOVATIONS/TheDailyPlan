@@ -1,5 +1,8 @@
 'use strict';
 
+var path = require('path');
+
+var moment = require('moment');
 var _ = require('lodash');
 
 var sectionHandlers = {};
@@ -86,4 +89,94 @@ exports.getSectionContent = function(sectionName, patientData) {
     } else {
         return [];
     }
+};
+
+exports.getDemographicsContent = function(demographics) {
+    var m = moment();
+
+    var demographicsTableContent = {
+        headerRows: 0,
+        widths: ['15%', '35%', '15%', '35%'],
+        body: [
+            [{
+                text: 'Name:',
+                alignment: 'right',
+                fontSize: 18
+            }, {
+                text: demographics.name,
+                alignment: 'left',
+                bold: true,
+                fontSize: 18
+            }, {
+                text: 'Date:',
+                alignment: 'right',
+                fontSize: 18
+            }, {
+                text: m.format('MM/DD/YYYY'),
+                alignment: 'left',
+                fontSize: 18
+            }],
+            [{
+                text: 'DOB:',
+                alignment: 'right',
+                fontSize: 18
+            }, {
+                text: demographics.DOB,
+                alignment: 'left',
+                fontSize: 18
+            }, {
+                text: 'Time:',
+                alignment: 'right',
+                fontSize: 18
+            }, {
+                text: m.format('HH:mm'),
+                alignment: 'left',
+                fontSize: 18
+            }]
+        ]
+    };
+    var locationName = demographics.location && demographics.location.name;
+    if (locationName) {
+        demographicsTableContent.body.push([{
+            text: 'Location:',
+            alignment: 'right',
+            fontSize: 18
+        }, {
+            text: locationName,
+            alignment: 'left',
+            fontSize: 18
+        }, {
+            text: '',
+            alignment: 'left',
+            fontSize: 18
+        }, {
+            text: '',
+            alignment: 'left',
+            fontSize: 18
+        }]);
+    }
+
+    return {
+        table: demographicsTableContent,
+        margin: [5, 0, 0, 20],
+        layout: 'noBorders'
+    };
+};
+
+var headerText = "The Daily Plan represents current hospital activity and it is NOT a full list of everything that takes place during your hospital stay.  Your medications, treatments, appointments, etc. may change at discharge.  Please keep your personal information out of sight by storing this folder in a private place, such as a night stand drawer or bedside cabinet.";
+
+exports.getIntro = function(following) {
+    var result =  {
+        columns: [{
+            image: path.join(__dirname, 'images', 'dailyPlanLogo.jpg')
+        }, {
+            text: headerText,
+            width: '50%'
+        }],
+        margin: [0, 0, 0, 10]
+    };
+    if (following) {
+        result.pageBreak = 'before'
+    }
+    return result;
 };
