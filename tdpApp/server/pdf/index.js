@@ -274,7 +274,7 @@ var getTemplates = function(templateIds, callback) {
             r[t.id] = t.panels;
             return r;
         }, {});
-        callback(null, result);
+        callback(null, result, template);
     }).catch(function(err) {
         callback(err);
     });
@@ -300,7 +300,23 @@ exports.write = function(session, userSession, patientIds, templateIds, callback
             if (err) {
                 return callback(err);
             }
-            console.log(JSON.stringify(resultPatientData, undefined, 4));
+            var result = input.map(function(p, index) {
+                var sectionData = resultPatientData[index]
+
+                var tables = p.template.map(function(panel) {
+                    return {
+                        section: panel.section,
+                        hilite: panel.hilite,
+                        data: sectionData[panel.section]
+                    }
+                });
+                return {
+                    Demographics: sectionData.Demographics,
+                    tables: tables
+                }
+            });
+
+            console.log(JSON.stringify(result, undefined, 4));
             callback(null, resultPatientData);
         });
     });

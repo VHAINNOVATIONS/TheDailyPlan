@@ -5,6 +5,10 @@ var _ = require('lodash');
 
 var getters = {};
 
+getters.Demographics = function(session, userSession, patientId, details, callback) {
+    session.getDemographics(userSession, patientId, {}, callback);
+};
+
 getters.Allergies = function(session, userSession, patientId, details, callback) {
     session.getAllergies(userSession, patientId, {}, callback);
 };
@@ -44,6 +48,9 @@ module.exports = function(input, callback) {
             return noop(section);
         }
     });
+    var fnDemRaw = getSection('Demographics', getters.Demographics);
+    fns.push(_.partial(fnDemRaw, input.session, input.userSession, input.patientId, []));
+
     async.parallel(fns, function(err, dataAsArray) {
         if (err) {
             return callback(err);
