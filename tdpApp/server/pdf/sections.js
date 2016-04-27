@@ -16,8 +16,10 @@ var commonTable = function(tableData) {
         tableContent.widths =  _.map(tableData.columns, 'width');
         tableContent.body = [[{
             text: tableData.title,
+            color: 'white',
             colSpan: tableData.columns.length,
-            style: 'tableTitle'
+            style: 'tableTitle',
+            fillColor: 'black'
         }, {
             text: 'dummy'
         }], tableData.columns.map(function(c) {
