@@ -123,6 +123,32 @@ sectionHandlers.Immunizations = function(data) {
     return commonTable(tableData);
 };
 
+var freeTextHandler = function(defaultTitle) {
+    return function(data) {
+        var tableContent = {
+            headerRows: 1,
+            keepWithHeaderRows: 1
+        };
+        tableContent.widths =  ['100%'];
+        tableContent.body = [[{
+            text: data.title || defaultTitle,
+            style: 'tableTitle'
+        }], [{
+            text: data.content || ''
+        }]];
+        return {
+            table: tableContent,
+            keepWithHeaderRows: true
+        };
+     };
+};
+
+sectionHandlers['Free Text 1'] = freeTextHandler('Free Text 1');
+
+sectionHandlers['Free Text 2'] = freeTextHandler('Free Text 2');
+
+sectionHandlers['Free Text 3'] = freeTextHandler('Free Text 3');
+
 exports.getSectionContent = function(sectionName, patientData) {
     var handler = sectionHandlers[sectionName];
     var table;

@@ -28,9 +28,48 @@ getters['Health Factors'] = function(session, userSession, patientId, details, c
     session.getHealthFactors(userSession, patientId, options, callback);
 };
 
-getters['Immunizations'] = function(session, userSession, patientId, details, callback) {
+getters.Immunizations = function(session, userSession, patientId, details, callback) {
     session.getImmunizations(userSession, patientId, {}, callback);
 };
+
+var freeText = function(session, userSession, patientId, details, callback) {
+    var content = '';
+    var title = '';
+    if (details) {
+        details.forEach(function(detail) {
+            if (detail.name === 'Content') {
+                content = detail.value || '';
+            }
+            if (detail.name === 'Title') {
+                title = detail.value;
+            }
+        });
+    }
+    var tius = content.match(/\|[^\|]+\|/g);
+    if (tius && tius.length) {
+        session.getBoilerplates(userSession, patientId, {
+            text: content
+        },  function(err, value) {
+            if (err) {
+                return callback(err);
+            }
+            callback(null, {
+                content: content,
+                title: title
+            })
+            content = value;
+        });
+    } else {
+        callback(null, {
+            content: content,
+            title: title
+        })
+    }
+};
+
+getters['Free Text 1'] = freeText;
+getters['Free Text 2'] = freeText;
+getters['Free Text 3'] = freeText;
 
 var getSection = function(sectionTitle, getter) {
     return function(session, userSession, patientId, details, callback) {
