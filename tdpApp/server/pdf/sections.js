@@ -105,6 +105,24 @@ sectionHandlers['Health Factors'] = function(data) {
     return commonTable(tableData);
 };
 
+sectionHandlers.Immunizations = function(data) {
+    var tableData = {
+        title: 'Immunizations',
+        emptyMessage: 'No immunizations found',
+        columns: [{
+            header: 'Date',
+            property: 'date',
+            width: '25%'
+        }, {
+            header: 'Immunization',
+            property: 'name',
+            width: '75%'
+        }],
+        data: data
+    };
+    return commonTable(tableData);
+};
+
 exports.getSectionContent = function(sectionName, patientData) {
     var handler = sectionHandlers[sectionName];
     var table;

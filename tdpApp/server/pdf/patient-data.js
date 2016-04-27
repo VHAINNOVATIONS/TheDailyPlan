@@ -28,6 +28,10 @@ getters['Health Factors'] = function(session, userSession, patientId, details, c
     session.getHealthFactors(userSession, patientId, options, callback);
 };
 
+getters['Immunizations'] = function(session, userSession, patientId, details, callback) {
+    session.getImmunizations(userSession, patientId, {}, callback);
+};
+
 var getSection = function(sectionTitle, getter) {
     return function(session, userSession, patientId, details, callback) {
         getter(session, userSession, patientId, details, function(err, data) {
