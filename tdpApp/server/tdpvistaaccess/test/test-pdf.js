@@ -26,7 +26,7 @@ describe('ewd session test', function () {
 
     var userSession;
 
-    xit('login', function (done) {
+    it('login', function (done) {
         testSession.login({
             accessCode: 'CPRS1234',
             verifyCode: 'CPRS4321$',
@@ -62,7 +62,7 @@ describe('ewd session test', function () {
     });
 
     it('report', function(done) {
-        pdf.write(testSession, ['100846', '756'], [2, 5], function(err) {
+        pdf.write(testSession, userSession, ['100846', '756'], [2, 5], function(err) {
             if (err) {
                 return done(err);
             }

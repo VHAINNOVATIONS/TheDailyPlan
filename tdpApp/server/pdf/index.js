@@ -280,7 +280,7 @@ var getTemplates = function(templateIds, callback) {
     });
 };
 
-exports.write = function(session, patientIds, templateIds, callback) {
+exports.write = function(session, userSession, patientIds, templateIds, callback) {
     var uniqTemplateIds = _.uniq(templateIds);
     getTemplates(uniqTemplateIds, function(err, templateDict) {
         if (err) {
@@ -290,17 +290,18 @@ exports.write = function(session, patientIds, templateIds, callback) {
             var templateId = templateIds[index];
             var template = templateDict[templateId];
             return {
+                session: session,
+                userSession: userSession,
                 patientId: patientId,
                 template: template
             }
         });
-        //async.map(input, patientData, function(err, result) {
-        //    if (err) {
-        //        callback(err);
-        //    }
-        //    callback(null, result);
-        //});
-        console.log(JSON.stringify(input, undefined, 4));
-        callback(null, input);
+        async.map(input, patientData, function(err, resultPatientData) {
+            if (err) {
+                return callback(err);
+            }
+            console.log(JSON.stringify(resultPatientData, undefined, 4));
+            callback(null, resultPatientData);
+        });
     });
 };
