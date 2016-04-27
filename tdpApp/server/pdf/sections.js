@@ -7,20 +7,24 @@ var _ = require('lodash');
 
 var sectionHandlers = {};
 
-var commonTable = function(tableData) {
+var commonTable = function(tableData, options) {
+    options = options || {};
     if (tableData.data && tableData.data.length) {
         var tableContent = {
             headerRows: 2,
             keepWithHeaderRows: 2
         };
         tableContent.widths =  _.map(tableData.columns, 'width');
-        tableContent.body = [[{
+        var titleSpec = {
             text: tableData.title,
-            color: 'white',
             colSpan: tableData.columns.length,
             style: 'tableTitle',
-            fillColor: 'black'
-        }, {
+        }
+        if (options.hilite) {
+            titleSpec.color = 'white';
+            titleSpec.fillColor = 'black'
+        }
+        tableContent.body = [[titleSpec, {
             text: 'dummy'
         }], tableData.columns.map(function(c) {
             return {
@@ -66,7 +70,7 @@ var commonTable = function(tableData) {
 sectionHandlers.Allergies = function(data) {
     var tableData = {
         title: 'Allergies',
-        emptyMessage: (data.status === null) ? 'No Allergy Assessment' : 'No Known Allergies',
+        emptyMessage: (data.status === null) ? 'No allergy assessment' : 'No known allergies',
         columns: [{
             header: 'Name',
             property: 'allergenName',
@@ -77,6 +81,26 @@ sectionHandlers.Allergies = function(data) {
             width: '50%'
         }],
         data: data.allergies
+    };
+    return commonTable(tableData, {
+        hilite: true
+    });
+};
+
+sectionHandlers['Health Factors'] = function(data) {
+    var tableData = {
+        title: 'Health Factors',
+        emptyMessage: 'No health factors found',
+        columns: [{
+            header: 'Date',
+            property: 'date',
+            width: '25%'
+        }, {
+            header: 'Name',
+            property: 'name',
+            width: '75%'
+        }],
+        data: data
     };
     return commonTable(tableData);
 };

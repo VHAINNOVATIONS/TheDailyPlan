@@ -142,11 +142,13 @@ var headerFooterHandler = function(demographicsList) {
 
 exports.generatePDF = function(reportData) {
     var content = [];
+    var following = false;
 
     reportData.forEach(function(patientData) {
-        content.push(sections.getIntro());
+        content.push(sections.getIntro(following));
         var dem = sections.getDemographicsContent(patientData.Demographics);
         content.push(dem);
+        following = true;
 
         patientData.tables.forEach(function(table) {
             var sectionTable = sections.getSectionContent(table.section, table.data);
@@ -286,9 +288,6 @@ exports.write = function(session, userSession, patientIds, templateIds, callback
             });
 
             var doc = exports.generatePDF(result);
-
-            console.log(doc);
-
             var demographicsList = result.map(function(r) {
                 return r.Demographics;
             });
