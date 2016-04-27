@@ -11,12 +11,6 @@ getters.Allergies = function(session, userSession, patientId, details, callback)
 
 var getSection = function(sectionTitle, getter) {
     return function(session, userSession, patientId, details, callback) {
-        console.log('==============');
-        console.log(session);
-        console.log(userSession);
-        console.log(patientId);
-        console.log(details);
-        console.log('==============');
         getter(session, userSession, patientId, details, function(err, data) {
             if (err) {
                 return callback(err);
@@ -50,10 +44,14 @@ module.exports = function(input, callback) {
             return noop(section);
         }
     });
-    async.parallel(fns, function(err, results) {
+    async.parallel(fns, function(err, dataAsArray) {
         if (err) {
             return callback(err);
         }
-        callback(null, results);
+        var result = dataAsArray.reduce(function(r, p) {
+            r[p.section]= p.data;
+            return r;
+        }, {});
+        callback(null, result);
     });
 };
