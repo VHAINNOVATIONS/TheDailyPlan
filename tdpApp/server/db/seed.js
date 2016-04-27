@@ -393,7 +393,7 @@ module.exports = function(db) {
             scope_variable: 'patient',
             minSizeX: 2,
             minSizeY: 2,
-            mandatory: true,
+            mandatory: false,
             enable_options: false
         }).then(function(pt) {
             // Then Create the Panel Second
