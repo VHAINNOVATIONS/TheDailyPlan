@@ -140,39 +140,19 @@ var headerFooterHandler = function(demographicsList) {
 };
 
 
-exports.generatePDF = function(patientIds, templateId) {
-    var content = [sections.getIntro()];
+exports.generatePDF = function(reportData) {
+    var content = [];
 
-    var dem = sections.getDemographicsContent(demographics);
-    content.push(dem);
+    reportData.forEach(function(patientData) {
+        content.push(sections.getIntro());
+        var dem = sections.getDemographicsContent(patientData.Demographics);
+        content.push(dem);
 
-    for (var i=0; i<4; ++i) {
-        var allergiesSection = sections.getSectionContent('Allergies', allergies)
-        var emptySection = sections.getSectionContent('Allergies', {
-            status: 1
+        patientData.tables.forEach(function(table) {
+            var sectionTable = sections.getSectionContent(table.section, table.data);
+            content.push(sectionTable);
         });
-        var allergiesSection2 = sections.getSectionContent('Allergies', allergies2)
-
-        Array.prototype.push.apply(content, allergiesSection);
-        Array.prototype.push.apply(content, emptySection);
-        Array.prototype.push.apply(content, allergiesSection2);
-    }
-
-    content.push(sections.getIntro(true));
-    var dem2 = sections.getDemographicsContent(demographics2);
-    content.push(dem2);
-
-    for (i=0; i<4; ++i) {
-        var allergiesSection22 = sections.getSectionContent('Allergies', allergies)
-        var emptySection22 = sections.getSectionContent('Allergies', {
-            status: 1
-        });
-        var allergiesSection222 = sections.getSectionContent('Allergies', allergies2)
-
-        Array.prototype.push.apply(content, allergiesSection22);
-        Array.prototype.push.apply(content, emptySection22);
-        Array.prototype.push.apply(content, allergiesSection222);
-    }
+    });
 
     return {
         content: content,
@@ -202,12 +182,10 @@ exports.generatePDF = function(patientIds, templateId) {
     }
 };
 
-exports.run = function(patientId, templateId, callback) {
+exports.run = function(pdoc, demographicsList, callback) {
     var printer = new PdfMake(fonts);
 
-    var pdoc = exports.generatePDF(patientId, templateId)
-
-    var hfh = headerFooterHandler([demographics, demographics2]);
+    var hfh = headerFooterHandler(demographicsList);
     pdoc.header = hfh.header;
     pdoc.footer = hfh.footer;
 
@@ -224,15 +202,6 @@ exports.run = function(patientId, templateId, callback) {
     doc.pipe(target);
     doc.end();
 };
-
-exports.run(null, null, function(err, result) {
-    if (err) {
-        console.log('error');
-        console.log(err);
-    } else {
-        console.log('success');
-    }
-});
 
 var getTemplates = function(templateIds, callback) {
     var output = 'pt.title AS section, p.id AS pid, pt."highlightPanel" AS hilite';
@@ -316,8 +285,14 @@ exports.write = function(session, userSession, patientIds, templateIds, callback
                 }
             });
 
-            console.log(JSON.stringify(result, undefined, 4));
-            callback(null, resultPatientData);
+            var doc = exports.generatePDF(result);
+
+            console.log(doc);
+
+            var demographicsList = result.map(function(r) {
+                return r.Demographics;
+            });
+            exports.run(doc, demographicsList, callback);
         });
     });
 };

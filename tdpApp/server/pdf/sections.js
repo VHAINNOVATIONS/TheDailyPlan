@@ -83,14 +83,20 @@ sectionHandlers.Allergies = function(data) {
 
 exports.getSectionContent = function(sectionName, patientData) {
     var handler = sectionHandlers[sectionName];
+    var table;
     if (handler && patientData) {
-        var table = handler(patientData);
-        table.margin = [0, 0, 0, 20];
-        var result = [table];
-        return result;
+        table = handler(patientData);
     } else {
-        return [];
+        table = commonTable({
+            title: sectionName,
+            emptyMessage: patientData ? 'No Handler found' : 'No Data Found',
+            columns: [],
+            data: []
+        });
     }
+    table.margin = [0, 0, 0, 20];
+    var result = [table];
+    return result;
 };
 
 exports.getDemographicsContent = function(demographics) {
