@@ -2,12 +2,17 @@
 
 var fs = require('fs');
 var path = require('path');
+var util = require('util');
 
 var moment = require('moment');
+var async = require('async');
 
 var PdfMake = require('pdfmake');
 
 var sections = require('./sections');
+var patientData = require('./patient-data');
+var models = require('../models');
+var _ = require('lodash');
 
 var fonts = {
     Roboto: {
@@ -228,3 +233,74 @@ exports.run(null, null, function(err, result) {
         console.log('success');
     }
 });
+
+var getTemplates = function(templateIds, callback) {
+    var output = 'pt.title AS section, p.id AS pid, pt."highlightPanel" AS hilite';
+    var source = 'template AS t, panel AS p, panel_type AS pt, template_layout AS tl';
+    var condition = 't.id = $id AND tl.template_id = t.id AND tl.panel_id = p.id AND p.panel_type_id = pt.id'
+    var query = util.format('SELECT %s FROM %s WHERE %s ORDER BY tl.panel_order', output, source, condition);
+
+    var outputDetail = 'pd.detail_value AS value, pt.setting_name AS name';
+    var sourceDetail = 'panel_detail AS pd, panel_setting AS pt, panel AS p';
+    var conditionDetail = 'p.id = $id AND pd.panel_id = p.id AND pd.panel_setting_id = pt.id';
+    var queryDetail = util.format('SELECT %s FROM %s WHERE %s', outputDetail, sourceDetail, conditionDetail);
+    models.Sequelize.Promise.map(templateIds, function(templateId) {
+        return models.sequelize.query(query, {
+            bind: {
+                id: templateId
+            },
+            type: models.sequelize.QueryTypes.SELECT
+        }).then(function(panels) {
+            return {
+                id: templateId,
+                panels: panels
+            }
+        }).then(function(template) {
+            return models.Sequelize.Promise.map(template.panels, function(panel) {
+                return models.sequelize.query(queryDetail, {
+                    bind: {
+                        id: panel.pid
+                    },
+                    type: models.sequelize.QueryTypes.SELECT
+                }).then(function(details) {
+                    panel.details = details;
+                });
+            }).then(function() {
+                return template
+            })
+        });
+    }).then(function(template) {
+        var result = template.reduce(function(r, t) {
+            r[t.id] = t.panels;
+            return r;
+        }, {});
+        callback(null, result);
+    }).catch(function(err) {
+        callback(err);
+    });
+};
+
+exports.write = function(session, patientIds, templateIds, callback) {
+    var uniqTemplateIds = _.uniq(templateIds);
+    getTemplates(uniqTemplateIds, function(err, templateDict) {
+        if (err) {
+            return callback(err);
+        }
+        var input = patientIds.map(function(patientId, index) {
+            var templateId = templateIds[index];
+            var template = templateDict[templateId];
+            return {
+                patientId: patientId,
+                template: template
+            }
+        });
+        //async.map(input, patientData, function(err, result) {
+        //    if (err) {
+        //        callback(err);
+        //    }
+        //    callback(null, result);
+        //});
+        console.log(JSON.stringify(input, undefined, 4));
+        callback(null, input);
+    });
+};
