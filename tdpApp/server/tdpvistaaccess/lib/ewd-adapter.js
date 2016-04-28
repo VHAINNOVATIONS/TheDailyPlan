@@ -374,6 +374,7 @@ var session = {
                 result.forEach(function(item) {
                     item.text = item.text.join(' ').trim();
                     item.text = item.text.replace('  ', ' ');
+                    item.entryDate = timeUtility.postingsDate(item.entryDate);
                 });
                 callback(null, result);
             }

@@ -190,18 +190,23 @@ exports.translateVisits = function (rawData) {
 
 exports.translateImmunizations = function (rawData) {
     var result = [];
+    var dictionary = {};
     if (rawData && rawData.value) {
         Object.keys(rawData.value).forEach(function (key) {
             var immunizationPieces = rawData.value[key].split('^');
-            var immunization = {
-                id: immunizationPieces[0],
-                date: exports.translateVistADate(immunizationPieces[2]),
-                name: immunizationPieces[1]
-            };
-            if (immunizationPieces[3]) {
-                immunization.status = immunizationPieces[3];
+            var name = immunizationPieces[1];
+            if (! dictionary[name]) {
+                dictionary[name] = true;
+                var immunization = {
+                    id: immunizationPieces[0],
+                    date: exports.translateVistADate(immunizationPieces[2]),
+                    name: name
+                };
+                if (immunizationPieces[3]) {
+                    immunization.status = immunizationPieces[3];
+                }
+                result.push(immunization);
             }
-            result.push(immunization);
         });
     }
     if (result.length === 1 && ((result[0].name === "No immunizations found.") || ! result[0].id)) {

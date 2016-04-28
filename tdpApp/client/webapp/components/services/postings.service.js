@@ -4,6 +4,11 @@ angular.module('tdpApp')
     .factory('Postings', function Postings($http) {
         return {
             columnDefs: [{
+                name: 'entryDate',
+                displayName: 'Date',
+                width: '*',
+                btsrpWidth: '3'
+            }, {
                 name: 'type',
                 displayName: 'Type',
                 width: '*',
@@ -11,8 +16,8 @@ angular.module('tdpApp')
             }, {
                 name: 'text',
                 displayName: 'Text',
-                width: '***',
-                btsrpWidth: '9'
+                width: '**',
+                btsrpWidth: '6'
             }],
             loadingMsg: 'Loading postings...',
             emptyMsg: 'No postings found',

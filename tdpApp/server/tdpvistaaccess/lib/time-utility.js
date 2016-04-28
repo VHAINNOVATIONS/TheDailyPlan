@@ -59,3 +59,11 @@ exports.startWithinFutureDays = function(externalStart, futureDays) {
     var start = moment(externalStart, "MM/DD/YYYY HH:mm");
     return ! start.isAfter(mlimit, 'day');
 };
+
+exports.postingsDate = function(input) {
+    if (input) {
+        var dateOnly = input.split('@')[0];
+        return moment(dateOnly, 'MMM DD, YYYY').format('MM/DD/YYYY');
+    }
+    return '';
+};

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tdpApp')
-    .controller('PatientSearchCtrl', function($compile, $scope, $q, $location, DTOptionsBuilder, DTColumnBuilder, Patient, Location, Auth, Audit, $filter, Template) {
+    .controller('PatientSearchCtrl', function($compile, $scope, $q, $location, DTOptionsBuilder, DTColumnBuilder, Patient, Location, Auth, Audit, $filter, Template, PDF) {
         var self = this;
         self.data = [];
         self.templates = [];
@@ -161,6 +161,36 @@ angular.module('tdpApp')
             })
             .catch( function(err) {
               self.errors.other = err.message;
+            });
+        };
+
+        self.genPDF = function () {
+             console.log('patientSearch display!');
+
+            var items = [];
+            angular.forEach(self.selected, function(value, key) {
+                var entry = {};
+                if (value === true) {
+                    entry.id = key;
+                    entry.templateID = findTemplate(key);
+                    this.push(entry);
+                }
+            }, items);
+
+            console.log('items:', items.length);
+
+            if (items.length === 0) {
+                self.displayErr.flag = true;
+                self.displayErr.msg = 'Please select a patient to display.';
+                return;
+            }
+
+            PDF.generate(items).then(function(fileInfo) {
+                var filepath = fileInfo.data.path;
+                Patient.setPDFFilepath(filepath);
+                $location.path('/PDFView');
+            }).catch( function(err) {
+                console.log(err);
             });
         };
 
