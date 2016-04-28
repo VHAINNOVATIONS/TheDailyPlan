@@ -249,17 +249,25 @@ var noop = function(sectionTitle) {
 };
 
 module.exports = function(input, callback) {
-    var fns = input.template.map(function(panel) {
+    var demographicsSections = {
+        'Providers': false,
+        'Contacts': false
+    };
+
+    var fns = input.template.reduce(function(r, panel) {
         var section = panel.section;
         var g = getters[section];
         if (g) {
             var fnRaw = getSection(section, g);
             var fn = _.partial(fnRaw, input.session, input.userSession, input.patientId, panel.details);
-            return fn
+            r.push(fn);
+        } else if (demographicsSections.hasOwnProperty(section)) {
+            demographicsSections[section] = true;
         } else {
-            return noop(section);
+            r.push(noop(section));
         }
-    });
+        return r;
+    }, []);
     var fnDemRaw = getSection('Demographics', getters.Demographics);
     fns.push(_.partial(fnDemRaw, input.session, input.userSession, input.patientId, []));
 
@@ -271,6 +279,15 @@ module.exports = function(input, callback) {
             r[p.section]= p.data;
             return r;
         }, {});
+        if (demographicsSections.Providers) {
+            var provData = {};
+            provData.admittingProvider = _.get(result.Demographics, 'admissionInfo.attendingProvider');
+            provData.admittingDiagnosis = _.get(result.Demographics, 'admissionInfo.diagnosis');
+            provData.attendingProvider = _.get(result.Demographics, 'team.attendingName');
+            provData.inpatientProvider = _.get(result.Demographics, 'team.inpatientName');
+            result.Providers = provData;
+            console.log(provData);
+        }
         callback(null, result);
     });
 };

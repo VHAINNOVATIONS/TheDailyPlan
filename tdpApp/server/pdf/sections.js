@@ -393,6 +393,55 @@ sectionHandlers.Postings = function(data) {
     return commonTable(tableData);
 };
 
+sectionHandlers.Providers = function(data) {
+    var tableContent = {
+        headerRows: 1,
+        keepWithHeaderRows: 1
+    };
+    tableContent.widths =  ['30%', '70%'];
+    var titleSpec = {
+        text: 'Providers',
+        colSpan: 2,
+        style: 'tableTitle',
+    }
+    var titleRow = [titleSpec, {}];
+    tableContent.body = [
+        titleRow,
+        [{
+            text: 'Admitting Provider',
+            style: 'tableHeader',
+            alignment: 'left'
+        }, {
+            text: data.admittingProvider || ''
+        }],
+        [{
+            text: 'Admitting Diagnosis',
+            style: 'tableHeader',
+            alignment: 'left'
+        }, {
+            text: data.admittingDiagnosis || ''
+        }],
+        [{
+            text: 'Attending Provider',
+            style: 'tableHeader',
+            alignment: 'left'
+        }, {
+            text: data.attendingProvider || ''
+        }],
+        [{
+            text: 'Inpatient Provider',
+            style: 'tableHeader',
+            alignment: 'left'
+        }, {
+            text: data.inpatientProvider || ''
+        }]
+    ];
+    return {
+        table: tableContent,
+        keepWithHeaderRows: true
+    };
+};
+
 exports.getSectionContent = function(sectionName, patientData) {
     var handler = sectionHandlers[sectionName];
     var table;
