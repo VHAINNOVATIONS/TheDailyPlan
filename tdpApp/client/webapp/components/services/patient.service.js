@@ -6,6 +6,7 @@ angular.module('tdpApp')
         var selectedPatients = [];
         var selectedPrintPatients = [];
         var selectedPrintPanels = [];
+        var pdfFilepath;
 
         return {
 
@@ -54,6 +55,13 @@ angular.module('tdpApp')
             setPrintPanels: function(value) {
                 selectedPrintPanels = value;
             },
+            setPDFFilepath: function(filepath) {
+                pdfFilepath = filepath;
+            },
+            getPDFFilepath: function() {
+                return pdfFilepath;
+            },
+
             /**
              * Search Patients By Clinic
              *

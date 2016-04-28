@@ -34,6 +34,7 @@ module.exports = function(app) {
   app.use('/api/facility',require('./api/facility'));
   app.use('/api/facility_message',require('./api/facility_message'));
   app.use('/api/audit',require('./api/audit'));
+  app.use('/api/pdf',require('./api/pdf'));
 
   app.use('/auth', require('./auth'));
 

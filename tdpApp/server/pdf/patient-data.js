@@ -286,7 +286,6 @@ module.exports = function(input, callback) {
             provData.attendingProvider = _.get(result.Demographics, 'team.attendingName');
             provData.inpatientProvider = _.get(result.Demographics, 'team.inpatientName');
             result.Providers = provData;
-            console.log(provData);
         }
         callback(null, result);
     });

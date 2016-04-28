@@ -14,6 +14,8 @@ var patientData = require('./patient-data');
 var models = require('../models');
 var _ = require('lodash');
 
+var fileCounter = 1;
+
 var fonts = {
     Roboto: {
         normal: path.join(__dirname, 'fonts/Roboto-Regular.ttf'),
@@ -194,9 +196,13 @@ exports.run = function(pdoc, demographicsList, callback) {
     var doc = printer.createPdfKitDocument(pdoc, {
         pagesInfoCallback: hfh.layoutInfoAccepter
     });
-    var target = fs.createWriteStream('/Work/sandbox/tdp.pdf');
+    var filename = util.format('TDP_%s.pdf', 1); //fileCounter);
+    var filepath = path.join(__dirname, '../../client/webapp', filename);
+    var target = fs.createWriteStream(filepath);
     target.on('finish', function() {
-        callback(null);
+        callback(null, {
+            path: filename
+        });
     }).on('error', function(err) {
         callback(err);
     });

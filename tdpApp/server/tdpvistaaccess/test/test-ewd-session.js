@@ -189,8 +189,8 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get patient demographics/flags', function (done) {
-        var pid = 100846; //756; //724; //631; //100845; //100748; //100846;
+    it('get patient demographics/flags', function (done) {
+        var pid = 100845; //100846; //756; //724; //631; //100845; //100748; //100846;
         testSession.getDemographics(userSession, pid, {}, function (err, body) {
             if (err) {
                 done(err);
