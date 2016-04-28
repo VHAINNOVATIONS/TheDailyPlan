@@ -23,6 +23,7 @@ var commonTable = function(tableData, options) {
         if (options.hilite) {
             titleSpec.color = 'white';
             titleSpec.fillColor = 'black'
+            titleSpec.text = '*** ' + tableData.title + ' ***';
         }
         var titleRow = [titleSpec];
         for (var i=1; i<tableData.columns.length; ++i) {
