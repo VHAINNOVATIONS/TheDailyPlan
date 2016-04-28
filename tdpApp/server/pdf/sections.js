@@ -24,9 +24,11 @@ var commonTable = function(tableData, options) {
             titleSpec.color = 'white';
             titleSpec.fillColor = 'black'
         }
-        tableContent.body = [[titleSpec, {
-            text: 'dummy'
-        }], tableData.columns.map(function(c) {
+        var titleRow = [titleSpec];
+        for (var i=1; i<tableData.columns.length; ++i) {
+            titleRow.push({});
+        }
+        tableContent.body = [titleRow, tableData.columns.map(function(c) {
             return {
                 text: c.header,
                 style: 'tableHeader'
@@ -37,9 +39,13 @@ var commonTable = function(tableData, options) {
                 var p = c.property;
                 var v = datum[p];
                 if (v === null || v === undefined) {
-                    return '';
+                    return {
+                        text: ''
+                    };
                 } else {
-                    return v;
+                    return {
+                        text: v
+                    };
                 }
             });
             tableContent.body.push(row);
@@ -148,6 +154,98 @@ sectionHandlers['Free Text 1'] = freeTextHandler('Free Text 1');
 sectionHandlers['Free Text 2'] = freeTextHandler('Free Text 2');
 
 sectionHandlers['Free Text 3'] = freeTextHandler('Free Text 3');
+
+sectionHandlers.Labs = function(data) {
+    var tableData = {
+        title: 'Labs',
+        emptyMessage: 'No lab results found',
+        columns: [{
+            header: 'Date',
+            property: 'date',
+            width: '17%'
+        }, {
+            header: 'Name',
+            property: 'name',
+            width: '32%'
+        }, {
+            header: 'Value',
+            property: 'value',
+            width: '17%'
+        }, {
+            header: 'Units',
+            property: 'units',
+            width: '17%'
+        }, {
+            header: 'Range',
+            property: 'refRange',
+            width: '17%'
+        }],
+        data: data
+    };
+    return commonTable(tableData);
+};
+
+sectionHandlers['IV Medications'] = function(data) {
+    var tableData = {
+        title: 'IV Medications',
+        emptyMessage: 'No IV medications found',
+        columns: [{
+            header: 'Detail',
+            property: 'detail',
+            width: '50%'
+        }, {
+            header: 'Direction',
+            property: 'sig',
+            width: '50%'
+        }],
+        data: data
+    };
+    return commonTable(tableData);
+};
+
+sectionHandlers['Outpatient Medications'] = function(data) {
+    var tableData = {
+        title: 'Outpatient Medications',
+        emptyMessage: 'No outpatient found',
+        columns: [{
+            header: 'Detail',
+            property: 'detail',
+            width: '50%'
+        }, {
+            header: 'Direction',
+            property: 'sig',
+            width: '50%'
+        }],
+        data: data
+    };
+    return commonTable(tableData);
+};
+
+sectionHandlers['Inpatient Medications'] = function(data) {
+    var tableData = {
+        title: 'Inpatient Medications',
+        emptyMessage: 'No inpatient medications found',
+        columns: [{
+            header: 'Name',
+            property: 'name',
+            width: '25%'
+        }, {
+            header: 'Dose',
+            property: 'dose',
+            width: '25%'
+        }, {
+            header: 'Route',
+            property: 'route',
+            width: '25%'
+        }, {
+            header: 'Schedule',
+            property: 'schedule',
+            width: '25%'
+        }],
+        data: data
+    };
+    return commonTable(tableData);
+};
 
 exports.getSectionContent = function(sectionName, patientData) {
     var handler = sectionHandlers[sectionName];

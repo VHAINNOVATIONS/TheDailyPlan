@@ -71,6 +71,46 @@ getters['Free Text 1'] = freeText;
 getters['Free Text 2'] = freeText;
 getters['Free Text 3'] = freeText;
 
+getters.Labs = function(session, userSession, patientId, details, callback) {
+    var options = {
+        testNames: [],
+        occurances: '3'
+    };
+    if (details) {
+        options = details.reduce(function(r, detail) {
+            if (detail.name === 'Test Names') {
+                r.testNames.push(detail.value);
+            } else if (detail.name === 'Occurences') {
+                r.occurances = detail.value;
+            }
+            return r;
+        }, {
+            testNames: [],
+            occurances: '3'
+        });
+    }
+    options.occurances = parseInt(options.occurances, 10);
+    session.getChemHemReports(userSession, patientId, options, callback);
+};
+
+getters['IV Medications'] = function(session, userSession, patientId, details, callback) {
+    session.getMedications(userSession, patientId, {
+        type: 'iv'
+    }, callback);
+};
+
+getters['Inpatient Medications'] = function(session, userSession, patientId, details, callback) {
+    session.getMedications(userSession, patientId, {
+        type: 'inpatient'
+    }, callback);
+};
+
+getters['Outpatient Medications'] = function(session, userSession, patientId, details, callback) {
+    session.getMedications(userSession, patientId, {
+        type: 'outpatient'
+    }, callback);
+};
+
 var getSection = function(sectionTitle, getter) {
     return function(session, userSession, patientId, details, callback) {
         getter(session, userSession, patientId, details, function(err, data) {
