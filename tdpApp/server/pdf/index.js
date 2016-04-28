@@ -14,7 +14,7 @@ var patientData = require('./patient-data');
 var models = require('../models');
 var _ = require('lodash');
 
-var fileCounter = 1;
+var fileCounter = 0;
 
 var fonts = {
     Roboto: {

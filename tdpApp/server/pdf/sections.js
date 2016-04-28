@@ -7,8 +7,7 @@ var _ = require('lodash');
 
 var sectionHandlers = {};
 
-var commonTable = function(tableData, options) {
-    options = options || {};
+var commonTable = function(tableData) {
     if (tableData.data && tableData.data.length) {
         var tableContent = {
             headerRows: 2,
@@ -19,11 +18,6 @@ var commonTable = function(tableData, options) {
             text: tableData.title,
             colSpan: tableData.columns.length,
             style: 'tableTitle',
-        }
-        if (options.hilite) {
-            titleSpec.color = 'white';
-            titleSpec.fillColor = 'black'
-            titleSpec.text = '*** ' + tableData.title + ' ***';
         }
         var titleRow = [titleSpec];
         for (var i=1; i<tableData.columns.length; ++i) {
