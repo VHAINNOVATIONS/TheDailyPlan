@@ -196,7 +196,7 @@ exports.run = function(pdoc, demographicsList, callback) {
     var doc = printer.createPdfKitDocument(pdoc, {
         pagesInfoCallback: hfh.layoutInfoAccepter
     });
-    var filename = util.format('TDP_%s.pdf', 1); //fileCounter);
+    var filename = util.format('TDP_%s.pdf', ++fileCounter);
     var filepath = path.join(__dirname, '../../client/webapp', filename);
     var target = fs.createWriteStream(filepath);
     target.on('finish', function() {
