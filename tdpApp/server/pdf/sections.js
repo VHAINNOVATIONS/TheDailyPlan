@@ -341,6 +341,36 @@ sectionHandlers.Visits = function(data) {
     return commonTable(tableData);
 };
 
+sectionHandlers.Vitals = function(data) {
+    var tableData = {
+        title: 'Vitals',
+        emptyMessage: 'No vitals signs found',
+        columns: [{
+            header: 'Date/Time',
+            property: 'date',
+            width: '25%'
+        }, {
+            header: 'Type',
+            property: 'type',
+            width: '33%'
+        }, {
+            header: 'Value',
+            property: 'value',
+            width: '10%'
+        }, {
+            header: 'Unit',
+            property: 'unit',
+            width: '16%'
+        }, {
+            header: 'Qualifier',
+            property: 'qualifier',
+            width: '16%'
+        }],
+        data: data
+    };
+    return commonTable(tableData);
+};
+
 exports.getSectionContent = function(sectionName, patientData) {
     var handler = sectionHandlers[sectionName];
     var table;
