@@ -206,7 +206,7 @@ sectionHandlers['IV Medications'] = function(data) {
 sectionHandlers['Outpatient Medications'] = function(data) {
     var tableData = {
         title: 'Outpatient Medications',
-        emptyMessage: 'No outpatient found',
+        emptyMessage: 'No outpatient medications found',
         columns: [{
             header: 'Detail',
             property: 'detail',
@@ -241,6 +241,78 @@ sectionHandlers['Inpatient Medications'] = function(data) {
             header: 'Schedule',
             property: 'schedule',
             width: '25%'
+        }],
+        data: data
+    };
+    return commonTable(tableData);
+};
+
+sectionHandlers['Pending Lab Orders'] = function(data) {
+    var tableData = {
+        title: 'Pending Lab Orders',
+        emptyMessage: 'No pending lab orders found',
+        columns: [{
+            header: 'Date/Time',
+            property: 'start',
+            width: '25%'
+        }, {
+            header: 'Order',
+            property: 'testName',
+            width: '75%'
+        }],
+        data: data
+    };
+    return commonTable(tableData);
+};
+
+sectionHandlers['Diet Orders'] = function(data) {
+    var tableData = {
+        title: 'Diet Orders',
+        emptyMessage: 'No diet orders found',
+        columns: [{
+            header: 'Date/Time',
+            property: 'start',
+            width: '25%'
+        }, {
+            header: 'Order',
+            property: 'description',
+            width: '75%'
+        }],
+        data: data
+    };
+    return commonTable(tableData);
+};
+
+sectionHandlers['Pending Procedures'] = function(data) {
+    var tableData = {
+        title: 'Pending Procedures',
+        emptyMessage: 'No pending procedures found',
+        columns: [{
+            header: 'Date/Time',
+            property: 'start',
+            width: '25%'
+        }, {
+            header: 'Order',
+            property: 'name',
+            width: '75%'
+        }],
+        data: data
+    };
+    return commonTable(tableData);
+};
+
+sectionHandlers['Pending Radiology Orders'] = function(data) {
+    var tableData = {
+        title: 'Pending Radiology Orders',
+        emptyMessage: 'No pending radiology orders found',
+        columns: [{
+            header: 'Date/Time',
+            property: 'start',
+            width: '25%'
+        }, {
+            header: 'Order',
+            property: 'testName',
+            width: '75%'
         }],
         data: data
     };

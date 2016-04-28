@@ -111,6 +111,43 @@ getters['Outpatient Medications'] = function(session, userSession, patientId, de
     }, callback);
 };
 
+getters['Pending Lab Orders'] = function(session, userSession, patientId, details, callback) {
+    session.getOrders(userSession, patientId, {}, function(err, data) {
+        var typedData = (data && data.labOrders) || [];
+        callback(null, typedData);
+    });
+};
+
+getters['Diet Orders'] = function(session, userSession, patientId, details, callback) {
+    session.getOrders(userSession, patientId, {}, function(err, data) {
+        var typedData = (data && data.currentDietProfile) || [];
+        callback(null, typedData);
+    });
+};
+
+getters['Pending Radiology Orders'] = function(session, userSession, patientId, details, callback) {
+    session.getOrders(userSession, patientId, {}, function(err, data) {
+        var typedData = (data && data.radiologyOrders) || [];
+        callback(null, typedData);
+    });
+};
+
+getters['Pending Procedures'] = function(session, userSession, patientId, details, callback) {
+    var futureDays = '30';
+    details.forEach(function(detail) {
+        if (detail.name === 'Future Days') {
+            futureDays = detail.value || '30';
+        }
+    });
+    futureDays = parseInt(futureDays, 10);
+    session.getOrders(userSession, patientId, {
+        futureDays: futureDays
+    }, function(err, data) {
+        var typedData = (data && data.procedures) || [];
+        callback(null, typedData);
+    });
+};
+
 var getSection = function(sectionTitle, getter) {
     return function(session, userSession, patientId, details, callback) {
         getter(session, userSession, patientId, details, function(err, data) {
