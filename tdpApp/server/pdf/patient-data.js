@@ -148,6 +148,19 @@ getters['Pending Procedures'] = function(session, userSession, patientId, detail
     });
 };
 
+getters.Visits = function(session, userSession, patientId, details, callback) {
+    var futureDays = '30';
+    details.forEach(function(detail) {
+        if (detail.name === 'Future Days') {
+            futureDays = detail.value || '30';
+        }
+    });
+    futureDays = parseInt(futureDays, 10);
+    session.getVisits(userSession, patientId, {
+        numDaysFuture: futureDays
+    }, callback);
+};
+
 var getSection = function(sectionTitle, getter) {
     return function(session, userSession, patientId, details, callback) {
         getter(session, userSession, patientId, details, function(err, data) {

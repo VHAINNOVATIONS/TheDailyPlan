@@ -319,6 +319,28 @@ sectionHandlers['Pending Radiology Orders'] = function(data) {
     return commonTable(tableData);
 };
 
+sectionHandlers.Visits = function(data) {
+    var tableData = {
+        title: 'Visits',
+        emptyMessage: 'No current or future visits found',
+        columns: [{
+            header: 'Date',
+            property: 'time',
+            width: '33%'
+        }, {
+            header: 'Clinic',
+            property: 'clinic',
+            width: '33%'
+        }, {
+            header: 'Status',
+            property: 'status',
+            width: '34%'
+        }],
+        data: data
+    };
+    return commonTable(tableData);
+};
+
 exports.getSectionContent = function(sectionName, patientData) {
     var handler = sectionHandlers[sectionName];
     var table;
