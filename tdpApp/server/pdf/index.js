@@ -58,7 +58,7 @@ var headerFooterHandler = function(demographicsList) {
             var pageInfo = pageInfos[currentPage-1];
             var dindex = pageInfo.dindex;
             return {
-                text: 'CONFIDENTIAL ' + demographicsList[dindex].name + ' ' + moment().format('MM/DD/YYYY HH:mm'),
+                text: 'CONFIDENTIAL - ' + demographicsList[dindex].name + ' - DOB: ' + demographicsList[dindex].DOB,
                 bold: true,
                 alignment: 'center',
                 fontSize: 18
