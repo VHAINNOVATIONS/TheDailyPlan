@@ -371,6 +371,28 @@ sectionHandlers.Vitals = function(data) {
     return commonTable(tableData);
 };
 
+sectionHandlers.Postings = function(data) {
+    var tableData = {
+        title: 'Postings',
+        emptyMessage: 'No postings found',
+        columns: [{
+            header: 'Date',
+            property: 'entryDate',
+            width: '15%'
+        }, {
+            header: 'Type',
+            property: 'type',
+            width: '25%'
+        }, {
+            header: 'Text',
+            property: 'text',
+            width: '60%'
+        }],
+        data: data
+    };
+    return commonTable(tableData);
+};
+
 exports.getSectionContent = function(sectionName, patientData) {
     var handler = sectionHandlers[sectionName];
     var table;

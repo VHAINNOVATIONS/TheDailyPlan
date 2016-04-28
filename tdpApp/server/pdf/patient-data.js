@@ -210,6 +210,21 @@ getters.Vitals = function(session, userSession, patientId, details, callback) {
     });
 };
 
+getters['Postings'] = function(session, userSession, patientId, details, callback) {
+    var options = {};
+    if (details) {
+        options = details.reduce(function(r, detail) {
+            if (detail.name === 'Include Types') {
+                r.includeTypes.push(detail.value);
+            }
+            return r;
+        }, {
+            includeTypes: []
+        });
+    }
+    session.getPostings(userSession, patientId, options, callback);
+};
+
 var getSection = function(sectionTitle, getter) {
     return function(session, userSession, patientId, details, callback) {
         getter(session, userSession, patientId, details, function(err, data) {

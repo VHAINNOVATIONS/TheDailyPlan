@@ -288,7 +288,6 @@ exports.write = function(session, userSession, patientIds, templateIds, callback
             });
 
             var doc = exports.generatePDF(result);
-            console.log(JSON.stringify(doc, undefined, 4));
             var demographicsList = result.map(function(r) {
                 return r.Demographics;
             });
