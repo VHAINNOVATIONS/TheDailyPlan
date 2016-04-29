@@ -34,11 +34,6 @@ angular.module('tdpApp')
        templateUrl: 'app/patientPlan/patientPlan.html',
        resolve: { authenticate: authenticate }
       })
-      .state('PatientsPrint', {
-       url: '/PatientsPrint',
-       templateUrl: 'app/patientsPrint/patientsPrint.html',
-       resolve: { authenticate: authenticate }
-      })
       .state('PDFView', {
        url: '/PDFView',
        templateUrl: 'app/pdfView/pdfView.html',

@@ -1,18 +1,16 @@
 'use strict';
 
 angular.module('tdpApp')
-    .factory('Allergy', function Allergy($location, $rootScope, $http, $q) {
+    .factory('Allergy', function Allergy($http) {
         return {
             columnDefs: [{
                 name: 'allergenName',
                 displayName: 'Name',
-                width: '*',
-                btsrpWidth: '6'
+                width: '*'
             }, {
                 name: 'reaction',
                 displayName: 'Reaction',
-                width: '*',
-                btsrpWidth: '6'
+                width: '*'
             }],
             loadingMsg: 'Loading allergies...',
             emptyMsg: 'No Allergy Assessment',
@@ -37,15 +35,6 @@ angular.module('tdpApp')
                     var data = response.data;
                     self.emptyMsg = (data.status === null) ? 'No Allergy Assessment' : 'No Known Allergies';
                     var result = data.allergies || [];
-                    result.columns = self.columnDefs;
-                    result.forEach(function(row) {
-                        row.columns = result.columns.map(function(p) {
-                            return {
-                                btsrpWidth: p.btsrpWidth,
-                                value: row[p.name]
-                            };
-                        });
-                    });
                     return result;
                 });
             }

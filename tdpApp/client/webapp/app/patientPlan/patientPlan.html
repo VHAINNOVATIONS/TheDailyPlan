@@ -8,7 +8,7 @@
       <div class="panel panel-default">
           <div class="panel-heading clearfix">
             <div class="col-xs-2 col-sm-1 pull-right">
-              <button type="button" title="Print" class="btn btn-default tdp-printer-icon" ng-click="printDailyPlan()">Print</button>
+              <button type="button" title="Print" class="btn btn-default" ng-click="genPDF()">PDF</button>
             </div>
             <div class="col-xs-10 col-sm-11 pull-left">
               <div class="col-xs-4">
@@ -43,35 +43,6 @@
             </div>
           </div>
       </div>
-    </div>
-  </div>
-  <div class="visible-print-block">
-    <div class="header">
-        <div class="row">
-          <div class="col-xs-6">
-            <img alt="The Daily Plan" src="common/assets/images/dailyPlanLogo.jpg" style="display: block; width: 100%; height: 100%;"/>
-          </div>
-          <div class="col-xs-6">The Daily Plan represents current hospital activity and it is NOT a full list of everything that takes place during your hospital stay.  Your medications, treatments, appointments, etc. may change at discharge.  Please keep your personal information out of sight by storing this folder in a private place, such as a night stand drawer or bedside cabinet.</div>
-        </div>
-      <div class="report_title">
-          <h3 class="text-primary report_title_text">Confidential: The Daily Plan<sup>&#174;</sup> {{ctrl.cdate | date:'MM/dd/yyyy'}}</h3>
-      </div>
-      <div class="row tdp_demographics">
-          <div class="col-xs-4 tdp_demographics_row">{{ctrl.demographics.name}}</div>
-          <div class="col-xs-4 tdp_demographics_row">DOB: {{ctrl.demographics.DOB}}</div>
-          <div class="col-xs-4 tdp_demographics_row" ng-show="ctrl.demographics.location.name">Med Unit: {{ctrl.demographics.location.name}}</div>
-      </div>
-    </div>
-    <div>
-      <ul ng-model="ctrl.panels" class="tdp_panel">
-        <li class="patient_data" ng-repeat="panel in ctrl.panels" grid-panel-print>
-            <div class="tdp_panel_title">
-              <h4 class="tdp_panel_title_text">{{panel.title}}</h4>
-            </div>
-            <div class="box-content-print">
-            </div>
-        </li>
-      </ul>
     </div>
   </div>
 </div>
