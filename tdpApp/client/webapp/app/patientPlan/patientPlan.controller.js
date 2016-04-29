@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tdpApp')
-  .controller('PatientPlanCtrl', function ($scope, $resource, Patient, Demographics, Template, Panel, Auth, Audit) {
+  .controller('PatientPlanCtrl', function ($scope, $location, Patient, Demographics, Template, Panel, Auth, Audit, PDF) {
   	var self = this;
     self.cdate = new Date();
     self.demographics = null;
@@ -13,19 +13,28 @@ angular.module('tdpApp')
     console.log('Patient Plan - patients:',self.patients);
     console.log('Patient Plan - patient:', self.patient);
 
-    $scope.printDailyPlan = function() {
-      var accessInfo = {
-        userId: Auth.getCurrentUser().duz,
-        patientId: self.patient,
-        action: 'print'
-      };
-      Audit.create(accessInfo).then( function(data) {
-        console.log('Access Info:', data);
-      })
-      .catch( function(err) {
-        self.errors.other = err.message;
-      });
-      window.print();
+    $scope.genPDF = function() {
+        var accessInfo = {
+          userId: Auth.getCurrentUser().duz,
+          patientId: self.patient,
+          action: 'pdf'
+        };
+        Audit.create(accessInfo).then( function(data) {
+          console.log('Access Info:', data);
+        })
+        .catch( function(err) {
+          self.errors.other = err.message;
+        });
+        PDF.generate([{
+            id: self.patient,
+            templateID: self.templateID
+        }]).then(function(fileInfo) {
+            var filepath = fileInfo.data.path;
+            Patient.setPDFFilepath(filepath);
+            $location.path('/PDFView');
+        }).catch( function(err) {
+            console.log(err);
+        });
     };
 
     self.gridsterOptions = {
