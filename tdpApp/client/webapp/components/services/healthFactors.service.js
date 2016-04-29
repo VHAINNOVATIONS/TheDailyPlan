@@ -6,13 +6,11 @@ angular.module('tdpApp')
             columnDefs: [{
                 name: 'date',
                 displayName: 'Date',
-                width: '*',
-                btsrpWidth: '3'
+                width: '*'
             }, {
                 name: 'name',
                 displayName: 'Name',
-                width: '***',
-                btsrpWidth: '9'
+                width: '***'
             }],
             loadingMsg: 'Loading health factors...',
             emptyMsg: 'No health factors found',
@@ -25,7 +23,6 @@ angular.module('tdpApp')
              * @return {Promise}
              */
             get: function(patientId, panelDetails) {
-                var self = this;
                 var params = {
                     patientId: patientId,
                 };
@@ -47,16 +44,6 @@ angular.module('tdpApp')
                 };
                 return $http(httpParams).then(function(response) {
                     var result = response.data;
-                    result.columns = self.columnDefs;
-
-                    result.forEach(function(row) {
-                        row.columns = result.columns.map(function(p) {
-                            return {
-                                btsrpWidth: p.btsrpWidth,
-                                value: row[p.name]
-                            };
-                        });
-                    });
                     return result;
                 });
             }

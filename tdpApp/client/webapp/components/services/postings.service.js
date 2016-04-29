@@ -6,18 +6,15 @@ angular.module('tdpApp')
             columnDefs: [{
                 name: 'entryDate',
                 displayName: 'Date',
-                width: '*',
-                btsrpWidth: '3'
+                width: '*'
             }, {
                 name: 'type',
                 displayName: 'Type',
-                width: '*',
-                btsrpWidth: '3'
+                width: '*'
             }, {
                 name: 'text',
                 displayName: 'Text',
-                width: '**',
-                btsrpWidth: '6'
+                width: '**'
             }],
             loadingMsg: 'Loading postings...',
             emptyMsg: 'No postings found',
@@ -29,7 +26,6 @@ angular.module('tdpApp')
              * @return {Promise}
              */
             get: function(patientId, panelDetails) {
-                var self = this;
                 var params = {
                     patientId: patientId
                 };
@@ -54,16 +50,6 @@ angular.module('tdpApp')
                 };
                 return $http(httpParams).then(function(response) {
                     var result = response.data;
-                    result.columns = self.columnDefs;
-
-                    result.forEach(function(row) {
-                        row.columns = result.columns.map(function(p) {
-                            return {
-                                btsrpWidth: p.btsrpWidth,
-                                value: row[p.name]
-                            };
-                        });
-                    });
                     return result;
                 });
             }

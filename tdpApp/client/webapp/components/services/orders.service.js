@@ -3,7 +3,7 @@
 angular.module('tdpApp')
     .factory('Orders', function Orders($http) {
         return {
-            get: function(patientId, topType, columnDefs, params) {
+            get: function(patientId, topType, params) {
                 if (! params) {
                     params = {};
                 }
@@ -21,17 +21,6 @@ angular.module('tdpApp')
                     if (!result) {
                         result = [];
                     }
-
-                    result.columns = columnDefs;
-
-                    result.forEach(function(row) {
-                        row.columns = result.columns.map(function(p) {
-                            return {
-                                btsrpWidth: p.btsrpWidth,
-                                value: row[p.name]
-                            };
-                        });
-                    });
                     return result;
                 });
             }
@@ -44,19 +33,17 @@ angular.module('tdpApp')
             columnDefs: [{
                 name: 'start',
                 displayName: 'Date/Time',
-                width: '*',
-                btsrpWidth: '3'
+                width: '*'
             }, {
                 name: 'testName',
                 displayName: 'Order',
-                width: '***',
-                btsrpWidth: '9'
+                width: '***'
             }],
             loadingMsg: 'Loading Lab orders...',
             emptyMsg: 'No Lab Orders Found',
 
             get: function(patientId) {
-                return Orders.get(patientId, 'labOrders', this.columnDefs);
+                return Orders.get(patientId, 'labOrders');
             }
         };
     });
@@ -67,19 +54,17 @@ angular.module('tdpApp')
             columnDefs: [{
                 name: 'start',
                 displayName: 'Date/Time',
-                width: '*',
-                btsrpWidth: '3'
+                width: '*'
             }, {
                 name: 'testName',
                 displayName: 'Order',
-                width: '***',
-                btsrpWidth: '9'
+                width: '***'
             }],
             loadingMsg: 'Loading Radiology orders...',
             emptyMsg: 'No Radiology Orders Found',
 
             get: function(patientId) {
-                return Orders.get(patientId, 'radiologyOrders', this.columnDefs);
+                return Orders.get(patientId, 'radiologyOrders');
             }
         };
     });
@@ -90,19 +75,17 @@ angular.module('tdpApp')
             columnDefs: [{
                 name: 'start',
                 displayName: 'Date/Time',
-                width: '*',
-                btsrpWidth: '3'
+                width: '*'
             }, {
                 name: 'description',
                 displayName: 'Order',
-                width: '**',
-                btsrpWidth: '9'
+                width: '**'
             }],
             loadingMsg: 'Loading current diet order...',
             emptyMsg: 'No current diet found',
 
             get: function(patientId) {
-                return Orders.get(patientId, 'currentDietProfile', this.columnDefs);
+                return Orders.get(patientId, 'currentDietProfile');
             }
         };
     });
@@ -113,13 +96,11 @@ angular.module('tdpApp')
             columnDefs: [{
                 name: 'start',
                 displayName: 'Date/Time',
-                width: '*',
-                btsrpWidth: '3'
+                width: '*'
             }, {
                 name: 'name',
                 displayName: 'Order',
-                width: '**',
-                btsrpWidth: '9'
+                width: '**'
             }],
             loadingMsg: 'Loading pending procedures...',
             emptyMsg: 'No pending procedures',
@@ -131,7 +112,7 @@ angular.module('tdpApp')
                         futureDays = pd.detail_value || pd.setting_value || 30;
                     }
                 });
-                return Orders.get(patientId, 'procedures', this.columnDefs, {
+                return Orders.get(patientId, 'procedures', {
                     futureDays: futureDays
                 });
             }
