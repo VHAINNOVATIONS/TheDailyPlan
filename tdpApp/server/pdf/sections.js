@@ -7,6 +7,24 @@ var _ = require('lodash');
 
 var sectionHandlers = {};
 
+var emptyTable = function(title, emptyMessage) {
+    var emptyTableContent = {
+        headerRows: 1,
+        keepWithHeaderRows: 1
+    };
+    emptyTableContent.widths = ['100%'];
+    emptyTableContent.body = [[{
+        text: title,
+        style: 'tableTitle'
+    }], [{
+        text: emptyMessage
+    }]];
+    return {
+        table: emptyTableContent,
+        style: 'tableEmpty'
+    }
+};
+
 var commonTable = function(tableData) {
     if (tableData.data && tableData.data.length) {
         var tableContent = {
@@ -50,21 +68,7 @@ var commonTable = function(tableData) {
             keepWithHeaderRows: true
         };
     } else {
-        var emptyTableContent = {
-            headerRows: 1,
-            keepWithHeaderRows: 1
-        };
-        emptyTableContent.widths = ['100%'];
-        emptyTableContent.body = [[{
-            text: tableData.title,
-            style: 'tableTitle'
-        }], [{
-            text: tableData.emptyMessage
-        }]];
-        return {
-            table: emptyTableContent,
-            style: 'tableEmpty'
-        }
+        return emptyTable(tableData.title, tableData.emptyMessage)
     }
 };
 
@@ -435,6 +439,108 @@ sectionHandlers.Providers = function(data) {
         table: tableContent,
         keepWithHeaderRows: true
     };
+};
+
+var contactRow = function(title, data) {
+    var info = {};
+    var result = [{
+        text: title,
+        style: 'tableHeader',
+        alignment: 'left'
+    },  {
+        text: data.name || ''
+    },  {
+        text: data.relation || ''
+    },  {
+        text: data.phone || ''
+    }, info
+    ];
+    var text = [];
+    if (data.st1) {
+        text.push([data.st1]);
+    }
+    if (data.st2) {
+        text.push([data.st2])
+    }
+    var cityRow = '';
+    if (data.city) {
+        cityRow = data.city + ' ';
+    }
+    if (data.state) {
+        cityRow += data.state + ' ';
+    }
+    if (data.zip) {
+        cityRow += data.zip;
+    }
+    if (cityRow) {
+        text.push([cityRow]);
+    }
+    if (text.length > 0) {
+        info.table = {
+            body: text
+        };
+        info.layout = 'noBorders';
+    } else {
+        info.text = ''
+    }
+    return result;
+};
+
+sectionHandlers.Contacts = function(data) {
+    if (data && (data.nextOfKin || data.emergencyContact)) {
+        var tableContent = {
+            headerRows: 2,
+            keepWithHeaderRows: 2
+        };
+        tableContent.widths = ['15%', '20%', '10%', '15%', '40%'];
+        var titleSpec = {
+            text: 'Contacts',
+            colSpan: 5,
+            style: 'tableTitle',
+        }
+        var titleRow = [titleSpec, {}, {}, {}, {}];
+        tableContent.body = [titleRow];
+        var headerRow = [{text: ''}, {
+            text: 'Name',
+            style: 'tableHeader'
+        }, {
+            text: 'Relation',
+            style: 'tableHeader'
+        }, {
+            text: 'Phone',
+            style: 'tableHeader'
+        }, {
+            text: 'Address',
+            style: 'tableHeader'
+        }];
+        tableContent.body.push(headerRow);
+        if (data.nextOfKin) {
+            var rNKO = contactRow('Next Of Kin', data.nextOfKin);
+            tableContent.body.push(rNKO);
+        }
+        if (data.emergencyContact) {
+            if (data.nextOfKin && data.emergencyContact.sameAsNKO === 'Y') {
+                tableContent.body.push([{
+                    text: 'Emergency Contact',
+                    style: 'tableHeader',
+                    alignment: 'left'
+                },  {
+                    text: 'Same as next of kin',
+                    align: 'center',
+                    colSpan: 4
+                }, {}, {}, {}]);
+            } else {
+                var rEC = contactRow('Emergency Contact', data.emergencyContact);
+                tableContent.body.push(rEC);
+            }
+        }
+        return {
+            table: tableContent,
+            keepWithHeaderRows: true
+        };
+    } else {
+        return emptyTable('Contacts', 'No contact information found');
+    }
 };
 
 exports.getSectionContent = function(sectionName, patientData) {

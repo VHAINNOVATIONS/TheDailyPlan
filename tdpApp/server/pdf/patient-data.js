@@ -287,6 +287,12 @@ module.exports = function(input, callback) {
             provData.inpatientProvider = _.get(result.Demographics, 'team.inpatientName');
             result.Providers = provData;
         }
+        if (demographicsSections.Contacts) {
+            var contactData = {};
+            contactData.nextOfKin = _.get(result.Demographics, 'nextOfKin');
+            contactData.emergencyContact = _.get(result.Demographics, 'emergencyContact');
+            result.Contacts = contactData;
+        }
         callback(null, result);
     });
 };
