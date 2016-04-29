@@ -635,52 +635,21 @@ module.exports = function(db) {
             mandatory: false,
             enable_options: true
         }).then(function(pt) {
-            // Then Create the Panel Second
-            return db.panel.create({
-                name: 'Free Text Default',
+            db.panel_setting.create({
                 panel_type_id: pt.id,
-                sizeX: 2,
-                sizeY: 2
-            }).then(function(p) {
-                console.log('templateId:', templateId);
-                return db.Sequelize.Promise.all([
-                    // Then Create the Template_Layout Second
-                    db.template_layout.create({
-                        template_id: templateId,
-                        panel_id: p.id,
-                        panel_order: layoutOrder[pt.title]
-                    }).then(function(tl) {
-                        console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
-                    }),
-                    // Now Create the Settings and Details
-                    db.panel_setting.create({
-                        panel_type_id: pt.id,
-                        setting_type: 3,
-                        setting_name: 'Title',
-                        setting_value: ''
-                    }).then(function(ps) {
-                        //Then Create the Details
-                        return db.panel_detail.create({
-                            panel_id: p.id,
-                            panel_setting_id: ps.id
-                        })
-                    }).then(function() {
-                        return db.panel_setting.create({
-                            panel_type_id: pt.id,
-                            setting_type: 4,
-                            setting_name: 'Content',
-                            setting_value: ''
-                        });
-                    }).then(function(ps) {
-                        return db.panel_detail.create({
-                            panel_id: p.id,
-                            panel_setting_id: ps.id
-                        })
-                    }).then(function() {
-                        console.log('Free text settings are created<<<<<<<.>>>>>>>')
-                    })
-                ]);
-            });
+                setting_type: 3,
+                setting_name: 'Title',
+                setting_value: ''
+            }).then(function() {
+                return db.panel_setting.create({
+                    panel_type_id: pt.id,
+                    setting_type: 4,
+                    setting_name: 'Content',
+                    setting_value: ''
+                });
+            }).then(function() {
+                console.log('Free text settings are created<<<<<<<.>>>>>>>')
+            })
         }).then(function() {
             console.log('%s Free Text %s is created', facility.name, index);
         });
