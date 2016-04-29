@@ -165,20 +165,22 @@ angular.module('tdpApp')
         };
 
         self.genPDF = function () {
-             console.log('patientSearch display!');
-
             var items = [];
+            var auditItems = [];
+            var userId = Auth.getCurrentUser().duz;
             angular.forEach(self.selected, function(value, key) {
-                var entry = {};
                 if (value === true) {
-                    entry.id = key;
-                    entry.templateID = findTemplate(key);
-                    this.push(entry);
+                    items.push({
+                        id: key,
+                        templateID: findTemplate(key)
+                    });
+                    auditItems.push({
+                        userId: userId,
+                        patientId: key,
+                        action: 'multipdf'
+                    });
                 }
-            }, items);
-
-            console.log('items:', items.length);
-
+            });
             if (items.length === 0) {
                 self.displayErr.flag = true;
                 self.displayErr.msg = 'Please select a patient to display.';
@@ -191,6 +193,10 @@ angular.module('tdpApp')
                 $location.path('/PDFView');
             }).catch( function(err) {
                 console.log(err);
+            });
+
+            Audit.bulkCreate(auditItems).then(function(data) {
+                console.log('Access Info:', data);
             });
         };
 
