@@ -12,8 +12,21 @@ angular.module('tdpApp')
         //self.facilitySelect = null;
         self.messageTabs = [];
 
-        //functions
-        self.init = init;
+        self.init = function init() {
+            // Initially Populate the Facilities
+            Facility.findAll()
+                .then(function(data) {
+                    self.facilities = data;
+                })
+                .then(function() {
+                    self.facilitySelect = '1';
+                    self.setFacility();
+                })
+                .catch(function(err) {
+                    console.log('Facility Error:', err);
+                    self.errors = true;
+                });
+        };
         self.init();
 
         function closeTimeout() {
@@ -107,22 +120,4 @@ angular.module('tdpApp')
                     });
             }
         };
-
-        function init() {
-
-            // Initially Populate the Facilities
-            Facility.findAll()
-                .then(function(data) {
-                    self.facilities = data;
-                })
-                .then(function() {
-                    self.facilitySelect = '1';
-                    self.setFacility();
-                })
-                .catch(function(err) {
-                    console.log('Facility Error:', err);
-                    self.errors = true;
-                });
-            //setFacility();
-        }
     });
