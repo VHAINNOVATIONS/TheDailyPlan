@@ -28,13 +28,13 @@ var commonTable = function(tableData) {
     if (tableData.data && tableData.data.length) {
         var tableContent = {
             headerRows: 2,
-            keepWithHeaderRows: 2
+            keepWithHeaderRows: 1
         };
         tableContent.widths =  _.map(tableData.columns, 'width');
         var titleSpec = {
             text: tableData.title,
             colSpan: tableData.columns.length,
-            style: 'tableTitle',
+            style: 'tableTitle'
         }
         var titleRow = [titleSpec];
         for (var i=1; i<tableData.columns.length; ++i) {

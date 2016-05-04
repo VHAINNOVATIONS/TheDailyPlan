@@ -62,7 +62,11 @@ describe('ewd session test', function () {
     });
 
     it('report', function(done) {
-        pdf.write(testSession, userSession, ['100846', '756'], [2, 5], function(err) {
+        var options = {
+            time: 'XXXX',
+            date: 'YYYY'
+        };
+        pdf.write(testSession, userSession, ['100846'], [2], options, function(err) {
             if (err) {
                 return done(err);
             }
