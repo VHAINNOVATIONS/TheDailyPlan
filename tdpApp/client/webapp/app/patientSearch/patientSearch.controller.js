@@ -29,6 +29,7 @@ angular.module('tdpApp')
         self.toggleAll = toggleAll;
         self.toggleOne = toggleOne;
         self.display = display;
+        self.patientClick = patientClick;
 
         // Populate the Templates
         Template.findAll()
@@ -293,6 +294,32 @@ angular.module('tdpApp')
             return items;
         }
 
+        function patientClick(obj){
+            obj.preventDefault();
+            var target = angular.element(obj.target);
+            var id = target.attr('data-id');
+            var items = [];
+            var entry  = {};
+            entry.id = id;
+            entry.name = findName(id);
+            entry.templateID = findTemplate(id);
+            items.push(entry);
+            Patient.setSelectedPatients(items);
+            $location.path('/PatientPlan');
+
+            var accessInfo = {
+                userId: Auth.getCurrentUser().duz,
+                patientId: id,
+                action: 'view'
+            };
+            Audit.create(accessInfo).then(function(data) {
+                console.log('Access Info:', data);
+            })
+            .catch(function(err) {
+                console.log('Error filing access info: %s', err.message);
+            });
+        }
+
         self.dtOptions = DTOptionsBuilder.fromFnPromise(function() {
                 //return $resource('data1.json').query().$promise;
                 return newPromise();
@@ -321,7 +348,9 @@ angular.module('tdpApp')
                 self.selected[full.id] = false;
                 return '<input type="checkbox" ng-model="ctrl.selected[' + data.id + ']" ng-click="ctrl.toggleOne(ctrl.selected)">';
             }),
-            DTColumnBuilder.newColumn('name').withTitle('Name'),
+            DTColumnBuilder.newColumn(null).withTitle('Name').renderWith(function(data, type, full){
+                return '<a href="_blank" ng-click="ctrl.patientClick($event)" data-id='+ data.id +'  class="nameLink">'+data.name+'</a>';
+            }),
             DTColumnBuilder.newColumn('SSN').withTitle('SSN').renderWith(function(data, type, full) {
                 return !angular.isUndefined(data) ? data.substr(0, 3) + '-' + data.substr(3, 2) + '-' + data.substr(5) : '';
             }),
