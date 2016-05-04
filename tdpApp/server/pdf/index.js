@@ -77,13 +77,13 @@ var headerFooterHandler = function(demographicsList) {
 };
 
 
-exports.generatePDF = function(reportData) {
+exports.generatePDF = function(reportData, options) {
     var content = [];
     var following = false;
 
     reportData.forEach(function(patientData) {
         content.push(sections.getIntro(following));
-        var dem = sections.getDemographicsContent(patientData.Demographics);
+        var dem = sections.getDemographicsContent(patientData.Demographics, options);
         content.push(dem);
         following = true;
 
@@ -192,7 +192,7 @@ var getTemplates = function(templateIds, callback) {
     });
 };
 
-exports.write = function(session, userSession, patientIds, templateIds, callback) {
+exports.write = function(session, userSession, patientIds, templateIds, options, callback) {
     var uniqTemplateIds = _.uniq(templateIds);
     getTemplates(uniqTemplateIds, function(err, templateDict) {
         if (err) {
@@ -228,7 +228,7 @@ exports.write = function(session, userSession, patientIds, templateIds, callback
                 }
             });
 
-            var doc = exports.generatePDF(result);
+            var doc = exports.generatePDF(result, options);
             var demographicsList = result.map(function(r) {
                 return r.Demographics;
             });
