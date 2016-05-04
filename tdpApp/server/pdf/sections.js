@@ -2,7 +2,6 @@
 
 var path = require('path');
 
-var moment = require('moment');
 var _ = require('lodash');
 
 var sectionHandlers = {};
@@ -561,9 +560,7 @@ exports.getSectionContent = function(sectionName, patientData) {
     return result;
 };
 
-exports.getDemographicsContent = function(demographics) {
-    var m = moment();
-
+exports.getDemographicsContent = function(demographics, options) {
     var demographicsTableContent = {
         headerRows: 0,
         widths: ['15%', '35%', '15%', '35%'],
@@ -582,7 +579,7 @@ exports.getDemographicsContent = function(demographics) {
                 alignment: 'right',
                 fontSize: 18
             }, {
-                text: m.format('MM/DD/YYYY'),
+                text: options.date,
                 alignment: 'left',
                 fontSize: 18
             }],
@@ -599,7 +596,7 @@ exports.getDemographicsContent = function(demographics) {
                 alignment: 'right',
                 fontSize: 18
             }, {
-                text: m.format('HH:mm'),
+                text: options.time,
                 alignment: 'left',
                 fontSize: 18
             }]
