@@ -14,31 +14,27 @@ angular.module('tdpApp')
             },
 
             /**
-             * Find All Facilitys
+             * Find all facilities
              *
-             * @param  {Function} callback - optional
              * @return {Promise}
              */
-            findAll: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/facility/').
-                success(function(data) {
-                    console.log('Facility findAll:', data);
-                    results = data;
-                    deferred.resolve(data);
-                    return cb();
-                }).
-                error(function(err) {
-
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            findAll: function() {
+                return $http.get('/api/facility/').then(function(response) {
+                    results = response.data;
+                    return results;
+                });
             },
-
+            /**
+             * Load facility information to display on the logon page
+             *
+             * @return {Promise}
+             */
+            getLandingPageInformation: function(id) {
+                return $http.get('/api/facility/landing/' + id).then(function(response) {
+                    results = response.data;
+                    return results;
+                });
+            },
             /**
              * Find Single Facility by Facility ID
              *

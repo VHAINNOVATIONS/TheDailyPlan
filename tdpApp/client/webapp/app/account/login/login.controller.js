@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tdpApp')
-    .controller('LoginCtrl', function($rootScope, $scope, Auth, $location, $window, $modal, Facility, Facility_Message, Idle, LogonFacility) {
+    .controller('LoginCtrl', function($rootScope, $scope, Auth, $location, $window, $modal, $log, Facility, Facility_Message, Idle, LogonFacility) {
         var self = this;
         self.user = {};
         self.errors = false;
@@ -33,7 +33,7 @@ angular.module('tdpApp')
                 self.setFacility();
             })
             .catch(function(err) {
-                console.log('Facility Error:', err);
+                $log.debug('Facility Error:', err);
                 self.errors = true;
             });
         };
@@ -47,7 +47,7 @@ angular.module('tdpApp')
         }
 
         $rootScope.$on('IdleStart', function() {
-            console.log('IdleStart');
+            $log.debug('IdleStart');
             closeTimeout();
 
             $scope.timeout = $modal.open({
@@ -57,12 +57,12 @@ angular.module('tdpApp')
         });
 
         $rootScope.$on('IdleEnd', function() {
-            console.log('IdleEnd');
+            $log.debug('IdleEnd');
             closeTimeout();
         });
 
         $rootScope.$on('IdleTimeout', function() {
-            console.log('IdleTimeout');
+            $log.debug('IdleTimeout');
             closeTimeout();
             Idle.unwatch();
             Auth.logout();
@@ -104,7 +104,7 @@ angular.module('tdpApp')
                     })
                     .catch(function() {
                         self.errors = true;
-                        console.log('login err:', self.errors);
+                        $log.debug('login err:', self.errors);
                     });
             }
         };
@@ -114,20 +114,17 @@ angular.module('tdpApp')
         };
 
         self.setFacility = function() {
-
-            console.log('login setFacility', self.facilitySelect);
+            $log.debug('login setFacility', self.facilitySelect);
             // Populate the Message Tabs
             if (self.facilitySelect) {
                 Facility.setCurrentFacility(self.facilitySelect);
-
-                Facility_Message.findAllByFacilityID(self.facilitySelect)
-                    .then(function(data) {
-                        self.messageTabs = data;
-                    })
-                    .catch(function(err) {
-                        console.log('Facility Error:', err);
-                        self.errors = true;
-                    });
+                Facility.getLandingPageInformation(self.facilitySelect).then(function(data) {
+                    self.messageTabs = data.messages;
+                    self.contact = data.contact;
+                }).catch(function(err) {
+                    $log.debug('Facility Error:', err);
+                    self.errors = true;
+                });
             }
         };
     });

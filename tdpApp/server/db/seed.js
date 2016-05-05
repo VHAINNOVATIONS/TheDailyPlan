@@ -320,6 +320,7 @@ module.exports = function(db) {
             });
         });
     };
+
     var ivMedications = function(facilityId, templateId) {
         return db.panel_type.create({
             facility_id: facilityId,
@@ -716,7 +717,15 @@ module.exports = function(db) {
                 message_order: 3,
                 message_text: 'VA Secretary Robert A. McDonald announces a partnership with the a foundation to further advance VA’s outreach to Veterans through deeper and more innovative local and community partnerships.',
                 message_headline: 'VA Secretary to Announce Partnership'
-            }]);
+            }]).then(function() {
+                db.facility_contact.create({
+                    facilityId: facility.id,
+                    title1: 'Beth J. King, RN, BSN, MA, CCM',
+                    title2: 'National Center for Patient Safety (10A4E)',
+                    phone: '730-930-5871',
+                    email: 'Beth.King@va.gov'
+                })
+            });
         }),
         db.facility.create({
             name: 'Biloxi',
@@ -748,8 +757,15 @@ module.exports = function(db) {
                     message_order: 4,
                     message_text: 'This is the message text for the fourth message from Biloxi. We hope you have a great day!',
                     message_headline: 'Biloxi Message 4 Headline'
-                }])
-            ]);
+                }]),
+                db.facility_contact.create({
+                    facilityId: facility.id,
+                    title1: 'Beth J. King, RN, BSN, MA, CCM',
+                    title2: 'National Center for Patient Safety (10A4E)',
+                    phone: '730-930-5871',
+                    email: 'Beth.King@va.gov'
+                })
+            ])
         }),
         db.facility.create({
             name: 'Madison',
@@ -781,8 +797,16 @@ module.exports = function(db) {
                     message_order: 4,
                     message_text: 'This is the message text for the fourth message from Madison. We hope you have a great day!',
                     message_headline: 'Madison Message 4 Headline'
-                }])
-            ]);
+                }]),
+                db.facility_contact.create({
+                    facilityId: facility.id,
+                    title1: 'Carole Borland BSN, RN',
+                    title2: 'Nurse Manager',
+                    title3: 'William S. Middleton Memorial VA Hospital',
+                    phone: '608-308-3432',
+                    email: 'Carole.Borland@va.gov'
+                })
+            ])
         }),
         db.facility.create({
             name: 'Minneapolis',
@@ -814,8 +838,14 @@ module.exports = function(db) {
                     message_order: 4,
                     message_text: 'This is the message text for the fourth message from Minneapolis. We hope you have a great day!',
                     message_headline: 'Minneapolis Message 4 Headline'
-                }])
-            ]);
+                }]),
+                db.facility_contact.create({
+                    facilityId: facility.id,
+                    title1: 'Adam Herr',
+                    phone: '612-467-4268',
+                    email: 'Adam.Herr@va.gov'
+                })
+            ])
         }),
         db.facility.create({
             name: 'Central Texas (Waco)',
@@ -847,7 +877,13 @@ module.exports = function(db) {
                     message_order: 4,
                     message_text: 'This is the message text for the fourth message from Central Texas (Waco). We hope you have a great day!',
                     message_headline: 'Central Texas (Waco) Message 4 Headline'
-                }])
+                }]),
+                db.facility_contact.create({
+                    facilityId: facility.id,
+                    title1: 'Judy Strahan',
+                    phone: '254-752-6581',
+                    email: 'Judy.Strahan@va.gov'
+                })
             ]);
         })
     ]);
