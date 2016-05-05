@@ -9,7 +9,6 @@ angular.module('tdpApp')
             isselected: false
         };
         self.facilities = [];
-        //self.facilitySelect = null;
         self.messageTabs = [];
 
         self.landingImage = '/common/assets/landing_images/landing1.jpg';
@@ -27,19 +26,19 @@ angular.module('tdpApp')
             Facility.findAll().then(function(data) {
                 self.facilities = data;
                 var logonFacility = LogonFacility.get();
-                var facilityId = '1';
+                var selectFacility = data[0];
                 if (logonFacility) {
                     data.some(function(facility) {
                         if (facility.name.toLowerCase() === logonFacility) {
-                            facilityId = facility.id.toString();
+                            selectFacility = facility;
                             return true;
                         }
                         return false;
                     });
                 }
-                return facilityId;
-            }).then(function(facilityId) {
-                self.facilitySelect = facilityId;
+                return selectFacility;
+            }).then(function(facility) {
+                self.facilitySelect = facility;
                 self.setFacility();
             })
             .catch(function(err) {
@@ -88,16 +87,12 @@ angular.module('tdpApp')
             }, {
                 client: 'admin',
                 vista: 'TDPADMIN'
-            }]; // TODO read from  db when combobox for facility is functional
+            }];
 
             var location;
-            var selectedId = parseInt(self.facilitySelect, 10);
-            if (selectedId !== 1) {
-                self.facilities.forEach(function(facility) {
-                    if (facility.id === selectedId) {
-                        location = facility.name;
-                    }
-                });
+            var selectedId = self.facilitySelect && self.facilitySelect.id;
+            if (selectedId && (selectedId !== 1)) {
+                location = self.facilitySelect.name;
             }
             if (form.$valid && location) {
                 Auth.login({
@@ -127,8 +122,8 @@ angular.module('tdpApp')
             $log.debug('login setFacility', self.facilitySelect);
             // Populate the Message Tabs
             if (self.facilitySelect) {
-                Facility.setCurrentFacility(self.facilitySelect);
-                Facility.getLandingPageInformation(self.facilitySelect).then(function(data) {
+                Facility.setCurrentFacility(self.facilitySelect.id, self.facilitySelect.name);
+                Facility.getLandingPageInformation(self.facilitySelect.id).then(function(data) {
                     self.messageTabs = data.messages;
                     self.contact = data.contact;
                 }).catch(function(err) {

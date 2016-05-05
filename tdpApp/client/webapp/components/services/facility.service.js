@@ -4,13 +4,21 @@ angular.module('tdpApp')
     .factory('Facility', function Facility($location, $rootScope, $http, $q) {
         var results = {};
         var currentFacility = null;
+        var currentFacilityName = null;
 
         return {
             getCurrentFacility: function() {
                 return currentFacility;
             },
-            setCurrentFacility: function(value) {
-                currentFacility = value;
+            getCurrentFacilityName: function() {
+                return currentFacilityName;
+            },
+            setCurrentFacility: function(id, name) {
+                if (typeof id === 'string') {
+                    id = parseInt(id, 10);
+                }
+                currentFacility = id;
+                currentFacilityName = name;
             },
 
             /**

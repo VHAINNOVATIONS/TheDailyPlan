@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tdpApp')
-  .controller('PatientPlanCtrl', function ($scope, $location, Patient, Demographics, Template, Panel, Auth, Audit, PDF) {
+  .controller('PatientPlanCtrl', function ($scope, $location, Patient, Demographics, Template, Panel, Auth, Audit, PDF, Facility) {
   	var self = this;
     self.cdate = new Date();
     self.demographics = null;
@@ -9,6 +9,7 @@ angular.module('tdpApp')
     // Based on constraints, patient array can ony have one element.
     self.patient = self.patients[0].id;
     self.templateID = self.patients[0].templateID;
+    self.facilityName = Facility.getCurrentFacilityName();
 
     console.log('Patient Plan - patients:',self.patients);
     console.log('Patient Plan - patient:', self.patient);

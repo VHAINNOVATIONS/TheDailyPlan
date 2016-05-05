@@ -5,8 +5,12 @@
             <form name="form" ng-submit="login(form)" novalidate="" width="380px" margin="0" auto="auto" class="form">
                 <div class="form-group">
                     <label for="facilitySelect"> Facility</label>
-                    <select name="facilitySelect" id="facilitySelect" ng-model="ctrl.facilitySelect" ng-change="ctrl.setFacility()" class="form-control">
-                        <option ng-repeat="option in ctrl.facilities" value="{{option.id}}">{{option.name}}</option>
+                    <select name="facilitySelect"
+                            id="facilitySelect"
+                            ng-options="option as option.name for option in ctrl.facilities"
+                            ng-model="ctrl.facilitySelect"
+                            ng-change="ctrl.setFacility()"
+                            class="form-control">
                     </select>
                 </div>
                 <div class="form-group">
