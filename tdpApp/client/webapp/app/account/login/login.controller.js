@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tdpApp')
-    .controller('LoginCtrl', function($rootScope, $scope, Auth, $location, $window, $modal, $log, Facility, Facility_Message, Idle, LogonFacility) {
+    .controller('LoginCtrl', function($rootScope, $scope, Auth, $location, $window, $modal, $log, $interval, Facility, Idle, LogonFacility) {
         var self = this;
         self.user = {};
         self.errors = false;
@@ -11,6 +11,16 @@ angular.module('tdpApp')
         self.facilities = [];
         //self.facilitySelect = null;
         self.messageTabs = [];
+
+        self.landingImage = '/common/assets/landing_images/landing1.jpg';
+        self.landingImageIndex = 1;
+        $interval(function() {
+            ++self.landingImageIndex;
+            if (self.landingImageIndex === 5) {
+                self.landingImageIndex = 1;
+            }
+            self.landingImage = '/common/assets/landing_images/landing' + self.landingImageIndex + '.jpg';
+        }, 5000);
 
         self.init = function init() {
             // Initially Populate the Facilities
