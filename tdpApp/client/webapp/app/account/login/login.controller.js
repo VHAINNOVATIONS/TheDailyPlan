@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tdpApp')
-    .controller('LoginCtrl', function($rootScope, $scope, Auth, $location, $window, $modal, Facility, Facility_Message, Idle) {
+    .controller('LoginCtrl', function($rootScope, $scope, Auth, $location, $window, $modal, Facility, Facility_Message, Idle, LogonFacility) {
         var self = this;
         self.user = {};
         self.errors = false;
@@ -14,18 +14,28 @@ angular.module('tdpApp')
 
         self.init = function init() {
             // Initially Populate the Facilities
-            Facility.findAll()
-                .then(function(data) {
-                    self.facilities = data;
-                })
-                .then(function() {
-                    self.facilitySelect = '1';
-                    self.setFacility();
-                })
-                .catch(function(err) {
-                    console.log('Facility Error:', err);
-                    self.errors = true;
-                });
+            Facility.findAll().then(function(data) {
+                self.facilities = data;
+                var logonFacility = LogonFacility.get();
+                var facilityId = '1';
+                if (logonFacility) {
+                    data.some(function(facility) {
+                        if (facility.name.toLowerCase() === logonFacility) {
+                            facilityId = facility.id.toString();
+                            return true;
+                        }
+                        return false;
+                    });
+                }
+                return facilityId;
+            }).then(function(facilityId) {
+                self.facilitySelect = facilityId;
+                self.setFacility();
+            })
+            .catch(function(err) {
+                console.log('Facility Error:', err);
+                self.errors = true;
+            });
         };
         self.init();
 

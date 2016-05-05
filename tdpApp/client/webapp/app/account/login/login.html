@@ -6,8 +6,6 @@
                 <div class="form-group">
                     <label for="facilitySelect"> Facility</label>
                     <select name="facilitySelect" id="facilitySelect" ng-model="ctrl.facilitySelect" ng-change="ctrl.setFacility()" class="form-control">
-                        <!--option value="">Select a facility...</option-->
-                        <!-- not selected / blank option -->
                         <option ng-repeat="option in ctrl.facilities" value="{{option.id}}">{{option.name}}</option>
                     </select>
                 </div>
