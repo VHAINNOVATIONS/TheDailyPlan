@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tdpApp')
-    .controller('LoginCtrl', function($rootScope, $scope, Auth, $location, $window, $modal, Facility, Facility_Message, Idle) {
+    .controller('LoginCtrl', function($rootScope, $scope, Auth, $location, $window, $modal, $log, $interval, Facility, Idle, LogonFacility) {
         var self = this;
         self.user = {};
         self.errors = false;
@@ -9,23 +9,42 @@ angular.module('tdpApp')
             isselected: false
         };
         self.facilities = [];
-        //self.facilitySelect = null;
         self.messageTabs = [];
+
+        self.landingImage = '/common/assets/landing_images/landing1.jpg';
+        self.landingImageIndex = 1;
+        $interval(function() {
+            ++self.landingImageIndex;
+            if (self.landingImageIndex === 5) {
+                self.landingImageIndex = 1;
+            }
+            self.landingImage = '/common/assets/landing_images/landing' + self.landingImageIndex + '.jpg';
+        }, 5000);
 
         self.init = function init() {
             // Initially Populate the Facilities
-            Facility.findAll()
-                .then(function(data) {
-                    self.facilities = data;
-                })
-                .then(function() {
-                    self.facilitySelect = '1';
-                    self.setFacility();
-                })
-                .catch(function(err) {
-                    console.log('Facility Error:', err);
-                    self.errors = true;
-                });
+            Facility.findAll().then(function(data) {
+                self.facilities = data;
+                var logonFacility = LogonFacility.get();
+                var selectFacility = data[0];
+                if (logonFacility) {
+                    data.some(function(facility) {
+                        if (facility.name.toLowerCase() === logonFacility) {
+                            selectFacility = facility;
+                            return true;
+                        }
+                        return false;
+                    });
+                }
+                return selectFacility;
+            }).then(function(facility) {
+                self.facilitySelect = facility;
+                self.setFacility();
+            })
+            .catch(function(err) {
+                $log.debug('Facility Error:', err);
+                self.errors = true;
+            });
         };
         self.init();
 
@@ -37,7 +56,7 @@ angular.module('tdpApp')
         }
 
         $rootScope.$on('IdleStart', function() {
-            console.log('IdleStart');
+            $log.debug('IdleStart');
             closeTimeout();
 
             $scope.timeout = $modal.open({
@@ -47,12 +66,12 @@ angular.module('tdpApp')
         });
 
         $rootScope.$on('IdleEnd', function() {
-            console.log('IdleEnd');
+            $log.debug('IdleEnd');
             closeTimeout();
         });
 
         $rootScope.$on('IdleTimeout', function() {
-            console.log('IdleTimeout');
+            $log.debug('IdleTimeout');
             closeTimeout();
             Idle.unwatch();
             Auth.logout();
@@ -68,16 +87,12 @@ angular.module('tdpApp')
             }, {
                 client: 'admin',
                 vista: 'TDPADMIN'
-            }]; // TODO read from  db when combobox for facility is functional
+            }];
 
             var location;
-            var selectedId = parseInt(self.facilitySelect, 10);
-            if (selectedId !== 1) {
-                self.facilities.forEach(function(facility) {
-                    if (facility.id === selectedId) {
-                        location = facility.name;
-                    }
-                });
+            var selectedId = self.facilitySelect && self.facilitySelect.id;
+            if (selectedId && (selectedId !== 1)) {
+                location = self.facilitySelect.name;
             }
             if (form.$valid && location) {
                 Auth.login({
@@ -94,7 +109,7 @@ angular.module('tdpApp')
                     })
                     .catch(function() {
                         self.errors = true;
-                        console.log('login err:', self.errors);
+                        $log.debug('login err:', self.errors);
                     });
             }
         };
@@ -104,20 +119,17 @@ angular.module('tdpApp')
         };
 
         self.setFacility = function() {
-
-            console.log('login setFacility', self.facilitySelect);
+            $log.debug('login setFacility', self.facilitySelect);
             // Populate the Message Tabs
             if (self.facilitySelect) {
-                Facility.setCurrentFacility(self.facilitySelect);
-
-                Facility_Message.findAllByFacilityID(self.facilitySelect)
-                    .then(function(data) {
-                        self.messageTabs = data;
-                    })
-                    .catch(function(err) {
-                        console.log('Facility Error:', err);
-                        self.errors = true;
-                    });
+                Facility.setCurrentFacility(self.facilitySelect.id, self.facilitySelect.name);
+                Facility.getLandingPageInformation(self.facilitySelect.id).then(function(data) {
+                    self.messageTabs = data.messages;
+                    self.contact = data.contact;
+                }).catch(function(err) {
+                    $log.debug('Facility Error:', err);
+                    self.errors = true;
+                });
             }
         };
     });

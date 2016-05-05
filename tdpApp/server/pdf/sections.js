@@ -605,19 +605,19 @@ exports.getDemographicsContent = function(demographics, options) {
     var locationName = demographics.location && demographics.location.name;
     if (locationName) {
         demographicsTableContent.body.push([{
-            text: 'Location:',
+            text: 'Facility:',
             alignment: 'right',
             fontSize: 18
         }, {
+            text: options.facility,
+            alignment: 'left',
+            fontSize: 18
+        }, {
+            text: 'Location:',
+            alignment: 'left',
+            fontSize: 18
+        }, {
             text: locationName,
-            alignment: 'left',
-            fontSize: 18
-        }, {
-            text: '',
-            alignment: 'left',
-            fontSize: 18
-        }, {
-            text: '',
             alignment: 'left',
             fontSize: 18
         }]);

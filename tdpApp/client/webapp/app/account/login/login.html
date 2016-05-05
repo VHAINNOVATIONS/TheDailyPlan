@@ -5,10 +5,12 @@
             <form name="form" ng-submit="login(form)" novalidate="" width="380px" margin="0" auto="auto" class="form">
                 <div class="form-group">
                     <label for="facilitySelect"> Facility</label>
-                    <select name="facilitySelect" id="facilitySelect" ng-model="ctrl.facilitySelect" ng-change="ctrl.setFacility()" class="form-control">
-                        <!--option value="">Select a facility...</option-->
-                        <!-- not selected / blank option -->
-                        <option ng-repeat="option in ctrl.facilities" value="{{option.id}}">{{option.name}}</option>
+                    <select name="facilitySelect"
+                            id="facilitySelect"
+                            ng-options="option as option.name for option in ctrl.facilities"
+                            ng-model="ctrl.facilitySelect"
+                            ng-change="ctrl.setFacility()"
+                            class="form-control">
                     </select>
                 </div>
                 <div class="form-group">
@@ -34,17 +36,21 @@
                 </div>
             </form>
         </div>
-        <!-- <div class="col-sm-4">
-          <div class="panel panel-default">
-            <div class="panel-heading row-centered">
-              <h4>** WARNING ** WARNING **</h4>
+        <div class="col-sm-8">
+            <img ng-src="{{ctrl.landingImage}}" width="100%"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <h3>Contact Information</h3>
+            <div ng-if="ctrl.contact.title1">{{ctrl.contact.title1}}</div>
+            <div ng-if="ctrl.contact.title2">{{ctrl.contact.title2}}</div>
+            <div ng-if="ctrl.contact.title3">{{ctrl.contact.title3}}</div>
+            <div ng-if="ctrl.contact.phone">Phone: {{ctrl.contact.phone}}</div>
+            <div ng-if="ctrl.contact.email">
+                <a ng-href="mailto:{{ctrl.contact.email}}">{{ctrl.contact.email}}</a>
             </div>
-            <div class="panel-body">
-              <p>This site is intended to be used by authorized VA network users for viewing and retrieving information only except as otherwise explicitly authorized. VA information resides on and transmits through computer systems and networks funded by VA; all use is considered to be understanding and acceptance that there is no reasonable expectation of privacy for any data or transmissions on Government Intranet or Extranet (non-public) networks or systems. All transactions that occur on this system other than the viewing and downloading of Web site information and all data transmitted through this system are subject to review and action including (but not limited to) monitoring, recording, retrieving, copying, auditing, inspecting, investigating, restricting access, blocking, tracking, disclosing to authorized personnel, or any other authorized actions by all authorized VA and law enforcement personnel. All use of this system constitutes understanding and unconditional acceptance of these terms.</p>
-              <p>Unauthorized attempts or acts to either (1) access, upload, change, or delete information on this system, (2) modify this system, (3) deny access to this system, or (4) accrue resources for unauthorized use on this system are strictly prohibited. Such attempts or acts are subject to action that may result in criminal, civil, or administrative penalties.</p>
-            </div>
-          </div>
-        </div> -->
+        </div>
         <div class="col-sm-8">
             <h3>The Latest News</h3>
             <uib-accordion close-others="true">
@@ -54,30 +60,4 @@
             </uib-accordion>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-4">
-            <h3>Contact Information</h3>
-            <p/>Please reach out to the TDP Coordinator
-            <br/>555-555-555
-            <br/>Email:
-            <br/>
-            <a href="tdp_coordinator@va.gov">tdp_coordinator@va.gov</a>
-            </p>
-        </div>
-        <div class="col-sm-8">
-            <p>The Daily Plan&reg; was initiated to increase patient safety during hospitalization by empowering patients - and their families - to ask questions about their care; in particular, to speak up if they believe a patient&apos;s care plan is different than expected.</p>
-            <p>The plan is a patient-specific document reviewed with patients each day of their hospitalization.</p>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-4">
-            <h3> Additional Resources</h3>
-            <p><a href="#">View demo &gt;&gt;</a></p>
-        </div>
-        <div class="col-sm-8">
-            <h3>Testimonials</h3>
-            <p>This is where testimonials would go</p>
-        </div>
-    </div>
-
 </div>
