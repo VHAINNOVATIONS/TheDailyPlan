@@ -32,7 +32,7 @@
                 <div class="col-sm-12 text-center">
                     <h3>Select Panels for Template</h3>
                 </div>
-                <div class="col-sm-5">
+                <div class="col-sm-4">
                     <div class="list-group" id="availableList">
                         <span class="list-group-item active">Available
                             <input title="Toggle all" ng-click="ctrl.toggleA()" ng-model="ctrl.checkedA" value="{{ctrl.checkedA}}" ng-disabled="ctrl.availablePanels.length === 0 || ctrl.displayOnly" type="checkbox" class="pull-left picklist-input">
@@ -50,7 +50,7 @@
                         <button type="button" title="Send to Selected List" ng-disabled="ctrl.selectedA.length === 0 || ctrl.displayOnly" class="btn btn-default tdp-chevron-right" ng-click="ctrl.aToS()">Move Right</button>
                     </div>
                 </div>
-                <div class="col-sm-5">
+                <div class="col-sm-6">
                     <div class="list-group" id="selectedList">
                         <span class="list-group-item active">Selected
                             <input title="Toggle all" ng-click="ctrl.toggleS()" ng-model="ctrl.checkedS" value="{{ctrl.checkedS}}" ng-disabled="ctrl.selectedPanels.length === 0 || ctrl.displayOnly" type="checkbox" class="pull-left picklist-input">
@@ -79,6 +79,7 @@
             <div class="col-sm-4 col-sm-offset-8 col-xs-12 text-center">
                 <div>
                     <button type="submit" ng-disabled="form.$invalid && !ctrl.displayOnly" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i>{{ctrl.submitButton}}</button>
+                    <button type="button" ng-show="ctrl.displayOnly" ng-click="ctrl.startEditTemplate()" class="btn btn-default">Edit</button>
                     <button type="button" ng-hide="ctrl.displayOnly" ng-click="ctrl.cancelTemplate()" class="btn btn-default"><i class="glyphicon glyphicon-remove"></i>Cancel</button>
                 </div>
             </div>

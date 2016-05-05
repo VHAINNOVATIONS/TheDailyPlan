@@ -228,6 +228,13 @@ angular.module('tdpApp')
                 }
             };
 
+            self.startEditTemplate = function() {
+                self.displayOnly = false;
+                self.submitButton = 'Update';
+                self.topTitle = 'Edit Template';
+                self.mode = 'edit';
+             };
+
             self.cancelTemplate = function() {
                 $location.path('/templateSearch');
                 return;
