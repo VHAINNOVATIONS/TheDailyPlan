@@ -10,7 +10,7 @@
                 <div class="col-sm-4 col-centered">
                   <form ng-submit="ctrl.searchAll()" name="searchAll">
                       <div class="form-group">
-                        <label for="searchAllTemplates">Template Name</label>
+                        <label for="searchAllTemplates"><h4>Template Name</h4></label>
                         <input type="text" ng-model="ctrl.search.all" class="form-control" id="searchAllTemplates" placeholder="All" autocomplete="off" style="cursor: auto;">
                       </div>
                       <input class="btn btn-primary" type="submit" value="Search">
@@ -25,8 +25,8 @@
                 <div class="col-sm-4 col-centered">
                   <form ng-submit="ctrl.searchWard()" name="searchWard">
                       <div class="form-group">
-                        <h4>Select Ward to Display</h4>
-                        <select class="form-control" ng-model="ctrl.search.ward">
+                        <label for="searchTemplateInWard"><h4>Select Ward to Display</h4></label>
+                        <select class="form-control" id="searchTemplateInWard" ng-model="ctrl.search.ward">
                           <option value="">Select a Ward</option>
                           <option ng-repeat="option in ctrl.wards" value="{{option.id}}">{{option.name}}</option>
                         </select>
@@ -43,8 +43,8 @@
                 <div class="col-sm-4 col-centered">
                   <form ng-submit="ctrl.searchClinic()" name="searchClinic">
                       <div class="form-group">
-                        <h4>Select Clinic to Display</h4>
-                        <select class="form-control" ng-model="ctrl.search.clinic">
+                        <label for="searchTemplateInClinic"><h4>Select Clinic to Display</h4></label>
+                        <select class="form-control"  id="searchTemplateInClinic" ng-model="ctrl.search.clinic">
                           <option value="">Select a Clinic</option>
                           <option ng-repeat="option in ctrl.clinics" value="{{option.id}}">{{option.name}}</option>
                         </select>
