@@ -47,7 +47,7 @@ angular.module('tdpApp')
       mobileModeEnabled: true,
       draggable: {
         enabled: true,
-        handle: '.box-header'
+        handle: '.dragHandle'
       }
     };
 
