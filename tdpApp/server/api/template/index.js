@@ -84,30 +84,6 @@ router.get('/complete/:id', auth.isAuthenticated(), function(req, res) {
                             type: models.sequelize.QueryTypes.SELECT
                         })
                     .then(function(panelDetails) {
-                        if (panelDetails && panelDetails.length) {
-                            return panelDetails;
-                        } else if (panel.enable_options) {
-                            return models.sequelize.query('select panel_setting.id as panel_setting_id, panel_setting.setting_type, panel_setting.setting_name, panel_setting.setting_value from panel_setting, panel_type, panel where panel.id = $panel_id and panel.panel_type_id = panel_type.id and panel_setting.panel_type_id = panel_type.id', {
-                                bind: {
-                                    panel_id: panel.panel_id
-                                },
-                                type: models.sequelize.QueryTypes.SELECT
-                            }).then(function(settingDetails) {
-                                if (settingDetails && settingDetails.length) {
-                                    settingDetails = settingDetails.filter(function(r) {
-                                        return r.setting_value !== null && r.setting_value !== undefined && r.setting_type !== 1;
-                                    });
-                                    if (settingDetails && settingDetails.length) {
-                                        return settingDetails;
-                                    }
-                                }
-                                return null;
-                            });
-                        } else {
-                            return null;
-                        }
-                    })
-                    .then(function(panelDetails) {
                         var panelObj = {};
                         panelObj.panel_id = panel.panel_id;
                         panelObj.id = panel.panel_type_id;
@@ -121,6 +97,7 @@ router.get('/complete/:id', auth.isAuthenticated(), function(req, res) {
                         panelObj.print = '<div ' + panel.directive + '-print' + ' service="' + panel.service + '" patient="ctrl.' + panel.scope_variable + '" panelid="panel.panel_id" paneldetail="panel.panelDetails"></div>';
                         panelObj.mandatory = panel.mandatory;
                         panelObj.enable_options = panel.enable_options;
+                        panelObj.highlightPanel = panel.highlightPanel;
                         panelObj.order = panel.panel_order;
                         if (panelDetails && panelDetails.length) {
                             panelObj.panelDetails = panelDetails;

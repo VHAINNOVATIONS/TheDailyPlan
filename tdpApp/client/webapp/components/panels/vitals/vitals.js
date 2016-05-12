@@ -8,6 +8,7 @@ angular.module('tdpApp')
       templateUrl: 'components/panels/vitals/vitals.html',
       scope: {
         patient: '=',
+        paneldetail: '='
       },
       controller: function ($scope, Vitals) {
 
@@ -23,17 +24,19 @@ angular.module('tdpApp')
           //subGridVariable will be available in subGrid scope
           expandableRowScope: {
             subGridVariable: 'subGridScopeVariable'
-          }
+          },
+          rowHeight:50
         };
 
         $scope.vitalsGridOptions.columnDefs = [
-          { name: 'dateTime', displayName: 'Date' , width:'*' },
+          { name: 'dateTime', displayName: 'Date' , width:'*',
+            cellTemplate: '<div class="ui-grid-cell-contents wrap" white-space: normal>{{COL_FIELD CUSTOM_FILTERS}}</div>' },
           { name: 'getTemp()', displayName: 'Temp' , width:'*' },
           { name: 'bloodPressure.value', displayName: 'Blood Pressure', width:'*' },
           { name: 'pulse.value', displayName: 'Pulse', width:'*' }
         ];
 
-        Vitals.getByID($scope.patient)
+        Vitals.get($scope.patient, $scope.paneldetail)
         .then( function(data) {
           console.log('Patient Plan - vitals:',data);
           $scope.vitalsGridOptions.data = data;
@@ -55,13 +58,6 @@ angular.module('tdpApp')
           $scope.vitalsGridApi.expandable.collapseAllRows();
         };
 
-      }/*,
-      link: function postLink(scope) {
-        scope.$watch('data', function (data) {
-          if (data) {
-            scope.data = data;
-          }
-        });
-      }*/
+      }
     };
   });

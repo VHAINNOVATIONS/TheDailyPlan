@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('tdpApp')
-    .controller('LayoutsCtrl', ['$scope', '$location', 'Template', 'Panel_Type', 'Location', '$modal', 'Facility', '$stateParams',
-        function($scope, $location, Template, Panel_Type, Location, $modal, Facility, $stateParams) {
+    .controller('LayoutsCtrl', ['$scope', '$location', 'Template', 'PanelType', 'Location', '$modal', 'Facility', '$stateParams',
+        function($scope, $location, Template, PanelType, Location, $modal, Facility, $stateParams) {
             var self = this;
             self.errors = {};
             self.currentFacility = Facility.getCurrentFacility();
@@ -27,11 +27,15 @@ angular.module('tdpApp')
             self.displayOnly = false;
             self.templateID = $stateParams.id;
 
-            var initializeLayout = Panel_Type.findAllByFacilityID(self.currentFacility).then(function(panel_types) {
+            var initializeLayout = PanelType.findAllByFacilityID(self.currentFacility).then(function(panel_types) {
                     reset();
                     self.masterPanelsList = panel_types;
                     for (var i = 0; i < panel_types.length; i++) {
-                        panel_types[i].mandatory ? self.selectedPanels.push(panel_types[i]) : self.availablePanels.push(panel_types[i]);
+                        if (panel_types[i].mandatory) {
+                            self.selectedPanels.push(panel_types[i]);
+                        } else {
+                            self.availablePanels.push(panel_types[i]);
+                        }
                     }
                 }).then(function() {
                     return Location.getWards().then(function(wards) {
@@ -54,6 +58,15 @@ angular.module('tdpApp')
                     });
                 });
 
+            function arrayObjectIndexOf(myArray, searchTerm, property) {
+                for (var i = 0, len = myArray.length; i < len; i++) {
+                    if (myArray[i][property] === searchTerm) {
+                        return i;
+                    }
+                }
+                return -1;
+            }
+
             var loadTemplate = function(id) {
                 initializeLayout.then(function() {
                     return Template.findByID(id);
@@ -75,11 +88,60 @@ angular.module('tdpApp')
                 });
             };
 
+            var defaultDetail = function(setting, detailValue) {
+                var detaill = {
+                    panel_setting_id: setting.id,
+                    detail_value: detailValue,
+                    setting_type: setting.setting_type,
+                    setting_name: setting.setting_name,
+                    setting_value: setting.setting_value
+                };
+                return detaill;
+            };
+
             switch (self.mode) {
                 case 'create':
                     self.submitButton = 'Save';
                     self.topTitle = 'New Template';
-                    initializeLayout.catch(function(err) {
+                    initializeLayout.then(function() {
+                        self.masterPanelsList.forEach(function(panel) {
+                            var settings = panel.panelSettings;
+                            if (settings && settings.length) {
+                                var panelDetails = [];
+                                settings.forEach(function(setting) {
+                                    switch (setting.setting_type) {
+                                        case 2:
+                                        case 3:
+                                        case 4:
+                                            if (setting.setting_value) {
+                                                panelDetails.push(defaultDetail(setting, setting.setting_value));
+                                            }
+                                            break;
+                                        case 5:
+                                           if (setting.setting_value) {
+                                                var values = setting.setting_value.split('^');
+                                                values.forEach(function(value) {
+                                                    panelDetails.push(defaultDetail(setting, value));
+                                                });
+                                            }
+                                            break;
+                                        case 6:
+                                           if (setting.setting_value) {
+                                                var value = setting.setting_value.split(':')[0];
+                                                if (value) {
+                                                    panelDetails.push(defaultDetail(setting, value));
+                                                }
+                                            }
+                                            break;
+                                        default:
+                                    }
+                                });
+                                if (panelDetails && panelDetails.length) {
+                                    panel.panelDetails = panelDetails;
+                                }
+                            }
+                        });
+                    }).catch(function(err) {
                         self.errors.other = err.message;
                     });
                     break;
@@ -91,7 +153,7 @@ angular.module('tdpApp')
                 case 'display':
                     self.displayOnly = true;
                     self.submitButton = 'Done';
-                    self.topTitle = 'Display Template';
+                    self.topTitle = 'Display Template (Read Only)';
                     loadTemplate(self.templateID);
                     break;
                 default:
@@ -100,16 +162,10 @@ angular.module('tdpApp')
                     break;
             }
 
-            function arrayObjectIndexOf(myArray, searchTerm, property) {
-                for (var i = 0, len = myArray.length; i < len; i++) {
-                    if (myArray[i][property] === searchTerm) return i;
-                }
-                return -1;
-            }
-
             function move(array, from, to) {
-                if (to === from) return;
-
+                if (to === from) {
+                    return;
+                }
                 var target = array[from];
                 var increment = to < from ? -1 : 1;
 
@@ -171,6 +227,13 @@ angular.module('tdpApp')
                     }
                 }
             };
+
+            self.startEditTemplate = function() {
+                self.displayOnly = false;
+                self.submitButton = 'Update';
+                self.topTitle = 'Edit Template';
+                self.mode = 'edit';
+             };
 
             self.cancelTemplate = function() {
                 $location.path('/templateSearch');
@@ -253,7 +316,9 @@ angular.module('tdpApp')
                     self.selectedA.push(i);
                 } else {
                     self.selectedA.splice(self.selectedA.indexOf(i), 1);
-                    if (self.checkedA) self.checkedA = false;
+                    if (self.checkedA) {
+                      self.checkedA = false;
+                    }
                 }
             };
 
@@ -262,7 +327,9 @@ angular.module('tdpApp')
                     self.selectedS.push(i);
                 } else {
                     self.selectedS.splice(self.selectedS.indexOf(i), 1);
-                    if (self.checkedS) self.checkedS = false;
+                    if (self.checkedS) {
+                        self.checkedS = false;
+                    }
                 }
             };
 
@@ -275,7 +342,8 @@ angular.module('tdpApp')
                         params: function() {
                             return {
                               panel: panel,
-                              displayOnly: self.displayOnly
+                              displayOnly: self.displayOnly,
+
                             };
                         }
                     }
@@ -289,7 +357,6 @@ angular.module('tdpApp')
             var panel = params.panel;
             $scope.panel = panel;
             $scope.options = [];
-            $scope.selectedOption = [];
             $scope.displayOnly = !!params.displayOnly;
 
             Panel_Setting.findByPanelTypeID(panel.id)
@@ -307,9 +374,6 @@ angular.module('tdpApp')
                     if (panel.panelDetails) {
                         for (var i = 0; i < panel.panelDetails.length; i++) {
                             var pid = panel.panelDetails[i].panel_setting_id;
-                            if (settingIdMap[pid].type === 1) {
-                                $scope.selectedOption.push(pid);
-                            }
                             if (settingIdMap[pid].type === 2) {
                                 var valueType2 = panel.panelDetails[i].detail_value;
                                 if (typeof valueType2 === 'string') {
@@ -320,36 +384,33 @@ angular.module('tdpApp')
                             if (settingIdMap[pid].type === 3 || settingIdMap[pid].type === 4) {
                                 settingIdMap[pid].obj.textValue = panel.panelDetails[i].detail_value || '';
                             }
-                        }
-                    }
-                    var settingValue;
-                    panel_settings.forEach(function(ps) {
-                        if (ps.settingType === 2) {
-                            settingValue = ps.settingValues[0];
-                            if (!ps.hasOwnProperty('numberValue')) {
-                                ps.numberValue = parseInt(settingValue.settingValue, 10);
+                            if (settingIdMap[pid].type === 5) {
+                                if (! settingIdMap[pid].obj.listValues) {
+                                    settingIdMap[pid].obj.listValues = [panel.panelDetails[i].detail_value];
+                                } else {
+                                    settingIdMap[pid].obj.listValues.push(panel.panelDetails[i].detail_value);
+                                }
+                            }
+                            if (settingIdMap[pid].type === 6) {
+                                settingIdMap[pid].obj.textValue = panel.panelDetails[i].detail_value;
                             }
                         }
-                        if (ps.settingType === 3 || ps.settingType === 4) {
-                            settingValue = ps.settingValues[0];
-                            if (!ps.hasOwnProperty('textValue')) {
-                                ps.textValue = settingValue.settingValue || '';
+                    }
+                    panel_settings.forEach(function(ps) {
+                        var settingValue = ps.settingValues[0] && ps.settingValues[0].settingValue;
+                        if (ps.settingType === 6) {
+                            if (settingValue) {
+                                var pieces = settingValue.split(':');
+                                if (pieces[1]) {
+                                    ps.possibleValues = pieces[1].split('^');
+                                }
                             }
                         }
                     });
-
                 })
                 .catch(function(err) {
                     $scope.errors = err.message;
                 });
-
-            $scope.selectOption = function(i) {
-                if ($scope.selectedOption.indexOf(i) === -1) {
-                    $scope.selectedOption.push(i);
-                } else {
-                    $scope.selectedOption.splice($scope.selectedOption.indexOf(i), 1);
-                }
-            };
 
             $scope.dismiss = function() {
                 $uibModalInstance.dismiss();
@@ -358,30 +419,40 @@ angular.module('tdpApp')
             $scope.submit = function() {
                 console.log('CustomizerCtrl - panelSave:', panel);
                 var panelDetails = [];
-                if ($scope.selectedOption.length > 0) {
-                    for (var i = 0; i < $scope.selectedOption.length; i++) {
-                        var detail = {};
-                        detail.panel_setting_id = $scope.selectedOption[i];
-                        panelDetails.push(detail);
-                    }
-                }
                 $scope.settings.forEach(function(ps) {
+                    var detail;
+                    var settingId = ps.settingValues[0].panelSettingID;
                     if (ps.settingType === 2) {
-                        var detail = {
-                            panel_setting_id: ps.settingValues[0].panelSettingID,
+                        detail = {
+                            panel_setting_id: settingId,
                             detail_value: ps.numberValue.toString()
                         };
                         panelDetails.push(detail);
                     }
                     if (ps.settingType === 3 || ps.settingType === 4) {
-                        var detail = {
-                            panel_setting_id: ps.settingValues[0].panelSettingID,
+                        detail = {
+                            panel_setting_id: settingId,
+                            detail_value: ps.textValue
+                        };
+                        panelDetails.push(detail);
+                    }
+                    if (ps.settingType === 5) {
+                        ps.listValues.forEach(function(listValue) {
+                            detail = {
+                                panel_setting_id: settingId,
+                                detail_value: listValue
+                            };
+                            panelDetails.push(detail);
+                        });
+                    }
+                    if (ps.settingType === 6) {
+                        detail = {
+                            panel_setting_id: settingId,
                             detail_value: ps.textValue
                         };
                         panelDetails.push(detail);
                     }
                 });
-
                 if (panelDetails.length) {
                     $scope.panel.panelDetails = panelDetails;
                 }

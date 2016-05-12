@@ -2,12 +2,12 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <base href="/">
-    <title></title>
+    <title>The Daily Plan</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -20,12 +20,10 @@
     <!-- build:css({.tmp,client}) app/app.css -->
     <link rel="stylesheet" href="app/app.css">
       <!-- injector:css -->
-      <link rel="stylesheet" href="app/pdf.css" media="print"/>
       <!-- endinjector -->
     <!-- endbuild -->
     <link rel="stylesheet" href="common.css">
     <link rel="stylesheet" href="bower_components/angular-gridster/dist/angular-gridster.min.css"/>
-    <link rel="stylesheet" href="app/pdf.css" media="print"/>
   </head>
   <body ng-app="tdpApp">
     <!--[if lt IE 7]>
@@ -79,6 +77,7 @@
       <script src="bower_components/javascript-detect-element-resize/detect-element-resize.js"></script>
       <script src="bower_components/angular-gridster/src/angular-gridster.js"></script>
       <script src="bower_components/ng-idle/angular-idle.js"></script>
+      <script src="bower_components/moment/moment.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
       <script src="bower_components/javascript-detect-element-resize/jquery.resize.js"></script>
@@ -86,42 +85,30 @@
         <!-- build:js({.tmp,client}) app/app.js -->
         <script src="webapp/app/app.js"></script>
             <!-- injector:js -->
-            <script src="webapp/app/account/account.js"></script>
             <script src="webapp/app/account/login/login.controller.js"></script>
-            <script src="webapp/app/account/login/login.js"></script>
             <script src="webapp/app/account/settings/settings.controller.js"></script>
             <script src="webapp/app/account/signup/signup.controller.js"></script>
             <script src="webapp/app/admin/admin.controller.js"></script>
-            <script src="webapp/app/admin/admin.js"></script>
             <script src="webapp/app/layouts/layouts.controller.js"></script>
-            <script src="webapp/app/layouts/layouts.js"></script>
             <script src="webapp/app/main/main.controller.js"></script>
-            <script src="webapp/app/main/main.js"></script>
             <script src="webapp/app/patientPlan/patientPlan.controller.js"></script>
             <script src="webapp/app/patientSearch/patientSearch.controller.js"></script>
+            <script src="webapp/app/pdfView/pdfView.controller.js"></script>
+            <script src="webapp/app/routes.js"></script>
             <script src="webapp/app/templateSearch/templateSearch.controller.js"></script>
-            <script src="webapp/app/templateSearch/templateSearch.js"></script>
             <script src="webapp/components/auth/auth.service.js"></script>
+            <script src="webapp/components/auth/logon-facility.service.js"></script>
             <script src="webapp/components/auth/user.service.js"></script>
+            <script src="webapp/components/embedsrc/embedsrc.js"></script>
             <script src="webapp/components/modal/modal.service.js"></script>
             <script src="webapp/components/mongoose-error/mongoose-error.directive.js"></script>
             <script src="webapp/components/navbar/navbar.controller.js"></script>
             <script src="webapp/components/panels/contacts/contacts.js"></script>
-            <script src="webapp/components/panels/contacts/contactsPrint.js"></script>
             <script src="webapp/components/panels/freeText/freeText.js"></script>
-            <script src="webapp/components/panels/freeText/freeTextPrint.js"></script>
-            <script src="webapp/components/panels/labs/labs.js"></script>
-            <script src="webapp/components/panels/labs/labsPrint.js"></script>
             <script src="webapp/components/panels/panel.js"></script>
-            <script src="webapp/components/panels/panelPrint.js"></script>
             <script src="webapp/components/panels/providers/providers.js"></script>
-            <script src="webapp/components/panels/providers/providersPrint.js"></script>
-            <script src="webapp/components/panels/radiologyReports/radiologyReports.js"></script>
-            <script src="webapp/components/panels/radiologyReports/radiologyReportsPrint.js"></script>
             <script src="webapp/components/panels/simpleGrid/simpleGrid.js"></script>
-            <script src="webapp/components/panels/simpleGrid/simpleGridPrint.js"></script>
             <script src="webapp/components/panels/vitals/vitals.js"></script>
-            <script src="webapp/components/panels/vitals/vitalsPrint.js"></script>
             <script src="webapp/components/services/allergy.service.js"></script>
             <script src="webapp/components/services/audit.service.js"></script>
             <script src="webapp/components/services/demographics.service.js"></script>
@@ -135,14 +122,12 @@
             <script src="webapp/components/services/medications.service.js"></script>
             <script src="webapp/components/services/orders.service.js"></script>
             <script src="webapp/components/services/panel.service.js"></script>
-            <script src="webapp/components/services/panel_detail.service.js"></script>
             <script src="webapp/components/services/panel_setting.service.js"></script>
             <script src="webapp/components/services/panel_type.service.js"></script>
             <script src="webapp/components/services/patient.service.js"></script>
+            <script src="webapp/components/services/pdf.service.js"></script>
             <script src="webapp/components/services/postings.service.js"></script>
-            <script src="webapp/components/services/radiologyReports.service.js"></script>
             <script src="webapp/components/services/template.service.js"></script>
-            <script src="webapp/components/services/template_layout.service.js"></script>
             <script src="webapp/components/services/visits.service.js"></script>
             <script src="webapp/components/services/vitals.service.js"></script>
             <!-- endinjector -->

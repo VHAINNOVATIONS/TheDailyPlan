@@ -13,7 +13,8 @@ angular.module('tdpApp', [
   'ui.grid',
   'ui.grid.expandable',
   'ui.grid.selection',
-  'ui.grid.pinning'
+  'ui.grid.pinning',
+  'ui.grid.autoResize'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, IdleProvider) {
     $urlRouterProvider.otherwise('/');
@@ -29,8 +30,8 @@ angular.module('tdpApp', [
       // Add authorization token to headers
       request: function (config) {
         config.headers = config.headers || {};
-        if ($cookieStore.get('token')) {
-          config.headers.Authorization = 'Bearer ' + $cookieStore.get('token');
+        if ($cookieStore.get('tdptoken')) {
+          config.headers.Authorization = 'Bearer ' + $cookieStore.get('tdptoken');
         }
         return config;
       },
@@ -40,7 +41,7 @@ angular.module('tdpApp', [
         if(response.status === 401) {
           $location.path('/');
           // remove any stale tokens
-          $cookieStore.remove('token');
+          $cookieStore.remove('tdptoken');
           return $q.reject(response);
         }
         else {
@@ -50,7 +51,13 @@ angular.module('tdpApp', [
     };
   })
 
-  .run(function ($rootScope, $location, Auth) {
+  .run(function ($rootScope, $location, Auth, LogonFacility) {
+    var path = $location.path();
+    var pieces = path.split('/');
+    if ((pieces.length > 2) && (pieces[1] === 'facility')) {
+        LogonFacility.set(pieces[2]);
+    }
+
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function (event, next) {
       Auth.isLoggedInAsync(function(loggedIn) {

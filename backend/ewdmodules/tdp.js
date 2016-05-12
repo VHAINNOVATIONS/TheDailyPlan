@@ -106,19 +106,6 @@ var operations = {
             return result;
         }
     },
-    getRadiologyReportsDetailMap: {
-        GET: function(ewd, session) {
-            var params = {
-                patientId: ewd.query.patientId,
-                fromDate: ewd.query.fromDate,
-                toDate: ewd.query.toDate,
-                nRpts: ewd.query.nRpts
-            };
-            var ok = vista.restoreSymbolTable(ewd, session);
-            var result = vista.getRadiologyReports(params, session, ewd);
-            return result;
-        }
-    },
     getRawVitalSignsMap: {
         GET: function(ewd, session) {
             var params = {

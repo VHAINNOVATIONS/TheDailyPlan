@@ -12,6 +12,28 @@ router.get('/', function(req, res) {
   });
 });
 
+router.get('/landing/:id', function(req, res) {
+    var id = req.params.id;
+    var result = {};
+    models.facility_message.findAll({
+        where: {
+            facility_id: id
+        },
+        raw: true
+    }).then(function(facilityMessages) {
+        result.messages = facilityMessages;
+        return models.facility_contact.find({
+            where: {
+                facilityId: id
+            },
+            raw: true
+        })
+    }).then(function(contact) {
+        result.contact = contact;
+        res.json(result);
+    });
+});
+
 // get single facility
 router.get('/:id', function(req, res) {
   models.facility.find({

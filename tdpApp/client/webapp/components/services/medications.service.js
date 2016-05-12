@@ -3,7 +3,7 @@
 angular.module('tdpApp')
     .factory('Medication', function Medication($http) {
         return {
-            get: function(patientId, type, columnDefs) {
+            get: function(patientId, type) {
                 var httpParams = {
                     url: '/api/medication',
                     method: 'GET',
@@ -15,16 +15,6 @@ angular.module('tdpApp')
 
                 return $http(httpParams).then(function(response) {
                     var result = response.data;
-                    result.columns = columnDefs;
-
-                    result.forEach(function(row) {
-                        row.columns = result.columns.map(function(p) {
-                            return {
-                                btsrpWidth: p.btsrpWidth,
-                                value: row[p.name]
-                            };
-                        });
-                    });
                     return result;
                 });
             }
@@ -37,19 +27,17 @@ angular.module('tdpApp')
             columnDefs: [{
                 name: 'detail',
                 displayName: 'Detail',
-                width: '*',
-                btsrpWidth: '6'
+                width: '*'
             }, {
                 name: 'sig',
                 displayName: 'Direction',
-                width: '*',
-                btsrpWidth: '6'
+                width: '*'
             }],
             loadingMsg: 'Loading IV medications...',
             emptyMsg: 'No IV Medications Found',
 
             get: function(patientId) {
-                return Medication.get(patientId, 'iv', this.columnDefs);
+                return Medication.get(patientId, 'iv');
             }
         };
     });
@@ -60,29 +48,25 @@ angular.module('tdpApp')
             columnDefs: [{
                 name: 'name',
                 displayName: 'Name',
-                width: '*',
-                btsrpWidth: '3'
+                width: '*'
             }, {
                 name: 'dose',
                 displayName: 'Dose',
-                width: '*',
-                btsrpWidth: '3'
+                width: '*'
             }, {
                 name: 'route',
                 displayName: 'Route',
-                width: '*',
-                btsrpWidth: '3'
+                width: '*'
             }, {
                 name: 'schedule',
                 displayName: 'Schedule',
-                width: '*',
-                btsrpWidth: '3'
+                width: '*'
             }],
             loadingMsg: 'Loading inpatient medications...',
             emptyMsg: 'No Inpatient Medications Found',
 
             get: function(patientId) {
-                return Medication.get(patientId, 'inpatient', this.columnDefs);
+                return Medication.get(patientId, 'inpatient');
             }
         };
     });
@@ -93,19 +77,17 @@ angular.module('tdpApp')
             columnDefs: [{
                 name: 'detail',
                 displayName: 'Detail',
-                width: '*',
-                btsrpWidth: '6'
+                width: '*'
             }, {
                 name: 'sig',
                 displayName: 'Direction',
-                width: '*',
-                btsrpWidth: '6'
+                width: '*'
             }],
             loadingMsg: 'Loading outpatient medications...',
             emptyMsg: 'No Outpatient Medications Found',
 
             get: function(patientId) {
-                return Medication.get(patientId, 'outpatient', this.columnDefs);
+                return Medication.get(patientId, 'outpatient');
             }
         };
     });

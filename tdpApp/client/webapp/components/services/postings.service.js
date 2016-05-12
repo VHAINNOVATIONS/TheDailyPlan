@@ -4,15 +4,17 @@ angular.module('tdpApp')
     .factory('Postings', function Postings($http) {
         return {
             columnDefs: [{
+                name: 'entryDate',
+                displayName: 'Date',
+                width: '*'
+            }, {
                 name: 'type',
                 displayName: 'Type',
-                width: '*',
-                btsrpWidth: '3'
+                width: '*'
             }, {
                 name: 'text',
                 displayName: 'Text',
-                width: '***',
-                btsrpWidth: '9'
+                width: '**'
             }],
             loadingMsg: 'Loading postings...',
             emptyMsg: 'No postings found',
@@ -23,11 +25,24 @@ angular.module('tdpApp')
              * @param  {Function} callback - optional
              * @return {Promise}
              */
-            get: function(patientId) {
-                var self = this;
+            get: function(patientId, panelDetails) {
                 var params = {
                     patientId: patientId
                 };
+
+                if (panelDetails && panelDetails.length) {
+                    var includeTypes = [];
+                    panelDetails.forEach(function(pd) {
+                        if (pd.setting_name === 'Include Types') {
+                            if (pd.detail_value) {
+                                includeTypes.push(pd.detail_value);
+                            }
+                        }
+                    });
+                    if (includeTypes.length) {
+                        params.includeTypes = includeTypes;
+                    }
+                }
                 var httpParams = {
                     url: '/api/postings',
                     method: 'GET',
@@ -35,16 +50,6 @@ angular.module('tdpApp')
                 };
                 return $http(httpParams).then(function(response) {
                     var result = response.data;
-                    result.columns = self.columnDefs;
-
-                    result.forEach(function(row) {
-                        row.columns = result.columns.map(function(p) {
-                            return {
-                                btsrpWidth: p.btsrpWidth,
-                                value: row[p.name]
-                            };
-                        });
-                    });
                     return result;
                 });
             }

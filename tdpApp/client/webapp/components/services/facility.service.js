@@ -4,41 +4,45 @@ angular.module('tdpApp')
     .factory('Facility', function Facility($location, $rootScope, $http, $q) {
         var results = {};
         var currentFacility = null;
+        var currentFacilityName = null;
 
         return {
             getCurrentFacility: function() {
                 return currentFacility;
             },
-            setCurrentFacility: function(value) {
-                currentFacility = value;
+            getCurrentFacilityName: function() {
+                return currentFacilityName;
+            },
+            setCurrentFacility: function(id, name) {
+                if (typeof id === 'string') {
+                    id = parseInt(id, 10);
+                }
+                currentFacility = id;
+                currentFacilityName = name;
             },
 
             /**
-             * Find All Facilitys
+             * Find all facilities
              *
-             * @param  {Function} callback - optional
              * @return {Promise}
              */
-            findAll: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/facility/').
-                success(function(data) {
-                    console.log('Facility findAll:', data);
-                    results = data;
-                    deferred.resolve(data);
-                    return cb();
-                }).
-                error(function(err) {
-
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            findAll: function() {
+                return $http.get('/api/facility/').then(function(response) {
+                    results = response.data;
+                    return results;
+                });
             },
-
+            /**
+             * Load facility information to display on the logon page
+             *
+             * @return {Promise}
+             */
+            getLandingPageInformation: function(id) {
+                return $http.get('/api/facility/landing/' + id).then(function(response) {
+                    results = response.data;
+                    return results;
+                });
+            },
             /**
              * Find Single Facility by Facility ID
              *

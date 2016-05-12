@@ -2,10 +2,10 @@
 
 exports.index = function (req, res, next) {
   var patientId = req.query.patientId;
-  var numDaysBack = req.query.numDaysBack;
+  var includeFactors = req.query.includeFactors;
 
   req.session.getHealthFactors(req.user, patientId, {
-    numDaysBack: numDaysBack
+    includeFactors: includeFactors
   }, function (err, body) {
       if (err) {
           return res.status(401).json(err);

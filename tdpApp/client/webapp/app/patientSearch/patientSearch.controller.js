@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tdpApp')
-    .controller('PatientSearchCtrl', function($compile, $scope, $q, $location, DTOptionsBuilder, DTColumnBuilder, Patient, Location, Auth, Audit, $filter, Template) {
+    .controller('PatientSearchCtrl', function($compile, $scope, $q, $location, DTOptionsBuilder, DTColumnBuilder, Patient, Location, Auth, Audit, $filter, Template, PDF) {
         var self = this;
         self.data = [];
         self.templates = [];
@@ -17,7 +17,7 @@ angular.module('tdpApp')
         self.displayErr = {};
         self.displayErr.flag = false;
         self.errors = {};
-        var titleHtml = '<input type="checkbox" ng-model="ctrl.selectAll" ng-click="ctrl.toggleAll(ctrl.selectAll, ctrl.selected)">';
+        var titleHtml = '<label for="selectchkall" style="display: none">select</label><input type="checkbox" id="selectchkall" ng-model="ctrl.selectAll" ng-click="ctrl.toggleAll(ctrl.selectAll, ctrl.selected)"> ';
 
         //functions
         self.newPromise = newPromise;
@@ -29,6 +29,7 @@ angular.module('tdpApp')
         self.toggleAll = toggleAll;
         self.toggleOne = toggleOne;
         self.display = display;
+        self.patientClick = patientClick;
 
         // Populate the Templates
         Template.findAll()
@@ -111,15 +112,59 @@ angular.module('tdpApp')
                 });
         }
 
+        self.genPDF = function () {
+            var items = [];
+            var auditItems = [];
+            var userId = Auth.getCurrentUser().duz;
+            angular.forEach(self.selected, function(value, key) {
+                if (value === true) {
+                    items.push({
+                        id: key,
+                        templateID: findTemplate(key)
+                    });
+                    auditItems.push({
+                        userId: userId,
+                        patientId: key,
+                        action: 'multipdf'
+                    });
+                }
+            });
+            if (items.length === 0) {
+                self.displayErr.flag = true;
+                self.displayErr.msg = 'Please select a patient to display.';
+                return;
+            }
+
+            PDF.generate(items).then(function(fileInfo) {
+                var filepath = fileInfo.data.path;
+                Patient.setPDFFilepath(filepath);
+                $location.path('/PDFView');
+            }).catch( function(err) {
+                console.log(err);
+            });
+
+            Audit.bulkCreate(auditItems).then(function(data) {
+                console.log('Access Info:', data);
+            });
+        };
+
+        function setDefaultTemplate(data) {
+            if (data.length && self.templates.length) {
+                var founds = $filter('filter')(self.templates, {'template_name': 'Default'}, true);
+                var found = founds[0] ? founds[0] : self.templates[0];
+                data.forEach(function(patient) {
+                    self.selectedTemplate[patient.id] = found.id.toString();
+                });
+            }
+        }
+
         function searchClinic() {
             self.submitted = true;
             self.clearAlerts();
 
             Patient.byClinic(self.search.clinic)
                 .then(function(data) {
-                    self.data = data;
-                    self.noResults = !(data.length);
-                    reloadData();
+                    reloadData(data);
                 })
                 .catch(function(err) {
                     self.errors.other = err.message;
@@ -132,9 +177,7 @@ angular.module('tdpApp')
 
             Patient.byWard(self.search.ward)
                 .then(function(data) {
-                    self.data = data;
-                    self.noResults = !(data.length);
-                    reloadData();
+                    reloadData(data);
                 })
                 .catch(function(err) {
                     self.errors.other = err.message;
@@ -147,9 +190,7 @@ angular.module('tdpApp')
 
             Patient.searchAll(self.search.all)
                 .then(function(data) {
-                    self.data = data;
-                    self.noResults = !(data.length);
-                    reloadData();
+                    reloadData(data);
                 })
                 .catch(function(err) {
                     self.errors.other = err.message;
@@ -171,7 +212,10 @@ angular.module('tdpApp')
             });
         }
 
-        function reloadData() {
+        function reloadData(data) {
+            self.data = data;
+            self.noResults = !(data.length);
+            setDefaultTemplate(data);
             var resetPaging = true;
             self.dtInstance.reloadData(callback, resetPaging);
         }
@@ -250,6 +294,32 @@ angular.module('tdpApp')
             return items;
         }
 
+        function patientClick(obj){
+            obj.preventDefault();
+            var target = angular.element(obj.target);
+            var id = target.attr('data-id');
+            var items = [];
+            var entry  = {};
+            entry.id = id;
+            entry.name = findName(id);
+            entry.templateID = findTemplate(id);
+            items.push(entry);
+            Patient.setSelectedPatients(items);
+            $location.path('/PatientPlan');
+
+            var accessInfo = {
+                userId: Auth.getCurrentUser().duz,
+                patientId: id,
+                action: 'view'
+            };
+            Audit.create(accessInfo).then(function(data) {
+                console.log('Access Info:', data);
+            })
+            .catch(function(err) {
+                console.log('Error filing access info: %s', err.message);
+            });
+        }
+
         self.dtOptions = DTOptionsBuilder.fromFnPromise(function() {
                 //return $resource('data1.json').query().$promise;
                 return newPromise();
@@ -276,9 +346,11 @@ angular.module('tdpApp')
             DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable()
             .renderWith(function(data, type, full, meta) {
                 self.selected[full.id] = false;
-                return '<input type="checkbox" ng-model="ctrl.selected[' + data.id + ']" ng-click="ctrl.toggleOne(ctrl.selected)">';
+                return '<label for="selectchk' + data.id + '" style="display: none">select</label><input id="selectchk' + data.id + '" type="checkbox" ng-model="ctrl.selected[' + data.id + ']" ng-click="ctrl.toggleOne(ctrl.selected)">';
             }),
-            DTColumnBuilder.newColumn('name').withTitle('Name'),
+            DTColumnBuilder.newColumn(null).withTitle('Name').renderWith(function(data, type, full){
+                return '<a href="_blank" ng-click="ctrl.patientClick($event)" data-id='+ data.id +'  class="nameLink">'+data.name+'</a>';
+            }),
             DTColumnBuilder.newColumn('SSN').withTitle('SSN').renderWith(function(data, type, full) {
                 return !angular.isUndefined(data) ? data.substr(0, 3) + '-' + data.substr(3, 2) + '-' + data.substr(5) : '';
             }),

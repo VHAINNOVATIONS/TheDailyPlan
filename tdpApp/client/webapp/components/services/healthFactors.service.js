@@ -4,25 +4,13 @@ angular.module('tdpApp')
     .factory('HealthFactors', function HealthFactors($http) {
         return {
             columnDefs: [{
-                name: 'name',
-                displayName: 'Name',
-                width: '*',
-                btsrpWidth: '3'
-            }, {
                 name: 'date',
                 displayName: 'Date',
-                width: '*',
-                btsrpWidth: '3'
+                width: '*'
             }, {
-                name: 'location',
-                displayName: 'Location',
-                width: '*',
-                btsrpWidth: '3'
-            }, {
-                name: 'severity',
-                displayName: 'Severity',
-                width: '*',
-                btsrpWidth: '3'
+                name: 'name',
+                displayName: 'Name',
+                width: '***'
             }],
             loadingMsg: 'Loading health factors...',
             emptyMsg: 'No health factors found',
@@ -35,17 +23,20 @@ angular.module('tdpApp')
              * @return {Promise}
              */
             get: function(patientId, panelDetails) {
-                var self = this;
-                var numDaysBack = 30;
-                panelDetails.forEach(function(pd) {
-                    if (pd.setting_name === 'Number of Back Days') {
-                        numDaysBack = pd.detail_value || pd.setting_value || 30;
-                    }
-                });
                 var params = {
                     patientId: patientId,
-                    numDaysBack: numDaysBack
                 };
+                if (panelDetails && panelDetails.length) {
+                    var includeFactors = [];
+                    panelDetails.forEach(function(pd) {
+                        if (pd.setting_name === 'Include Factors') {
+                            includeFactors.push(pd.detail_value);
+                        }
+                    });
+                    if (includeFactors.length) {
+                      params.includeFactors = includeFactors;
+                    }
+                }
                 var httpParams = {
                     url: '/api/healthFactors',
                     method: 'GET',
@@ -53,16 +44,6 @@ angular.module('tdpApp')
                 };
                 return $http(httpParams).then(function(response) {
                     var result = response.data;
-                    result.columns = self.columnDefs;
-
-                    result.forEach(function(row) {
-                        row.columns = result.columns.map(function(p) {
-                            return {
-                                btsrpWidth: p.btsrpWidth,
-                                value: row[p.name]
-                            };
-                        });
-                    });
                     return result;
                 });
             }

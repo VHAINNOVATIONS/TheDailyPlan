@@ -2,8 +2,12 @@
 
 exports.index = function (req, res, next) {
   var patientId = req.query.patientId;
-
-  req.session.getOrders(req.user, patientId, {}, function (err, body) {
+  var options = {};
+  var futureDays = req.query.futureDays;
+  if (! (futureDays === undefined || futureDays === null)) {
+      options.futureDays = futureDays
+  }
+  req.session.getOrders(req.user, patientId, options, function (err, body) {
       if (err) {
           return res.status(401).json(err);
       } else {

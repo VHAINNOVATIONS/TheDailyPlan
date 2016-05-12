@@ -43,6 +43,11 @@ module.exports = function(sequelize, DataTypes) {
         enable_options: {
             type: DataTypes.BOOLEAN,
             allowNull: false
+        },
+        highlightPanel: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue:false
         }
     }, {
         tableName: 'panel_type',

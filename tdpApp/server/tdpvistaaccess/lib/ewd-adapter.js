@@ -43,16 +43,20 @@ var typedOrderUpdater = {
             if (order.startDate) {
                 diet.start = order.startDate;
             }
-            if (order.stopDate) {
-                diet.stop = order.stopDate;
-            }
-            if (timeUtility.nowIsBetween(diet.start, diet.stop)) {
-                result.currentDietProfile.push(diet);
+            diet.status = order.status;
+            if (timeUtility.nowIsBefore(diet.stop)) {
+                if (result.currentDietProfile.length) {
+                    if (timeUtility.existingIsBefore(diet.start, result.currentDietProfile[0].start)) {
+                        result.currentDietProfile[0] = diet;
+                    }
+                } else {
+                  result.currentDietProfile.push(diet);
+                }
             }
         }
     },
     lab: function (result, order) {
-        if (order.status === 'Active' || order.status === 'Pending') {
+        if (order.status === 'Pending') {
             if (!result.labOrders) {
                 result.labOrders = [];
             }
@@ -66,13 +70,13 @@ var typedOrderUpdater = {
                 lab.stop = order.stopDate;
             }
             lab.status = order.status;
-            if (timeUtility.nowIsBetween(lab.start, lab.stop)) {
+            if (timeUtility.nowIsBefore(lab.stop)) {
                 result.labOrders.push(lab);
             }
         }
     },
     imaging: function (result, order) {
-        if (order.status === 'Active' || order.status === 'Pending') {
+        if (order.status === 'Pending') {
             if (!result.radiologyOrders) {
                 result.radiologyOrders = [];
             }
@@ -86,35 +90,12 @@ var typedOrderUpdater = {
                 radiology.stop = order.stopDate;
             }
             radiology.status = order.status;
-            if (timeUtility.nowIsBetween(undefined, radiology.stop)) {
+            if (timeUtility.nowIsBefore(radiology.stop)) {
                 result.radiologyOrders.push(radiology);
             }
         }
     },
-    activity: function (result, order) {
-        if (order.status === 'Active') {
-            if (!result.otherOrders) {
-                result.otherOrders = [];
-            }
-            var other = {
-                description: order.text
-            };
-            if (order.startDate) {
-                other.start = order.startDate;
-            }
-            if (order.stopDate) {
-                other.stop = order.stopDate;
-            }
-            other.status = order.status;
-            if (timeUtility.nowIsBetween(undefined, other.stop)) {
-                result.otherOrders.push(other);
-            }
-        }
-    },
-    nursing: function (result, order) {
-        typedOrderUpdater.activity(result, order);
-    },
-    procedures: function(result, order) {
+    procedures: function(result, order, options) {
       if (order.status === 'Pending') {
         if (! result.procedures) {
           result.procedures = [];
@@ -125,7 +106,9 @@ var typedOrderUpdater = {
         if (order.startDate) {
             procedure.start = order.startDate;
         }
-        result.procedures.push(procedure);
+        if (procedure.start && timeUtility.startWithinFutureDays(procedure.startDate, options.numDaysFuture)) {
+            result.procedures.push(procedure);
+        }
       }
     }
 };
@@ -155,6 +138,9 @@ var toPatientList = function (rawData, ignoreSecondPiece) {
 };
 
 var filterChemHemReports = function (report, testNames) {
+    if (! testNames || ! testNames.length) {
+        return report;
+    }
     var testNameDict = testNames.reduce(function (r, testName) {
         r[testName] = true;
         return r;
@@ -191,6 +177,35 @@ var putInChemHemReportDates = function(report) {
         }
       }
     });
+};
+
+var reduceLabToTests = function(fullLabResults, occurances) {
+    var testNameOccurances = {};
+    return fullLabResults.reduce(function(r, fullLabResult) {
+        var collectionDate =fullLabResult.specimen.collectionDate;
+        collectionDate = collectionDate && collectionDate.split(' ')[0];
+        fullLabResult.labResults.forEach(function(labResult) {
+            var e = {
+                date: collectionDate,
+                value: labResult.value
+            }
+            var name = labResult.labTest.name;
+            if (! testNameOccurances[name]) {
+                testNameOccurances[name] = 1;
+            } else {
+                ++testNameOccurances[name];
+            }
+            if (testNameOccurances[name] <= occurances) {
+                if (labResult.labTest) {
+                      e.name = name;
+                      e.units = labResult.labTest.units;
+                      e.refRange = labResult.labTest.refRange;
+                }
+                r.push(e);
+            }
+        });
+        return r;
+    }, []);
 };
 
 var session = {
@@ -324,7 +339,7 @@ var session = {
             if (err) {
                 callback(err);
             } else {
-                var result = translator.translateVitalSigns(body);
+                var result = translator.translateVitalSigns(body, options.occurances);
                 callback(null, result);
             }
         });
@@ -333,13 +348,33 @@ var session = {
         this.get(userSession, '/getPostings', {
             patientId: patientId,
             nRpts: "0"
-        }, function (err, result) {
+        }, function (err, rawResult) {
             if (err) {
                 callback(err);
             } else {
+                var includeTypes = _.get(options, 'includeTypes', null);
+                var result = rawResult;
+                if (includeTypes && includeTypes.length) {
+                    if (! Array.isArray(includeTypes)) {
+                        includeTypes = [includeTypes];
+                    }
+                    var dictionary = _.indexBy(includeTypes, _.toUpper);
+                    result = _.filter(rawResult, function(p) {
+                        return p.type && dictionary[p.type.toUpperCase()];
+                    });
+                }
+                var d = {};
+                result = result.reduce(function(r, p) {
+                    if (! d[p.type]) {
+                        d[p.type] = true;
+                        r.push(p);
+                    }
+                    return r;
+                }, []);
                 result.forEach(function(item) {
                     item.text = item.text.join(' ').trim();
                     item.text = item.text.replace('  ', ' ');
+                    item.entryDate = timeUtility.postingsDate(item.entryDate);
                 });
                 callback(null, result);
             }
@@ -388,19 +423,6 @@ var session = {
             }
         });
     },
-    getRadiologyReports: function (userSession, patientId, options, callback) {
-        this.get(userSession, '/getRadiologyReportsDetailMap', {
-            patientId: patientId,
-            type: 'ALL'
-        }, function (err, body) {
-            if (err) {
-                callback(err);
-            } else {
-                var result = translator.translateRadiologyReports(body);
-                callback(null, result);
-            }
-        });
-    },
     _getAllOrders: function (userSession, patientId, options, callback) {
         var self = this;
         this.get(userSession, '/getAllOrders', {
@@ -441,7 +463,7 @@ var session = {
                         if (type && type.topName) {
                             var updater = typedOrderUpdater[type.topName.toLowerCase()];
                             if (updater) {
-                                updater(r, order);
+                                updater(r, order, options);
                             }
                         }
                     }
@@ -457,14 +479,15 @@ var session = {
     getChemHemReports: function (userSession, patientId, options, callback) {
         this.get(userSession, '/getChemHemLabs', {
             patientId: patientId,
-            toDate: options.toDate,
-            fromDate: options.fromDate
+            toDate: translator.vistAFuture(),
+            fromDate: 0
         }, function (err, result) {
             if (err) {
                 callback(err);
             } else {
                 result = filterChemHemReports(result, options.testNames);
                 putInChemHemReportDates(result);
+                result = reduceLabToTests(result, options.occurances);
                 callback(null, result);
             }
         });
@@ -509,31 +532,36 @@ var session = {
         });
     },
     getHealthFactors: function(userSession, patientId, options, callback) {
-        var numDaysBack = _.get(options, "numDaysBack", 90);
-        var fromDate = translator.translateNumDaysPast(numDaysBack);
         this.get(userSession, '/getPatientHealthFactors', {
-            patientId: patientId,
-            fromDate: fromDate
+            patientId: patientId
         }, function (err, result) {
             if (err) {
                 callback(err);
             } else {
-              result.forEach(function(r) {
-                if (r.date) {
-                  r.date = translator.translateVistADate(r.date);
+                var includeFactors = _.get(options, 'includeFactors', null);
+                if (includeFactors && includeFactors.length) {
+                    if (! Array.isArray(includeFactors)) {
+                        includeFactors = [includeFactors];
+                    }
+                    var dictionary = _.indexBy(includeFactors, _.toUpper);
+                    result = _.filter(result, function(hf) {
+                        return hf.name && dictionary[hf.name.toUpperCase()];
+                    });
                 }
-                if (r.severity) {
-                  var severity = {
-                    'M': 'MINIMAL',
-                    'MO': 'MODERATE',
-                    'H': 'SEVERE'
-                  }[r.severity];
-                  if (severity) {
-                    r.severity = severity;
+                var d = {};
+                result = result.reduce(function(r, hf) {
+                    if (! d[hf.name]) {
+                        d[hf.name] = true;
+                        r.push(hf);
+                    }
+                    return r;
+                }, []);
+                result.forEach(function(r) {
+                  if (r.date) {
+                    r.date = translator.translateVistADate(r.date);
                   }
-                }
-              });
-              callback(null, result);
+                });
+                callback(null, result);
             }
         });
     },

@@ -4,6 +4,9 @@ angular.module('tdpApp')
     .factory('Patient', function Patient($location, $rootScope, $http, $q) {
         var results = {};
         var selectedPatients = [];
+        var selectedPrintPatients = [];
+        var selectedPrintPanels = [];
+        var pdfFilepath;
 
         return {
 
@@ -38,6 +41,25 @@ angular.module('tdpApp')
             },
             setSelectedPatients: function(value) {
                 selectedPatients = value;
+            },
+
+            getPrintPatients: function() {
+                return selectedPrintPatients;
+            },
+            setPrintPatients: function(value) {
+                selectedPrintPatients = value;
+            },
+            getPrintPanels: function() {
+                return selectedPrintPanels;
+            },
+            setPrintPanels: function(value) {
+                selectedPrintPanels = value;
+            },
+            setPDFFilepath: function(filepath) {
+                pdfFilepath = filepath;
+            },
+            getPDFFilepath: function() {
+                return pdfFilepath;
             },
 
             /**
