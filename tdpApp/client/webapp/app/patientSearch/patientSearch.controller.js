@@ -346,7 +346,7 @@ angular.module('tdpApp')
             DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable()
             .renderWith(function(data, type, full, meta) {
                 self.selected[full.id] = false;
-                return '<input type="checkbox" ng-model="ctrl.selected[' + data.id + ']" ng-click="ctrl.toggleOne(ctrl.selected)">';
+                return '<label for="selectchk' + data.id + '" style="display: none">select</label><input id="selectchk' + data.id + '" type="checkbox" ng-model="ctrl.selected[' + data.id + ']" ng-click="ctrl.toggleOne(ctrl.selected)">';
             }),
             DTColumnBuilder.newColumn(null).withTitle('Name').renderWith(function(data, type, full){
                 return '<a href="_blank" ng-click="ctrl.patientClick($event)" data-id='+ data.id +'  class="nameLink">'+data.name+'</a>';
