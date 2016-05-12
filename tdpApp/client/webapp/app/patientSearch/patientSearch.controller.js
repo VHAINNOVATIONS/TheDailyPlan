@@ -17,7 +17,7 @@ angular.module('tdpApp')
         self.displayErr = {};
         self.displayErr.flag = false;
         self.errors = {};
-        var titleHtml = '<input type="checkbox" ng-model="ctrl.selectAll" ng-click="ctrl.toggleAll(ctrl.selectAll, ctrl.selected)">';
+        var titleHtml = '<label for="selectchkall" style="display: none">select</label><input type="checkbox" id="selectchkall" ng-model="ctrl.selectAll" ng-click="ctrl.toggleAll(ctrl.selectAll, ctrl.selected)"> ';
 
         //functions
         self.newPromise = newPromise;
@@ -346,7 +346,7 @@ angular.module('tdpApp')
             DTColumnBuilder.newColumn(null).withTitle(titleHtml).notSortable()
             .renderWith(function(data, type, full, meta) {
                 self.selected[full.id] = false;
-                return '<input type="checkbox" ng-model="ctrl.selected[' + data.id + ']" ng-click="ctrl.toggleOne(ctrl.selected)">';
+                return '<label for="selectchk' + data.id + '" style="display: none">select</label><input id="selectchk' + data.id + '" type="checkbox" ng-model="ctrl.selected[' + data.id + ']" ng-click="ctrl.toggleOne(ctrl.selected)">';
             }),
             DTColumnBuilder.newColumn(null).withTitle('Name').renderWith(function(data, type, full){
                 return '<a href="_blank" ng-click="ctrl.patientClick($event)" data-id='+ data.id +'  class="nameLink">'+data.name+'</a>';
