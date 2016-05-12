@@ -17,7 +17,7 @@ angular.module('tdpApp')
         self.displayErr = {};
         self.displayErr.flag = false;
         self.errors = {};
-        var titleHtml = '<input type="checkbox" ng-model="ctrl.selectAll" ng-click="ctrl.toggleAll(ctrl.selectAll, ctrl.selected)">';
+        var titleHtml = '<label for="selectchkall" style="display: none">select</label><input type="checkbox" id="selectchkall" ng-model="ctrl.selectAll" ng-click="ctrl.toggleAll(ctrl.selectAll, ctrl.selected)"> ';
 
         //functions
         self.newPromise = newPromise;
