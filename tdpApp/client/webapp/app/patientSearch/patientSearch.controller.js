@@ -28,7 +28,6 @@ angular.module('tdpApp')
         self.searchAll = searchAll;
         self.toggleAll = toggleAll;
         self.toggleOne = toggleOne;
-        self.display = display;
         self.patientClick = patientClick;
 
         // Populate the Templates
@@ -58,7 +57,7 @@ angular.module('tdpApp')
                 self.errors.other = err.message;
             });
 
-        function display() {
+        self.display = function () {
             console.log('patientSearch display!');
 
             var items = [];
@@ -110,26 +109,30 @@ angular.module('tdpApp')
                 .catch(function(err) {
                     console.log('Error filing access info: %s', err.message);
                 });
-        }
+        };
 
         self.genPDF = function () {
+            var order = self.dtInstance.DataTable.rows()[0];
             var items = [];
             var auditItems = [];
             var userId = Auth.getCurrentUser().duz;
-            angular.forEach(self.selected, function(value, key) {
-                if (value === true) {
+            order.forEach(function(index) {
+                var datum = self.data[index];
+                var id = datum.id;
+                if (self.selected[id]) {
                     items.push({
-                        id: key,
-                        templateID: findTemplate(key)
+                        id: id,
+                        templateID: findTemplate(id)
                     });
                     auditItems.push({
                         userId: userId,
-                        patientId: key,
+                        patientId: id,
                         action: 'multipdf'
                     });
                 }
             });
-            if (items.length === 0) {
+
+            if (items.length < 1) {
                 self.displayErr.flag = true;
                 self.displayErr.msg = 'Please select a patient to display.';
                 return;
