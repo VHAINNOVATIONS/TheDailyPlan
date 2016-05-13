@@ -1,0 +1,60 @@
+<div ng-controller="SystemSettingsCtrl as ctrl" class="container">
+    <div class="row">
+        <h2>System Settings</h2>
+    </div>
+    <div class="row">
+        <uib-tabset>
+            <uib-tab heading="Messages" select="ctrl.clearAlerts()">
+                <div class="container">
+                    <div class="row row-centered">
+                        <div class="col-sm-4 col-centered">
+                            <form ng-submit="ctrl.commit()" name="commit">
+                                <div class="form-group row" ng-repeat="message in ctrl.facilityMessages">
+                                    <label for="{{'facilitymsg'+$index}}" class="control-label">{{'Message'+$index}}</label>
+                                    <textarea ng-model="message" rows="4" class="form-control" id="{{'facilitymsg'+$index}}"></textarea>
+                                </div>
+                                <input class="btn btn-primary" type="submit" value="Save" ng-disabled="searchAll.$invalid">
+                                <input class="btn btn-primary" type="button" value="Reset" ng-click"ctrl.reset()">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </uib-tab>
+            <uib-tab heading="Images" select="ctrl.clearAlerts()">
+                <div class="container">
+                    <div class="row row-centered">
+                        <div class="col-sm-4">
+                            <form ng-submit="ctrl.addImage()" name="searchWard">
+                                <div class="form-group">
+                                    <h4>Select an Image</h4>
+                                    <input type="file" class="form-control" on-file-change="ctrl.onFileChange" ctrl="ctrl" file-select>
+                                </div>
+                                <button class="btn btn-primary pull-right" type="submit" ng-disabled="!ctrl.selectedFile">Add</button>
+                            </form>
+                        </div>
+                        <div class="col-sm-8">
+                            <img ng-src="{{imageSrc}}" width="100%" ng-show="ctrl.selectedFile"/>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-12 col-centered">
+                            <table datatable="" dt-options="ctrl.dtOptions" dt-columns="ctrl.dtColumns" dt-instance="ctrl.dtInstance" class="row-border hover"></table>
+                        </div>
+                    </div>
+                </div>
+            </uib-tab>
+        </uib-tabset>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-centered">
+            <hr>
+            <button class="btn btn-primary" ng-click="ctrl.display()">Display</button>
+            <button class="btn btn-primary" ng-click="ctrl.genPDF()">Delete</button>
+        </div>
+    </div>
+    <div class="row row-centered">
+        <div class="col-sm-4 col-centered pull-left">
+            <div class="alert alert-danger" role="alert" ng-show="ctrl.displayErr.flag">{{ctrl.displayErr.msg}}</div>
+        </div>
+    </div>

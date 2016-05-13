@@ -48,8 +48,12 @@ angular.module('tdpApp')
         url: '/templateSearch',
         templateUrl: 'app/templateSearch/templateSearch.html',
         resolve: { authenticate: authenticate }
+      })
+      .state('systemSettings', {
+        url: '/systemSettings',
+        templateUrl: 'app/systemSettings/systemSettings.html',
+        resolve: { authenticate: function() {return true;} }
       });
-
 
       function initCheck($q, Auth, $state, $timeout) {
       if (!Auth.isLoggedIn()) {
