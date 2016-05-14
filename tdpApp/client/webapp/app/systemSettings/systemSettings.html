@@ -22,8 +22,10 @@
             </uib-tab>
             <uib-tab index="1" heading="Images" select="ctrl.selectTab(1)">
                 <div class="container">
-                    <div class="row row-centered">
-                        <div class="col-sm-4">
+                    <div class="row">
+                        <div class="col-sm-4" ng-if="ctrl.tabIndex === 1">
+                            <h4>Existing Images</h4>
+                            <table datatable="" dt-options="ctrl.dtOptions" dt-columns="ctrl.dtColumns" dt-instance="ctrl.dtInstance" class="row-border hover"></table>
                             <form ng-submit="ctrl.addImage()" name="searchWard">
                                 <div class="form-group">
                                     <h4>Select an Image</h4>
@@ -39,22 +41,6 @@
                 </div>
             </uib-tab>
         </uib-tabset>
-    </div>
-    <div class="row" ng-if="ctrl.tabIndex === 1">
-        <div class="col-sm-4">
-            <h4>Existing Images</h4>
-            <table datatable="" dt-options="ctrl.dtOptions" dt-columns="ctrl.dtColumns" dt-instance="ctrl.dtInstance" class="row-border hover"></table>
-        </div>
-        <div class="col-sm-8">
-            <img ng-src="{{imageSrc}}" width="100%" ng-show="ctrl.selectedFile"/>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-4 oull-right">
-            <hr>
-            <button class="btn btn-primary" ng-click="ctrl.display()">Display</button>
-            <button class="btn btn-primary" ng-click="ctrl.genPDF()">Delete</button>
-        </div>
     </div>
     <div class="row row-centered">
         <div class="col-sm-4 col-centered pull-left">
