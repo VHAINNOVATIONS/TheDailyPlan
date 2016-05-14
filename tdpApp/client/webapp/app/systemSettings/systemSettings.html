@@ -21,24 +21,32 @@
                 </div>
             </uib-tab>
             <uib-tab index="1" heading="Images" select="ctrl.selectTab(1)">
-                <div class="container">
-                    <div class="row">
+                    <div class="row row-centered">
                         <div class="col-sm-4" ng-if="ctrl.tabIndex === 1">
-                            <h4>Existing Images</h4>
-                            <table datatable="" dt-options="ctrl.dtOptions" dt-columns="ctrl.dtColumns" dt-instance="ctrl.dtInstance" class="row-border hover"></table>
-                            <form ng-submit="ctrl.addImage()" name="searchWard">
+                            <form name="searchWard">
+                                <hr>
                                 <div class="form-group">
-                                    <h4>Select an Image</h4>
-                                    <input type="file" class="form-control" on-file-change="ctrl.onFileChange" ctrl="ctrl" file-select>
+                                    <h3>Select a New Image</h3>
+                                    <div class="input-group">
+                                        <input type="file" class="form-control" on-file-change="ctrl.onFileChange" ctrl="ctrl" file-select>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-primary" type="button" ng-disabled="!ctrl.selectedFile" ng-click="ctrl.addImage()">Add</button>
+                                        </span>
+                                    </div>
                                 </div>
-                                <button class="btn btn-primary pull-right" type="submit" ng-disabled="!ctrl.selectedFile">Add</button>
+                                <hr>
+                                <h3>Existing Images</h3>
+                                <table datatable="" dt-options="ctrl.dtOptions" dt-columns="ctrl.dtColumns" dt-instance="ctrl.dtInstance" class="row-border hover"></table>
+                                <div class="btn-toolbar pull-right" style="padding-top: 5px;">
+                                    <button type="button" class="btn btn-primary">Save</button>
+                                    <button type="button" class="btn btn-primary">Restore</button>
+                                </div>
                             </form>
                         </div>
                         <div class="col-sm-8">
                             <img ng-src="{{imageSrc}}" width="100%" ng-show="ctrl.selectedFile"/>
                         </div>
                     </div>
-                </div>
             </uib-tab>
         </uib-tabset>
     </div>

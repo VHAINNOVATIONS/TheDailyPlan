@@ -72,7 +72,7 @@ angular.module('tdpApp')
             .withPaginationType('simple')
             .withOption('dom', 'tip')
             .withOption('ordering', false)
-            .withOption('pageLength', 5)
+            .withOption('pageLength', 4)
             //.withOption('scrollCollapse', true)
             //.withOption('scrollY', '180px')
             // Active Responsive plugin
