@@ -42,17 +42,15 @@
     </div>
     <div class="row" ng-if="ctrl.tabIndex === 1">
         <div class="col-sm-4">
+            <h4>Existing Images</h4>
             <table datatable="" dt-options="ctrl.dtOptions" dt-columns="ctrl.dtColumns" dt-instance="ctrl.dtInstance" class="row-border hover"></table>
         </div>
         <div class="col-sm-8">
             <img ng-src="{{imageSrc}}" width="100%" ng-show="ctrl.selectedFile"/>
         </div>
     </div>
-
-
-
     <div class="row">
-        <div class="col-sm-12 col-centered">
+        <div class="col-sm-4 oull-right">
             <hr>
             <button class="btn btn-primary" ng-click="ctrl.display()">Display</button>
             <button class="btn btn-primary" ng-click="ctrl.genPDF()">Delete</button>
