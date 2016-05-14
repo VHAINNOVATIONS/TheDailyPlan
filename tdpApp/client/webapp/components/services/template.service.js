@@ -19,27 +19,16 @@ angular.module('tdpApp')
              * @param  {Function} callback - optional
              * @return {Promise}
              */
-            findAll: function(callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
+            findAll: function() {
                 var id = Facility.getCurrentFacility();
                 if (id) {
-                    $http.get('/api/template/facility/' + id).
-                        success(function(data) {
-                        results = data;
-                        deferred.resolve(data);
-                        return cb();
-                    }).
-                    error(function(err) {
-                        deferred.reject(err);
-                        return cb(err);
-                    }.bind(this));
+                  return $http.get('/api/template/facility/' + id).then(function(response) {
+                      var results = response.data;
+                      return results;
+                  });
+                } else {
+                    return $q.reject('No facility is chosen.');
                 }
-                else
-                {
-                    deferred.reject('No facility is chosen.');
-                }
-                return deferred.promise;
             },
 
             findByWard: function(wardId) {
