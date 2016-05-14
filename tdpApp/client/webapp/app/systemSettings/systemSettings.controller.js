@@ -34,19 +34,15 @@ angular.module('tdpApp')
             name: 'landing6.jpg',
             active: true
         }];
-
+        this.original = _.cloneDeep(this.data);
         this.dtInstance = {};
         this.selectedFile = null;
         this.existingFile = null;
+        this.dirty = false;
         this.activeImg = this.data.reduce(function(r, d) {
             r[d.name] = d.active;
             return r;
         }, {});
-
-
-        this.newPromise = function () {
-            return $q.resolve(this.data);
-        };
 
         this.onFileChange = function (file) {
             FileReader.readAsDataUrl(file, $scope).then(function(result) {
@@ -82,15 +78,24 @@ angular.module('tdpApp')
                 this.selectedFile = null;
                 this.data.unshift(fileData);
                 this.activeImg[name] = true;
-                var dtInstance = this.dtInstance;
-                dtInstance.reloadData(function() {}, true);
+                this.dirty = true;
             }
         };
 
         this.imgClick = function(name) {
-            this.existingFile = name;
-            this.selectedFile = null;
-            $scope.imageSrc = '/common/assets/landing_images/' + name;
+            var img = this.activeImg[name];
+            if (img) {
+                var file = img.file;
+                this.existingFile = name;
+                this.selectedFile = null;
+                if (file) {
+                    FileReader.readAsDataUrl(file, $scope).then(function(result) {
+                        $scope.imageSrc = result;
+                    });
+                } else {
+                    $scope.imageSrc = '/common/assets/landing_images/' + name;
+                }
+            }
         };
 
         this.imgDelete = function(name) {
@@ -100,34 +105,31 @@ angular.module('tdpApp')
             var index = _.findIndex(this.data, {name: name});
             if (index > -1) {
                 this.data.splice(index, 1);
-                this.dtInstance.reloadData(function() {}, true);
+                this.dirty = true;
             }
         };
 
-        self.dtOptions = DTOptionsBuilder.fromFnPromise(function() {
-                return self.newPromise();
-            })
-            .withOption('createdRow', function(row) {
-                // Recompiling so we can bind Angular directive to the DT
-                $compile(angular.element(row).contents())($scope);
-            })
+        this.activeClick = function() {
+            this.dirty = true;
+        };
+
+        this.save = function() {
+            this.dirty = false;
+        };
+
+        this.restore = function() {
+            this.data.length = 0;
+            this.original.forEach(function(r) {
+                this.data.push(_.clone(r));
+            }, this);
+            this.dirty = false;
+        };
+
+        self.dtOptions = DTOptionsBuilder.newOptions()
             .withPaginationType('simple')
             .withOption('dom', 'tip')
             .withOption('ordering', false)
             .withOption('pageLength', 4)
             .withOption('responsive', true);
-
-        self.dtColumns = [
-            DTColumnBuilder.newColumn(null).withTitle('Name').renderWith(function(data){
-                return '<span ng-click="ctrl.imgClick(\'' + data.name + '\')"  class="nameLink clickable">'+data.name+'</span>';
-            }),
-            DTColumnBuilder.newColumn(null).withTitle('Active')
-            .renderWith(function(data) {
-                return '<label for="selectchk' + data.name + '" style="display: none">active</label><input id="selectchk' + data.name + '" type="checkbox" ng-model="ctrl.activeImg[\'' + data.name + '\']" ng-click="ctrl.toggleActiveImg(' + data.name + ')">';
-            }),
-            DTColumnBuilder.newColumn(null).renderWith(function(data){
-                return '<span ng-click="ctrl.imgDelete(\'' + data.name + '\')"  class="nameLink clickable">'+'Delete'+'</span>';
-            }),
-        ];
     });
 

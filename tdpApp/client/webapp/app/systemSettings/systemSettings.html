@@ -36,12 +36,27 @@
                                 </div>
                                 <hr>
                                 <h3>Existing Images</h3>
-                                <table datatable="" dt-options="ctrl.dtOptions" dt-columns="ctrl.dtColumns" dt-instance="ctrl.dtInstance" class="row-border hover"></table>
-                                <div class="btn-toolbar pull-right" style="padding-top: 5px;">
-                                    <button type="button" class="btn btn-primary">Save</button>
-                                    <button type="button" class="btn btn-primary">Restore</button>
-                                </div>
+                                <table datatable="ng" dt-options="ctrl.dtOptions" dt-columns="ctrl.dtColumns" dt-instance="ctrl.dtInstance" class="row-border hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Active</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="datum in ctrl.data" ng-model="ctrl.data">
+                                            <td ng-click="ctrl.imgClick(datum.name)" class="nameLink clickable">{{ datum.name }}</td>
+                                            <td><input type="checkbox" ng-model="datum.active" ng-click="ctrl.activeClick()"></td>
+                                            <td ng-click="ctrl.imgDelete(datum.name)" class="nameLink clickable">Delete</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </form>
+                            <div class="btn-toolbar pull-right" style="padding-top: 5px;">
+                                <button type="button" class="btn btn-primary" ng-click="ctrl.save()" ng-disabled="!ctrl.dirty">Save</button>
+                                <button type="button" class="btn btn-primary" ng-click="ctrl.restore()" ng-disabled="!ctrl.dirty">Restore</button>
+                            </div>
                         </div>
                         <div class="col-sm-8">
                             <img ng-src="{{imageSrc}}" width="100%" ng-show="ctrl.selectedFile || ctrl.existingFile"/>
