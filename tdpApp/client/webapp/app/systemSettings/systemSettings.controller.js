@@ -38,7 +38,9 @@ angular.module('tdpApp')
             name: 'landing6.jpg',
             active: true
         }];
+        this.dtInstance = {};
         this.selectedFile = null;
+        this.existingFile = null;
         this.activeImg = this.data.reduce(function(r, d) {
             r[d.name] = d.active;
             return r;
@@ -60,9 +62,24 @@ angular.module('tdpApp')
             this.selectedFile = null;
         };
 
+        this.imgClick = function(name) {
+            this.existingFile = name;
+            this.selectedFile = null;
+            $scope.imageSrc = '/common/assets/landing_images/' + name;
+        };
+
+        this.imgDelete = function(name) {
+            if (name === this.existingFile) {
+                this.existingFile = null;
+            }
+            var index = _.findIndex(this.data, {name: name});
+            if (index > -1) {
+                this.data.splice(index, 1);
+                this.dtInstance.reloadData(function() {}, true);
+            }
+        };
 
         self.dtOptions = DTOptionsBuilder.fromFnPromise(function() {
-                //return $resource('data1.json').query().$promise;
                 return self.newPromise();
             })
             .withOption('createdRow', function(row) {
@@ -73,21 +90,18 @@ angular.module('tdpApp')
             .withOption('dom', 'tip')
             .withOption('ordering', false)
             .withOption('pageLength', 4)
-            //.withOption('scrollCollapse', true)
-            //.withOption('scrollY', '180px')
-            // Active Responsive plugin
             .withOption('responsive', true);
 
         self.dtColumns = [
             DTColumnBuilder.newColumn(null).withTitle('Name').renderWith(function(data){
-                return '<a href="_blank" ng-click="ctrl.imgClick(' + data.name + ')"  class="nameLink">'+data.name+'</a>';
+                return '<span ng-click="ctrl.imgClick(\'' + data.name + '\')"  class="nameLink clickable">'+data.name+'</span>';
             }),
             DTColumnBuilder.newColumn(null).withTitle('Active')
             .renderWith(function(data) {
                 return '<label for="selectchk' + data.name + '" style="display: none">active</label><input id="selectchk' + data.name + '" type="checkbox" ng-model="ctrl.activeImg[\'' + data.name + '\']" ng-click="ctrl.toggleActiveImg(' + data.name + ')">';
             }),
             DTColumnBuilder.newColumn(null).renderWith(function(data){
-                return '<a href="_blank" ng-click="ctrl.imgDelete(' + data.name + ')"  class="nameLink">'+'Delete'+'</a>';
+                return '<span ng-click="ctrl.imgDelete(\'' + data.name + '\')"  class="nameLink clickable">'+'Delete'+'</span>';
             }),
         ];
     });
