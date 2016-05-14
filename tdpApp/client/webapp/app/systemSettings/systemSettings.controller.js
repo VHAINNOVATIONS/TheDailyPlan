@@ -4,7 +4,6 @@ angular.module('tdpApp')
     .controller('SystemSettingsCtrl', function($q, $scope, $compile, FileReader, DTOptionsBuilder, DTColumnBuilder) {
         var self = this;
 
-        var titleHtml = '<label for="selectchkall" style="display: none">select</label><input type="checkbox" id="selectchkall" ng-model="ctrl.selectAll" ng-click="ctrl.toggleAll(ctrl.selectAll, ctrl.selected)"> ';
         this.facilityMessages = ['Message 1 is good', 'Message 2 is good', 'Message 4 is good'];
 
         this.selectTab = function (index) {
@@ -13,9 +12,6 @@ angular.module('tdpApp')
             this.displayErr.flag = false;
         };
 
-        //self.landingImage = '/common/assets/landing_images/landing' + self.landingImageIndex + '.jpg';
-
-
         this.tabIndex = 1;
 
         this.displayErr = {};
@@ -23,7 +19,7 @@ angular.module('tdpApp')
             name: 'landing1.jpg',
             active: true
         }, {
-            name: 'landing2.jpg',
+            name: 'landing8.jpg',
             active: false
         }, {
             name: 'landing3.jpg',
@@ -38,6 +34,7 @@ angular.module('tdpApp')
             name: 'landing6.jpg',
             active: true
         }];
+
         this.dtInstance = {};
         this.selectedFile = null;
         this.existingFile = null;
@@ -58,8 +55,36 @@ angular.module('tdpApp')
             });
         };
 
+        this.uniqifyImageName = function(name) {
+            var index = 1;
+            var pieces = name.split('.');
+            var original = pieces[0];
+            while (this.activeImg.hasOwnProperty('name')) {
+                pieces[0] = original + index;
+                name = pieces.join('.');
+                ++index;
+            }
+            return name;
+        };
+
         this.addImage = function() {
-            this.selectedFile = null;
+            if (this.selectedFile) {
+                var name = this.selectedFile.name;
+                if (this.activeImg.hasOwnProperty('name')) {
+                    name = this.uniqifyImageName(name);
+                }
+                var fileData = {
+                    name: name,
+                    active: true,
+                    file: this.selectedFile
+                };
+                this.existingFile = name;
+                this.selectedFile = null;
+                this.data.unshift(fileData);
+                this.activeImg[name] = true;
+                var dtInstance = this.dtInstance;
+                dtInstance.reloadData(function() {}, true);
+            }
         };
 
         this.imgClick = function(name) {
