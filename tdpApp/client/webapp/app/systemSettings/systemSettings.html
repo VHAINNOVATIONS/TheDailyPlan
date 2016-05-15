@@ -57,6 +57,8 @@
                                 <button type="button" class="btn btn-primary" ng-click="ctrl.save()" ng-disabled="!ctrl.dirty">Save</button>
                                 <button type="button" class="btn btn-primary" ng-click="ctrl.restore()" ng-disabled="!ctrl.dirty">Restore</button>
                             </div>
+                            <div class="alert" role="alert" ng-if="ctrl.displayMsg">{{ctrl.displayMsg}}</div>
+                            <div class="alert" role="alert alert-danger" ng-if="ctrl.displayErr">{{ctrl.displayErr}}</div>
                         </div>
                         <div class="col-sm-8">
                             <img ng-src="{{imageSrc}}" width="100%" ng-show="ctrl.selectedFile || ctrl.existingFile"/>
@@ -65,8 +67,4 @@
             </uib-tab>
         </uib-tabset>
     </div>
-    <div class="row row-centered">
-        <div class="col-sm-4 col-centered pull-left">
-            <div class="alert alert-danger" role="alert" ng-show="ctrl.displayErr.flag">{{ctrl.displayErr.msg}}</div>
-        </div>
-    </div>
+</div>

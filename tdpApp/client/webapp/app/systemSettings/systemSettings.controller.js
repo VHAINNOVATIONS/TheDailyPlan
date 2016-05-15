@@ -115,13 +115,43 @@ angular.module('tdpApp')
 
         this.save = function() {
             this.dirty = false;
-            var selectedFile = _.find(this.data, function(d) {
-                return d.file;
+            var originalMap = _.indexBy(this.original, 'name');
+            var stateData = this.data.reduce(function(r, d) {
+                if (d.file) {
+                    r.new.push(d);
+                } else {
+                    var original = originalMap[d.name];
+                    if (original.active !== d.active) {
+                        r.dirty.push(d);
+                    }
+                    r.calledFor[d.name] = true;
+                }
+                return r;
+            }, {
+                new: [],
+                dirty: [],
+                calledFor: {}
             });
-            LandingImage.save({}, selectedFile).then(function() {
-                console.log('success');
-            }).catch(function(err) {
-                console.log(err);
+            var formData = {};
+            formData.files = _.map(stateData.new, 'file');
+            formData.new = _.map(stateData, function(r) {
+                return {
+                    name: r.name,
+                    active: r.active
+                };
+            });
+            formData.dirty = stateData.dirty;
+            formData.deleted = this.original.reduce(function(r, p) {
+                var name = p.name;
+                if (! stateData.calledFor[name]) {
+                    r.push(name);
+                }
+                return r;
+            }, []);
+            LandingImage.save(formData).then(function() {
+                self.displayMsg = 'Changes saved successfully';
+            }).catch(function() {
+                self.displayMsg = 'Error saving changes.';
             });
         };
 

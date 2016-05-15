@@ -17,13 +17,17 @@ var config = require('./environment');
 var passport = require('passport');
 var multer = require('multer')
 
+var stagingPath = path.join(config.root, 'common/assets/landing_images/staging');
+
 module.exports = function(app) {
     var env = app.get('env');
-    var multerInstance = multer({ dest: '/tmp'}).single('file');
+    var multerInstance = multer({dest: '/tmp'}).single('files');
     app.set('views', config.root + '/server/views');
     app.engine('html', require('ejs').renderFile);
     app.set('view engine', 'html');
-    app.use(multerInstance);
+    app.use(multer({
+        dest: stagingPath
+    }).array('files'));
     app.use(compression());
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
