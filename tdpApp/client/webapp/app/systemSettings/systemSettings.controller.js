@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tdpApp')
-    .controller('SystemSettingsCtrl', function($q, $scope, $compile, FileReader, DTOptionsBuilder, DTColumnBuilder) {
+    .controller('SystemSettingsCtrl', function($q, $scope, $compile, FileReader, LandingImage, DTOptionsBuilder) {
         var self = this;
 
         this.facilityMessages = ['Message 1 is good', 'Message 2 is good', 'Message 4 is good'];
@@ -115,6 +115,14 @@ angular.module('tdpApp')
 
         this.save = function() {
             this.dirty = false;
+            var selectedFile = _.find(this.data, function(d) {
+                return d.file;
+            });
+            LandingImage.save({}, selectedFile).then(function() {
+                console.log('success');
+            }).catch(function(err) {
+                console.log(err);
+            });
         };
 
         this.restore = function() {
