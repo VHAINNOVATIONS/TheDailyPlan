@@ -13,10 +13,15 @@ angular.module('tdpApp')
                     return response.data;
                 });
             },
-            save: function(images, file) {
+            save: function(formData) {
                 var fd = new FormData();
-                fd.append('file', file.file);
-                return $http.post('/api/landing_image', fd, {
+                ['new', 'deleted', 'dirty'].forEach(function(key) {
+                    fd.append(key, JSON.stringify(formData[key]));
+                });
+                formData.files.forEach(function(file) {
+                    fd.append('files', file);
+                });
+                return $http.post('/fu/landing_image', fd, {
                     transformRequest: angular.identity,
                     headers: {
                         'Content-Type': undefined

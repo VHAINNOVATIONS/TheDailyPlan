@@ -17,20 +17,24 @@ var config = require('./environment');
 var passport = require('passport');
 var multer = require('multer')
 
-var stagingPath = path.join(config.root, 'common/assets/landing_images/staging');
+var stagingPath = path.join(config.root, 'client/common/assets/landing_images/staging');
 
 module.exports = function(app) {
     var env = app.get('env');
-    var multerInstance = multer({dest: '/tmp'}).single('files');
+    var multerInstance = multer({dest: stagingPath}).array('files');
     app.set('views', config.root + '/server/views');
     app.engine('html', require('ejs').renderFile);
     app.set('view engine', 'html');
-    app.use(multer({
-        dest: stagingPath
+    app.use(['/fu'], multer({
+        dest: stagingPath,
+        fileFilter: function fileFilter (req, file, cb) {
+            console.log('INSIDEEDEDEDE');
+            cb(null, true);
+        }
     }).array('files'));
-    app.use(compression());
-    app.use(bodyParser.urlencoded({ extended: true }));
-    app.use(bodyParser.json());
+    app.use(['/api', '/auth'], compression());
+    app.use(['/api', '/auth'], bodyParser.urlencoded({ extended: true }));
+    app.use(['/api', '/auth'], bodyParser.json());
     app.use(methodOverride());
     app.use(cookieParser());
     app.use(

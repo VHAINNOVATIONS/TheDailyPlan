@@ -9,40 +9,23 @@ angular.module('tdpApp')
         this.selectTab = function (index) {
             this.tabIndex = index;
             this.noResults = false;
-            this.displayErr.flag = false;
         };
 
         this.tabIndex = 1;
 
-        this.displayErr = {};
-        this.data = [{
-            name: 'landing1.jpg',
-            active: true
-        }, {
-            name: 'landing8.jpg',
-            active: false
-        }, {
-            name: 'landing3.jpg',
-            active: false
-        }, {
-            name: 'landing4.jpg',
-            active: true
-        }, {
-            name: 'landing5.jpg',
-            active: false
-        }, {
-            name: 'landing6.jpg',
-            active: true
-        }];
-        this.original = _.cloneDeep(this.data);
+        LandingImage.get().then(function(data) {
+            self.data = data;
+            self.original = _.cloneDeep(self.data);
+            self.activeImg = data.reduce(function(r, d) {
+                r[d.name] = d.active;
+                return r;
+            }, {});
+        });
+
         this.dtInstance = {};
         this.selectedFile = null;
         this.existingFile = null;
         this.dirty = false;
-        this.activeImg = this.data.reduce(function(r, d) {
-            r[d.name] = d.active;
-            return r;
-        }, {});
 
         this.onFileChange = function (file) {
             FileReader.readAsDataUrl(file, $scope).then(function(result) {
@@ -83,7 +66,7 @@ angular.module('tdpApp')
         };
 
         this.imgClick = function(name) {
-            var img = this.activeImg[name];
+            var img = _.find(this.data, {name: name});
             if (img) {
                 var file = img.file;
                 this.existingFile = name;
@@ -93,17 +76,17 @@ angular.module('tdpApp')
                         $scope.imageSrc = result;
                     });
                 } else {
-                    $scope.imageSrc = '/common/assets/landing_images/' + name;
+                    $scope.imageSrc = img.path;
                 }
             }
         };
 
         this.imgDelete = function(name) {
-            if (name === this.existingFile) {
-                this.existingFile = null;
-            }
             var index = _.findIndex(this.data, {name: name});
             if (index > -1) {
+                if (name === this.existingFile) {
+                    this.existingFile = null;
+                }
                 this.data.splice(index, 1);
                 this.dirty = true;
             }
@@ -134,7 +117,7 @@ angular.module('tdpApp')
             });
             var formData = {};
             formData.files = _.map(stateData.new, 'file');
-            formData.new = _.map(stateData, function(r) {
+            formData.new = _.map(stateData.new, function(r) {
                 return {
                     name: r.name,
                     active: r.active

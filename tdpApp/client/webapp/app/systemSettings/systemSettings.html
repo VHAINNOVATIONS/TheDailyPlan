@@ -21,7 +21,7 @@
                 </div>
             </uib-tab>
             <uib-tab index="1" heading="Images" select="ctrl.selectTab(1)">
-                    <div class="row row-centered">
+                    <div class="row row-centered" ng-if="ctrl.data.length">
                         <div class="col-sm-4" ng-if="ctrl.tabIndex === 1">
                             <form name="searchWard">
                                 <hr>
