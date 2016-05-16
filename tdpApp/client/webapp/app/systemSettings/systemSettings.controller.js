@@ -4,7 +4,16 @@ angular.module('tdpApp')
     .controller('SystemSettingsCtrl', function($q, $scope, $compile, FileReader, LandingImage, DTOptionsBuilder) {
         var self = this;
 
-        this.facilityMessages = ['Message 1 is good', 'Message 2 is good', 'Message 4 is good'];
+        this.facilityMessages = [{
+            title: 'Message 1 is good',
+            message: 'Message 1 is good'
+        }, {
+            title: 'Message 2 is good',
+            message: 'Message 2 is good'
+        }, {
+            title: 'Message 3 is good',
+            message: 'Message 3 is good'
+        }];
 
         this.selectTab = function (index) {
             this.tabIndex = index;

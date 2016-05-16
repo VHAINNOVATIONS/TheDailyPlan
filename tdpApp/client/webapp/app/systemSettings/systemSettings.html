@@ -7,14 +7,37 @@
             <uib-tab index="0" heading="Messages" select="ctrl.selectTab(0)">
                 <div class="container">
                     <div class="row row-centered">
-                        <div class="col-sm-4 col-centered">
-                            <form ng-submit="ctrl.commit()" name="commit">
-                                <div class="form-group row" ng-repeat="message in ctrl.facilityMessages">
-                                    <label for="{{'facilitymsg'+$index}}" class="control-label">{{'Message'+$index}}</label>
-                                    <textarea ng-model="message" rows="4" class="form-control" id="{{'facilitymsg'+$index}}"></textarea>
+                        <div class="col-sm-8 col-centered">
+                            <form ng-submit="ctrl.commitMessages()" name="commit">
+                                <div class="form-group">
+                                    <label for="messageSelect">Message</label>
+                                    <div class="input-group">
+                                        <select name="messageSelect"
+                                                id="messageSelect"
+                                                ng-options="message as message.title for message in ctrl.facilityMessages"
+                                                ng-model="ctrl.messageSelect"
+                                                class="form-control">
+                                                <option value="">Select Message</option>
+                                        </select>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-primary" type="button" ng-click"ctrl.addMessage()">Add</button>
+                                            <button class="btn btn-primary" type="button" ng-click"ctrl.deleteMessage()">Delete</button>
+                                        </span>
+                                    </div>
                                 </div>
-                                <input class="btn btn-primary" type="submit" value="Save" ng-disabled="searchAll.$invalid">
-                                <input class="btn btn-primary" type="button" value="Reset" ng-click"ctrl.reset()">
+                                <div class="form-group" ng-disabked="!ctrl.messageSelect">
+                                    <label for="messageTitle" class="control-label">Title</label>
+                                    <input type="text" ng-model="ctrl.messageSelect.title" class="form-control" id="messageTitle">
+                                </div>
+                                <div class="form-group" ng-disabled="!ctrl.messageSelect">
+                                    <label for="messageContent" class="control-label">Content</label>
+                                    <textarea ng-model="ctrl.messageSelect.message" rows="4" class="form-control" id="messageContent"></textarea>
+                                </div>
+                                <hr>
+                                <div class="btn-toolbar pull-right" style="padding-top: 5px;">
+                                    <button class="btn btn-primary" type="submit" ng-disabled="searchAll.$invalid">Save</button>
+                                    <button class="btn btn-primary" type="button" ng-click"ctrl.resetMessage()">Reset</button>
+                                </div>
                             </form>
                         </div>
                     </div>
