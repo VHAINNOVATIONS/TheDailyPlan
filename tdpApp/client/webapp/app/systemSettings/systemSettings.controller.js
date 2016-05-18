@@ -40,6 +40,18 @@ angular.module('tdpApp')
             self.masterNatContact = angular.copy(self.natContact);
         });
 
+        this.commitContact = function() {
+            Facility.saveCurrentContact(this.contact).then(function() {
+                self.facililtyContactForm.$setPristine();
+            });
+        };
+
+        this.commitNationalContact = function() {
+            Facility.saveContactById(1, this.natContact).then(function() {
+                self.nationalContactForm.$setPristine();
+            });
+        };
+
         this.selectTab = function (index) {
             this.tabIndex = index;
             this.noResults = false;

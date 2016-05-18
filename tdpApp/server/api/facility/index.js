@@ -36,9 +36,6 @@ router.get('/landing/:id', function(req, res) {
 
 router.get('/contact/:id', function(req, res) {
     var id = req.params.id;
-    console.log('=============');
-    console.log(id);
-    console.log('=============');
     models.facility_contact.find({
         where: {
             facilityId: id
@@ -46,6 +43,26 @@ router.get('/contact/:id', function(req, res) {
         raw: true
     }).then(function(contact) {
         res.json(contact);
+    });
+});
+
+router.post('/contact/:id', function(req, res) {
+    var id = req.params.id;
+    var body = req.body;
+    models.facility_contact.find({
+        where: {
+            facilityId: id
+        }
+    }).then(function(contact) {
+        ['title1', 'title2', 'title3', 'phone', 'email'].forEach(function(key) {
+            var value = body[key];
+            contact[key] = (value === undefined ? null : value);
+        });
+        return contact.save();
+    }).then(function() {
+        res.status(200).end();
+    }).catch(function(err) {
+        res.status(401).send(err);
     });
 });
 
