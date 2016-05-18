@@ -166,7 +166,30 @@ angular.module('tdpApp')
                 }.bind(this));
 
                 return deferred.promise;
-            }
+            },
 
+            /**
+             * Replace messages
+             *
+             * @param {String} id      - facility id
+             * @param {Array} messages - messages
+             */
+             replaceAll: function(id, messages) {
+                return $http.post('/api/facility_message/all/' + id, messages);
+             },
+
+            /**
+             * Find current facility messages
+             *
+             * @ return {Promise}
+             */
+             replaceAllForCurrent: function(messages) {
+                var id = Facility.getCurrentFacility();
+                if (id) {
+                    return $http.post('/api/facility_message/all/' + id, messages);
+                } else {
+                    $q.reject('No facility is selected.');
+                }
+             }
         };
     });

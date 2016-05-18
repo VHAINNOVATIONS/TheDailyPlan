@@ -52,6 +52,18 @@ angular.module('tdpApp')
             });
         };
 
+        this.commitMessages = function() {
+            Facility_Message.replaceAllForCurrent(this.facilityMessages).then(function() {
+                self.messagesForm.$setPristine();
+            });
+        };
+
+        this.commitNatMessages = function() {
+            Facility_Message.replaceAll(1, this.nationalMessages).then(function() {
+                self.natMessagesForm.$setPristine();
+            });
+        };
+
         this.selectTab = function (index) {
             this.tabIndex = index;
             this.noResults = false;
