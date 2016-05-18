@@ -43,6 +43,15 @@ angular.module('tdpApp')
                     return results;
                 });
             },
+            getCurrentContact: function() {
+                return this.getContactById(currentFacility);
+            },
+            getContactById: function(id) {
+                return $http.get('/api/facility/contact/' + id).then(function(response) {
+                    var result = response.data;
+                    return result;
+                });
+            },
             /**
              * Find Single Facility by Facility ID
              *

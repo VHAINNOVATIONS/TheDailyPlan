@@ -1,19 +1,44 @@
 'use strict';
 
 angular.module('tdpApp')
-    .controller('SystemSettingsCtrl', function($q, $scope, $compile, FileReader, LandingImage, DTOptionsBuilder) {
+    .controller('SystemSettingsCtrl', function($scope, Facility, Facility_Message, FileReader, LandingImage, DTOptionsBuilder) {
         var self = this;
 
-        this.facilityMessages = [{
-            title: 'Message 1 is good',
-            message: 'Message 1 is good'
-        }, {
-            title: 'Message 2 is good',
-            message: 'Message 2 is good'
-        }, {
-            title: 'Message 3 is good',
-            message: 'Message 3 is good'
-        }];
+        Facility_Message.findAllForCurrent().then(function(messages) {
+            self.facilityMessages = messages.map(function(message) {
+                return {
+                    id: message.id,
+                    title: message.message_headline,
+                    message: message.message_text
+                };
+            });
+            self.messagesForm.$setPristine();
+            self.masterFacilityMessages = angular.copy(self.facilityMessages);
+        });
+
+        Facility_Message.findAllByFacilityID(1).then(function(messages) {
+            self.nationalMessages = messages.map(function(message) {
+                return {
+                    id: message.id,
+                    title: message.message_headline,
+                    message: message.message_text
+                };
+            });
+            self.natMessagesForm.$setPristine();
+            self.masterNationalMessages = angular.copy(self.nationalMessages);
+        });
+
+        Facility.getCurrentContact().then(function(contact) {
+            self.contact = contact;
+            self.facilityContactForm.$setPristine();
+            self.masterContact = angular.copy(self.contact);
+        });
+
+        Facility.getContactById(1).then(function(contact) {
+            self.natContact = contact;
+            self.nationalContactForm.$setPristine();
+            self.masterNatContact = angular.copy(self.natContact);
+        });
 
         this.selectTab = function (index) {
             this.tabIndex = index;

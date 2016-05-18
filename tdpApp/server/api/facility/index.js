@@ -34,6 +34,21 @@ router.get('/landing/:id', function(req, res) {
     });
 });
 
+router.get('/contact/:id', function(req, res) {
+    var id = req.params.id;
+    console.log('=============');
+    console.log(id);
+    console.log('=============');
+    models.facility_contact.find({
+        where: {
+            facilityId: id
+        },
+        raw: true
+    }).then(function(contact) {
+        res.json(contact);
+    });
+});
+
 // get single facility
 router.get('/:id', function(req, res) {
   models.facility.find({
