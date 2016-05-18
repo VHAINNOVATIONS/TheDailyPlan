@@ -147,7 +147,7 @@ angular.module('tdpApp')
             });
         };
 
-        this.restore = function() {
+        this.reset = function() {
             this.data.length = 0;
             this.original.forEach(function(r) {
                 this.data.push(_.clone(r));

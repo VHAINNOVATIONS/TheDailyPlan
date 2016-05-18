@@ -25,7 +25,7 @@
                                         </span>
                                     </div>
                                 </div>
-                                <div class="form-group" ng-disabked="!ctrl.messageSelect">
+                                <div class="form-group" ng-disabled="!ctrl.messageSelect">
                                     <label for="messageTitle" class="control-label">Title</label>
                                     <input type="text" ng-model="ctrl.messageSelect.title" class="form-control" id="messageTitle">
                                 </div>
@@ -43,9 +43,44 @@
                     </div>
                 </div>
             </uib-tab>
-            <uib-tab index="1" heading="Images" select="ctrl.selectTab(1)">
+            <uib-tab index="1" heading="Contact" select="ctrl.selectTab(1)">
+                <div class="container">
+                    <div class="row row-centered">
+                        <div class="col-sm-8 col-centered">
+                            <form ng-submit="ctrl.commitContact()" name="commit">
+                                <div class="form-group">
+                                    <label for="contactTitle1" class="control-label">Title Line 1</label>
+                                    <input type="text" ng-model="ctrl.contactTitle1" class="form-control" id="contactTitle1">
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactTitle2" class="control-label">Title Line 2</label>
+                                    <input type="text" ng-model="ctrl.contactTitle2" class="form-control" id="contactTitle2">
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactTitle3" class="control-label">Title Line 3</label>
+                                    <input type="text" ng-model="ctrl.contactTitle4" class="form-control" id="contactTitle3">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phoneLine" class="control-label">Phone</label>
+                                    <input type="phone" ng-model="ctrl.phoneLine" class="form-control" id="phoneLine">
+                                </div>
+                                <div class="form-group">
+                                    <label for="natEmailLine" class="control-label">Email</label>
+                                    <input type="email" ng-model="ctrl.email" class="form-control" id="emailLine">
+                                </div>
+                                <hr>
+                                <div class="btn-toolbar pull-right" style="padding-top: 5px;">
+                                    <button class="btn btn-primary" type="submit" ng-disabled="searchAll.$invalid">Save</button>
+                                    <button class="btn btn-primary" type="button" ng-click"ctrl.resetMessage()">Reset</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </uib-tab>
+            <uib-tab index="2" heading="Images" select="ctrl.selectTab(2)">
                     <div class="row row-centered" ng-if="ctrl.data.length">
-                        <div class="col-sm-4" ng-if="ctrl.tabIndex === 1">
+                        <div class="col-sm-4" ng-if="ctrl.tabIndex === 2">
                             <form name="searchWard">
                                 <hr>
                                 <div class="form-group">
@@ -78,7 +113,7 @@
                             </form>
                             <div class="btn-toolbar pull-right" style="padding-top: 5px;">
                                 <button type="button" class="btn btn-primary" ng-click="ctrl.save()" ng-disabled="!ctrl.dirty">Save</button>
-                                <button type="button" class="btn btn-primary" ng-click="ctrl.restore()" ng-disabled="!ctrl.dirty">Restore</button>
+                                <button type="button" class="btn btn-primary" ng-click="ctrl.reset()" ng-disabled="!ctrl.dirty">Reset</button>
                             </div>
                             <div class="alert" role="alert" ng-if="ctrl.displayMsg">{{ctrl.displayMsg}}</div>
                             <div class="alert" role="alert alert-danger" ng-if="ctrl.displayErr">{{ctrl.displayErr}}</div>
@@ -87,6 +122,80 @@
                             <img ng-src="{{imageSrc}}" width="100%" ng-show="ctrl.selectedFile || ctrl.existingFile"/>
                         </div>
                     </div>
+            </uib-tab>
+            <uib-tab index="3" heading="National Contact" select="ctrl.selectTab(3)">
+                <div class="container">
+                    <div class="row row-centered">
+                        <div class="col-sm-8 col-centered">
+                            <form ng-submit="ctrl.commitNationalContact()" name="nationalCommit">
+                                <div class="form-group">
+                                    <label for="natContactTitle1" class="control-label">Title Line 1</label>
+                                    <input type="text" ng-model="ctrl.natContactTitle1" class="form-control" id="natContactTitle1">
+                                </div>
+                                <div class="form-group">
+                                    <label for="natContactTitle2" class="control-label">Title Line 2</label>
+                                    <input type="text" ng-model="ctrl.natContactTitle2" class="form-control" id="natContactTitle2">
+                                </div>
+                                <div class="form-group">
+                                    <label for="natContactTitle3" class="control-label">Title Line 3</label>
+                                    <input type="text" ng-model="ctrl.natContactTitle4" class="form-control" id="natContactTitle3">
+                                </div>
+                                <div class="form-group">
+                                    <label for="natPhoneLine" class="control-label">Phone</label>
+                                    <input type="phone" ng-model="ctrl.natPhoneLine" class="form-control" id="natPhoneLine">
+                                </div>
+                                <div class="form-group">
+                                    <label for="natEmailLine" class="control-label">Email</label>
+                                    <input type="email" ng-model="ctrl.natEmail" class="form-control" id="natEmailLine">
+                                </div>
+                                <hr>
+                                <div class="btn-toolbar pull-right" style="padding-top: 5px;">
+                                    <button class="btn btn-primary" type="submit" ng-disabled="searchAll.$invalid">Save</button>
+                                    <button class="btn btn-primary" type="button" ng-click"ctrl.resetNationalMessage()">Reset</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </uib-tab>
+            <uib-tab index="4" heading="National Messages" select="ctrl.selectTab(4)">
+                <div class="container">
+                    <div class="row row-centered">
+                        <div class="col-sm-8 col-centered">
+                            <form ng-submit="ctrl.commitNatMessages()" name="commit">
+                                <div class="form-group">
+                                    <label for="natMessageSelect">Message</label>
+                                    <div class="input-group">
+                                        <select name="natMessageSelect"
+                                                id="natMessageSelect"
+                                                ng-options="message as message.title for message in ctrl.natMessages"
+                                                ng-model="ctrl.natMessageSelect"
+                                                class="form-control">
+                                                <option value="">Select Message</option>
+                                        </select>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-primary" type="button" ng-click"ctrl.addNatMessage()">Add</button>
+                                            <button class="btn btn-primary" type="button" ng-click"ctrl.deleteNatMessage()">Delete</button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-disabled="!ctrl.natMessageSelect">
+                                    <label for="natMessageTitle" class="control-label">Title</label>
+                                    <input type="text" ng-model="ctrl.natMessageSelect.title" class="form-control" id="natMessageTitle">
+                                </div>
+                                <div class="form-group" ng-disabled="!ctrl.natMessageSelect">
+                                    <label for="natMessageContent" class="control-label">Content</label>
+                                    <textarea ng-model="ctrl.natMessageSelect.message" rows="4" class="form-control" id="natMessageContent"></textarea>
+                                </div>
+                                <hr>
+                                <div class="btn-toolbar pull-right" style="padding-top: 5px;">
+                                    <button class="btn btn-primary" type="submit" ng-disabled="searchAll.$invalid">Save</button>
+                                    <button class="btn btn-primary" type="button" ng-click"ctrl.resetNatMessage()">Reset</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </uib-tab>
         </uib-tabset>
     </div>
