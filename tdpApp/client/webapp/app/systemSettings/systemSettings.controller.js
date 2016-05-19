@@ -16,18 +16,6 @@ angular.module('tdpApp')
             self.masterFacilityMessages = angular.copy(self.facilityMessages);
         });
 
-        Facility_Message.findAllByFacilityID(1).then(function(messages) {
-            self.nationalMessages = messages.map(function(message) {
-                return {
-                    id: message.id,
-                    title: message.message_headline,
-                    message: message.message_text
-                };
-            });
-            self.natMessagesForm.$setPristine();
-            self.masterNationalMessages = angular.copy(self.nationalMessages);
-        });
-
         Facility.getCurrentContact().then(function(contact) {
             self.contact = contact;
             self.facilityContactForm.$setPristine();
@@ -83,11 +71,50 @@ angular.module('tdpApp')
             }
         };
 
-        this.commitNatMessages = function() {
+        /*** National messages ***/
+
+        Facility_Message.findAllByFacilityID(1).then(function(messages) {
+            self.nationalMessages = messages.map(function(message) {
+                return {
+                    id: message.id,
+                    title: message.message_headline,
+                    message: message.message_text
+                };
+            });
+            self.nationalMessagesForm.$setPristine();
+            self.masterNationalMessages = angular.copy(self.nationalMessages);
+        });
+
+        this.commitNationalMessages = function() {
             Facility_Message.replaceAll(1, this.nationalMessages).then(function() {
-                self.natMessagesForm.$setPristine();
+                self.nationalMessagesForm.$setPristine();
+                self.masterNationalMessages = angular.copy(self.nationalMessages);
             });
         };
+
+        this.resetNationalMessages = function() {
+            self.nationalMessages = angular.copy(self.masterNationalMessages);
+            self.nationalMessagesForm.$setPristine();
+        };
+
+        this.addNationalMessage = function () {
+            this.nationalMessages.push({
+                title: 'New Message',
+                message: ''
+            });
+            this.nationalMessageSelect = this.nationalMessages[this.nationalMessages.length - 1];
+        };
+
+        this.deleteNationalMessage = function () {
+            if (this.nationalMessages.length) {
+                var index = this.nationalMessages.indexOf(this.nationalMessageSelect);
+                if (index < this.nationalMessages.length) {
+                    this.nationalMessages.splice(index, 1);
+                }
+            }
+        };
+
+        /****/
 
         this.selectTab = function (index) {
             this.tabIndex = index;

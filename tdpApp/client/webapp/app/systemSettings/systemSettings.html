@@ -150,35 +150,62 @@
                 <div class="container">
                     <div class="row row-centered">
                         <div class="col-sm-8 col-centered">
-                            <form ng-submit="ctrl.commitNatMessages()" name="ctrl.natMessagesForm">
+                            <form ng-submit="ctrl.commitNationalMessages()" name="ctrl.nationalMessagesForm">
                                 <div class="form-group">
-                                    <label for="natMessageSelect">Message</label>
+                                    <label for="nationalMessageSelect">Message</label>
                                     <div class="input-group">
-                                        <select name="natMessageSelect"
-                                                id="natMessageSelect"
+                                        <select name="nationalMessageSelect"
+                                                id="nationalMessageSelect"
                                                 ng-options="message as message.title for message in ctrl.nationalMessages"
-                                                ng-model="ctrl.natMessageSelect"
+                                                ng-model="ctrl.nationalMessageSelect"
                                                 class="form-control">
                                                 <option value="">Select Message</option>
                                         </select>
                                         <span class="input-group-btn">
-                                            <button class="btn btn-primary" type="button" ng-click="ctrl.addNatMessage()">Add</button>
-                                            <button class="btn btn-primary" type="button" ng-click="ctrl.deleteNatMessage()">Delete</button>
+                                            <button class="btn btn-primary"
+                                                    type="button"
+                                                    ng-click="ctrl.addNationalMessage()">
+                                                Add
+                                            </button>
+                                            <button class="btn btn-primary"
+                                                    type="button"
+                                                    ng-disabled="ctrl.nationalMessages.length < 1"
+                                                    ng-click="ctrl.deleteNationalMessage()">
+                                                Delete
+                                            </button>
                                         </span>
                                     </div>
                                 </div>
-                                <div class="form-group" ng-disabled="!ctrl.natMessageSelect">
-                                    <label for="natMessageTitle" class="control-label">Title</label>
-                                    <input type="text" ng-model="ctrl.natMessageSelect.title" class="form-control" id="natMessageTitle">
+                                <div class="form-group" ng-disabled="!ctrl.nationalMessageSelect">
+                                    <label for="messageTitle" class="control-label">Title</label>
+                                    <input type="text"
+                                           ng-model="ctrl.nationalMessageSelect.title"
+                                           class="form-control"
+                                           id="messageTitle"
+                                           ng-disabled="!ctrl.nationalMessageSelect">
                                 </div>
-                                <div class="form-group" ng-disabled="!ctrl.natMessageSelect">
-                                    <label for="natMessageContent" class="control-label">Content</label>
-                                    <textarea ng-model="ctrl.natMessageSelect.message" rows="4" class="form-control" id="natMessageContent"></textarea>
+                                <div class="form-group" ng-disabled="!ctrl.nationalMessageSelect">
+                                    <label for="messageContent" class="control-label">Content</label>
+                                    <textarea
+                                        ng-model="ctrl.nationalMessageSelect.message"
+                                        rows="4" class="form-control"
+                                        id="messageContent"
+                                        ng-disabled="!ctrl.nationalMessageSelect">
+                                    </textarea>
                                 </div>
                                 <hr>
                                 <div class="btn-toolbar pull-right" style="padding-top: 5px;">
-                                    <button class="btn btn-primary" type="submit" ng-disabled="searchAll.$invalid">Save</button>
-                                    <button class="btn btn-primary" type="button" ng-click="ctrl.resetNatMessage()">Reset</button>
+                                    <button class="btn btn-primary"
+                                            type="submit"
+                                            ng-disabled="ctrl.nationalMessagesForm.$invalid || ctrl.nationalMessagesForm.$pristine">
+                                            Save
+                                    </button>
+                                    <button class="btn btn-primary"
+                                            type="button"
+                                            ng-disabled="ctrl.nationalMessagesForm.$pristine"
+                                            ng-click="ctrl.resetNationalMessages()">
+                                        Reset
+                                    </button>
                                 </div>
                             </form>
                         </div>
