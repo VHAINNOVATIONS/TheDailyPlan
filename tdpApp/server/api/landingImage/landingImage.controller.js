@@ -35,7 +35,8 @@ exports.getActive = function (req, res, next) {
 exports.get = function (req, res, next) {
     var options = {
         raw: true,
-        attributes: ['name', 'active']
+        attributes: ['name', 'active'],
+        order: [['id','DESC']]
     };
     models.landing_image.findAll(options).then(function(images) {
         images.forEach(function(img) {

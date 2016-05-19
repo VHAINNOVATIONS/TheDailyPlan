@@ -138,10 +138,6 @@ angular.module('tdpApp')
         LandingImage.get().then(function(data) {
             self.data = data;
             self.original = _.cloneDeep(self.data);
-            self.activeImg = data.reduce(function(r, d) {
-                r[d.name] = d.active;
-                return r;
-            }, {});
         });
 
         this.dtInstance = {};
@@ -160,10 +156,12 @@ angular.module('tdpApp')
             var index = 1;
             var pieces = name.split('.');
             var original = pieces[0];
-            while (this.activeImg.hasOwnProperty('name')) {
+            var img = _.find(this.data, {name: name});
+            while (img) {
                 pieces[0] = original + index;
                 name = pieces.join('.');
                 ++index;
+                img = _.find(this.data, {name: name});
             }
             return name;
         };
@@ -171,9 +169,7 @@ angular.module('tdpApp')
         this.addImage = function() {
             if (this.selectedFile) {
                 var name = this.selectedFile.name;
-                if (this.activeImg.hasOwnProperty('name')) {
-                    name = this.uniqifyImageName(name);
-                }
+                name = this.uniqifyImageName(name);
                 var fileData = {
                     name: name,
                     active: true,
@@ -182,7 +178,6 @@ angular.module('tdpApp')
                 this.existingFile = name;
                 this.selectedFile = null;
                 this.data.unshift(fileData);
-                this.activeImg[name] = true;
                 this.dirty = true;
             }
         };
