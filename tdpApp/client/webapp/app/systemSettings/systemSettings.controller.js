@@ -4,6 +4,44 @@ angular.module('tdpApp')
     .controller('SystemSettingsCtrl', function($scope, Facility, Facility_Message, FileReader, LandingImage, DTOptionsBuilder) {
         var self = this;
 
+        Facility.getCurrentContact().then(function(contact) {
+            self.contact = contact;
+            self.facilityContactForm.$setPristine();
+            self.masterContact = angular.copy(self.contact);
+        });
+
+        this.commitContact = function() {
+            Facility.saveCurrentContact(this.contact).then(function() {
+                self.facilityContactForm.$setPristine();
+                self.masterContact = angular.copy(self.contact);
+            });
+        };
+
+        this.resetContact = function() {
+            self.contact = angular.copy(self.masterContact);
+            self.facilityContactForm.$setPristine();
+        };
+
+        Facility.getContactById(1).then(function(contact) {
+            self.natContact = contact;
+            self.nationalContactForm.$setPristine();
+            self.masterNatContact = angular.copy(self.natContact);
+        });
+
+        this.commitNationalContact = function() {
+            Facility.saveContactById(1, this.natContact).then(function() {
+                self.nationalContactForm.$setPristine();
+                self.masterNatContact = angular.copy(self.natContact);
+            });
+        };
+
+        this.resetNationalContact = function() {
+            self.natContact = angular.copy(self.masterNatContact);
+            self.nationalContactForm.$setPristine();
+        };
+
+        /*** Facility Messages ***/
+
         Facility_Message.findAllForCurrent().then(function(messages) {
             self.facilityMessages = messages.map(function(message) {
                 return {
@@ -15,32 +53,6 @@ angular.module('tdpApp')
             self.messagesForm.$setPristine();
             self.masterFacilityMessages = angular.copy(self.facilityMessages);
         });
-
-        Facility.getCurrentContact().then(function(contact) {
-            self.contact = contact;
-            self.facilityContactForm.$setPristine();
-            self.masterContact = angular.copy(self.contact);
-        });
-
-        Facility.getContactById(1).then(function(contact) {
-            self.natContact = contact;
-            self.nationalContactForm.$setPristine();
-            self.masterNatContact = angular.copy(self.natContact);
-        });
-
-        this.commitContact = function() {
-            Facility.saveCurrentContact(this.contact).then(function() {
-                self.facililtyContactForm.$setPristine();
-                self.masterContact = angular.copy(self.contact);
-            });
-        };
-
-        this.commitNationalContact = function() {
-            Facility.saveContactById(1, this.natContact).then(function() {
-                self.nationalContactForm.$setPristine();
-                self.masterNatContact = angular.copy(self.natContact);
-            });
-        };
 
         this.commitMessages = function() {
             Facility_Message.replaceAllForCurrent(this.facilityMessages).then(function() {

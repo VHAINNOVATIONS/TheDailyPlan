@@ -93,8 +93,17 @@
                                 </div>
                                 <hr>
                                 <div class="btn-toolbar pull-right" style="padding-top: 5px;">
-                                    <button class="btn btn-primary" type="submit" ng-disabled="searchAll.$invalid">Save</button>
-                                    <button class="btn btn-primary" type="button" ng-click="ctrl.resetContact()">Reset</button>
+                                    <button class="btn btn-primary"
+                                            type="submit"
+                                            ng-disabled="ctrl.facilityContactForm.$invalid || ctrl.facilityContactForm.$pristine">
+                                        Save
+                                    </button>
+                                    <button class="btn btn-primary"
+                                            type="button"
+                                            ng-click="ctrl.resetContact()"
+                                            ng-disabled="ctrl.facilityContactForm.$pristine">
+                                        Reset
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -239,8 +248,17 @@
                                 </div>
                                 <hr>
                                 <div class="btn-toolbar pull-right" style="padding-top: 5px;">
-                                    <button class="btn btn-primary" type="submit" ng-disabled="searchAll.$invalid">Save</button>
-                                    <button class="btn btn-primary" type="button" ng-click="ctrl.resetNationalMessage()">Reset</button>
+                                    <button class="btn btn-primary"
+                                            type="submit"
+                                            ng-disabled="ctrl.nationalContactForm.$invalid || ctrl.nationalContactForm.$pristine">
+                                        Save
+                                    </button>
+                                    <button class="btn btn-primary"
+                                            type="button"
+                                            ng-click="ctrl.resetNationalContact()"
+                                            ng-disabled="ctrl.nationalContactForm.$pristine">
+                                        Reset
+                                    </button>
                                 </div>
                             </form>
                         </div>
