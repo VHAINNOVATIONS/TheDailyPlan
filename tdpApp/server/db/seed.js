@@ -757,7 +757,7 @@ module.exports = function(db) {
                     facility_id: facility.id,
                     active: true,
                     message_order: 2,
-                    message_text: 'This is the message text for the second message from Biloxi. We hope you have a great day!',
+                    message_text: 'This is the message text for the second message from Biloxi. We hope you have a great day!This is the message text for the second message from Biloxi. We hope you have a great day!This is the message text for the second message from Biloxi. We hope you have a great day!',
                     message_headline: 'Biloxi Message 2 Headline'
                 }, {
                     facility_id: facility.id,
