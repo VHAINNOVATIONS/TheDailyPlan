@@ -158,9 +158,19 @@ $btnTextAlt:                        #000;
     cursor: pointer;
     position: absolute;
 }
-a {
-    color: #ccc;
+
+a{
+  color:#333333;
 }
+
+.nav-tabs a {
+    color: #333333;
+}
+
+#footer-area-links a{
+  color:#333333;
+}
+
 form {
     margin-bottom: 0;
 }
