@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tdpApp')
-    .controller('LoginCtrl', function($rootScope, $scope, Auth, $location, $window, $modal, $log, $interval, Facility, Idle, LogonFacility) {
+    .controller('LoginCtrl', function($rootScope, $scope, Auth, $location, $window, $modal, $log, $interval, Facility, Idle, LogonFacility, LandingImage) {
         var self = this;
         self.user = {};
         self.errors = false;
@@ -11,15 +11,22 @@ angular.module('tdpApp')
         self.facilities = [];
         self.messageTabs = [];
 
-        self.landingImage = '/common/assets/landing_images/landing1.jpg';
-        self.landingImageIndex = 1;
-        $interval(function() {
-            ++self.landingImageIndex;
-            if (self.landingImageIndex === 5) {
-                self.landingImageIndex = 1;
+        $scope.landingImageInterval = null;
+        LandingImage.getActive().then(function(images) {
+            if (images.length) {
+                self.landingImage = images[0];
+                self.landingImageIndex = 0;
+                $scope.landingImageInterval = $interval(function() {
+                    ++self.landingImageIndex;
+                    if (self.landingImageIndex === images.length) {
+                        self.landingImageIndex = 0;
+                    }
+                    self.landingImage = images[self.landingImageIndex];
+                }, 5000);
             }
-            self.landingImage = '/common/assets/landing_images/landing' + self.landingImageIndex + '.jpg';
-        }, 5000);
+        }).catch(function(err) {
+            $log.error(err);
+        });
 
         self.init = function init() {
             // Initially Populate the Facilities
@@ -132,4 +139,11 @@ angular.module('tdpApp')
                 });
             }
         };
+
+        $scope.$on('$destroy', function() {
+            if ($scope.landingImageInterval) {
+                $interval.cancel($scope.landingImageInterval);
+                $scope.landingImageInterval = null;
+            }
+        });
     });

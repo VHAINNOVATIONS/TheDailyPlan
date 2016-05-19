@@ -726,6 +726,20 @@ module.exports = function(db) {
                     email: 'Beth.King@va.gov'
                 })
             });
+        }).then(function() {
+            return db.landing_image.bulkCreate([{
+                name: 'landing1.jpg',
+                active: true
+            }, {
+                name: 'landing2.jpg',
+                active: true
+            }, {
+                name: 'landing3.jpg',
+                active: true
+            }, {
+                name: 'landing4.jpg',
+                active: true
+            }]);
         }),
         db.facility.create({
             name: 'Biloxi',

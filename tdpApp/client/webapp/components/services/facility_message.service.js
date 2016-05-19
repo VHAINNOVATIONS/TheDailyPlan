@@ -1,11 +1,10 @@
 'use strict';
 
 angular.module('tdpApp')
-    .factory('Facility_Message', function Template($location, $rootScope, $http, $q) {
+    .factory('Facility_Message', function FacilityMessage($http, $q, Facility) {
         var results = {};
 
         return {
-
             /**
              * Find All Facility_Messages
              *
@@ -31,6 +30,22 @@ angular.module('tdpApp')
 
                 return deferred.promise;
             },
+
+            /**
+             * Find current facility messages
+             *
+             * @ return {Promise}
+             */
+             findAllForCurrent: function() {
+                var id = Facility.getCurrentFacility();
+                if (id) {
+                    return $http.get('/api/facility_message/byFacility/' + id).then(function(response) {
+                        return response.data;
+                    });
+                } else {
+                    $q.reject('No facility is selected.');
+                }
+             },
 
             /**
              * Find Single Facility_Message by Facility_Message ID
@@ -151,7 +166,30 @@ angular.module('tdpApp')
                 }.bind(this));
 
                 return deferred.promise;
-            }
+            },
 
+            /**
+             * Replace messages
+             *
+             * @param {String} id      - facility id
+             * @param {Array} messages - messages
+             */
+             replaceAll: function(id, messages) {
+                return $http.post('/api/facility_message/all/' + id, messages);
+             },
+
+            /**
+             * Find current facility messages
+             *
+             * @ return {Promise}
+             */
+             replaceAllForCurrent: function(messages) {
+                var id = Facility.getCurrentFacility();
+                if (id) {
+                    return $http.post('/api/facility_message/all/' + id, messages);
+                } else {
+                    $q.reject('No facility is selected.');
+                }
+             }
         };
     });
