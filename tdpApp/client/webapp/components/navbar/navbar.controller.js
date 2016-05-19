@@ -14,7 +14,7 @@ angular.module('tdpApp')
     $scope.currentUser = Auth.getCurrentUser();
     $scope.displayName = Auth.getCurrentUser().displayName;
 
-    console.log("navbar user:",$scope.displayName);
+    console.log('navbar user:', $scope.displayName);
 
     $scope.logout = function() {
       Auth.logout();

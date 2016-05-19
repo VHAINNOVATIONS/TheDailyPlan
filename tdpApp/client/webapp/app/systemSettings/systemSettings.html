@@ -20,18 +20,32 @@
                                                 <option value="">Select Message</option>
                                         </select>
                                         <span class="input-group-btn">
-                                            <button class="btn btn-primary" type="button" ng-click"ctrl.addMessage()">Add</button>
-                                            <button class="btn btn-primary" type="button" ng-click"ctrl.deleteMessage()">Delete</button>
+                                            <button class="btn btn-primary" type="button" ng-click="ctrl.addMessage()">Add</button>
+                                            <button class="btn btn-primary"
+                                                    type="button"
+                                                    ng-disabled="ctrl.facilityMessages.length < 1"
+                                                    ng-click="ctrl.deleteMessage()">
+                                                Delete
+                                            </button>
                                         </span>
                                     </div>
                                 </div>
                                 <div class="form-group" ng-disabled="!ctrl.messageSelect">
                                     <label for="messageTitle" class="control-label">Title</label>
-                                    <input type="text" ng-model="ctrl.messageSelect.title" class="form-control" id="messageTitle">
+                                    <input type="text"
+                                           ng-model="ctrl.messageSelect.title"
+                                           class="form-control"
+                                           id="messageTitle"
+                                           ng-disabled="!ctrl.messageSelect">
                                 </div>
                                 <div class="form-group" ng-disabled="!ctrl.messageSelect">
                                     <label for="messageContent" class="control-label">Content</label>
-                                    <textarea ng-model="ctrl.messageSelect.message" rows="4" class="form-control" id="messageContent"></textarea>
+                                    <textarea
+                                        ng-model="ctrl.messageSelect.message"
+                                        rows="4" class="form-control"
+                                        id="messageContent"
+                                        ng-disabled="!ctrl.messageSelect">
+                                    </textarea>
                                 </div>
                                 <hr>
                                 <div class="btn-toolbar pull-right" style="padding-top: 5px;">
@@ -43,7 +57,7 @@
                                     <button class="btn btn-primary"
                                             type="button"
                                             ng-disabled="ctrl.messagesForm.$pristine"
-                                            ng-click"ctrl.resetMessage()">
+                                            ng-click="ctrl.resetMessages()">
                                         Reset
                                     </button>
                                 </div>
@@ -56,7 +70,7 @@
                 <div class="container">
                     <div class="row row-centered">
                         <div class="col-sm-8 col-centered">
-                            <form ng-submit="ctrl.commitContact()" name="facilityContactForm">
+                            <form ng-submit="ctrl.commitContact()" name="ctrl.facilityContactForm">
                                 <div class="form-group">
                                     <label for="contactTitle1" class="control-label">Title Line 1</label>
                                     <input type="text" ng-model="ctrl.contact.title1" class="form-control" id="contactTitle1">
@@ -80,7 +94,7 @@
                                 <hr>
                                 <div class="btn-toolbar pull-right" style="padding-top: 5px;">
                                     <button class="btn btn-primary" type="submit" ng-disabled="searchAll.$invalid">Save</button>
-                                    <button class="btn btn-primary" type="button" ng-click"ctrl.resetContact()">Reset</button>
+                                    <button class="btn btn-primary" type="button" ng-click="ctrl.resetContact()">Reset</button>
                                 </div>
                             </form>
                         </div>
@@ -136,7 +150,7 @@
                 <div class="container">
                     <div class="row row-centered">
                         <div class="col-sm-8 col-centered">
-                            <form ng-submit="ctrl.commitNatMessages()" name="natMessagesForm">
+                            <form ng-submit="ctrl.commitNatMessages()" name="ctrl.natMessagesForm">
                                 <div class="form-group">
                                     <label for="natMessageSelect">Message</label>
                                     <div class="input-group">
@@ -148,8 +162,8 @@
                                                 <option value="">Select Message</option>
                                         </select>
                                         <span class="input-group-btn">
-                                            <button class="btn btn-primary" type="button" ng-click"ctrl.addNatMessage()">Add</button>
-                                            <button class="btn btn-primary" type="button" ng-click"ctrl.deleteNatMessage()">Delete</button>
+                                            <button class="btn btn-primary" type="button" ng-click="ctrl.addNatMessage()">Add</button>
+                                            <button class="btn btn-primary" type="button" ng-click="ctrl.deleteNatMessage()">Delete</button>
                                         </span>
                                     </div>
                                 </div>
@@ -164,7 +178,7 @@
                                 <hr>
                                 <div class="btn-toolbar pull-right" style="padding-top: 5px;">
                                     <button class="btn btn-primary" type="submit" ng-disabled="searchAll.$invalid">Save</button>
-                                    <button class="btn btn-primary" type="button" ng-click"ctrl.resetNatMessage()">Reset</button>
+                                    <button class="btn btn-primary" type="button" ng-click="ctrl.resetNatMessage()">Reset</button>
                                 </div>
                             </form>
                         </div>
@@ -199,7 +213,7 @@
                                 <hr>
                                 <div class="btn-toolbar pull-right" style="padding-top: 5px;">
                                     <button class="btn btn-primary" type="submit" ng-disabled="searchAll.$invalid">Save</button>
-                                    <button class="btn btn-primary" type="button" ng-click"ctrl.resetNationalMessage()">Reset</button>
+                                    <button class="btn btn-primary" type="button" ng-click="ctrl.resetNationalMessage()">Reset</button>
                                 </div>
                             </form>
                         </div>

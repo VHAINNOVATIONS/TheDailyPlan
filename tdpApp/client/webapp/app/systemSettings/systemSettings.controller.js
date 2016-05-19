@@ -43,19 +43,44 @@ angular.module('tdpApp')
         this.commitContact = function() {
             Facility.saveCurrentContact(this.contact).then(function() {
                 self.facililtyContactForm.$setPristine();
+                self.masterContact = angular.copy(self.contact);
             });
         };
 
         this.commitNationalContact = function() {
             Facility.saveContactById(1, this.natContact).then(function() {
                 self.nationalContactForm.$setPristine();
+                self.masterNatContact = angular.copy(self.natContact);
             });
         };
 
         this.commitMessages = function() {
             Facility_Message.replaceAllForCurrent(this.facilityMessages).then(function() {
                 self.messagesForm.$setPristine();
+                self.masterFacilityMessages = angular.copy(self.facilityMessages);
             });
+        };
+
+        this.resetMessages = function() {
+            self.facilityMessages = angular.copy(self.masterFacilityMessages);
+            self.messagesForm.$setPristine();
+        };
+
+        this.addMessage = function () {
+            this.facilityMessages.push({
+                title: 'New Message',
+                message: ''
+            });
+            this.messageSelect = this.facilityMessages[this.facilityMessages.length - 1];
+        };
+
+        this.deleteMessage = function () {
+            if (this.facilityMessages.length) {
+                var index = this.facilityMessages.indexOf(this.messageSelect);
+                if (index < this.facilityMessages.length) {
+                    this.facilityMessages.splice(index, 1);
+                }
+            }
         };
 
         this.commitNatMessages = function() {
