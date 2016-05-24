@@ -21,7 +21,8 @@ angular.module('tdpApp')
                 var service = $injector.get($scope.service);
 
                 $scope.gridOptions = {
-                    columnDefs: service.columnDefs
+                    columnDefs: service.columnDefs,
+                    enablePinning: false
                 };
 
                 service.get($scope.patient, $scope.paneldetail)
