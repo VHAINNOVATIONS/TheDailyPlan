@@ -212,3 +212,62 @@ form {
 .wrap {
   white-space: normal;
 }
+
+.ui-grid-column-menu-button>i::before, .ui-grid-cell-contents>i::before{
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 5px;
+  margin-top: 5px;
+  content: "";
+}
+
+.ui-grid-icon-angle-down::before{
+  background: url("../common/assets/images/grid-arrow-down.png") no-repeat 0 0;
+  background-size: 100%;
+}
+
+.ui-grid-icon-plus-squared::before{
+  background: url("../common/assets/images/grid-plus-square.png") no-repeat 0 0;
+  background-size: 100%;
+}
+
+.ui-grid-icon-minus-squared::before{
+  background: url("../common/assets/images/grid-minus-square.png") no-repeat 0 0;
+  background-size: 100%;
+}
+
+.ui-grid-menu-item>i::before{
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 5px;
+  margin-top: 5px;
+  content: "";
+}
+
+.ui-grid-icon-sort-alt-up::before{
+  background: url("../common/assets/images/grid-sort-ascending.png") no-repeat 0 0;
+  background-size: 100%;
+}
+
+.ui-grid-icon-sort-alt-down::before{
+  background: url("../common/assets/images/grid-sort-descending.png") no-repeat 0 0;
+  background-size: 100%;
+}
+
+.ui-grid-icon-cancel::before{
+  background: url("../common/assets/images/grid-menu-close.png") no-repeat 0 0;
+  background-size: 100%;
+}
+
+.ui-grid-menu-close-button .ui-grid-icon-cancel::before{
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 5px;
+  margin-top: 5px;
+  content: "";
+  background: url("../common/assets/images/grid-menu-close.png") no-repeat 0 0;
+  background-size: 100%;
+}

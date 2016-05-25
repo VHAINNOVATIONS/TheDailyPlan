@@ -436,7 +436,7 @@ angular.module('tdpApp')
                         };
                         panelDetails.push(detail);
                     }
-                    if (ps.settingType === 5) {
+                    if ((ps.settingType === 5) && ps.listValues) {
                         ps.listValues.forEach(function(listValue) {
                             detail = {
                                 panel_setting_id: settingId,
