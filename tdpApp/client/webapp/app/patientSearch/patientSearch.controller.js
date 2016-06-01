@@ -6,6 +6,7 @@ angular.module('tdpApp')
         self.data = [];
         self.templates = [];
         self.selectedTemplate = {};
+        self.defaultTemplate = {};
         self.selectedTemplateArray = [];
         self.wards = [];
         self.clinics = [];
@@ -18,6 +19,11 @@ angular.module('tdpApp')
         self.displayErr.flag = false;
         self.errors = {};
         var titleHtml = '<label for="selectchkall" style="display: none">select</label><input type="checkbox" id="selectchkall" ng-model="ctrl.selectAll" ng-click="ctrl.toggleAll(ctrl.selectAll, ctrl.selected)"> ';
+        var templateHeaderHtml = '<div><label>Template</label>' +
+                                 '<select name="templateSelectAll" class="form-control"' +
+                                 'ng-model="ctrl.defaultTemplate" ng-change="ctrl.selectAllTemplate()">' +
+                                 '<option ng-repeat="option in ctrl.templates" value="{{option.id}}">{{option.template_name}}</option></select>'+
+                                 '</div>';
 
         //functions
         self.newPromise = newPromise;
@@ -29,6 +35,7 @@ angular.module('tdpApp')
         self.toggleAll = toggleAll;
         self.toggleOne = toggleOne;
         self.patientClick = patientClick;
+        self.selectAllTemplate = selectAllTemplate;
 
         // Populate the Templates
         Template.findAll()
@@ -155,6 +162,7 @@ angular.module('tdpApp')
             if (data.length && self.templates.length) {
                 var founds = $filter('filter')(self.templates, {'template_name': 'Default'}, true);
                 var found = founds[0] ? founds[0] : self.templates[0];
+                self.defaultTemplate = found.id.toString();
                 data.forEach(function(patient) {
                     self.selectedTemplate[patient.id] = found.id.toString();
                 });
@@ -323,6 +331,12 @@ angular.module('tdpApp')
             });
         }
 
+        function selectAllTemplate(){
+            self.data.forEach(function(patient) {
+                self.selectedTemplate[patient.id] = self.defaultTemplate;
+            });
+        }
+
         self.dtOptions = DTOptionsBuilder.fromFnPromise(function() {
                 //return $resource('data1.json').query().$promise;
                 return newPromise();
@@ -360,15 +374,13 @@ angular.module('tdpApp')
             DTColumnBuilder.newColumn('DOB').withTitle('DOB'),
             DTColumnBuilder.newColumn('age').withTitle('Age'),
             DTColumnBuilder.newColumn('sex').withTitle('Gender'),
-            DTColumnBuilder.newColumn(null).withTitle('Template').notSortable()
+            DTColumnBuilder.newColumn(null).withTitle(templateHeaderHtml).notSortable()
             .renderWith(function(data, type, full, meta) {
                 var teamplateSelect = '';
-                teamplateSelect += '<select name="templateSelect" id="templateSelect" class="form-control" ';
+                teamplateSelect += '<select name="templateSelect" class="form-control" ';
                 teamplateSelect += 'ng-model="ctrl.selectedTemplate[' + data.id + ']">';
                 teamplateSelect += '<option ng-repeat="option in ctrl.templates" value="{{option.id}}">{{option.template_name}}</option></select>';
-
                 return teamplateSelect;
-
             })
         ];
 
