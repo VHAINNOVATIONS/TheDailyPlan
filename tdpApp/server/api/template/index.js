@@ -28,16 +28,9 @@ router.get('/facility/:id', auth.isAuthenticated(), function(req, res) {
 router.get('/ward/:id/:wardId', auth.isAuthenticated(), function(req, res) {
     models.template.findAll({
         where: {
-            $or: [  { 
-                        facility_id: req.params.id, 
-                        location_id: req.params.wardId, 
-                        location_type: 1
-                    },
-                    {
-                        facility_id: req.params.id, 
-                        template_name: 'Default'
-                    }
-                 ]
+            facility_id: req.params.id,
+            location_id: req.params.wardId,
+            location_type: 1
         }
     }).then(function(templates) {
         res.json(templates);
@@ -48,16 +41,9 @@ router.get('/ward/:id/:wardId', auth.isAuthenticated(), function(req, res) {
 router.get('/clinic/:id/:clinicId', auth.isAuthenticated(), function(req, res) {
     models.template.findAll({
         where: {
-            $or: [  { 
-                        facility_id: req.params.id,
-                        location_id: req.params.clinicId,
-                        location_type: 2
-                    },
-                    {
-                        facility_id: req.params.id, 
-                        template_name: 'Default'
-                    }
-                 ]
+            facility_id: req.params.id,
+            location_id: req.params.clinicId,
+            location_type: 2
         }
     }).then(function(templates) {
         res.json(templates);
