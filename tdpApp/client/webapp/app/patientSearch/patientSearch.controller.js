@@ -37,15 +37,6 @@ angular.module('tdpApp')
         self.patientClick = patientClick;
         self.selectAllTemplate = selectAllTemplate;
 
-        // Populate the Templates
-        Template.findAll()
-            .then(function(data) {
-                self.templates = data;
-            })
-            .catch(function(err) {
-                self.errors.other = err.message;
-            });
-
         // Initially Populate the Wards
         Location.getWards()
             .then(function(data) {
@@ -173,6 +164,15 @@ angular.module('tdpApp')
             self.submitted = true;
             self.clearAlerts();
 
+            //Load Templates specific to clinic + Default
+            Template.findByClinic(self.search.clinic)
+                .then(function(data) {
+                    self.templates = data;
+                })
+                .catch(function(err) {
+                    self.errors.other = err.message;
+                });
+
             Patient.byClinic(self.search.clinic)
                 .then(function(data) {
                     reloadData(data);
@@ -186,6 +186,16 @@ angular.module('tdpApp')
             self.submitted = true;
             self.clearAlerts();
 
+            //Load Templates specific to ward + Default
+            Template.findByWard(self.search.ward)
+                .then(function(data) {
+                    self.templates = data;
+                })
+                .catch(function(err) {
+                    self.errors.other = err.message;
+                });
+
+
             Patient.byWard(self.search.ward)
                 .then(function(data) {
                     reloadData(data);
@@ -198,6 +208,15 @@ angular.module('tdpApp')
         function searchAll() {
             self.submitted = true;
             self.clearAlerts();
+
+            //Load all Templates
+            Template.findAll()
+                .then(function(data) {
+                    self.templates = data;
+                })
+                .catch(function(err) {
+                    self.errors.other = err.message;
+                });
 
             Patient.searchAll(self.search.all)
                 .then(function(data) {
