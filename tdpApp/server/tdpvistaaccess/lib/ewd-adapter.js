@@ -183,11 +183,13 @@ var reduceLabToTests = function(fullLabResults, occurances) {
     var testNameOccurances = {};
     return fullLabResults.reduce(function(r, fullLabResult) {
         var collectionDate =fullLabResult.specimen.collectionDate;
+        var key = collectionDate;
         collectionDate = collectionDate && collectionDate.split(' ')[0];
         fullLabResult.labResults.forEach(function(labResult) {
             var e = {
                 date: collectionDate,
-                value: labResult.value
+                value: labResult.value,
+                key: key
             }
             var name = labResult.labTest.name;
             if (! testNameOccurances[name]) {

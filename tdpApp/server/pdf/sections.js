@@ -51,14 +51,15 @@ var commonTable = function(tableData) {
                 var p = c.property;
                 var v = datum[p];
                 if (v === null || v === undefined) {
-                    return {
-                        text: ''
-                    };
-                } else {
-                    return {
-                        text: v
-                    };
+                    v = '';
                 }
+                var result = {
+                    text: v
+                };
+                if (c.align) {
+                    result.alignment = c.align;
+                }
+                return result;
             });
             tableContent.body.push(row);
         });
@@ -153,7 +154,7 @@ sectionHandlers['Free Text 2'] = freeTextHandler('Free Text 2');
 
 sectionHandlers['Free Text 3'] = freeTextHandler('Free Text 3');
 
-sectionHandlers.Labs = function(data) {
+var labsVertical = function(data) {
     var tableData = {
         title: 'Labs',
         emptyMessage: 'No lab results found',
@@ -179,6 +180,62 @@ sectionHandlers.Labs = function(data) {
             width: '17%'
         }],
         data: data
+    };
+    return commonTable(tableData);
+};
+
+sectionHandlers.Labs = function(input) {
+    var testNames = input.testNames;
+    var n = testNames.length;
+    if ((n < 1) || (n > 5)) {
+        return labsVertical(input.data);
+    }
+    var dateWidths = ['NA', '20%', '20%', '19%', '16%', '15%'];
+    var otherWidths = ['NA', '80%', '40%', '27%', '21%', '17%'];
+    var data = input.data;
+    var columns = [{
+        header: 'Date',
+        property: 'date',
+        width: dateWidths[n]
+    }];
+    var otherWidth = otherWidths[n];
+    testNames.forEach(function(testName) {
+        columns.push({
+            header: testName,
+            property: testName,
+            width: otherWidth,
+            align: 'center'
+        });
+    });
+    var lines = {};
+    var newData = [];
+    data.forEach(function(datum) {
+        var name = datum.name;
+        var value = datum.value + (datum.units || '');
+        if (datum.refRange) {
+            value += (n > 3 ? '\n' : ' ');
+            value += '(' + datum.refRange + ')';
+        }
+        var key = datum.key;
+        var line = lines[key];
+        if (line === undefined) {
+            line = testNames.reduce(function(r, testName) {
+                r[testName] = '';
+                return r;
+            }, {
+                date: datum.key
+            });
+            newData.push(line);
+            lines[key] = line;
+        }
+        line[name] = value;
+
+    });
+    var tableData = {
+        title: 'Labs',
+        emptyMessage: 'No lab results found',
+        columns: columns,
+        data: newData
     };
     return commonTable(tableData);
 };
@@ -341,28 +398,42 @@ sectionHandlers.Visits = function(data) {
 
 sectionHandlers.Vitals = function(data) {
     var tableData = {
-        title: 'Vitals',
+        title: 'Vitals\n(blank areas indicate no data available)',
         emptyMessage: 'No vitals signs found',
         columns: [{
             header: 'Date/Time',
             property: 'date',
-            width: '25%'
+            width: '20%'
         }, {
-            header: 'Type',
-            property: 'type',
-            width: '33%'
+            header: 'Temp',
+            property: 'temperature',
+            width: '13%',
+            align: 'center'
         }, {
-            header: 'Value',
-            property: 'value',
-            width: '10%'
+            header: 'Pulse',
+            property: 'pulse',
+            width: '13%',
+            align: 'center'
         }, {
-            header: 'Unit',
-            property: 'unit',
-            width: '16%'
+            header: 'BP',
+            property: 'bloodPressure',
+            width: '15%',
+            align: 'center'
         }, {
-            header: 'Qualifier',
-            property: 'qualifier',
-            width: '16%'
+            header: 'Weight',
+            property: 'weight',
+            width: '13%',
+            align: 'center'
+        }, {
+            header: 'Pain',
+            property: 'pain',
+            width: '13%',
+            align: 'center'
+        }, {
+            header: 'Resp',
+            property: 'respiration',
+            width: '13%',
+            align: 'center'
         }],
         data: data
     };
