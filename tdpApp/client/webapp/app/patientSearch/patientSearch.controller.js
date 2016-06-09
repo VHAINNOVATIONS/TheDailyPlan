@@ -40,7 +40,7 @@ angular.module('tdpApp')
         // Populate the Templates
         Template.findAll()
             .then(function(data) {
-                self.templates = data;
+                self.allTemplates = data;
             })
             .catch(function(err) {
                 self.errors.other = err.message;
@@ -175,6 +175,9 @@ angular.module('tdpApp')
 
             Patient.byClinic(self.search.clinic)
                 .then(function(data) {
+                    self.templates = $filter('filter')(self.allTemplates,{location_id:self.search.clinic});
+                    //If no templates found, Load templates containing "Default" in the name
+                    self.templates = self.templates.length > 0 ? self.templates : $filter('filter')(self.allTemplates,{template_name:'Default'});
                     reloadData(data);
                 })
                 .catch(function(err) {
@@ -188,6 +191,9 @@ angular.module('tdpApp')
 
             Patient.byWard(self.search.ward)
                 .then(function(data) {
+                    self.templates = $filter('filter')(self.allTemplates,{location_id:self.search.ward});
+                    //If no templates found, Load templates containing "Default" in the name
+                    self.templates = self.templates.length > 0 ? self.templates : $filter('filter')(self.allTemplates,{template_name:'Default'});
                     reloadData(data);
                 })
                 .catch(function(err) {
@@ -201,6 +207,7 @@ angular.module('tdpApp')
 
             Patient.searchAll(self.search.all)
                 .then(function(data) {
+                    self.templates = self.allTemplates;
                     reloadData(data);
                 })
                 .catch(function(err) {
