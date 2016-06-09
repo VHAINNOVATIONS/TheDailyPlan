@@ -90,7 +90,15 @@ getters.Labs = function(session, userSession, patientId, details, callback) {
         });
     }
     options.occurances = parseInt(options.occurances, 10);
-    session.getChemHemReports(userSession, patientId, options, callback);
+    session.getChemHemReports(userSession, patientId, options, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        callback(null, {
+            data: result,
+            testNames: options.testNames
+        })
+    });
 };
 
 getters['IV Medications'] = function(session, userSession, patientId, details, callback) {
