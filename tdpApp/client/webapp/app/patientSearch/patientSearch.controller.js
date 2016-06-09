@@ -37,6 +37,15 @@ angular.module('tdpApp')
         self.patientClick = patientClick;
         self.selectAllTemplate = selectAllTemplate;
 
+        // Populate the Templates
+        Template.findAll()
+            .then(function(data) {
+                self.allTemplates = data;
+            })
+            .catch(function(err) {
+                self.errors.other = err.message;
+            });
+
         // Initially Populate the Wards
         Location.getWards()
             .then(function(data) {
@@ -164,17 +173,11 @@ angular.module('tdpApp')
             self.submitted = true;
             self.clearAlerts();
 
-            //Load Templates specific to clinic + Default
-            Template.findByClinic(self.search.clinic)
-                .then(function(data) {
-                    self.templates = data;
-                })
-                .catch(function(err) {
-                    self.errors.other = err.message;
-                });
-
             Patient.byClinic(self.search.clinic)
                 .then(function(data) {
+                    self.templates = $filter('filter')(self.allTemplates,{location_id:self.search.clinic});
+                    //If no templates found, Load templates containing "Default" in the name
+                    self.templates = self.templates.length > 0 ? self.templates : $filter('filter')(self.allTemplates,{template_name:'Default'});
                     reloadData(data);
                 })
                 .catch(function(err) {
@@ -186,18 +189,11 @@ angular.module('tdpApp')
             self.submitted = true;
             self.clearAlerts();
 
-            //Load Templates specific to ward + Default
-            Template.findByWard(self.search.ward)
-                .then(function(data) {
-                    self.templates = data;
-                })
-                .catch(function(err) {
-                    self.errors.other = err.message;
-                });
-
-
             Patient.byWard(self.search.ward)
                 .then(function(data) {
+                    self.templates = $filter('filter')(self.allTemplates,{location_id:self.search.ward});
+                    //If no templates found, Load templates containing "Default" in the name
+                    self.templates = self.templates.length > 0 ? self.templates : $filter('filter')(self.allTemplates,{template_name:'Default'});
                     reloadData(data);
                 })
                 .catch(function(err) {
@@ -209,17 +205,9 @@ angular.module('tdpApp')
             self.submitted = true;
             self.clearAlerts();
 
-            //Load all Templates
-            Template.findAll()
-                .then(function(data) {
-                    self.templates = data;
-                })
-                .catch(function(err) {
-                    self.errors.other = err.message;
-                });
-
             Patient.searchAll(self.search.all)
                 .then(function(data) {
+                    self.templates = self.allTemplates;
                     reloadData(data);
                 })
                 .catch(function(err) {
