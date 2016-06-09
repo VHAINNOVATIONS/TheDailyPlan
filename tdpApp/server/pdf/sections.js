@@ -51,14 +51,15 @@ var commonTable = function(tableData) {
                 var p = c.property;
                 var v = datum[p];
                 if (v === null || v === undefined) {
-                    return {
-                        text: ''
-                    };
-                } else {
-                    return {
-                        text: v
-                    };
+                    v = '';
                 }
+                var result = {
+                    text: v
+                };
+                if (c.align) {
+                    result.alignment = c.align;
+                }
+                return result;
             });
             tableContent.body.push(row);
         });
@@ -341,28 +342,42 @@ sectionHandlers.Visits = function(data) {
 
 sectionHandlers.Vitals = function(data) {
     var tableData = {
-        title: 'Vitals',
+        title: 'Vitals (blank area indicate no data available)',
         emptyMessage: 'No vitals signs found',
         columns: [{
             header: 'Date/Time',
             property: 'date',
-            width: '25%'
+            width: '20%'
         }, {
-            header: 'Type',
-            property: 'type',
-            width: '33%'
+            header: 'Temp',
+            property: 'temperature',
+            width: '13%',
+            align: 'center'
         }, {
-            header: 'Value',
-            property: 'value',
-            width: '10%'
+            header: 'Pulse',
+            property: 'pulse',
+            width: '13%',
+            align: 'center'
         }, {
-            header: 'Unit',
-            property: 'unit',
-            width: '16%'
+            header: 'BP',
+            property: 'bloodPressure',
+            width: '15%',
+            align: 'center'
         }, {
-            header: 'Qualifier',
-            property: 'qualifier',
-            width: '16%'
+            header: 'Weight',
+            property: 'weight',
+            width: '13%',
+            align: 'center'
+        }, {
+            header: 'Pain',
+            property: 'pain',
+            width: '13%',
+            align: 'center'
+        }, {
+            header: 'Resp',
+            property: 'respiration',
+            width: '13%',
+            align: 'center'
         }],
         data: data
     };
