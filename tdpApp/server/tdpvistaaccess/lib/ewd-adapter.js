@@ -210,6 +210,11 @@ var reduceLabToTests = function(fullLabResults, occurances) {
     }, []);
 };
 
+var sortLabByTestNames = function(labResults)
+{
+    return _.sortByAll(labResults, ['name']);
+}
+
 var session = {
     get: function (userSession, route, parameters, callback) {
         var options = _.assign({
@@ -490,6 +495,7 @@ var session = {
                 result = filterChemHemReports(result, options.testNames);
                 putInChemHemReportDates(result);
                 result = reduceLabToTests(result, options.occurances);
+                result = sortLabByTestNames(result);
                 callback(null, result);
             }
         });
