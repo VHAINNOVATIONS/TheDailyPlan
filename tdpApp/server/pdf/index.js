@@ -147,7 +147,7 @@ exports.run = function(pdoc, demographicsList, callback) {
 };
 
 var getTemplates = function(templateIds, callback) {
-    var output = 'pt.title AS section, p.id AS pid, pt.highlightPanel AS hilite';
+    var output = 'pt.title AS section, p.id AS pid, pt.highlight_panel AS hilite';
     var source = 'template AS t, panel AS p, panel_type AS pt, template_layout AS tl';
     var condition = 't.id = $id AND tl.template_id = t.id AND tl.panel_id = p.id AND p.panel_type_id = pt.id'
     var query = util.format('SELECT %s FROM %s WHERE %s ORDER BY tl.panel_order', output, source, condition);

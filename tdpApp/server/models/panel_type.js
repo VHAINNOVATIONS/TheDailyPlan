@@ -44,7 +44,7 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.BOOLEAN,
             allowNull: false
         },
-        highlightPanel: {
+        highlight_panel: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue:false

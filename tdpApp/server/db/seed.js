@@ -34,7 +34,7 @@ module.exports = function(db) {
             minSizeY: 2,
             mandatory: false,
             enable_options: false,
-            highlightPanel:true
+            highlight_panel:true
         }).then(function(pt) {
             // Then Create the Panel Second
             return db.panel.create({

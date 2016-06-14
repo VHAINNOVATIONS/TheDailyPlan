@@ -27,10 +27,10 @@
               <ul ng-model="ctrl.panels">
                 <li gridster-item="panel.settings" ng-repeat="panel in ctrl.panels" grid-panel>
                   <div class="box" ng-controller="CustomPanelCtrl">
-                    <div class="dragHandle" ng-class="panel.highlightPanel==true ? 'stripe-4 box-header' : 'box-header'">
+                    <div class="dragHandle" ng-class="panel.highlight_panel==true ? 'stripe-4 box-header' : 'box-header'">
                       <h3>{{ panel.title }}<span ng-show="panel.mandatory">*</span></h3>
                       <div class="box-header-btns pull-right">
-                        <button type="button" title="Settings" class="btn btn-default tdp-cog" ng-click="openSettings(panel)" ng-style="panel.highlightPanel==true && {'background-color':'white'}" >Settings</button>
+                        <button type="button" title="Settings" class="btn btn-default tdp-cog" ng-click="openSettings(panel)" ng-style="panel.highlight_panel==true && {'background-color':'white'}" >Settings</button>
                         <!-- <a title="Remove panel" ng-click="remove(panel)"><i class="glyphicon glyphicon-trash"></i></a> -->
                       </div>
                     </div>
