@@ -67,3 +67,15 @@ exports.postingsDate = function(input) {
     }
     return '';
 };
+
+exports.dateAfterBackDays = function(externalDate, backDays) {
+    if (backDays === undefined || backDays === null) {
+        backDays = 30;
+    }
+    var mlimit = moment();
+    if (backDays) {
+        mlimit.subtract(backDays, 'd');
+    }
+    var date = moment(externalDate, "MM/DD/YYYY HH:mm");
+    return date.isAfter(mlimit, 'day');
+};

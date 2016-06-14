@@ -346,7 +346,7 @@ var session = {
             if (err) {
                 callback(err);
             } else {
-                var result = translator.translateVitalSigns(body, options.occurances);
+                var result = translator.translateVitalSigns(body, options.occurances,options.backdays);
                 callback(null, result);
             }
         });
