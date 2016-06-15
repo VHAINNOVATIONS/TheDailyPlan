@@ -74,7 +74,9 @@ getters['Free Text 3'] = freeText;
 getters.Labs = function(session, userSession, patientId, details, callback) {
     var options = {
         testNames: [],
-        occurances: '3'
+        occurances: '3',
+        backdays: '30',
+        isvertical: '1'
     };
     if (details) {
         options = details.reduce(function(r, detail) {
@@ -82,11 +84,17 @@ getters.Labs = function(session, userSession, patientId, details, callback) {
                 r.testNames.push(detail.value);
             } else if (detail.name === 'Occurences') {
                 r.occurances = detail.value;
+            } else if(detail.name === 'Back Days'){
+                r.backdays = detail.value;
+            }else if(detail.name === 'Is Vertical'){
+                r.isvertical = detail.value;
             }
             return r;
         }, {
             testNames: [],
-            occurances: '3'
+            occurances: '3',
+            backdays: '30',
+            isvertical: '1'
         });
     }
     options.occurances = parseInt(options.occurances, 10);
@@ -96,7 +104,8 @@ getters.Labs = function(session, userSession, patientId, details, callback) {
         }
         callback(null, {
             data: result,
-            testNames: options.testNames
+            testNames: options.testNames,
+            isvertical: options.isvertical
         })
     });
 };
@@ -171,19 +180,25 @@ getters.Visits = function(session, userSession, patientId, details, callback) {
 
 getters.Vitals = function(session, userSession, patientId, details, callback) {
     var options = {
-        occurances: '3'
+        occurances: '3',
+        backdays: '30'
     };
     if (details) {
         options = details.reduce(function(r, detail) {
             if (detail.name === 'Occurences') {
                 r.occurances = detail.value;
+            }else if(detail.name === 'Back Days'){
+                r.backdays = detail.value;
             }
             return r;
         }, {
-            occurances: '3'
+            occurances: '3',
+            backdays: '30'
         });
     }
     options.occurances = parseInt(options.occurances, 10);
+    options.backdays = parseInt(options.backdays,10);
+    
     session.getVitalSigns(userSession, patientId, options, function(err, vitals) {
         var vitalSets = vitals.reduce(function(r, vital) {
             var dateTime = vital.dateTime;

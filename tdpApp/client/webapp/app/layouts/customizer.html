@@ -39,6 +39,12 @@
                             </select>
                         </div>
                     </div>
+                    <div class="form-group row" ng-if="setting.settingType === 7">
+                        <label for="checkboxinput" class="col-sm-4 control-label">{{setting.settingName}}</label>
+                        <div class="col-sm-7">
+                           <input id="checkboxinput" type="checkbox" ng-model="setting.isChecked">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

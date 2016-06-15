@@ -37,6 +37,8 @@ angular.module('tdpApp')
             get: function(patientId, panelDetails) {
                 var tn = [];
                 var occurances = '3';
+                var backdays = '30';
+                var isvertical = '1';
                 panelDetails.forEach(function(pd) {
                     if (pd.setting_name === 'Occurences') {
                         occurances = pd.detail_value || '3';
@@ -47,10 +49,20 @@ angular.module('tdpApp')
                           tn.push(pd.detail_value);
                         }
                     }
+                    if(pd.setting_name === 'Back Days'){
+                        backdays = pd.detail_value || '30';
+                        return;
+                    }
+                    if(pd.setting_name === 'Is Vertical'){
+                        isvertical = pd.detail_value || '1';
+                        return;
+                    }
                 });
                 var params = {
                     patientId: patientId,
-                    occurances: occurances
+                    occurances: occurances,
+                    backdays:  backdays,
+                    isvertical: isvertical
                 };
                 if (tn.length) {
                     params.testNames = tn;

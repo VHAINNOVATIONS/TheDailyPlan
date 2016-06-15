@@ -18,7 +18,8 @@ angular.module('tdpApp')
                     }
                 });
                 var params = {
-                    occurances: occurances
+                    occurances: occurances,
+                    backdays: backdays
                 };
                 var httpParams = {
                     url: '/api/vitals/' + patientId,

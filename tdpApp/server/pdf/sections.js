@@ -186,8 +186,9 @@ var labsVertical = function(data) {
 
 sectionHandlers.Labs = function(input) {
     var testNames = input.testNames;
+    var isVertical = input.isvertical === "1";
     var n = testNames.length;
-    if ((n < 1) || (n > 5)) {
+    if (isVertical) {
         return labsVertical(input.data);
     }
     var dateWidths = ['NA', '20%', '20%', '19%', '16%', '15%'];

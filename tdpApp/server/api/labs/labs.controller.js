@@ -3,7 +3,9 @@
 exports.index = function (req, res, next) {
   var patientId = req.query.patientId;
   var options = {
-      occurances: parseInt(req.query.occurances, 10)
+      occurances: parseInt(req.query.occurances, 10),
+      backdays: parseInt(req.query.backdays,10),
+      isvertical: req.query.isvertical
   };
   if (req.query.testNames) {
     options.testNames = req.query.testNames;
