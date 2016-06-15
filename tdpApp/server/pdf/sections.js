@@ -186,8 +186,9 @@ var labsVertical = function(data) {
 
 sectionHandlers.Labs = function(input) {
     var testNames = input.testNames;
+    var isVertical = input.isvertical === "0";
     var n = testNames.length;
-    if ((n < 1) || (n > 5)) {
+    if (isVertical || (n < 1) || (n > 5)) {
         return labsVertical(input.data);
     }
     var dateWidths = ['NA', '20%', '20%', '19%', '16%', '15%'];
@@ -407,32 +408,22 @@ sectionHandlers.Vitals = function(data) {
         }, {
             header: 'Temp',
             property: 'temperature',
-            width: '13%',
+            width: '20%',
             align: 'center'
         }, {
             header: 'Pulse',
             property: 'pulse',
-            width: '13%',
+            width: '20%',
             align: 'center'
         }, {
             header: 'BP',
             property: 'bloodPressure',
-            width: '15%',
+            width: '20%',
             align: 'center'
         }, {
             header: 'Weight',
             property: 'weight',
-            width: '13%',
-            align: 'center'
-        }, {
-            header: 'Pain',
-            property: 'pain',
-            width: '13%',
-            align: 'center'
-        }, {
-            header: 'Resp',
-            property: 'respiration',
-            width: '13%',
+            width: '20%',
             align: 'center'
         }],
         data: data

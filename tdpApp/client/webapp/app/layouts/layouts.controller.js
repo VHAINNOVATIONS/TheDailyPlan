@@ -394,6 +394,9 @@ angular.module('tdpApp')
                             if (settingIdMap[pid].type === 6) {
                                 settingIdMap[pid].obj.textValue = panel.panelDetails[i].detail_value;
                             }
+                            if (settingIdMap[pid].type === 7) {
+                                settingIdMap[pid].obj.isChecked = panel.panelDetails[i].detail_value === "1";
+                            }
                         }
                     }
                     panel_settings.forEach(function(ps) {
@@ -449,6 +452,13 @@ angular.module('tdpApp')
                         detail = {
                             panel_setting_id: settingId,
                             detail_value: ps.textValue
+                        };
+                        panelDetails.push(detail);
+                    }
+                    if (ps.settingType === 7) {
+                        detail = {
+                            panel_setting_id: settingId,
+                            detail_value: ps.isChecked === true ? "1":"0"
                         };
                         panelDetails.push(detail);
                     }
