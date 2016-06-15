@@ -86,7 +86,7 @@ getters.Labs = function(session, userSession, patientId, details, callback) {
                 r.occurances = detail.value;
             } else if(detail.name === 'Back Days'){
                 r.backdays = detail.value;
-            }else if(detail.name === 'Is Vertical'){
+            }else if(detail.name === 'Name as PDF Header'){
                 r.isvertical = detail.value;
             }
             return r;
@@ -205,7 +205,7 @@ getters.Vitals = function(session, userSession, patientId, details, callback) {
             var v = {
               date: dateTime,
             };
-            ['temperature', 'pulse', 'bloodPressure', 'weight', 'pain', 'respiration'].forEach(function(type) {
+            ['temperature', 'pulse', 'bloodPressure', 'weight'].forEach(function(type) {
                 var value = vital[type] && vital[type].value;
                 v[type] = value;
             });
