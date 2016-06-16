@@ -34,6 +34,7 @@ module.exports = function (grunt) {
       clientCommon: 'client/common',
       clientWebapp: 'client/webapp',
       clientIonic:  'client/ionic',
+      clientDesktop: 'client',
 
       bowerFromWebappIndexHtml: '../',
       bowerFromIonicIndexHtml: '../',
@@ -377,7 +378,7 @@ module.exports = function (grunt) {
     ngtemplates: {
       options: {
         // This should be the name of your apps angular module
-        module: 'starterApp',
+        module: 'tdpApp',
         htmlmin: {
           collapseBooleanAttributes: true,
           collapseWhitespace: true,
@@ -391,7 +392,7 @@ module.exports = function (grunt) {
       },
       // TODO: Include common here (i.e. in cwd) - required for build task to work properly
       main: {
-        cwd: '<%= yeoman.clientDesktop %>',
+        cwd: '<%= yeoman.clientWebapp %>',
         src: ['{app,components}/**/*.html'],
         dest: '.tmp/templates.js'
       },
@@ -417,15 +418,32 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           dot: true,
-          cwd: '<%= yeoman.clientDesktop %>',
+          cwd: '<%= yeoman.clientWebapp %>',
           dest: '<%= yeoman.dist %>/public',
           src: [
             '*.{ico,png,txt}',
             '.htaccess',
-            'bower_components/**/*',
             'assets/images/{,*/}*.{webp}',
             'assets/fonts/**/*',
+            'pdfreports/*.txt',
             'index.html'
+          ]
+        }, {
+          expand: true,
+          dot: true,
+          cwd: '<%= yeoman.clientDesktop %>',
+          dest: '<%= yeoman.dist %>/public',
+          src: [
+            'bower_components/**/*'
+          ]
+        }, {
+          expand: true,
+          dot: true,
+          cwd: '<%= yeoman.clientDesktop %>',
+          dest: '<%= yeoman.dist %>/public',
+          src: [
+            'common/assets/images/*.*',
+            'common/assets/landing_images/**/*'
           ]
         }, {
           expand: true,

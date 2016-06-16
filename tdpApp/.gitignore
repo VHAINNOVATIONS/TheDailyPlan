@@ -12,3 +12,4 @@ dist-ionic/
 bower_components
 sandbox
 client/webapp/TDP_*.pdf
+client/webapp/pdfreports/TDP_*.pdf
