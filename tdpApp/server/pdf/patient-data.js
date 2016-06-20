@@ -74,7 +74,9 @@ getters['Free Text 3'] = freeText;
 getters.Labs = function(session, userSession, patientId, details, callback) {
     var options = {
         testNames: [],
-        occurances: '3'
+        occurances: '3',
+        backdays: '30',
+        isvertical: '1'
     };
     if (details) {
         options = details.reduce(function(r, detail) {
@@ -82,15 +84,30 @@ getters.Labs = function(session, userSession, patientId, details, callback) {
                 r.testNames.push(detail.value);
             } else if (detail.name === 'Occurences') {
                 r.occurances = detail.value;
+            } else if(detail.name === 'Back Days'){
+                r.backdays = detail.value;
+            }else if(detail.name === 'Name as PDF Header'){
+                r.isvertical = detail.value;
             }
             return r;
         }, {
             testNames: [],
-            occurances: '3'
+            occurances: '3',
+            backdays: '30',
+            isvertical: '1'
         });
     }
     options.occurances = parseInt(options.occurances, 10);
-    session.getChemHemReports(userSession, patientId, options, callback);
+    session.getChemHemReports(userSession, patientId, options, function(err, result) {
+        if (err) {
+            return callback(err);
+        }
+        callback(null, {
+            data: result,
+            testNames: options.testNames,
+            isvertical: options.isvertical
+        })
+    });
 };
 
 getters['IV Medications'] = function(session, userSession, patientId, details, callback) {
@@ -161,56 +178,45 @@ getters.Visits = function(session, userSession, patientId, details, callback) {
     }, callback);
 };
 
-var typeDisplay = {
-  temperature: 'Temperature',
-  pulse: 'Pulse',
-  respiration: 'Respiration',
-  bloodPressure: 'Blood Pressure',
-  height: 'Height',
-  weight: 'Weight',
-  pain: 'Pain',
-  pulseOxymetry: 'Pulse Oxymetry',
-  centralVenousPressure: 'Central Venous Pressure',
-  circumferenceGirth: 'Circumference Girth'
-};
-
 getters.Vitals = function(session, userSession, patientId, details, callback) {
     var options = {
-        occurances: '3'
+        occurances: '3',
+        backdays: '30'
     };
     if (details) {
         options = details.reduce(function(r, detail) {
             if (detail.name === 'Occurences') {
                 r.occurances = detail.value;
+            }else if(detail.name === 'Back Days'){
+                r.backdays = detail.value;
             }
             return r;
         }, {
-            occurances: '3'
+            occurances: '3',
+            backdays: '30'
         });
     }
     options.occurances = parseInt(options.occurances, 10);
+    options.backdays = parseInt(options.backdays,10);
+    
     session.getVitalSigns(userSession, patientId, options, function(err, vitals) {
         var vitalSets = vitals.reduce(function(r, vital) {
-          var dateTime = vital.dateTime;
-          Object.keys(typeDisplay).forEach(function(type) {
-                if (vital[type]) {
-                    var v = {
-                      date: dateTime,
-                    };
-                    v.type = typeDisplay[type];
-                    v.value = vital[type].value;
-                    v.unit = vital[type].unit || '-';
-                    v.qualifier = vital[type].qualifier || '-';
-                    r.push(v);
-                }
+            var dateTime = vital.dateTime;
+            var v = {
+              date: dateTime,
+            };
+            ['temperature', 'pulse', 'bloodPressure', 'weight'].forEach(function(type) {
+                var value = vital[type] && vital[type].value;
+                v[type] = value;
             });
+            r.push(v);
             return r;
         }, []);
         callback(null, vitalSets);
     });
 };
 
-getters['Postings'] = function(session, userSession, patientId, details, callback) {
+getters.Postings = function(session, userSession, patientId, details, callback) {
     var options = {};
     if (details) {
         options = details.reduce(function(r, detail) {

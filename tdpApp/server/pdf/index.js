@@ -121,7 +121,7 @@ exports.generatePDF = function(reportData, options) {
     }
 };
 
-exports.run = function(pdoc, demographicsList, callback) {
+exports.run = function(rootPath, pdoc, demographicsList, callback) {
     var printer = new PdfMake(fonts);
 
     var hfh = headerFooterHandler(demographicsList);
@@ -131,12 +131,14 @@ exports.run = function(pdoc, demographicsList, callback) {
     var doc = printer.createPdfKitDocument(pdoc, {
         pagesInfoCallback: hfh.layoutInfoAccepter
     });
+
     var filename = util.format('TDP_%s.pdf', ++fileCounter);
-    var filepath = path.join(__dirname, '../../client/webapp', filename);
+    var localPath = path.join('pdfreports', filename);
+    var filepath = path.join(rootPath, localPath);
     var target = fs.createWriteStream(filepath);
     target.on('finish', function() {
         callback(null, {
-            path: filename
+            path: localPath
         });
     }).on('error', function(err) {
         callback(err);
@@ -147,7 +149,7 @@ exports.run = function(pdoc, demographicsList, callback) {
 };
 
 var getTemplates = function(templateIds, callback) {
-    var output = 'pt.title AS section, p.id AS pid, pt."highlightPanel" AS hilite';
+    var output = 'pt.title AS section, p.id AS pid, pt.highlight_panel AS hilite';
     var source = 'template AS t, panel AS p, panel_type AS pt, template_layout AS tl';
     var condition = 't.id = $id AND tl.template_id = t.id AND tl.panel_id = p.id AND p.panel_type_id = pt.id'
     var query = util.format('SELECT %s FROM %s WHERE %s ORDER BY tl.panel_order', output, source, condition);
@@ -192,7 +194,7 @@ var getTemplates = function(templateIds, callback) {
     });
 };
 
-exports.write = function(session, userSession, patientIds, templateIds, options, callback) {
+exports.write = function(rootPath, session, userSession, patientIds, templateIds, options, callback) {
     var uniqTemplateIds = _.uniq(templateIds);
     getTemplates(uniqTemplateIds, function(err, templateDict) {
         if (err) {
@@ -232,7 +234,7 @@ exports.write = function(session, userSession, patientIds, templateIds, options,
             var demographicsList = result.map(function(r) {
                 return r.Demographics;
             });
-            exports.run(doc, demographicsList, callback);
+            exports.run(rootPath, doc, demographicsList, callback);
         });
     });
 };

@@ -8,13 +8,18 @@ angular.module('tdpApp')
                     return !angular.isUndefined(this.temperature) ? this.temperature.value + ' ' + this.temperature.unit : '';
                 };
                 var occurances = '3';
+                var backdays = '30';
                 panelDetails.forEach(function(pd) {
                     if (pd.setting_name === 'Occurences') {
                        occurances = pd.detail_value || '3';
                     }
+                    if(pd.setting_name === 'Back Days'){
+                        backdays = pd.detail_value || '30';
+                    }
                 });
                 var params = {
-                    occurances: occurances
+                    occurances: occurances,
+                    backdays: backdays
                 };
                 var httpParams = {
                     url: '/api/vitals/' + patientId,

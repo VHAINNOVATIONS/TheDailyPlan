@@ -183,11 +183,13 @@ var reduceLabToTests = function(fullLabResults, occurances) {
     var testNameOccurances = {};
     return fullLabResults.reduce(function(r, fullLabResult) {
         var collectionDate =fullLabResult.specimen.collectionDate;
+        var key = collectionDate;
         collectionDate = collectionDate && collectionDate.split(' ')[0];
         fullLabResult.labResults.forEach(function(labResult) {
             var e = {
                 date: collectionDate,
-                value: labResult.value
+                value: labResult.value,
+                key: key
             }
             var name = labResult.labTest.name;
             if (! testNameOccurances[name]) {
@@ -207,6 +209,11 @@ var reduceLabToTests = function(fullLabResults, occurances) {
         return r;
     }, []);
 };
+
+var sortLabByTestNames = function(labResults)
+{
+    return _.sortByAll(labResults, ['name']);
+}
 
 var session = {
     get: function (userSession, route, parameters, callback) {
@@ -339,7 +346,7 @@ var session = {
             if (err) {
                 callback(err);
             } else {
-                var result = translator.translateVitalSigns(body, options.occurances);
+                var result = translator.translateVitalSigns(body, options.occurances,options.backdays);
                 callback(null, result);
             }
         });
@@ -488,6 +495,7 @@ var session = {
                 result = filterChemHemReports(result, options.testNames);
                 putInChemHemReportDates(result);
                 result = reduceLabToTests(result, options.occurances);
+                result = sortLabByTestNames(result);
                 callback(null, result);
             }
         });

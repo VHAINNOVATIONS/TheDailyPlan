@@ -49,13 +49,13 @@ describe('ewd session test', function () {
                 done(err);
             } else {
                 expect(userData).to.exist();
-                console.log("======USER DATA=======");
-                console.log(JSON.stringify(userData, undefined, 4));
+                //console.log("======USER DATA=======");
+                //console.log(JSON.stringify(userData, undefined, 4));
                 userSession = {
                   _id: userData.authKey,
                   _port: userData.authPort
                 }
-                console.log("======================");
+                //console.log("======================");
                 done();
             }
         });
@@ -63,10 +63,11 @@ describe('ewd session test', function () {
 
     it('report', function(done) {
         var options = {
-            time: 'XXXX',
-            date: 'YYYY'
+            date: '06/08/2016',
+            time: '20:37',
+            facility: 'Madison'
         };
-        pdf.write(testSession, userSession, ['100846'], [2], options, function(err) {
+        pdf.write(testSession, userSession, ['746'], ['2'], options, function(err) {
             if (err) {
                 return done(err);
             }

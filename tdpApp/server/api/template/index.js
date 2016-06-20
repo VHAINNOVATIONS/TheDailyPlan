@@ -97,7 +97,7 @@ router.get('/complete/:id', auth.isAuthenticated(), function(req, res) {
                         panelObj.print = '<div ' + panel.directive + '-print' + ' service="' + panel.service + '" patient="ctrl.' + panel.scope_variable + '" panelid="panel.panel_id" paneldetail="panel.panelDetails"></div>';
                         panelObj.mandatory = panel.mandatory;
                         panelObj.enable_options = panel.enable_options;
-                        panelObj.highlightPanel = panel.highlightPanel;
+                        panelObj.highlight_panel = panel.highlight_panel;
                         panelObj.order = panel.panel_order;
                         if (panelDetails && panelDetails.length) {
                             panelObj.panelDetails = panelDetails;

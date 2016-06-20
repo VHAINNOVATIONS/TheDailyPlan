@@ -1,0 +1,270 @@
+<div ng-controller="SystemSettingsCtrl as ctrl" class="container">
+    <div class="row">
+        <h2>System Settings</h2>
+    </div>
+    <div class="row">
+        <uib-tabset class="col-sm-12" active="ctrl.activeTab">
+            <uib-tab index="0" heading="Messages" select="ctrl.selectTab(0)">
+                <div class="container">
+                    <div class="row row-centered">
+                        <div class="col-sm-8 col-centered">
+                            <form ng-submit="ctrl.commitMessages()" name="ctrl.messagesForm">
+                                <div class="form-group">
+                                    <label for="messageSelect">Message</label>
+                                    <div class="input-group">
+                                        <select name="messageSelect"
+                                                id="messageSelect"
+                                                ng-options="message as message.title for message in ctrl.facilityMessages"
+                                                ng-model="ctrl.messageSelect"
+                                                class="form-control">
+                                                <option value="">Select Message</option>
+                                        </select>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-primary" type="button" ng-click="ctrl.addMessage()">Add</button>
+                                            <button class="btn btn-primary"
+                                                    type="button"
+                                                    ng-disabled="ctrl.facilityMessages.length < 1"
+                                                    ng-click="ctrl.deleteMessage()">
+                                                Delete
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-disabled="!ctrl.messageSelect">
+                                    <label for="messageTitle" class="control-label">Title</label>
+                                    <input type="text"
+                                           ng-model="ctrl.messageSelect.title"
+                                           class="form-control"
+                                           id="messageTitle"
+                                           ng-disabled="!ctrl.messageSelect">
+                                </div>
+                                <div class="form-group" ng-disabled="!ctrl.messageSelect">
+                                    <label for="messageContent" class="control-label">Content</label>
+                                    <textarea
+                                        ng-model="ctrl.messageSelect.message"
+                                        rows="4" class="form-control"
+                                        id="messageContent"
+                                        ng-disabled="!ctrl.messageSelect">
+                                    </textarea>
+                                </div>
+                                <hr>
+                                <div class="btn-toolbar pull-right" style="padding-top: 5px;">
+                                    <button class="btn btn-primary"
+                                            type="submit"
+                                            ng-disabled="ctrl.messagesForm.$invalid || ctrl.messagesForm.$pristine">
+                                            Save
+                                    </button>
+                                    <button class="btn btn-primary"
+                                            type="button"
+                                            ng-disabled="ctrl.messagesForm.$pristine"
+                                            ng-click="ctrl.resetMessages()">
+                                        Reset
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </uib-tab>
+            <uib-tab index="1" heading="Contact" select="ctrl.selectTab(1)">
+                <div class="container">
+                    <div class="row row-centered">
+                        <div class="col-sm-8 col-centered">
+                            <form ng-submit="ctrl.commitContact()" name="ctrl.facilityContactForm">
+                                <div class="form-group">
+                                    <label for="contactTitle1" class="control-label">Title Line 1</label>
+                                    <input type="text" ng-model="ctrl.contact.title1" class="form-control" id="contactTitle1">
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactTitle2" class="control-label">Title Line 2</label>
+                                    <input type="text" ng-model="ctrl.contact.title2" class="form-control" id="contactTitle2">
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactTitle3" class="control-label">Title Line 3</label>
+                                    <input type="text" ng-model="ctrl.contact.title3" class="form-control" id="contactTitle3">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phoneLine" class="control-label">Phone</label>
+                                    <input type="phone" ng-model="ctrl.contact.phone" class="form-control" id="phoneLine">
+                                </div>
+                                <div class="form-group">
+                                    <label for="emailLine" class="control-label">Email</label>
+                                    <input type="email" ng-model="ctrl.contact.email" class="form-control" id="emailLine">
+                                </div>
+                                <hr>
+                                <div class="btn-toolbar pull-right" style="padding-top: 5px;">
+                                    <button class="btn btn-primary"
+                                            type="submit"
+                                            ng-disabled="ctrl.facilityContactForm.$invalid || ctrl.facilityContactForm.$pristine">
+                                        Save
+                                    </button>
+                                    <button class="btn btn-primary"
+                                            type="button"
+                                            ng-click="ctrl.resetContact()"
+                                            ng-disabled="ctrl.facilityContactForm.$pristine">
+                                        Reset
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </uib-tab>
+            <uib-tab index="2" heading="Images" select="ctrl.selectTab(2)">
+                    <div class="row row-centered" ng-if="ctrl.data.length">
+                        <div class="col-sm-4" ng-if="ctrl.tabIndex === 2">
+                            <form name="searchWard">
+                                <hr>
+                                <div class="form-group">
+                                    <h3>Select a New Image</h3>
+                                    <div class="input-group">
+                                        <input type="file" class="form-control" on-file-change="ctrl.onFileChange" ctrl="ctrl" file-select>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-primary" type="button" ng-disabled="!ctrl.selectedFile" ng-click="ctrl.addImage()">Add</button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <hr>
+                                <h3>Existing Images</h3>
+                                <table datatable="ng" dt-options="ctrl.dtOptions" dt-columns="ctrl.dtColumns" dt-instance="ctrl.dtInstance" class="row-border hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Active</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="datum in ctrl.data" ng-model="ctrl.data">
+                                            <td ng-click="ctrl.imgClick(datum.name)" class="nameLink clickable">{{ datum.name }}</td>
+                                            <td><input type="checkbox" ng-model="datum.active" ng-click="ctrl.activeClick()"></td>
+                                            <td ng-click="ctrl.imgDelete(datum.name)" class="nameLink clickable">Delete</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </form>
+                            <div class="btn-toolbar pull-right" style="padding-top: 5px;">
+                                <button type="button" class="btn btn-primary" ng-click="ctrl.save()" ng-disabled="!ctrl.dirty">Save</button>
+                                <button type="button" class="btn btn-primary" ng-click="ctrl.reset()" ng-disabled="!ctrl.dirty">Reset</button>
+                            </div>
+                            <div class="alert" role="alert" ng-if="ctrl.displayMsg">{{ctrl.displayMsg}}</div>
+                            <div class="alert" role="alert alert-danger" ng-if="ctrl.displayErr">{{ctrl.displayErr}}</div>
+                        </div>
+                        <div class="col-sm-8">
+                            <img ng-src="{{imageSrc}}" width="100%" ng-show="ctrl.selectedFile || ctrl.existingFile"/>
+                        </div>
+                    </div>
+            </uib-tab>
+            <uib-tab index="3" heading="National Messages" select="ctrl.selectTab(3)">
+                <div class="container">
+                    <div class="row row-centered">
+                        <div class="col-sm-8 col-centered">
+                            <form ng-submit="ctrl.commitNationalMessages()" name="ctrl.nationalMessagesForm">
+                                <div class="form-group">
+                                    <label for="nationalMessageSelect">Message</label>
+                                    <div class="input-group">
+                                        <select name="nationalMessageSelect"
+                                                id="nationalMessageSelect"
+                                                ng-options="message as message.title for message in ctrl.nationalMessages"
+                                                ng-model="ctrl.nationalMessageSelect"
+                                                class="form-control">
+                                                <option value="">Select Message</option>
+                                        </select>
+                                        <span class="input-group-btn">
+                                            <button class="btn btn-primary"
+                                                    type="button"
+                                                    ng-click="ctrl.addNationalMessage()">
+                                                Add
+                                            </button>
+                                            <button class="btn btn-primary"
+                                                    type="button"
+                                                    ng-disabled="ctrl.nationalMessages.length < 1"
+                                                    ng-click="ctrl.deleteNationalMessage()">
+                                                Delete
+                                            </button>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-disabled="!ctrl.nationalMessageSelect">
+                                    <label for="messageTitle" class="control-label">Title</label>
+                                    <input type="text"
+                                           ng-model="ctrl.nationalMessageSelect.title"
+                                           class="form-control"
+                                           id="messageTitle"
+                                           ng-disabled="!ctrl.nationalMessageSelect">
+                                </div>
+                                <div class="form-group" ng-disabled="!ctrl.nationalMessageSelect">
+                                    <label for="messageContent" class="control-label">Content</label>
+                                    <textarea
+                                        ng-model="ctrl.nationalMessageSelect.message"
+                                        rows="4" class="form-control"
+                                        id="messageContent"
+                                        ng-disabled="!ctrl.nationalMessageSelect">
+                                    </textarea>
+                                </div>
+                                <hr>
+                                <div class="btn-toolbar pull-right" style="padding-top: 5px;">
+                                    <button class="btn btn-primary"
+                                            type="submit"
+                                            ng-disabled="ctrl.nationalMessagesForm.$invalid || ctrl.nationalMessagesForm.$pristine">
+                                            Save
+                                    </button>
+                                    <button class="btn btn-primary"
+                                            type="button"
+                                            ng-disabled="ctrl.nationalMessagesForm.$pristine"
+                                            ng-click="ctrl.resetNationalMessages()">
+                                        Reset
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </uib-tab>
+            <uib-tab index="4" heading="National Contact" select="ctrl.selectTab(4)">
+                <div class="container">
+                    <div class="row row-centered">
+                        <div class="col-sm-8 col-centered">
+                            <form ng-submit="ctrl.commitNationalContact()" name="ctrl.nationalContactForm">
+                                <div class="form-group">
+                                    <label for="natContactTitle1" class="control-label">Title Line 1</label>
+                                    <input type="text" ng-model="ctrl.natContact.title1" class="form-control" id="natContactTitle1">
+                                </div>
+                                <div class="form-group">
+                                    <label for="natContactTitle2" class="control-label">Title Line 2</label>
+                                    <input type="text" ng-model="ctrl.natContact.title2" class="form-control" id="natContactTitle2">
+                                </div>
+                                <div class="form-group">
+                                    <label for="natContactTitle3" class="control-label">Title Line 3</label>
+                                    <input type="text" ng-model="ctrl.natContact.title3" class="form-control" id="natContactTitle3">
+                                </div>
+                                <div class="form-group">
+                                    <label for="natPhoneLine" class="control-label">Phone</label>
+                                    <input type="phone" ng-model="ctrl.natContact.phone" class="form-control" id="natPhoneLine">
+                                </div>
+                                <div class="form-group">
+                                    <label for="natEmailLine" class="control-label">Email</label>
+                                    <input type="email" ng-model="ctrl.natContact.email" class="form-control" id="natEmailLine">
+                                </div>
+                                <hr>
+                                <div class="btn-toolbar pull-right" style="padding-top: 5px;">
+                                    <button class="btn btn-primary"
+                                            type="submit"
+                                            ng-disabled="ctrl.nationalContactForm.$invalid || ctrl.nationalContactForm.$pristine">
+                                        Save
+                                    </button>
+                                    <button class="btn btn-primary"
+                                            type="button"
+                                            ng-click="ctrl.resetNationalContact()"
+                                            ng-disabled="ctrl.nationalContactForm.$pristine">
+                                        Reset
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </uib-tab>
+        </uib-tabset>
+    </div>
+</div>

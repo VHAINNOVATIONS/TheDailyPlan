@@ -35,6 +35,32 @@ router.get('/:id', function(req, res) {
 });
 
 // add new facility_message
+router.post('/all/:id', auth.isAuthenticated(), function(req, res) {
+    var body = req.body;
+    var id = req.params.id;
+    models.facility_message.destroy({
+        where: {
+            facility_id: req.params.id
+        }
+    }).then(function() {
+        var records = body.map(function(r, index) {
+            return {
+                active: true,
+                facility_id: id,
+                message_order: index + 1,
+                message_text: r.message,
+                message_headline: r.title
+            }
+        });
+        return models.facility_message.bulkCreate(records);
+    }).then(function() {
+        res.status(200).end();
+    }).catch(function(err) {
+        res.status(401).end();
+    })
+});
+
+// add new facility_message
 router.post('/', auth.isAuthenticated(), function(req, res) {
   models.facility_message.create({
     facility_id: req.body.facility_id,

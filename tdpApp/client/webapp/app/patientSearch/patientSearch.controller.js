@@ -6,6 +6,7 @@ angular.module('tdpApp')
         self.data = [];
         self.templates = [];
         self.selectedTemplate = {};
+        self.defaultTemplate = {};
         self.selectedTemplateArray = [];
         self.wards = [];
         self.clinics = [];
@@ -18,6 +19,11 @@ angular.module('tdpApp')
         self.displayErr.flag = false;
         self.errors = {};
         var titleHtml = '<label for="selectchkall" style="display: none">select</label><input type="checkbox" id="selectchkall" ng-model="ctrl.selectAll" ng-click="ctrl.toggleAll(ctrl.selectAll, ctrl.selected)"> ';
+        var templateHeaderHtml = '<div><label>Template</label>' +
+                                 '<select name="templateSelectAll" class="form-control"' +
+                                 'ng-model="ctrl.defaultTemplate" ng-change="ctrl.selectAllTemplate()">' +
+                                 '<option ng-repeat="option in ctrl.templates" value="{{option.id}}">{{option.template_name}}</option></select>'+
+                                 '</div>';
 
         //functions
         self.newPromise = newPromise;
@@ -28,13 +34,13 @@ angular.module('tdpApp')
         self.searchAll = searchAll;
         self.toggleAll = toggleAll;
         self.toggleOne = toggleOne;
-        self.display = display;
         self.patientClick = patientClick;
+        self.selectAllTemplate = selectAllTemplate;
 
         // Populate the Templates
         Template.findAll()
             .then(function(data) {
-                self.templates = data;
+                self.allTemplates = data;
             })
             .catch(function(err) {
                 self.errors.other = err.message;
@@ -58,7 +64,7 @@ angular.module('tdpApp')
                 self.errors.other = err.message;
             });
 
-        function display() {
+        self.display = function () {
             console.log('patientSearch display!');
 
             var items = [];
@@ -110,26 +116,30 @@ angular.module('tdpApp')
                 .catch(function(err) {
                     console.log('Error filing access info: %s', err.message);
                 });
-        }
+        };
 
         self.genPDF = function () {
+            var order = self.dtInstance.DataTable.rows()[0];
             var items = [];
             var auditItems = [];
             var userId = Auth.getCurrentUser().duz;
-            angular.forEach(self.selected, function(value, key) {
-                if (value === true) {
+            order.forEach(function(index) {
+                var datum = self.data[index];
+                var id = datum.id;
+                if (self.selected[id]) {
                     items.push({
-                        id: key,
-                        templateID: findTemplate(key)
+                        id: id,
+                        templateID: findTemplate(id)
                     });
                     auditItems.push({
                         userId: userId,
-                        patientId: key,
+                        patientId: id,
                         action: 'multipdf'
                     });
                 }
             });
-            if (items.length === 0) {
+
+            if (items.length < 1) {
                 self.displayErr.flag = true;
                 self.displayErr.msg = 'Please select a patient to display.';
                 return;
@@ -152,6 +162,7 @@ angular.module('tdpApp')
             if (data.length && self.templates.length) {
                 var founds = $filter('filter')(self.templates, {'template_name': 'Default'}, true);
                 var found = founds[0] ? founds[0] : self.templates[0];
+                self.defaultTemplate = found.id.toString();
                 data.forEach(function(patient) {
                     self.selectedTemplate[patient.id] = found.id.toString();
                 });
@@ -164,6 +175,9 @@ angular.module('tdpApp')
 
             Patient.byClinic(self.search.clinic)
                 .then(function(data) {
+                    self.templates = $filter('filter')(self.allTemplates,{location_id:self.search.clinic});
+                    //If no templates found, Load templates containing "Default" in the name
+                    self.templates = self.templates.length > 0 ? self.templates : $filter('filter')(self.allTemplates,{template_name:'Default'});
                     reloadData(data);
                 })
                 .catch(function(err) {
@@ -177,6 +191,9 @@ angular.module('tdpApp')
 
             Patient.byWard(self.search.ward)
                 .then(function(data) {
+                    self.templates = $filter('filter')(self.allTemplates,{location_id:self.search.ward});
+                    //If no templates found, Load templates containing "Default" in the name
+                    self.templates = self.templates.length > 0 ? self.templates : $filter('filter')(self.allTemplates,{template_name:'Default'});
                     reloadData(data);
                 })
                 .catch(function(err) {
@@ -190,6 +207,7 @@ angular.module('tdpApp')
 
             Patient.searchAll(self.search.all)
                 .then(function(data) {
+                    self.templates = self.allTemplates;
                     reloadData(data);
                 })
                 .catch(function(err) {
@@ -320,6 +338,12 @@ angular.module('tdpApp')
             });
         }
 
+        function selectAllTemplate(){
+            self.data.forEach(function(patient) {
+                self.selectedTemplate[patient.id] = self.defaultTemplate;
+            });
+        }
+
         self.dtOptions = DTOptionsBuilder.fromFnPromise(function() {
                 //return $resource('data1.json').query().$promise;
                 return newPromise();
@@ -357,15 +381,13 @@ angular.module('tdpApp')
             DTColumnBuilder.newColumn('DOB').withTitle('DOB'),
             DTColumnBuilder.newColumn('age').withTitle('Age'),
             DTColumnBuilder.newColumn('sex').withTitle('Gender'),
-            DTColumnBuilder.newColumn(null).withTitle('Template').notSortable()
+            DTColumnBuilder.newColumn(null).withTitle(templateHeaderHtml).notSortable()
             .renderWith(function(data, type, full, meta) {
                 var teamplateSelect = '';
-                teamplateSelect += '<select name="templateSelect" id="templateSelect" class="form-control" ';
+                teamplateSelect += '<select name="templateSelect" class="form-control" ';
                 teamplateSelect += 'ng-model="ctrl.selectedTemplate[' + data.id + ']">';
                 teamplateSelect += '<option ng-repeat="option in ctrl.templates" value="{{option.id}}">{{option.template_name}}</option></select>';
-
                 return teamplateSelect;
-
             })
         ];
 

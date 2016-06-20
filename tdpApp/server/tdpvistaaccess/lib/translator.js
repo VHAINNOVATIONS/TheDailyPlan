@@ -87,7 +87,7 @@ var vitalSetUpdateFn = {
     '17': setVitalUnitOrQualifier('unit')
 };
 
-exports.translateVitalSigns = function (rawVitalSets, occurances) {
+exports.translateVitalSigns = function (rawVitalSets, occurances,backdays) {
     var vitalSets = [];
     rawVitalSets = _.get(rawVitalSets, "WP", null);
     if (rawVitalSets) {
@@ -104,7 +104,10 @@ exports.translateVitalSigns = function (rawVitalSets, occurances) {
                     fn(vitalSet, data);
                 }
             });
-            vitalSets.push(vitalSet);
+
+            if(vitalSet.dateTime && timeUtility.dateAfterBackDays(vitalSet.dateTime,backdays)){
+                vitalSets.push(vitalSet);
+            }
         });
     }
     return vitalSets;

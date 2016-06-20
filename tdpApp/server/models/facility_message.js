@@ -26,7 +26,7 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: false
         },
         message_text: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: false
         },
         message_headline: {

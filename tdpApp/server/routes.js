@@ -25,6 +25,8 @@ module.exports = function(app) {
   app.use('/api/wards', require('./api/wards'));
   app.use('/api/labs', require('./api/labs'));
   app.use('/api/freetextresolve', require('./api/freeTextResolve'));
+  app.use('/api/landing_image', require('./api/landingImage'));
+  app.use('/fu/landing_image', require('./fu/landingImage'));
 
   // TDP DB API Routes
   app.use('/api/template',require('./api/template'));

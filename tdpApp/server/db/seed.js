@@ -34,7 +34,7 @@ module.exports = function(db) {
             minSizeY: 2,
             mandatory: false,
             enable_options: false,
-            highlightPanel:true
+            highlight_panel:true
         }).then(function(pt) {
             // Then Create the Panel Second
             return db.panel.create({
@@ -124,6 +124,20 @@ module.exports = function(db) {
                             detail_value: '3'
                         }).then(function(tl) {
                             console.log('vital settings updated...')
+                        });
+                    }),
+                    db.panel_setting.create({
+                        panel_type_id: pt.id,
+                        setting_type: 2,
+                        setting_name: 'Back Days',
+                        setting_value: '30'
+                    }).then(function(ps) {
+                        return db.panel_detail.create({
+                            panel_id: p.id,
+                            panel_setting_id: ps.id,
+                            detail_value: '30'
+                        }).then(function(tl) {
+                            console.log('vital Back Days settings updated...')
                         });
                     })
                 ]);
@@ -465,6 +479,20 @@ module.exports = function(db) {
                         });
                     }).then(function() {
                         console.log('labs settings are created...')
+                    }),
+                    db.panel_setting.create({
+                        panel_type_id: pt.id,
+                        setting_type: 7,
+                        setting_name: 'Name as PDF Header',
+                        setting_value: true
+                    }).then(function(ps) {
+                        return db.panel_detail.create({
+                            panel_id: p.id,
+                            panel_setting_id: ps.id,
+                            detail_value: true
+                        })
+                    }).then(function() {
+                        console.log('labs Name as PDF Header settings are created...')
                     })
                 ])
             });
@@ -726,6 +754,20 @@ module.exports = function(db) {
                     email: 'Beth.King@va.gov'
                 })
             });
+        }).then(function() {
+            return db.landing_image.bulkCreate([{
+                name: 'landing1.jpg',
+                active: true
+            }, {
+                name: 'landing2.jpg',
+                active: true
+            }, {
+                name: 'landing3.jpg',
+                active: true
+            }, {
+                name: 'landing4.jpg',
+                active: true
+            }]);
         }),
         db.facility.create({
             name: 'Biloxi',
@@ -743,7 +785,7 @@ module.exports = function(db) {
                     facility_id: facility.id,
                     active: true,
                     message_order: 2,
-                    message_text: 'This is the message text for the second message from Biloxi. We hope you have a great day!',
+                    message_text: 'This is the message text for the second message from Biloxi. We hope you have a great day!This is the message text for the second message from Biloxi. We hope you have a great day!This is the message text for the second message from Biloxi. We hope you have a great day!',
                     message_headline: 'Biloxi Message 2 Headline'
                 }, {
                     facility_id: facility.id,
