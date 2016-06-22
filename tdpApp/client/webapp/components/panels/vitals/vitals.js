@@ -33,7 +33,7 @@ angular.module('tdpApp')
           { name: 'dateTime', displayName: 'Date' , width:'*',
             cellTemplate: '<div class="ui-grid-cell-contents wrap" white-space: normal>{{COL_FIELD CUSTOM_FILTERS}}</div>' },
           { name: 'getTemp()', displayName: 'Temp' , width:'*' },
-          { name: 'bloodPressure.value', displayName: 'Blood Pressure', width:'*' },
+          { name: 'bloodPressure.value', displayName: 'BP', width:'*' },
           { name: 'pulse.value', displayName: 'Pulse', width:'*' }
         ];
 

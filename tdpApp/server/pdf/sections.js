@@ -397,9 +397,9 @@ sectionHandlers.Visits = function(data) {
     return commonTable(tableData);
 };
 
-sectionHandlers.Vitals = function(data) {
+sectionHandlers['Vital Signs'] = function(data) {
     var tableData = {
-        title: 'Vitals\n(blank areas indicate no data available)',
+        title: 'Vital Signs\n(blank areas indicate no data available)',
         emptyMessage: 'No vitals signs found',
         columns: [{
             header: 'Date/Time',
@@ -408,22 +408,32 @@ sectionHandlers.Vitals = function(data) {
         }, {
             header: 'Temp',
             property: 'temperature',
-            width: '20%',
+            width: '13%',
             align: 'center'
         }, {
             header: 'Pulse',
             property: 'pulse',
-            width: '20%',
+            width: '13%',
             align: 'center'
         }, {
             header: 'BP',
             property: 'bloodPressure',
-            width: '20%',
+            width: '13%',
             align: 'center'
         }, {
             header: 'Weight',
             property: 'weight',
-            width: '20%',
+            width: '13%',
+            align: 'center'
+        }, {
+            header: 'Pain',
+            property: 'pain',
+            width: '13%',
+            align: 'center'
+        }, {
+            header: 'Resp.',
+            property: 'respiration',
+            width: '13%',
             align: 'center'
         }],
         data: data
