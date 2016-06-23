@@ -4,7 +4,7 @@ module.exports = function(db) {
     var layoutOrder = {
         'Allergies': 1,
         'Immunizations': 2,
-        'Vitals': 3,
+        'Vital Signs': 3,
         'Diet Orders': 4,
         'Pending Lab Orders': 5,
         'Pending Radiology Orders': 6,
@@ -91,7 +91,7 @@ module.exports = function(db) {
     var vitals = function(facilityId, templateId) {
         return db.panel_type.create({
             facility_id: facilityId,
-            title: 'Vitals',
+            title: 'Vital Signs',
             directive: 'dt-vitals',
             scope_variable: 'patient',
             minSizeX: 2,
@@ -376,7 +376,7 @@ module.exports = function(db) {
             scope_variable: 'patient',
             minSizeX: 2,
             minSizeY: 2,
-            mandatory: true,
+            mandatory: false,
             enable_options: false
         }).then(function(pt) {
             // Then Create the Panel Second
