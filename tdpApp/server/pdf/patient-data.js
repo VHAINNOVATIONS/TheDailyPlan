@@ -178,7 +178,7 @@ getters.Visits = function(session, userSession, patientId, details, callback) {
     }, callback);
 };
 
-getters.Vitals = function(session, userSession, patientId, details, callback) {
+getters['Vital Signs'] = function(session, userSession, patientId, details, callback) {
     var options = {
         occurances: '3',
         backdays: '30'
@@ -205,7 +205,7 @@ getters.Vitals = function(session, userSession, patientId, details, callback) {
             var v = {
               date: dateTime,
             };
-            ['temperature', 'pulse', 'bloodPressure', 'weight'].forEach(function(type) {
+            ['temperature', 'pulse', 'bloodPressure', 'weight', 'pain', 'respiration'].forEach(function(type) {
                 var value = vital[type] && vital[type].value;
                 v[type] = value;
             });
