@@ -26,7 +26,8 @@ angular.module('tdpApp')
             subGridVariable: 'subGridScopeVariable'
           },
           rowHeight:50,
-          enablePinning: false
+          enablePinning: false,
+          enableColumnMenus:false
         };
 
         $scope.vitalsGridOptions.columnDefs = [

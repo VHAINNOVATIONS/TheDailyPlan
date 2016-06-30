@@ -92,7 +92,8 @@ module.exports = function(db) {
         return db.panel_type.create({
             facility_id: facilityId,
             title: 'Vital Signs',
-            directive: 'dt-vitals',
+            directive: 'dt-simple-grid',
+            service: 'Vitals',
             scope_variable: 'patient',
             minSizeX: 2,
             minSizeY: 2,

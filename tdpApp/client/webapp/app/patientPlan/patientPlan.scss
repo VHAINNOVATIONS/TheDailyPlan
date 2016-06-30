@@ -256,6 +256,17 @@ form {
   background-size: 100%;
 }
 
+.ui-grid-icon-down-dir::before{
+  background: url("../common/assets/images/sort-down.png") no-repeat 0 0 !important;
+  background-size: 60%;
+}
+
+.ui-grid-icon-up-dir::before{
+  background: url("../common/assets/images/sort-up.png") no-repeat 0 0 !important;
+  background-size: 60%;
+}
+
+
 .ui-grid-icon-cancel::before{
   background: url("../common/assets/images/grid-menu-close.png") no-repeat 0 0;
   background-size: 100%;
