@@ -161,11 +161,11 @@ var labsVertical = function(data) {
         columns: [{
             header: 'Date',
             property: 'date',
-            width: '17%'
+            width: '22%'
         }, {
             header: 'Name',
             property: 'name',
-            width: '32%'
+            width: '27%'
         }, {
             header: 'Value',
             property: 'value',
