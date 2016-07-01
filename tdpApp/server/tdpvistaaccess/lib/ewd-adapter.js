@@ -184,7 +184,6 @@ var reduceLabToTests = function(fullLabResults, occurances) {
     return fullLabResults.reduce(function(r, fullLabResult) {
         var collectionDate =fullLabResult.specimen.collectionDate;
         var key = collectionDate;
-        collectionDate = collectionDate && collectionDate.split(' ')[0];
         fullLabResult.labResults.forEach(function(labResult) {
             var e = {
                 date: collectionDate,

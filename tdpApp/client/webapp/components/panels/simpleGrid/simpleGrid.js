@@ -22,7 +22,8 @@ angular.module('tdpApp')
 
                 $scope.gridOptions = {
                     columnDefs: service.columnDefs,
-                    enablePinning: false
+                    enablePinning: false,
+                    enableColumnMenus:false
                 };
 
                 service.get($scope.patient, $scope.paneldetail)
