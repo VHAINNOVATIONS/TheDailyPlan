@@ -352,14 +352,14 @@ angular.module('tdpApp')
         }
     ])
     // Customizer Controller Settings Modal
-    .controller('CustomizerCtrl', ['$scope', '$uibModalInstance', 'params', 'Panel_Setting',
-        function($scope, $uibModalInstance, params, Panel_Setting) {
+    .controller('CustomizerCtrl', ['$scope', '$uibModalInstance', 'params', 'PanelSetting',
+        function($scope, $uibModalInstance, params, PanelSetting) {
             var panel = params.panel;
             $scope.panel = panel;
             $scope.options = [];
             $scope.displayOnly = !!params.displayOnly;
 
-            Panel_Setting.findByPanelTypeID(panel.id)
+            PanelSetting.findByPanelTypeID(panel.id)
                 .then(function(panel_settings) {
                     $scope.settings = panel_settings;
                     var settingIdMap = panel_settings.reduce(function(r, ps) {
