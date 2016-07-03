@@ -12,48 +12,19 @@ router.get('/byPanelType/:id', auth.isAuthenticated(), function(req, res) {
           panel_type_id: req.params.id
         }
     }).then(function(panel_setting) {
-        var settings = [];
-        var settingObj = {};
-        var values = [];
-        var settingTypeSave = 0;
-        var settingNameSave = '';
-        var i = 0;
-        // Panel - Loop
-        panel_setting.forEach(function(setting) {
-            i++;
-
-            if (settingNameSave === '') {
-              // Save Type & Name
-              settingTypeSave = setting.setting_type;
-              settingNameSave = setting.setting_name;
-
-            } else if(settingNameSave !== setting.setting_name) {
-              // Build Object
-              settingObj = {};
-              settingObj.settingValues = values;
-              settingObj.panelTypeID = setting.panel_type_id;
-              settingObj.settingType = settingTypeSave;
-              settingObj.settingName = settingNameSave;
-              settings.push(settingObj);
-              // Prepare for next set
-              settingTypeSave = setting.setting_type;
-              settingNameSave = setting.setting_name;
-              values =[];
-            }
+        var settings = panel_setting.map(function(setting) {
+            var values = [];
             var value = {};
             value.panelSettingID = setting.id;
             value.settingValue = setting.setting_value;
             values.push(value);
 
-            // Final Push to settings array
-            if (i === panel_setting.length) {
-              settingObj = {};
-              settingObj.settingValues = values;
-              settingObj.panelTypeID = setting.panel_type_id;
-              settingObj.settingType = settingTypeSave;
-              settingObj.settingName = settingNameSave;
-              settings.push(settingObj);
-            }
+            var settingObj = {};
+            settingObj.settingValues = values;
+            settingObj.panelTypeID = setting.panel_type_id;
+            settingObj.settingType = setting.setting_type;
+            settingObj.settingName = setting.setting_name;
+            return settingObj;
         });
 
         res.json(settings);
