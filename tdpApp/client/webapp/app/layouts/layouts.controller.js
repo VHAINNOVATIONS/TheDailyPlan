@@ -363,12 +363,10 @@ angular.module('tdpApp')
                 .then(function(panel_settings) {
                     $scope.settings = panel_settings;
                     var settingIdMap = panel_settings.reduce(function(r, ps) {
-                        ps.settingValues.forEach(function(value) {
-                            r[value.panelSettingID] = {
-                                type: ps.settingType,
-                                obj: ps
-                            };
-                        });
+                        r[ps.panelSettingID] = {
+                            type: ps.settingType,
+                            obj: ps
+                        };
                         return r;
                     }, {});
                     if (panel.panelDetails) {
@@ -395,13 +393,13 @@ angular.module('tdpApp')
                                 settingIdMap[pid].obj.textValue = panel.panelDetails[i].detail_value;
                             }
                             if (settingIdMap[pid].type === 7) {
-                                settingIdMap[pid].obj.isChecked = panel.panelDetails[i].detail_value === "1";
+                                settingIdMap[pid].obj.isChecked = panel.panelDetails[i].detail_value === '1';
                             }
                         }
                     }
                     panel_settings.forEach(function(ps) {
-                        var settingValue = ps.settingValues[0] && ps.settingValues[0].settingValue;
                         if (ps.settingType === 6) {
+                            var settingValue = ps.settingValue;
                             if (settingValue) {
                                 var pieces = settingValue.split(':');
                                 if (pieces[1]) {
@@ -424,7 +422,7 @@ angular.module('tdpApp')
                 var panelDetails = [];
                 $scope.settings.forEach(function(ps) {
                     var detail;
-                    var settingId = ps.settingValues[0].panelSettingID;
+                    var settingId = ps.panelSettingID;
                     if (ps.settingType === 2) {
                         detail = {
                             panel_setting_id: settingId,
@@ -458,7 +456,7 @@ angular.module('tdpApp')
                     if (ps.settingType === 7) {
                         detail = {
                             panel_setting_id: settingId,
-                            detail_value: ps.isChecked === true ? "1":"0"
+                            detail_value: ps.isChecked === true ? '1' : '0'
                         };
                         panelDetails.push(detail);
                     }

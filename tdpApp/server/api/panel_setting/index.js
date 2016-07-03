@@ -13,18 +13,13 @@ router.get('/byPanelType/:id', auth.isAuthenticated(), function(req, res) {
         }
     }).then(function(panel_setting) {
         var settings = panel_setting.map(function(setting) {
-            var values = [];
-            var value = {};
-            value.panelSettingID = setting.id;
-            value.settingValue = setting.setting_value;
-            values.push(value);
-
-            var settingObj = {};
-            settingObj.settingValues = values;
-            settingObj.panelTypeID = setting.panel_type_id;
-            settingObj.settingType = setting.setting_type;
-            settingObj.settingName = setting.setting_name;
-            return settingObj;
+            return {
+                settingValue: setting.setting_value,
+                panelSettingID: setting.id,
+                panelTypeID: setting.panel_type_id,
+                settingType: setting.setting_type,
+                settingName: setting.setting_name
+            };
         });
 
         res.json(settings);
