@@ -6,6 +6,9 @@
         </div>
 
         <div class="modal-body">
+            <div ng-if="loadMessage">
+                <h4><strong>{{loadMessage}}</strong></h4>
+            </div>
             <div class="form-group" ng-class="{error: _form.title.$error && _form.submitted}">
                 <div ng-repeat="setting in settings">
                     <div class="form-group row" ng-if="setting.settingType === 2">

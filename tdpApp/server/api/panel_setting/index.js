@@ -21,8 +21,28 @@ router.get('/byPanelType/:id', auth.isAuthenticated(), function(req, res) {
                 settingName: setting.setting_name
             };
         });
-
-        res.json(settings);
+        return settings;
+    }).then(function(settings) {
+        return models.panel_type.find({
+            where: {
+                id: req.params.id
+            }
+        }).then(function(panelType) {
+            var title = panelType.title;
+            return models.Sequelize.Promise.map(settings, function(setting) {
+                if (title === 'Health Factors') {
+                    var sess = req.session;
+                    var ghf = models.Sequelize.Promise.promisify(sess.getSystemHealthFactors, {
+                        context: sess
+                    });
+                    return ghf(req.user).then(function(possibleValues) {
+                        setting.possibleValues = possibleValues;
+                    });
+                }
+            });
+        }).then(function() {
+            res.json(settings);
+        });
     }).catch(function(err) {
         res.status(401).json(err);
     });

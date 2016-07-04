@@ -222,6 +222,13 @@ var operations = {
             return result;
         }
     },
+    getSystemHealthFactors: {
+        GET: function(ewd, session) {
+            var ok = vista.restoreSymbolTable(ewd, session);
+            var result = healthFactorsLib.getSystemHealthFactors(session, ewd);
+            return result;
+        }
+    },
     resolveBPs: {
         GET: function(ewd, session) {
             var params = {

@@ -189,7 +189,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get patient demographics/flags', function (done) {
+    xit('get patient demographics/flags', function (done) {
         var pid = 100845; //100846; //756; //724; //631; //100845; //100748; //100846;
         testSession.getDemographics(userSession, pid, {}, function (err, body) {
             if (err) {
@@ -344,7 +344,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get procedures', function (done) {
+    xit('get procedures', function (done) {
         var pid = 100846; //100685;
         testSession.getOrders(userSession, pid, {}, function (err, body) {
             if (err) {
@@ -446,6 +446,20 @@ describe('ewd session test', function () {
             } else {
                 expect(result).to.exist();
                 console.log("=== Health Factors =============");
+                console.log(JSON.stringify(result, undefined, 4));
+                console.log("================================");
+                done();
+            }
+        });
+    });
+
+    it('get system health factors', function (done) {
+        testSession.getSystemHealthFactors(userSession, function (err, result) {
+            if (err) {
+                done(err);
+            } else {
+                expect(result).to.exist();
+                console.log("=== System Health Factors =============");
                 console.log(JSON.stringify(result, undefined, 4));
                 console.log("================================");
                 done();

@@ -23,9 +23,11 @@ angular.module('tdpApp')
                     };
                 };
             };
+            $scope.loadMessage = 'Loading ' + panel.title + '...';
 
             PanelSetting.findByPanelTypeID(panel.id)
                 .then(function(panel_settings) {
+                    $scope.actionn = 'loaded stage';
                     $scope.settings = panel_settings;
                     var settingIdMap = panel_settings.reduce(function(r, ps) {
                         r[ps.panelSettingID] = {
@@ -88,8 +90,10 @@ angular.module('tdpApp')
                             ps.selectionValues = model8;
                         }
                     });
+                    $scope.loadMessage = '';
                 })
                 .catch(function(err) {
+                    $scope.loadMessage = '';
                     $scope.errors = err.message;
                 });
 

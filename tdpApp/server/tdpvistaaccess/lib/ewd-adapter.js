@@ -572,6 +572,15 @@ var session = {
             }
         });
     },
+    getSystemHealthFactors: function(userSession, callback) {
+        this.get(userSession, '/getSystemHealthFactors', null, function (err, result) {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, result);
+            }
+        });
+    },
     getBoilerplates: function(userSession, patientId, options, callback) {
       this.get(userSession, '/resolveBPs', {
         patientId: patientId,
