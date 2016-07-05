@@ -30,21 +30,23 @@ router.get('/byPanelType/:id', auth.isAuthenticated(), function(req, res) {
         }).then(function(panelType) {
             var title = panelType.title;
             return models.Sequelize.Promise.map(settings, function(setting) {
-                var sess = req.session;
-                if (title === 'Health Factors') {
-                    var ghf = models.Sequelize.Promise.promisify(sess.getSystemHealthFactors, {
-                        context: sess
-                    });
-                    return ghf(req.user).then(function(possibleValues) {
-                        setting.possibleValues = possibleValues;
-                    });
-                } else if (title === 'Postings') {
-                    var gps = models.Sequelize.Promise.promisify(sess.getPostingTypes, {
-                        context: sess
-                    });
-                    return gps(req.user).then(function(possibleValues) {
-                        setting.possibleValues = possibleValues;
-                    });
+                if (setting.settingType === 8) {
+                    var sess = req.session;
+                    if (title === 'Health Factors') {
+                        var ghf = models.Sequelize.Promise.promisify(sess.getSystemHealthFactors, {
+                            context: sess
+                        });
+                        return ghf(req.user).then(function(possibleValues) {
+                            setting.possibleValues = possibleValues;
+                        });
+                    } else if (title === 'Postings') {
+                        var gps = models.Sequelize.Promise.promisify(sess.getPostingTypes, {
+                            context: sess
+                        });
+                        return gps(req.user).then(function(possibleValues) {
+                            setting.possibleValues = possibleValues;
+                        });
+                    }
                 }
             });
         }).then(function() {
