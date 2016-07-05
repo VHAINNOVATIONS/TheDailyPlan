@@ -6,6 +6,9 @@
         </div>
 
         <div class="modal-body">
+            <div ng-if="loadMessage">
+                <h4><strong>{{loadMessage}}</strong></h4>
+            </div>
             <div class="form-group" ng-class="{error: _form.title.$error && _form.submitted}">
                 <div ng-repeat="setting in settings">
                     <div class="form-group row" ng-if="setting.settingType === 2">
@@ -43,6 +46,20 @@
                         <label for="checkboxinput" class="col-sm-4 control-label">{{setting.settingName}}</label>
                         <div class="col-sm-7">
                            <input id="checkboxinput" type="checkbox" ng-model="setting.isChecked">
+                        </div>
+                    </div>
+                    <div class="form-group row" ng-if="setting.settingType === 8">
+                        <label for="listareainput" class="col-sm-4 control-label">{{setting.settingName}}</label>
+                        <div class="col-sm-7">
+                            <div class="form-control chkbox-div">
+                                <div ng-repeat="selectionValue in setting.selectionValues">
+                                    <label class="chkbox-label"><input type="checkbox" ng-model="selectionValue.selected"> {{selectionValue.title}}</label>
+                                </div>
+                            </div>
+                            <div class="btn-toolbar pull-right" style="padding-top: 2px;">
+                                <button type="button" class="btn btn-sm btn-secondary" ng-click="clearAll()">Clear All</button>
+                                <button type="button" class="btn btn-sm btn-secondary" ng-click="selectAll()">Select All</button>
+                            </div>
                         </div>
                     </div>
                 </div>
