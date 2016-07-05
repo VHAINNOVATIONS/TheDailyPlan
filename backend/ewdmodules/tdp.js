@@ -126,6 +126,13 @@ var operations = {
             return result;
         }
     },
+    getPostingTypes: {
+        GET: function(ewd, session) {
+            var ok = vista.restoreSymbolTable(ewd, session);
+            var result = postingsLib.getPostingTypes(session, ewd);
+            return result;
+        }
+    },
     getImmunizations: {
         GET: function(ewd, session) {
             var params = {

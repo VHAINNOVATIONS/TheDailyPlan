@@ -328,6 +328,21 @@ describe('ewd session test', function () {
         });
     });
 
+    it('get posting types', function (done) {
+        testSession.getPostingTypes(userSession, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body).to.exist();
+                //expect(body.length).to.be.above(0);
+                console.log("====== POSTINGS ============");
+                console.log(JSON.stringify(body, undefined, 4));
+                console.log("============================");
+                done();
+            }
+        });
+    });
+
     xit('get immunizations', function (done) {
         var pid = 711;
         testSession.getImmunizations(userSession, pid, {}, function (err, body) {
@@ -453,7 +468,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get system health factors', function (done) {
+    xit('get system health factors', function (done) {
         testSession.getSystemHealthFactors(userSession, function (err, result) {
             if (err) {
                 done(err);

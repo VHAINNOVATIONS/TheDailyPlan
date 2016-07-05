@@ -386,6 +386,16 @@ var session = {
             }
         });
     },
+    getPostingTypes: function(userSession, callback) {
+        this.get(userSession, '/getPostingTypes', null, function (err, result) {
+            if (err) {
+                callback(err);
+            } else {
+                result.sort();
+                callback(null, result);
+            }
+        });
+    },
     getImmunizations: function (userSession, patientId, options, callback) {
         this.get(userSession, '/getImmunizations', {
             patientId: patientId,
