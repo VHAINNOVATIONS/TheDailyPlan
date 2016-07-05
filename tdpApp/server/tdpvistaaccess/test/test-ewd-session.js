@@ -189,7 +189,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get patient demographics/flags', function (done) {
+    xit('get patient demographics/flags', function (done) {
         var pid = 100845; //100846; //756; //724; //631; //100845; //100748; //100846;
         testSession.getDemographics(userSession, pid, {}, function (err, body) {
             if (err) {
@@ -328,6 +328,21 @@ describe('ewd session test', function () {
         });
     });
 
+    it('get posting types', function (done) {
+        testSession.getPostingTypes(userSession, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body).to.exist();
+                //expect(body.length).to.be.above(0);
+                console.log("====== POSTINGS ============");
+                console.log(JSON.stringify(body, undefined, 4));
+                console.log("============================");
+                done();
+            }
+        });
+    });
+
     xit('get immunizations', function (done) {
         var pid = 711;
         testSession.getImmunizations(userSession, pid, {}, function (err, body) {
@@ -344,7 +359,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get procedures', function (done) {
+    xit('get procedures', function (done) {
         var pid = 100846; //100685;
         testSession.getOrders(userSession, pid, {}, function (err, body) {
             if (err) {
@@ -446,6 +461,20 @@ describe('ewd session test', function () {
             } else {
                 expect(result).to.exist();
                 console.log("=== Health Factors =============");
+                console.log(JSON.stringify(result, undefined, 4));
+                console.log("================================");
+                done();
+            }
+        });
+    });
+
+    xit('get system health factors', function (done) {
+        testSession.getSystemHealthFactors(userSession, function (err, result) {
+            if (err) {
+                done(err);
+            } else {
+                expect(result).to.exist();
+                console.log("=== System Health Factors =============");
                 console.log(JSON.stringify(result, undefined, 4));
                 console.log("================================");
                 done();

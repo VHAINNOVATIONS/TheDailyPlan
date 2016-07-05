@@ -4,131 +4,57 @@ var express = require('express');
 var router = express.Router();
 var auth = require('../../auth/auth.service');
 var models = require('../../models/index');
-var async = require('async');
-
-
-// get all panel_settings
-router.get('/', auth.isAuthenticated(), function(req, res) {
-  models.panel_setting.findAll({}).then(function(panel_settings) {
-    res.json(panel_settings);
-  });
-});
-
-// get single panel_setting
-router.get('/:id', auth.isAuthenticated(), function(req, res) {
-  models.panel_setting.find({
-    where: {
-      id: req.params.id
-    }
-  }).then(function(panel_setting) {
-    res.json(panel_setting);
-  });
-});
 
 // get single panel_settings
 router.get('/byPanelType/:id', auth.isAuthenticated(), function(req, res) {
-  models.panel_setting.findAll({
-    where: {
-      panel_type_id: req.params.id
-    }
-  }).then(function(panel_setting) {
-    var settings = [];
-    var settingObj = {};
-    var values = [];
-    var settingTypeSave = 0;
-    var settingNameSave = '';
-    var i = 0;
-    // Panel - Loop
-    async.eachSeries(panel_setting, function(setting, callback) {
-      i++;
-
-      if (settingNameSave === '') {
-        // Save Type & Name
-        settingTypeSave = setting.setting_type;
-        settingNameSave = setting.setting_name;
-
-      } else if(settingNameSave !== setting.setting_name) {
-        // Build Object
-        settingObj = {};
-        settingObj.settingValues = values;
-        settingObj.panelTypeID = setting.panel_type_id;
-        settingObj.settingType = settingTypeSave;
-        settingObj.settingName = settingNameSave;
-        settings.push(settingObj);
-        // Prepare for next set
-        settingTypeSave = setting.setting_type;
-        settingNameSave = setting.setting_name;
-        values =[];
-      }
-      var value = {};
-      value.panelSettingID = setting.id;
-      value.settingValue = setting.setting_value;
-      values.push(value);
-
-      // Final Push to settings array
-      if (i === panel_setting.length) {
-        settingObj = {};
-        settingObj.settingValues = values;
-        settingObj.panelTypeID = setting.panel_type_id;
-        settingObj.settingType = settingTypeSave;
-        settingObj.settingName = settingNameSave;
-        settings.push(settingObj);
-      }
-
-      callback();
-
-    }, function(err){
-
-      if( err ) {
-        console.log('ERROR:',err);
-      } else {
-        res.json(settings);
-      }
+    models.panel_setting.findAll({
+        where: {
+          panel_type_id: req.params.id
+        }
+    }).then(function(panel_setting) {
+        var settings = panel_setting.map(function(setting) {
+            return {
+                settingValue: setting.setting_value,
+                panelSettingID: setting.id,
+                panelTypeID: setting.panel_type_id,
+                settingType: setting.setting_type,
+                settingName: setting.setting_name
+            };
+        });
+        return settings;
+    }).then(function(settings) {
+        return models.panel_type.find({
+            where: {
+                id: req.params.id
+            }
+        }).then(function(panelType) {
+            var title = panelType.title;
+            return models.Sequelize.Promise.map(settings, function(setting) {
+                if (setting.settingType === 8) {
+                    var sess = req.session;
+                    if (title === 'Health Factors') {
+                        var ghf = models.Sequelize.Promise.promisify(sess.getSystemHealthFactors, {
+                            context: sess
+                        });
+                        return ghf(req.user).then(function(possibleValues) {
+                            setting.possibleValues = possibleValues;
+                        });
+                    } else if (title === 'Postings') {
+                        var gps = models.Sequelize.Promise.promisify(sess.getPostingTypes, {
+                            context: sess
+                        });
+                        return gps(req.user).then(function(possibleValues) {
+                            setting.possibleValues = possibleValues;
+                        });
+                    }
+                }
+            });
+        }).then(function() {
+            res.json(settings);
+        });
+    }).catch(function(err) {
+        res.status(401).json(err);
     });
-  });
-});
-
-// add new panel_setting
-router.post('/', auth.isAuthenticated(), function(req, res) {
-  models.panel_setting.create({
-    panel_type_id: req.body.panel_type_id,
-    setting_type: req.body.setting_type,
-    setting_name: req.body.setting_name,
-    setting_value: req.body.setting_value
-  }).then(function(panel_setting) {
-    res.json(panel_setting);
-  });
-});
-
-// update single panel_setting
-router.put('/:id', auth.isAuthenticated(), function(req, res) {
-  models.panel_setting.find({
-    where: {
-      id: req.params.id
-    }
-  }).then(function(panel_setting) {
-    if(panel_setting){
-      panel_setting.updateAttributes({
-        panel_type_id: req.body.panel_type_id,
-        setting_type: req.body.setting_type,
-        setting_name: req.body.setting_name,
-        setting_value: req.body.setting_value
-      }).then(function(panel_setting) {
-        res.send(panel_setting);
-      });
-    }
-  });
-});
-
-// delete a single panel_setting
-router.delete('/:id', auth.isAuthenticated(), function(req, res) {
-  models.panel_setting.destroy({
-    where: {
-      id: req.params.id
-    }
-  }).then(function(panel_setting) {
-    res.json(panel_setting);
-  });
 });
 
 module.exports = router;

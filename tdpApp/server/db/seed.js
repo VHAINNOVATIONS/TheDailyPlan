@@ -345,7 +345,7 @@ module.exports = function(db) {
             scope_variable: 'patient',
             minSizeX: 2,
             minSizeY: 2,
-            mandatory: true,
+            mandatory: false,
             enable_options: false
         }).then(function(pt) {
             // Then Create the Panel Second
@@ -588,7 +588,7 @@ module.exports = function(db) {
                     }),
                     db.panel_setting.create({
                         panel_type_id: pt.id,
-                        setting_type: 5,
+                        setting_type: 8,
                         setting_name: 'Include Factors'
                     }).then(function() {
                         console.log('health factor settings are created...')
@@ -625,7 +625,7 @@ module.exports = function(db) {
                     }),
                     db.panel_setting.create({
                         panel_type_id: pt.id,
-                        setting_type: 5,
+                        setting_type: 8,
                         setting_name: 'Include Types',
                         setting_value: 'FALL RISK^CLINICAL WARNING^ADVANCE DIRECTIVE'
                     }).then(function(ps) {
