@@ -150,6 +150,11 @@ angular.module('tdpApp')
                     self.topTitle = 'Edit Template';
                     loadTemplate(self.templateID);
                     break;
+                case 'delete':
+                    self.submitButton = 'Delete';
+                    self.topTitle = 'Delete Template';
+                    loadTemplate(self.templateID);
+                    break;
                 case 'display':
                     self.displayOnly = true;
                     self.submitButton = 'Done';
@@ -219,6 +224,16 @@ angular.module('tdpApp')
                             break;
                         case 'display':
                             $location.path('/templateSearch');
+                            break;
+                        case 'delete':
+                            Template.delete(self.template.id)
+                                .then(function() {
+                                    $location.path('/templateSearch');
+                                    return;
+                                })
+                                .catch(function(err) {
+                                    self.errors.other = err;
+                                });
                             break;
                         default:
                             // set error and send back to templateSearch

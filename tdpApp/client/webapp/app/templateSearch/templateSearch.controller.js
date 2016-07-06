@@ -167,15 +167,19 @@ angular.module('tdpApp')
     self.toggleOne = toggleOne;
 
     self.display = function () {
-      editOrDisplay('display');
+      editDeleteOrDisplay('display');
     };
 
     self.edit = function () {
-      editOrDisplay('edit');
+      editDeleteOrDisplay('edit');
     };
 
     self.create = function () {
       $location.path('/layouts/create/');
+    };
+
+    self.delete = function(){
+      editDeleteOrDisplay('delete');
     };
 
     // Initially Populate the Wards
@@ -196,7 +200,7 @@ angular.module('tdpApp')
       self.errors.other = err.message;
     });
 
-    function editOrDisplay(type) {
+    function editDeleteOrDisplay(type) {
       angular.forEach(self.selected, function(value, key) {
         var entry = {};
         if(value === true)
