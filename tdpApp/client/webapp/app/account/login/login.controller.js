@@ -90,10 +90,10 @@ angular.module('tdpApp')
 
             var keys = [{
                 client: 'super',
-                vista: 'TDPSUPER'
+                vista: 'TDP_SUPER'
             }, {
                 client: 'admin',
-                vista: 'TDPADMIN'
+                vista: 'TDP_ADMIN'
             }];
 
             var location;
