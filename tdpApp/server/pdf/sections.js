@@ -128,6 +128,28 @@ sectionHandlers.Immunizations = function(data) {
     return commonTable(tableData);
 };
 
+sectionHandlers['Pending Consults'] = function(data) {
+    var tableData = {
+        title: 'Pending Consults',
+        emptyMessage: 'No consults found',
+        columns: [{
+            header: 'Request Date',
+            property: 'requestDate',
+            width: '25%'
+        }, {
+            header: 'Service',
+            property: 'service',
+            width: '50%'
+        }, {
+            header: 'Earliest Date',
+            property: 'earliestDate',
+            width: '25%'
+        }],
+        data: data
+    };
+    return commonTable(tableData);
+};
+
 var freeTextHandler = function(defaultTitle) {
     return function(data) {
         var tableContent = {

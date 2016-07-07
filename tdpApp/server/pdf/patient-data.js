@@ -178,6 +178,10 @@ getters.Visits = function(session, userSession, patientId, details, callback) {
     }, callback);
 };
 
+getters['Pending Consults'] = function(session, userSession, patientId, details, callback) {
+    session.getConsults(userSession, patientId, {}, callback);
+};
+
 getters['Vital Signs'] = function(session, userSession, patientId, details, callback) {
     var options = {
         occurances: '3',
@@ -198,7 +202,7 @@ getters['Vital Signs'] = function(session, userSession, patientId, details, call
     }
     options.occurances = parseInt(options.occurances, 10);
     options.backdays = parseInt(options.backdays,10);
-    
+
     session.getVitalSigns(userSession, patientId, options, function(err, vitals) {
         var vitalSets = vitals.reduce(function(r, vital) {
             var dateTime = vital.dateTime;
