@@ -172,6 +172,16 @@ var operations = {
             return result;
         }
     },
+    getConsults: {
+        GET: function(ewd, session) {
+            var params = {
+                patientId: ewd.query.patientId
+            };
+            var ok = vista.restoreSymbolTable(ewd, session);
+            var result = ordersLib.getConsults(params, session, ewd);
+            return result;
+        }
+    },
     getOrderTypes: {
         GET: function(ewd, session) {
             var params = {};

@@ -489,6 +489,26 @@ var session = {
             }
         });
     },
+    getConsults: function (userSession, patientId, options, callback) {
+        var self = this;
+        this.get(userSession, '/getConsults', {
+            patientId: patientId
+        }, function (err, consults) {
+            if (err) {
+                callback(err);
+            } else {
+                consults = consults || [];
+                var result = consults.map(function(c) {
+                    return {
+                        service: (c.service || '').split(' CONSULT')[0],
+                        requestDate: c.requestDate && translator.translateVistADateTime(c.requestDate),
+                        earliestDate: c.earliestDate && translator.translateVistADate(c.earliestDate)
+                    };
+                });
+                callback(null, result);
+            }
+        });
+    },
     logout: function (userSession, callback) {
         callback(null);
     },

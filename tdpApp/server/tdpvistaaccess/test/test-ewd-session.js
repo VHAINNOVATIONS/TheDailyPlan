@@ -45,7 +45,7 @@ describe('ewd session test', function () {
         testSession.login({
             accessCode: 'CPRS1234',
             verifyCode: 'CPRS4321$',
-            location: 'Madison',
+            location: 'Biloxi',
             userKeys: [{
               client: 'admin',
               vista: 'XUPROG'
@@ -328,7 +328,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get posting types', function (done) {
+    xit('get posting types', function (done) {
         testSession.getPostingTypes(userSession, function (err, body) {
             if (err) {
                 done(err);
@@ -379,7 +379,7 @@ describe('ewd session test', function () {
     });
 
     xit('get pending procedures', function (done) {
-        var pid = 100846; //100685;
+        var pid = 756; //100846; //100685;
         testSession.getAllOrders(userSession, pid, {}, function (err, body) {
             if (err) {
                 done(err);
@@ -392,6 +392,25 @@ describe('ewd session test', function () {
                 console.log("=== All Orders =============");
                 console.log(JSON.stringify(body, undefined, 4));
                 console.log("============================");
+                done();
+            }
+        });
+    });
+
+    it('get consults', function (done) {
+        var pid = 756; //100846; //100685;
+        testSession.getConsults(userSession, pid, {}, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body).to.exist();
+                //expect(body.length).to.be.above(0);
+                //console.log("=== Order Types ============");
+                //console.log(testSession.orderTypes);
+                //console.log('============================');
+                console.log("===      All Consults      ===");
+                console.log(JSON.stringify(body, undefined, 4));
+                console.log("==============================");
                 done();
             }
         });
