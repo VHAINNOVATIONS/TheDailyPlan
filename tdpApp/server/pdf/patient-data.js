@@ -86,7 +86,7 @@ getters.Labs = function(session, userSession, patientId, details, callback) {
                 r.occurances = detail.value;
             } else if(detail.name === 'Back Days'){
                 r.backdays = detail.value;
-            }else if(detail.name === 'Name as PDF Header'){
+            }else if(detail.name === 'Test Names as PDF Table Header'){
                 r.isvertical = detail.value;
             }
             return r;

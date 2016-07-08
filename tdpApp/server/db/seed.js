@@ -485,7 +485,7 @@ module.exports = function(db) {
                     db.panel_setting.create({
                         panel_type_id: pt.id,
                         setting_type: 7,
-                        setting_name: 'Name as PDF Header',
+                        setting_name: 'Test Names as PDF Table Header',
                         setting_value: true
                     }).then(function(ps) {
                         return db.panel_detail.create({
