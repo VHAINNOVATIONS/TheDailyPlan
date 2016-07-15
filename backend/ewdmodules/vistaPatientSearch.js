@@ -16,12 +16,12 @@ var toArrayWithNameId = function(input) {
     return result;
 };
 
-exports.getClinics = function(session, ewd) {
+var auxGetClinics = function(session, ewd, from) {
     var params = {};
-    params.rpcName = 'ORWU1 NEWLOC';
+    params.rpcName = 'ORWU CLINLOC';
     params.rpcArgs = [{
         type: 'LITERAL',
-        value: ''
+        value: from
     }, {
         type: 'LITERAL',
         value: '1',
@@ -29,6 +29,26 @@ exports.getClinics = function(session, ewd) {
     var response = vistaLib.runRpc(params, session, ewd);
     var result = toArrayWithNameId(response);
     return result;
+};
+
+exports.getClinics = function(session, ewd) {
+    var from = '';
+    var safetyIndex = 500;
+    var index = 0;
+    var overallResult = [];
+    while (index < safetyIndex) {
+        var result = auxGetClinics(session, ewd, from);
+        var n = result.length;
+        if (! (result && result.length)) {
+            return overallResult;
+        }
+        Array.prototype.push.apply(overallResult, result);
+        from = (result[n-1] && result[n-1].name) || null;
+        if (from === null) {
+            return overallResult;
+        }
+    }
+    return overallResult;
 };
 
 exports.getWards = function(session, ewd) {
