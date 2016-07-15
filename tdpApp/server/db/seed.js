@@ -18,9 +18,10 @@ module.exports = function(db) {
         'Providers': 14,
         'Health Factors': 15,
         'Postings': 16,
-        'Free Text 1': 17,
-        'Free Text 2': 18,
-        'Free Text 3': 19
+        'Pending Consults': 17,
+        'Free Text 1': 18,
+        'Free Text 2': 19,
+        'Free Text 3': 20
     }
 
     var allergies = function(facilityId, templateId) {
@@ -345,7 +346,7 @@ module.exports = function(db) {
             scope_variable: 'patient',
             minSizeX: 2,
             minSizeY: 2,
-            mandatory: true,
+            mandatory: false,
             enable_options: false
         }).then(function(pt) {
             // Then Create the Panel Second
@@ -588,7 +589,7 @@ module.exports = function(db) {
                     }),
                     db.panel_setting.create({
                         panel_type_id: pt.id,
-                        setting_type: 5,
+                        setting_type: 8,
                         setting_name: 'Include Factors'
                     }).then(function() {
                         console.log('health factor settings are created...')
@@ -625,7 +626,7 @@ module.exports = function(db) {
                     }),
                     db.panel_setting.create({
                         panel_type_id: pt.id,
-                        setting_type: 5,
+                        setting_type: 8,
                         setting_name: 'Include Types',
                         setting_value: 'FALL RISK^CLINICAL WARNING^ADVANCE DIRECTIVE'
                     }).then(function(ps) {
@@ -650,6 +651,38 @@ module.exports = function(db) {
                         console.log('postings settings are created...')
                     })
                 ]);
+            });
+        });
+    };
+
+    var consults = function(facilityId, templateId) {
+        return db.panel_type.create({
+            facility_id: facilityId,
+            title: 'Pending Consults',
+            directive: 'dt-simple-grid',
+            service: 'Consults',
+            scope_variable: 'patient',
+            minSizeX: 2,
+            minSizeY: 2,
+            mandatory: false,
+            enable_options: false
+        }).then(function(pt) {
+            // Then Create the Panel Second
+            return db.panel.create({
+                name: 'Pending Consults Default',
+                panel_type_id: pt.id,
+                sizeX: 3,
+                sizeY: 2
+            }).then(function(p) {
+                // Then Create the Template_Layout Second
+                console.log('templateId:', templateId);
+                return db.template_layout.create({
+                    template_id: templateId,
+                    panel_id: p.id,
+                    panel_order: layoutOrder[pt.title]
+                }).then(function(tl) {
+                    console.log('<<<<<<<Template Layout Records Created.>>>>>>>')
+                });
             });
         });
     };
@@ -712,7 +745,8 @@ module.exports = function(db) {
                 contacts(facility.id, templateId),
                 providers(facility.id, templateId),
                 healthFactors(facility.id, templateId),
-                postings(facility.id, templateId)
+                postings(facility.id, templateId),
+                consults(facility.id, templateId)
             ].concat(['1', '2', '3'].map(function(index) {
                 return freeText(facility, templateId, index);
             })))

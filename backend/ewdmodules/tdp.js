@@ -126,6 +126,13 @@ var operations = {
             return result;
         }
     },
+    getPostingTypes: {
+        GET: function(ewd, session) {
+            var ok = vista.restoreSymbolTable(ewd, session);
+            var result = postingsLib.getPostingTypes(session, ewd);
+            return result;
+        }
+    },
     getImmunizations: {
         GET: function(ewd, session) {
             var params = {
@@ -162,6 +169,16 @@ var operations = {
             };
             var ok = vista.restoreSymbolTable(ewd, session);
             var result = ordersLib.getAllOrders(params, session, ewd);
+            return result;
+        }
+    },
+    getConsults: {
+        GET: function(ewd, session) {
+            var params = {
+                patientId: ewd.query.patientId
+            };
+            var ok = vista.restoreSymbolTable(ewd, session);
+            var result = ordersLib.getConsults(params, session, ewd);
             return result;
         }
     },
@@ -219,6 +236,13 @@ var operations = {
             };
             var ok = vista.restoreSymbolTable(ewd, session);
             var result = healthFactorsLib.getPatientHealthFactors(params, session, ewd);
+            return result;
+        }
+    },
+    getSystemHealthFactors: {
+        GET: function(ewd, session) {
+            var ok = vista.restoreSymbolTable(ewd, session);
+            var result = healthFactorsLib.getSystemHealthFactors(session, ewd);
             return result;
         }
     },

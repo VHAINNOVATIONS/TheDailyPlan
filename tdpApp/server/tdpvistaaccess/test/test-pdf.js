@@ -11,7 +11,7 @@ var pdf = require('../../pdf');
 chai.use(dirtyChai);
 var expect = chai.expect;
 
-describe('ewd session test', function () {
+xdescribe('ewd session test', function () {
     var testSession;
     it('new session', function (done) {
         adapter.newSession(function (err, session) {

@@ -45,7 +45,7 @@ describe('ewd session test', function () {
         testSession.login({
             accessCode: 'CPRS1234',
             verifyCode: 'CPRS4321$',
-            location: 'Madison',
+            location: 'Biloxi',
             userKeys: [{
               client: 'admin',
               vista: 'XUPROG'
@@ -189,7 +189,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get patient demographics/flags', function (done) {
+    xit('get patient demographics/flags', function (done) {
         var pid = 100845; //100846; //756; //724; //631; //100845; //100748; //100846;
         testSession.getDemographics(userSession, pid, {}, function (err, body) {
             if (err) {
@@ -328,6 +328,21 @@ describe('ewd session test', function () {
         });
     });
 
+    xit('get posting types', function (done) {
+        testSession.getPostingTypes(userSession, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body).to.exist();
+                //expect(body.length).to.be.above(0);
+                console.log("====== POSTINGS ============");
+                console.log(JSON.stringify(body, undefined, 4));
+                console.log("============================");
+                done();
+            }
+        });
+    });
+
     xit('get immunizations', function (done) {
         var pid = 711;
         testSession.getImmunizations(userSession, pid, {}, function (err, body) {
@@ -344,7 +359,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get procedures', function (done) {
+    xit('get procedures', function (done) {
         var pid = 100846; //100685;
         testSession.getOrders(userSession, pid, {}, function (err, body) {
             if (err) {
@@ -364,7 +379,7 @@ describe('ewd session test', function () {
     });
 
     xit('get pending procedures', function (done) {
-        var pid = 100846; //100685;
+        var pid = 756; //100846; //100685;
         testSession.getAllOrders(userSession, pid, {}, function (err, body) {
             if (err) {
                 done(err);
@@ -377,6 +392,25 @@ describe('ewd session test', function () {
                 console.log("=== All Orders =============");
                 console.log(JSON.stringify(body, undefined, 4));
                 console.log("============================");
+                done();
+            }
+        });
+    });
+
+    it('get consults', function (done) {
+        var pid = 756; //100846; //100685;
+        testSession.getConsults(userSession, pid, {}, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body).to.exist();
+                //expect(body.length).to.be.above(0);
+                //console.log("=== Order Types ============");
+                //console.log(testSession.orderTypes);
+                //console.log('============================');
+                console.log("===      All Consults      ===");
+                console.log(JSON.stringify(body, undefined, 4));
+                console.log("==============================");
                 done();
             }
         });
@@ -446,6 +480,20 @@ describe('ewd session test', function () {
             } else {
                 expect(result).to.exist();
                 console.log("=== Health Factors =============");
+                console.log(JSON.stringify(result, undefined, 4));
+                console.log("================================");
+                done();
+            }
+        });
+    });
+
+    xit('get system health factors', function (done) {
+        testSession.getSystemHealthFactors(userSession, function (err, result) {
+            if (err) {
+                done(err);
+            } else {
+                expect(result).to.exist();
+                console.log("=== System Health Factors =============");
                 console.log(JSON.stringify(result, undefined, 4));
                 console.log("================================");
                 done();

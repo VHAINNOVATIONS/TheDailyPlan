@@ -10,3 +10,29 @@ exports.getPatientHealthFactors = function(params, session, ewd) {
     gloRef._delete();
     return results;
 };
+
+var translateArray = function(response) {
+    var value = response && response.value;
+    if (! value) {
+        return [];
+    }
+    var count = Object.keys(value).length;
+    var result = [];
+    for (var i = 1; i <= count; ++i) {
+        var p = value[i.toString()];
+        if (p) {
+	        var pieces = p.split('^');
+	        var hf = pieces[1];
+    	    result.push(hf);
+    	}
+    }
+    return result;
+};
+
+exports.getSystemHealthFactors = function(session, ewd) {
+    var params = {};
+    params.rpcName = 'ORWPCE GET HEALTH FACTORS TY';
+    params.rpcArgs = [];
+    var response = vistaLib.runRpc(params, session, ewd);
+    return translateArray(response);
+};

@@ -11,6 +11,12 @@ var fillPosting = function(ien, obj, session, ewd) {
     return results;
 };
 
+exports.getPostingTypes = function(session,ewd) {
+    var resultStr = ewd.mumps.function('PSTNTYPE^ZZTDP');
+    var result = resultStr.split('^');
+    return result;
+};
+
 exports.getPostings = function(params, session, ewd) {
     params.rpcName = 'ORQQPP LIST';
     params.rpcArgs = [{

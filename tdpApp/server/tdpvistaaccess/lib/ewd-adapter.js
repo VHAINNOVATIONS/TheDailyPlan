@@ -386,6 +386,16 @@ var session = {
             }
         });
     },
+    getPostingTypes: function(userSession, callback) {
+        this.get(userSession, '/getPostingTypes', null, function (err, result) {
+            if (err) {
+                callback(err);
+            } else {
+                result.sort();
+                callback(null, result);
+            }
+        });
+    },
     getImmunizations: function (userSession, patientId, options, callback) {
         this.get(userSession, '/getImmunizations', {
             patientId: patientId,
@@ -479,6 +489,26 @@ var session = {
             }
         });
     },
+    getConsults: function (userSession, patientId, options, callback) {
+        var self = this;
+        this.get(userSession, '/getConsults', {
+            patientId: patientId
+        }, function (err, consults) {
+            if (err) {
+                callback(err);
+            } else {
+                consults = consults || [];
+                var result = consults.map(function(c) {
+                    return {
+                        service: (c.service || '').split(' CONSULT')[0],
+                        requestDate: c.requestDate && translator.translateVistADateTime(c.requestDate),
+                        earliestDate: c.earliestDate && translator.translateVistADate(c.earliestDate)
+                    };
+                });
+                callback(null, result);
+            }
+        });
+    },
     logout: function (userSession, callback) {
         callback(null);
     },
@@ -568,6 +598,15 @@ var session = {
                     r.date = translator.translateVistADate(r.date);
                   }
                 });
+                callback(null, result);
+            }
+        });
+    },
+    getSystemHealthFactors: function(userSession, callback) {
+        this.get(userSession, '/getSystemHealthFactors', null, function (err, result) {
+            if (err) {
+                callback(err);
+            } else {
                 callback(null, result);
             }
         });
