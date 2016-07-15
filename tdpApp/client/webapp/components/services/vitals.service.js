@@ -67,36 +67,6 @@ angular.module('tdpApp')
                 };
                 return $http(httpParams).then(function(response) {
                     var data = response.data;
-                    // var i = 0;
-                    // for (i = 0; i < data.length; i++) {
-                    //     var subData = [];
-                    //     if(!angular.isUndefined(data[i].weight))
-                    //     {
-                    //         data[i].weight.value = "Weight:"+ data[i].weight.value;
-                    //         subData.push(data[i].weight);
-                    //     }
-                    //     if(!angular.isUndefined(data[i].pain))
-                    //     {
-                    //         data[i].pain.value = "Pain:"+ data[i].pain.value;
-                    //         subData.push(data[i].pain);
-                    //     }
-                    //     if(!angular.isUndefined(data[i].respiration))
-                    //     {
-                    //         data[i].respiration.value = "Respiration:"+ data[i].respiration.value;
-                    //         subData.push(data[i].respiration);
-                    //     }
-                    //     data[i].subGridOptions = {
-                    //         columnDefs: [{
-                    //             name: 'Name:Value',
-                    //             field: 'value'
-                    //         }, {
-                    //             name: 'Unit',
-                    //             field: 'unit'
-                    //         }],
-                    //         data: subData
-                    //     };
-                    //     data[i].getTemp = fn;
-                    // }
                     return data;
                });
             }
