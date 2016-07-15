@@ -27,6 +27,9 @@ var auxGetClinics = function(session, ewd, from) {
         value: '1',
     }];
     var response = vistaLib.runRpc(params, session, ewd);
+    if (! (response && response.value)) {
+        return [];
+    }
     var result = toArrayWithNameId(response);
     return result;
 };
