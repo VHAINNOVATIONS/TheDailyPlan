@@ -2,6 +2,24 @@
 
 var vistaLib = require('VistALib');
 
+var translateArray = function(response) {
+    var value = response && response.value;
+    if (! value) {
+        return [];
+    }
+    var count = Object.keys(value).length;
+    var result = [];
+    for (var i = 1; i <= count; ++i) {
+        var p = value[i.toString()];
+        if (p) {
+            var pieces = p.split('^');
+            var hf = pieces[1];
+            result.push(hf);
+        }
+    }
+    return result;
+};
+
 module.exports = {
     getChemHemReports: function(params, session, ewd) {
         // swap patient ID for lab data file ID
@@ -186,5 +204,14 @@ module.exports = {
 
     getLrdfnFromDfn: function(dfn, session, ewd) {
         return vistaLib.getVariableValue('$G(^DPT(' + dfn + ',"LR"))', session, ewd);
+    },
+
+
+    getTestNames: function(session, ewd) {
+        var params = {};
+        params.rpcName = 'ORWLRR ALLTESTS';
+        params.rpcArgs = [];
+        var response = vistaLib.runRpc(params, session, ewd);
+        return translateArray(response);
     }
 };

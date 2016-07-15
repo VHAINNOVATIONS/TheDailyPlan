@@ -59,6 +59,13 @@ var operations = {
             return result;
         }
     },
+    getTestNames: {
+        GET: function(ewd, session) {
+            var ok = vista.restoreSymbolTable(ewd, session);
+            var result = chemHemLib.getTestNames(session, ewd);
+            return result;
+        }
+    },
     getImagingTypesMap: {
         GET: function(ewd, session) {
             var ok = vista.restoreSymbolTable(ewd, session);

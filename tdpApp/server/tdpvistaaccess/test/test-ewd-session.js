@@ -45,7 +45,7 @@ describe('ewd session test', function () {
         testSession.login({
             accessCode: 'CPRS1234',
             verifyCode: 'CPRS4321$',
-            location: 'Biloxi',
+            location: 'Madison',
             userKeys: [{
               client: 'admin',
               vista: 'XUPROG'
@@ -130,13 +130,14 @@ describe('ewd session test', function () {
     });
 
     var clinics;
-    xit('getClinics', function (done) {
+    it('getClinics', function (done) {
         testSession.getClinics(userSession, {}, function (err, body) {
             if (err) {
                 done(err);
             } else {
                 expect(body).to.exist();
                 clinics = body;
+                console.log(clinics.length);
                 console.log(clinics);
                 done();
             }
@@ -343,6 +344,21 @@ describe('ewd session test', function () {
         });
     });
 
+    xit('get test names', function (done) {
+        testSession.getTestNames(userSession, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body).to.exist();
+                //expect(body.length).to.be.above(0);
+                console.log("====== Test Names ============");
+                console.log(JSON.stringify(body, undefined, 4));
+                console.log("============================");
+                done();
+            }
+        });
+    });
+
     xit('get immunizations', function (done) {
         var pid = 711;
         testSession.getImmunizations(userSession, pid, {}, function (err, body) {
@@ -397,7 +413,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get consults', function (done) {
+    xit('get consults', function (done) {
         var pid = 756; //100846; //100685;
         testSession.getConsults(userSession, pid, {}, function (err, body) {
             if (err) {
