@@ -396,6 +396,24 @@ var session = {
             }
         });
     },
+    getTestNames: function(userSession, callback) {
+        this.get(userSession, '/getTestNames', null, function (err, result) {
+            if (err) {
+                callback(err);
+            } else {
+                var dict = {};
+                var rresult = result.reduce(function(r, name) {
+                    name = name.trim();
+                    if (name && ! dict[name]) {
+                        dict[name] = true;
+                        r.push(name);
+                    }
+                    return r;
+                }, []);
+                callback(null, rresult);
+            }
+        });
+    },
     getImmunizations: function (userSession, patientId, options, callback) {
         this.get(userSession, '/getImmunizations', {
             patientId: patientId,
