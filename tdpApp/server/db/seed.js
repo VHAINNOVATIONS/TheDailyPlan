@@ -476,7 +476,7 @@ module.exports = function(db) {
                     }).then(function() {
                         return db.panel_setting.create({
                             panel_type_id: pt.id,
-                            setting_type: 5,
+                            setting_type: 8,
                             setting_name: 'Test Names'
                         });
                     }).then(function() {

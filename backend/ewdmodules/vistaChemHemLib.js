@@ -207,11 +207,37 @@ module.exports = {
     },
 
 
-    getTestNames: function(session, ewd) {
+    auxGetTestNames: function(session, ewd, from) {
         var params = {};
         params.rpcName = 'ORWLRR ALLTESTS';
-        params.rpcArgs = [];
+        params.rpcArgs = [{
+            type: 'LITERAL',
+            value: from
+        }, {
+            type: 'LITERAL',
+            value: '1',
+        }];
         var response = vistaLib.runRpc(params, session, ewd);
         return translateArray(response);
+    },
+
+    getTestNames: function(session, ewd) {
+        var from = '';
+        var safetyIndex = 500;
+        var index = 0;
+        var overallResult = [];
+        while (index < safetyIndex) {
+            var result = this.auxGetTestNames(session, ewd, from);
+            var n = result.length;
+            if (! (result && result.length)) {
+                return overallResult;
+            }
+            Array.prototype.push.apply(overallResult, result);
+            from = result[n-1] || null;
+            if (from === null) {
+                return overallResult;
+            }
+        }
+        return overallResult;
     }
 };

@@ -344,7 +344,7 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get test names', function (done) {
+    it('get test names', function (done) {
         testSession.getTestNames(userSession, function (err, body) {
             if (err) {
                 done(err);

@@ -401,8 +401,16 @@ var session = {
             if (err) {
                 callback(err);
             } else {
-                result.sort();
-                callback(null, result);
+                var dict = {};
+                var rresult = result.reduce(function(r, name) {
+                    name = name.trim();
+                    if (name && ! dict[name]) {
+                        dict[name] = true;
+                        r.push(name);
+                    }
+                    return r;
+                }, []);
+                callback(null, rresult);
             }
         });
     },

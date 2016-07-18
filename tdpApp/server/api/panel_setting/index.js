@@ -46,6 +46,13 @@ router.get('/byPanelType/:id', auth.isAuthenticated(), function(req, res) {
                         return gps(req.user).then(function(possibleValues) {
                             setting.possibleValues = possibleValues;
                         });
+                    } else if (title === 'Labs') {
+                        var gls = models.Sequelize.Promise.promisify(sess.getTestNames, {
+                            context: sess
+                        });
+                        return gls(req.user).then(function(possibleValues) {
+                            setting.possibleValues = possibleValues;
+                        });
                     }
                 }
             });
