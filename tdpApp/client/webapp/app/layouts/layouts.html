@@ -76,6 +76,11 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-sm-4 col-sm-offset-7 col-xs-12 text-center">
+                <div>
+                    <label class="bg-danger" ng-show="ctrl.submitButton == 'Delete'" >*NOTE: Deleting a template will permanently remove template from the system and cannot be recovered.</label>
+                </div>
+            </div>
             <div class="col-sm-4 col-sm-offset-8 col-xs-12 text-center">
                 <div>
                     <button type="submit" ng-disabled="form.$invalid && !ctrl.displayOnly" class="btn btn-primary"><i class="glyphicon glyphicon-ok"></i>{{ctrl.submitButton}}</button>
