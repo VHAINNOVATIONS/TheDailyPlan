@@ -59,10 +59,14 @@
                                     <label class="chkbox-label"><input type="checkbox" ng-model="selectionValue.selected"> {{selectionValue.title}}</label>
                                 </div>
                             </div>
-                            <div class="btn-toolbar pull-right" style="padding-top: 2px;">
+                            <div class="btn-toolbar pull-right" style="padding-top: 2px; padding-bottom: 2px;">
                                 <button type="button" class="btn btn-sm btn-secondary" ng-click="clearAll()">Clear All</button>
                                 <button type="button" class="btn btn-sm btn-secondary" ng-click="selectAll()">Select All</button>
                             </div>
+                            <div style="padding-top: 5px;" ng-if="panel.title === 'Labs'">
+                                <label class="col-sm-12 bg-danger">*NOTE: If more than 5 test Names are selected, the display will be diverted to the vertical format.</label>
+                            </div>
+
                         </div>
                     </div>
                 </div>
