@@ -45,7 +45,7 @@ describe('ewd session test', function () {
         testSession.login({
             accessCode: 'CPRS1234',
             verifyCode: 'CPRS4321$',
-            location: 'Madison',
+            location: 'Biloxi',
             userKeys: [{
               client: 'admin',
               vista: 'XUPROG'
@@ -130,7 +130,7 @@ describe('ewd session test', function () {
     });
 
     var clinics;
-    it('getClinics', function (done) {
+    xit('getClinics', function (done) {
         testSession.getClinics(userSession, {}, function (err, body) {
             if (err) {
                 done(err);
@@ -344,7 +344,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get test names', function (done) {
+    xit('get test names', function (done) {
         testSession.getTestNames(userSession, function (err, body) {
             if (err) {
                 done(err);
@@ -447,13 +447,14 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get chem hem reports', function (done) {
+    it('get chem hem reports', function (done) {
         var pid = 756; //100022;
         testSession.getChemHemReports(userSession, pid, {
             occurances: 2,
-            testNames: [
-                'CHOLESTEROL', 'HDL', 'TRIGLYCERIDE', 'MAGNESIUM', 'POTASSIUM'
-            ]
+            backDays: 12,
+            //testNames: [
+              //  'CHOLESTEROL', 'HDL', 'TRIGLYCERIDE', 'MAGNESIUM', 'POTASSIUM'
+            //]
         }, function (err, result) {
             if (err) {
                 done(err);
