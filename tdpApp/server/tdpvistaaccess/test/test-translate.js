@@ -10,7 +10,7 @@ var translator = require('../lib/translator');
 chai.use(dirtyChai);
 var expect = chai.expect;
 
-describe('vista raw translations', function () {
+xdescribe('vista raw translations', function () {
     it('vitals', function () {
         var sample = require('./fixtures/rawVitalSignSample.json');
         var result = translator.translateVitalSigns(sample);

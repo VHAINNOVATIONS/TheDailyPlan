@@ -33,9 +33,12 @@
                         <label for="listareainput" class="col-sm-4 control-label">{{setting.settingName}}</label>
                         <div class="col-sm-7">
                             <textarea ng-model="setting.listValues" ng-list="&#10;" ng-trim="false" rows="4" class="form-control" id="listareainput" ng-disabled="displayOnly"></textarea>
+                            <div style="padding-top:5px;" ng-if="panel.title === 'Labs'">
+                                <label class="col-sm-12 bg-danger">*NOTE: If more than 5 test Names are selected, the display will be diverted to the vertical format.</label>
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group row" ng-if="setting.settingType === 6">
+                    <div class="form-group" ng-if="setting.settingType === 6">
                         <label for="dropdowninput" class="col-sm-4 control-label">{{setting.settingName}}</label>
                         <div class="col-sm-7">
                             <select id="dropdowninput" ng-model="setting.textValue" ng-disabled="ctrl.displayOnly" class="form-control" ng-options="p as p for p in setting.possibleValues">
@@ -56,10 +59,14 @@
                                     <label class="chkbox-label"><input type="checkbox" ng-model="selectionValue.selected"> {{selectionValue.title}}</label>
                                 </div>
                             </div>
-                            <div class="btn-toolbar pull-right" style="padding-top: 2px;">
+                            <div class="btn-toolbar pull-right" style="padding-top: 2px; padding-bottom: 2px;">
                                 <button type="button" class="btn btn-sm btn-secondary" ng-click="clearAll()">Clear All</button>
                                 <button type="button" class="btn btn-sm btn-secondary" ng-click="selectAll()">Select All</button>
                             </div>
+                            <div style="padding-top: 5px;" ng-if="panel.title === 'Labs'">
+                                <label class="col-sm-12 bg-danger">*NOTE: If more than 5 test Names are selected, the display will be diverted to the vertical format.</label>
+                            </div>
+
                         </div>
                     </div>
                 </div>

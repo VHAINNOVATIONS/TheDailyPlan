@@ -77,5 +77,5 @@ exports.dateAfterBackDays = function(externalDate, backDays) {
         mlimit.subtract(backDays, 'd');
     }
     var date = moment(externalDate, "MM/DD/YYYY HH:mm");
-    return date.isAfter(mlimit, 'day');
+    return ! mlimit.isAfter(date, 'day');
 };

@@ -75,7 +75,7 @@ getters.Labs = function(session, userSession, patientId, details, callback) {
     var options = {
         testNames: [],
         occurances: '3',
-        backdays: '30',
+        backDays: '30',
         isvertical: '1'
     };
     if (details) {
@@ -85,19 +85,20 @@ getters.Labs = function(session, userSession, patientId, details, callback) {
             } else if (detail.name === 'Occurences') {
                 r.occurances = detail.value;
             } else if(detail.name === 'Back Days'){
-                r.backdays = detail.value;
-            }else if(detail.name === 'Name as PDF Header'){
+                r.backDays = detail.value;
+            }else if(detail.name === 'Test Names as PDF Table Header'){
                 r.isvertical = detail.value;
             }
             return r;
         }, {
             testNames: [],
             occurances: '3',
-            backdays: '30',
+            backDays: '30',
             isvertical: '1'
         });
     }
     options.occurances = parseInt(options.occurances, 10);
+    options.backDays = parseInt(options.backDays, 10);
     session.getChemHemReports(userSession, patientId, options, function(err, result) {
         if (err) {
             return callback(err);

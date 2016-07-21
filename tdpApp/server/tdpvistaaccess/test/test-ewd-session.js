@@ -137,6 +137,7 @@ describe('ewd session test', function () {
             } else {
                 expect(body).to.exist();
                 clinics = body;
+                console.log(clinics.length);
                 console.log(clinics);
                 done();
             }
@@ -343,6 +344,21 @@ describe('ewd session test', function () {
         });
     });
 
+    xit('get test names', function (done) {
+        testSession.getTestNames(userSession, function (err, body) {
+            if (err) {
+                done(err);
+            } else {
+                expect(body).to.exist();
+                //expect(body.length).to.be.above(0);
+                console.log("====== Test Names ============");
+                console.log(JSON.stringify(body, undefined, 4));
+                console.log("============================");
+                done();
+            }
+        });
+    });
+
     xit('get immunizations', function (done) {
         var pid = 711;
         testSession.getImmunizations(userSession, pid, {}, function (err, body) {
@@ -397,7 +413,7 @@ describe('ewd session test', function () {
         });
     });
 
-    it('get consults', function (done) {
+    xit('get consults', function (done) {
         var pid = 756; //100846; //100685;
         testSession.getConsults(userSession, pid, {}, function (err, body) {
             if (err) {
@@ -431,13 +447,14 @@ describe('ewd session test', function () {
         });
     });
 
-    xit('get chem hem reports', function (done) {
+    it('get chem hem reports', function (done) {
         var pid = 756; //100022;
         testSession.getChemHemReports(userSession, pid, {
             occurances: 2,
-            testNames: [
-                'CHOLESTEROL', 'HDL', 'TRIGLYCERIDE', 'MAGNESIUM', 'POTASSIUM'
-            ]
+            backDays: 12,
+            //testNames: [
+              //  'CHOLESTEROL', 'HDL', 'TRIGLYCERIDE', 'MAGNESIUM', 'POTASSIUM'
+            //]
         }, function (err, result) {
             if (err) {
                 done(err);

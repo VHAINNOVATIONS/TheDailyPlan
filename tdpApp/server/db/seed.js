@@ -476,7 +476,7 @@ module.exports = function(db) {
                     }).then(function() {
                         return db.panel_setting.create({
                             panel_type_id: pt.id,
-                            setting_type: 5,
+                            setting_type: 8,
                             setting_name: 'Test Names'
                         });
                     }).then(function() {
@@ -484,8 +484,22 @@ module.exports = function(db) {
                     }),
                     db.panel_setting.create({
                         panel_type_id: pt.id,
+                        setting_type: 2,
+                        setting_name: 'Back Days',
+                        setting_value: '30'
+                    }).then(function(ps) {
+                        return db.panel_detail.create({
+                            panel_id: p.id,
+                            panel_setting_id: ps.id,
+                            detail_value: '30'
+                        }).then(function(tl) {
+                            console.log('labs Back Days settings updated...')
+                        });
+                    }),
+                    db.panel_setting.create({
+                        panel_type_id: pt.id,
                         setting_type: 7,
-                        setting_name: 'Name as PDF Header',
+                        setting_name: 'Test Names as PDF Table Header',
                         setting_value: true
                     }).then(function(ps) {
                         return db.panel_detail.create({

@@ -53,7 +53,7 @@ angular.module('tdpApp')
                         backdays = pd.detail_value || '30';
                         return;
                     }
-                    if(pd.setting_name === 'Name as PDF Header'){
+                    if(pd.setting_name === 'Test Names as PDF Table Header'){
                         isvertical = pd.detail_value || '1';
                         return;
                     }

@@ -179,32 +179,35 @@ var putInChemHemReportDates = function(report) {
     });
 };
 
-var reduceLabToTests = function(fullLabResults, occurances) {
+var reduceLabToTests = function(fullLabResults, occurances, backDays) {
     var testNameOccurances = {};
     return fullLabResults.reduce(function(r, fullLabResult) {
         var collectionDate =fullLabResult.specimen.collectionDate;
         var key = collectionDate;
-        fullLabResult.labResults.forEach(function(labResult) {
-            var e = {
-                date: collectionDate,
-                value: labResult.value,
-                key: key
-            }
-            var name = labResult.labTest.name;
-            if (! testNameOccurances[name]) {
-                testNameOccurances[name] = 1;
-            } else {
-                ++testNameOccurances[name];
-            }
-            if (testNameOccurances[name] <= occurances) {
-                if (labResult.labTest) {
-                      e.name = name;
-                      e.units = labResult.labTest.units;
-                      e.refRange = labResult.labTest.refRange;
+            if(key && timeUtility.dateAfterBackDays(key, backDays)) {
+
+            fullLabResult.labResults.forEach(function(labResult) {
+                var e = {
+                    date: collectionDate,
+                    value: labResult.value,
+                    key: key
                 }
-                r.push(e);
-            }
-        });
+                var name = labResult.labTest.name;
+                if (! testNameOccurances[name]) {
+                    testNameOccurances[name] = 1;
+                } else {
+                    ++testNameOccurances[name];
+                }
+                if (testNameOccurances[name] <= occurances) {
+                    if (labResult.labTest) {
+                          e.name = name;
+                          e.units = labResult.labTest.units;
+                          e.refRange = labResult.labTest.refRange;
+                    }
+                    r.push(e);
+                }
+            });
+        }
         return r;
     }, []);
 };
@@ -396,6 +399,24 @@ var session = {
             }
         });
     },
+    getTestNames: function(userSession, callback) {
+        this.get(userSession, '/getTestNames', null, function (err, result) {
+            if (err) {
+                callback(err);
+            } else {
+                var dict = {};
+                var rresult = result.reduce(function(r, name) {
+                    name = name.trim();
+                    if (name && ! dict[name]) {
+                        dict[name] = true;
+                        r.push(name);
+                    }
+                    return r;
+                }, []);
+                callback(null, rresult);
+            }
+        });
+    },
     getImmunizations: function (userSession, patientId, options, callback) {
         this.get(userSession, '/getImmunizations', {
             patientId: patientId,
@@ -523,7 +544,11 @@ var session = {
             } else {
                 result = filterChemHemReports(result, options.testNames);
                 putInChemHemReportDates(result);
-                result = reduceLabToTests(result, options.occurances);
+                var backDays = options.backDays;
+                if (backDays === undefined || backDays === null) {
+                    backDays = 30;
+                }
+                result = reduceLabToTests(result, options.occurances, backDays);
                 result = sortLabByTestNames(result);
                 callback(null, result);
             }
