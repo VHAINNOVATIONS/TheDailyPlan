@@ -2,17 +2,8 @@
 
 angular.module('tdpApp')
     .factory('Template', function Template($location, $rootScope, $http, $q, Facility) {
-        var results = {};
-        var selectedTemplates = [];
 
         return {
-            getSelectedPatients: function() {
-                return selectedTemplates;
-            },
-            setSelectedPatients: function(value) {
-                selectedTemplates = value;
-            },
-
             /**
              * Find All Templates
              *
@@ -68,7 +59,6 @@ angular.module('tdpApp')
 
                 $http.get('/api/template/' + id).
                 success(function(data) {
-                    results = data;
                     deferred.resolve(data);
                     return cb();
                 }).
@@ -94,7 +84,6 @@ angular.module('tdpApp')
 
                 $http.get('/api/template/complete/' + id).
                 success(function(data) {
-                    results = data;
                     deferred.resolve(data);
                     return cb();
                 }).
@@ -168,7 +157,6 @@ angular.module('tdpApp')
 
                 $http.delete('/api/template/' + id).
                 success(function(data) {
-                    results = data;
                     deferred.resolve(data);
                     return cb();
                 }).
