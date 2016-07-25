@@ -23,6 +23,15 @@ angular.module('tdpApp')
                     };
                 };
             };
+            var searchTextGen = function(values) {
+                return function(text) {
+                    var index = _.sortedIndex(values, text);
+                    var parent = angular.element(document.getElementById('selvals'))[0];
+                    var element = angular.element(document.getElementById('selval' + index))[0];
+                    parent.scrollTop = element.offsetTop;
+                };
+            };
+
             $scope.loadMessage = 'Loading ' + panel.title + '...';
 
             PanelSetting.findByPanelTypeID(panel.id)
@@ -87,6 +96,7 @@ angular.module('tdpApp')
                             var model8 = ps.possibleValues.map(selectedData(dict));
                             $scope.clearAll = selectedGen(model8, false);
                             $scope.selectAll = selectedGen(model8, true);
+                            $scope.searchText = searchTextGen(ps.possibleValues);
                             ps.selectionValues = model8;
                         }
                     });
