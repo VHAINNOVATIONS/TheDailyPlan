@@ -12,7 +12,7 @@
             <div class="form-group" ng-class="{error: _form.title.$error && _form.submitted}">
                 <div ng-repeat="setting in settings">
                     <div class="form-group row" ng-if="setting.settingType === 2">
-                        <label for="numberinput" class="col-sm-4 control-label">{{setting.settingName + ' (0-120)'}}</label>
+                        <label for="numberinput" class="col-sm-4 control-label">{{setting.settingName + ' (0-120)  Note: 0 will show only today'}}</label>
                         <div class="col-sm-7">
                             <input ng-model="setting.numberValue" type="number" min="0" max="120" class="form-control" id="numberinput" ng-disabled="displayOnly">
                         </div>
