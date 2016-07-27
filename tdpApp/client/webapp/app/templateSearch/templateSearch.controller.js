@@ -123,61 +123,61 @@ angular.module('tdpApp')
     };
 
     self.searchClinic = function () {
-      self.submitted = true;
-      self.clearAlerts();
-      var id = self.search && self.search.clinic;
-      Template.findByClinic(id).then(function(data) {
-          var clinicsDictionary = self.clinics.reduce(function(r, clinic) {
-              r[clinic.id] = clinic.name;
-              return r;
-          }, {});
-          data.forEach(function(t) {
-              if (t.location_id) {
-                  var locationName = clinicsDictionary[t.location_id];
-                  if (locationName) {
-                      t.locationName = locationName;
-                  } else {
-                      t.locationName = t.location_id;
-                  }
-              } else {
-                t.locationName = null;
-              }
-          });
-          self.data = data;
-          self.noResults = !(data.length);
-          reloadData();
-      }).catch( function(err) {
-          self.errors.other = err.message;
-      });
+        self.submitted = true;
+        self.clearAlerts();
+        var id = self.search && self.search.clinic;
+        Template.findByClinic(id).then(function(data) {
+            var clinicsDictionary = self.clinics.reduce(function(r, clinic) {
+                r[clinic.id] = clinic.name;
+                return r;
+            }, {});
+            data.forEach(function(t) {
+                if (t.location_id) {
+                    var locationName = clinicsDictionary[t.location_id];
+                    if (locationName) {
+                        t.locationName = locationName;
+                    } else {
+                        t.locationName = t.location_id;
+                    }
+                } else {
+                  t.locationName = null;
+                }
+            });
+            self.data = data;
+            self.noResults = !(data.length);
+            reloadData();
+        }).catch( function(err) {
+            self.errors.other = err.message;
+        });
     };
 
     self.searchWard = function () {
-      self.submitted = true;
-      self.clearAlerts();
-      var id = self.search && self.search.ward;
-      Template.findByWard(id).then(function(data) {
-          var wardsDictionary = self.wards.reduce(function(r, ward) {
-              r[ward.id] = ward.name;
-              return r;
-          }, {});
-          data.forEach(function(t) {
-              if (t.location_id) {
-                  var locationName = wardsDictionary[t.location_id];
-                  if (locationName) {
-                      t.locationName = locationName;
-                  } else {
-                      t.locationName = t.location_id;
-                  }
-              } else {
-                t.locationName = null;
-              }
-          });
-          self.data = data;
-          self.noResults = !(data.length);
-          reloadData();
-      }).catch( function(err) {
-          self.errors.other = err.message;
-      });
+        self.submitted = true;
+        self.clearAlerts();
+        var id = self.search && self.search.ward;
+        Template.findByWard(id).then(function(data) {
+            var wardsDictionary = self.wards.reduce(function(r, ward) {
+                r[ward.id] = ward.name;
+                return r;
+            }, {});
+            data.forEach(function(t) {
+                if (t.location_id) {
+                    var locationName = wardsDictionary[t.location_id];
+                    if (locationName) {
+                        t.locationName = locationName;
+                    } else {
+                        t.locationName = t.location_id;
+                    }
+                } else {
+                  t.locationName = null;
+                }
+            });
+            self.data = data;
+            self.noResults = !(data.length);
+            reloadData();
+        }).catch( function(err) {
+            self.errors.other = err.message;
+        });
     };
 
     self.toggleAll = function (selectAll, selectedItems) {
