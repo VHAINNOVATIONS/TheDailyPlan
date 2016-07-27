@@ -54,7 +54,6 @@ angular.module('tdpApp').controller('TemplateSearchCtrl', function ($compile, $s
       self.tabInfo = Template.tabInfo();
 
       self.data = [];
-      self.items = [];
       self.templates = [];
       self.selectedTemplate = {};
       self.selectedTemplateArray = [];
@@ -202,26 +201,25 @@ angular.module('tdpApp').controller('TemplateSearchCtrl', function ($compile, $s
       };
 
       function editDeleteOrDisplay(type) {
+          var items = [];
           angular.forEach(self.selected, function(value, key) {
-              var entry = {};
-              if(value === true)
-              {
-                entry.id = key;
-                this.push(entry);
+              if(value === true) {
+                  this.push({
+                      id: key
+                  });
               }
-          }, self.items);
+          }, items);
 
-          switch(self.items.length) {
+          switch(items.length) {
               case 0:
                   self.displayErr.flag = true;
                   self.displayErr.msg = 'Please select a template to '+ type + '.';
                   break;
               case 1:
-                  //Template.setSelectedTemplates(self.items);
-                  $location.path('/layouts/' + type + '/' + self.items[0].id);
+                  $location.path('/layouts/' + type + '/' + items[0].id);
                   break;
               default:
-                  self.items = [];
+                  items = [];
                   self.displayErr.flag = true;
                   self.displayErr.msg = 'Please select only one template to '+ type + '.';
                   break;
