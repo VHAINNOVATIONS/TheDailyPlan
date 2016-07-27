@@ -54,12 +54,8 @@ angular.module('tdpApp').controller('TemplateSearchCtrl', function ($compile, $s
       self.tabInfo = Template.tabInfo();
 
       self.data = [];
-      self.templates = [];
-      self.selectedTemplate = {};
-      self.selectedTemplateArray = [];
       self.wards = [];
       self.clinics = [];
-      self.wardsSelected = [];
       self.selected = {};
       self.selectAll = false;
       self.noResults = false;
