@@ -4,7 +4,7 @@
   </div>
   <div class="row">
     <uib-tabset>
-      <uib-tab heading="All" select="ctrl.clearAlerts()">
+      <uib-tab heading="All" select="ctrl.clearAlerts()" active="ctrl.tabInfo[0].active">
         <div class="container">
             <div class="row row-centered">
                 <div class="col-sm-4 col-centered">
@@ -19,7 +19,7 @@
             </div>
         </div>
       </uib-tab>
-      <uib-tab heading="Ward" select="ctrl.clearAlerts()">
+      <uib-tab heading="Ward" select="ctrl.clearAlerts()" active="ctrl.tabInfo[1].active">
         <div class="container">
             <div class="row row-centered">
                 <div class="col-sm-4 col-centered">
@@ -37,7 +37,7 @@
             </div>
         </div>
       </uib-tab>
-      <uib-tab heading="Clinic" select="ctrl.clearAlerts()">
+      <uib-tab heading="Clinic" select="ctrl.clearAlerts()" active="ctrl.tabInfo[2].active">
         <div class="container">
             <div class="row row-centered">
                 <div class="col-sm-4 col-centered">

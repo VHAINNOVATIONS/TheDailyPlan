@@ -3,6 +3,22 @@
 angular.module('tdpApp')
     .factory('Template', function Template($location, $rootScope, $http, $q, Facility) {
 
+        var tabInfo = null;
+
+        var resetData = function() {
+            tabInfo = [{
+                active: true
+            }, {
+                active: false
+            }, {
+                active: false
+            }];
+        };
+
+        resetData();
+
+        $rootScope.$on('login-success', resetData);
+
         return {
             /**
              * Find All Templates
@@ -167,7 +183,10 @@ angular.module('tdpApp')
                 }.bind(this));
 
                 return deferred.promise;
-            }
+            },
 
+            tabInfo: function () {
+                return tabInfo;
+            }
         };
     });

@@ -24,6 +24,7 @@ angular.module('tdpApp')
                     currentUser.displayName = serverUser.displayName;
                     currentUser.keys = serverUser.keys;
                     currentUser.duz = serverUser.DUZ;
+                    $rootScope.$broadcast('login-success');
                 });
             },
 

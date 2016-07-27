@@ -51,6 +51,8 @@ angular.module('tdpApp').controller('TemplateSearchCtrl', function ($compile, $s
           DTColumnBuilder.newColumn('active').withTitle('Active')
       ];
 
+      self.tabInfo = Template.tabInfo();
+
       self.data = [];
       self.items = [];
       self.templates = [];
