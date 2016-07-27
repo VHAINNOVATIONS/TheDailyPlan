@@ -51,11 +51,26 @@ angular.module('tdpApp').controller('TemplateSearchCtrl', function ($compile, $s
           DTColumnBuilder.newColumn('active').withTitle('Active')
       ];
 
+      // Initially Populate the Wards
+      self.wards = [];
+      Location.getWards().then( function(data) {
+          self.wards = data;
+      }).catch( function(err) {
+          self.errors.other = err.message;
+      });
+
+      // Initially Populate the Clinics
+      self.clinics = [];
+      Location.getClinics().then( function(data) {
+          self.clinics = data;
+      }).catch( function(err) {
+          self.errors.other = err.message;
+      });
+
       self.tabInfo = Template.tabInfo();
 
       self.data = [];
-      self.wards = [];
-      self.clinics = [];
+
       self.selected = {};
       self.selectAll = false;
       self.noResults = false;
@@ -237,18 +252,4 @@ angular.module('tdpApp').controller('TemplateSearchCtrl', function ($compile, $s
       self.delete = function(){
           editDeleteOrDisplay('delete');
       };
-
-      // Initially Populate the Wards
-      Location.getWards().then( function(data) {
-          self.wards = data;
-      }).catch( function(err) {
-          self.errors.other = err.message;
-      });
-
-      // Initially Populate the Clinics
-      Location.getClinics().then( function(data) {
-          self.clinics = data;
-      }).catch( function(err) {
-          self.errors.other = err.message;
-      });
 });
