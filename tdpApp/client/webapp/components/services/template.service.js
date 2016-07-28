@@ -245,22 +245,14 @@ angular.module('tdpApp')
              * @param  {String}   id    - query id
              * @return {Promise}
              */
-            delete: function(id, callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.delete('/api/template/' + id).
-                success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                }).
-                error(function(err) {
-
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            delete: function(id) {
+                return $http.delete('/api/template/' + id).then(function() {
+                    if (templates) {
+                        _.remove(templates, function(template) {
+                            return template.id === id;
+                        });
+                    }
+                });
             },
 
             tabInfo: function () {
