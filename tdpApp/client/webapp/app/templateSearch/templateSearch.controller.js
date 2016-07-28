@@ -89,7 +89,6 @@ angular.module('tdpApp').controller('TemplateSearchCtrl', function ($compile, $s
       };
 
       self.searchAll = function () {
-          self.submitted = true;
           self.clearAlerts();
           var nameStartsWith = self.tabInfo[0].search;
           Template.findAll().then(function(data) {
@@ -133,18 +132,17 @@ angular.module('tdpApp').controller('TemplateSearchCtrl', function ($compile, $s
           });
       };
 
-      self.searchClinic = function () {
-          self.submitted = true;
+      self.searchWard = function () {
           self.clearAlerts();
-          var id = self.tabInfo[2].search;
-          Template.findByClinic(id).then(function(data) {
-              var clinicsDictionary = self.clinics.reduce(function(r, clinic) {
-                  r[clinic.id] = clinic.name;
+          var id = self.tabInfo[1].search;
+          Template.findByWard(id).then(function(data) {
+              var wardsDictionary = self.wards.reduce(function(r, ward) {
+                  r[ward.id] = ward.name;
                   return r;
               }, {});
               data.forEach(function(t) {
                   if (t.location_id) {
-                      var locationName = clinicsDictionary[t.location_id];
+                      var locationName = wardsDictionary[t.location_id];
                       if (locationName) {
                           t.locationName = locationName;
                       } else {
@@ -162,18 +160,17 @@ angular.module('tdpApp').controller('TemplateSearchCtrl', function ($compile, $s
           });
       };
 
-      self.searchWard = function () {
-          self.submitted = true;
+      self.searchClinic = function () {
           self.clearAlerts();
-          var id = self.tabInfo[1].search;
-          Template.findByWard(id).then(function(data) {
-              var wardsDictionary = self.wards.reduce(function(r, ward) {
-                  r[ward.id] = ward.name;
+          var id = self.tabInfo[2].search;
+          Template.findByClinic(id).then(function(data) {
+              var clinicsDictionary = self.clinics.reduce(function(r, clinic) {
+                  r[clinic.id] = clinic.name;
                   return r;
               }, {});
               data.forEach(function(t) {
                   if (t.location_id) {
-                      var locationName = wardsDictionary[t.location_id];
+                      var locationName = clinicsDictionary[t.location_id];
                       if (locationName) {
                           t.locationName = locationName;
                       } else {
