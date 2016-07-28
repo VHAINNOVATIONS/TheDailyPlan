@@ -41,6 +41,24 @@ angular.module('tdpApp')
             return results;
         };
 
+        var putSingleLocationName = function(template, locations) {
+            var locationId = template.location_id;
+            if (locationId) {
+                if (typeof locationId === 'number') {
+                    locationId = locationId.toString();
+                }
+                var location = _.find(locations, {
+                    'id': locationId
+                });
+                var locationName = location && location.name;
+                if (locationName) {
+                    template.locationName = locationName;
+                } else {
+                    template.locationName = locationId;
+                }
+            }
+        };
+
         return {
             /**
              * Find All Templates
@@ -233,7 +251,36 @@ angular.module('tdpApp')
                 var id = Facility.getCurrentFacility();
                 if (id) {
                     template.facility_id = id;
-                    return $http.put('/api/template/' + template.id, template);
+                    return $http.put('/api/template/' + template.id, template).then(function(result) {
+                        if (templates) {
+                            var tid = template.id;
+                            if (typeof tid === 'string') {
+                                tid = parseInt(tid, 10);
+                            }
+                            var existing = _.find(templates, {
+                                'id': tid
+                            });
+                            if (existing) {
+                                existing.template_name = template.template_name;
+                                existing.facility_id = template.facility_id;
+                                existing.location_id = template.location_id;
+                                var locationType = template.location_type;
+                                existing.location_type = template.location_type;
+                                if (locationType === 1) {
+                                    return Location.getWards().then(function(wards) {
+                                        putSingleLocationName(existing, wards);
+                                        return result;
+                                    });
+                                } else if (locationType === 2) {
+                                    return Location.getClinics().then(function(clinics) {
+                                        putSingleLocationName(existing, clinics);
+                                        return result;
+                                    });
+                                }
+                            }
+                            return result;
+                        }
+                    });
                 } else {
                     return $q.reject('No facility is chosen.');
                 }
