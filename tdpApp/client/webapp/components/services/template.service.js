@@ -227,7 +227,35 @@ angular.module('tdpApp')
                 var id = Facility.getCurrentFacility();
                 if (id) {
                     template.facility_id = id;
-                    return $http.post('/api/template/', template);
+                    return $http.post('/api/template/', template).then(function(result) {
+                        var id = result && result.data && result.data.id;
+                        if (id) {
+                            var locationType = template.location_type;
+                            var newTemplate = {
+                                id: id,
+                                template_name: template.template_name,
+                                template_description: template.template_description,
+                                template_owner: template.template_owner,
+                                facility_id: template.facility_id,
+                                location_id: template.location_id,
+                                location_type: template.location_type,
+                                active: true
+                            };
+                            templates.push(newTemplate);
+                            if (locationType === 1) {
+                                return Location.getWards().then(function(wards) {
+                                    putSingleLocationName(newTemplate, wards);
+                                    return result;
+                                });
+                            } else if (locationType === 2) {
+                                return Location.getClinics().then(function(clinics) {
+                                    putSingleLocationName(newTemplate, clinics);
+                                    return result;
+                                });
+                            }
+                            return result;
+                        }
+                    });
                 } else {
                     return $q.reject('No facility is chosen.');
                 }
@@ -262,6 +290,8 @@ angular.module('tdpApp')
                             });
                             if (existing) {
                                 existing.template_name = template.template_name;
+                                existing.template_description = template.template_description;
+                                existing.template_owner = template.template_owner;
                                 existing.facility_id = template.facility_id;
                                 existing.location_id = template.location_id;
                                 var locationType = template.location_type;
