@@ -91,7 +91,7 @@ angular.module('tdpApp').controller('TemplateSearchCtrl', function ($compile, $s
       self.searchAll = function () {
           self.submitted = true;
           self.clearAlerts();
-          var nameStartsWith = self.search && self.search.all;
+          var nameStartsWith = self.tabInfo[0].search;
           Template.findAll().then(function(data) {
               if (nameStartsWith && nameStartsWith.length) {
                 var n = nameStartsWith.length;
@@ -136,7 +136,7 @@ angular.module('tdpApp').controller('TemplateSearchCtrl', function ($compile, $s
       self.searchClinic = function () {
           self.submitted = true;
           self.clearAlerts();
-          var id = self.search && self.search.clinic;
+          var id = self.tabInfo[2].search;
           Template.findByClinic(id).then(function(data) {
               var clinicsDictionary = self.clinics.reduce(function(r, clinic) {
                   r[clinic.id] = clinic.name;
@@ -165,7 +165,7 @@ angular.module('tdpApp').controller('TemplateSearchCtrl', function ($compile, $s
       self.searchWard = function () {
           self.submitted = true;
           self.clearAlerts();
-          var id = self.search && self.search.ward;
+          var id = self.tabInfo[1].search;
           Template.findByWard(id).then(function(data) {
               var wardsDictionary = self.wards.reduce(function(r, ward) {
                   r[ward.id] = ward.name;
