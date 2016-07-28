@@ -69,15 +69,20 @@ angular.module('tdpApp').controller('TemplateSearchCtrl', function ($compile, $s
 
       self.tabInfo = Template.tabInfo();
 
-      self.data = [];
-
       self.selected = {};
       self.selectAll = false;
-      self.noResults = false;
       self.dtInstance = {};
       self.displayErr = {};
       self.displayErr.flag = false;
       self.errors = {};
+
+      self.data = Template.foundTemplates();
+      if (self.data === null) {
+          self.noResults = false;
+          self.data = [];
+      } else {
+          self.noResults = !(self.data.length);
+      }
 
       //functions
       self.newPromise = newPromise;
@@ -91,7 +96,7 @@ angular.module('tdpApp').controller('TemplateSearchCtrl', function ($compile, $s
       self.searchAll = function () {
           self.clearAlerts();
           var text = self.tabInfo[0].search;
-          Template.findAll(text).then(function(data) {
+          Template.findAll(text, true).then(function(data) {
               self.data = data;
               self.noResults = !(data.length);
               reloadData();

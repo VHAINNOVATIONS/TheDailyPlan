@@ -4,6 +4,7 @@ angular.module('tdpApp')
     .factory('Template', function Template($location, $rootScope, $http, $q, Facility, Location) {
 
         var tabInfo = null;
+        var templates = null;
 
         var resetData = function() {
             tabInfo = [{
@@ -13,18 +14,19 @@ angular.module('tdpApp')
             }, {
                 active: false
             }];
+            templates = null;
         };
 
         resetData();
 
         $rootScope.$on('login-success', resetData);
 
-        var putLocationName = function(templates, locations) {
+        var putLocationName = function(results, locations) {
             var dictionary = locations.reduce(function(r, location) {
                 r[location.id] = location.name;
                 return r;
             }, {});
-            templates.forEach(function(t) {
+            results.forEach(function(t) {
                 if (t.location_id) {
                     var locationName = dictionary[t.location_id];
                     if (locationName) {
@@ -36,7 +38,7 @@ angular.module('tdpApp')
                   t.locationName = null;
                 }
             });
-            return templates;
+            return results;
         };
 
         return {
@@ -46,17 +48,17 @@ angular.module('tdpApp')
              * @param  {Function} callback - optional
              * @return {Promise}
              */
-            findAll: function(input) {
+            findAll: function(input, cache) {
                 var id = Facility.getCurrentFacility();
                 if (id) {
                     return $http.get('/api/template/facility/' + id).then(function(response) {
                         var results = response.data;
                         return results;
-                    }).then(function(templates) {
+                    }).then(function(results) {
                         if (input && input.length) {
                             var n = input.length;
                             input = input.toLowerCase();
-                            templates = templates.reduce(function(r, t) {
+                            results = results.reduce(function(r, t) {
                                 var name = t.template_name;
                                 name = name && name.slice(0, n).toLowerCase();
                                 if (name === input) {
@@ -65,8 +67,8 @@ angular.module('tdpApp')
                                 return r;
                             }, []);
                         }
-                        return templates;
-                    }).then(function(templates) {
+                        return results;
+                    }).then(function(results) {
                         return Location.getWards().then(function(wards) {
                             return Location.getClinics().then(function(clinics) {
                                 var wardsDictionary = wards.reduce(function(r, ward) {
@@ -77,7 +79,7 @@ angular.module('tdpApp')
                                     r[clinic.id] = clinic.name;
                                     return r;
                                 }, {});
-                                templates.forEach(function(t) {
+                                results.forEach(function(t) {
                                     if (t.location_id) {
                                         var locationName = t.location_type === 2 ? clinicsDictionary[t.location_id] : wardsDictionary[t.location_id];
                                         if (locationName) {
@@ -89,7 +91,10 @@ angular.module('tdpApp')
                                       t.locationName = null;
                                     }
                                 });
-                                return templates;
+                                if (cache) {
+                                    templates = results;
+                                }
+                                return results;
                             });
                         });
                     });
@@ -104,9 +109,10 @@ angular.module('tdpApp')
                     return $http.get('/api/template/ward/' + id + '/' + wardId).then(function(response) {
                         var results = response.data;
                         return results;
-                    }).then(function(templates) {
+                    }).then(function(results) {
                         return Location.getWards().then(function(wards) {
-                            return putLocationName(templates, wards);
+                            templates = putLocationName(results, wards);
+                            return templates;
                         });
                     });
                 } else {
@@ -120,14 +126,19 @@ angular.module('tdpApp')
                     return $http.get('/api/template/clinic/' + id + '/' + clinicId).then(function(response) {
                         var results = response.data;
                         return results;
-                    }).then(function(templates) {
+                    }).then(function(results) {
                         return Location.getClinics().then(function(clinics) {
-                            return putLocationName(templates, clinics);
+                            templates = putLocationName(results, clinics);
+                            return templates;
                         });
                     });
                 } else {
                     return $q.reject('No facility is chosen.');
                 }
+            },
+
+            foundTemplates: function() {
+                return templates;
             },
 
             /**
@@ -232,7 +243,6 @@ angular.module('tdpApp')
              * Delete Single Template by Template ID
              *
              * @param  {String}   id    - query id
-             * @param  {Function} callback - optional
              * @return {Promise}
              */
             delete: function(id, callback) {
