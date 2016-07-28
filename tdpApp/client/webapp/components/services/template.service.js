@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('tdpApp')
-    .factory('Template', function Template($location, $rootScope, $http, $q, Facility) {
+    .factory('Template', function Template($location, $rootScope, $http, $q, Facility, Location) {
 
         var tabInfo = null;
 
@@ -19,6 +19,26 @@ angular.module('tdpApp')
 
         $rootScope.$on('login-success', resetData);
 
+        var putLocationName = function(templates, locations) {
+            var dictionary = locations.reduce(function(r, location) {
+                r[location.id] = location.name;
+                return r;
+            }, {});
+            templates.forEach(function(t) {
+                if (t.location_id) {
+                    var locationName = dictionary[t.location_id];
+                    if (locationName) {
+                        t.locationName = locationName;
+                    } else {
+                        t.locationName = t.location_id;
+                    }
+                } else {
+                  t.locationName = null;
+                }
+            });
+            return templates;
+        };
+
         return {
             /**
              * Find All Templates
@@ -26,13 +46,53 @@ angular.module('tdpApp')
              * @param  {Function} callback - optional
              * @return {Promise}
              */
-            findAll: function() {
+            findAll: function(input) {
                 var id = Facility.getCurrentFacility();
                 if (id) {
-                  return $http.get('/api/template/facility/' + id).then(function(response) {
-                      var results = response.data;
-                      return results;
-                  });
+                    return $http.get('/api/template/facility/' + id).then(function(response) {
+                        var results = response.data;
+                        return results;
+                    }).then(function(templates) {
+                        if (input && input.length) {
+                            var n = input.length;
+                            input = input.toLowerCase();
+                            templates = templates.reduce(function(r, t) {
+                                var name = t.template_name;
+                                name = name && name.slice(0, n).toLowerCase();
+                                if (name === input) {
+                                  r.push(t);
+                                }
+                                return r;
+                            }, []);
+                        }
+                        return templates;
+                    }).then(function(templates) {
+                        return Location.getWards().then(function(wards) {
+                            return Location.getClinics().then(function(clinics) {
+                                var wardsDictionary = wards.reduce(function(r, ward) {
+                                    r[ward.id] = ward.name;
+                                    return r;
+                                }, {});
+                                var clinicsDictionary = clinics.reduce(function(r, clinic) {
+                                    r[clinic.id] = clinic.name;
+                                    return r;
+                                }, {});
+                                templates.forEach(function(t) {
+                                    if (t.location_id) {
+                                        var locationName = t.location_type === 2 ? clinicsDictionary[t.location_id] : wardsDictionary[t.location_id];
+                                        if (locationName) {
+                                            t.locationName = locationName;
+                                        } else {
+                                            t.locationName = t.location_id;
+                                        }
+                                    } else {
+                                      t.locationName = null;
+                                    }
+                                });
+                                return templates;
+                            });
+                        });
+                    });
                 } else {
                     return $q.reject('No facility is chosen.');
                 }
@@ -41,10 +101,14 @@ angular.module('tdpApp')
             findByWard: function(wardId) {
                 var id = Facility.getCurrentFacility();
                 if (id) {
-                  return $http.get('/api/template/ward/' + id + '/' + wardId).then(function(response) {
-                      var results = response.data;
-                      return results;
-                  });
+                    return $http.get('/api/template/ward/' + id + '/' + wardId).then(function(response) {
+                        var results = response.data;
+                        return results;
+                    }).then(function(templates) {
+                        return Location.getWards().then(function(wards) {
+                            return putLocationName(templates, wards);
+                        });
+                    });
                 } else {
                     return $q.reject('No facility is chosen.');
                 }
@@ -53,10 +117,14 @@ angular.module('tdpApp')
             findByClinic: function(clinicId) {
                 var id = Facility.getCurrentFacility();
                 if (id) {
-                  return $http.get('/api/template/clinic/' + id + '/' + clinicId).then(function(response) {
-                      var results = response.data;
-                      return results;
-                  });
+                    return $http.get('/api/template/clinic/' + id + '/' + clinicId).then(function(response) {
+                        var results = response.data;
+                        return results;
+                    }).then(function(templates) {
+                        return Location.getClinics().then(function(clinics) {
+                            return putLocationName(templates, clinics);
+                        });
+                    });
                 } else {
                     return $q.reject('No facility is chosen.');
                 }
