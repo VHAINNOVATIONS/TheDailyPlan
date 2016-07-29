@@ -5,6 +5,8 @@ angular.module('tdpApp')
 
         var tabInfo = null;
         var templates = null;
+        var uiSettings = null;
+        var pageInfo = null;
 
         var resetData = function() {
             tabInfo = [{
@@ -15,6 +17,15 @@ angular.module('tdpApp')
                 active: false
             }];
             templates = null;
+            uiSettings = {
+                load: {
+                    type: null
+                }
+            };
+            pageInfo = {
+                page: 0,
+                length: 10
+            };
         };
 
         resetData();
@@ -57,6 +68,28 @@ angular.module('tdpApp')
                     template.locationName = locationId;
                 }
             }
+        };
+
+        var shouldBeLoaded = function(template) {
+            var type = uiSettings.load.type;
+            if (type !== null) {
+                var param = uiSettings.load.param;
+                if ((type === 1) || (type === 2)) {
+                    if (typeof param === 'string') {
+                        param = parseInt(param, 10);
+                    }
+                    return (template.location_type === type) && (template.location_id === param);
+                }
+                if (param && param.length) {
+                    var n = param.length;
+                    param = param.toLowerCase();
+                    var name = template.template_name;
+                    name = name && name.slice(0, n).toLowerCase();
+                    return name === param;
+                }
+                return true;
+            }
+            return false;
         };
 
         return {
@@ -229,16 +262,17 @@ angular.module('tdpApp')
                     template.facility_id = id;
                     return $http.post('/api/template/', template).then(function(result) {
                         var id = result && result.data && result.data.id;
-                        if (id) {
+                        if (id && shouldBeLoaded(template)) {
                             var locationType = template.location_type;
                             var newTemplate = {
                                 id: id,
                                 template_name: template.template_name,
-                                template_description: template.template_description,
+                                template_description: template.template_description || null,
                                 template_owner: template.template_owner,
                                 facility_id: template.facility_id,
                                 location_id: template.location_id,
                                 location_type: template.location_type,
+                                locationName: null,
                                 active: true
                             };
                             templates.push(newTemplate);
@@ -296,6 +330,7 @@ angular.module('tdpApp')
                                 existing.location_id = template.location_id;
                                 var locationType = template.location_type;
                                 existing.location_type = template.location_type;
+                                existing.locationName = null;
                                 if (locationType === 1) {
                                     return Location.getWards().then(function(wards) {
                                         putSingleLocationName(existing, wards);
@@ -328,12 +363,26 @@ angular.module('tdpApp')
                         _.remove(templates, function(template) {
                             return template.id === id;
                         });
+                        var n = templates.length;
+                        if ((pageInfo.page > 0) && (n % pageInfo.length === 0)) {
+                            var total = pageInfo.length * (pageInfo.page + 1);
+                            if (total > n) {
+                                pageInfo.page = pageInfo.page - 1;
+                            }
+                        }
                     }
                 });
             },
 
             tabInfo: function () {
                 return tabInfo;
+            },
+            uiSettings: function () {
+                return uiSettings;
+            },
+            pageInfo: function() {
+                return pageInfo;
             }
+
         };
     });
