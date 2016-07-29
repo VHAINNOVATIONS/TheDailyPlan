@@ -53,6 +53,7 @@ router.get('/clinic/:id/:clinicId', auth.isAuthenticated(), function(req, res) {
 // get single template
 router.get('/:id', auth.isAuthenticated(), function(req, res) {
     models.template.find({
+        raw: true,
         where: {
             id: req.params.id
         }

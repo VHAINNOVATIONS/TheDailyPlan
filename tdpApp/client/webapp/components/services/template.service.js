@@ -196,50 +196,24 @@ angular.module('tdpApp')
              * Find Single Template by Template ID
              *
              * @param  {String}   id    - query id
-             * @param  {Function} callback - optional
              * @return {Promise}
              */
-            findByID: function(id, callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/template/' + id).
-                success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                }).
-                error(function(err) {
-
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            findByID: function(id) {
+                return $http.get('/api/template/' + id).then(function(response) {
+                    return response.data;
+                });
             },
 
             /**
              * Find Complete Template by Template ID
              *
              * @param  {String}   id    - query id
-             * @param  {Function} callback - optional
              * @return {Promise}
              */
-            findCompleteByID: function(id, callback) {
-                var cb = callback || angular.noop;
-                var deferred = $q.defer();
-
-                $http.get('/api/template/complete/' + id).
-                success(function(data) {
-                    deferred.resolve(data);
-                    return cb();
-                }).
-                error(function(err) {
-
-                    deferred.reject(err);
-                    return cb(err);
-                }.bind(this));
-
-                return deferred.promise;
+            findCompleteByID: function(id) {
+                return $http.get('/api/template/complete/' + id).then(function(response) {
+                    return response.data;
+                });
             },
 
             /**
