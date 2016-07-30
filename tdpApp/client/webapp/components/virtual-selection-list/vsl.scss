@@ -1,0 +1,23 @@
+ui-virtual-list {
+    height: 160px;
+    max-height: 200px;
+    overflow-y: auto;
+    display: block;
+
+    .canvas {
+      position: relative;
+      resize: both;
+    }
+
+    div.renderer {
+      display: block;
+      width: 100%;
+      position: absolute;
+      height: 30px;
+      line-height: 30px;
+
+      span {
+        margin-left: 10px;
+      }
+    }
+}
