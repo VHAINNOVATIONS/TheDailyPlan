@@ -1,6 +1,5 @@
 ui-virtual-list {
-    height: 160px;
-    max-height: 200px;
+    max-height: 180px;
     overflow-y: auto;
     display: block;
 
@@ -18,6 +17,10 @@ ui-virtual-list {
 
       span {
         margin-left: 10px;
+      }
+      .chkbox-label {
+          text-overflow: ellipsis;
+          white-space: nowrap
       }
     }
 }

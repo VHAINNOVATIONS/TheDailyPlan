@@ -13,7 +13,7 @@ angular.module('tdpApp').directive('uiVirtualList', [function () {
         link: function (scope, elem) {
             var rowHeight = 30;
 
-            scope.height = 200;
+            scope.height = 180;
             scope.scrollTop = 0;
             scope.visibleProvider = [];
             scope.cellsPerPage = 0;
@@ -58,6 +58,10 @@ angular.module('tdpApp').directive('uiVirtualList', [function () {
 
             scope.$watch('uiSelectedTop', function(value) {
                 if (typeof value === 'number') {
+                    var m = scope.uiDataProvider.length - scope.cellsPerPage;
+                    if (value > m) {
+                        value = m;
+                    }
                     scope.scrollTop = rowHeight * value;
                     elem[0].scrollTop = rowHeight * value;
                     scope.updateDisplayListFromIndex(value);

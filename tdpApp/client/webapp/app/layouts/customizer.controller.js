@@ -26,9 +26,7 @@ angular.module('tdpApp')
             var searchTextGen = function(values) {
                 return function(text) {
                     var index = _.sortedIndex(values, text);
-                    var parent = angular.element(document.getElementById('selvals'))[0];
-                    var element = angular.element(document.getElementById('selval' + index))[0];
-                    parent.scrollTop = element.offsetTop;
+                    $scope.selectedTop = index;
                 };
             };
 
