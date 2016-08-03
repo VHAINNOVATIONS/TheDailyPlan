@@ -54,10 +54,8 @@
                     <div class="form-group row" ng-if="setting.settingType === 8">
                         <label for="listareainput" class="col-sm-4 control-label">{{setting.settingName}}</label>
                         <div class="col-sm-7">
-                            <div class="form-control chkbox-div" id="selvals">
-                                <div id="selval{{$index}}" ng-repeat="selectionValue in setting.selectionValues">
-                                    <label class="chkbox-label"><input type="checkbox" ng-model="selectionValue.selected"> {{selectionValue.title}}</label>
-                                </div>
+                            <div class="form-control chkbox-div">
+                                <ui-virtual-list ui-selected-top="selectedTop" ui-data-provider="setting.selectionValues" ng-model="setting.selectedOption"></ui-virtual-list>
                             </div>
                             <div class="row" style="padding-top: 2px; padding-bottom: 2px;">
                                 <input class="col-sm-4 col-sm-offset-1 pull-left" ng-model="searchTextValue" type="text" style="padding-top: 4px;" ng-change="searchText(searchTextValue)" placeholder="Search">

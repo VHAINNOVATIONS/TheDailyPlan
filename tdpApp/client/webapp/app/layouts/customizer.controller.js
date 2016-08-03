@@ -26,9 +26,7 @@ angular.module('tdpApp')
             var searchTextGen = function(values) {
                 return function(text) {
                     var index = _.sortedIndex(values, text);
-                    var parent = angular.element(document.getElementById('selvals'))[0];
-                    var element = angular.element(document.getElementById('selval' + index))[0];
-                    parent.scrollTop = element.offsetTop;
+                    $scope.selectedTop = index;
                 };
             };
 
@@ -36,8 +34,6 @@ angular.module('tdpApp')
 
             PanelSetting.findByPanelTypeID(panel.id)
                 .then(function(panel_settings) {
-                    $scope.actionn = 'loaded stage';
-                    $scope.settings = panel_settings;
                     var settingIdMap = panel_settings.reduce(function(r, ps) {
                         r[ps.panelSettingID] = {
                             type: ps.settingType,
@@ -93,13 +89,14 @@ angular.module('tdpApp')
                             } else {
                                 dict = false;
                             }
-                            var model8 = ps.possibleValues.map(selectedData(dict));
-                            $scope.clearAll = selectedGen(model8, false);
-                            $scope.selectAll = selectedGen(model8, true);
+                            var selectionValues = ps.possibleValues.map(selectedData(dict));
+                            $scope.clearAll = selectedGen(selectionValues, false);
+                            $scope.selectAll = selectedGen(selectionValues, true);
                             $scope.searchText = searchTextGen(ps.possibleValues);
-                            ps.selectionValues = model8;
+                            ps.selectionValues = selectionValues;
                         }
                     });
+                    $scope.settings = panel_settings;
                     $scope.loadMessage = '';
                 })
                 .catch(function(err) {

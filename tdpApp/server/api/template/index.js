@@ -53,6 +53,7 @@ router.get('/clinic/:id/:clinicId', auth.isAuthenticated(), function(req, res) {
 // get single template
 router.get('/:id', auth.isAuthenticated(), function(req, res) {
     models.template.find({
+        raw: true,
         where: {
             id: req.params.id
         }
@@ -155,7 +156,9 @@ var fillTemplate = function(params) {
             });
         })
     });
-    return models.Sequelize.Promise.all(panelPromises);
+    return models.Sequelize.Promise.all(panelPromises).then(function() {
+        return params;
+    });
 };
 
 // add new template
@@ -173,8 +176,10 @@ router.post('/', auth.isAuthenticated(), function(req, res) {
             id: template.id,
             panels: req.body.panels
         };
-    }).then(fillTemplate).then(function() {
-        res.json({});
+    }).then(fillTemplate).then(function(params) {
+        res.json({
+            id: params.id
+        });
     }).catch(function(err) {
         console.log('ERROR:', err);
     });
