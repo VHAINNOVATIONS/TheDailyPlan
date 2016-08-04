@@ -12,7 +12,7 @@
             <div class="form-group" ng-class="{error: _form.title.$error && _form.submitted}">
                 <div ng-repeat="setting in settings">
                     <div class="form-group row" ng-if="setting.settingType === 2">
-                        <label for="numberinput" class="col-sm-4 control-label">{{setting.settingName + ' (0-120)  Note: 0 will show only today'}}</label>
+                        <label for="numberinput" class="col-sm-4 control-label">{{setting.settingName}} (0-120) <br/> Note: 0 = today</label>
                         <div class="col-sm-7">
                             <input ng-model="setting.numberValue" type="number" min="0" max="120" class="form-control" id="numberinput" ng-disabled="displayOnly">
                         </div>
@@ -58,9 +58,11 @@
                                 <ui-virtual-list ui-selected-top="selectedTop" ui-data-provider="setting.selectionValues" ng-model="setting.selectedOption"></ui-virtual-list>
                             </div>
                             <div class="row" style="padding-top: 2px; padding-bottom: 2px;">
-                                <input class="col-sm-4 col-sm-offset-1 pull-left" ng-model="searchTextValue" type="text" style="padding-top: 4px;" ng-change="searchText(searchTextValue)" placeholder="Search">
-                                <div class="col-sm-6 btn-toolbar pull-right">
+                                <input class="col-sm-5 col-sm-offset-1 pull-left" ng-model="searchTextValue" type="text" style="padding-top: 4px;" ng-change="searchText(searchTextValue)" placeholder="Search">
+                                <div class="col-sm-3 btn-toolbar pull-left">
                                     <button type="button" class="btn btn-sm btn-secondary" ng-click="clearAll()">Clear All</button>
+                                </div>
+                                <div class="col-sm-3 btn-toolbar pull-left">
                                     <button type="button" class="btn btn-sm btn-secondary" ng-click="selectAll()">Select All</button>
                                 </div>
                             </div>
