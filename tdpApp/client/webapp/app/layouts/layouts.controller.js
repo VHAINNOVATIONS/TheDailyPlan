@@ -6,7 +6,6 @@ angular.module('tdpApp')
             var self = this;
             self.errors = {};
             self.currentFacility = Facility.getCurrentFacility();
-            self.facilities = [];
             self.selectedA = [];
             self.selectedS = [];
             self.selectedPanels = [];
@@ -88,60 +87,11 @@ angular.module('tdpApp')
                 });
             };
 
-            var defaultDetail = function(setting, detailValue) {
-                var detaill = {
-                    panel_setting_id: setting.id,
-                    detail_value: detailValue,
-                    setting_type: setting.setting_type,
-                    setting_name: setting.setting_name,
-                    setting_value: setting.setting_value
-                };
-                return detaill;
-            };
-
             switch (self.mode) {
                 case 'create':
                     self.submitButton = 'Save';
                     self.topTitle = 'New Template';
-                    initializeLayout.then(function() {
-                        self.masterPanelsList.forEach(function(panel) {
-                            var settings = panel.panelSettings;
-                            if (settings && settings.length) {
-                                var panelDetails = [];
-                                settings.forEach(function(setting) {
-                                    switch (setting.setting_type) {
-                                        case 2:
-                                        case 3:
-                                        case 4:
-                                            if (setting.setting_value) {
-                                                panelDetails.push(defaultDetail(setting, setting.setting_value));
-                                            }
-                                            break;
-                                        case 5:
-                                           if (setting.setting_value) {
-                                                var values = setting.setting_value.split('^');
-                                                values.forEach(function(value) {
-                                                    panelDetails.push(defaultDetail(setting, value));
-                                                });
-                                            }
-                                            break;
-                                        case 6:
-                                           if (setting.setting_value) {
-                                                var value = setting.setting_value.split(':')[0];
-                                                if (value) {
-                                                    panelDetails.push(defaultDetail(setting, value));
-                                                }
-                                            }
-                                            break;
-                                        default:
-                                    }
-                                });
-                                if (panelDetails && panelDetails.length) {
-                                    panel.panelDetails = panelDetails;
-                                }
-                            }
-                        });
-                    }).catch(function(err) {
+                    initializeLayout.catch(function(err) {
                         self.errors.other = err.message;
                     });
                     break;

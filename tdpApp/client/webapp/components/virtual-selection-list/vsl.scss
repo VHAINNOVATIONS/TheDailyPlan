@@ -1,0 +1,26 @@
+ui-virtual-list {
+    max-height: 180px;
+    overflow-y: auto;
+    display: block;
+
+    .canvas {
+      position: relative;
+      resize: both;
+    }
+
+    div.renderer {
+      display: block;
+      width: 100%;
+      position: absolute;
+      height: 30px;
+      line-height: 30px;
+
+      span {
+        margin-left: 10px;
+      }
+      .chkbox-label {
+          text-overflow: ellipsis;
+          white-space: nowrap
+      }
+    }
+}

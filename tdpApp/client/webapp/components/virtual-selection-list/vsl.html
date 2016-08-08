@@ -1,0 +1,10 @@
+<div class="canvas" ng-style="canvasHeight">
+    <div class="renderer"
+        ng-repeat="item in visibleProvider"
+        ng-style="item.styles">
+        <span>
+            <label class="chkbox-label">
+                <input type="checkbox" ng-model="item.selected"> {{item.title}}</label>
+        </span>
+    </div>
+</div>
