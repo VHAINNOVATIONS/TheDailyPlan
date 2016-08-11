@@ -1,0 +1,24 @@
+<div ng-controller="PdfDownloadCtrl as ctrl" class="container">
+     <div class="row">
+         <div class="col-md-12">
+            <h2>PDF Download</h2>
+         </div>
+    </div>
+    <div class="row">
+        <label class="col-md-12">
+        	PDF files that were requested today will be listed below. Files can be downloaded/Viewed when they are marked as "Complete" status.
+        </label>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <button class="btn btn-primary" ng-click="ctrl.refreshTable()">Refresh</button>
+        </div>
+    </div>
+    <div class="row">
+    </div>
+     <div class="row">
+        <div class="col-sm-12 col-centered">
+            <table datatable="" dt-options="ctrl.dtOptions" dt-columns="ctrl.dtColumns" dt-instance="ctrl.dtInstance" class="row-border hover"></table>
+        </div>
+    </div>
+</div>
