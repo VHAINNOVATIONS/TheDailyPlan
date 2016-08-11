@@ -2,7 +2,7 @@
 
 var path = require('path');
 var _ = require('lodash');
-
+var models = require('../../models/index');
 var pdf = require('../../pdf');
 
 exports.index = function(req, res) {
@@ -19,3 +19,15 @@ exports.index = function(req, res) {
         }
     });
 };
+
+
+exports.getPdfList = function(req,res){
+    var id = req.params.userId;
+    models.user_pdf.findAll({
+        where: {
+            userId: id
+        }
+    }).then(function(pdfList) {
+        res.json(pdfList);
+    });
+}

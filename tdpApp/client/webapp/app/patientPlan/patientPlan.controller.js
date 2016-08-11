@@ -30,9 +30,7 @@ angular.module('tdpApp')
             id: self.patient,
             templateID: self.templateID
         }]).then(function(fileInfo) {
-            var filepath = fileInfo.data.path;
-            Patient.setPDFFilepath(filepath);
-            $location.path('/PDFView');
+             $location.path('/PDFDownload');
         }).catch( function(err) {
             console.log(err);
         });
@@ -50,19 +48,6 @@ angular.module('tdpApp')
         handle: '.dragHandle'
       }
     };
-
-    //Build the Panels based on the data returned from
-    // DB.  The Array will be made up of objects like this.
-    /*self.panels = [    {
-      title: 'Problems',
-      settings: {
-        sizeX: 3,
-        sizeY: 3,
-        minSizeX: 2,
-        minSizeY: 2,
-      }
-      template: '<div dt-problems patient="ctrl.patient"></div>',
-    }];*/
 
     self.panels = [];
 

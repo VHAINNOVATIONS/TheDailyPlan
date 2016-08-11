@@ -145,10 +145,8 @@ angular.module('tdpApp')
                 return;
             }
 
-            PDF.generate(items).then(function(fileInfo) {
-                var filepath = fileInfo.data.path;
-                Patient.setPDFFilepath(filepath);
-                $location.path('/PDFView');
+            PDF.generate(items).then(function() {
+                $location.path('/PDFDownload');
             }).catch( function(err) {
                 console.log(err);
             });
