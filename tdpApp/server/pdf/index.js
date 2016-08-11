@@ -14,7 +14,6 @@ var patientData = require('./patient-data');
 var models = require('../models');
 var _ = require('lodash');
 
-var fileCounter = 0;
 
 var fonts = {
     Roboto: {
@@ -121,7 +120,7 @@ exports.generatePDF = function(reportData, options) {
     }
 };
 
-exports.run = function(rootPath, pdoc, demographicsList, callback) {
+exports.run = function(rootPath, pdoc, demographicsList, fileid) {
     var printer = new PdfMake(fonts);
 
     var hfh = headerFooterHandler(demographicsList);
@@ -132,16 +131,31 @@ exports.run = function(rootPath, pdoc, demographicsList, callback) {
         pagesInfoCallback: hfh.layoutInfoAccepter
     });
 
-    var filename = util.format('TDP_%s.pdf', ++fileCounter);
+    var filename = util.format('TDP_%s.pdf', fileid);
     var localPath = path.join('pdfreports', filename);
     var filepath = path.join(rootPath, localPath);
     var target = fs.createWriteStream(filepath);
     target.on('finish', function() {
-        callback(null, {
-            path: localPath
+        models.user_pdf.find({
+            where: {
+                id: fileid
+            }
+        }).then(function(usrPdf) {
+            usrPdf.update({
+                fileName: filename
+            });
+            
         });
     }).on('error', function(err) {
-        callback(err);
+        models.user_pdf.find({
+            where: {
+                id: fileid
+            }
+        }).then(function(usrPdf) {
+            usrPdf.update({
+                fileName: 'ERROR'
+            });
+        });
     });
 
     doc.pipe(target);
@@ -195,10 +209,24 @@ var getTemplates = function(templateIds, callback) {
 };
 
 exports.write = function(rootPath, session, userSession, patientIds, templateIds, options, callback) {
-    var uniqTemplateIds = _.uniq(templateIds);
-    getTemplates(uniqTemplateIds, function(err, templateDict) {
+    models.user_pdf.create({
+        userId: options.userId,
+        requestedDateTime: options.date + ' '+ options.time
+    }).then(function(userPdf) {
+        callback(null,"");
+        var uniqTemplateIds = _.uniq(templateIds);
+        getTemplates(uniqTemplateIds, function(err, templateDict) {
         if (err) {
-            return callback(err);
+            models.user_pdf.find({
+            where: {
+                id: userPdf.id
+            }
+            }).then(function(usrPdf) {
+                usrPdf.update({
+                    fileName: 'ERROR'
+                });
+            });
+            return;
         }
         var input = patientIds.map(function(patientId, index) {
             var templateId = templateIds[index];
@@ -212,7 +240,7 @@ exports.write = function(rootPath, session, userSession, patientIds, templateIds
         });
         async.map(input, patientData, function(err, resultPatientData) {
             if (err) {
-                return callback(err);
+                return;
             }
             var result = input.map(function(p, index) {
                 var sectionData = resultPatientData[index]
@@ -234,7 +262,11 @@ exports.write = function(rootPath, session, userSession, patientIds, templateIds
             var demographicsList = result.map(function(r) {
                 return r.Demographics;
             });
-            exports.run(rootPath, doc, demographicsList, callback);
+            exports.run(rootPath, doc, demographicsList, userPdf.id);
         });
     });
+
+    });
+
+    
 };
