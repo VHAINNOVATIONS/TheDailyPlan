@@ -25,7 +25,7 @@ angular.module('tdpApp')
             };
             var searchTextGen = function(values) {
                 return function(text) {
-                    var index = _.sortedIndex(values, text);
+                    var index = _.findIndex(values, function(ele){return ele.toLowerCase().indexOf(text.toLowerCase()) > -1})
                     $scope.selectedTop = index;
                 };
             };
