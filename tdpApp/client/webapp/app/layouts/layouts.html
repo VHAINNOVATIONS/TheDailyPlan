@@ -39,7 +39,7 @@
                         </span>
                         <span ng-repeat="ap in ctrl.availablePanels">
                             <span class="list-group-item">{{ap.title}}
-                                <input ng-click="ctrl.selectA(ap.id)" name="ctrl.selectedA[]" value="{{ap.id}}" ng-checked="ctrl.selectedA.indexOf(ap.id) > -1" type="checkbox" class="pull-left picklist-input" ng-disabled="ctrl.displayOnly">
+                                <input ng-click="ctrl.selectA(ap.id)" title="{{ap.title}}}" name="ctrl.selectedA[]" value="{{ap.id}}" ng-checked="ctrl.selectedA.indexOf(ap.id) > -1" type="checkbox" class="pull-left picklist-input" ng-disabled="ctrl.displayOnly">
                             </span>
                         </span>
                     </div>
@@ -62,7 +62,7 @@
                         <span ng-repeat="sp in ctrl.selectedPanels">
                             <span class="list-group-item">{{sp.title}}
                                 <span ng-show="sp.mandatory"> (Required)</span>
-                                <input ng-click="ctrl.selectS(sp.id)" name="ctrl.selectedS[]" value="{{sp.id}}" ng-checked="ctrl.selectedS.indexOf(sp.id) > -1" type="checkbox" class="pull-left picklist-input" ng-disabled="ctrl.displayOnly">
+                                <input ng-click="ctrl.selectS(sp.id)" title="{{sp.title}}" name="ctrl.selectedS[]" value="{{sp.id}}" ng-checked="ctrl.selectedS.indexOf(sp.id) > -1" type="checkbox" class="pull-left picklist-input" ng-disabled="ctrl.displayOnly">
                                 <span class="pull-right">
                                     <button type="button" class="btn btn-default btn-xs" ng-click="ctrl.openSettings(sp)" ng-if="sp.enable_options">
                                         <span aria-hidden="true">OPTIONS</span>
