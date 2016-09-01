@@ -26,9 +26,9 @@
                   <form ng-submit="ctrl.searchWard()" name="searchWard">
                       <div class="form-group">
                         <label for="searchTemplateInWard"><h4>Select Ward to Display</h4></label>
-                        <select class="form-control" id="searchTemplateInWard" ng-model="ctrl.tabInfo[1].search">
-                          <option value="">Select a Ward</option>
-                          <option ng-repeat="option in ctrl.wards" value="{{option.id}}">{{option.name}}</option>
+                        <select title="Select a Ward" class="form-control" id="searchTemplateInWard" ng-model="ctrl.tabInfo[1].search" 
+                                ng-options="item.id as item.name for item in ctrl.wards">
+                          <option value="">Select a ward...</option>
                         </select>
                       </div>
                       <input class="btn btn-primary" type="submit" value="Search" ng-disabled="!ctrl.tabInfo[1].search">
@@ -44,9 +44,9 @@
                   <form ng-submit="ctrl.searchClinic()" name="searchClinic">
                       <div class="form-group">
                         <label for="searchTemplateInClinic"><h4>Select Clinic to Display</h4></label>
-                        <select class="form-control"  id="searchTemplateInClinic" ng-model="ctrl.tabInfo[2].search">
-                          <option value="">Select a Clinic</option>
-                          <option ng-repeat="option in ctrl.clinics" value="{{option.id}}">{{option.name}}</option>
+                        <select title="Select a Clinic" class="form-control" id="searchTemplateInClinic" ng-options="item.id as item.name for item in ctrl.clinics" 
+                                ng-model="ctrl.tabInfo[2].search">
+                            <option value="">Select a clinic...</option>
                         </select>
                       </div>
                       <input class="btn btn-primary" type="submit" value="Search" ng-disabled="!ctrl.tabInfo[2].search">
