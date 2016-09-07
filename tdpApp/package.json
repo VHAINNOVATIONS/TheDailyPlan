@@ -29,6 +29,7 @@
     "mssql": "^2.3.2",
     "multer": "^1.1.0",
     "mysql": "^2.10.1",
+    "node-schedule": "^1.1.1",
     "passport": "~0.2.0",
     "passport-local": "~0.1.6",
     "pdfmake": "git+https://github.com/austundag/pdfmake.git",

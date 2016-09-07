@@ -15,7 +15,9 @@ var errorHandler = require('errorhandler');
 var path = require('path');
 var config = require('./environment');
 var passport = require('passport');
-var multer = require('multer')
+var multer = require('multer');
+var schedule = require('node-schedule');
+var nightlyJob = require('../nightlyJobs');
 
 var stagingPath = path.join(config.root, 'client/common/assets/landing_images/staging');
 
@@ -28,7 +30,6 @@ module.exports = function(app) {
     app.use(['/fu'], multer({
         dest: stagingPath,
         fileFilter: function fileFilter (req, file, cb) {
-            console.log('INSIDEEDEDEDE');
             cb(null, true);
         }
     }).array('files'));
@@ -66,4 +67,13 @@ module.exports = function(app) {
       app.use(morgan('dev'));
       app.use(errorHandler()); // Error handler - has to be last
     }
+
+    //Delete Files evertday at 11:59pm
+    var rule = new schedule.RecurrenceRule();
+    rule.hour = 23;
+    rule.minute = 59;
+    var deletePdfJob = schedule.scheduleJob(rule, function(){
+        var rootPath = app.get('appPath');
+        nightlyJob.DeletePDF(rootPath);
+    });
 };
