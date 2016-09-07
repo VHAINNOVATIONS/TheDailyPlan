@@ -88,9 +88,7 @@ angular.module('tdpApp')
                 }
                 return Status;
             }),
-            DTColumnBuilder.newColumn(null).withTitle('Date Requested').renderWith(function(data, type, full){
-                return new Date(data.requestedDateTime).toLocaleString();
-            })
+            DTColumnBuilder.newColumn('requestedDateTime').withTitle('Date Requested').withOption('type', 'date')
         ];
 
     });

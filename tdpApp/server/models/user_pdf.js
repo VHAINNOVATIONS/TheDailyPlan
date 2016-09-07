@@ -13,7 +13,7 @@ module.exports = function(sequelize, dataTypes) {
             allowNull: false
         },
         requestedDateTime: {
-            type: dataTypes.DATE,
+            type: dataTypes.STRING,
             allowNull: false
         },
         fileName:{
