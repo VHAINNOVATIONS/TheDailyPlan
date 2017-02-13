@@ -14,7 +14,7 @@ of your EWD.js configuration
 var ewd = require('ewdjs');
 
 var params = {
-  logFile: '/var/log/raptor/ewdjs.log',
+  logFile: '/var/log/tdp/ewdjs.log',
   poolSize: 2,
   httpPort: 8082,
   modulePath: '/opt/ewdjs/node_modules',

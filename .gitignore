@@ -1,5 +1,6 @@
 **/.env
 *.DS_Store
+.vagrant
 
 provision/cache/CACHE.DAT
 provision/cache/*.DAT

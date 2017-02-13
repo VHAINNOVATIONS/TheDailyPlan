@@ -26,8 +26,8 @@ var params = {
   },
 
   service: {
-    raptor: {
-      module: 'raptor',
+    tdp: {
+      module: 'tdp',
       service: 'parse',
       contentType: 'application/json'
     }
