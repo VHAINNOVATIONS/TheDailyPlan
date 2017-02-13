@@ -1,1 +1,6 @@
 **/.env
+*.DS_Store
+
+provision/cache/CACHE.DAT
+provision/cache/*.DAT
+provision/cache/cache-*.tar.gz

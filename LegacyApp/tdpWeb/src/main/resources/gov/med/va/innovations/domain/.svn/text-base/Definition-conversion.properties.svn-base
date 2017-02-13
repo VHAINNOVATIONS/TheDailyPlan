@@ -1,2 +1,0 @@
-# syntax: <propertyName> = <converterClassName>
-status = gov.med.va.innovations.ui.converter.DefinitionStatusConverter
