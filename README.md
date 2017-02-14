@@ -1,16 +1,16 @@
 TheDailyPlan
 ============
 
-Radiology Protocol Tool Recorder
-
 The Daily Plan is essentially a road map that lets the VA patient see, in black and white, what to expect on a particular day of their hospitalization.It was found to increase patient safety during hospitalization. By importing provider orders into a health summary, patients receive an itinerary for each day in the hospital. These patient-specific reports, one or two pages in length, reflect current orders such as allergies, medications, procedures, and diet.
 
 Dependencies
 ------------
 - Angular.JS
 - MySQL
+- Nginx (used for reverse proxy)
 - Node.js
 - EWD.js
+- PM2 (to keep node.js processes running)
 - Intersystems Cache'
 - VistA
     - TheDailyPlan specific KIDs builds

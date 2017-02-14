@@ -26,21 +26,20 @@ sudo rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-6.rpm
 rpm -Uvh http://dev.mysql.com/get/mysql-community-release-el6-5.noarch.rpm
 # sed -i s'/enabled=1/enabled=0/' /etc/yum.repos.d/remi.repo
 sudo cp /vagrant/provision/remi.repo /etc/yum.repos.d/
-
-# Install Apache, PHP, and other tidbits ##############
-#
-echo installing apache, php, and other tidbits
-sudo yum -y install parted vim zip unzip wget drush httpd php php-gd php-mcrypt php-curl
-sudo chkconfig httpd on
+sudo yum update
 
 # install Nodejs and Development Tools such as gcc & make
+#
+echo installing nodejs npm nginx and other tidbits
+sudo yum -y install nodejs npm nginx parted vim zip unzip wget 
 sudo yum -y groupinstall 'Development Tools'
-sudo yum -y install nodejs npm
-# sudo npm -g install bower
 
-# Change 'AllowOverride None' to 'All' in httpd.conf 
-sudo cp /vagrant/provision/httpd.conf /etc/httpd/conf/
-sudo service httpd start
+# configure nginx for reverse proxy
+#
+sudo cp /vagrant/provision/virtual.conf /etc/nginx/conf.d/
+sudo /etc/init.d/nginx start
+sudo chkconfig nginx on 
+sudo ifconfig eth0 | grep inet | awk '{ print $2 }'
 
 # Install MySQL ######################
 #
@@ -189,7 +188,7 @@ EOE
 # todo: this doesn't work because it doesn't see device(0) ~something with c-vt320? vt320 doesn't 
 # work either...
 cp /vagrant/backend/vistaroutines/* /srv/mgr/
-cd /opt/vagrant/provision/
+cd /vagrant/provision/
 dos2unix install-tdp.rb
 sudo chmod u+x install-tdp.rb
 sudo ./install-tdp.rb
@@ -247,6 +246,9 @@ sudo chmod a+x startEverything.sh
 sudo dos2unix killEverything.sh 
 sudo chmod a+x killEverything.sh
 
+# copy TheDailyPlan TDP EWD Modules
+cp /vagrant/backend/ewdmodules/*.js /opt/ewdjs/node_modules/
+
 # start EWD and Federator 
 sudo ./startEverything.sh 
 ps aux | grep node
@@ -286,8 +288,46 @@ sudo ./install-bowerjson.rb
 
 echo "initialize the database..."
 sudo node server/db/syncAndLoad.js
+# need to do a CTRL+C after running the above...
 
 sudo grunt serve 
+
+# start TDP EWD Interface?
+# sudo node app.js 8082 127.0.0.1 (pilot location 1)
+# sudo node app.js 8083 127.0.0.1 (pilot location 2)
+# sudo node app.js 8084 127.0.0.1 (pilot location 3)
+# sudo node app.js 8085 127.0.0.1 (pilot location 4)
+
+########### TODO #####################################################################
+#
+# PM2 is a production ready process manager for Node.js applications with a built-in load balancer. 
+# It allows you to keep applications alive forever, to reload them without downtime and to facilitate 
+# common system admin tasks. 
+#
+# Follow the steps to install PM2 and start the application:
+#
+# $ npm install pm2 –g
+# $ cd /vagrant/tdpApp/dist  
+# $ pm2 start app
+# $ cd /vagrant/backend/tdpewdrest
+#
+# Create a script file for each of the corresponding the eWD sites 
+# $ vi Pilot1.sh
+# Insert sudo node app.js 8082 XXX.XXX.XXX.XXX (Pilot Location 1)
+# Save Pilot1.sh
+# $vi Pilot2.sh
+# Insert sudo node app.js 8083 XXX.XXX.XXX.XXX (Pilot Location 2)
+# Save Pilot2.sh
+# $vi Pilot3.sh
+# Insert sudo node app.js 8083 XXX.XXX.XXX.XXX (Pilot Location 3)
+# Save Pilot3.sh
+# $vi Pilot4.sh
+# Insert sudo node app.js 8083 XXX.XXX.XXX.XXX (Pilot Location 4)
+# Save Pilot4.sh
+# $pm2 start Pilot1.sh
+# $pm2 start Pilot2.sh
+# $pm2 start Pilot3.sh
+# $pm2 start Pilot4.sh
 
 echo CSP is here: http://192.168.33.11:57772/csp/sys/UtilHome.csp
 echo username: cache password: innovate 
@@ -295,6 +335,7 @@ echo See Readme.md from root level of this repository...
 echo EWD Monitor: http://192.168.33.11:8082/ewd/ewdMonitor/index.html password: innovate 
 echo EWD: http://192.168.33.11:8082/ewdjs/EWD.js ewdBootstrap3.js 
 echo EWD Federator: http://192.168.33.11:8081/RaptorEwdVista/raptor/
+echo EWD Test Login: http://192.168.33.11:8080/ewd/tdp/index.html 
 echo password: innovate 
 echo TheDailyPlan is now installed to a test instance
 echo Browse to: http://192.168.33.11/ 
