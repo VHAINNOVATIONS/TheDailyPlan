@@ -9,7 +9,8 @@ server/config/local.env.js
 server/tdpvistaaccess/.env
 dist-ionic/
 *.env
-bower_components
+*/bower_components
+
 sandbox
 client/webapp/TDP_*.pdf
 client/webapp/pdfreports/TDP_*.pdf

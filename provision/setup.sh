@@ -38,10 +38,6 @@ sudo yum -y groupinstall 'Development Tools'
 sudo yum -y install nodejs npm
 # sudo npm -g install bower
 
-# copy php.ini from provision folder to prepare for Drupal 7
-# 'expose_php' and 'allow_url_fopen' will be set to 'Off'
-sudo cp /vagrant/provision/php.ini /etc/
-
 # Change 'AllowOverride None' to 'All' in httpd.conf 
 sudo cp /vagrant/provision/httpd.conf /etc/httpd/conf/
 sudo service httpd start
@@ -53,7 +49,7 @@ echo -------------
 cd
 wget -nc --progress=bar:force http://repo.mysql.com/mysql-community-release-el6-5.noarch.rpm
 sudo rpm -Uvh mysql-community-release-el6-5.noarch.rpm
-sudo yum -y install dos2unix mysql mysql-server php-mysql php-soap php-mbstring php-dom php-xml rsync ruby-devel
+sudo yum -y install dos2unix mysql mysql-server rsync ruby-devel
 sudo rpm -qa | grep mysql
 sudo chkconfig mysqld on
 sudo service mysqld start
@@ -65,12 +61,12 @@ mysql -u root -p"$DATABASE_PASS" -e "DELETE FROM mysql.user WHERE User=''"
 mysql -u root -p"$DATABASE_PASS" -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\_%'"
 
 # set up database for Drupal 7
-mysql -u root -p"$DATABASE_PASS" -h localhost -e "create database tdp;"
+mysql -u root -p"$DATABASE_PASS" -h localhost -e "create database tdpappdb;"
 # add standard tables from a clean installation
 #mysql -u root -p"$DATABASE_PASS" -h localhost raptor500 < /vagrant/provision/drupal.sql
 # add tdp database user and assign access
-mysql -u root -p"$DATABASE_PASS" -h localhost -e "create user tdpuser@localhost identified by '$DATABASE_PASS';"
-mysql -u root -p"$DATABASE_PASS" -h localhost -e "GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES ON tdp.* TO tdpuser@localhost;"
+mysql -u root -p"$DATABASE_PASS" -h localhost -e "create user tdpappuser@localhost identified by '$DATABASE_PASS';"
+mysql -u root -p"$DATABASE_PASS" -h localhost -e "GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,INDEX,ALTER,CREATE TEMPORARY TABLES,LOCK TABLES ON tdp.* TO tdpappuser@localhost;"
 mysql -u root -p"$DATABASE_PASS" -h localhost -e "FLUSH PRIVILEGES;"
 
 
@@ -214,7 +210,11 @@ sudo ./install-tdp.rb
 #h
 #EOI
 
+# user notifications 
+echo VistA is now installed with TDP KIDS routines.
+
 # EWD.js and Federator installation ############################
+#
 sudo mkdir /var/log/tdp 
 sudo touch /var/log/tdp/federatorCPM.log
 sudo touch /var/log/tdp/ewdjs.log
@@ -236,12 +236,6 @@ npm install globalsjs@0.31.0
 # get database interface from cache version we are running
 sudo cp /srv/bin/cache0100.node /opt/ewdjs/node_modules/cache.node
 
-# copy node_modules for ewd into RAPTOR Module space...
-#cd /opt/ewdjs/node_modules/ewdjs/essentials
-#sudo cp -R node_modules /var/www/html/RSite500/sites/all/modules/raptor_glue/core/
-#sudo cp -R /opt/ewdjs/node_modules /var/www/html/RSite500/sites/all/modules/raptor_glue/core/node_modules 
-#sudo chown -R apache:apache /var/www/html/RSite500/sites/all/modules/raptor_glue/core/node_modules/
-
 # start EWD and EWD Federator
 cd /opt/ewdjs
 
@@ -255,9 +249,45 @@ sudo chmod a+x killEverything.sh
 
 # start EWD and Federator 
 sudo ./startEverything.sh 
+ps aux | grep node
+echo "you should see node related process IDs above..."
 
-# user notifications 
-echo VistA is now installed.  
+# TDP Application related tidbits #############################################################
+
+# Install Python ####################
+#
+echo "install python dependencies..."
+sudo yum install zlib-devel
+sudo yum install bzip2-devel
+sudo yum install openssl-devel
+sudo yum install ncurses-devel
+sudo yum install sqlite-devel
+echo "install python..."
+cd /opt
+sudo wget --no-check-certificate https://www.python.org/ftp/python/2.7.6/Python-2.7.6.tar.xz
+sudo tar xf Python-2.7.6.tar.xz
+cd Python-2.7.6
+sudo ./configure --prefix=/usr/local
+sudo make && sudo make altinstall
+
+cd /vagrant/tdpapp
+sudo npm install -g bower 
+npm install grunt
+
+sudo su -c "gem install sass"
+
+npm install
+
+dos2unix install-bowerjson.rb
+sudo chmod u+x install-bowerjson.rb
+#bower install
+# note needs to install 6
+sudo ./install-bowerjson.rb
+
+echo "initialize the database..."
+sudo node server/db/syncAndLoad.js
+
+sudo grunt serve 
 
 echo CSP is here: http://192.168.33.11:57772/csp/sys/UtilHome.csp
 echo username: cache password: innovate 
