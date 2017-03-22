@@ -170,7 +170,9 @@ sudo cp $cacheInstallerPath/cache.cpf $cacheInstallTargetPath/
 # start cache 
 sudo ccontrol start cache
 
-# enable cache' os authentication and %Service_CallIn required by EWD.js 
+# Enable Cache' OS Authentication and %Service_CallIn required by EWD.js
+############ START ######################
+##
 csession CACHE -U%SYS <<EOE
 vagrant
 innovate
@@ -183,6 +185,8 @@ D ##class(Security.Services).Modify("%Service_CallIn",.p)
 
 h
 EOE
+##
+############ END #######################
 
 # install TDP_1.0_1 ~TheDailyPlan Specific KIDS into VistA
 # todo: this doesn't work because it doesn't see device(0) ~something with c-vt320? vt320 doesn't 
@@ -192,22 +196,6 @@ cd /vagrant/provision/
 dos2unix install-tdp.rb
 sudo chmod u+x install-tdp.rb
 sudo ./install-tdp.rb
-
-#csession CACHE -UVISTA "^ZU" <<EOI
-#cprs1234
-#cprs4321$
-#^^load a distribution
-#/srv/mgr/VEFB_1_2.KID
-#yes
-#^^install package
-#VEFB 1.2
-#no
-#no
-#
-#^
-#^
-#h
-#EOI
 
 # user notifications 
 echo VistA is now installed with TDP KIDS routines.

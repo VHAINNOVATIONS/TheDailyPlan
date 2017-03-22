@@ -22,9 +22,11 @@ Prerequisites
 - Install VirtualBox (see: https://www.virtualbox.org/wiki/Downloads )
 - Install Git (see: operating system specific instructions ) 
 
-Installation for Production
----------------------------
-https://github.com/VHAINNOVATIONS/TheDailyPlan/blob/automate/installation/README.md
+Development Related Install Information
+---------------------------------------
+This is the information being rolled into the provisioning script to support automated build of demonstration and development:
+
+https://github.com/VHAINNOVATIONS/TheDailyPlan/blob/automate/tdpApp/README.md
 
 Installation for Demonstration and Development
 ----------------------------------------------
@@ -39,10 +41,16 @@ vagrant up
 ```
 To provision in AWS adjust your environment variables or modify the 'aws' section of the Vagrantfile and execute:
 
-To provision with AWS as your provider you will need to adjust line 25 of provision/cache/parameters.isc
-to contain the username you are using in AWS:
+To provision with AWS as your provider or to use a different username (instanceOwner) to install from you will need to update provision/config.local.json file to reflect parameters for Caché installer.
 ```
-security_settings.manager_user: vagrant
+{
+    "cacheInstallerPath": "/vagrant/provision/cache",
+    "cacheInstaller": "cache-2014.1.3.775.14809-lnxrhx64.tar.gz",
+    "cacheInstallTargetPath": "/srv",
+    "instanceOwner": "vagrant",
+    "commonPassword": "innovate",
+    "cacheGroup": "cacheserver"
+}
 ```
 ~By default the username is set to 'vagrant'
 
